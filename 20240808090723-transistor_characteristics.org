@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       4ca3dec8-db31-4287-aa7a-0c9ff27e727a
+:END:
+#+title: Transistor Characteristics
+#+date: [2024-08-08 Thu 09:07]
+#+STARTUP: latexpreview
+
+* Transistor Characteristics
+** Alpha Parameter
+- \[\alpha_F=\frac{I_C}{I_E}\]
+- \[\alpha_F=\frac{\beta_F}{1+\beta_F}\]
+** Beta Parameter
+- \[\beta_F=\frac{I_C}{I_B}\]
+- \[\beta_F=\frac{\alpha_F}{1-\alpha_F}\]

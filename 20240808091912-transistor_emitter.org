@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       5d9a88fd-4236-41ae-8d1d-dbd25cb44888
+:END:
+#+title: Transistor Emitter
+#+date: [2024-08-08 Thu 09:19]
+#+STARTUP: latexpreview
+
+* Transistor Emitter
+- One of the [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] materials in NPN transistors
+- One of the [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] materials in PNP transistors
+- \[I_E\]

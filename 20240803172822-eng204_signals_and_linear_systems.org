@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       b05e0d6c-252f-4e03-bfbc-250983e2ff45
+:END:
+#+title: ENG204 - Signals And Linear Systems
+#+date: [2024-08-03 Sat 17:28]
+#+STARTUP: latexpreview
+* Topics
+[[id:20669232-9d64-47e4-b0ee-db2c88ab9eaf][Signals]]
+[[id:14718dfe-c826-48a7-bc6c-b6ef37d0badc][Generalised Functions]]
+* Assesment
+** Assessment Task 1: Semester test 1
+- During Week 5
+- 15% of mark
+** Assessment Task 2: Group project 1
+- 10% of mark
+  [[file:~/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.1/ENG204 Signals and Linear Systems - Assignment 1.pdf][ENG204 Signals and Linear Systems – Assignment 1 in Simulation Project 1]]
+  [[id:30249a6e-b013-425d-91bc-71cd60d93893][ENG204 - Signals and Linear Systems – Assignment 1.1]]
+** Assessment Task 3: Semester test 2
+- Week 10
+- 15% of mark
+** Assessment Task 4: Group project 2
+- Week 13
+- 20% of mark
+** Assessment Task 5: Final Exam
+- Exam Period
+- 40% of mark

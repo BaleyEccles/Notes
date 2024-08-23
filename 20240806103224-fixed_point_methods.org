@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       5d1b6d40-17f3-486c-9aae-bd5516083d30
+:END:
+#+title: Fixed Point Methods
+#+date: [2024-08-06 Tue 10:32]
+#+STARTUP: latexpreview
+
+* Fixed Point Methods
+A root finding method that uses a fixed point ie \[x_{x+1}=g(x^{*})\], the operation to get the next \[x_{n}\] only includes the previous \[x_{n}\].

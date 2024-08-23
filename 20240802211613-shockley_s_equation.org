@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       21a23149-640a-4216-8f06-604d995a9d06
+:END:
+#+title: Shockley's equation
+#+date: [2024-08-02 Fri 21:16]
+#+STARTUP: latexpreview
+
+
+* Equation
+\[I_D=I_S(e^{\frac{V_D}{n\cdot V_T}}-1)\]
+\[I_D\] is the diode current
+\[I_S\] is the reverse-bias saturation current (or scale current)
+\[V_D\] is the voltage across the diode
+\[V_T=\frac{kT}{q}\] is the thermal voltage, where \[k\] is the Boltzmann constant \[(8.617333262\cdot 10^{−5} eV\cdot K^{-1})\], \[T\] is the temprature in Kelvin and \[q\] is the charge
+\[n  \] is the ideality factor, also known as the quality factor or emission coefficient
+* Implications
+[[id:21a23149-640a-4216-8f06-604d995a9d06][Shockley's equation]] only works for forward biased diodes.
+There is a Q point where it is said that the [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diode]] is turned on, where after that point a small change in voltage will result in a large increase in current.
+In this [[https://upload.wikimedia.org/wikipedia/commons/a/ae/Diode_Law_Graph.jpg][Graph]] it can be seen that this is true.

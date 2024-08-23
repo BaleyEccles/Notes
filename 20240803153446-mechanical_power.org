@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       a8b4d4da-873f-4608-9b7a-f954f0adabe1
+:END:
+#+title: Mechanical Power
+#+date: [2024-08-03 Sat 15:34]
+#+STARTUP: latexpreview
+
+* Mechanical Power
+Given by:
+\[p=\tau\omega\]
+\[\tau\] is the torque and \[\omega\] is the angular frequency.
+The result \[p\] is the power in Watts (W).

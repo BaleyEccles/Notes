@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       8c187cae-c6ec-4298-85ef-12448f78b5e6
+:END:
+#+title: Impulse Response
+#+date: [2024-08-04 Sun 13:14]
+#+STARTUP: latexpreview
+
+* Impulse Response
+We can input the [[id:31e21e4b-6463-4efb-a9bd-6fb1f20d5db8][Delta Function]] into a [[id:e8b3e3c8-1012-4b36-8aa5-81ebf472052f][System]] to get its impulse resposne.
+\begin{math}
+x(t)=\delta(t)\rightarrow \framebox[1.1\width]{System} \rightarrow h(t)=y(t)
+\end{math}.
+To get a response \[h(t)\].
+** Finding the Impulse Response
+\[h(t)\] can be found by:
+- Computing the step response
+- Differentiating it to get \[h(t)\], as \[\delta (t)=\frac{du(t)}{dt}\]
+** Discrete Impulse Response
+Set \[x[0]=\delta [0] \rightarrow x[0]=1\]. This and the fact that the system is at rest (\[y[-1]=0\]) allows us to solve for \[x[1]\] and \[y[0]\] using the [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equation]]. And so on for \[x[2], y[1] ...\], ie set \[x[0]\] to 1 and solve for next values.

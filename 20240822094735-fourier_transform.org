@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       e2fd0b83-635c-48b4-85c0-2067477a0e63
+:END:
+#+title: Fourier Transform
+#+date: [2024-08-22 Thu 09:47]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Fourier Transform
+- Fourier Transforms use [[id:d2083e8a-7a7a-48a8-89f4-9d13bba76b50][Transform Theory]] to convert a signal into its frequencies
+- It uses the [[id:90080c46-f2b3-4e73-995a-ef33b7e70bbe][Fourier Series]] to decompose signal into its frequencies.
+** Definition
+- The Fourier Transform is defined as
+- \[X(\omega)=\int_{-\infty}^{\infty}x(t)e^{-j\omega t}dt\]
+  - The Kernel \[K(\omega,t) =e^{-j\omega t}\]
+  - \[C_k=\frac{1}{T_0}X(k\omega_0\]
+** Inverse Fourier Transform
+- To convert a frequency signal into a time signal
+  - \[x(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)e^{j\omega t}d\omega\]
+** Properties
+- Linearality:
+  - \[a_1x_1(t)+a_2x_2(t)\leftrightarrow a_1X_1(\omega)+a_2X_2(\omega)\]
+- Time-sifting:
+  - \[x(t-t_0) \leftrightarrow X(\omega)=\int_{-\infty}^{\infty}x(t-t_0)e^{-j\omega t}dt\]
+- Reversal:
+  - \[x(-t) \leftrightarrow X(-\omega)\]
+- Duality:
+  - \[X(t) \leftrightarrow 2\pi x(-\omega)\]
+- Differentiation:
+  - \[\frac{dx(t)}{dt}\leftrightarrow j\omega X(\omega)\]
+- Frequency Differentiation
+  - \[(-jt)x(t) \leftrightarrow \frac{dX(\omega)}{d\omega}\]

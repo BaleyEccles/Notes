@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       b384a6cd-6602-4363-8274-ba922b6a014d
+:END:
+#+title: Regular Falsi Method
+#+date: [2024-08-06 Tue 10:27]
+#+STARTUP: latexpreview
+
+* Regular Falsi Method
+- Similar to the [[id:97007561-5b23-42b9-815c-a4d0c3c030a4][Bisection Method]], however replace \[c\] with a line that connects \[a,f(a)\] and \[b,f(b)\] and take \[c\] to be the point where the line intersects the x-axis. Now set \[a=c\] and repeat.
+- \[c=a-f(a)(\frac{b-a}{f(b)-f(a)})\]

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       2d52aaf7-3693-43cf-9e09-03f9277c878c
+:END:
+#+title: Integer
+#+date: [2024-08-03 Sat 12:58]
+#+STARTUP: latexpreview
+* Integer
+Integers use bits with each bit representing a specific power of 2. There are two types of integers, [[id:9fdea021-e75d-44e9-9b82-bcce3262c534][Unsigned Integer]] and [[id:e83a4e79-c4ce-4082-bd81-017e7b37a17e][Signed Integer]]. Each of which allows for larger range given the desired situtation. These forms only represent whole numbers.

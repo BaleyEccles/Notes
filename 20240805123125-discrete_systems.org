@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       9d44cc62-fd73-49f1-9bda-efa24d9e5538
+:END:
+#+title: Discrete Systems
+#+date: [2024-08-05 Mon 12:31]
+#+STARTUP: latexpreview
+
+* Discrete Systems
+A [[id:e8b3e3c8-1012-4b36-8aa5-81ebf472052f][System]] that is not continious, we can discribe the system as a set of points rather then one of lines.
+\begin{math}
+x[n] \rightarrow \framebox[1.1\width]{System} \rightarrow y[n]
+\end{math}
+- \[y[n]=Sys\{x[n]\}\]
+We can use [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equations]] to solve them.
+- [[id:e1293290-fe17-4467-8083-142aa848421e][State Space Representation]]

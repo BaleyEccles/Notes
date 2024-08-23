@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       c8a630ae-77f2-4968-8819-0ae1b80d8c6e
+:END:
+#+title: Jacobi Iteration
+#+date: [2024-08-09 Fri 12:56]
+#+STARTUP: latexpreview
+
+* TODO Jacobi Iteration

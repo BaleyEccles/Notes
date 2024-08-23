@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       0a7f8944-a9e7-4302-8388-e92035e96800
+:END:
+#+title: Flux Linkage
+#+date: [2024-08-22 Thu 09:18]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Flux Linkage
+- Used to describe the interaction of an inductor with [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]].
+  - \[\lambda = N \cdot \phi =L\cdot i\]
+    - \[N\] Number of turns to \[\phi\] to [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]].
+    - or, \[L\] [[id:bcc570ef-ee97-4bb9-9aca-1a81bd4a4ced][Inductance]] to \[i\] current.

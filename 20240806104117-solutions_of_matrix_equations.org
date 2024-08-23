@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       3a948b0c-e597-4007-9a11-e84b73a560ba
+:END:
+#+title: Solutions of Matrix Equations
+#+date: [2024-08-06 Tue 10:41]
+#+STARTUP: latexpreview
+
+* Solutions of Matrix Equations
+Our goal is to transfor \[AX=B\] into \[UX=G\], where \[U\] is an upper triangular matrix (Lower triangle is filled with zeros).
+We rearange the matix such that there the largest of absolute value in the left most row is at the top and choose this to be our pivot. We then calculate the multipliers for the rows below uing \[m_{n1}=\frac{a_{n1}}{a_{11}}\], where \[n\] is the the rows below the current pivot point. This allows us to convert the column below the pivot point into zeros using \[row_{n}=row_{n}-m_{n1}row_{1}\]. This process would then be repeated for the next row, using the second column.
+- [[id:c8a630ae-77f2-4968-8819-0ae1b80d8c6e][Jacobi Iteration]]
+- [[id:469846e6-9225-45b4-990a-9d614c9f50f9][Gauss-Seidel Method]]

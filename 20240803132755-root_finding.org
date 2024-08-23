@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       dc6ece72-c6c1-4317-9bbc-f8de60766b23
+:END:
+#+title: Root Finding
+#+date: [2024-08-03 Sat 13:27]
+#+STARTUP: latexpreview
+* Root Finding
+Root finding is using computional techniques to solve the roots of an equation.
+- [[id:eb026fba-b0fd-4bee-9ab4-bbe2f3d13f99][Bracketing Methods]]
+- [[id:b384a6cd-6602-4363-8274-ba922b6a014d][Regular Falsi Method]]
+- [[id:5d1b6d40-17f3-486c-9aae-bd5516083d30][Fixed Point Methods]]
+- [[id:33916d2c-c9b8-40a8-9532-2c81f0da49cf][Newton-Raphson Method]]
+- [[id:76992b98-5d64-4bd8-97c4-2d218d1262a9][Secant Method]]

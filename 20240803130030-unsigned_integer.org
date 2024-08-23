@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       9fdea021-e75d-44e9-9b82-bcce3262c534
+:END:
+#+title: Unsigned Integer
+#+date: [2024-08-03 Sat 13:00]
+#+STARTUP: latexpreview
+* Unsigned Integer
+Each bit in an unsigned integer represent a power of two to be summed. The least significant bit being \[2^{0}\] and the most significant bit being \[2^{N}\], where \[N\] is the number of bits in the integer. The range for [[id:9fdea021-e75d-44e9-9b82-bcce3262c534][Unsigned Integer]] is \[2^{0}\] to \[2^{N}\].

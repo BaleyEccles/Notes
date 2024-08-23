@@ -1,0 +1,49 @@
+[[id:53b048d6-b758-41bc-b1ac-8845f027c450][ENG234 - Analog Electronics]]:PROPERTIES:
+:ID:       38486700-d8af-4388-b00c-be2d603e998d
+:END:
+#+title: KME272 - Assessment Task 1.1
+#+date: [2024-08-02 Fri 17:03]
+#+STARTUP: latexpreview
+[[file:~/UTAS/KME272 - Engineering Maths 2B/assignments/ass1/kme272assn1_2024.pdf][Assignment Sheet]]
+[[file:~/UTAS/KME272 - Engineering Maths 2B/assignments/ass1/G1.m][Matlab Grader Code]]
+* Q1
+** (i)
+\begin{align*}
+& 2x^2-150x =0 \\
+& x(2x-150) =0 \\
+& x =0 \textrm{ or } 2x-150=0 \\
+& x =0 \textrm{ or } x=75
+\end{align*}
+
+** (ii)
+\begin{align*}
+x&=\frac{-b \pm \sqrt{b^2-4ac}}{2a} \\
+x&=\frac{-150 \pm \sqrt{150^2-4\cdot 2\cdot 3}}{2\cdot 2} \\
+x&=74.979 994 66 \textrm{ or } 20.005 336 18 \cdot 10^{−3}
+\end{align*}
+** (iii)
+\begin{center}
+\begin{tabular}{ |c|c|c|c| }
+\hline
+ digits of precision & \[b^2-4ac\] & \[\sqrt{b^2-4ac}\] & \[x_2=\frac{-b-\sqrt{b^2-4ac}}{2a}\] \\ \hline
+1                    & 20000       & 200                & 0.02                                 \\ \hline
+2                    & 22000       & 150                & 0.020                                \\ \hline
+3                    & 22400       & 150                & 0.0200                               \\ \hline
+4                    & 22470       & 149.9              & 0.02000                              \\ \hline
+5                    & 22476       & 149.92             & 0.020005                             \\ \hline
+6                    & 22476       & 149.920            & 0.0200053                            \\ \hline
+\end{tabular}
+\end{center}
+
+\newline
+Calculation for two digits of precision with rounding up:
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+\[=b^2-4ac\]                & \[=\sqrt{b^2-4ac}\]               & \[x_2=\frac{-b-\sqrt{b^2-4ac}}{2a}\] \\
+\[=150^2-4\cdot 2\cdot 3 \] & \[=\sqrt{150^2-4\cdot 2\cdot 3}\] & \[x_2=\frac{150-\sqrt{150^2-4\cdot 2 \cdot 3}}{2\cdot 2}\] \\
+\[=22476\]                  & \[=149.9199787\]                  & \[=0.02000533618\] \\
+\[=22000\]                  & \[=150\]                          & \[=0.020\] \\
+\end{tabular}
+\end{center}
+
+** (iv)

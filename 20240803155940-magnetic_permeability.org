@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       b70c8efe-e501-479a-8d58-6093bd1e891a
+:END:
+#+title: Magnetic Permeability
+#+date: [2024-08-03 Sat 15:59]
+#+STARTUP: latexpreview
+
+* Magnetic Permeability
+- Magnetic permeability descibes how well a material can be magnetised.
+  - \[\mu=\mu_{0}\mu_{r}\]
+- \[\mu_{0}=4\pi\cdot 10^{-7}\], which is the permeability of vacuum and is measured in Hennery per meter (H/m).
+- \[\mu_{r}\] is the permeability of the specified material, in air \[\mu_{r}\approx 1\]
+- \[\mu_r=\frac{B}{\mu_0H}\]

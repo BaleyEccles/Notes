@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       1a5a7101-2779-487c-9f19-9722a835f358
+:END:
+#+title: Semiconductors
+#+date: [2024-08-02 Fri 20:56]
+* Materials
+- Ge: Germanium
+- Si: Silicon
+- GaAs: GaliumAsenide
+When the temprature of a semiconductor goes up the resistance goes up too.
+[[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]]
+[[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]]
+
+* Uses
+[[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductors]] can be used to create elecrical components.
+By combining [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] and [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] together in different ways we can create many semiconductor based components.
+[[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]]

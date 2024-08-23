@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       a07c8c29-2c60-4b1e-aad9-8e99801e0dc4
+:END:
+#+title: Diodes
+#+date: [2024-08-02 Fri 21:05]
+* Construction
+When [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] and [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] materials are combined we create a diode.
+* Operation
+There are two ways to opperate a diode, forward and reverse biased.
+[[https://upload.wikimedia.org/wikipedia/commons/a/a5/Diode-IV-Curve.svg][Diode I-V Curve]
+** Forward biased
+When forward biased + is connected to the [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] and - is connected to the [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]].
+When a diode is forward biased the current is easily able to flow through the diode.
+An ideal diode assumes that there is zero voltage drop across the diode. In the real world there is a small voltage drop (~0.7V).
+The equation for the current voltage relationship when foward biased is given by [[id:21a23149-640a-4216-8f06-604d995a9d06][Shockley's equation]].
+[[id:9f092447-9168-44ac-bc6a-2bea3889923e][Light Emitting Diode]]s are a special type of diode that when forward biased emitt light.
+
+** Reverse biased
+When forward biased - is connected to the [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] and + is connected to the [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]].
+When a diode is reverse biased the current struggles to flow through the diode.
+An ideal diode assumes that there is zero current through the diode. In the real world there is a small amount of current.
+[[id:033adb3d-d291-4c69-a627-3ddc6cc6804a][Zener Diodes]] are a special type of diodes that have special effects when reverse biased.
+Diodes will break if they are given too much reverse biased voltage ([[id:a45c9daf-0e8d-47e5-9cad-f7e08af06a30][Diode Breakdown Voltage]]).
+* Uses
+[[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]] can be used to convert AC signals to DC ones, by using either a [[id:f06ff88b-1880-4d2b-93a5-d8287139f3f1][Halfwave Rectifier]] or a [[id:d257b4a6-f0be-4fd1-9105-c2747c3c3f56][Fullwave Rectifier]].
+They can be used to save circuits from breaking due to backcurrent, by using them on the input circuit.
+* Solving Problems
+- Determine if the diode is forward or reverse biased. If forward, short circuit, if reversed, open circuit.
+- When there is a DC source and a AC source use superposistion, doing DC first.

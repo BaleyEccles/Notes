@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       949eb0e5-3855-46f6-bc68-67f16c04c961
+:END:
+#+title: Time Invariance
+#+date: [2024-08-04 Sun 12:55]
+#+STARTUP: latexpreview
+
+* Time Invariance
+A signal is said to be time invarient if the output is not dependent on the time input.
+That is \[Sys\{x(t)\}=y(t) \Rightarrow Sys\{x(t-\tau\}=y(t-\tau)\].

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       451a0c0d-d955-4278-8648-7f56593a4965
+:END:
+#+title: Common Base
+#+date: [2024-08-08 Thu 09:05]
+#+STARTUP: latexpreview
+
+* TODO Common Base

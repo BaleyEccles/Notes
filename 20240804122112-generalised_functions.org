@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       14718dfe-c826-48a7-bc6c-b6ef37d0badc
+:END:
+#+title: Generalised Functions
+#+date: [2024-08-04 Sun 12:21]
+#+STARTUP: latexpreview
+
+* Generalised Functions
+Special type of function that is used for many things.
+ - [[id:31e21e4b-6463-4efb-a9bd-6fb1f20d5db8][Delta Function]]
+ - [[id:df314ae5-1b35-49a3-be34-8d0aeb720ff3][Unit Step]]
+ - [[id:53ce78b0-ab9b-43cb-84a8-987082091043][Unit Pulse]]
+ - [[id:e7ffbaee-6fd8-4ec9-8722-f5d293d9212e][Unit Ramp]]

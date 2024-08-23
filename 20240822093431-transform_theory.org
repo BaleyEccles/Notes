@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       d2083e8a-7a7a-48a8-89f4-9d13bba76b50
+:END:
+#+title: Transform Theory
+#+date: [2024-08-22 Thu 09:34]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Transform Theory
+
+- The act of transforming a signal into a different domain
+  - This changes the function from one to another
+  - [[file:Screenshot 2024-08-22 at 09-35-13 Week 5 and 6.pdf.png][Notation]]
+- The transform integral defined by, in [[id:3b3f9115-e45f-425f-a0ed-531944a709b6][Continuous Systems]]
+  - \[F(u)=\int_{t_1}^{t_2}K(u,t)\cdot f(t)dt\]
+    - the function \[f(t)\] is being transformed into \[F(u)\]
+    - \[K\] is the kernel, which defines the transform
+- The transform integral defined by, in [[id:9d44cc62-fd73-49f1-9bda-efa24d9e5538][Discrete Systems]]
+  - \[F(u)=\sum_{n=n_1}^{n_2}K(u,n)\cdot f[n]\]
+    - the function \[f[n]\] is being transformed into \[F(u)\]
+    - \[K\] is the kernel, which defines the transform

@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       fe57d179-5f2f-4956-9cbe-a45c26f80883
+:END:
+#+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 2
+#+date: [2024-08-20 Tue 13:58]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 2
+#+BEGIN_SRC octave :export both :results output :session Part1
+Time=[1.25490196078431,1.86937726369903,2.29885057471264,2.60162601626016]
+EMFMax=[1.54,1.93,2.26,2.45]
+EMFMin=[0.637,1.43,1.9,2.23]
+plot(Time,EMFMax,Time,EMFMin)
+xlabel('Time (ms)')
+ylabel('EMF (V)')
+
+#+END_SRC
+
+#+RESULTS:
+: Time =
+:
+:    1.2549   1.8694   2.2989   2.6016
+: EMFMax =
+:
+:    1.5400   1.9300   2.2600   2.4500
+: EMFMin =
+:
+:    0.6370   1.4300   1.9000   2.2300
+
+The core is taking some of the energy at high frequencies
+Use a material with better conductivity
+Or use plates to reduce eddy currents
+#+BEGIN_SRC octave :export both :results output :session Part1
+Freq=[20,40,60,80,100,120,140];
+EMF=[75,112,133,155,165,182,195];
+
+plot(Freq,EMF)
+xlabel('Frequency (Hz)')
+ylabel('EMF (mV)')
+
+#+END_SRC
+
+#+RESULTS:

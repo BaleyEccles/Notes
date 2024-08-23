@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       d257b4a6-f0be-4fd1-9105-c2747c3c3f56
+:END:
+#+title: Fullwave Rectifiers
+#+date: [2024-08-03 Sat 12:46]
+#+STARTUP: latexpreview
+* Fullwave Rectifiers
+Fullwave Rectifiers work on the same principle as [[id:f06ff88b-1880-4d2b-93a5-d8287139f3f1][Halfwave Rectifiers]], by blocking and allowing current depending on its direction. The construction uses four [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]] in a specific configuration to get this result ([[https://www.electrical4u.com/images/2018/may18/1527761607.png][Fullwave Rectifier Circuit]]).
+The result is taking the absolute value of the AC signal.

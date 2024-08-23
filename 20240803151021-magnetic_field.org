@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       5d2e4040-1702-407a-9c6a-d83239e40d85
+:END:
+#+title: Magnetic Field
+#+date: [2024-08-03 Sat 15:10]
+#+STARTUP: latexpreview
+
+* Magnetic Field
+When a magnetic field interacts with a current a [[id:ed756a7d-950b-4f00-81dc-91310ab5c48c][Magnetic Force]] is created.
+The [[id:ed756a7d-950b-4f00-81dc-91310ab5c48c][Magnetic Force]] can be extended to create a [[id:7d56394b-0f96-4b6f-89ab-a9f5484314d0][Magnetic Torque]].
+Magnetic fields can be created by varible electic fields and currents.
+To understand magnetic fields we need to understand [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] and [[id:f15ab8cb-30df-45d4-ab39-707648dea1be][Magnetic Flux Intensity]].
+- [[id:a108cf65-7978-4a97-8198-0154657916d1][Magnetic Field Of A Wire]]
+- [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]]

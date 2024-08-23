@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       9ff1e7f6-b6f2-447b-81b9-f64b89a9d834
+:END:
+#+title: How Computers Represent Numbers
+#+date: [2024-08-03 Sat 12:57]
+#+STARTUP: latexpreview
+
+
+* How Computers Represent Numbers
+Computers use bits (either 1 or 0) to represent numbers. There are many forms to this, each with their positives and negatives.
+[[id:2d52aaf7-3693-43cf-9e09-03f9277c878c][Integer]], and [[id:ace79a98-46ca-49e3-a7ee-cceba767714a][Floating Point]].

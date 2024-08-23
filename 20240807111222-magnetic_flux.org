@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       3ab115b0-6e42-46ec-b987-bd09c10d0ec6
+:END:
+#+title: Magnetic Flux
+#+date: [2024-08-07 Wed 11:12]
+#+STARTUP: latexpreview
+
+* Magnetic Flux
+- The amount of magnetic field that is ${90}^{\circ}$ to the surface
+- Measured in Webbers (Wb)
+- \[\phi =\vec{B}\cdot \hat{n}A=BA\cos(\theta)\]
+- For a transformer \[\phi \approx BA\]
+- Within motor \[\theta =\omega t \rightarrow \phi = BA \cos(\omega t)\]
+- [[id:bb47a409-62bc-4872-aea0-e0ebfb24a6c6][Conservation Of Magnetic Flux]]

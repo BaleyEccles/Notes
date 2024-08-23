@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       bb47a409-62bc-4872-aea0-e0ebfb24a6c6
+:END:
+#+title: Conservation Of Magnetic Flux
+#+date: [2024-08-07 Wed 14:13]
+#+STARTUP: latexpreview
+
+* Conservation Of Magnetic Flux
+- Flux is conserved, that is \[\phi_T=\phi_1+\phi_2 \hdots\], the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][flux]] entering is equal to the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][flux]] exiting.
+  - This holds true when the flux is going into/outof materials.

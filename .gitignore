@@ -1,0 +1,4 @@
+# Ignore Org-mode backup files
+*~
+# Ignore auto-save files
+.#*

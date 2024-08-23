@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       891d06d4-06be-40c3-b7d1-70a485f56e5a
+:END:
+#+title: Magnetic Susceptibility
+#+date: [2024-08-07 Wed 11:23]
+#+STARTUP: latexpreview
+
+* Magnetic Susceptibility
+- Describes the ability of a material to be [[id:98bea621-e9eb-415a-9d79-a9bd4d1de9b9][Magnetised]].
+  - If the field is small then the process is linear and \[\chi_{m}\] is constant.
+  - If the field is large enough then the process becomes non-linear and \[\chi_{m}\] is no longer constant.
+- Related to [[id:b70c8efe-e501-479a-8d58-6093bd1e891a][Magnetic Permeability]]
+  - \[\mu_r=1+\chi_m\]
+  - If \[\chi_{m} > 0\]
+    - [[id:c53c36b7-7f4a-43de-8c5e-2e54d92453d8][Ferromagnetic]]
+  - If \[\chi_{m} < 0\]
+    - [[id:49bf2fc3-d5c6-4078-851f-1029ef4d9065][Diamagnetic]]

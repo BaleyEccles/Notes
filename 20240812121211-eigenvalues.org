@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       e7ad3ee3-7394-40ed-b2a3-ca0815bd9280
+:END:
+#+title: Eigenvalues
+#+date: [2024-08-12 Mon 12:12]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+
+* Eigenvalues
+To solve eigenvalues we need to solve \[det(A-\lambda I)=0\]

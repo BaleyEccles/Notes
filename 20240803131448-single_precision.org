@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       927f4ddf-8c9b-454c-b4cd-54cc2e184d11
+:END:
+#+title: Single Precision
+#+date: [2024-08-03 Sat 13:14]
+#+STARTUP: latexpreview
+* Single Precision
+Uses 32-bits = 4-bytes:
+\begin{table}
+\caption[]{\label{tab:Bits}}
+\begin{tabular}{|c|c|c|c|}
+\hline
+bits & 32 (1-bit) & 24-31 (8-bits) & 1-23 (23-bits) \\ \hline
+     & sign       & exponent       & mantisa \\
+\hline
+\end{tabular}
+\end{table}

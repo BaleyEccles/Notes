@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       5dc298ad-eb3c-4d56-9963-5e5a020b6ce7
+:END:
+#+title: Transistor Base
+#+date: [2024-08-08 Thu 09:18]
+#+STARTUP: latexpreview
+
+* Transistor Base
+- The [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] material in PNP Transistors
+- The [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] material in NPN Transistors
+- \[I_B\]

@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       ed756a7d-950b-4f00-81dc-91310ab5c48c
+:END:
+#+title: Magnetic Force
+#+date: [2024-08-03 Sat 15:12]
+#+STARTUP: latexpreview
+
+* Magnetic Force
+A magnetic field acted upon a current will create a force.
+This force can be calculated using:
+\[\vec{F}=i\vec{l}\times \vec{B} \Rightarrow F=ilB\sin(\theta)\]
+\[F\] is the force, measured in Newtons (N)
+\[i\] is the conventional current, measured in Amperes (A)
+\[l\] is the length, measured in meters (m)
+\[B\] is the magnetic flux density, measured in Tesla (T)
+\[\theta\] is the angle between \[i\] \[B\]
+\[F\], \[i\] and \[B\] are at right angles. So the right hand rule can be used to find the direction, with the index finger as \[i\], the middle finger as \[B\] and the thumb as \[F\]. If the magnetic field is at an angle to the current, then only the perpendicular component of the magnetic field is translated into force.

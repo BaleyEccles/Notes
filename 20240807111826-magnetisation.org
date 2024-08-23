@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       98bea621-e9eb-415a-9d79-a9bd4d1de9b9
+:END:
+#+title: Magnetisation
+#+date: [2024-08-07 Wed 11:18]
+#+STARTUP: latexpreview
+
+* Magnetisation
+- The process of aligning magnetic dipoles to the direction of an external material in a material.
+  - \[\vec{M}= \frac{\Sigma_{i}\vec{m}_i}{V}\]
+    - \[V\] is the volume
+    - \[m_{i}\] is a single magnetic dipole in the mateiral
+  - On a macroscopic level \[\vec{M}=\chi_{m}\vec{H}\]
+    - \[\chi_{m}\] is the [[id:891d06d4-06be-40c3-b7d1-70a485f56e5a][Magnetic Susceptibility]]
+  - Related to [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] and [[id:f15ab8cb-30df-45d4-ab39-707648dea1be][Magnetic Flux Intensity]] by
+    - \[B=\mu_0H+\mu_0M\]
+- [[https://images.saymedia-content.com/.image/t_share/MTc0MjA4NDMyNjMzNTU0NDI4/the-characteristics-of-magnetic-fields.jpg][Magnetisation Graph]]

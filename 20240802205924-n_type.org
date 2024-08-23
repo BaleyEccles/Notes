@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc
+:END:
+#+title: N-type
+#+date: [2024-08-02 Fri 20:59]
+
+5 valence electron material
+There are extra electrons flowing around the material.
+Electrically neutral
+The electron is majority carrier, and the hole is the minority carrier

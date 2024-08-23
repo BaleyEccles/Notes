@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       53ce78b0-ab9b-43cb-84a8-987082091043
+:END:
+#+title: Unit Pulse
+#+date: [2024-08-04 Sun 12:41]
+#+STARTUP: latexpreview
+
+* Unit Pulse
+Denoted \[\Pi (t)\].
+Defined as d\begin{math}
+\Pi(t)=
+\begin{cases}
+        1 & \lvert t\rvert < \frac{1}{2} \\
+        0 & \lvert t\rvert > \frac{1}{2}
+\end{cases}
+
+\end{math},
+or in terms of the [[id:df314ae5-1b35-49a3-be34-8d0aeb720ff3][Unit Step]] as \[\Pi (t)=u(t+\frac{1}{2})-u(t-\frac{1}{2})\].

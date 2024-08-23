@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       787abd3a-b156-4729-8fce-e82a14c7777d
+:END:
+#+title: Double Precision
+#+date: [2024-08-03 Sat 13:15]
+#+STARTUP: latexpreview
+* Double Precision
+Uses 64-bits = 8-bytes:
+\begin{table}
+\caption[]{\label{tab:Bits}}
+\begin{tabular}{|c|c|c|c|}
+\hline
+bits & 64 (1-bit) & 53-63 (11-bits) & 1-52 (52-bits) \\ \hline
+     & sign       & exponent       & mantisa \\
+\hline
+\end{tabular}
+\end{table}

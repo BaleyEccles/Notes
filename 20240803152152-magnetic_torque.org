@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       7d56394b-0f96-4b6f-89ab-a9f5484314d0
+:END:
+#+title: Magnetic Torque
+#+date: [2024-08-03 Sat 15:21]
+#+STARTUP: latexpreview
+
+* Magnetic Torque
+Magnetic torque is used when we are dealing with motors.
+The equation that governs the torque and magnetic field relationship is:
+\[\vec{\tau}=\vec{m}\times\vec{B}\Rightarrow\tau=iAB\sin(\theta)\]
+\[vec{m}\] is the magnetic dipole given by \[\vec{m}=iA\hat{n}\]
+\[\tau\] is the torque, measured in Newton meters (Nm)
+\[i\] is the conventional current, measured in Amperes (A)
+\[A\] is the area of the frame, measured in meters squared (m^2)
+\[B\] is the magnetic flux density, measured in Tesla (T)
+\[\theta\] is given by \[\theta=\omega t\], where omega is the rotational frequency and t is time
+The [[id:a8b4d4da-873f-4608-9b7a-f954f0adabe1][Mechanical Power]].

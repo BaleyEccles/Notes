@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       0e057e37-e287-469b-8085-d0c2f94713c1
+:END:
+#+title: Linearity
+#+date: [2024-08-04 Sun 12:51]
+#+STARTUP: latexpreview
+
+* Linearity
+A system is said to be linear if:  \[Sys\{\alpha x_1(t)+\beta x_2(t)\}=\alpha Sys\{x_1(t)\}+\beta Sys\{x_2(t)\}\].

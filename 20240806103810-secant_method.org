@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       76992b98-5d64-4bd8-97c4-2d218d1262a9
+:END:
+#+title: Secant Method
+#+date: [2024-08-06 Tue 10:38]
+#+STARTUP: latexpreview
+
+* Secant Method
+Similar to the [[id:33916d2c-c9b8-40a8-9532-2c81f0da49cf][Newton-Raphson Method]], however we replace the derivative with an approximation.
+- \[x_{n+1}=x_n-f(x_n)\frac{x_n-x_{n-1}}{f(x_n)-f(x_{n-1})}\]

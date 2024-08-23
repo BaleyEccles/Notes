@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       1ce0a2b1-ecf2-40fa-8b02-d6bee61d0bb8
+:END:
+#+title: Flux Cutting EMF
+#+date: [2024-08-14 Wed 14:01]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Flux Cutting EMF
+The case of a rectangualr frame moving perpendicuarlay to a magnetic field.
+\[\mathcal{E}=vBh\]
+- The electrical power is proportional to the amplitude of the velocity square
+  - \[P\sim v^{2}\]
+- \[\mathcal{E}=2\pi BAfN\]
+- we can convert RMS to non-RMS using
+  - \[\mathcal{E}_{RMS}=4.44BAfN\]
+- In a motor
+  - \[\mathcal{E}=vBh\sin(\omega t)\]

@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       31e21e4b-6463-4efb-a9bd-6fb1f20d5db8
+:END:
+#+title: Delta Function
+#+date: [2024-08-04 Sun 12:21]
+#+STARTUP: latexpreview
+
+* Delta Function
+Also known as the unit impulse.
+Denoted \[\delta (x)\].
+Height of \[1\] at \[x=0\] and height of \[0\] every where else.
+Has an area of \[1\] ie \[\int_{-\infty}^{\infty}\delta (x)dx=1\]. This is also true for ranges that arent \[\pm\infty\], as long as it contains \[0\].
+Relation to [[id:df314ae5-1b35-49a3-be34-8d0aeb720ff3][Unit Step]]:
+\[u(t)=\int_{-\infty}^{t}\delta (\lambda)d\lambda \Leftrightarrow \delta (t)=\frac{du(t)}{dt}\]
+** Sampling Property
+\[f(t)\delta (t-t_{1})=f(t_1)\delta (t-t_{1})\].
+That is we can use the delta function to take impulse at a point \[t_{1}\].
+** Sifting Property
+\[\int_{-\infty}^{\infty}f(t)\delta (t-t_1)dt=f(t_1)\].
+That is we can use the integral and delta function to evaluate a function at a point \[t_1\].
+This is also known as inpulse decompasistion

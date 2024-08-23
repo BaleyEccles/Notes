@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       53b048d6-b758-41bc-b1ac-8845f027c450
+:END:
+#+title: ENG234 - Analog Electronics
+#+date: [2024-08-02 Fri 20:46]
+#+STARTUP: latexpreview
+
+
+* Topics
+[[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductors]]
+[[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]]
+[[id:47517c75-582b-4948-a2a7-f88e883e7b65][Bipolar Junction Transistors]]
+
+* Assesment
+** Assessment Task 1: Semester Test
+- During Week 8
+- 15% of mark
+** Assessment Task 2: Practical laboratory
+- During Week 11
+- 20% of mark
+** Assessment Task 3: Design laboratory
+- During Week 13
+- 15% of mark
+** Assessment Task 4: Assessed tutorials
+- Through out semester
+- 10% of mark
+** Assessment Task 5: Final exam
+- During Exam Period
+- 40% of mark

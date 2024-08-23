@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       c53c36b7-7f4a-43de-8c5e-2e54d92453d8
+:END:
+#+title: Ferromagnetic
+#+date: [2024-08-07 Wed 14:21]
+#+STARTUP: latexpreview
+
+* Ferromagnetic
+A material that is attracted to a magnetic field.

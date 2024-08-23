@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       6f242323-5b6b-469d-b611-a3cdf4641299
+:END:
+#+title: Block Diagrams
+#+date: [2024-08-12 Mon 12:19]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Block Diagrams
+** Sum
+- represented as a plus sign in a circle
+- adds the inputs
+** Unit Delay
+- Represented as a square with a T inside
+- Delays the input by one
+** Multiplyer
+- Represented by a triangle with a number inside
+- Multiplies the input by the number
+** Solving
+The act of finding the [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equation]] for the block diagram
+*** Output goes into the block diagram
+If the output goes back into the diagram we can work backwards from the output until we get a [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equation]]
+*** Output does not go into the block diagram
+If the output does not go back into the diagram we must define the input to a unit delay as \[q[n]\] and work through the system to get two or more equations. Where they can be delayed, and rearagnged to get one equation.

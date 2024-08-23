@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       94f9e3e0-820f-4857-b127-d5ff0dd282f6
+:END:
+#+title: ENG203 - Work Placement A
+#+date: [2024-08-07 Wed 17:14]
+#+STARTUP: latexpreview
+
+* ENG203 - Work Placement A
+
+** Assessment Task 1: Retrospective review
+Week 3
+** Assessment Task 2: Prepare a job application
+Week 6
+** Assessment Task 3: Interview skills development
+Week 8
+** Assessment Task 4: Professional network development
+Week 10
+** Assessment Task 5: Industry assessment report
+Week 11
+** Assessment Task 6: Acknowledgement quiz
+Week 13
+** Notes
+
+[[id:47a8b71f-4a01-4d35-9e9c-7a73abff0a70][Searching for Placement]]

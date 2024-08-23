@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       d308fc05-1386-4025-966c-f860c3fc3d71
+:END:
+#+title: Dynamo
+#+date: [2024-08-14 Wed 14:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Dynamo
+When a disc is rotated and used to create a DC current.
+- \[\mathcal{E}=\frac{1}{2}\omega BR^{2}\]
+- \[P\sim\omega^{2}\]

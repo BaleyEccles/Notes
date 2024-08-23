@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       9e78b4ec-0ab4-42e2-b379-0fef36675d4e
+:END:
+#+title: Catastrophic Cancellation
+#+date: [2024-08-03 Sat 13:32]
+#+STARTUP: latexpreview
+
+* TODO Catastrophic Cancellation

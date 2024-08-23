@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       46520028-eacf-4045-8fd0-06962f33e5a8
+:END:
+#+title: Transistor Collector
+#+date: [2024-08-08 Thu 09:18]
+#+STARTUP: latexpreview
+
+* Transistor Collector
+- One of the [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] materials in NPN transistors
+- One of the [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] materials in PNP transistors
+- \[I_{C}\]

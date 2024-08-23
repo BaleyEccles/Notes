@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       bcc570ef-ee97-4bb9-9aca-1a81bd4a4ced
+:END:
+#+title: Inductance
+#+date: [2024-08-22 Thu 09:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Inductance
+- \[L\] is the inductance, which a representation for an object to its ability to conduct flux. It only depends on the dimensions of the object.
+- \[L=N \frac{\phi}{i}\]
+** Cylindrical Coil
+- \[L=\mu \frac{N^2A}{l}\]
+** Toroidal Coil
+- \[L=\mu \frac{N^2h}{2\pi}\ln(\frac{b}{a})\]
+  - where \[\mu\] is the permeability of the material, \[N\] is the number of turns, \[h\] is the height of the coil, and \[a\] and \[b\] are the inner and outer radius respectively.
+** EMF Relation
+- It can be related to emf using, which is [[id:0b3f01d9-4742-47d0-b78d-a2399a25c3c2][Faraday's law]].
+  - \[\mathcal{E}=-N \frac{\partial \phi}{\partial t}=-L \frac{\partial i}{\partial t}\]
+** Energy Relation
+- The magnetic energy stored by an inductor is
+  - \[W=\frac{1}{2}Li^2\]

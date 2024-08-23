@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       5090162e-9bbe-482c-bb65-0c906392309a
+:END:
+#+title: Ampere's Law
+#+date: [2024-08-03 Sat 15:46]
+#+STARTUP: latexpreview
+
+* Ampere's Law
+\[\oint\vec{H}\cdot d\vec{l}=i_{enc}=N\cdot i\]
+It says that the current through a wire can be related to the [[id:f15ab8cb-30df-45d4-ab39-707648dea1be][Magnetic Flux Intensity]] around the wire. The contour intergral means that we need to take one full loop around the wire and sum the magnetic field at each point. Use the formular for the circumference for the shape your trying to find H for or sum up all of the sides multiplied by \[\vec{H}\] and set that equal to \[N\cdot i\].
+The \[i_{enc}=N\cdot i\] part is derived from [[id:5090162e-9bbe-482c-bb65-0c906392309a][Ampere's Law]] and can used for motors, where \[N\] is the number of windings and \[i\] is the current in the wire.

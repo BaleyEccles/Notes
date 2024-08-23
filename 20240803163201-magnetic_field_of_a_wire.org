@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       a108cf65-7978-4a97-8198-0154657916d1
+:END:
+#+title: Magnetic Field Of A Wire
+#+date: [2024-08-03 Sat 16:32]
+#+STARTUP: latexpreview
+
+* Magnetic Field Of A Wire
+When a current flows through a wire a magnetic field is generated.
+This field can be caluclated using [[id:82b046b4-6f10-4b83-8009-939b694f7277][Biot-Savart Law]], we will use a special case of the law for when the wire is completely straight.
+\[\vec{B}=\frac{\mu_{0}i}{4\pi s}(\sin(\theta_{-})+\sin(\theta_{+}))\]
+\[s\] is the smallest distance from the wire and the point at which [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] (\[\vec{B}\]) will be calculated.
+\[\theta_{-}\] and \[\theta_{+}\] are the angles to the start and end of the wire from \[s\].
+When using this to calculate a realy long wire we see that \[\theta_{-}\approx \theta_{+}\approx \frac{\pi}{2}\]. Which means the equation becomes  \[\vec{B}=\frac{\mu_{0}i}{2\pi s}\].
+The direction of the magnetic field can be found by using the right hand rule. That is curling your right hand in a fist and pointing your thumb in the direction of the current, giving the direction of the [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] as your fingers.

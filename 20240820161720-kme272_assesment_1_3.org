@@ -1,0 +1,117 @@
+:PROPERTIES:
+:ID:       48d046e6-9f39-44ef-ab20-455e13bb9282
+:END:
+#+title: KME272 - Assesment 1.3
+#+date: [2024-08-20 Tue 16:17]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmonofont{Iosevka}
+#+LATEX_HEADER: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER: \usemintedstyle{emacs}
+
+* KME272 - Assesment 1.3
+** 1
+#+BEGIN_SRC octave :export both :results output :session Q2
+A = [1   , -1/4, 0   , 0   , 0   , 0   ; ...
+     -1/4, 1   , -1/4, 0   , -1/4, 0   ; ...
+     0   , -1/4, 1   , -1/4, 0   , 0   ; ...
+     0   , -1/4, 0   , 1   , -1/4, 0   ; ...
+     0   , 0   , -1/4, -1/4, 1   , -1/4; ...
+     0   , 0   , 0   , 0   , -1/4, 1   ;];
+b = [20;0;20;5/4;5/4;85/4];
+
+[M,N] = size(A);
+if M~=N
+  error('A must be a square matrix')
+end
+
+rowtest = abs(diag(A)) > sum(abs(A-diag(diag(A))),2);
+index = find(rowtest==0);
+if ~isempty(index)
+  disp("The matrix is not diagonally dominant.")
+  disp("Take the results with caution.")
+  pause(2)
+end
+
+x = [0; 0; 0; 0; 0; 0];
+x0 = x;
+
+reldiff_tolerance = 1e-3;
+reldiff = 100;
+k = 0;
+
+fprintf('CASE 1: Diagonally Dominant\n----------------------------\nJacobi iteration\n')
+while reldiff > reldiff_tolerance
+  x0(1) = (b(1)-A(1,2:M)*x(2:M))/A(1,1);
+  for j = 2 : M-1
+    termsl = A(j,1:j-1)*x(1:j-1);
+    termsr = A(j,j+1:M)*x(j+1:M);
+    x0(j) = (b(j)-termsl-termsr)/A(j,j);
+  end
+  x0(M) = (b(M)-A(M,1:M-1)*x(1:M-1))/A(M,M);
+  reldiff = abs(norm(x-x0))/norm(x0);
+  k = k+1;
+  residual = norm(x - x0);
+  x = x0;
+  if k == 10
+    x10 = x;
+  end
+
+  fprintf('%d, [%.2f, %.2f, %.2f, %.2f, %.2f, %.2f], residual = %.2f\n',k,x(1),x(2),x(3),x(4),x(5),x(6), residual);
+  x_J=x;
+end
+x_J = x;
+k_J = k;
+
+%% Gauss Seidel Method
+fprintf('----------------------------\nGauss-Seidel iteration\n')
+x = [0; 0; 0; 0; 0; 0];
+k_G = 0;
+reldiff = 100;
+while reldiff > reldiff_tolerance
+  x0 = x;
+  for j = 1:size(A,1)
+    x(j) = (b(j) - sum(A(j,:)'.*x) + A(j,j)*x(j)) / A(j,j);
+  end
+  reldiff = abs(norm(x-x0))/norm(x0);
+  k = k+1;
+  residual = norm(x-x0);
+  fprintf('%d, [%.2f, %.2f, %.2f, %.2f, %.2f, %.2f], residual = %.2f\n',k,x(1),x(2),x(3),x(4),x(5),x(6), residual);
+
+end
+x_G=x;
+k_G=k;
+fprintf('----------------------------\nSummary\n')
+fprintf('Using Jacobi iteration, [t1, t2, t3, t4, t5, t6] = [%.2f, %.2f, %.2f, %.2f, %.2f, %.2f] after %i %.2f\n',k,x_J(1),x_J(2),x_J(3),x_J(4),x_J(5),x_J(6),k_J);
+fprintf('Using Gauss-Seidel iteration, [t1, t2, t3, t4, t5, t6] = [%.2f, %.2f, %.2f, %.2f, %.2f, %.2f] after %i %.2f\n',k,x_G(1),x_G(2),x_G(3),x_G(4),x_G(5),x_G(6),k_G);
+#+END_SRC
+
+
+Jacobi iteration \\
+1, [20.00, 0.00, 20.00, 1.25, 1.25, 21.25], residual = 35.42 \\
+2, [20.00, 10.31, 20.31, 1.56, 11.88, 21.56], residual = 14.82 \\
+3, [22.58, 13.05, 22.97, 6.80, 12.11, 24.22], residual = 7.46 \\
+4, [23.26, 14.41, 24.96, 7.54, 14.75, 24.28], residual = 3.72 \\
+5, [23.60, 15.74, 25.49, 8.54, 15.44, 24.94], residual = 2.02 \\
+6, [23.94, 16.13, 26.07, 9.05, 15.99, 25.11], residual = 1.09 \\
+7, [24.03, 16.50, 26.30, 9.28, 16.31, 25.25], residual = 0.61 \\
+8, [24.12, 16.66, 26.45, 9.45, 16.46, 25.33], residual = 0.34 \\
+9, [24.16, 16.76, 26.53, 9.53, 16.56, 25.36], residual = 0.19 \\
+10, [24.19, 16.81, 26.57, 9.58, 16.61, 25.39], residual = 0.11 \\
+11, [24.20, 16.84, 26.60, 9.60, 16.63, 25.40], residual = 0.06 \\
+12, [24.21, 16.86, 26.61, 9.62, 16.65, 25.41], residual = 0.03 \\
+Gauss-Seidel iteration \\
+13, [20.00, 5.00, 21.25, 2.50, 7.19, 23.05], residual = 38.28 \\
+14, [21.25, 12.42, 23.73, 6.15, 14.48, 24.87], residual = 11.52 \\
+15, [23.11, 15.33, 25.37, 8.70, 15.99, 25.25], residual = 4.85 \\
+16, [23.83, 16.30, 26.25, 9.32, 16.45, 25.36], residual = 1.69 \\
+17, [24.07, 16.69, 26.50, 9.54, 16.60, 25.40], residual = 0.59 \\
+18, [24.17, 16.82, 26.59, 9.61, 16.65, 25.41], residual = 0.20 \\
+19, [24.20, 16.86, 26.62, 9.63, 16.66, 25.42], residual = 0.06 \\
+20, [24.22, 16.87, 26.63, 9.63, 16.67, 25.42], residual = 0.02 \\
+Summary \\
+Using Jacobi iteration, [t1, t2, t3, t4, t5, t6] = [20.00, 24.21, 16.86, 26.61, 9.62, 16.65] after 25.4086 12.00 \\
+Using Gauss-Seidel iteration, [t1, t2, t3, t4, t5, t6] = [20.00, 24.22, 16.87, 26.63, 9.63, 16.67] after 25.4172 20.00

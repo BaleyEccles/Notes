@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       033adb3d-d291-4c69-a627-3ddc6cc6804a
+:END:
+#+title: Zener Diodes
+#+date: [2024-08-03 Sat 12:26]
+#+STARTUP: latexpreview
+* Zener [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]]
+When a zener diode is being reverse biased there is a set of voltages that will allow current to flow. This happens due to quantum tunneling and the voltages are dependet on the [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] and [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] materials used.
+* Sovling Problems
+- Find if the diode is forward or reverse biased, if it is reverse assume that the diode is not yet in the avalanche effect and find the volatage accross it and then reasses if it is in avalanch effect range.

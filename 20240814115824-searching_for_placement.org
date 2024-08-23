@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       47a8b71f-4a01-4d35-9e9c-7a73abff0a70
+:END:
+#+title: Searching for Placement
+#+date: [2024-08-14 Wed 11:58]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Searching for Placement
+
+Talk about what you can provide, not what they can provide to me.
+** Cover letter
+To tell the employer why they should higher you and what you can provide
+- Intro
+-
+[[file:asdas.png][Cover Letter Example]]
+** Selection Criteria
+- Evidence that you have done somthing
+- Tell a story that proves you have some skill
+- 1/3 page per response

@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       fb00e1b5-c484-409e-a4e2-8b1ed31c5427
+:END:
+#+title: Reluctance
+#+date: [2024-08-07 Wed 14:34]
+#+STARTUP: latexpreview
+
+* Reluctance
+- \[\mathfrak{R}=\frac{l}{\mu A}\]
+  - \[l\] is the lenght of the material
+  - \[\mu\] is the [[id:b70c8efe-e501-479a-8d58-6093bd1e891a][Magnetic Permeability]]
+  - \[A\] is the cross-sectional area
+- Measured in inverse henry, \[H^{-1}\]
+- In series \[\mathfrak{R}\] adds
+  - \[\mathfrak{R}_T=\mathfrak{R}_1+\mathfrak{R}_2+\mathfrak{R}_3 + \hdots\]
+- In parallel \[\mathfrak{R}\] adds inversely
+  - \[\frac{1}{\mathfrak{R}_T}=\frac{1}{\mathfrak{R}_1}+\frac{1}{\mathfrak{R}_2}+\frac{1}{\mathfrak{R}_3} + \hdots\]

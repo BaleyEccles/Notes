@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       240aca67-b15c-4bea-ba1e-09f80a59ccd5
+:END:
+#+title: Causel Systems
+#+date: [2024-08-05 Mon 12:04]
+#+STARTUP: latexpreview
+
+* Causel Systems
+A [[id:e8b3e3c8-1012-4b36-8aa5-81ebf472052f][System]] that only depend on prior events and not future ones. That is \[y(t_0)\] depends only on the input \[x(t)\] for values of \[t\leq t_0\]

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       33916d2c-c9b8-40a8-9532-2c81f0da49cf
+:END:
+#+title: Newton-Raphson Method
+#+date: [2024-08-06 Tue 10:35]
+#+STARTUP: latexpreview
+
+* Newton-Raphson Method
+A [[id:5d1b6d40-17f3-486c-9aae-bd5516083d30][Fixed Point Method]] that uses the operation \[x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}\].
+** Convergence
+Quadratic convergence

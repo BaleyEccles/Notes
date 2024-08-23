@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       124ac03e-eb71-4731-a90c-55171f9edb80
+:END:
+#+title: Difference Equations
+#+date: [2024-08-05 Mon 09:36]
+#+STARTUP: latexpreview
+
+* Difference Equations
+To convert an ODE into a [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equation]] use:
+** Backward Difference
+- \[\frac{dy}{dt}\approx \frac{y_2-y_1}{t_2-t_1} = \frac{y[n]-y[n-1]}{T_s}\]
+- \[\frac{d^2y}{dt^2} \approx \frac{y[n] - 2y[n-1] + y[n-2]}{T_s^2}\]
+- \[\frac{d^3y}{dt^3} \approx \frac{y[n] - 3y[n-1] + 3y[n-2] - y[n-3]}{T_s^3}\]
+Where \[T_s\] is the time between each discrete point. This would then be put into the ODE and solved for \[x[n]\].
+** Forward Difference
+- \[\frac{dy}{dt}\approx \frac{y_2-y_1}{t_2-t_1} = \frac{y[n+1]-y[n]}{T_s}\]
+- \[\frac{d^2y}{dt^2} \approx \frac{y[n+2] - 2y[n+1] + y[n]}{T_s^2}\]
+- \[\frac{d^3y}{dt^3} \approx \frac{y[n+3] - 3y[n+2] + 3y[n+1] - y[n]}{T_s^3}\]
+Where \[T_s\] is the time between each discrete point. This would then be put into the ODE and solved for \[x[n]\].

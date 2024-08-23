@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       18aa5061-7346-462c-9f77-d0a6c6e2752c
+:END:
+#+title: P-type
+#+date: [2024-08-02 Fri 21:01]
+
+3 valence electron material
+There are free spots for electrons to flow (hole).
+Electrically neutral
+The hole is the majority carrier, and the electron is the minority carrier

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       49bf2fc3-d5c6-4078-851f-1029ef4d9065
+:END:
+#+title: Diamagnetic
+#+date: [2024-08-07 Wed 14:20]
+#+STARTUP: latexpreview
+
+* Diamagnetic
+The material is repeled by a magnetic field.

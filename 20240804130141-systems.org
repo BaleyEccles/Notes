@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       e8b3e3c8-1012-4b36-8aa5-81ebf472052f
+:END:
+#+title: Systems
+#+date: [2024-08-04 Sun 13:01]
+#+STARTUP: latexpreview
+
+* Systems
+A transformation from one function into another.
+\begin{math}
+x(t) \rightarrow \framebox[1.1\width]{System} \rightarrow y(t)
+\end{math}
+A transformation from \[x(t)\] into \[y(t)\],
+** Properties
+A system can have many properties, such as
+- [[id:949eb0e5-3855-46f6-bc68-67f16c04c961][Time Invariance]]
+- [[id:0e057e37-e287-469b-8085-d0c2f94713c1][Linearity]]
+- [[id:240aca67-b15c-4bea-ba1e-09f80a59ccd5][Causality]]
+** Operations On Systems
+- [[id:8c187cae-c6ec-4298-85ef-12448f78b5e6][Impulse Response]]
+- [[id:5a63667f-a24c-4a46-99de-0997d54296b7][Conolution Operation]]
+
+** Special Systems
+A special type of system that we will be looking at are [[id:129878a7-2136-473b-ac33-74da80b12e67][Linear and Time Invarient Systems (LTI)]].
+** Forms of Systems
+- [[id:3b3f9115-e45f-425f-a0ed-531944a709b6][Continuous Systems]]
+- [[id:9d44cc62-fd73-49f1-9bda-efa24d9e5538][Discrete Systems]]
+

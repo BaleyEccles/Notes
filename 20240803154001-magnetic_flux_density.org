@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       cf104375-09b0-4334-84ce-3e0e1f41c234
+:END:
+#+title: Magnetic Flux Density
+#+date: [2024-08-03 Sat 15:40]
+#+STARTUP: latexpreview
+
+* Magnetic Flux Density
+- Given by \[B\] or \[\vec{B}\] in its vector form. Measured in Tesla (\[T\]) or Webbers per meter (\[Wb/m\])
+- Magnetic flux density has a relation to [[id:f15ab8cb-30df-45d4-ab39-707648dea1be][Magnetic Flux Intensity]] given by:
+  - \[\vec{B}=\mu\vec{H}\]
+  - \[B=\mu_0 H+ \mu_0 M\]
+    - when the material is magnetic
+- -\[\mu\] is the [[id:b70c8efe-e501-479a-8d58-6093bd1e891a][Magnetic Permeability]].

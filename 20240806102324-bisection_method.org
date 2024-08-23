@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       97007561-5b23-42b9-815c-a4d0c3c030a4
+:END:
+#+title: Bisection Method
+#+date: [2024-08-06 Tue 10:23]
+#+STARTUP: latexpreview
+
+* Bisection Method
+We halve the interval with \[c=\frac{a+b}{2}\], now \[x^{*}\] will be in \[[a,c]\] or \[[c,b]\]. If \[f(c)=0\] then \[c=x^{*}\] and we have found the root.
+** Convergence
+This method converges linearly

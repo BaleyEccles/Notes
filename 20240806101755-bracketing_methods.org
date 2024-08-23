@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       eb026fba-b0fd-4bee-9ab4-bbe2f3d13f99
+:END:
+#+title: Bracketing Methods
+#+date: [2024-08-06 Tue 10:17]
+#+STARTUP: latexpreview
+
+* Bracketing Methods
+A root finding method that only works in one dimension, but will always find the root if the interval is chosen correctly.
+We choose two points, one that is above the x-axis and one that is below the x-axis, using the Intermediate Value Theroem, we know that there will be a root inbetween these points, so we itterativly make the intervall smaller. Unitl we converge on the root.
+- [[id:97007561-5b23-42b9-815c-a4d0c3c030a4][Bisection Method]]

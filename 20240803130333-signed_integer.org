@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       e83a4e79-c4ce-4082-bd81-017e7b37a17e
+:END:
+#+title: Signed Integer
+#+date: [2024-08-03 Sat 13:03]
+#+STARTUP: latexpreview
+
+* Signed Integer
+Each bit in a signed integer represents a power of two to be summed. The least significant bit being \[2^{0}\], the second most significant bit being \[2^{N-1}\] and the most significant bit being \[-2^{N}\], where \[N\] is the number of bits in the integer. This allows a range of numbers from \[-2^{N-1}\] to \[2^{N-1}-1\]. This format is known as twos complement.

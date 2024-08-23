@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       a45c9daf-0e8d-47e5-9cad-f7e08af06a30
+:END:
+#+title: Diode Breakdown Voltage
+#+date: [2024-08-03 Sat 12:32]
+#+STARTUP: latexpreview
+
+* Diode Breakdown Voltage
+When [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]] are reverse biased there is a voltage where the diode will start to destroy its self. This is known as the breakdown voltage. It happens due to electrons gaining too much energy and being able to break through the junction.

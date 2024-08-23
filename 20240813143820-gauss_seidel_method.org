@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       469846e6-9225-45b4-990a-9d614c9f50f9
+:END:
+#+title: Gauss-Seidel Method
+#+date: [2024-08-13 Tue 14:38]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Gauss-Seidel Method
+In matrix form
+- \[x^{(k+1)}=L^{-1}(b-Ux^{(k)}\]
+In element form
+- \[x_i^{(k+1)}=\frac{1}{a_{ii}}(b_i-\sum_{j=1,j\ne i}^{n}a_{ij}x_j)\]
+This method will converge if:
+- \[A\] is diagonally dominant.
+- This method may also converge if this isnt true.

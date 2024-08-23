@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       89a05d8d-08a9-4ac8-81bc-78239de5bc5c
+:END:
+#+title: Transformers
+#+date: [2024-08-22 Thu 09:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Transformers
+** Ideal Transformer
+- An ideal transformer converts all of the enegy from one coil to the other. ie no energy loss.
+- Electrical power ratio is one, \[\frac{p_1}{p_2}=1\]
+  - \[\frac{\mathcal{E}_{1}}{\mathcal{E}_2}=\frac{N_1}{N_2}\]
+  - \[\frac{i_1}{i_2}=\frac{N_2}{N_1}\]
+
+** Losses To Hysteresis
+- Some energy is lossed to hysteresis
+  - \[P=K_h\cdot f \cdot B^{1.6}_{max}\]
+    - \[K_h\] is a constant depending on the mateiral
+    - \[f\] is the frequency
+    - \[\B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core
+** Losses To Eddy Currents
+- When the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]] ocillates eddy currents are created in the secondary and the core.
+  - \[P_e=K_e\cdot f^2 \cdot B^{2}_{max}\]
+    - \[K_e\] is a constant depending on the mateiral
+    - \[f\] is the frequency
+    - \[\B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core

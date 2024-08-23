@@ -1,0 +1,83 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZpc{} True Answer}
+\PYG{n}{T} \PYG{p}{=} \PYG{l+m+mi}{50}\PYG{p}{;}
+\PYG{n}{A} \PYG{p}{=} \PYG{l+m+mf}{0.05}\PYG{p}{;} \PYG{c}{\PYGZpc{} This amplitude shows the input and output well}
+\PYG{n}{xDiscrete} \PYG{p}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{T}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{T}\PYG{p}{;}
+
+
+\PYG{n}{fDiscrete} \PYG{p}{=} \PYG{n+nb}{zeros}\PYG{p}{(}\PYG{n+nb}{size}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{));}
+\PYG{k}{for} \PYG{n}{i} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{)}
+    \PYG{n}{x} \PYG{p}{=} \PYG{n}{xDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{o}{+} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{;}
+    \PYG{k}{if}  \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}
+        \PYG{n}{fDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{elseif} \PYG{o}{\PYGZhy{}}\PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{2} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4}
+        \PYG{n}{fDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n}{x}\PYG{p}{;}
+    \PYG{k}{elseif} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{2}
+        \PYG{n}{fDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{3} \PYG{o}{*} \PYG{n}{x} \PYG{o}{+} \PYG{n}{T}\PYG{p}{);}
+    \PYG{k}{elseif} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{2} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{3}\PYG{o}{*}\PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4}
+        \PYG{n}{fDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{T}\PYG{p}{);}
+    \PYG{k}{elseif} \PYG{l+m+mi}{3}\PYG{o}{*}\PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{T}
+        \PYG{n}{fDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{p}{(}\PYG{l+m+mi}{5} \PYG{o}{*} \PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{4} \PYG{o}{*} \PYG{n}{T}\PYG{p}{);}
+    \PYG{k}{else}
+        \PYG{n}{fDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{end}
+\PYG{k}{end}
+
+\PYG{n}{fFlippedDiscrete} \PYG{p}{=} \PYG{n+nb}{zeros}\PYG{p}{(}\PYG{n+nb}{size}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{));}
+\PYG{k}{for} \PYG{n}{i} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{)}
+    \PYG{n}{x} \PYG{p}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{xDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mf}{1.5} \PYG{o}{*} \PYG{n}{T}\PYG{p}{;}
+    \PYG{k}{if} \PYG{l+m+mi}{0} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4}
+        \PYG{n}{fFlippedDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n}{x}\PYG{p}{;}
+    \PYG{k}{elseif} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{2}
+        \PYG{n}{fFlippedDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{3} \PYG{o}{*} \PYG{n}{x} \PYG{o}{+} \PYG{n}{T}\PYG{p}{);}
+    \PYG{k}{elseif} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{2} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{3}\PYG{o}{*}\PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4}
+        \PYG{n}{fFlippedDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{T}\PYG{p}{);}
+    \PYG{k}{elseif} \PYG{l+m+mi}{3}\PYG{o}{*}\PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{T}
+        \PYG{n}{fFlippedDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{p}{(}\PYG{l+m+mi}{5} \PYG{o}{*} \PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{4} \PYG{o}{*} \PYG{n}{T}\PYG{p}{);}
+    \PYG{k}{else}
+        \PYG{n}{fFlippedDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{end}
+\PYG{k}{end}
+
+\PYG{c}{\PYGZpc{} Discrete Approximation}
+\PYG{n}{sDiscrete} \PYG{p}{=} \PYG{n+nb}{zeros}\PYG{p}{(}\PYG{n+nb}{size}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{));}
+\PYG{n}{hDiscrete} \PYG{p}{=} \PYG{n+nb}{zeros}\PYG{p}{(}\PYG{n+nb}{size}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{));}
+\PYG{k}{for} \PYG{n}{i} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{)}
+    \PYG{n}{x} \PYG{p}{=} \PYG{n}{xDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+    \PYG{k}{if} \PYG{o}{\PYGZhy{}}\PYG{n}{T} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}
+        \PYG{n}{sDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{n}{hDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{elseif} \PYG{l+m+mi}{0} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4}
+        \PYG{n}{sDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYG{p}{;}
+        \PYG{n}{hDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYG{p}{;}
+    \PYG{k}{elseif} \PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{3}\PYG{o}{*}\PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4}
+        \PYG{n}{sDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{A}\PYG{p}{;}
+        \PYG{n}{hDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{A}\PYG{p}{;}
+    \PYG{k}{elseif} \PYG{l+m+mi}{3}\PYG{o}{*}\PYG{n}{T}\PYG{o}{/}\PYG{l+m+mi}{4} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{T}
+        \PYG{n}{sDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYG{p}{;}
+        \PYG{n}{hDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{n}{A}\PYG{p}{;}
+    \PYG{k}{elseif} \PYG{n}{T} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{n}{x} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{x} \PYG{o}{\PYGZlt{}}\PYG{p}{=} \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{T}
+        \PYG{n}{sDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{n}{hDiscrete}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{end}
+\PYG{k}{end}
+
+\PYG{n}{C} \PYG{p}{=} \PYG{n+nb}{conv}\PYG{p}{(}\PYG{n}{sDiscrete}\PYG{p}{,} \PYG{n}{hDiscrete}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}same\PYGZsq{}}\PYG{p}{);}
+
+\PYG{n+nb}{figure}\PYG{p}{;}
+\PYG{n+nb}{hold} \PYG{n}{on}\PYG{p}{;}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{,} \PYG{n}{sDiscrete}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}b\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}DisplayName\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}s(x)\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}LineWidth\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mf}{1.5}\PYG{p}{);}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{,} \PYG{n}{hDiscrete}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}DisplayName\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}h(x)\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}LineWidth\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mf}{1.5}\PYG{p}{);}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{,} \PYG{n}{C}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}k\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}DisplayName\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}Convolution Result\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}LineWidth\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mf}{1.5}\PYG{p}{);}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{,} \PYG{n}{fDiscrete}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}g\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}DisplayName\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}f(x)\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}LineWidth\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mf}{1.5}\PYG{p}{);}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{,} \PYG{n}{fFlippedDiscrete}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}m\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}DisplayName\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}f(x) flipped about y\PYGZhy{}axis\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}LineWidth\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mf}{1.5}\PYG{p}{);}
+
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Original Functions and Convolution Result\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{xlabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}x\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{ylabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Amplitude\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{xlim}\PYG{p}{([}\PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{),} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{xDiscrete}\PYG{p}{)]);}
+\PYG{n}{ylim}\PYG{p}{([}\PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{C}\PYG{p}{),} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)]);}
+\PYG{n+nb}{grid} \PYG{n}{on}\PYG{p}{;}
+\PYG{n+nb}{legend}\PYG{p}{;}
+\PYG{n+nb}{hold} \PYG{n}{off}\PYG{p}{;}
+\end{Verbatim}

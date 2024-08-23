@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       9f092447-9168-44ac-bc6a-2bea3889923e
+:END:
+#+title: Light Emitting Diode
+#+date: [2024-08-03 Sat 12:28]
+#+STARTUP: latexpreview
+* Light Emitting [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]] (LED)
+When LEDs are foward biased they emitt light. This is because when the electrons travel through the junction they are rasied into the conductance band, and when they go back down to the valence band a photon is created. The wavelenght of this photon is dependent on the [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] and [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] materials used. LEDs typically have small [[id:a45c9daf-0e8d-47e5-9cad-f7e08af06a30][Diode Breakdown Voltage]].

@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       a889f56d-55aa-4d63-b86a-50226324c218
+:END:
+#+title: Magnetic Circuits
+#+date: [2024-08-07 Wed 11:28]
+#+STARTUP: latexpreview
+
+* Magnetic Circuits
+- These are similar to electric circuits
+  - \[\phi =\frac{F}{\mathfrak{R}}\]
+    - \[\phi\] is the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]]
+    - \[F\] is the magnetomotive force
+      - \[F=Ni\] from [[id:5090162e-9bbe-482c-bb65-0c906392309a][Ampere's Law]]
+    - \[\mathfrak{R}\] is the [[id:fb00e1b5-c484-409e-a4e2-8b1ed31c5427][reluctance]]

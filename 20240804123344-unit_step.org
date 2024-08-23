@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       df314ae5-1b35-49a3-be34-8d0aeb720ff3
+:END:
+#+title: Unit Step
+#+date: [2024-08-04 Sun 12:33]
+#+STARTUP: latexpreview
+
+* Unit Step
+\begin{math}
+u(t)=
+\begin{cases}
+        1 & t > 0 \\
+        0 & t < 0
+\end{cases}
+\end{math}.
+Relation to [[id:31e21e4b-6463-4efb-a9bd-6fb1f20d5db8][Delta Function]]:
+\[u(t)=\int_{-\infty}^{t}\delta (\lambda)d\lambda \Leftrightarrow \delta (t)=\frac{du(t)}{dt}\].

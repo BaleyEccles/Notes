@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       3c07a18c-ae66-4f86-868e-a15671e6aa00
+:END:
+#+title: Magnetic Induction
+#+date: [2024-08-14 Wed 07:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Magnetic Induction
+- [[id:1ce0a2b1-ecf2-40fa-8b02-d6bee61d0bb8][Flux Cutting EMF]]
+- [[id:d308fc05-1386-4025-966c-f860c3fc3d71][Dynamo]]
+- [[id:0b3f01d9-4742-47d0-b78d-a2399a25c3c2][Faraday's law]]
+
+\[\mathcal{E}=\int \vec{f}\cdot d\vec{l}\]
+- we can convert RMS to non-RMS using
+  - \[\mathcal{E}_{RMS}=\frac{\mathcal{E}}{\sqrt{2}}\]

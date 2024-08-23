@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       3b3f9115-e45f-425f-a0ed-531944a709b6
+:END:
+#+title: Continuous Systems
+#+date: [2024-08-05 Mon 12:32]
+#+STARTUP: latexpreview
+
+* Continuous Systems
+A [[id:e8b3e3c8-1012-4b36-8aa5-81ebf472052f][System]] that is denoted using \[x(t),h(t),y(t) \hdots\], and uses continuous data.

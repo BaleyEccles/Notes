@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       52e30487-1ef4-4023-b68c-b892fdaa0966
+:END:
+#+title: Common Emitter
+#+date: [2024-08-08 Thu 09:06]
+#+STARTUP: latexpreview
+
+* TODO Common Emitter

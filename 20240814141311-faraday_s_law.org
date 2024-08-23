@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       0b3f01d9-4742-47d0-b78d-a2399a25c3c2
+:END:
+#+title: Faraday's law
+#+date: [2024-08-14 Wed 14:13]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Faraday's law
+The same as Lenz's law
+EMF is equal to the negative of the rate of change of flux over time:
+- \[\mathcal{E}=-N \frac{\partial \phi}{\partial t}\]
+- If a magnet enters a magnetic field, an opossing field is create to counteract the magnet.

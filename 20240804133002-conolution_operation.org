@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       5a63667f-a24c-4a46-99de-0997d54296b7
+:END:
+#+title: Convolution Operation
+#+date: [2024-08-04 Sun 13:30]
+#+STARTUP: latexpreview
+
+* Convolution Operation
+Using the sifting property of the [[id:31e21e4b-6463-4efb-a9bd-6fb1f20d5db8][Delta Function]], we can find that:
+- \[y(t)=\int_{-\infty}^{\infty}x(\lambda)h(t-\lambda)d\lambda=x(t)*h(t)=h(t)*x(t)\]
+which is for [[id:3b3f9115-e45f-425f-a0ed-531944a709b6][Continuous Systems]].
+** Graphical Convolution
+The convolution is effectivly multiplication and summation, so we can break down the operation into a set of \[t\] segments and visually create a \[y(t)\].
+** Discrete Convolution
+When dealing with a [[id:9d44cc62-fd73-49f1-9bda-efa24d9e5538][Discrete System]] use:
+- \[\sum_{k=-\infty}^{\infty}x[k]h[n-k]\]
+Itterate through n, noticing that a lot of terms will be zero.
+If The input system can be represented as a few [[id:31e21e4b-6463-4efb-a9bd-6fb1f20d5db8][Delta Functions]] then it can simply become a sum of the impulse response translated by the posistions of the [[id:31e21e4b-6463-4efb-a9bd-6fb1f20d5db8][Delta Functions]].
