@@ -13,7 +13,7 @@ These systems can be represented as [[id:6f242323-5b6b-469d-b611-a3cdf4641299][B
 
 ** State Space-Single Undelayed Input
 - State equation:
-        \[\begin{bmatrix}
+\[\begin{bmatrix}
 q_{1}[n+1] \\
 q_{2}[n+1] \\
 \vdots     \\
@@ -51,7 +51,6 @@ b
 Which becomes:
 - \[\underline{q}[n+1]=\underline{A}q[n]+\underline{b}x[n]\]
   - Part one of the general form
-and
 - \[y[n]=\underline{C}q[n]+dx[n]\]
   - Part two of the general form
 These equations can be used to solve systems of the form:

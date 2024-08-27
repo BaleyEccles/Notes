@@ -11,22 +11,26 @@
 - It uses the [[id:90080c46-f2b3-4e73-995a-ef33b7e70bbe][Fourier Series]] to decompose signal into its frequencies.
 ** Definition
 - The Fourier Transform is defined as
-- \[X(\omega)=\int_{-\infty}^{\infty}x(t)e^{-j\omega t}dt\]
+- \[\mathcal{F}(x(t))=X(\omega)=\int_{-\infty}^{\infty}x(t)e^{-j\omega t}dt\]
   - The Kernel \[K(\omega,t) =e^{-j\omega t}\]
   - \[C_k=\frac{1}{T_0}X(k\omega_0\]
 ** Inverse Fourier Transform
 - To convert a frequency signal into a time signal
-  - \[x(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)e^{j\omega t}d\omega\]
+  - \[\mathcal{F}^{-1}(X(\omega))=x(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)e^{j\omega t}d\omega\]
 ** Properties
 - Linearality:
   - \[a_1x_1(t)+a_2x_2(t)\leftrightarrow a_1X_1(\omega)+a_2X_2(\omega)\]
-- Time-sifting:
-  - \[x(t-t_0) \leftrightarrow X(\omega)=\int_{-\infty}^{\infty}x(t-t_0)e^{-j\omega t}dt\]
+- Time-shifting:
+  - \[x(t-t_0) \leftrightarrow X(\omega)=\int_{-\infty}^{\infty}x(t-t_0)e^{-j\omega t}dt=e^{-j\omega t_0}\cdot X(\omega)\]
+- Frequency-shifting:
+  - \[e^{j\omega_0 t}\cdot x(t) \leftrightarrow X(\omega - \omega_0)\]
+- Time scaling:
+  - \[x(at) \leftrightarrow \frac{1}{\lvert a\rvert}X(\frac{\omega}{a})\]
 - Reversal:
   - \[x(-t) \leftrightarrow X(-\omega)\]
 - Duality:
   - \[X(t) \leftrightarrow 2\pi x(-\omega)\]
 - Differentiation:
   - \[\frac{dx(t)}{dt}\leftrightarrow j\omega X(\omega)\]
-- Frequency Differentiation
+- Frequency Differentiation:
   - \[(-jt)x(t) \leftrightarrow \frac{dX(\omega)}{d\omega}\]
