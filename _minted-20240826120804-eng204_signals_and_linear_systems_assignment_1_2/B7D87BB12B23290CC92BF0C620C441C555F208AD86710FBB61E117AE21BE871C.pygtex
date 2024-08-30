@@ -1,0 +1,58 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{clear}
+\PYG{n+nb}{clc}
+\PYG{n}{pkg} \PYG{n+nb}{load} \PYG{n}{symbolic}
+\PYG{n}{pkg} \PYG{n+nb}{load} \PYG{n}{control}
+\PYG{c}{\PYGZpc{} Using student IDs 652137 and 651790}
+\PYG{c}{\PYGZpc{}unsprungMass=236;}
+\PYG{c}{\PYGZpc{}sprungMass=2296;}
+\PYG{n}{ms}\PYG{p}{=}\PYG{l+m+mi}{2296}\PYG{p}{;}
+\PYG{n}{mt}\PYG{p}{=}\PYG{l+m+mi}{236}\PYG{p}{;}
+\PYG{n}{kt}\PYG{p}{=}\PYG{l+m+mi}{250000}\PYG{p}{;}
+\PYG{c}{\PYGZpc{} syms k ks cs Ts mt ms}
+\PYG{k}{for} \PYG{n}{i}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{10}
+  \PYG{k}{for} \PYG{n}{j}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{10}
+\PYG{n}{ks} \PYG{p}{=} \PYG{l+m+mi}{10000}\PYG{o}{+} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{i}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{l+m+mi}{250000}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{10000}\PYG{p}{);}
+\PYG{n}{cs} \PYG{p}{=} \PYG{l+m+mi}{500}\PYG{o}{+} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{j}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{l+m+mi}{2000}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{500}\PYG{p}{);}
+\PYG{n}{Ts} \PYG{p}{=} \PYG{l+m+mf}{0.1}\PYG{p}{;}
+\PYG{n}{A} \PYG{p}{=[(}\PYG{o}{\PYGZhy{}}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{\PYGZhy{}} \PYG{n}{Ts} \PYG{o}{*} \PYG{n}{kt} \PYG{o}{+} \PYG{n}{cs}\PYG{p}{)} \PYG{o}{*} \PYG{n}{cs}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{,} \PYG{l+m+mi}{0} \PYG{p}{,} \PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{o}{*} \PYG{n}{cs}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{,} \PYG{n}{mt} \PYG{o}{*} \PYG{n}{cs}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{;} \PYG{p}{...}
+    \PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{o}{*} \PYG{n}{ms}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{,} \PYG{l+m+mi}{1} \PYG{p}{,} \PYG{p}{(}\PYG{n}{cs} \PYG{o}{\PYGZhy{}} \PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks}\PYG{p}{)} \PYG{o}{*} \PYG{n}{ms}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{,} \PYG{l+m+mi}{0} \PYG{p}{;} \PYG{p}{...}
+    \PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{o}{*} \PYG{n}{cs}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{,} \PYG{n}{ms} \PYG{o}{*} \PYG{n}{cs}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{,} \PYG{p}{(}\PYG{n}{cs} \PYG{o}{\PYGZhy{}} \PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks}\PYG{p}{)} \PYG{o}{*} \PYG{n}{cs}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{,} \PYG{l+m+mi}{0} \PYG{p}{;} \PYG{p}{...}
+    \PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{+} \PYG{n}{cs}\PYG{p}{)} \PYG{o}{*} \PYG{n}{mt}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{,} \PYG{l+m+mi}{0} \PYG{p}{,} \PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{o}{*} \PYG{n}{mt}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{];}
+\PYG{n}{B}\PYG{p}{=} \PYG{p}{[}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{kt} \PYG{o}{*} \PYG{n}{cs}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{;} \PYG{p}{...}
+    \PYG{l+m+mi}{0} \PYG{p}{;} \PYG{p}{...}
+    \PYG{l+m+mi}{0} \PYG{p}{;} \PYG{p}{...}
+    \PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{kt} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{o}{*} \PYG{n}{mt}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)];}
+\PYG{n}{c}\PYG{p}{=[}\PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{n}{cs}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{+} \PYG{n}{Ts} \PYG{o}{*} \PYG{n}{kt} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{p}{,} \PYG{l+m+mi}{0} \PYG{p}{,} \PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{+} \PYG{n}{Ts} \PYG{o}{*} \PYG{n}{kt} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{p}{,} \PYG{p}{(}\PYG{n}{mt}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{+} \PYG{n}{Ts} \PYG{o}{*} \PYG{n}{kt} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{p}{;} \PYG{p}{...}
+\PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{p}{,} \PYG{p}{(}\PYG{n}{ms}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{n}{cs}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{];}
+\PYG{n}{d} \PYG{p}{=} \PYG{p}{[(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{kt}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts} \PYG{o}{*} \PYG{n}{ks} \PYG{o}{+} \PYG{n}{Ts} \PYG{o}{*} \PYG{n}{kt} \PYG{o}{\PYGZhy{}} \PYG{n}{cs}\PYG{p}{)} \PYG{p}{;} \PYG{l+m+mi}{0}\PYG{p}{];}
+\PYG{n}{sys} \PYG{p}{=} \PYG{n}{ss}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,}\PYG{n}{B}\PYG{p}{,}\PYG{n}{c}\PYG{p}{,}\PYG{n}{d}\PYG{p}{);}
+
+\PYG{n}{t} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{:}\PYG{n}{Ts}\PYG{p}{:}\PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{n}{u} \PYG{p}{=} \PYG{n+nb}{zeros}\PYG{p}{(}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{t}\PYG{p}{),} \PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{n}{u}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{[}\PYG{n}{y}\PYG{p}{,} \PYG{n}{t}\PYG{p}{]} \PYG{p}{=} \PYG{n}{lsim}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{,} \PYG{n}{u}\PYG{p}{,} \PYG{n}{t}\PYG{p}{);}
+
+\PYG{c}{\PYGZpc{}figure;}
+\PYG{c}{\PYGZpc{}plot(t, y(:, 1), \PYGZsq{}b\PYGZsq{})}
+\PYG{c}{\PYGZpc{}hold on;}
+\PYG{c}{\PYGZpc{}plot(t, y(:, 2), \PYGZsq{}r\PYGZsq{})}
+\PYG{c}{\PYGZpc{}title(\PYGZsq{}Impulse response of the car suspension\PYGZsq{});}
+\PYG{c}{\PYGZpc{}xlabel(\PYGZsq{}Time (s)\PYGZsq{});}
+\PYG{c}{\PYGZpc{}ylabel(\PYGZsq{}Displacement (m)\PYGZsq{});}
+\PYG{c}{\PYGZpc{}legend(\PYGZsq{}Body Displacement\PYGZsq{}, \PYGZsq{}Wheel Displacement\PYGZsq{});}
+\PYG{c}{\PYGZpc{}grid on;}
+\PYG{n}{eigenvalues} \PYG{p}{=} \PYG{n+nb}{eig}\PYG{p}{(}\PYG{n}{A}\PYG{p}{);}
+\PYG{c}{\PYGZpc{}disp(\PYGZsq{}Eigenvalues of the system:\PYGZsq{});}
+\PYG{c}{\PYGZpc{}disp(eigenvalues);}
+
+\PYG{c}{\PYGZpc{} Check stability}
+\PYG{k}{if} \PYG{n+nb}{all}\PYG{p}{(}\PYG{n+nb}{real}\PYG{p}{(}\PYG{n}{eigenvalues}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{)}
+    \PYG{n+nb}{disp}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}The system is stable.\PYGZsq{}}\PYG{p}{);}
+\PYG{k}{else}
+\PYG{c}{\PYGZpc{}    disp(\PYGZsq{}The system is unstable.\PYGZsq{});}
+\PYG{k}{end}
+\PYG{k}{end}
+\PYG{k}{end}
+
+\end{Verbatim}

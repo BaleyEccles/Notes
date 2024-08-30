@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{t} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{:}\PYG{n}{Ts}\PYG{p}{:}\PYG{l+m+mi}{25}\PYG{p}{;}
+\PYG{n}{f} \PYG{p}{=} \PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{n}{w0} \PYG{p}{=} \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{o}{*}\PYG{n}{f}\PYG{p}{;}
+\PYG{n}{um} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{n}{u} \PYG{p}{=} \PYG{n}{um}\PYG{o}{*}\PYG{n+nb}{sin}\PYG{p}{(}\PYG{n}{w0}\PYG{o}{*}\PYG{n}{t}\PYG{p}{);}
+\PYG{p}{[}\PYG{n}{y}\PYG{p}{,} \PYG{n}{t}\PYG{p}{]} \PYG{p}{=} \PYG{n}{lsim}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{,} \PYG{n}{u}\PYG{p}{,} \PYG{n}{t}\PYG{p}{);}
+
+\PYG{n+nb}{figure}\PYG{p}{;}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,} \PYG{n}{y}\PYG{p}{(:,} \PYG{l+m+mi}{1}\PYG{p}{),} \PYG{l+s}{\PYGZsq{}b\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{hold} \PYG{n}{on}\PYG{p}{;}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,} \PYG{n}{y}\PYG{p}{(:,} \PYG{l+m+mi}{2}\PYG{p}{),} \PYG{l+s}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Impulse response of the car suspension\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{xlabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Time (s)\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{ylabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Displacement (m)\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{legend}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Body Displacement\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}Wheel Displacement\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{grid} \PYG{n}{on}\PYG{p}{;}
+\end{Verbatim}

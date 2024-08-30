@@ -1,0 +1,362 @@
+:PROPERTIES:
+:ID:       218004d7-a20c-416d-a8ed-d364b513c0a0
+:END:
+#+title: ENG204 - Signals and Linear Systems – Assignment 1.2
+#+date: [2024-08-26 Mon 12:08]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmonofont{Iosevka}
+#+LATEX_HEADER: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER: \usemintedstyle{emacs}
+
+* ENG204 - Signals and Linear Systems – Assignment 1.2
+** b
+#+BEGIN_SRC octave :exports code :results output :session Equ1
+clc
+clear
+pkg load symbolic
+syms mt at ms as  ...
+     Fkt Fks Fcs Fks
+                                % sum F_y = ma
+eq1 = mt*at == Fkt - Fks - Fcs;
+eq2 = ms*as == Fks + Fcs;
+
+
+                                % Sub in force equations
+syms kt u zt zs dzs dzt ks cs
+FktEqu = -kt*(u-zt);
+FksEqu = -ks*(zt-zs);
+FcsEqu = -cs*(dzt-dzs);
+eq1=subs(subs(subs(eq1,Fkt,FktEqu),Fks,FksEqu),Fcs,FcsEqu);
+eq2=subs(subs(subs(eq2,Fkt,FktEqu),Fks,FksEqu),Fcs,FcsEqu);
+
+#+END_SRC
+
+#+RESULTS:
+
+
+Using these equations from the free body diagram:
+ - $a_t m_t = - F_{cs} - F_{ks} + F_{kt}$
+ - $a_s m_s = F_{cs} + F_{ks}$
+And:
+ - $F_{kt} = -k_t \left(u - z_t\right)$
+ - $F_{ks} = -k_s \left(- z_s + z_t\right)$
+ - $F_{cs} = -c_s \left(- \dot{z}_s + \dot{z}_t\right)$
+Will result in the differential equations for the system:
+ - $a_t m_t = \dot{v_t} m_t \ddot{z_t} m_t = c_s \left(- \dot{z}_s + \dot{z}_t\right) + k_s \left(- z_s + z_t\right) - k_t \left(u - z_t\right)$
+ - $a_s m_s = \dot{v_s} m_s \ddot{z_s} m_s = - c_s \left(- \dot{z}_s + \dot{z}_t\right) - k_s \left(- z_s + z_t\right)$
+*** Difference Equations
+Next we can create the difference equations by subsituting in the forward differences for the velocities and accelerations:
+ - \dot{z_s} = \frac{- z_s[n] + zs[n+1]}{Ts}
+ - \dot{z_t} = \frac{- z_t[n] + zt[n+1]}{Ts}
+ - \dot{a_s} = \dot{v_s} = \frac{- v_s[n] + v_s[n+1]}{Ts}
+ - \dot{a_t} = \dot{v_t} = \frac{- v_t[n] + v_t[n+1]}{Ts}
+#+BEGIN_SRC octave :exports code :results output :session Equ1
+                                % Sub in forward difference
+syms zs zs1 zs2 zt zt1 zt2 Ts vs1 vt1 vs vt
+% First forward difference of displacement
+dzsEqu = (zs1-zs)/(Ts);
+dztEqu = (zt1-zt)/(Ts);
+% First forward differences of acceleration
+dvsEqu = (vs1-vs)/(Ts);
+dvtEqu = (vt1-vt)/(Ts);
+eq1=subs(eq1,at,dvtEqu);
+eq1=subs(eq1,dzs,dzsEqu);
+eq1=simplify(subs(eq1,dzt,dztEqu));
+eq2=subs(eq2,as,dvsEqu);
+eq2=subs(eq2,dzs,dzsEqu);
+eq2=simplify(subs(eq2,dzt,dztEqu));
+#+END_SRC
+
+#+RESULTS:
+
+ - $\frac{m_t \left(- v_s[n+1] + v_s[n+1]\right)}{T_s} = \frac{T_s \left(k_s \left(z_s[n] - z_t[n]\right) + kt \left(u[n] - z_t[n]\right)\right) - c_s \left(z_s[n] - z_s[n+1] - z_t[n] + z_t[n+1]\right)}{T_s}$
+ - $\frac{m_s \left(- v_t[n] + v_t[n+1[\right)}{T_s} = \frac{- T_s k_s \left(z_s[n] - z_t[n]\right) + c_s \left(z_s - z_s[n+1] - z_t[n] + z_t[n+1]\right)}{T_s}$
+
+** c
+
+
+We need to find the matricies of the two following equations:
+ - $\underline{q}[n+1]=\underline{A}q[n]+\underline{b}x[n]$
+ - $y[n]=\underline{C}q[n]+dx[n]$
+
+We chose the following state varibles:
+ - $q_1[n] = z_t[n]$
+ - $q_2[n] = v_t[n] = \dot{z_t}[n]$
+ - $q_3[n] = z_s[n]$
+ - $q_4[n] = v_s[n] = \dot{z_s}[n]$
+ - $q_1[n+1] = z_t[n+1]$
+ - $q_2[n+1] = v_t[n+1] = \dot{z_t}[n+1]$
+ - $q_3[n+1] = z_s[n+1]$
+ - $q_4[n+1] = v_s[n+1] = \dot{z_s}[n+1]$
+ - $x[n] = u[n]$
+ - $y[n] = \begin{bmatrix} z_t[n] \\ z_s[n] \end{bmatrix}$
+
+   
+*** State Equation
+Need to solve for the matricies in $\underline{q}[n+1]=\underline{A}q[n]+\underline{b}x[n]$. To do this we will subsitute in the state varibles into the difference equations.
+#+BEGIN_SRC octave :exports code :results output :session Equ1
+syms q1n q1n1 q2n q2n1 q3n q3n1 q4n q4n1
+
+eq1 = subs(eq1,zt,q1n);
+eq1 = subs(eq1,vt,q2n);
+eq1 = subs(eq1,zs,q3n);
+eq1 = subs(eq1,vs,q4n);
+eq1 = subs(eq1,zt1,q1n1);
+eq1 = subs(eq1,vt1,q2n1);
+eq1 = subs(eq1,zs1,q3n1);
+eq1 = subs(eq1,vs1,q4n1);
+
+eq2 = subs(eq2,zt,q1n);
+eq2 = subs(eq2,vt,q2n);
+eq2 = subs(eq2,zs,q3n);
+eq2 = subs(eq2,vs,q4n);
+eq2 = subs(eq2,zt1,q1n1);
+eq2 = subs(eq2,vt1,q2n1);
+eq2 = subs(eq2,zs1,q3n1);
+eq2 = subs(eq2,vs1,q4n1);
+
+equq1n1 = q1n+Ts*q2n; % t
+equq3n1 = q3n+Ts*q4n; % s
+
+eq1 = subs(eq1, q1n1, equq1n1);
+eq1 = subs(eq1, q3n1, equq3n1);
+eq2 = subs(eq2, q1n1, equq1n1);
+eq2 = subs(eq2, q3n1, equq3n1);
+
+expand(simplify(solve(eq1,q2n1)));
+expand(simplify(solve(eq2,q4n1)));
+
+#+END_SRC
+
+#+RESULTS:
+
+Which gives us the following equations:
+ - $q_1[n+1]=q_1[n]+T_s\cdot q_2[n]$
+ - $q_4[n+1]=-\frac{T_s c_s q_2[n]}{m_t} + \frac{T_s c_s q_4[n]}{m_t} - \frac{T_s k_s q_1[n]}{m_t} + \frac{T_s k_s q_3[n]}{m_t} - \frac{T_s k_t q_1[n]}{m_t} + \frac{T_s k_t u[n]}{m_t} + q_4[n]$
+ - $q_3[n+1]=q_3[n]+T_s\cdot q_4[n]$
+ - $q_2[n+1]=\frac{T_s c_s q_2[n]}{m_s} - \frac{T_s c_s q_4[n]}{m_s} + \frac{T_s k_s q_1[n]}{m_s} - \frac{T_s k_s q_3[n]}{m_s} + q_2[n]$
+
+
+Therefore:
+\[\underline{A} = \begin{bmatrix}
+1 & T_s & 0 & 0 \\
+\frac{T_s k_s }{m_t} +  \frac{T_s kt }{m_t} &\frac{T_s c_s }{m_t} +1 & - \frac{T_s k_s }{m_t} & - \frac{T_s c_s }{m_t} \\
+0 & 0 & 1 & T_s \\
+-\frac{T_s k_s }{m_s} & -\frac{T_s c_s }{m_s} & \frac{T_s k_s }{m_s} & \frac{T_s c_s }{m_s} +1
+\end{bmatrix}\]
+\\ and
+\[\underline{B} = \begin{bmatrix}
+0 \\
+0 \\
+0 \\
+\frac{T_s k_t}{m_t}
+\end{bmatrix}\]
+
+*** Output Equation
+Need to solve for the matricies in $y[n]=\underline{C}q[n]+d x[n]$
+
+Using:
+ - $q_1[n] = z_t[n]$
+ - $q_3[n] = z_s[n]$
+
+Therefore:
+\[\underline{C} = \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0
+\end{bmatrix}\]
+
+\[d = \begin{bmatrix}
+0 \\
+0
+\end{bmatrix}\]
+
+
+
+** d
+
+#+BEGIN_SRC octave :exports code :results output :session Part2
+clear
+clc
+pkg load symbolic
+pkg load control
+% Student ID 1 = 651790
+% Student ID 2 = 652137
+ms=2296;
+mt=236;
+kt=250000;
+
+ks = 10000;
+cs = 2000;
+Ts = 0.001;
+idx = 0;
+numOfSys = 2;
+for i =0:numOfSys;
+    for j =0:numOfSys;
+
+        % Setup State Space Matricies
+        A = [1-(Ts*cs)/mt,(Ts*cs)/mt,-1*(Ts*ks+Ts*kt)/mt,(Ts*ks)/mt;
+             (Ts*cs)/ms,1-(Ts*cs)/ms,(Ts*ks)/ms,-1*(Ts*ks)/ms;
+             Ts,0,1,0;
+             0,Ts,0,1];
+
+        B = [(Ts*kt)/mt;
+             0;
+             0;
+             0];
+
+        C = [0,0,1,0;
+             0,0,0,1];
+
+        D = [0;
+             0];
+        idx = idx +1;
+        sysArray(idx).A = A;
+        sysArray(idx).B = B;
+        sysArray(idx).C = C;
+        sysArray(idx).D = D;
+
+    end
+
+end
+% Create the state-space system
+sys = cell(length(sysArray), 1);
+for i = 1:length(sysArray)
+    sys{i} = ss(sysArray(i).A, sysArray(i).B, sysArray(i).C, sysArray(i).D,Ts);
+end
+
+#+END_SRC
+
+#+RESULTS:
+
+*** Eigenvalues
+Check if the system is stable using the eigenvalues
+#+BEGIN_SRC octave :exports code :results output :session Part2
+for i = 1:length(sysArray)
+  eigen=eig(sysArray(i).A)
+  if (all(abs(eigen)) < 1)
+    fprintf("The %i th system is stable\n", i)
+  else
+    fprintf("The %i th system is unstable\n", i)
+  end
+end
+#+END_SRC
+
+*** Impulse Response
+#+BEGIN_SRC octave :exports code :results output :session Part2
+  figure;
+for i = 1:length(sys)
+
+  hold on;
+  impulse(sys{i});
+  title('Impulse Response of Quarter-Car Suspension System');
+  xlabel('Time');
+  ylabel('Displacement');
+  hold off;
+end
+#+END_SRC
+
+#+RESULTS:
+
+
+#+BEGIN_SRC octave :exports code :results output :session Part2
+impulseResponses = cell(length(sysArray), 1);
+timeVectors = cell(length(sysArray), 1);
+figure;
+hold on;
+
+for i = 1:length(sys)
+  [y, t] = impulse(sys{i});  % Get the impulse response and time vector
+  impulseResponses{i} = y;   % Store the response
+  timeVectors{i} = t;        % Store the time vector
+  plot(t, y);                % Plot the impulse response
+end
+
+title('Impulse Response of Quarter-Car Suspension System');
+xlabel('Time (s)');
+ylabel('Displacement');
+legend(arrayfun(@(x) sprintf('System %d', x), 1:length(sys), 'UniformOutput', false)); % Add legend
+hold off;
+#+END_SRC
+
+#+RESULTS:
+
+
+** e
+#+BEGIN_SRC octave :exports code :results output :session Part2
+for i = 0.5:0.5:10
+um = 0.1;
+f = i; % Frequency
+w0 = 2 * pi * f;
+t = 0:Ts:10;
+
+u = um * sin(w0 * t);
+
+figure;
+hold on;
+for i = 1:length(sys)
+    y = lsim(sys{i}, u, t);
+    plot(t, y);
+end
+title('Response of Quarter-Car Suspension System to Sinusoidal Input');
+xlabel('Time (s)');
+ylabel('Displacement');
+legend(arrayfun(@(x) sprintf('System %d', x), 1:length(sys), 'UniformOutput', false));
+hold off;
+end
+#+END_SRC
+
+#+RESULTS:
+** f
+#+BEGIN_SRC octave :exports code :results output :session Part2
+% Define bounds for ks and cs
+ks_bounds = [10000, 250000]; % N/m
+cs_bounds = [500, 2000];      % Ns/m
+
+% Number of samples
+num_samples = 10000;
+
+% Initialize arrays to store results
+results = zeros(num_samples, 3); % [ks, cs, performance_metric]
+
+for i = 1:num_samples
+    % Randomly sample ks and cs
+    ks = rand() * (ks_bounds(2) - ks_bounds(1)) + ks_bounds(1);
+    cs = rand() * (cs_bounds(2) - cs_bounds(1)) + cs_bounds(1);
+
+    % Update the state-space matrices with new ks and cs
+    A = [...]; % Update with new ks and cs
+    B = [...];
+    C = [...];
+    D = [...];
+
+    % Create the state-space system
+    sys = ss(A, B, C, D, Ts);
+
+    % Calculate performance metrics
+    % Example: RMS acceleration for ride comfort
+    [y, t] = impulse(sys);
+    rms_acceleration = sqrt(mean((y).^2)); % Calculate RMS
+
+    % Store results
+    results(i, :) = [ks, cs, rms_acceleration];
+end
+
+% Find the best parameters based on the performance metric
+[~, best_index] = min(results(:, 3)); % Minimize RMS acceleration
+best_ks = results(best_index, 1);
+best_cs = results(best_index, 2);
+
+fprintf('Optimal ks: %.2f N/m, Optimal cs: %.2f Ns/m\n', best_ks, best_cs);
+#+END_SRC
+
+#+RESULTS:
+: error: parse error:
+:
+:   syntax error
+: end
+:       ^
+: Optimal ks: 0.00 N/m, Optimal cs: 0.00 Ns/m

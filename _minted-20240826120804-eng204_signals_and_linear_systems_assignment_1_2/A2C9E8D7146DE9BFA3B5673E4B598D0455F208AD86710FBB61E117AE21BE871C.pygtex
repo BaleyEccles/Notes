@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}at = \PYGZbs{}n\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{latex}\PYG{p}{(}\PYG{n}{expand}\PYG{p}{(}\PYG{n}{solve}\PYG{p}{([}\PYG{n}{eq1}\PYG{p}{,}\PYG{n}{eq2}\PYG{p}{],}\PYG{n}{at}\PYG{p}{)))}
+\PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}as = \PYGZbs{}n\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{latex}\PYG{p}{(}\PYG{n}{expand}\PYG{p}{(}\PYG{n}{solve}\PYG{p}{([}\PYG{n}{eq1}\PYG{p}{,}\PYG{n}{eq2}\PYG{p}{],}\PYG{n}{as}\PYG{p}{)))}
+
+\end{Verbatim}
