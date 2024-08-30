@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{for} \PYG{n}{i} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{)}
+  \PYG{n+nb}{figure}\PYG{p}{;}
+  \PYG{n+nb}{hold} \PYG{n}{on}\PYG{p}{;}
+  \PYG{n}{impulse}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{\PYGZob{}}\PYG{n}{i}\PYG{p}{\PYGZcb{});}
+  \PYG{n}{titleStr} \PYG{p}{=} \PYG{n+nb}{sprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Impulse Response with ks = \PYGZpc{}i and cs = \PYGZpc{}i\PYGZsq{}}\PYG{p}{,} \PYG{n}{sysArray}\PYG{p}{(}\PYG{n}{i}\PYG{p}{).}\PYG{n}{ks}\PYG{p}{,} \PYG{n}{sysArray}\PYG{p}{(}\PYG{n}{i}\PYG{p}{).}\PYG{n}{cs}\PYG{p}{);}
+  \PYG{n+nb}{title}\PYG{p}{(}\PYG{n}{titleStr}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}FontSize\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{15}\PYG{p}{);}
+  \PYG{n+nb}{hold} \PYG{n}{off}\PYG{p}{;}
+\PYG{k}{end}
+\end{Verbatim}

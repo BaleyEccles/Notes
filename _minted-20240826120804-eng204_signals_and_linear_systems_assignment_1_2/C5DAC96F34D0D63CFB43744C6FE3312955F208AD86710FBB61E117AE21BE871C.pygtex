@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\PYG{k}{for} \PYG{n}{i} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{)}
+  \PYG{n+nb}{figure}\PYG{p}{;}
+  \PYG{n+nb}{hold} \PYG{n}{on}\PYG{p}{;}
+  \PYG{n}{impulse}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{\PYGZob{}}\PYG{n}{i}\PYG{p}{\PYGZcb{});}
+  \PYG{n+nb}{hold} \PYG{n}{off}\PYG{p}{;}
+  \PYG{n}{filename} \PYG{p}{=} \PYG{n+nb}{sprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}ENG204\PYGZhy{}Assignment\PYGZhy{}2\PYGZhy{}Impulse\PYGZhy{}Response\PYGZhy{}\PYGZpc{}i.png\PYGZsq{}}\PYG{p}{,} \PYG{n}{i}\PYG{p}{);}
+  \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}\PYGZhy{}dpng\PYGZsq{}}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}\PYGZhy{}r1000\PYGZsq{}}\PYG{p}{);}
+\PYG{k}{end}
+\end{Verbatim}

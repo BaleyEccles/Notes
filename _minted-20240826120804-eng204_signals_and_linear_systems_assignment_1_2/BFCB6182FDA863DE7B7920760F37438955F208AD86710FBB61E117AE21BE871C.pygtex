@@ -1,0 +1,41 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZpc{} Define bounds for ks and cs}
+\PYG{n}{ks\PYGZus{}bounds} \PYG{p}{=} \PYG{p}{[}\PYG{l+m+mi}{10000}\PYG{p}{,} \PYG{l+m+mi}{250000}\PYG{p}{];} \PYG{c}{\PYGZpc{} N/m}
+\PYG{n}{cs\PYGZus{}bounds} \PYG{p}{=} \PYG{p}{[}\PYG{l+m+mi}{500}\PYG{p}{,} \PYG{l+m+mi}{2000}\PYG{p}{];}      \PYG{c}{\PYGZpc{} Ns/m}
+
+\PYG{c}{\PYGZpc{} Number of samples}
+\PYG{n}{num\PYGZus{}samples} \PYG{p}{=} \PYG{l+m+mi}{10000}\PYG{p}{;}
+
+\PYG{c}{\PYGZpc{} Initialize arrays to store results}
+\PYG{n}{results} \PYG{p}{=} \PYG{n+nb}{zeros}\PYG{p}{(}\PYG{n}{num\PYGZus{}samples}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{);} \PYG{c}{\PYGZpc{} [ks, cs, performance\PYGZus{}metric]}
+
+\PYG{k}{for} \PYG{n}{i} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n}{num\PYGZus{}samples}
+    \PYG{c}{\PYGZpc{} Randomly sample ks and cs}
+    \PYG{n}{ks} \PYG{p}{=} \PYG{n+nb}{rand}\PYG{p}{()} \PYG{o}{*} \PYG{p}{(}\PYG{n}{ks\PYGZus{}bounds}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{ks\PYGZus{}bounds}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{))} \PYG{o}{+} \PYG{n}{ks\PYGZus{}bounds}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+    \PYG{n}{cs} \PYG{p}{=} \PYG{n+nb}{rand}\PYG{p}{()} \PYG{o}{*} \PYG{p}{(}\PYG{n}{cs\PYGZus{}bounds}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{cs\PYGZus{}bounds}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{))} \PYG{o}{+} \PYG{n}{cs\PYGZus{}bounds}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+
+    \PYG{c}{\PYGZpc{} Update the state\PYGZhy{}space matrices with new ks and cs}
+    \PYG{n}{A} \PYG{p}{=} \PYG{p}{[...];} \PYG{c}{\PYGZpc{} Update with new ks and cs}
+    \PYG{n}{B} \PYG{p}{=} \PYG{p}{[...];}
+    \PYG{n}{C} \PYG{p}{=} \PYG{p}{[...];}
+    \PYG{n}{D} \PYG{p}{=} \PYG{p}{[...];}
+
+    \PYG{c}{\PYGZpc{} Create the state\PYGZhy{}space system}
+    \PYG{n}{sys} \PYG{p}{=} \PYG{n}{ss}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,} \PYG{n}{B}\PYG{p}{,} \PYG{n}{C}\PYG{p}{,} \PYG{n}{D}\PYG{p}{,} \PYG{n}{Ts}\PYG{p}{);}
+
+    \PYG{c}{\PYGZpc{} Calculate performance metrics}
+    \PYG{c}{\PYGZpc{} Example: RMS acceleration for ride comfort}
+    \PYG{p}{[}\PYG{n}{y}\PYG{p}{,} \PYG{n}{t}\PYG{p}{]} \PYG{p}{=} \PYG{n}{impulse}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{);}
+    \PYG{n}{rms\PYGZus{}acceleration} \PYG{p}{=} \PYG{n+nb}{sqrt}\PYG{p}{(}\PYG{n+nb}{mean}\PYG{p}{((}\PYG{n}{y}\PYG{p}{)}\PYG{o}{.\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{));} \PYG{c}{\PYGZpc{} Calculate RMS}
+
+    \PYG{c}{\PYGZpc{} Store results}
+    \PYG{n}{results}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{p}{:)} \PYG{p}{=} \PYG{p}{[}\PYG{n}{ks}\PYG{p}{,} \PYG{n}{cs}\PYG{p}{,} \PYG{n}{rms\PYGZus{}acceleration}\PYG{p}{];}
+\PYG{k}{end}
+
+\PYG{c}{\PYGZpc{} Find the best parameters based on the performance metric}
+\PYG{p}{[}\PYG{o}{\PYGZti{}}\PYG{p}{,} \PYG{n}{best\PYGZus{}index}\PYG{p}{]} \PYG{p}{=} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{results}\PYG{p}{(:,} \PYG{l+m+mi}{3}\PYG{p}{));} \PYG{c}{\PYGZpc{} Minimize RMS acceleration}
+\PYG{n}{best\PYGZus{}ks} \PYG{p}{=} \PYG{n}{results}\PYG{p}{(}\PYG{n}{best\PYGZus{}index}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{n}{best\PYGZus{}cs} \PYG{p}{=} \PYG{n}{results}\PYG{p}{(}\PYG{n}{best\PYGZus{}index}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{);}
+
+\PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Optimal ks: \PYGZpc{}.2f N/m, Optimal cs: \PYGZpc{}.2f Ns/m\PYGZbs{}n\PYGZsq{}}\PYG{p}{,} \PYG{n}{best\PYGZus{}ks}\PYG{p}{,} \PYG{n}{best\PYGZus{}cs}\PYG{p}{);}
+\end{Verbatim}

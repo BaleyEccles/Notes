@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{for} \PYG{n}{i} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{sysArray}\PYG{p}{)}
+    \PYG{n}{eigen}\PYG{p}{=}\PYG{n+nb}{abs}\PYG{p}{(}\PYG{n+nb}{eig}\PYG{p}{(}\PYG{n}{sysArray}\PYG{p}{(}\PYG{n}{i}\PYG{p}{).}\PYG{n}{A}\PYG{p}{));}
+    \PYG{k}{if} \PYG{n+nb}{all}\PYG{p}{(}\PYG{n}{eigen} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{1}\PYG{p}{)}
+        \PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}The \PYGZpc{}i th system is stable\PYGZbs{}n\PYGZdq{}}\PYG{p}{,} \PYG{n}{i}\PYG{p}{)}
+        \PYG{n}{maxEig} \PYG{p}{=} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{eigen}\PYG{p}{);}
+        \PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}The max eigen value is \PYGZpc{}f\PYGZbs{}n\PYGZdq{}}\PYG{p}{,} \PYG{n}{maxEig}\PYG{p}{)}
+    \PYG{k}{else}
+        \PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}The \PYGZpc{}i th system is unstable\PYGZbs{}n\PYGZdq{}}\PYG{p}{,} \PYG{n}{i}\PYG{p}{)}
+    \PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

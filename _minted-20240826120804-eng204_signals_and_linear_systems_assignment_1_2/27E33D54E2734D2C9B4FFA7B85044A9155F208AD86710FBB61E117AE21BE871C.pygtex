@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+                                \PYG{c}{\PYGZpc{} Sub in forward difference}
+\PYG{n}{syms} \PYG{n}{zs} \PYG{n}{zs1} \PYG{n}{zs2} \PYG{n}{zt} \PYG{n}{zt1} \PYG{n}{zt2} \PYG{n}{Ts} \PYG{n}{vs1} \PYG{n}{vt1} \PYG{n}{vs} \PYG{n}{vt}
+\PYG{c}{\PYGZpc{} First forward difference of displacement}
+\PYG{n}{dzsEqu} \PYG{p}{=} \PYG{p}{(}\PYG{n}{zs1}\PYG{o}{\PYGZhy{}}\PYG{n}{zs}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts}\PYG{p}{);}
+\PYG{n}{dztEqu} \PYG{p}{=} \PYG{p}{(}\PYG{n}{zt1}\PYG{o}{\PYGZhy{}}\PYG{n}{zt}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts}\PYG{p}{);}
+\PYG{c}{\PYGZpc{} First forward differences of acceleration}
+\PYG{n}{dvsEqu} \PYG{p}{=} \PYG{p}{(}\PYG{n}{vs1}\PYG{o}{\PYGZhy{}}\PYG{n}{vs}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts}\PYG{p}{);}
+\PYG{n}{dvtEqu} \PYG{p}{=} \PYG{p}{(}\PYG{n}{vt1}\PYG{o}{\PYGZhy{}}\PYG{n}{vt}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{Ts}\PYG{p}{);}
+\PYG{n}{eq1}\PYG{p}{=}\PYG{n}{subs}\PYG{p}{(}\PYG{n}{eq1}\PYG{p}{,}\PYG{n}{at}\PYG{p}{,}\PYG{n}{dvtEqu}\PYG{p}{);}
+\PYG{n}{eq1}\PYG{p}{=}\PYG{n}{subs}\PYG{p}{(}\PYG{n}{eq1}\PYG{p}{,}\PYG{n}{dzs}\PYG{p}{,}\PYG{n}{dzsEqu}\PYG{p}{);}
+\PYG{n}{eq1}\PYG{p}{=}\PYG{n}{simplify}\PYG{p}{(}\PYG{n}{subs}\PYG{p}{(}\PYG{n}{eq1}\PYG{p}{,}\PYG{n}{dzt}\PYG{p}{,}\PYG{n}{dztEqu}\PYG{p}{));}
+\PYG{n}{eq2}\PYG{p}{=}\PYG{n}{subs}\PYG{p}{(}\PYG{n}{eq2}\PYG{p}{,}\PYG{n}{as}\PYG{p}{,}\PYG{n}{dvsEqu}\PYG{p}{);}
+\PYG{n}{eq2}\PYG{p}{=}\PYG{n}{subs}\PYG{p}{(}\PYG{n}{eq2}\PYG{p}{,}\PYG{n}{dzs}\PYG{p}{,}\PYG{n}{dzsEqu}\PYG{p}{);}
+\PYG{n}{eq2}\PYG{p}{=}\PYG{n}{simplify}\PYG{p}{(}\PYG{n}{subs}\PYG{p}{(}\PYG{n}{eq2}\PYG{p}{,}\PYG{n}{dzt}\PYG{p}{,}\PYG{n}{dztEqu}\PYG{p}{));}
+\end{Verbatim}

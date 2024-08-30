@@ -1,0 +1,9 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is '20240826120804-eng204_signals_and_linear_systems_assignment_1_2.blg'
+[54] biber:340> INFO - === Fri Aug 30, 2024, 17:58:26
+[66] Biber.pm:419> INFO - Reading '20240826120804-eng204_signals_and_linear_systems_assignment_1_2.bcf'
+[116] Biber.pm:979> INFO - Found 0 citekeys in bib section 0
+[131] bbl.pm:660> INFO - Writing '20240826120804-eng204_signals_and_linear_systems_assignment_1_2.bbl' with encoding 'UTF-8'
+[132] bbl.pm:763> INFO - Output to 20240826120804-eng204_signals_and_linear_systems_assignment_1_2.bbl
+[132] Biber.pm:131> WARN - The file '20240826120804-eng204_signals_and_linear_systems_assignment_1_2.bcf' does not contain any citations!
+[132] Biber.pm:133> INFO - WARNINGS: 1
