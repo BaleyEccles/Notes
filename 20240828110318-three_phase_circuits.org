@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       f1c37752-21fe-4222-95c2-c4ce67a673e2
+:END:
+#+title: Three-phase Circuits
+#+date: [2024-08-28 Wed 11:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Three-phase Circuits
+ - Three [[id:a64c9330-c330-43ad-844e-70100e9e3d08][AC Circuits]] out of phase by \[120^{o}\]
+ - Three phases
+   - a, b and c
+ - in [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasors]]
+   - \[V_{an}=\lvert V_{m} \rvert \angle 0^{o}\]
+   - \[V_{bn}=\lvert V_{m} \rvert \angle -120^{o}\]
+   - \[V_{bn}=\lvert V_{m} \rvert \angle -240^{o}= \lvert V_{m} \rvert \angle 120^{o}\]
+ - Line to line volate
+   - \[V_{ab}=V_{an}-V_{bn}\]
+ - Balanced voltages
+   - \[V_{an}=V\]
+   - \[V_{bn}=\frac{-1}{2}V\]
+   - \[V_{cn}=\frac{-1}{2}V+j \frac{\sqrt{3}}{2}V\]
+ - Balanced current
+   - \[I_a+I_b+I_c=0\]
+ - Two Configurations
+   - Y-Config $Y$
+   - Delta-Config $\Delta$
+   - This gives four possible input -> output configs
+     - \[\Delta \rightarrow Y\]
+       - \[Z_Y=\frac{Z_{\Delta}}{3}\]
+     - \[\Delta \rightarrow \Delta\]
+     - \[Y \rightarrow Y\]
+     - \[Y \rightarrow \Delta\]
+   - Both are interchangeable with some calculations

@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       a64c9330-c330-43ad-844e-70100e9e3d08
+:END:
+#+title: AC Power Analysis
+#+date: [2024-08-28 Wed 11:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* AC Power Analysis
+\[p(t)=v(t)\cdot i(t)\]
+\[v(t)=V_m\cos(\omega t +\theta_v)\]
+\[i(t)=I_m\cos(\omega t +\theta_i)\]
+ - Resistive load
+   - \[p(t)=V_{rms}I_{rms}+V_{rms}I_{rms}\cos(2\omega t)}\]
+     - \[V_{rms}=\frac{V_m}{\sqrt{2}}\]
+     - \[I_{rms}=\frac{I_m}{\sqrt{2}}\]
+   - In phase ie $\theta_v=\theta_i$
+ - Inductive load
+   - \[p(t)=V_{rms}I_{rms}\sin(2\omega t + 2\theta_v)\]
+     - Current lags voltage
+ - Capacitive load
+   - \[p(t)=-V_{rms}I_{rms}\sin(2\omega t + 2\theta_v)\]
+     - Voltage lags current
+ - Mixed load
+   - \[p(t)=\frac{V_{m}I_{m}}{2}[\cos(\theta_v-\theta_i)+\cos(2\omega t+\theta_v+\theta_i)]\]
+   - \[P=\frac{V_{m}I_{m}}{2}\cos(\theta_v-\theta_i)\]
+ - Power types
+   - Reactive Power
+     - \[Q=V_{rms}I_{rms}\sin(\theta_v-\theta_i)=V_{rms}I_{rms}\sin(\phi)\]
+     - Positive for inductive load
+     - Negative for capcitive load
+     - Inductors absorb reactive power
+     - Capacitors supply reactive power
+   - Average power
+     - \[P=V_{rms}I_{rms}\cos(\phi)\]
+   - Apparent power
+     - The magnitude of Reactive power or Average power
+     - \[\lvert S \rvert = V_{rms}I_{rms}\]
+   - These can be used to find the [[id:8e4d8052-219e-4813-bcba-0bda30141d24][Power Factor]]
+   - Complex Power
+     - In [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasors]]
+     - \[S=P+jQ\]

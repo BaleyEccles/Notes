@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       749ce925-bf65-474e-af6f-62d75d94a1fd
+:END:
+#+title: Phasors
+#+date: [2024-08-28 Wed 11:22]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Phasors
+We can use phasors which is a [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier Transform]] on an electircal system.
+ - $v_a(t)=V_{a_{rms}}\cos(\omega t+\theta_{a})$ can be represented in phasor domain as
+   - \[V_a=V_{a_{rms}}e^{j\theta_a}=V_{a_{rms}}\angle \theta_a\]
+ - Capacitor
+   - \[\frac{1}{j\omega C}\]
+ - Inductor
+   - \[{j\omega L\]
+ - Real power
+   - \[P=\lvert S\rvert \cos(\phi)\]
+ - Reactive Power
+   - \[Q=\lvert S\rvert \sin(\phi)\]
+ - [[id:8e4d8052-219e-4813-bcba-0bda30141d24][Power Factor]]
+   - Determined by the angle of \[Z\]
+ - Complex Power
+   - \[S=V \bar{I}\]
+   - \[S=\frac{\lvert V\rvert^2}{\bar{Z}}\]
+   - \[S=P+jQ\]
+   - \[\lvert S \rvert = \sqrt{P^2+Q^2}\]
+   - \[Q>0\]
+     - Leading
+   - \[Q<0\]
+     - Lagging

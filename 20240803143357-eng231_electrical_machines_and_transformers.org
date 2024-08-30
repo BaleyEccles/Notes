@@ -8,6 +8,7 @@
 
 [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][Magnetic Field]]
 [[id:a889f56d-55aa-4d63-b86a-50226324c218][Magnetic Circuits]]
+[[id:f1c37752-21fe-4222-95c2-c4ce67a673e2][Three-phase Circuits]]
 
 * Assesment
 ** Assessment Task 1: Weekly Online Quizzes

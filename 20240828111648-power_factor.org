@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       8e4d8052-219e-4813-bcba-0bda30141d24
+:END:
+#+title: Power Factor
+#+date: [2024-08-28 Wed 11:16]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Power Factor
+- The ratio of average power to apparent power
+- Power factor \[PF= \cos(\theta_v-\theta_i)=\cos(\phi)=\frac{P}{\lvert S \rvert}\]
