@@ -1,0 +1,55 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{c} \PYG{p}{=} \PYG{l+m+mf}{299792.458}\PYG{p}{;}
+\PYG{n}{pos} \PYG{p}{=} \PYG{p}{[} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{15093}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{519}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{13414}\PYG{p}{;}
+        \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5681}\PYG{p}{,} \PYG{l+m+mi}{9216}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{17053}\PYG{p}{;}
+        \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{6228}\PYG{p}{,} \PYG{l+m+mi}{16581}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{9711}\PYG{p}{;}
+        \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{16728}\PYG{p}{,} \PYG{l+m+mi}{9532}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{6110}\PYG{p}{];}
+\PYG{n}{t} \PYG{p}{=} \PYG{p}{[}\PYG{l+m+mf}{0.069121}\PYG{p}{,} \PYG{l+m+mf}{0.071234}\PYG{p}{,} \PYG{l+m+mf}{0.070942}\PYG{p}{,} \PYG{l+m+mf}{0.070537}\PYG{p}{];}
+
+                                \PYG{c}{\PYGZpc{} Initial Guess}
+\PYG{n}{x} \PYG{p}{=} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{l+m+mi}{0}\PYG{p}{];}
+\PYG{n}{tol} \PYG{p}{=} \PYG{l+m+mi}{10}\PYGZca{}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{6}\PYG{p}{;}
+\PYG{n}{i} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{maxit} \PYG{p}{=} \PYG{l+m+mi}{1000}\PYG{p}{;}
+\PYG{k}{while} \PYG{n+nb}{true}
+  \PYG{n}{i} \PYG{p}{=} \PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+
+                                \PYG{c}{\PYGZpc{} Calculate f}
+  \PYG{n}{f} \PYG{p}{=} \PYG{n+nb}{zeros}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+  \PYG{k}{for} \PYG{n}{k} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+    \PYG{n}{f}\PYG{p}{(}\PYG{n}{k}\PYG{p}{)} \PYG{p}{=} \PYG{p}{(}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{pos}\PYG{p}{(}\PYG{n}{k}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{))}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{+} \PYG{p}{...}
+           \PYG{p}{(}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{pos}\PYG{p}{(}\PYG{n}{k}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{))}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{+} \PYG{p}{...}
+           \PYG{p}{(}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{pos}\PYG{p}{(}\PYG{n}{k}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{))}\PYGZca{}\PYG{l+m+mi}{2} \PYG{o}{\PYGZhy{}} \PYG{p}{...}
+           \PYG{n}{c}\PYGZca{}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{p}{(}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{t}\PYG{p}{(}\PYG{n}{k}\PYG{p}{))}\PYGZca{}\PYG{l+m+mi}{2}\PYG{p}{;}
+  \PYG{k}{end}
+
+                                \PYG{c}{\PYGZpc{} Check for convergence}
+  \PYG{k}{if} \PYG{n+nb}{norm}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{n}{tol}
+    \PYG{n+nb}{disp}\PYG{p}{([}\PYG{l+s}{\PYGZsq{}Converged after \PYGZsq{}}\PYG{p}{,} \PYG{n}{num2str}\PYG{p}{(}\PYG{n}{i}\PYG{p}{),} \PYG{l+s}{\PYGZsq{} iterations.\PYGZsq{}}\PYG{p}{]);}
+    \PYG{k}{break}\PYG{p}{;}
+  \PYG{k}{end}
+
+                                \PYG{c}{\PYGZpc{} Calculate J(m)}
+  \PYG{n}{J} \PYG{p}{=} \PYG{n+nb}{zeros}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{);}
+  \PYG{k}{for} \PYG{n}{k} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{J}\PYG{p}{)}
+    \PYG{n}{J}\PYG{p}{(}\PYG{n}{k}\PYG{p}{,} \PYG{p}{:)} \PYG{p}{=} \PYG{p}{[}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{p}{(}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{pos}\PYG{p}{(}\PYG{n}{k}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)),} \PYG{p}{...}
+               \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{p}{(}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{pos}\PYG{p}{(}\PYG{n}{k}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)),} \PYG{p}{...}
+               \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{p}{(}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{pos}\PYG{p}{(}\PYG{n}{k}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)),} \PYG{p}{...}
+               \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{c}\PYGZca{}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{p}{(}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{t}\PYG{p}{(}\PYG{n}{k}\PYG{p}{))];}
+  \PYG{k}{end}
+
+                                \PYG{c}{\PYGZpc{} Solve for c(m)}
+  \PYG{n}{c\PYGZus{}m} \PYG{p}{=} \PYG{n+nb}{mldivide}\PYG{p}{(}\PYG{n}{J}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{n}{f}\PYG{p}{);}
+
+                                \PYG{c}{\PYGZpc{} Update guess}
+  \PYG{n}{x} \PYG{p}{=} \PYG{n}{x} \PYG{o}{+} \PYG{n}{c\PYGZus{}m}\PYG{p}{;}
+
+  \PYG{k}{if} \PYG{n}{i} \PYG{o}{\PYGZgt{}} \PYG{n}{maxit}
+    \PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Max iterations reached (\PYGZpc{}i)\PYGZbs{}n\PYGZdq{}}\PYG{p}{,} \PYG{n}{i}\PYG{p}{)}
+    \PYG{k}{break}\PYG{p}{;}
+  \PYG{k}{end}
+\PYG{k}{end}
+
+                                \PYG{c}{\PYGZpc{} Print results}
+\PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Calculated position (x, y, z, t): (\PYGZpc{}.2f,\PYGZpc{}.2f,\PYGZpc{}.2f,\PYGZpc{}.2f)\PYGZbs{}n\PYGZdq{}}\PYG{p}{,} \PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{),}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{),}\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{))}
+\end{Verbatim}
