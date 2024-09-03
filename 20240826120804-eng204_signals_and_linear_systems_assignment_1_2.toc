@@ -14,5 +14,5 @@
 \contentsline {subsubsection}{\numberline {1.5.1}Varing Frequency}{10}{subsubsection.1.5.1}%
 \contentsline {subsubsection}{\numberline {1.5.2}Varing Suspension}{12}{subsubsection.1.5.2}%
 \contentsline {subsection}{\numberline {1.6}Part f}{14}{subsection.1.6}%
-\contentsline {subsection}{\numberline {1.7}Appendix A}{15}{subsection.1.7}%
-\contentsline {subsection}{\numberline {1.8}Appendix B}{20}{subsection.1.8}%
+\contentsline {subsection}{\numberline {1.7}Appendix A}{16}{subsection.1.7}%
+\contentsline {subsection}{\numberline {1.8}Appendix B}{21}{subsection.1.8}%

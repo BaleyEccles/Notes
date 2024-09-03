@@ -441,7 +441,6 @@ The best preforming system was the last system, this system has the highest %k_s
 ** Part f
 The metrics involved in these calculations depend heavily on the use-case of the suspension system being designed. We will assume that the system is designed for general consumer usage, with typical speeds varying from 50km/h to 110km/h(13.8889 to 30.5556 m/s). These speeds impact the frequency of the oscillations as well as the peak suspension displacements. This will lead to varying vehicle smoothness depending on the speed as well as the suspension configuration( ks and cs values). The graphical demonstration developed through MATLAB shows clearly that as the speed increases the amplitude decreases and the frequency increases. This is due to the relationship between frequency and velocity, $\omega =2\pi v/\lambda$. Where $\lambda$ is the wavelength of the road bumps. Many documentations have been made on this topic, with varying approaches based on the specific vehicle and usage scenarios.
 
-[cite:@collimator2024]
 \newpage
 \printbibliography
 \newpage

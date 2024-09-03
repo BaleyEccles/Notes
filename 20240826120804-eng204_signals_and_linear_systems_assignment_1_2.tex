@@ -40,10 +40,14 @@
 \label{sec:org831f92d}
 \subsection{Part a}
 \label{sec:org72d9136}
-Free Body Diagram
-\begin{center}
-\includegraphics[width=.9\linewidth]{ENG204-FBD.png}
-\end{center}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\linewidth]{ENG204-FBD.png}
+    \caption{Free Body Diagram}
+    \label{fig:FBD}
+\end{figure}
+
+
 The gravational forces can be ignored because they will cause a constant downward force. Where we will only be looking at the differences in forces between the systems. In other words, the system will respond in the same way whether or not the gravitational forces are included. This is because the system that is being looked at only cares about the differences in forces, and not their total value.
 \subsection{Part b}
 \label{sec:orgb61511b}
@@ -321,18 +325,29 @@ for i = 1:length(sys)
 end
 \end{minted}
 In the following graphs y1 is the wheel and y2 is the vehicle. So we want y2 to stabalise as fast as possible, with the least amount of change in displacement.
-111th system:
-\begin{center}
-\includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Impulse-Response-111.png}
-\end{center}
-22nd system:
-\begin{center}
-\includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Impulse-Response-22.png}
-\end{center}
-11th system:
-\begin{center}
-\includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Impulse-Response-11.png}
-\end{center}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Impulse-Response-111.png}
+    \caption{111th system}
+    \label{fig:impulse_response_111}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Impulse-Response-22.png}
+    \caption{22nd system}
+    \label{fig:impulse_response_22}
+  \end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Impulse-Response-11.png}
+    \caption{11th system}
+    \label{fig:impulse_response_22}
+\end{figure}
+
 From these graphs we can see that having a high \(k_s\) and a low \(c_s\) resuts in a slow convergence and very high frequencies. Where as having a low \(k_s\) and high \(c_s\) results in a faster convergence at low frequency. However there is a sweet spot between both where the best response is gathered, which can be seen in the 11th response.
 \subsubsection{Stability}
 \label{sec:org6a1b386}
@@ -407,15 +422,25 @@ end
 
 
 Frequencies from 0.1 Hz to 10k Hz were analised. Some samples can be seen here:
-\begin{center}
-\includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-5.png}
-\end{center}
-\begin{center}
-\includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-0.3.png}
-\end{center}
-\begin{center}
-\includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-1000.png}
-\end{center}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-5.png}
+    \caption{5Hz}
+    \label{fig:5hz}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-0.3.png}
+    \caption{0.3Hz}
+    \label{fig:0.3hz}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-1000.png}
+    \caption{1000Hz}
+    \label{fig:1000hz}
+\end{figure}
+
 For low frequencies the vehicle experiences the worst movement, at high frequencies the vehicle experiences very low amount of movement. The worst amplitude occurs at 0.3 Hz, it has a maximum magnitude \(\approx 3\).
 \subsubsection{Varing Suspension}
 \label{sec:org70c3b0a}
@@ -445,23 +470,29 @@ for i = 1:length(sys)
 end
 \end{minted}
 
-The best preforming system was the last system, this system has the highest \%k\textsubscript{s}\$ and \(c_s\), the magnitude of the output is \(\approx 1.5\). Decreasing the value of \(k_s\) and \(c_s\) tends to increase the magnitdue of the output. Where the worst peforming system was the first one with the lowest \%k\textsubscript{s}\$ and \(c_s\), it has a magnitude of \(\approx 6\).
+The best preforming system was the last system, this system has the highest \(k_s\) and \(c_s\), the magnitude of the output is \(\approx 1.5\). Decreasing the value of \(k_s\) and \(c_s\) tends to increase the magnitdue of the output. Where the worst peforming system was the first one with the lowest  \(k_s\) and \(c_s\), it has a magnitude of \(\approx 6\).
 
-\begin{center}
-\includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-0.3-1.png}
-\end{center}
-\begin{center}
-\includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-0.3-121.png}
-\end{center}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-0.3-1.png}
+    \caption{1st system at 0.3Hz}
+    \label{fig:1000hz}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.9\linewidth]{ENG204-Assignment-2-Sinusoidal-f-0.3-121.png}
+    \caption{121st system at 0.3Hz}
+    \label{fig:1000hz}
+\end{figure}
+
 \subsection{Part f}
 \label{sec:org5621049}
 The metrics involved in these calculations depend heavily on the use-case of the suspension system being designed. We will assume that the system is designed for general consumer usage, with typical speeds varying from 50km/h to 110km/h(13.8889 to 30.5556 m/s). These speeds impact the frequency of the oscillations as well as the peak suspension displacements. This will lead to varying vehicle smoothness depending on the speed as well as the suspension configuration( ks and cs values). The graphical demonstration developed through MATLAB shows clearly that as the speed increases the amplitude decreases and the frequency increases. This is due to the relationship between frequency and velocity, \(\omega =2\pi v/\lambda\). Where \(\lambda\) is the wavelength of the road bumps. Many documentations have been made on this topic, with varying approaches based on the specific vehicle and usage scenarios.
-
-(??, ????)
+\cite{collimator2024}
+\cite{Optimization_of_vehicle_suspension_parameters_with_use_of_evolutionary_computation}
 \newpage
-\begin{LATEX}
 \printbibliography
-\end{LATEX}
 \newpage
 \subsection{Appendix A}
 \label{sec:org5ab6351}

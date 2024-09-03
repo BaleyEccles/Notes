@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024/Arch Linux) (preloaded format=xelatex 2024.8.4)  30 AUG 2024 17:59
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024/Arch Linux) (preloaded format=xelatex 2024.8.4)  30 AUG 2024 18:54
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1135,41 +1135,17 @@ File: ENG204-Assignment-2-Sinusoidal-f-0.3-1.png Graphic file (type bmp)
 File: ENG204-Assignment-2-Sinusoidal-f-0.3-121.png Graphic file (type bmp)
 <ENG204-Assignment-2-Sinusoidal-f-0.3-121.png>
 
-[13] [14]
-
-! LaTeX Error: Environment LATEX undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.462 \begin{LATEX}
-                   
-? 
-
-LaTeX Warning: Empty bibliography on input line 463.
-
-
-! LaTeX Error: \begin{document} ended by \end{LATEX}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.464 \end{LATEX}
-                 
-? 
-
-Underfull \hbox (badness 10000) in paragraph at lines 468--710
+[13] [14] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 466--708
 
  []
 
-[15] [16] [17] [18] [19]
-Underfull \hbox (badness 10000) in paragraph at lines 714--835
+[16] [17] [18] [19] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 712--833
 
  []
 
-[20] [21] [22]
+[21] [22] [23]
 (./20240826120804-eng204_signals_and_linear_systems_assignment_1_2.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -1188,13 +1164,13 @@ n.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 24125 strings out of 476772
- 487597 string characters out of 5803395
+ 24358 strings out of 476772
+ 492855 string characters out of 5803395
  1945839 words of memory out of 5000000
- 45778 multiletter control sequences out of 15000+600000
- 568571 words of font info for 92 fonts, out of 8000000 for 9000
+ 46009 multiletter control sequences out of 15000+600000
+ 568579 words of font info for 93 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  79i,9n,93p,998b,5050s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on 20240826120804-eng204_signals_and_linear_systems_assignment_1
-_2.pdf (22 pages).
+_2.pdf (23 pages).

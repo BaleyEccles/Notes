@@ -57,7 +57,7 @@ These equations can be used to solve systems of the form:
 - \[y[n]+a_1y[n-1]+a_2y[n-2]+ \hdots a_Ny[n-N]=bx[n]\]
 
 ** Solutions to State Space Equations
-\[y[n]= \underline{c} \underline{A}^n q[0] + \Sigma_{k=0}^{n-1}\underline{c}\underline{A}^{n-1-k}\underline{b}x[k]+dx[n]\] for \[n>0\]
+2\[y[n]= \underline{c} \underline{A}^n q[0] + \sum_{k=0}^{n-1}\underline{c}\underline{A}^{n-1-k}\underline{b}x[k]+dx[n]\] for \[n>0\]
 - The part before the sum is the zero input response
 - The part after and includeing the sum is the zero state response
 \[y[n]= \underline{c} q[0]+dx[0]\] for \[n=0\]

@@ -5,6 +5,7 @@
  (lambda ()
    (LaTeX-add-bibitems
     "collimator2024"
-    "Optimization_of_vehicle_suspension_parameters_with_use_of_evolutionary_computation"))
+    "Optimization_of_vehicle_suspension_parameters_with_use_of_evolutionary_computation"
+    "WikipediaDamping"))
  '(or :bibtex :latex))
 
