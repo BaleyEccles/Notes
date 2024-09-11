@@ -20,9 +20,12 @@
 - [[id:423d6798-d9ba-40ee-a100-e7235ce1c1ac][ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 1]]
 - [[id:fe57d179-5f2f-4956-9cbe-a45c26f80883][ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 2]]
 
+
 ** Assessment Task 3: Assignments (x2)
 - Due week 6 and week 12
 - 15% of mark
+- [[id:d0bf116b-bff9-48bb-938d-7fa8766d1088][ENG231 - Electrical Machines And Transformers - Assignment 1]]
+
 ** Assessment Task 4: Engineering Machines and Transformers Labs
 - Weeks 8, 10 and 12
 - 20% of mark

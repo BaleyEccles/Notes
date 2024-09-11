@@ -9,6 +9,7 @@
 - Describes the ability of a material to be [[id:98bea621-e9eb-415a-9d79-a9bd4d1de9b9][Magnetised]].
   - If the field is small then the process is linear and \[\chi_{m}\] is constant.
   - If the field is large enough then the process becomes non-linear and \[\chi_{m}\] is no longer constant.
+  - \[\chi_{m}=\frac{M}{H}\]
 - Related to [[id:b70c8efe-e501-479a-8d58-6093bd1e891a][Magnetic Permeability]]
   - \[\mu_r=1+\chi_m\]
   - If \[\chi_{m} > 0\]

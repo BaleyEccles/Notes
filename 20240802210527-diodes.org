@@ -7,7 +7,7 @@
 When [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] and [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] materials are combined we create a diode.
 * Operation
 There are two ways to opperate a diode, forward and reverse biased.
-[[https://upload.wikimedia.org/wikipedia/commons/a/a5/Diode-IV-Curve.svg][Diode I-V Curve]
+[[https://upload.wikimedia.org/wikipedia/commons/a/a5/Diode-IV-Curve.svg][Diode I-V Curve]]
 ** Forward biased
 When forward biased + is connected to the [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] and - is connected to the [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]].
 When a diode is forward biased the current is easily able to flow through the diode.

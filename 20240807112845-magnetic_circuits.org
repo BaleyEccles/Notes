@@ -6,9 +6,27 @@
 #+STARTUP: latexpreview
 
 * Magnetic Circuits
-- These are similar to electric circuits
-  - \[\phi =\frac{F}{\mathfrak{R}}\]
-    - \[\phi\] is the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]]
-    - \[F\] is the magnetomotive force
-      - \[F=Ni\] from [[id:5090162e-9bbe-482c-bb65-0c906392309a][Ampere's Law]]
-    - \[\mathfrak{R}\] is the [[id:fb00e1b5-c484-409e-a4e2-8b1ed31c5427][reluctance]]
+ - \[H=\frac{Ni}{l_c}\]
+ - These are similar to electric circuits
+   - \[\phi =\frac{F}{\mathfrak{R}} =\frac{Ni}{\mathfrak{R}}\]
+     - \[\phi\] is the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]]
+       - Measured in wb
+       - \[\phi=BA\]
+     - \[F\] is the magnetomotive force
+       - Measured in Ampere-Turns, A-T
+       - \[F=Ni\] from [[id:5090162e-9bbe-482c-bb65-0c906392309a][Ampere's Law]]
+     - \[\mathfrak{R}\] is the [[id:fb00e1b5-c484-409e-a4e2-8b1ed31c5427][reluctance]]
+       - Measured in A-T/wb
+       - \[\mathfrak{R}=\frac{l_c}{\mu A}\]
+         - \[l_c\] is the mean path
+         - \[A\] is the crossectional area
+         - \[\mu\] is the [[id:b70c8efe-e501-479a-8d58-6093bd1e891a][Magnetic Permeability]]
+     - When there are air gaps:
+       - \[\mathfrak{R}=\frac{g}{\mu_0A_g}\]
+
+** Sinusoidal Excitation
+ - \[\Phi(t)=\frac{N}{\mathfrak{R}}i(t)\]
+ - \[\mathcal{E}(t)=-N \frac{d\Phi(t)}{dt}\]
+
+** Applications
+[[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformers]]

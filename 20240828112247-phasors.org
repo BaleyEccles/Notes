@@ -29,3 +29,4 @@ We can use phasors which is a [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier
      - Leading
    - \[Q<0\]
      - Lagging
+y

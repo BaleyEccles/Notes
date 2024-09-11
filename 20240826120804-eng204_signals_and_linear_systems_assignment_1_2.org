@@ -431,6 +431,7 @@ for i = 1:length(sys)
     filename = sprintf('ENG204-Assignment-2-Sinusoidal-f-0.3-%i.png', i);
     print(filename,'-dpng','-r100');
 end
+
 #+END_SRC
 
 The best preforming system was the last system, this system has the highest %k_s$ and $c_s$, the magnitude of the output is $\approx 1.5$. Decreasing the value of $k_s$ and $c_s$ tends to increase the magnitdue of the output. Where the worst peforming system was the first one with the lowest %k_s$ and $c_s$, it has a magnitude of $\approx 6$.

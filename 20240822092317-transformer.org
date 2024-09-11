@@ -12,16 +12,32 @@
 - Electrical power ratio is one, \[\frac{p_1}{p_2}=1\]
   - \[\frac{\mathcal{E}_{1}}{\mathcal{E}_2}=\frac{N_1}{N_2}\]
   - \[\frac{i_1}{i_2}=\frac{N_2}{N_1}\]
+  - \[p=\mathcal{E}i\]
+- \[\phi(t)=\frac{\mu A}{l_c}NI_m\sin(\omega t)= \Phi_m\sin(\omega t)\]
+- \[E_{rms}=4.44N\Phi_m f\]
 
 ** Losses To Hysteresis
 - Some energy is lossed to hysteresis
-  - \[P=K_h\cdot f \cdot B^{1.6}_{max}\]
+  - \[P_{h}=K_h\cdot f \cdot B^{1.6}_{max}\]
     - \[K_h\] is a constant depending on the mateiral
     - \[f\] is the frequency
-    - \[\B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core
+    - \[B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core
 ** Losses To Eddy Currents
 - When the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]] ocillates eddy currents are created in the secondary and the core.
   - \[P_e=K_e\cdot f^2 \cdot B^{2}_{max}\]
     - \[K_e\] is a constant depending on the mateiral
     - \[f\] is the frequency
-    - \[\B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core
+    - \[B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core
+  - This can be reduced by
+    - Using different materials
+    - Laminating the core
+      - Each sheet is electrically seperated
+** Total loss
+\[P_c=P_h+P_e\]
+** Saturation
+When the current input pushes the core into the saturation region, the output voltage is creates a peak rather than a perfect sin wave.
+
+** Types
+*** Core Type
+
+*** Shell Type
