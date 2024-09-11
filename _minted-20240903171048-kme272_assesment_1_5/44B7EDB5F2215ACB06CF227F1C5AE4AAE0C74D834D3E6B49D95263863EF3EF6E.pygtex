@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{x\PYGZus{}3}\PYG{p}{=}\PYG{l+m+mi}{6}\PYG{p}{;}
+\PYG{n}{y\PYGZus{}3}\PYG{p}{=}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{c}{\PYGZpc{} Calculate divided differences}
+
+\PYG{c}{\PYGZpc{} Calculate divided differences and convert to symbolic}
+\PYG{n}{ddx\PYGZus{}0x\PYGZus{}1} \PYG{p}{=} \PYG{p}{((}\PYG{n}{y\PYGZus{}1} \PYG{o}{\PYGZhy{}} \PYG{n}{y\PYGZus{}0}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{x\PYGZus{}1} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{));}
+\PYG{n}{ddx\PYGZus{}1x\PYGZus{}2} \PYG{p}{=} \PYG{p}{((}\PYG{n}{y\PYGZus{}2} \PYG{o}{\PYGZhy{}} \PYG{n}{y\PYGZus{}1}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{x\PYGZus{}2} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}1}\PYG{p}{));}
+\PYG{n}{ddx\PYGZus{}2x\PYGZus{}3} \PYG{p}{=} \PYG{p}{((}\PYG{n}{y\PYGZus{}3} \PYG{o}{\PYGZhy{}} \PYG{n}{y\PYGZus{}2}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{x\PYGZus{}3} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}2}\PYG{p}{));}
+
+\PYG{n}{ddx\PYGZus{}0x\PYGZus{}1x\PYGZus{}2} \PYG{p}{=} \PYG{p}{(((}\PYG{n}{y\PYGZus{}1} \PYG{o}{\PYGZhy{}} \PYG{n}{y\PYGZus{}0}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{x\PYGZus{}1} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{))} \PYG{o}{\PYGZhy{}} \PYG{p}{((}\PYG{n}{y\PYGZus{}2} \PYG{o}{\PYGZhy{}} \PYG{n}{y\PYGZus{}1}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{x\PYGZus{}2} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}1}\PYG{p}{)));}
+\PYG{n}{ddx\PYGZus{}1x\PYGZus{}2x\PYGZus{}3} \PYG{p}{=} \PYG{p}{(((}\PYG{n}{y\PYGZus{}2} \PYG{o}{\PYGZhy{}} \PYG{n}{y\PYGZus{}1}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{x\PYGZus{}2} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}1}\PYG{p}{))} \PYG{o}{\PYGZhy{}} \PYG{p}{((}\PYG{n}{y\PYGZus{}3} \PYG{o}{\PYGZhy{}} \PYG{n}{y\PYGZus{}2}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{x\PYGZus{}3} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}2}\PYG{p}{)));}
+
+\PYG{n}{ddx\PYGZus{}0x\PYGZus{}1x\PYGZus{}2x\PYGZus{}3} \PYG{p}{=} \PYG{p}{((}\PYG{n}{ddx\PYGZus{}1x\PYGZus{}2x\PYGZus{}3} \PYG{o}{\PYGZhy{}} \PYG{n}{ddx\PYGZus{}0x\PYGZus{}1x\PYGZus{}2}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{x\PYGZus{}3} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{));}
+
+\PYG{c}{\PYGZpc{} Define P\PYGZus{}3 using symbolic variables}
+\PYG{n}{P\PYGZus{}3} \PYG{p}{=} \PYG{n}{y\PYGZus{}0} \PYG{o}{+} \PYG{n}{ddx\PYGZus{}0x\PYGZus{}1} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{ddx\PYGZus{}0x\PYGZus{}1x\PYGZus{}2} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}1}\PYG{p}{)} \PYG{o}{+} \PYG{n}{ddx\PYGZus{}0x\PYGZus{}1x\PYGZus{}2x\PYGZus{}3} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}1}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}2}\PYG{p}{);}
+\PYG{n}{latex}\PYG{p}{(}\PYG{n}{P\PYGZus{}3}\PYG{p}{);}
+\end{Verbatim}

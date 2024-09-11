@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{clear}
+\PYG{n+nb}{clc}
+\PYG{n}{pkg} \PYG{n+nb}{load} \PYG{n}{symbolic}
+\PYG{n}{x\PYGZus{}0}\PYG{p}{=}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{n}{x\PYGZus{}1}\PYG{p}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{x\PYGZus{}2}\PYG{p}{=}\PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{n}{y\PYGZus{}0}\PYG{p}{=}\PYG{l+m+mi}{3}\PYG{p}{;}
+\PYG{n}{y\PYGZus{}1}\PYG{p}{=}\PYG{l+m+mi}{5}\PYG{p}{;}
+\PYG{n}{y\PYGZus{}2}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{n}{syms} \PYG{n}{x} \PYG{n}{L\PYGZus{}1} \PYG{n}{L\PYGZus{}2} \PYG{n}{L\PYGZus{}3}
+
+
+\PYG{n}{L\PYGZus{}0} \PYG{p}{=} \PYG{p}{((}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}1}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}2}\PYG{p}{))} \PYG{o}{/} \PYG{p}{((}\PYG{n}{x\PYGZus{}0} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}1}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x\PYGZus{}0} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}2}\PYG{p}{));}
+\PYG{n}{L\PYGZus{}1} \PYG{p}{=} \PYG{p}{((}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}2}\PYG{p}{))} \PYG{o}{/} \PYG{p}{((}\PYG{n}{x\PYGZus{}1} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x\PYGZus{}1} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}2}\PYG{p}{));}
+\PYG{n}{L\PYGZus{}2} \PYG{p}{=} \PYG{p}{((}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}1}\PYG{p}{))} \PYG{o}{/} \PYG{p}{((}\PYG{n}{x\PYGZus{}2} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}0}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x\PYGZus{}2} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}1}\PYG{p}{));}
+\PYG{c}{\PYGZpc{} Display the LaTeX representations}
+\PYG{n}{latex}\PYG{p}{(}\PYG{n}{L\PYGZus{}0}\PYG{p}{)}
+\PYG{n}{latex}\PYG{p}{(}\PYG{n}{L\PYGZus{}1}\PYG{p}{)}
+\PYG{n}{latex}\PYG{p}{(}\PYG{n}{L\PYGZus{}2}\PYG{p}{)}
+\PYG{n}{P\PYGZus{}2}\PYG{p}{=}\PYG{n}{y\PYGZus{}0}\PYG{o}{*}\PYG{n}{L\PYGZus{}0}\PYG{o}{+}\PYG{n}{y\PYGZus{}1}\PYG{o}{*}\PYG{n}{L\PYGZus{}1}\PYG{o}{+}\PYG{n}{y\PYGZus{}2}\PYG{o}{*}\PYG{n}{L\PYGZus{}2}\PYG{p}{;}
+\PYG{n}{latex}\PYG{p}{(}\PYG{n}{P\PYGZus{}2}\PYG{p}{)}
+\end{Verbatim}
