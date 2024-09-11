@@ -1,0 +1,22 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[1] Config.pm:310> INFO - Logfile is 'ENG204-Ass1-2.blg'
+[164] biber:340> INFO - === Fri Aug 30, 2024, 19:18:01
+[195] Biber.pm:419> INFO - Reading 'ENG204-Ass1-2.bcf'
+[341] Biber.pm:979> INFO - Found 3 citekeys in bib section 0
+[385] Biber.pm:4419> INFO - Processing section 0
+[404] Biber.pm:4610> INFO - Looking for bibtex file 'citation.bib' for section 0
+[406] bibtex.pm:1713> INFO - LaTeX decoding ...
+[413] bibtex.pm:1519> INFO - Found BibTeX data source 'citation.bib'
+[503] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[503] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[503] Biber.pm:4239> INFO - Sorting list 'apa/apasortcite//global/global' of type 'entry' with template 'apa' and locale 'en-US'
+[503] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[528] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[528] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[528] Biber.pm:4239> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
+[529] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[544] bbl.pm:660> INFO - Writing 'ENG204-Ass1-2.bbl' with encoding 'UTF-8'
+[549] bbl.pm:763> INFO - Output to ENG204-Ass1-2.bbl
+[550] Biber.pm:131> WARN - BibTeX subsystem: /tmp/biber_tmp_1cOF/79acecc52ff72f017f31533f617ffb0e_399122.utf8, line 8, warning: 1 characters of junk seen at toplevel
+[550] Biber.pm:131> WARN - BibTeX subsystem: /tmp/biber_tmp_1cOF/79acecc52ff72f017f31533f617ffb0e_399122.utf8, line 15, warning: 1 characters of junk seen at toplevel
+[550] Biber.pm:133> INFO - WARNINGS: 2
