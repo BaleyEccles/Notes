@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       ebf41481-b929-4dcd-9ccf-0917326e416b
+:END:
+#+title: Ill-Conditioned Systems
+#+date: [2024-09-11 Wed 13:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Ill-Conditioned Systems
+Given \[AX=B\]
+and \[X=A^{-1}B\]
+If there is a large change in B for a small change in X, the system is said to be [[id:ebf41481-b929-4dcd-9ccf-0917326e416b][Ill-Conditioned]].
+This is bad.
+** Condition Number
+A mesure of how well/poorly conditioned A is.
+\[K=\lvert\lvert A\rvert\rvert\lvert\lvert A^{-1}\rvert\rvert\]
+ - \[K<100\] is good
+ - \[K>500\] is bad

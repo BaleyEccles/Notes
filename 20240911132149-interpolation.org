@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       844ebf39-6e0e-402c-a845-affbe92accc3
+:END:
+#+title: Interpolation
+#+date: [2024-09-11 Wed 13:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Interpolation
+[[id:3627418d-7dda-4475-8231-fa145e302f08][Lagrange Interpolation]]
+[[id:2e11733f-6ced-497b-86ff-3968248683fc][Newton Interpolation]]
+** Local Interpolation
+[[id:5b20f103-6f05-4147-acef-c1e50249b8c6][Cubic Splines]]

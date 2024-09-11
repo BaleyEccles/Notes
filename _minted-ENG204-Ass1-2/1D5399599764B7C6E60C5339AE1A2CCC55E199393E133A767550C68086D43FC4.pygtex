@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{um} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{n}{f} \PYG{p}{=} \PYG{l+m+mf}{0.3}\PYG{p}{;} \PYG{c}{\PYGZpc{} Frequency}
+\PYG{n}{w0} \PYG{p}{=} \PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n+nb}{pi} \PYG{o}{*} \PYG{n}{f}\PYG{p}{;}
+\PYG{n}{t} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{:}\PYG{n}{Ts}\PYG{p}{:}\PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{n}{u} \PYG{p}{=} \PYG{n}{um} \PYG{o}{*} \PYG{n+nb}{sin}\PYG{p}{(}\PYG{n}{w0} \PYG{o}{*} \PYG{n}{t}\PYG{p}{);}
+
+\PYG{k}{for} \PYG{n}{i} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{length}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{)}
+    \PYG{n+nb}{figure}\PYG{p}{;}
+    \PYG{n+nb}{hold} \PYG{n}{on}\PYG{p}{;}
+    \PYG{n}{y} \PYG{p}{=} \PYG{n}{lsim}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{\PYGZob{}}\PYG{n}{i}\PYG{p}{\PYGZcb{},} \PYG{n}{u}\PYG{p}{,} \PYG{n}{t}\PYG{p}{);}
+    \PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,} \PYG{n}{y}\PYG{p}{(:,} \PYG{l+m+mi}{2}\PYG{p}{));}
+
+    \PYG{n}{titleStr} \PYG{p}{=} \PYG{n+nb}{sprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}\PYGZpc{}i th System to Sinusoidal Input at \PYGZpc{}i Hz\PYGZsq{}}\PYG{p}{,} \PYG{n}{i} \PYG{p}{,} \PYG{n}{f}\PYG{p}{);}
+    \PYG{n+nb}{title}\PYG{p}{(}\PYG{n}{titleStr}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}FontSize\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{);}
+    \PYG{n+nb}{xlabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Time (s)\PYGZsq{}}\PYG{p}{);}
+    \PYG{n+nb}{ylabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Displacement\PYGZsq{}}\PYG{p}{);}
+    \PYG{n}{legendEntry} \PYG{p}{=} \PYG{n+nb}{sprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}System \PYGZpc{}d: ks = \PYGZpc{}.2f, cs = \PYGZpc{}.2f\PYGZsq{}}\PYG{p}{,} \PYG{n}{i}\PYG{p}{,} \PYG{n}{sysArray}\PYG{p}{(}\PYG{n}{i}\PYG{p}{).}\PYG{n}{ks}\PYG{p}{,} \PYG{n}{sysArray}\PYG{p}{(}\PYG{n}{i}\PYG{p}{).}\PYG{n}{cs}\PYG{p}{);}
+    \PYG{n+nb}{legend}\PYG{p}{(}\PYG{n}{legendEntry}\PYG{p}{);}
+    \PYG{n+nb}{hold} \PYG{n}{off}\PYG{p}{;}
+    \PYG{n}{filename} \PYG{p}{=} \PYG{n+nb}{sprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}ENG204\PYGZhy{}Assignment\PYGZhy{}2\PYGZhy{}Sinusoidal\PYGZhy{}f\PYGZhy{}0.3\PYGZhy{}\PYGZpc{}i.png\PYGZsq{}}\PYG{p}{,} \PYG{n}{i}\PYG{p}{);}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}\PYGZhy{}dpng\PYGZsq{}}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}\PYGZhy{}r100\PYGZsq{}}\PYG{p}{);}
+\PYG{k}{end}
+\end{Verbatim}

@@ -6,7 +6,7 @@
 #+STARTUP: latexpreview
 
 * Difference Equations
-To convert an ODE into a [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equation]] use:
+To convert an ODE into a [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equation]] use the [[id:c055f8be-1e74-4589-a695-352bc4643bb8][Divided Difference]]:
 ** Backward Difference
 - \[\frac{dy}{dt}\approx \frac{y_2-y_1}{t_2-t_1} = \frac{y[n]-y[n-1]}{T_s}\]
 - \[\frac{d^2y}{dt^2} \approx \frac{y[n] - 2y[n-1] + y[n-2]}{T_s^2}\]

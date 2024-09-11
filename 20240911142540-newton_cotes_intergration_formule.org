@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       b050d2c4-819e-4f39-b146-b4a2b92a6462
+:END:
+#+title: Newton-Cotes Intergration Formule
+#+date: [2024-09-11 Wed 14:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Newton-Cotes Intergration Formule
+** Trapezodial Rule
+\[A\approx \sum_{j=0}^{\frac{n}{N}-1}\sum_{k=0}^Nf(x_{Nj+k})\int_{x_{jN}}^{x_{(j+1)N}}L_{j,k}(x)dx\]

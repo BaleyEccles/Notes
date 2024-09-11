@@ -1,0 +1,74 @@
+:PROPERTIES:
+:ID:       80120a64-eeb7-471c-94e2-a3c537a21699
+:END:
+#+title: Laplace Transform
+#+date: [2024-09-08 Sun 16:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Laplace Transform
+ - Uses [[id:d2083e8a-7a7a-48a8-89f4-9d13bba76b50][Transform Theory]] to convert signals into
+ - Useful for
+
+** Definition
+ - \[F(s)=\int_{-\infty}^{\infty}f(t)e^{-st}dt\]
+ - \[F(s)=\mathcal{L}\{f(t)\}\]
+ - \[s=\sigma + i\omega\]
+** Inverse
+ - \[y(t)=\frac{1}{2\pi j}\int_{\sigma-j\infty}^{\sigma+j\infty}Y(s)e^{st}ds\]
+   - This is hard to use
+
+** Things
+ - if \[f(t)=\delta(t-\tau)\]
+   - then \[F(s)=e^{-s\tau}\]
+ - if \[f(t)=u(t)\]
+   - then \[F(s)=\frac{1}{s} \textrm{, for } \sigma>0\]
+** Laplace to [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier Transform]]
+ - This can only work one way, Laplace to Fourier
+ - when \[s=j\omega \Rightarrow \sigma=0\]
+ - There is one exception for this
+   - when \[f(t)=u(t)\]
+** Properties
+ - Linearality:
+   - \[a_1x_1(t)+a_2x_2(t)\leftrightarrow a_1X_1(s)+a_2X_2(s)\]
+ - Time-shifting:
+   - \[x(t-\tau) \leftrightarrow e^{-s\tau}X(s)\]
+ - S-domain shifting:
+   - \[e^{s_0t}x(t) \leftrightarrow X(s-s_0)\]
+ - Scaling in time:
+   - \[x(at) \leftrightarrow \frac{1}{\lvert a\rvert}X(\frac{s}{a})\]
+ - Time reversal:
+   - \[x(-t) \leftrightarrow X(-s)\]
+ - Differentiation (t)
+   - \[\frac{dx(t)}{dt} \leftrightarrow sX(s)\]
+ - Differentiation (s):
+   - \[tx(t) \leftrightarrow -\frac{dX(s)}{ds}\]
+ - Convolution
+   - \[x_1(t)*x_2(t) \leftrightarrow X_1(s)X_2(s)\]
+ - Integration
+   - \[\int_{-\infty}^tx(\lambda)d\lambda \leftrightarrow \frac{x(s)}{s}\]
+
+** Partial Fraction Expansion
+*** Example 1
+\begin{align*}
+Y(s)&=\frac{1}{(s+3)(s+1)} \\
+Y(s)&=\frac{A}{s+3}+\frac{B}{s+1} \\
+\Rightarrow 1&=A(s+1)+B(s+3) \\
+\textrm{let } s=-1, 1&=A(0)+B(-1+3) \\
+\Rightarrow B&=\frac{1}{2} \\
+\Rightarrow A&=\frac{-1}{2}
+\end{align*}
+*** Example 2
+- Quadratic factor in denominator
+  - Linear factor in numerator
+\begin{align*}
+X(s)&=\frac{s+1}{s(s^2+9)} \\
+\frac{s+1}{s(s^2+9)}&=\frac{A}{s}+\frac{Bs+c}{S^2+9} \\
+\Rightarrow s+1&=A(s^2+9)+s(Bs+c) \\
+\textrm{let } s=0, 1&=9A \Rightarrow A=\frac{1}{9} \\
+\textrm{let } s=-1, 0&=10\frac{1}{9}+B-c \\
+\textrm{let } s=1, 2&=A10+B-c \\
+\Rightarrow B&=-\frac{1}{9} \\
+\Rightarrow C&=1
+\end{align*}
+ - This will typically involve sin and cos terms.

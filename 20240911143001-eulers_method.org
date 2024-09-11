@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       1552e91e-e998-4943-bb4c-6b65319fa5c7
+:END:
+#+title: Eulers Method
+#+date: [2024-09-11 Wed 14:30]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Eulers Method
+** First Order
+Interpate $f(x,y)$ as the slope of the the solution to the ODE.
+ - \[y_{n+1}=y_i+hf(h_0,y_0)\]
+   - \[h=x_{i+1}-x_i\]

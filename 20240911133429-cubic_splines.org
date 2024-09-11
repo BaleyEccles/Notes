@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       5b20f103-6f05-4147-acef-c1e50249b8c6
+:END:
+#+title: Cubic Splines
+#+date: [2024-09-11 Wed 13:34]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Cubic Splines
+We make the first and second derivative at the knots equal:
+ - \[S_{j-1}'(x_j)=S_j'(x_j)\]
+ - \[S_{j-1}''(x_j)=S_j''(x_j)\]
+   - This does not give enough equations to solve for one solution
+     - We must decide on the end points
+ - \[S_j(x)=\frac{M_j}{6h_j}(x_{j+1}-x)^3+\frac{M_{j+1}}{6h_j}(x-x_j)^3-\frac{M_jh_j}{6}(x_{j+1}-x)-\frac{M_{j+1}h_j}{6}(x-x_j)+\frac{y_j}{h_j}(x_{j+1}-x)+\frac{y_{j+1}}{h_j}(x-x_{j})\]
+** End points
+*** Natural Slpine
+Let \[M_0=M_n=0\]
+ - \[\Rightarrow S_0'(x_0)=c \Rightarrow S_0(x_0)=c_1x+c_2\]
+*** Specify End Point Derivatives

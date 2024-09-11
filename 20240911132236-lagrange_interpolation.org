@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       3627418d-7dda-4475-8231-fa145e302f08
+:END:
+#+title: Lagrange Interpolation
+#+date: [2024-09-11 Wed 13:22]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Lagrange Interpolation
+\[L_k(x)=\prod_{j=0,j\neq k}^n \frac{(x-x_j)}{(x_k-x_j)}\]
+\[y=p_n(x)=\sum_{k=0}^ny_kL_k(x)\]

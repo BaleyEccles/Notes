@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       cd0f124d-beff-4f66-a405-01b2c19e9144
+:END:
+#+title: Heun's Method
+#+date: [2024-09-11 Wed 14:39]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Heun's Method
+This is an improved [[id:1552e91e-e998-4943-bb4c-6b65319fa5c7][Eulers Method]]. And is an example of a two stage [[id:40f307e6-abd5-4f34-bd8c-c06a5dc15d88][Runge-Kutta Methods]]
+First calcualte the inital value:
+ - \[\overline{y}_{i+1}=y_i+hf(t_{i},y_{i})\]
+Next:
+ - \[y_{i+1}=y_i+\frac{h}{2}\left[ f(t_{i},y_{i})+f(t_{i+1},\overline{y}_{i+1})\]
+Where:
+ - $h$ is the step size
+ - \[t_{i+1}=t_{i}+h\]

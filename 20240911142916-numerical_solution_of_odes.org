@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       2a1c15f9-8be3-4510-906c-bacc45b75068
+:END:
+#+title: Numerical Solution of ODEs
+#+date: [2024-09-11 Wed 14:29]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Numerical Solution of ODEs
+Higher order ODEs can be written as a system of first order ODEs
+[[id:1552e91e-e998-4943-bb4c-6b65319fa5c7][Eulers Method]]
+[[id:fce21fba-2ca1-4246-b455-f3d64793d020][Picard Iteration]]

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       84252b32-2d80-4702-91f3-762e69a33f0a
+:END:
+#+title: Numerical Integration
+#+date: [2024-09-11 Wed 14:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+
+* Numerical Integration
+[[id:b050d2c4-819e-4f39-b146-b4a2b92a6462][Newton-Cotes Intergration Formule]]

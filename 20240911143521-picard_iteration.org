@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       fce21fba-2ca1-4246-b455-f3d64793d020
+:END:
+#+title: Picard Iteration
+#+date: [2024-09-11 Wed 14:35]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Picard Iteration
+Guess some function for our intital guess, rather than a value. As this will return a function.
+\[y^{(m+1)}(x)=\int_{x_{0}}^{x}f(u,y^{(m)}(u))du+y_{0}\]

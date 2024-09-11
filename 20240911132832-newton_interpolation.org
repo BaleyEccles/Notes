@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       2e11733f-6ced-497b-86ff-3968248683fc
+:END:
+#+title: Newton Interpolation
+#+date: [2024-09-11 Wed 13:28]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Newton Interpolation
+Use [[id:c055f8be-1e74-4589-a695-352bc4643bb8][Divided Difference]] to find the $x_j$
+ - \[y=P_n(x)=a_0+a_1(x-x_0)+a_2(x-x_0)(x-x_1)+ ... + a_n(x-x_0)(x-x_1)...(x-x_{n-1})\]

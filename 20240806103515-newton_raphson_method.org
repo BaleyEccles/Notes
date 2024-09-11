@@ -9,3 +9,12 @@
 A [[id:5d1b6d40-17f3-486c-9aae-bd5516083d30][Fixed Point Method]] that uses the operation \[x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}\].
 ** Convergence
 Quadratic convergence
+* Newton-Raphson Method In Many Varibles
+ \[J^m\underline{c}^{(m)}+\underline{f}^{(m)}=0\]
+\[J = \begin{bmatrix}
+\frac{\partial f_{1}}{\partial f_{x_{1}}} & \frac{\partial f_{1}}{\partial f_{x_{2}}} & \hdots & \frac{\partial f_{1}}{\partial f_{x_{n}}} \\
+\frac{\partial f_{2}}{\partial f_{x_{1}}} & \frac{\partial f_{2}}{\partial f_{x_{2}}} & \hdots & \frac{\partial f_{2}}{\partial f_{x_{n}}} \\
+\vdots & \vdots & \hdots & \vdots \\
+\frac{\partial f_{n}}{\partial f_{x_{1}}} & \frac{\partial f_{n}}{\partial f_{x_{2}}} & \hdots & \frac{\partial f_{n}}{\partial f_{x_{n}}} \\
+\end{bmatrix\]
+\[\underline{c}^{(m)} =\underline{x}^{m+1}-\underline{x}^{m}\]

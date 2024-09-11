@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       e02208c9-8d80-402a-87ae-2a1f8217be36
+:END:
+#+title: Diagonaly Dominant
+#+date: [2024-09-11 Wed 12:59]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Diagonaly Dominant
+\[\lvert diagonal \rvert > \lvert other terms \rvert\]

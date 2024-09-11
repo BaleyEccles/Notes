@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       c055f8be-1e74-4589-a695-352bc4643bb8
+:END:
+#+title: Divided Difference
+#+date: [2024-09-11 Wed 13:29]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Divided Difference
+\[f[x_i,x_{i+1},...x_{i+k}]=\frac{f[x_{i+1},x_{i+2},...x_{i+k}]-f[x_i,x_{i+1},...x_{i+k-1}]}{x_{i+k}-x_{i}}\]

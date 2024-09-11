@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       40f307e6-abd5-4f34-bd8c-c06a5dc15d88
+:END:
+#+title: Runge-Kutta Method
+#+date: [2024-09-11 Wed 14:45]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* TODO Runge-Kutta Method
+if:
+\[K_j^{(1)}=f(x_j,y_j)\]
+\[K_j^{(2)}=f(x_j,y_j)\]
+\[y_{i+1}=y_i+h[A_1K_j^{(1)}+A_2K_j^{(2)}+...]\]

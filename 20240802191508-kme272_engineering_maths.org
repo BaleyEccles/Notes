@@ -11,6 +11,7 @@
 - [[id:9ff1e7f6-b6f2-447b-81b9-f64b89a9d834][How Computers Represent Numbers]]
 - [[id:dc6ece72-c6c1-4317-9bbc-f8de60766b23][Root Finding]]
 - [[id:3a948b0c-e597-4007-9a11-e84b73a560ba][Solutions of Matrix Equations]]
+- [[id:844ebf39-6e0e-402c-a845-affbe92accc3][Interpolation]]
 ** Probability and Statistics
 
 * Assesment
@@ -21,6 +22,7 @@
 - [[id:2bc9a183-0cf3-45fa-9c16-81de9c714e8f][KME272 - Assesment 1.2]]
 - [[id:48d046e6-9f39-44ef-ab20-455e13bb9282][KME272 - Assesment 1.3]]
 - [[id:a77847e5-4148-48a0-8aaa-dc2c4234dbfb][KME272 - Assesment 1.4]]
+- [[id:cabe2107-f822-4e95-95cf-9bf3a6c3550d][kme272 - Assesment 1.5]]
 ** Assessment Task 2: Computational Techniques Matlab Grader Assignments
 - Due 9am Monday weeks 3-7
 - \[5 \cdot 1\% = 5\%\]
