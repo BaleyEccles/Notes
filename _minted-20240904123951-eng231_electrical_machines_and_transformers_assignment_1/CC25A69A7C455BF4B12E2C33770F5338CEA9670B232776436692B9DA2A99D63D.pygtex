@@ -1,0 +1,47 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{clear}
+\PYG{n+nb}{clc}
+\PYG{c}{\PYGZpc{} From Q4 Part a and b:}
+\PYG{n}{t}\PYG{p}{=}\PYG{l+m+mi}{0}\PYG{p}{:}\PYG{l+m+mf}{0.0001}\PYG{p}{:}\PYG{l+m+mf}{0.1}\PYG{p}{;}
+\PYG{n}{I\PYGZus{}rms}\PYG{p}{=}\PYG{l+m+mf}{1.14}\PYG{p}{;}
+\PYG{n}{I\PYGZus{}peak}\PYG{p}{=}\PYG{n}{I\PYGZus{}rms}\PYG{o}{*}\PYG{n+nb}{sqrt}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{n}{f}\PYG{p}{=}\PYG{l+m+mi}{50}\PYG{p}{;}
+\PYG{n}{w}\PYG{p}{=}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{o}{*}\PYG{n}{f}\PYG{p}{;}
+\PYG{n}{i}\PYG{p}{=}\PYG{n}{I\PYGZus{}peak}\PYG{o}{*}\PYG{n+nb}{sin}\PYG{p}{(}\PYG{n}{w}\PYG{o}{*}\PYG{n}{t}\PYG{p}{);}
+\PYG{n}{M\PYGZus{}sat}\PYG{p}{=}\PYG{l+m+mf}{1.4}\PYG{o}{*}\PYG{l+m+mi}{10}\PYGZca{}\PYG{l+m+mi}{6}\PYG{p}{;}
+\PYG{n}{h\PYGZus{}0}\PYG{p}{=}\PYG{l+m+mi}{2230}\PYG{p}{;}
+
+\PYG{c}{\PYGZpc{} Old code}
+\PYG{n}{M}\PYG{p}{=}\PYG{n}{M\PYGZus{}sat}\PYG{o}{*}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{/}\PYG{n+nb}{pi}\PYG{p}{)}\PYG{o}{*}\PYG{n+nb}{atan}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{o}{*}\PYG{n}{i}\PYG{o}{/}\PYG{l+m+mi}{5}\PYG{p}{);}
+\PYG{n}{H}\PYG{p}{=}\PYG{n}{h\PYGZus{}0}\PYG{o}{*}\PYG{n}{i}\PYG{p}{;}
+\PYG{n}{u\PYGZus{}0}\PYG{p}{=}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{o}{*}\PYG{l+m+mi}{10}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{7}\PYG{p}{);}
+\PYG{n}{x\PYGZus{}m}\PYG{p}{=}\PYG{l+m+mf}{301.847007}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{n}{H}\PYG{p}{=}\PYG{n}{x\PYGZus{}m}\PYG{o}{*}\PYG{n}{H} \PYG{o}{+} \PYG{n}{H}\PYG{p}{;}
+\PYG{n}{B}\PYG{p}{=}\PYG{n}{u\PYGZus{}0}\PYG{o}{*}\PYG{n}{H}\PYG{p}{;}
+
+\PYG{n}{N}\PYG{p}{=}\PYG{l+m+mi}{880}\PYG{p}{;} \PYG{c}{\PYGZpc{} From guess and check}
+\PYG{n}{A}\PYG{p}{=}\PYG{l+m+mi}{3}\PYG{o}{*}\PYG{l+m+mi}{10}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{3}\PYG{o}{*}\PYG{l+m+mi}{10}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{n}{Phi}\PYG{p}{=}\PYG{n}{B}\PYG{o}{*}\PYG{n}{A}\PYG{p}{;}
+\PYG{n}{EMF}\PYG{p}{=}\PYG{o}{\PYGZhy{}}\PYG{n}{N}\PYG{o}{*} \PYG{n+nb}{gradient}\PYG{p}{(}\PYG{n}{Phi}\PYG{p}{)}\PYG{o}{./}\PYG{n+nb}{gradient}\PYG{p}{(}\PYG{n}{t}\PYG{p}{);}
+
+\PYG{n}{V\PYGZus{}rms}\PYG{p}{=}\PYG{l+m+mi}{240}\PYG{p}{;}
+\PYG{n}{V\PYGZus{}peak}\PYG{p}{=}\PYG{n}{V\PYGZus{}rms}\PYG{o}{*}\PYG{n+nb}{sqrt}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{n}{f}\PYG{p}{=}\PYG{l+m+mi}{50}\PYG{p}{;}
+\PYG{n}{w}\PYG{p}{=}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{o}{*}\PYG{n}{f}\PYG{p}{;}
+\PYG{n}{t}\PYG{p}{=}\PYG{l+m+mi}{0}\PYG{p}{:}\PYG{l+m+mf}{0.0001}\PYG{p}{:}\PYG{l+m+mf}{0.1}\PYG{p}{;}
+\PYG{n}{V}\PYG{p}{=}\PYG{n}{V\PYGZus{}peak}\PYG{o}{*}\PYG{n+nb}{cos}\PYG{p}{(}\PYG{n}{w}\PYG{o}{*}\PYG{n}{t}\PYG{p}{);}
+
+
+\PYG{n+nb}{clf}\PYG{p}{;}
+\PYG{n+nb}{hold} \PYG{n}{on}\PYG{p}{;}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{t}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{k}{end}\PYG{p}{),} \PYG{n}{EMF}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}b\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}DisplayName\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}Induced EMF\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{t}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{k}{end}\PYG{p}{),} \PYG{n}{V}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}DisplayName\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}Supplied Voltage\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{xlabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Time (s)\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{ylabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Voltage (V)\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Induced EMF and Supply Voltage\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{legend} \PYG{n}{show}\PYG{p}{;}
+\PYG{n}{E\PYGZus{}max}\PYG{p}{=}\PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{EMF}\PYG{p}{);}
+\PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}The max EMF induced is \PYGZpc{}f\PYGZbs{}n\PYGZsq{}}\PYG{p}{,} \PYG{n}{E\PYGZus{}max}\PYG{p}{);}
+\PYG{n}{filename} \PYG{p}{=} \PYG{n+nb}{sprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}ENG231\PYGZhy{}4.png\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}\PYGZhy{}dpng\PYGZsq{}}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}\PYGZhy{}r100\PYGZsq{}}\PYG{p}{);}
+\end{Verbatim}

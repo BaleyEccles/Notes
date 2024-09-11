@@ -1,0 +1,239 @@
+:PROPERTIES:
+:ID:       d0bf116b-bff9-48bb-938d-7fa8766d1088
+:END:
+#+title: ENG231 - Electrical Machines And Transformers - Assignment 1
+#+date: [2024-09-04 Wed 12:39]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG231 - Electrical Machines And Transformers - Assignment 1
+** Question 1
+ - 1: Alternatting current in the primary coil
+   - When an alternating current flows throug the primary coil, it creates a time varing magnetic field. Which is described by Ampere's Law, which states that an electric current produces a magnetic field.
+ - 2: Magnetic flux generation
+   - The time varing magnetic field creates a magnetic flux in the transformer. From Faraday's Law, the induced EMF in a coil is proportional to the the rate of change of magnetic flux in the coil $\left( \mathcal{E}\propto \frac{\partial \Phi}{\partial t}\right)$.
+ - 3: Induction in the secondary coil
+   - The magnetic flux generated in the primary coil links to the secondary coil and produces an EMF dependent on the number of turns in the secondary winding. As described by Farday's Law $\left( \mathcal{E}=-N\frac{\partial \Phi}{\partial t}  \right)$
+ - 4: Transfer of power
+   - In an ideal transformer the power induced in the secondary winding is equal to the power supplied to the primary winding. That is $P_1=P_2$ or $V_1I_1=V_2I_2$, where $V$ is the voltage and $I$ is the current.
+
+
+** Question 2
+\begin{align*}
+P_{in}&=P_{out} \\
+P_{out}&=V_{in}I_{in} \\
+P_{out}&=240\cdot 1.14 \\
+P_{out}&=273.6W
+\end{align*}
+
+** Question 3
+Two possible power losses in the transformer are, resistive losses due to the copper not having zero resistance and eddy currents in the core.
+To reduce the power losses due to eddy currents in the core, we can laminate the core.By spliting the core into seperate thin sheets of the cores material. This will reduce the power losses by making it harder for eddy currents to form.
+
+** Question 4
+*** a
+#+BEGIN_SRC octave :exports code :results output :session Q4
+clear
+clc
+pkg load symbolic
+I_rms=1.14;
+I_peak=I_rms*sqrt(2);
+f=50;
+w=2*pi*f;
+t=0:0.00001:0.1;
+i=I_peak*sin(w*t);
+plot(t,i);
+titleStr = sprintf('Current plot of the Arlec 2166');
+title(titleStr, 'FontSize', 10);
+xlabel('Time (s)');
+ylabel('Current (A)');
+#+END_SRC
+#+RESULTS:
+*** b
+#+BEGIN_SRC octave :exports code :results output :session Q4
+M_sat=1.4*10^6;
+h_0=2230;
+M=M_sat*(2/pi)*atan(6*i/5);
+H=h_0*i;
+u_0=4*pi*10^(-7);
+B=u_0*(M+H);
+plot(i,M);
+titleStr = sprintf('Plot of the hysteresis the Arlec 2166');
+title(titleStr, 'FontSize', 10);
+xlabel('Current (A)');
+ylabel('magnetic flux density (T)');
+#+END_SRC
+
+#+RESULTS:
+
+
+*** c
+#+BEGIN_SRC octave :exports code :results output :session Q4
+M_sat=1.4*10^6;
+h_0=2230;
+M=M_sat*(2/pi)*atan(6*i/5);
+H=h_0*i;
+x=M/H;
+fprintf('The maximum value of the magnetic susceptibility of the core of the transformer is %f\n',max(x));
+#+END_SRC
+
+#+RESULTS:
+: The maximum value of the magnetic susceptibility of the core of the transformer is 301.847007
+
+
+
+** Question 5
+*** a
+#+BEGIN_SRC octave :exports code :results output :session Q5
+clear
+clc
+pkg load symbolic
+V_rms=240;
+V_peak=V_rms*sqrt(2);
+f=50;
+w=2*pi*f;
+t=0:0.0001:0.1;
+V=V_peak*sin(w*t);
+figure;
+plot(t,V,'r', 'DisplayName', 'Input Voltage (V)');
+titleStr = sprintf('Voltage plot of the Arlec 2166');
+title(titleStr, 'FontSize', 10);
+xlabel('Time (s)');
+ylabel('Voltage (V)');
+legend('show');
+#+END_SRC
+
+#+RESULTS:
+*** b
+#+BEGIN_SRC octave :exports code :results output :session Q5
+% From Q4 Part a and b:
+t=0:0.0001:0.1;
+I_rms=1.14;
+I_peak=I_rms*sqrt(2);
+f=50;
+w=2*pi*f;
+i=I_peak*sin(w*t);
+M_sat=1.4*10^6;
+h_0=2230;
+
+% Old code
+M=M_sat*(2/pi)*atan(6*i/5);
+H=h_0*i;
+u_0=4*pi*10^(-7);
+x_m=301.847007-1;
+H=x_m*H + H;
+B=u_0*H;
+
+A=3*10^(-2)*3*10^(-2);
+Phi=B*A;
+EMF=-N* gradient(Phi)./gradient(t);
+
+V_rms=240;
+V_peak=V_rms*sqrt(2);
+f=50;
+w=2*pi*f;
+t=0:0.0001:0.1;
+V=V_peak*sin(w*t);
+
+figure;
+hold on;
+plot(t(1:end), EMF, 'b', 'DisplayName', 'Induced EMF');
+plot(t(1:end), V, 'r', 'DisplayName', 'Induced EMF');
+xlabel('Time (s)');
+ylabel('Voltage (V)');
+title('Induced EMF vs Supply Voltage');
+
+E_max=max(EMF);
+fprintf('The max EMF induced is %f\n', E_max);
+#+END_SRC
+
+#+RESULTS:
+: The max EMF induced is 339.254068
+
+
+*** c
+The induced EMF is dependent on the derivative of the flux which is dependent on the current. So the EMF will be out of phase of the current by $90^o$.
+The current lags the voltage.
+*** d
+#+BEGIN_SRC octave :exports code :results output :session Q5d
+clc
+clear
+A=3*10^(-2)*3*10^(-2);
+t=0:0.0001:0.1;
+I_peak=1.6;
+f=50;
+w=2*pi*f;
+N=550;
+M_sat=1.4*10^6;
+h_0=2230;
+u_0=4*pi*10^(-7);
+
+i1=I_peak*sin(w*t);
+H=h_0*i1;
+u_0=4*pi*10^(-7);
+x_m=301.847007-1;
+H=x_m*H + H;
+B=u_0*H;
+A=3*10^(-2)*3*10^(-2);
+Phi=B*A;
+N=550;
+E1=-N* gradient(Phi)./gradient(t);
+
+I_peak2=3
+i3=10^(-1)*I_peak2*sin(3*w*t);
+H=h_0*i3;
+u_0=4*pi*10^(-7);
+x_m=301.847007-1;
+H=x_m*H + H;
+B=u_0*H;
+A=3*10^(-2)*3*10^(-2);
+Phi=B*A;
+N=550;
+E3=-N* gradient(Phi)./gradient(t);
+
+
+i5=10^(-2)*I_peak*sin(5*w*t);
+H=h_0*i5;
+u_0=4*pi*10^(-7);
+x_m=301.847007-1;
+H=x_m*H + H;
+B=u_0*H;
+A=3*10^(-2)*3*10^(-2);
+Phi=B*A;
+N=550;
+E5=-N* gradient(Phi)./gradient(t);
+
+
+ETotal=E1+E3+E5;
+max(ETotal)
+
+
+V_rms=240;
+V_peak=V_rms*sqrt(2);
+f=50;
+w=2*pi*f;
+t=0:0.0001:0.1;
+V=V_peak*sin(w*t);
+
+figure;
+hold on;
+%plot(t, E1, 'b', 'DisplayName', 'Induced EMF 1');
+%plot(t, E3, 'r', 'DisplayName', 'Induced EMF 2');
+%plot(t, E5, 'g', 'DisplayName', 'Induced EMF 3');
+plot(t, ETotal, 'DisplayName', 'Total induced EMF');
+plot(t, V, 'DisplayName', 'Supply voltage');
+
+titleStr = sprintf('Voltage');
+title(titleStr, 'FontSize', 10);
+xlabel('Time (s)');
+ylabel('Voltage (V)');
+legend('show');
+hold off;
+#+END_SRC
+
+#+RESULTS:
+: I_peak2 = 3
+: ans = 339.12
+
+
+339.254068

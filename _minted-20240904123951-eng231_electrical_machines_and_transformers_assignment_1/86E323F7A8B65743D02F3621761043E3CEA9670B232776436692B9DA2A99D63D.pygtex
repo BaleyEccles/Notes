@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{clear}
+\PYG{n+nb}{clc}
+\PYG{n}{V\PYGZus{}rms}\PYG{p}{=}\PYG{l+m+mi}{240}\PYG{p}{;}
+\PYG{n}{V\PYGZus{}peak}\PYG{p}{=}\PYG{n}{V\PYGZus{}rms}\PYG{o}{*}\PYG{n+nb}{sqrt}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{n}{f}\PYG{p}{=}\PYG{l+m+mi}{50}\PYG{p}{;}
+\PYG{n}{w}\PYG{p}{=}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{o}{*}\PYG{n}{f}\PYG{p}{;}
+\PYG{n}{t}\PYG{p}{=}\PYG{l+m+mi}{0}\PYG{p}{:}\PYG{l+m+mf}{0.0001}\PYG{p}{:}\PYG{l+m+mf}{0.1}\PYG{p}{;}
+\PYG{n}{V}\PYG{p}{=}\PYG{n}{V\PYGZus{}peak}\PYG{o}{*}\PYG{n+nb}{sin}\PYG{p}{(}\PYG{n}{w}\PYG{o}{*}\PYG{n}{t}\PYG{p}{);}
+\PYG{n+nb}{clf}\PYG{p}{;}
+\PYG{n+nb}{hold} \PYG{n}{on}\PYG{p}{;}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{V}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}DisplayName\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}Input Voltage (V)\PYGZsq{}}\PYG{p}{);}
+\PYG{n}{titleStr} \PYG{p}{=} \PYG{n+nb}{sprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Voltage plot of the Arlec 2166\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{n}{titleStr}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}FontSize\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{);}
+\PYG{n+nb}{xlabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Time (s)\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{ylabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Voltage (V)\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{legend}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}show\PYGZsq{}}\PYG{p}{);}
+\PYG{n}{filename} \PYG{p}{=} \PYG{n+nb}{sprintf}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}ENG231\PYGZhy{}3.png\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}\PYGZhy{}dpng\PYGZsq{}}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}\PYGZhy{}r100\PYGZsq{}}\PYG{p}{);}
+\end{Verbatim}
