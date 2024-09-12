@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       2aa3347d-914f-4cda-a850-f6923f0c2a78
+:END:
+#+title: Gaussian Quadrature
+#+date: [2024-09-12 Thu 10:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Gaussian Quadrature
+Here the step size varies, the sample points are strategically located to minimise error.
+\[\int_{-1}^{1}f(x)dx=\sum_{i=0}^{n}w_if(x_i)\]
+** General Gaussian Quadrature
+When the end points are not $-1$ to $1$ we use
+\[\frac{b-a}{2}\int_{-1}^{1}f(x(z))dz=\frac{b-a}{2}\sum_{i=0}^{n}w_if(x(z_i))\]

@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       55d990d1-a770-4d9c-b7e7-7707cca95153
+:END:
+#+title: Numerical Differentiation
+#+date: [2024-09-12 Thu 10:29]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Numerical Differentiation
+[[id:c055f8be-1e74-4589-a695-352bc4643bb8][Divided Difference]]
+** Forward Difference
+\[f'(x_j)\approx \frac{f(x_{j+1})-f(x_{j})}{h}\]
+** Centered Difference
+\[f'(x_j)\approx \frac{f(x_{j+1})-f(x_{j-1})}{2h}\]
+** Backward Difference
+\[f'(x_j)\approx \frac{f(x_{j})-f(x_{j-1})}{h}\]

@@ -9,3 +9,4 @@
 
 * Numerical Integration
 [[id:b050d2c4-819e-4f39-b146-b4a2b92a6462][Newton-Cotes Intergration Formule]]
+[[id:2aa3347d-914f-4cda-a850-f6923f0c2a78][Gaussian Quadrature]]
