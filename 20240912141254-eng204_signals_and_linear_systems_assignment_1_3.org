@@ -1,0 +1,469 @@
+:PROPERTIES:
+:ID:       82f120fa-2ae0-4d14-b753-11324f73cf28
+:END:
+#+title: ENG204 - Signals and Linear Systems - Assignment 1.3
+#+date: [2024-09-12 Thu 14:12]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage[backend=biber,style=apa]{biblatex}
+#+LATEX_HEADER_EXTRA: \addbibresource{citation.bib}
+
+
+* ENG204 - Signals and Linear Systems - Assignment 1.3
+** TODO a
+** b
+#+BEGIN_SRC octave :exports code :results output :session b
+clear
+clc
+close
+pkg load symbolic
+sigma=10; % Filter size
+
+G = @(x, y) (1/(2*pi*sigma^2)) * exp(-1 * (x.^2 + y.^2) / (2 * sigma^2));
+size=6*sigma;
+GFilter=zeros(size);
+
+for xCoord = -size/2:size/2-1
+  for yCoord = -size/2:size/2-1
+    Gval=G(xCoord,yCoord);
+    GFilter(size/2+xCoord+1,size/2+yCoord+1)=double(Gval);
+  end
+end
+
+% Normalise the matrix
+GFilter=(GFilter - min(GFilter(:))) / (max(GFilter(:)) - min(GFilter(:)));
+
+#+END_SRC
+
+#+RESULTS:
+
+
+#+BEGIN_SRC octave :exports code :results output :session b
+noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.3/Pic/image_5_noise.jpg");
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports code :results output :session b
+output=conv2(noise,GFilter,'same');
+imshow(output,[]);
+#+END_SRC
+
+#+RESULTS:
+
+** c
+#+BEGIN_SRC octave :exports code :results output :session c
+clear
+clc
+close
+pkg load symbolic
+
+syms x y p phi sigma
+G =(1/(2*pi*sigma)) * exp(-1 * (x^2 + y^2) / (2 * sigma^2));
+% Sub in the cylindrical coordinates
+xCyl=p*cos(phi);
+yCyl=p*sin(phi);
+G=subs(G,x,xCyl);
+G=subs(G,y,yCyl);
+latex(xCyl)
+latex(yCyl)
+latex(simplify(G))
+#+END_SRC
+
+#+RESULTS:
+: warning: passing floating-point values to sym is dangerous, see "help sym"
+: warning: called from
+:     double_to_sym_heuristic at line 50 column 7
+:     sym at line 384 column 13
+:     mtimes at line 54 column 5
+: p \cos{\left(\phi \right)}
+: p \sin{\left(\phi \right)}
+: \frac{e^{- \frac{p^{2}}{2 \sigma^{2}}}}{2 \pi \sigma}
+To do this we can convert the function to cylindrical coordinates. using:
+\[x= \rho \cos{\left(\phi \right)}\]
+\[y= \rho \sin{\left(\phi \right)}\]
+Which will give:
+\[\frac{e^{- \frac{\rho^{2}}{2 \sigma^{2}}}}{2 \pi \sigma}\]
+As we can see this does not depend on $\phi$, which is the rotational aspect, so it is rotationaly symmetric.
+
+** d
+*** a
+  :PROPERTIES:
+  :ID: Part-d-a
+  :END:
+\begin{align*}
+G(x,y)&=\frac{1}{2\pi \sigma^{2}}e^{-\frac{x^2+y^2}{2 \sigma^2}} \\
+G(x,y)&=\frac{1}{2\pi \sigma^{2}}e^{-\frac{x^2}{2 \sigma^2}}e^{-\frac{y^2}{2 \sigma^2}} \\
+\Rightarrow G_x(x)&=\frac{1}{\sqrt{2\pi \sigma^{2}}}e^{-\frac{x^2}{2 \sigma^2}} \\
+\textrm{and } G_y(y)&=\frac{1}{\sqrt{2\pi \sigma^{2}}}e^{-\frac{y^2}{2 \sigma^2}}
+\end{align*}
+This shows that the Guassian kernel can be sperated into two individual components that can be acted seperately in the $x$ and $y$ direction. We can see that the $G_x(x)$ and $G_y(y)$ are varible subsitutions of one another, this means that they will result in the same values given the same input, and hence when formed into their matrices they will be transposes of one another.
+*** b
+We are taking the convolution of $G$ and $I$ resulting in $O$:
+\begin{align*}
+O&=I*G                     \\
+O&=I*(G_x\cdot G_y)        \\
+I'&=I*G_x                  \\
+O&=I'* G_y                 \\
+O&=(I*G_x)*G_y
+\end{align*}
+This shows that the Guassian kernel can be convoluted with the image in the $x$ direction to get some intermediate image, which then can be convoluted in the $y$ direction to get the final image.
+*** c
+#+BEGIN_SRC octave :exports none :results output :session c
+clear
+clc
+close
+
+sigma=50; % Filter size
+size=6*sigma;
+
+
+
+noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.3/Pic/image_5_noise.jpg");
+
+tic
+G = @(x, y) (1/(2*pi*sigma^2)) * exp(-1 * (x.^2 + y.^2) / (2 * sigma^2));
+GFilter=zeros(size);
+for xCoord = -size/2:size/2-1
+  for yCoord = -size/2:size/2-1
+    Gval=G(xCoord,yCoord);
+    GFilter(size/2+xCoord+1,size/2+yCoord+1)=double(Gval);
+  end
+end
+GFilter=(GFilter - min(GFilter(:))) / (max(GFilter(:)) - min(GFilter(:)));
+single=conv2(noise,GFilter,'same');
+time1 = toc;
+
+tic
+Gx = @(x) (1/(sqrt(2*pi*sigma^2))) * exp(-1 * (x.^2) / (2 * sigma^2));
+Gy = @(y) (1/(sqrt(2*pi*sigma^2))) * exp(-1 * (y.^2) / (2 * sigma^2));
+GxFilter=zeros(size,1);
+GyFilter=zeros(1,size);
+for xCoord = -size/2:size/2-1
+  Gxval=Gx(xCoord);
+  GxFilter(size/2+xCoord+1,1)=double(Gxval);
+end
+for yCoord = -size/2:size/2-1
+  Gyval=Gy(yCoord);
+  GyFilter(1,size/2+yCoord+1)=double(Gyval);
+end
+GxFilter=(GxFilter - min(GxFilter(:))) / (max(GxFilter(:)) - min(GxFilter(:)));
+GyFilter=(GyFilter - min(GyFilter(:))) / (max(GyFilter(:)) - min(GyFilter(:)));
+output=conv2(noise,GxFilter,'same');
+double=conv2(output,GyFilter,'same');
+time2 = toc;
+
+
+subplot(2, 1, 1);
+imshow(single, []);
+
+title('single');
+subplot(2, 1, 2);
+imshow(double, []);
+
+title('double');
+fprintf('The time to calculate the convolution of the single matrix is %f s\n', time1);
+fprintf('The time to calculate the convolution of the two matrices is %f s\n', time2);
+
+
+% sacle them so they dont look weird
+single = single / max(single(:)) * 65535;
+double = double / max(double(:)) * 65535;
+% Save the images
+imwrite(uint16(single), 'ENG204-Assignment-3-Single-sigma-10.png');
+imwrite(uint16(double), 'ENG204-Assignment-3-Double-sigma-10.png');
+#+END_SRC
+
+#+RESULTS:
+: The time to calculate the convolution of the single matrix is 6.112394 s
+: The time to calculate the convolution of the two matrices is 0.139590 s
+
+The output with $\sigma=10$ is:
+ - The time to calculate the convolution of the single matrix is 0.430982 s
+ - The time to calculate the convolution of the two matrices is 0.100643 s
+As we can see the convolution of the two matricies is about four times as fast. And we can also see that this creates the exact same result.\\
+Image with one convolution:
+[[file:ENG204-Assignment-3-Single-sigma-10.png]]
+Image with two convolutions:
+[[file:ENG204-Assignment-3-Double-sigma-10.png]]
+Increasing the $\sigma$ we will see that the difference between the two times increases. For $\sigma=50$:
+ - The time to calculate the convolution of the single matrix is 6.112394 s
+ - The time to calculate the convolution of the two matrices is 0.139590 s
+Here we get a $\approx 50$ times increase in speed. These resutls will vary based upon the hardware that it is being ran on. How ever we would still expect to see the increase in speed from one convolution to two.\\
+We can also notice that the the increase in time between each $\sigma$ grows faster for the single convolution compared to the double convolution. That is, for the single convolution, from $\sigma=10$ to $\sigma=50$, we get a $\approx 14$ times time requirement, and for the double convolution we $\approx 1.4$ times time requirement. This shows that not only does the double convolution preform better than the single convolution, but it also grows slower when $\sigma$ increases. So, it is better to calculate the one dimetional matricies then the two dimentional ones. This could also be improved by using the transpose property disscused in [[id:Part-d-a][a]], this would eliminate the need to calculate the second matrix.
+
+** e
+#+BEGIN_SRC octave :exports none :results output :session c
+clear
+clc
+close
+pkg load symbolic
+
+syms ddfx ddfy
+
+D2f=ddfx+ddfy;
+
+syms fxP1y fxy fxN1y fxyP1 fxyN1
+ddfxApprox=fxP1y-2*fxy+fxN1y
+ddfyApprox=fxyP1-2*fxy+fxyN1
+
+D2f=subs(D2f,ddfx,ddfxApprox);
+D2f=subs(D2f,ddfy,ddfyApprox);
+latex(D2f)
+#+END_SRC
+
+#+RESULTS:
+: ddfxApprox = (sym) fxN1y + fxP1y - 2⋅fxy
+: ddfyApprox = (sym) -2⋅fxy + fxyN₁ + fxyP₁
+: fxN1y + fxP1y - 4 fxy + fxyN_{1} + fxyP_{1}
+
+\begin{align*}
+\nabla^{2}f &= \frac{\partial^2 f}{\partial x^2}+ \frac{\partial^2 f}{\partial y^2} \\
+\textrm{subsitute in } \frac{\partial^2 f}{\partial x^2} &\approx f(x+1,y)-2f(x,y)+f(x-1,y) \\
+\textrm{and } \frac{\partial^2 f}{\partial y^2} &\approx f(x,y+1)-2f(x,y)+f(x,y-1) \\
+\textrm{gives }\nabla^{2}f & \approx \left[ f(x+1,y) + f(x-1,y) + f(x,y+1) + f(x,y-1)\right] - 4f(x,y)
+\end{align*}
+
+Reading the coefficents for the matrix:
+\[L=\begin{bmatrix}
+0 & 1  & 0 \\
+1 & -4 & 1 \\
+0 & 1  & 0
+\end{bmatrix}\]
+
+** f
+#+BEGIN_SRC octave :exports code :results output :session b
+clear
+clc
+close
+
+LFilter=[0, 1, 0;
+         1,-4, 1;
+         0, 1, 0];
+
+% Normalise the matrix
+LFilter=(LFilter - min(LFilter(:))) / (max(LFilter(:)) - min(LFilter(:)));
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports code :results output :session b
+noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.3/Pic/image_1_noise.jpg");
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports code :results output :session b
+output=conv2(noise,LFilter,'same');
+imshow(output,[]);
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports code :results output :session b
+Threshold = 10;
+EdgeDetect = output > Threshold;
+imshow(EdgeDetect,[]);
+#+END_SRC
+
+#+RESULTS:
+Noise in the image makes the derivative of the image contain a lot of larger values. The noise makes the difference between each pixel a larger result than without the noise. This resulst in the edge detect image having alot of large values, requiring the threshold to be larger and reducing the amount of true edges being detected.
+** g
+
+#+BEGIN_SRC octave :exports none :results output :session c
+clear
+clc
+close
+pkg load symbolic
+
+syms x y sigma
+
+G = (1/(2*pi*sigma^2)) * exp(-1 * (x^2 + y^2) / (2 * sigma^2));
+
+dGx=diff(G,x);
+latex(dGx);
+ddGx=diff(dGx,x);
+latex(ddGx);
+
+dGy=diff(G,y);
+latex(dGy);
+ddGy=diff(dGy,y);
+latex(ddGy);
+
+D2G=factor(ddGx+ddGy);
+latex(D2G);
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    mtimes at line 54 column 5
+- \frac{x e^{\frac{- x^{2} - y^{2}}{2 \sigma^{2}}}}{2 \pi \sigma^{4}}
+- \frac{e^{\frac{- x^{2} - y^{2}}{2 \sigma^{2}}}}{2 \pi \sigma^{4}} + \frac{x^{2} e^{\frac{- x^{2} - y^{2}}{2 \sigma^{2}}}}{2 \pi \sigma^{6}}
+- \frac{y e^{\frac{- x^{2} - y^{2}}{2 \sigma^{2}}}}{2 \pi \sigma^{4}}
+- \frac{e^{\frac{- x^{2} - y^{2}}{2 \sigma^{2}}}}{2 \pi \sigma^{4}} + \frac{y^{2} e^{\frac{- x^{2} - y^{2}}{2 \sigma^{2}}}}{2 \pi \sigma^{6}}
+\frac{\left(- 2 \sigma^{2} + x^{2} + y^{2}\right) e^{- \frac{x^{2}}{2 \sigma^{2}}} e^{- \frac{y^{2}}{2 \sigma^{2}}}}{2 \pi \sigma^{6}}
+#+end_example
+
+\begin{align*}
+LoG(x,y) &= \nabla^2G(x,y) = \frac{\partial^2 G}{\partial x^2} + \frac{\partial^2 G}{\partial y^2}\\
+&\\
+\frac{\partial G}{\partial x}&=- \frac{x e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{3}} \\
+\Rightarrow \frac{\partial^2 G}{\partial x^2}&=- \frac{e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{3}} + \frac{x^{2} e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{5}} \\
+& \\
+\frac{\partial G}{\partial y}&=-\frac{y e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{4}}\\
+\Rightarrow \frac{\partial^2 G}{\partial y^2}&=-\frac{e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{4}} + \frac{y^{2} e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{6}}
+& \\
+\Rightarrow LoG(x,y) &=- \frac{e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{\pi \sigma^{4}} + \frac{x^{2} e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{6}} + \frac{y^{2} e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{6}}\\
+\Rightarrow LoG(x,y) &=-\frac{1}{\pi\sigma^4}\left(1-\frac{x^2+y^2}{2\sigma^2}\right)e^{-\frac{x^2+y^2}{2\sigma^{2}}}
+\end{align*}
+
+** h
+Focusing on $1-\frac{x^2+y^2}{2\sigma^2}$ in the kernel. We can see that it contains $x^2+y^2$, which is not separable, so the entire kernel is not separable. \\
+The second derivatives of the Gaussian kernel can be expressed as a product of an individual varible and the Gaussian kernel. That is:
+\begin{align*}
+\frac{\partial^2 G}{\partial x^2}&=-\frac{e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{3}} + \frac{x^{2} e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{5}} \\
+\frac{\partial^2 G}{\partial x^2}&=\frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}} \left( \frac{x^2}{\sigma^3}-\frac{1}{\sigma}\right) \\
+\frac{\partial^2 G}{\partial x^2}&=G(x,y)\left( \frac{x^2}{\sigma^3}-\frac{1}{\sigma}\right) \\
+& \\
+& \textrm{Similarly for } \frac{\partial^2 G}{\partial y^2}\\
+\frac{\partial^2 G}{\partial y^2}&=\frac{1}{2\pi\sigma^2}e^{-\frac{y^2+x^2}{2\sigma^2}} \left( \frac{y^2}{\sigma^3}-\frac{1}{\sigma}\right) \\
+\frac{\partial^2 G}{\partial y^2}&=G(x,y)\left( \frac{y^2}{\sigma^3}-\frac{1}{\sigma}\right)
+\end{align*}
+We know that the Gaussian kernel is separable, and that is being multiplied by a function of the respective varible. So, the derivatives of the Guassian kernel are separable.\\
+To speed up the computation of the LoG kernel we can use:
+\[\nabla^2 G\approx \frac{\partial^2 G}{\partial x^2} + \frac{\partial^2 G}{\partial y^2}\]
+Where we can calculate the first and second derivatives from their separable forms.
+** i
+#+BEGIN_SRC octave :exports code :results output :session b
+clear
+clc
+close
+pkg load symbolic
+sigma=100; % Filter size
+
+LoG = @(x, y) (-1/(pi*sigma))*(1- ((x.^2+y.^2)/(2*sigma^2)))*e^(-1*(x^2+y^2)/(2*sigma^2));
+size=6.*sigma;
+LoGFilter=zeros(size);
+
+for xCoord = -size/2:size/2-1
+  for yCoord = -size/2:size/2-1
+    LoGval=LoG(xCoord,yCoord);
+    LoGFilter(size/2+xCoord+1,size/2+yCoord+1)=double(LoGval);
+  end
+end
+
+% Normalise the matrix
+LoGFilter=(LoGFilter - min(LoGFilter(:))) / (max(LoGFilter(:)) - min(LoGFilter(:)));
+
+#+END_SRC
+
+#+RESULTS:
+
+
+#+BEGIN_SRC octave :exports code :results output :session b
+noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.3/Pic/image_1_noise.jpg");
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports code :results output :session b
+output=conv2(noise,LoGFilter,'same');
+imshow(output,[]);
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports code :results output :session b
+Threshold = 50;
+EdgeDetect = output > Threshold;
+imshow(EdgeDetect,[]);
+#+END_SRC
+
+#+RESULTS:
+
+** TODO j
+To do this we will get an edge detect of the image and then add it back onto the original image. How ever, as mentioned before the noise in the image will make it look bad, so first we are going to apply the Gaussian filter and then the edge detect.
+#+BEGIN_SRC octave :exports code :results output :session j
+clear
+clc
+close
+pkg load symbolic
+
+sigma=3; % Filter size
+size=6*sigma;
+Gx = @(x) (1/(sqrt(2*pi*sigma^2))) * exp(-1 * (x.^2) / (2 * sigma^2));
+Gy = @(y) (1/(sqrt(2*pi*sigma^2))) * exp(-1 * (y.^2) / (2 * sigma^2));
+GxFilter=zeros(size,1);
+GyFilter=zeros(1,size);
+for xCoord = -size/2:size/2-1
+  Gxval=Gx(xCoord);
+  GxFilter(size/2+xCoord+1,1)=double(Gxval);
+end
+for yCoord = -size/2:size/2-1
+  Gyval=Gy(yCoord);
+  GyFilter(1,size/2+yCoord+1)=double(Gyval);
+end
+GxFilter=(GxFilter - min(GxFilter(:))) / (max(GxFilter(:)) - min(GxFilter(:)));
+GyFilter=(GyFilter - min(GyFilter(:))) / (max(GyFilter(:)) - min(GyFilter(:)));
+
+
+LFilter=[0, 1, 0;
+         1,-4, 1;
+         0, 1, 0];
+
+noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.3/Pic/image_5_noise.jpg");
+#+END_SRC
+
+#+RESULTS:
+
+
+#+BEGIN_SRC octave :exports code :results output :session j
+close
+
+noise = double(noise);
+noise = uint8(255 * (noise - min(noise(:))) / (max(noise(:)) - min(noise(:))));
+
+Blur1=conv2(noise,GxFilter,'same');
+Blur=conv2(Blur1,GyFilter,'same');
+
+Edge=conv2(Blur,LFilter,'same');
+
+output=noise;
+
+subplot(1, 4, 1);
+imshow(output, []);
+title('Sharpened');
+subplot(1, 4, 2);
+imshow(Edge, []);
+title('Edge');
+subplot(1, 4, 3);
+imshow(Blur, []);
+title('Blur');
+subplot(1, 4, 4);
+imshow(noise, []);
+title('Original');
+
+%Save images
+% sacle them so they dont look weird
+output = output / max(output(:)) * 65535;
+Edge = Edge / max(Edge(:)) * 65535;
+Blur = Blur / max(Blur(:)) * 65535;
+noise = noise / max(noise(:)) * 65535;
+% Save the images
+imwrite(uint16(output), 'ENG204-Assignment-3-Sharpend.png');
+imwrite(uint16(Edge), 'ENG204-Assignment-3-Edge.png');
+imwrite(uint16(Blur), 'ENG204-Assignment-3-Blur.png');
+imwrite(uint16(noise), 'ENG204-Assignment-3-Original.png');
+#+END_SRC
+
+#+RESULTS:

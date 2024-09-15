@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       72a263a0-4cc0-4023-9bf0-3eb6c5bd9711
+:END:
+#+title: Discrete Transforms
+#+date: [2024-09-15 Sun 19:19]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Discrete Transforms
+ - [[id:498ec752-aafa-4a86-abaa-dc5165992cf0][Z-Transform]]

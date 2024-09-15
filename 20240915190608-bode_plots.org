@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       79b422d5-ff34-41ab-8b86-67e6ecfc68ad
+:END:
+#+title: Bode Plots
+#+date: [2024-09-15 Sun 19:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bode Plots
+ - A way to reperesent [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace Transforms]]
+ - Two types magnitude and phase
+ - Creating the subsitute into the [[id:c7591f3a-c2d4-4591-b6af-b0db831a296c][Transfer Function]] $s=j\omega$
+   - We can either take the magnitude or phase of it
+     - Take the limits as $\omega \rightarrow 0$ and $\omega \rightarrow \infty$
+     - We use [[id:d041a889-d4af-4598-8434-866ecc7ce005][Decibels]] to plot them

@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{clear}
+\PYG{n+nb}{clc}
+\PYG{n+nb}{close}
+
+\PYG{n}{LFilter}\PYG{p}{=[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{;}
+         \PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{;}
+         \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{];}
+
+\PYG{c}{\PYGZpc{} Normalise the matrix}
+\PYG{n}{LFilter}\PYG{p}{=(}\PYG{n}{LFilter} \PYG{o}{\PYGZhy{}} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{LFilter}\PYG{p}{(:)))} \PYG{o}{/} \PYG{p}{(}\PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{LFilter}\PYG{p}{(:))} \PYG{o}{\PYGZhy{}} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{LFilter}\PYG{p}{(:)));}
+\end{Verbatim}

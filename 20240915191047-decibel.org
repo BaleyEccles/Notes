@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       d041a889-d4af-4598-8434-866ecc7ce005
+:END:
+#+title: Decibel
+#+date: [2024-09-15 Sun 19:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Decibel
+\[ 20 \log_{10}(X)\]

@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       498ec752-aafa-4a86-abaa-dc5165992cf0
+:END:
+#+title: Z-Transform
+#+date: [2024-09-15 Sun 19:19]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Z-Transform
+ - The Discrete [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace Transform]]
+ - \[y[n]=\sum_{i=0}^Ma_i(\lambda_i)^n\]
+ - Summation Transform
+   - \[X(z)=\sum_{n=-\infty}^{\infty}x[n]\cdot z^{-n}\]
+     - kernel: $K(n,z)=z^{-n}$
+       - \[z=re^{j\Omega}\]
+     - \[X(z)=Z\{x[n]\}\]
+     - \[x[n] \leftrightarrow^{\mathcal{L}} X(z) \]
+   - Using the gemometric series with $x[n]=a^nu[n]$
+     - \[X(z)=\frac{z}{z-a}\]
+       - useful for determining the domain expression
+     - \[\frac{1}{1-az^{-1}}\]
+       - useful for transforming into a [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equation]]
+** Properties
+- Linearity
+  - \[a_1x_1[n]+a_2x_2[n]\leftrightarrow^Za_1X_1(z)+a_2X_2(z)\]
+- Time shifting
+  - \[x[n-n_0]\leftrightarrow^Zz^{-n}X(z)\]
+    - ~Note~
+    - \[x[n-1]\leftrightarrow^Zz^{-1}X(z)\]
+      - $z^{-1}$ is the unit delay
+    - \[x[n+1]\leftrightarrow^Zz^{+1}X(z)\]
+      - $z^{+1}$ is the unit advance
+- Multiplication by:
+  - \[z_0^n\]
+    - \[(z_0)^nx[n] \leftrightarrow^ZX(\frac{z}{z_0})\]
+  - \[n\]
+    - \[nx[n]\leftrightarrow^Z-z \frac{dX(z)}{dz}\]
+  - Time Reversal
+    - \[x[-n]\leftrightarrow^ZX(\frac{1}{z})\]
+  - Accumulation
+    - \[\sum_{k=-\infty}^{n}x[k]\leftrightarrow^Z \frac{1}{1-z^{-1}}X(z),\frac{z}{z-1}X(z)\]
+  - Convolution
+    - \[x_1[n]*x_2[n]\leftrightarrow^Z X_1(z)X_2(z)\]
+  - Inital Value
+    - \[x[0]=\lim_{z\rightarrow \infty}X(z)\]
+      - $x[n]$ is [[id:240aca67-b15c-4bea-ba1e-09f80a59ccd5][Causel]]

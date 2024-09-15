@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Blur}\PYG{p}{=}\PYG{n}{conv2}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{,}\PYG{n}{GFilter}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}same\PYGZsq{}}\PYG{p}{);}
+
+\PYG{n}{Edge}\PYG{p}{=}\PYG{n}{conv2}\PYG{p}{(}\PYG{n}{Blur}\PYG{p}{,}\PYG{n}{LFilter}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}same\PYGZsq{}}\PYG{p}{);}
+\PYG{n}{Threshold} \PYG{p}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{EdgeDetect} \PYG{p}{=} \PYG{n}{Edge} \PYG{o}{\PYGZgt{}} \PYG{n}{Threshold}\PYG{p}{;}
+\PYG{n}{output}\PYG{p}{=}\PYG{n}{noise}\PYG{o}{+}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{EdgeDetect}\PYG{p}{;}
+
+\PYG{n+nb}{subplot}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{n+nb}{imshow}\PYG{p}{(}\PYG{n}{output}\PYG{p}{,} \PYG{p}{[]);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Output\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{subplot}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{n+nb}{imshow}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{,} \PYG{p}{[]);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Input\PYGZsq{}}\PYG{p}{);}
+\PYG{c}{\PYGZpc{}}
+\PYG{c}{\PYGZpc{}subplot(2, 2, 2);}
+\PYG{c}{\PYGZpc{}imshow(Blur, []);}
+\PYG{c}{\PYGZpc{}title(\PYGZsq{}Blurred Image\PYGZsq{});}
+\PYG{c}{\PYGZpc{}}
+\PYG{c}{\PYGZpc{}subplot(2, 2, 3);}
+\PYG{c}{\PYGZpc{}imshow(Edge, []);}
+\PYG{c}{\PYGZpc{}title(\PYGZsq{}Edge Detected Image\PYGZsq{});}
+\PYG{c}{\PYGZpc{}}
+\PYG{c}{\PYGZpc{}subplot(2, 2, 4);}
+\PYG{c}{\PYGZpc{}imshow(EdgeDetect, []);}
+\PYG{c}{\PYGZpc{}title(\PYGZsq{}Edge Detection Result\PYGZsq{});}
+\end{Verbatim}

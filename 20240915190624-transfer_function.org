@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       c7591f3a-c2d4-4591-b6af-b0db831a296c
+:END:
+#+title: Transfer Function
+#+date: [2024-09-15 Sun 19:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Transfer Function
+Transfers an input to an output
+\[Y(s)=H(s)\cdot X(s)\]
+Here $H(s)$ is the transfer function for a [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace Transform]].
