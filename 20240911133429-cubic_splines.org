@@ -18,3 +18,4 @@ We make the first and second derivative at the knots equal:
 Let \[M_0=M_n=0\]
  - \[\Rightarrow S_0'(x_0)=c \Rightarrow S_0(x_0)=c_1x+c_2\]
 *** Specify End Point Derivatives
+We can choose the end point derivatives, if we arent given any specification

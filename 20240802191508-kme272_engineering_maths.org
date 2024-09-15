@@ -12,6 +12,8 @@
 - [[id:dc6ece72-c6c1-4317-9bbc-f8de60766b23][Root Finding]]
 - [[id:3a948b0c-e597-4007-9a11-e84b73a560ba][Solutions of Matrix Equations]]
 - [[id:844ebf39-6e0e-402c-a845-affbe92accc3][Interpolation]]
+- [[id:2a1c15f9-8be3-4510-906c-bacc45b75068][Numerical Solution of ODEs]]
+- [[id:84252b32-2d80-4702-91f3-762e69a33f0a][Numerical Integration]]
 ** Probability and Statistics
 
 * Assesment

@@ -7,3 +7,5 @@
 
 * Fixed Point Methods
 A root finding method that uses a fixed point ie \[x_{x+1}=g(x^{*})\], the operation to get the next \[x_{n}\] only includes the previous \[x_{n}\].
+** Convergence
+\[\lvert g'(x) \rvert < 1\]

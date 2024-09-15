@@ -6,6 +6,6 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* Divided Differenc
+* Divided Difference
 The general form for the ith derivative of a discrete function
 \[f[x_i,x_{i+1},...x_{i+k}]=\frac{f[x_{i+1},x_{i+2},...x_{i+k}]-f[x_i,x_{i+1},...x_{i+k-1}]}{x_{i+k}-x_{i}}\]
