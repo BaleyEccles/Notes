@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{output}\PYG{p}{=}\PYG{n}{conv2}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{,}\PYG{n}{GFilter}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}same\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{imshow}\PYG{p}{(}\PYG{n}{output}\PYG{p}{,[]);}
+
+\PYG{n}{output} \PYG{p}{=} \PYG{n}{output} \PYG{o}{/} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{output}\PYG{p}{(:))} \PYG{o}{*} \PYG{l+m+mi}{65535}\PYG{p}{;}
+\PYG{n+nb}{imwrite}\PYG{p}{(}\PYG{n}{uint16}\PYG{p}{(}\PYG{n}{output}\PYG{p}{),} \PYG{l+s}{\PYGZsq{}ENG204\PYGZhy{}Assignment\PYGZhy{}3\PYGZhy{}b\PYGZhy{}1.png\PYGZsq{}}\PYG{p}{);}
+\end{Verbatim}
