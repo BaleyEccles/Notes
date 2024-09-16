@@ -1,4 +1,4 @@
-% Created 2024-09-15 Sun 16:12
+% Created 2024-09-16 Mon 11:53
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -37,11 +37,11 @@
 \tableofcontents
 
 \section{ENG204 - Signals and Linear Systems - Assignment 1.3}
-\label{sec:org0d176e2}
+\label{sec:orgd3af187}
 \subsection{{\bfseries\sffamily TODO} a}
-\label{sec:org5863489}
+\label{sec:org17c682d}
 \subsection{b}
-\label{sec:org5b8dd67}
+\label{sec:orge83be4d}
 \begin{minted}[]{octave}
 clear
 clc
@@ -73,9 +73,12 @@ noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.
 \begin{minted}[]{octave}
 output=conv2(noise,GFilter,'same');
 imshow(output,[]);
+
+output = output / max(output(:)) * 65535;
+imwrite(uint16(output), 'ENG204-Assignment-3-b-1.png');
 \end{minted}
 \subsection{c}
-\label{sec:orgabf1e0e}
+\label{sec:org25aa0b7}
 \begin{minted}[]{octave}
 clear
 clc
@@ -100,48 +103,52 @@ Which will give:
 \[\frac{e^{- \frac{\rho^{2}}{2 \sigma^{2}}}}{2 \pi \sigma}\]
 As we can see this does not depend on \(\phi\), which is the rotational aspect, so it is rotationaly symmetric.
 \subsection{d}
-\label{sec:orge89a644}
-\subsubsection{{\bfseries\sffamily TODO} a}
-\label{sec:org418dfb8}
+\label{sec:orga8d1b24}
+\subsubsection{a}
+\label{sec:org2a74310}
 \begin{align*}
 G(x,y)&=\frac{1}{2\pi \sigma^{2}}e^{-\frac{x^2+y^2}{2 \sigma^2}} \\
 G(x,y)&=\frac{1}{2\pi \sigma^{2}}e^{-\frac{x^2}{2 \sigma^2}}e^{-\frac{y^2}{2 \sigma^2}} \\
 \Rightarrow G_x(x)&=\frac{1}{\sqrt{2\pi \sigma^{2}}}e^{-\frac{x^2}{2 \sigma^2}} \\
 \textrm{and } G_y(y)&=\frac{1}{\sqrt{2\pi \sigma^{2}}}e^{-\frac{y^2}{2 \sigma^2}}
 \end{align*}
-This shows that the Guassian kernal can be sperated into two individual components that can be acted seperately in the \(x\) and \(y\) direction.
+This shows that the Guassian kernel can be sperated into two individual components that can be acted seperately in the \(x\) and \(y\) direction. We can see that the \(G_x(x)\) and \(G_y(y)\) are varible subsitutions of one another, this means that they will result in the same values given the same input, and hence when formed into their matrices they will be transposes of one another.
 \subsubsection{b}
-\label{sec:org9e92d05}
+\label{sec:org065df75}
 We are taking the convolution of \(G\) and \(I\) resulting in \(O\):
 \begin{align*}
 O&=I*G                     \\
 O&=I*(G_x\cdot G_y)        \\
 I'&=I*G_x                  \\
-I&=I'* G_y
+O&=I'* G_y                 \\
+O&=(I*G_x)*G_y
 \end{align*}
-This shows that the Guassian kernal can be convoluted with the image in the \(x\) direction to get some intermediate image, which then can be convoluted in the \(y\) direction to get the final image.
-\subsubsection{{\bfseries\sffamily TODO} c}
-\label{sec:orgbd64cfd}
+This shows that the Guassian kernel can be convoluted with the image in the \(x\) direction to get some intermediate image, which then can be convoluted in the \(y\) direction to get the final image.
+\subsubsection{c}
+\label{sec:org461602f}
 The output with \(\sigma=10\) is:
 \begin{itemize}
-\item The time to calculate the convolution of the single matrix is 0.240254 s
-\item The time to calculate the convolution of the two matrices is 0.025748 s
+\item The time to calculate the convolution of the single matrix is 0.430982 s
+\item The time to calculate the convolution of the two matrices is 0.100643 s
 \end{itemize}
-As we can see the convolution of the two matricies is about ten times as fast. And we can also see that this creates the exact same result.
+As we can see the convolution of the two matricies is about four times as fast. And we can also see that this creates the exact same result.\\
+Image with one convolution:
 \begin{center}
 \includegraphics[width=.9\linewidth]{ENG204-Assignment-3-Single-sigma-10.png}
 \end{center}
+Image with two convolutions:
 \begin{center}
 \includegraphics[width=.9\linewidth]{ENG204-Assignment-3-Double-sigma-10.png}
 \end{center}
-Increasing the \(\sigma\) we see that the difference between the two times increases. For \(\sigma=50\):
+Increasing the \(\sigma\) we will see that the difference between the two times increases. For \(\sigma=50\):
 \begin{itemize}
-\item The time to calculate the convolution of the single matrix is 5.167703 s
-\item The time to calculate the convolution of the two matrices is 0.058540 s
+\item The time to calculate the convolution of the single matrix is 6.112394 s
+\item The time to calculate the convolution of the two matrices is 0.139590 s
 \end{itemize}
-Here we get a \(\approx 100\) times increase in speed. These resutls will vary based upon the hardware that it is being ran on. How ever we would still expect to see the increase in speed from one convolution to two.
+Here we get a \(\approx 50\) times increase in speed. These resutls will vary based upon the hardware that it is being ran on. How ever we would still expect to see the increase in speed from one convolution to two.\\
+We can also notice that the the increase in time between each \(\sigma\) grows faster for the single convolution compared to the double convolution. That is, for the single convolution, from \(\sigma=10\) to \(\sigma=50\), we get a \(\approx 14\) times time requirement, and for the double convolution we \(\approx 1.4\) times time requirement. This shows that not only does the double convolution preform better than the single convolution, but it also grows slower when \(\sigma\) increases. So, it is better to calculate the one dimetional matricies then the two dimentional ones. This could also be improved by using the transpose property disscused in \hyperref[sec:org2a74310]{a}, this would eliminate the need to calculate the second matrix.
 \subsection{e}
-\label{sec:orgca84d7d}
+\label{sec:orgdaa51da}
 \begin{align*}
 \nabla^{2}f &= \frac{\partial^2 f}{\partial x^2}+ \frac{\partial^2 f}{\partial y^2} \\
 \textrm{subsitute in } \frac{\partial^2 f}{\partial x^2} &\approx f(x+1,y)-2f(x,y)+f(x-1,y) \\
@@ -156,7 +163,7 @@ Reading the coefficents for the matrix:
 0 & 1  & 0
 \end{bmatrix}\]
 \subsection{f}
-\label{sec:orgee10fef}
+\label{sec:org160ed82}
 \begin{minted}[]{octave}
 clear
 clc
@@ -167,26 +174,28 @@ LFilter=[0, 1, 0;
          0, 1, 0];
 
 % Normalise the matrix
-LFilter=(LFilter - min(LFilter(:))) / (max(LFilter(:)) - min(LFilter(:)));
+%LFilter=(LFilter - min(LFilter(:))) / (max(LFilter(:)) - min(LFilter(:)));
 \end{minted}
 
 \begin{minted}[]{octave}
-noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.3/Pic/image_1_noise.jpg");
-\end{minted}
+noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.3/Pic/image_5_noise.jpg");
 
-\begin{minted}[]{octave}
+noise = double(noise);
+noise = uint8(255 * (noise - min(noise(:))) / (max(noise(:)) - min(noise(:))));
 output=conv2(noise,LFilter,'same');
-imshow(output,[]);
-\end{minted}
-
-\begin{minted}[]{octave}
-Threshold = 10;
-EdgeDetect = output > Threshold;
+Threshold = 25;
+EdgeDetect = output < Threshold;
 imshow(EdgeDetect,[]);
+
+EdgeDetect = EdgeDetect / max(EdgeDetect(:)) * 65535;
+imwrite(uint16(EdgeDetect), 'ENG204-Assignment-3-f-1.png');
 \end{minted}
-Noise in the image makes the derivative of the image contain a lot of larger values. The noise makes the difference between each pixel a larger result than without the noise. This resulst in the edge detect image having alot of large values, requiring the threshold to be larger and reducing the amount of true edges being detected.
+Noise in the image makes the derivative of the image contain a lot of larger values. The noise makes the difference between each pixel a larger result than without the noise. This resulst in the edge detect image having alot of large values, requiring the threshold to be larger and reducing the amount of true edges being detected. We can see this in the image:
+\begin{center}
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-3-f-1.png}
+\end{center}
 \subsection{g}
-\label{sec:orgcbb3b38}
+\label{sec:orgd717fca}
 
 \begin{align*}
 LoG(x,y) &= \nabla^2G(x,y) = \frac{\partial^2 G}{\partial x^2} + \frac{\partial^2 G}{\partial y^2}\\
@@ -201,9 +210,9 @@ LoG(x,y) &= \nabla^2G(x,y) = \frac{\partial^2 G}{\partial x^2} + \frac{\partial^
 \Rightarrow LoG(x,y) &=-\frac{1}{\pi\sigma^4}\left(1-\frac{x^2+y^2}{2\sigma^2}\right)e^{-\frac{x^2+y^2}{2\sigma^{2}}}
 \end{align*}
 \subsection{h}
-\label{sec:orgb880a6e}
-Focusing on \(1-\frac{x^2+y^2}{2\sigma^2}\) in the kernal. We can see that it contains \(x^2+y^2\), which is not separable, so the entire kernal is not separable. \\
-The second derivatives of the Gaussian kernal can be expressed as a product of an individual varible and the Gaussian kernal. That is:
+\label{sec:orgb7cba26}
+Focusing on \(1-\frac{x^2+y^2}{2\sigma^2}\) in the kernel. We can see that it contains \(x^2+y^2\), which is not separable, so the entire kernel is not separable. \\
+The second derivatives of the Gaussian kernel can be expressed as a product of an individual varible and the Gaussian kernel. That is:
 \begin{align*}
 \frac{\partial^2 G}{\partial x^2}&=-\frac{e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{3}} + \frac{x^{2} e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{5}} \\
 \frac{\partial^2 G}{\partial x^2}&=\frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}} \left( \frac{x^2}{\sigma^3}-\frac{1}{\sigma}\right) \\
@@ -213,18 +222,18 @@ The second derivatives of the Gaussian kernal can be expressed as a product of a
 \frac{\partial^2 G}{\partial y^2}&=\frac{1}{2\pi\sigma^2}e^{-\frac{y^2+x^2}{2\sigma^2}} \left( \frac{y^2}{\sigma^3}-\frac{1}{\sigma}\right) \\
 \frac{\partial^2 G}{\partial y^2}&=G(x,y)\left( \frac{y^2}{\sigma^3}-\frac{1}{\sigma}\right)
 \end{align*}
-We know that the Gaussian kernal is separable, and that is being multiplied by a function of the respective varible. So, the derivatives of the Guassian kernal are separable.\\
-To speed up the computation of the LoG kernal we can use:
+We know that the Gaussian kernel is separable, and that is being multiplied by a function of the respective varible. So, the derivatives of the Guassian kernel are separable.\\
+To speed up the computation of the LoG kernel we can use:
 \[\nabla^2 G\approx \frac{\partial^2 G}{\partial x^2} + \frac{\partial^2 G}{\partial y^2}\]
 Where we can calculate the first and second derivatives from their separable forms.
 \subsection{i}
-\label{sec:orgbfc54f2}
+\label{sec:orga7ba25f}
 \begin{minted}[]{octave}
 clear
 clc
 close
 pkg load symbolic
-sigma=100; % Filter size
+sigma=5; % Filter size
 
 LoG = @(x, y) (-1/(pi*sigma))*(1- ((x.^2+y.^2)/(2*sigma^2)))*e^(-1*(x^2+y^2)/(2*sigma^2));
 size=6.*sigma;
@@ -238,27 +247,30 @@ for xCoord = -size/2:size/2-1
 end
 
 % Normalise the matrix
-LoGFilter=(LoGFilter - min(LoGFilter(:))) / (max(LoGFilter(:)) - min(LoGFilter(:)));
+%LoGFilter=(LoGFilter - min(LoGFilter(:))) / (max(LoGFilter(:)) - min(LoGFilter(:)));
 
 \end{minted}
 
 
 \begin{minted}[]{octave}
 noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.3/Pic/image_1_noise.jpg");
-\end{minted}
+noise = double(noise);
+noise = uint8(255 * (noise - min(noise(:))) / (max(noise(:)) - min(noise(:))));
 
-\begin{minted}[]{octave}
 output=conv2(noise,LoGFilter,'same');
-imshow(output,[]);
+
+Threshold = 10;
+EdgeDetect = output < Threshold;
+imshow(EdgeDetect,[]);
+EdgeDetect = EdgeDetect / max(EdgeDetect(:)) * 65535;
+imwrite(uint16(EdgeDetect), 'ENG204-Assignment-3-i-2.png');
 \end{minted}
 
-\begin{minted}[]{octave}
-Threshold = 50;
-EdgeDetect = output > Threshold;
-imshow(EdgeDetect,[]);
-\end{minted}
-\subsection{{\bfseries\sffamily TODO} j}
-\label{sec:org3e55895}
+\begin{center}
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-3-i-2.png}
+\end{center}
+\subsection{j}
+\label{sec:org4669989}
 To do this we will get an edge detect of the image and then add it back onto the original image. How ever, as mentioned before the noise in the image will make it look bad, so first we are going to apply the Gaussian filter and then the edge detect.
 \begin{minted}[]{octave}
 clear
@@ -266,59 +278,80 @@ clc
 close
 pkg load symbolic
 
-sigma=50; % Filter size
-
-G = @(x, y) (1/(2*pi*sigma^2)) * exp(-1 * (x.^2 + y.^2) / (2 * sigma^2));
+sigma=3; % Filter size
 size=6*sigma;
-GFilter=zeros(size);
-
+Gx = @(x) (1/(sqrt(2*pi*sigma^2))) * exp(-1 * (x.^2) / (2 * sigma^2));
+Gy = @(y) (1/(sqrt(2*pi*sigma^2))) * exp(-1 * (y.^2) / (2 * sigma^2));
+GxFilter=zeros(size,1);
+GyFilter=zeros(1,size);
 for xCoord = -size/2:size/2-1
-  for yCoord = -size/2:size/2-1
-    Gval=G(xCoord,yCoord);
-    GFilter(size/2+xCoord+1,size/2+yCoord+1)=double(Gval);
-  end
+  Gxval=Gx(xCoord);
+  GxFilter(size/2+xCoord+1,1)=double(Gxval);
 end
+for yCoord = -size/2:size/2-1
+  Gyval=Gy(yCoord);
+  GyFilter(1,size/2+yCoord+1)=double(Gyval);
+end
+GxFilter=(GxFilter - min(GxFilter(:))) / (max(GxFilter(:)) - min(GxFilter(:)));
+GyFilter=(GyFilter - min(GyFilter(:))) / (max(GyFilter(:)) - min(GyFilter(:)));
 
-% Normalise the matrix
-GFilter=(GFilter - min(GFilter(:))) / (max(GFilter(:)) - min(GFilter(:)));
 
 LFilter=[0, 1, 0;
          1,-4, 1;
          0, 1, 0];
 
+
 \end{minted}
 
 
-
 \begin{minted}[]{octave}
+close
 noise=imread("/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 1.3/Pic/image_1_noise.jpg");
-\end{minted}
+noise = double(noise);
+noise = uint8(255 * (noise - min(noise(:))) / (max(noise(:)) - min(noise(:))));
 
-\begin{minted}[]{octave}
-Blur=conv2(noise,GFilter,'same');
+Blur1=conv2(noise,GxFilter,'same');
+Blur=conv2(Blur1,GyFilter,'same');
 
 Edge=conv2(Blur,LFilter,'same');
-Threshold = 0;
-EdgeDetect = Edge > Threshold;
-output=noise+2*EdgeDetect;
 
-subplot(1, 2, 1);
+output=noise-2*Edge;
+
+subplot(1, 4, 1);
 imshow(output, []);
-title('Output');
-subplot(1, 2, 2);
+title('Sharpened');
+subplot(1, 4, 2);
+imshow(Edge<10, []);
+title('Edge');
+subplot(1, 4, 3);
+imshow(Blur, []);
+title('Blur');
+subplot(1, 4, 4);
 imshow(noise, []);
-title('Input');
-%
-%subplot(2, 2, 2);
-%imshow(Blur, []);
-%title('Blurred Image');
-%
-%subplot(2, 2, 3);
-%imshow(Edge, []);
-%title('Edge Detected Image');
-%
-%subplot(2, 2, 4);
-%imshow(EdgeDetect, []);
-%title('Edge Detection Result');
+title('Original');
+
+%Save images
+% sacle them so they dont look weird
+output = output / max(output(:)) * 65535;
+Edge = Edge / max(Edge(:)) * 65535;
+Blur = Blur / max(Blur(:)) * 65535;
+noise = noise / max(noise(:)) * 65535;
+% Save the images
+imwrite(uint16(output), 'ENG204-Assignment-3-Sharpened.png');
+imwrite(uint16(Edge), 'ENG204-Assignment-3-Edge.png');
+imwrite(uint16(Blur), 'ENG204-Assignment-3-Blur.png');
+imwrite(uint16(noise), 'ENG204-Assignment-3-Original.png');
 \end{minted}
+
+
+
+
+Here is the original image:
+\begin{center}
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-3-Original.png}
+\end{center}
+Here is the sharpened image:
+\begin{center}
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-3-Sharpened.png}
+\end{center}
 \end{document}
