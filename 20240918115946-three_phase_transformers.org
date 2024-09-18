@@ -1,0 +1,55 @@
+:PROPERTIES:
+:ID:       9d5af8e5-e9b0-4144-a4b9-f6ffff29e2af
+:END:
+#+title: Three-Phase Transformers
+#+date: [2024-09-18 Wed 11:59]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Three-Phase Transformers
+ - Four possible input -> output configs
+   - \[\Delta \rightarrow Y\]
+     - \[V_{LP}=V_{PP}\]
+     - \[V_{LS}=\sqrt{3}V_{PS}\]
+     - \[\frac{V_{LP}}{V_{LS}}=\frac{V_{PP}}{\sqrt{3}V_{PS}}=\frac{a}{\sqrt{3}}\]
+     - \[\frac{I_{LP}}{I_{LS}}=\frac{\sqrt{3}}{a}\]
+     - Primary Voltage Lags Secondary Voltage by $30^o$
+     - Secodary Voltage Leads Primary Voltage by $30^o$
+   - \[\Delta \rightarrow \Delta\]
+     - \[V_{LP}=V_{PP}\]
+     - \[V_{LS}=V_{PS}\]
+     - \[\frac{V_{LP}}{V_{Ls}}\frac{V_{PP}}{V_{PS}}=a\]
+     - \[\frac{I_{LP}}{I_{LS}}=\frac{1}{a}\]
+   - \[Y \rightarrow Y\]
+     - \[V_{LP}=\sqrt{3}V_{PP}\]
+     - \[V_{LS}=\sqrt{3}V_{PS}\]
+     - \[a=\frac{V_{PP}}{V_{PS}}\]
+     - \[\frac{I_{LP}}{I_{LS}}=\frac{1}{a}\]
+   - \[Y \rightarrow \Delta\]
+     - \[V_{LP}=\sqrt{3}V_{PP}\]
+     - \[V_{LS}=V_{PS}\]
+     - \[\frac{V_{LP}}{V_{LS}}=\frac{\sqrt{3}V_{PP}}{V_{PS}}=\sqrt{3}a\]
+     - \[\frac{I_{LP}}{I_{LS}}=\frac{1}{\sqrt{3}a}\]
+     - Primary Voltage Leads Secondary Voltage by $30^o$
+     - Secodary Voltage Lags Primary Voltage by $30^o$
+** Vector Groups
+A standard way to define 3-phase connections
+ - \[V[N]w[n]#\]
+   - V
+     - HV side connection (D or Y)
+   - N
+     - HV side neutral connected 'N'
+   - w
+     - LV side connection (d or y, a for auto)
+   - n
+     - LV side neutral connected 'n'
+   - #
+     - Phase lag
+       - LV rel. to HV 0 to 11
+** 3rd Harmonics
+- \[i_A=I_{m1}\sin(\omega t) +I_{m3}\sin(3\omega t)\]
+- \[i_B=I_{m1}\sin(\omega t-120^o) +I_{m3}\sin(3\omega t)\]
+- \[i_C=I_{m1}\sin(\omega t-240^o) +I_{m3}\sin(3\omega t)\]
+- Line currents cannot contain 3rd harmonics when there isn't a return path and it is $Y-Y$ connected.
+  - We can add a tertiary $\Delta$ to combat this, now there is no need for a return.
+- If there is atleast one $\Delta$ and one $Y$ then there is no need for a return, as the current will flow around the the $\Delta$

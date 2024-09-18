@@ -25,15 +25,15 @@
    - \[p(t)=\frac{V_{m}I_{m}}{2}[\cos(\theta_v-\theta_i)+\cos(2\omega t+\theta_v+\theta_i)]\]
    - \[P=\frac{V_{m}I_{m}}{2}\cos(\theta_v-\theta_i)\]
  - Power types
-   - Reactive Power
+   - Reactive Power (VA)
      - \[Q=V_{rms}I_{rms}\sin(\theta_v-\theta_i)=V_{rms}I_{rms}\sin(\phi)\]
      - Positive for inductive load
      - Negative for capcitive load
      - Inductors absorb reactive power
      - Capacitors supply reactive power
-   - Average power
+   - Average power (W)
      - \[P=V_{rms}I_{rms}\cos(\phi)\]
-   - Apparent power
+   - Apparent power (VA)
      - The magnitude of Reactive power or Average power
      - \[\lvert S \rvert = V_{rms}I_{rms}\]
    - These can be used to find the [[id:8e4d8052-219e-4813-bcba-0bda30141d24][Power Factor]]

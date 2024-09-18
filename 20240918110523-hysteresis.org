@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       bd829d16-0ded-4f21-8ce7-a99a79d1a078
+:END:
+#+title: Hysteresis
+#+date: [2024-09-18 Wed 11:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Hysteresis
+When a matrial has a  [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][Magnetic Field]] applied and removed it wont return to the exact magnetic properties
