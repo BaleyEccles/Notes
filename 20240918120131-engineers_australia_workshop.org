@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       4141f024-b581-43fc-bcac-7423ee3d9724
+:END:
+#+title: Engineers Australia Workshop
+#+date: [2024-09-18 Wed 12:01]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Engineers Australia Workshop
+** LinkedIn
+** Ice Breaker Questions
+Open ended questions
+ - What does your company do?
+ - What are the skills and attributes that you value most in employees?
+ - What type of eduational background do you look for in new employees?
+ - What is the traning process for new employees?
+ - How would you describe your company culture?
