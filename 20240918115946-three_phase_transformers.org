@@ -35,18 +35,18 @@
 ** Vector Groups
 A standard way to define 3-phase connections
  - \[V[N]w[n]#\]
-   - V
-     - HV side connection (D or Y)
-   - N
-     - HV side neutral connected 'N'
-   - w
-     - LV side connection (d or y, a for auto)
-   - n
-     - LV side neutral connected 'n'
-   - #
+   - $V$
+     - $HV$ side connection ($D$ or $Y$)
+   - $N$
+     - $HV$ side neutral connected '$N$'
+   - $w$
+     - $LV$ side connection ($d$ or $y, $a$ for auto)
+   - $n$
+     - $LV$ side neutral connected '$n$'
+   - $\#$
      - Phase lag
-       - LV rel. to HV 0 to 11
-** 3rd Harmonics
+       - $LV$ rel. to $HV$ $0$ to $11$
+** Third Harmonics
 - \[i_A=I_{m1}\sin(\omega t) +I_{m3}\sin(3\omega t)\]
 - \[i_B=I_{m1}\sin(\omega t-120^o) +I_{m3}\sin(3\omega t)\]
 - \[i_C=I_{m1}\sin(\omega t-240^o) +I_{m3}\sin(3\omega t)\]

@@ -7,60 +7,46 @@
 #+STARTUP: latexpreview
 
 * Transformers
+[[id:9d5af8e5-e9b0-4144-a4b9-f6ffff29e2af][Three-Phase Transformers]]
+
+ - The side with the dot is the positive side.
 ** Ideal Transformer
-- An ideal transformer converts all of the enegy from one coil to the other. ie no energy loss.
-- Electrical power ratio is one, \[\frac{p_1}{p_2}=1\]
-  - \[a=\frac{\mathcal{E}_{1}}{\mathcal{E}_2}=\frac{N_1}{N_2}\]
-  - \[\frac{i_1}{i_2}=\frac{N_2}{N_1}\]
-  - \[p=\mathcal{E}i\]
-- \[\phi(t)=\frac{\mu A}{l_c}NI_m\sin(\omega t)= \Phi_m\sin(\omega t)\]
-- \[E_{rms}=4.44N\Phi_m f\]
--
-
-
+ - An ideal transformer converts all of the enegy from one coil to the other. ie no energy loss.
+ - Electrical power ratio is one, \[\frac{p_1}{p_2}=1\]
+   - \[a=\frac{\mathcal{E}_{1}}{\mathcal{E}_2}=\frac{N_1}{N_2}\]
+   - \[\frac{1}{a}=\frac{i_1}{i_2}=\frac{N_2}{N_1}\]
+     - $a$ is the turns ratio
+   - \[p=\mathcal{E}i\]n
+ - \[\phi(t)=\frac{\mu A}{l_c}NI_m\sin(\omega t)= \Phi_m\sin(\omega t)\]
+ - \[E_{rms}=4.44N\Phi_m f\]
+ - \[P_1=P_2\]
+ - Secondary to primary
+   - \[Z'=a^2Z\]
+ - Primary to secondary
+   - \[Z'=\frac{1}{a^2}Z\]
 
 ** Real Transformers
-*** Losses To [[id:bd829d16-0ded-4f21-8ce7-a99a79d1a078][Hysteresis]]
-- Some energy is lossed to hysteresis
-  - \[P_{h}=K_h\cdot f \cdot B^{1.6}_{max}\]
-    - \[K_h\] is a constant depending on the mateiral
-    - \[f\] is the frequency
-    - \[B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core
-*** Losses To Eddy Currents
-- When the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]] ocillates eddy currents are created in the secondary and the core.
-  - \[P_e=K_e\cdot f^2 \cdot B^{2}_{max}\]
-    - \[K_e\] is a constant depending on the mateiral
-    - \[f\] is the frequency
-    - \[B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core
-  - This can be reduced by
-    - Using different materials
-    - Laminating the core
-      - Each sheet is electrically seperated
-*** Total loss
-\[P_c=P_h+P_e\]
-*** Saturation
-When the current input pushes the core into the saturation region, the output voltage is creates a peak rather than a perfect sin wave.
-*** Flux Leakage
- - \[L_{l1}=\frac{N_1\phi_{l1}}{i_1}\rightarrow X_{l1}=\omega 2\pi fL_{l1}\]
- - \[L_{l2}=\frac{N_2\phi_{l2}}{i_2}\rightarrow X_{l2}=\omega 2\pi fL_{l2}\]
+[[id:d7b9fa87-5d5d-49c8-a653-f7b6fa3cecaf][Transformer Power Losses]]
+*** Equivalent Circuit
+Here the power losses are taken up by the resistors and inductors.
+[[file:Screenshot 2024-09-18 at 13-04-55 Principles of Electric Machines and Power Electronics - P. C. Sen - Principles of Electric Machines and Power Electronics-Wiley (2013).pdf.png]]
+We can use the [[id:dfa6b2dd-4436-4494-a48d-31cd8b8a4eb1][Open Circuit Test]] and [[id:e0cb8a51-49f6-48b5-b70b-619caabaf101][Short Circuit Test]] to find the values
 *** Approximate Equivalent Circuit
 [[file:Screenshot 2024-09-18 at 13-01-42 Principles of Electric Machines and Power Electronics - P. C. Sen - Principles of Electric Machines and Power Electronics-Wiley (2013).pdf.png]]
-*** Equivalent Circuit
-[[file:Screenshot 2024-09-18 at 13-04-55 Principles of Electric Machines and Power Electronics - P. C. Sen - Principles of Electric Machines and Power Electronics-Wiley (2013).pdf.png]]
-**** [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasor]] Diagram
-
+*** [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasor]] Diagrams For Transformers
+[[file:Screenshot 2024-09-18 at 14-32-01 Machines&Transformers - ENG231_LectureSlideSetB3_Transformers.pdf.png]]
 *** Voltage Regulation
 Change in secondary voltage magnitude as a percentage of voltage magnitude under load.
  - Highly depends on [[id:8e4d8052-219e-4813-bcba-0bda30141d24][Power Factor]]
  - \[VR=\frac{\lvert V_{2}\rvert_{NL}-\lvert V_{2}\rvert_{L}}{\lvert V_{2}\rvert_{L}}\cdot 100\%\]
+[[file:Screenshot 2024-09-18 at 14-42-39 Machines&Transformers - ENG231_LectureSlideSetB3_Transformers.pdf.png]]
 *** Efficiency
- - \[ =\frac{P_{out}}{P_{in}} =\frac{P_{out}}{P_{out}+Losses} = \frac{P_{out}}{Pout+P_c+P_{cu}}\cdot 100\%\]
+ - \[\eta =\frac{P_{out}}{P_{in}} =\frac{P_{out}}{P_{out}+Losses} = \frac{P_{out}}{Pout+P_c+P_{cu}}\cdot 100\%\]
    - $P_c$ are the core losses
      - \[P_c=\frac{V_1^2}{R_{c1}}=\frac{V_2^2}{R_{c2}}\]
    - $P_{cu}$ are the copper losses
      - \[P_{cu}=I^2_1R_1=I^2_2R_2=I^2_1R_{eq1}=I^2_2R_{eq2}=I^2_LR_{eq}\]
- - Max efficency $\frac{dn}{dI_2}=0$
+ - Max efficency $\frac{d\eta}{dI_2}=0$
    - \[P_c=P_{cu}\]
    - \[I_2=\sqrt{\frac{P_c}{R_{eq2}}}\approx \frac{V_2}{\sqrt{R_{c2}R_{eq2}}}\approx \frac{V_1}{\sqrt{R_{c1}R_{eq1}}}\]
-
-** [[id:9d5af8e5-e9b0-4144-a4b9-f6ffff29e2af][Three-Phase Transformers]]
+[[file:Screenshot 2024-09-18 at 14-46-04 Machines&Transformers - ENG231_LectureSlideSetB3_Transformers.pdf.png]]

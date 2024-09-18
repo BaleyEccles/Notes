@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       e0cb8a51-49f6-48b5-b70b-619caabaf101
+:END:
+#+title: Short Circuit Test
+#+date: [2024-09-18 Wed 14:35]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Short Circuit Test
+Short the secondary side of a [[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformer]] and measure
+ - \[P_{2c}\]
+ - \[V_{1}\]
+ - \[I_{1}\]
+Which will be used to find
+ - \[R_{eq}=\frac{P_{sc}}{I_1^2}\]
+ - \[Z_{eq}=\frac{V_1}{I_1}\]
+ - \[X_{eq}=\sqrt{Z_{eq}^2-R_{eq}^{2}\]
+[[file:Screenshot 2024-09-18 at 14-41-35 Machines&Transformers - ENG231_LectureSlideSetB3_Transformers.pdf.png]]

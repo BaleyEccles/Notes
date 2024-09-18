@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       dfa6b2dd-4436-4494-a48d-31cd8b8a4eb1
+:END:
+#+title: Open Circuit Test
+#+date: [2024-09-18 Wed 14:34]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Open Circuit Test
+Open the secondary side of a [[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformer]] and measure
+ - \[P_{oc}\]
+ - \[V_{1}\]
+ - \[I_{\phi 1}\]
+Which will be used to find
+ - \[R_{c1}=\frac{V_1^2}{P_{oc}}\]
+ - \[I_{c1}=\frac{V_1}{R_{c1}}\]
+ - \[I_{m1}=\sqrt{I_{\phi 1}^2-I_{c1}^{2}\]
+ - \[X_{m1}=\frac{V_1}{I_{m1}}\]
+[[file:Screenshot 2024-09-18 at 14-40-56 Machines&Transformers - ENG231_LectureSlideSetB3_Transformers.pdf.png]]

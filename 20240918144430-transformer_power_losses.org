@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       d7b9fa87-5d5d-49c8-a653-f7b6fa3cecaf
+:END:
+#+title: Transformer Power Losses
+#+date: [2024-09-18 Wed 14:44]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Transformer Power Losses
+** Losses To [[id:bd829d16-0ded-4f21-8ce7-a99a79d1a078][Hysteresis]]
+- Some energy is lossed to hysteresis
+  - \[P_{h}=K_h\cdot f \cdot B^{1.6}_{max}\]
+    - \[K_h\] is a constant depending on the mateiral
+    - \[f\] is the frequency
+    - \[B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core
+** Losses To Eddy Currents
+- When the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]] ocillates eddy currents are created in the secondary and the core.
+  - \[P_e=K_e\cdot f^2 \cdot B^{2}_{max}\]
+    - \[K_e\] is a constant depending on the mateiral
+    - \[f\] is the frequency
+    - \[B_{max}\] is the max [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] established in the core
+  - This can be reduced by
+    - Using different materials
+    - Laminating the core
+      - Each sheet is electrically seperated
+** Total loss
+\[P_c=P_h+P_e\]
+** Saturation
+When the current input pushes the core into the saturation region, the output voltage is creates a peak rather than a perfect sin wave.
+
+** Flux Leakage
+ - \[L_{l1}=\frac{N_1\phi_{l1}}{i_1}\rightarrow X_{l1}=\omega L_{l1}= 2\pi fL_{l1}\]
+ - \[L_{l2}=\frac{N_2\phi_{l2}}{i_2}\rightarrow X_{l2}=\omega L_{l2}= 2\pi fL_{l2}\]
