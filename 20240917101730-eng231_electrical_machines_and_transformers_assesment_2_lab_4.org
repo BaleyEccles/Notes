@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       2efbfff1-5be0-4ca3-9a5c-4a2e0373d72d
+:END:
+#+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4
+#+date: [2024-09-17 Tue 10:17]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4
+[[file:~/UTAS/ENG231 - Electrical Machines And Transformers/Lab 4/Data.ods][Data Collected During Lab]]
