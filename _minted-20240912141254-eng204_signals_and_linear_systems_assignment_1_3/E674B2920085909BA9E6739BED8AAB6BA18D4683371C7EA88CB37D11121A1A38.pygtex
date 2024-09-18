@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{clear}
+\PYG{n+nb}{clc}
+\PYG{n+nb}{close}
+\PYG{n}{pkg} \PYG{n+nb}{load} \PYG{n}{symbolic}
+\PYG{n}{sigma}\PYG{p}{=}\PYG{l+m+mi}{5}\PYG{p}{;} \PYG{c}{\PYGZpc{} Filter size}
+
+\PYG{n}{G} \PYG{p}{=} \PYG{p}{@(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{)} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{o}{*}\PYG{n}{sigma}\PYGZca{}\PYG{l+m+mi}{2}\PYG{p}{))} \PYG{o}{*} \PYG{n+nb}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x}\PYG{o}{.\PYGZca{}}\PYG{l+m+mi}{2} \PYG{o}{+} \PYG{n}{y}\PYG{o}{.\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n}{sigma}\PYGZca{}\PYG{l+m+mi}{2}\PYG{p}{));}
+\PYG{n+nb}{size}\PYG{p}{=}\PYG{n+nb}{ceil}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{o}{*}\PYG{n}{sigma}\PYG{p}{);}
+\PYG{n}{GFilter}\PYG{p}{=}\PYG{n+nb}{zeros}\PYG{p}{(}\PYG{n+nb}{size}\PYG{p}{);}
+
+\PYG{k}{for} \PYG{n}{xCoord} \PYG{p}{=} \PYG{o}{\PYGZhy{}}\PYG{n+nb}{size}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{:}\PYG{n+nb}{size}\PYG{o}{/}\PYG{l+m+mi}{2}
+  \PYG{k}{for} \PYG{n}{yCoord} \PYG{p}{=} \PYG{o}{\PYGZhy{}}\PYG{n+nb}{size}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{:}\PYG{n+nb}{size}\PYG{o}{/}\PYG{l+m+mi}{2}
+    \PYG{n}{Gval}\PYG{p}{=}\PYG{n}{G}\PYG{p}{(}\PYG{n}{xCoord}\PYG{p}{,}\PYG{n}{yCoord}\PYG{p}{);}
+    \PYG{n}{GFilter}\PYG{p}{(}\PYG{n+nb}{size}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{o}{+}\PYG{n}{xCoord}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n+nb}{size}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{o}{+}\PYG{n}{yCoord}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)=}\PYG{n+nb}{double}\PYG{p}{(}\PYG{n}{Gval}\PYG{p}{);}
+  \PYG{k}{end}
+\PYG{k}{end}
+
+\PYG{c}{\PYGZpc{} Normalise the matrix}
+\PYG{n}{GFilter}\PYG{p}{=(}\PYG{n}{GFilter} \PYG{o}{\PYGZhy{}} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{GFilter}\PYG{p}{(:)))} \PYG{o}{/} \PYG{p}{(}\PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{GFilter}\PYG{p}{(:))} \PYG{o}{\PYGZhy{}} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{GFilter}\PYG{p}{(:)));}
+
+\end{Verbatim}
