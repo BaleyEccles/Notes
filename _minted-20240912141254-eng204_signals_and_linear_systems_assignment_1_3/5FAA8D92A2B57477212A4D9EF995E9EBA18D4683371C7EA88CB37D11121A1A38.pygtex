@@ -1,0 +1,34 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{close}
+\PYG{n}{noise}\PYG{p}{=}\PYG{n+nb}{imread}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}/home/Baley/UTAS/ENG204 \PYGZhy{} Signals And Linear Systems/Assignment 1.3/Pic/image\PYGZus{}5\PYGZus{}noise.jpg\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{noise} \PYG{p}{=} \PYG{n+nb}{double}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{);}
+\PYG{n}{noise} \PYG{p}{=} \PYG{n}{uint8}\PYG{p}{(}\PYG{l+m+mi}{255} \PYG{o}{*} \PYG{p}{(}\PYG{n}{noise} \PYG{o}{\PYGZhy{}} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{(:)))} \PYG{o}{/} \PYG{p}{(}\PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{(:))} \PYG{o}{\PYGZhy{}} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{(:))));}
+
+\PYG{n}{Blur1}\PYG{p}{=}\PYG{n}{conv2}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{,}\PYG{n}{GxFilter}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}same\PYGZsq{}}\PYG{p}{);}
+\PYG{n}{Blur}\PYG{p}{=}\PYG{n}{conv2}\PYG{p}{(}\PYG{n}{Blur1}\PYG{p}{,}\PYG{n}{GyFilter}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}same\PYGZsq{}}\PYG{p}{);}
+
+\PYG{n}{Edge}\PYG{p}{=}\PYG{n}{conv2}\PYG{p}{(}\PYG{n}{Blur}\PYG{p}{,}\PYG{n}{LFilter}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}same\PYGZsq{}}\PYG{p}{);}
+
+\PYG{n}{output}\PYG{p}{=}\PYG{n}{noise}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{Edge}\PYG{p}{;}
+
+\PYG{n+nb}{subplot}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{n+nb}{imshow}\PYG{p}{(}\PYG{n}{output}\PYG{p}{,} \PYG{p}{[]);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Sharpened\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{subplot}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{n+nb}{imshow}\PYG{p}{(}\PYG{n}{Edge}\PYG{p}{,} \PYG{p}{[]);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Edge\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{subplot}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{);}
+\PYG{n+nb}{imshow}\PYG{p}{(}\PYG{n}{Blur}\PYG{p}{,} \PYG{p}{[]);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Blur\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{subplot}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{);}
+\PYG{n+nb}{imshow}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{,} \PYG{p}{[]);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Original\PYGZsq{}}\PYG{p}{);}
+
+
+
+\PYG{n+nb}{imwrite}\PYG{p}{(}\PYG{n}{output}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}ENG204\PYGZhy{}Assignment\PYGZhy{}3\PYGZhy{}Sharpened.png\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{imwrite}\PYG{p}{(}\PYG{n}{Edge}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}ENG204\PYGZhy{}Assignment\PYGZhy{}3\PYGZhy{}Edge.png\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{imwrite}\PYG{p}{(}\PYG{n}{Blur}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}ENG204\PYGZhy{}Assignment\PYGZhy{}3\PYGZhy{}Blur.png\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{imwrite}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}ENG204\PYGZhy{}Assignment\PYGZhy{}3\PYGZhy{}Original.png\PYGZsq{}}\PYG{p}{);}
+
+\end{Verbatim}
