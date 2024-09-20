@@ -8,3 +8,40 @@
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4
 [[file:~/UTAS/ENG231 - Electrical Machines And Transformers/Lab 4/Data.ods][Data Collected During Lab]]
+** Name Plate
+
+** DC Test
+
+** Open Circuit Test
+
+** Short Circus Test
+
+** Performance Test / Full Load Test
+#+BEGIN_SRC octave :exports code :results output :session a
+clear
+clc
+close
+V2=[120, 120, 119, 118, 118, 117, 116, 115];
+P1=[12, 80, 102, 147, 191, 277, 409, 537];
+P2=[0, 67, 90, 133, 177, 262, 386, 509];
+I2=[0, 0.56, 0.753, 1.12, 1.5, 2.2, 3.3, 4.4];
+Eff=P1./P2;
+
+subplot(2, 1, 1);
+plot(I2, V2, 'o', 'LineWidth', 2);
+xlabel('Secondary Current (A)');
+ylabel('Measured Secondary Voltage (V)');
+title('Measured Secondary Voltage vs. Secondary Current');
+grid on;
+
+subplot(2, 1, 2);
+plot(I2, Eff, 'o', 'LineWidth', 2);
+xlabel('Secondary Current (A)');
+ylabel('Efficiency');
+title('Efficiency vs. Secondary Current');
+grid on;
+
+title('Voltage and Efficiency vs. Secondary Current');
+#+END_SRC
+
+#+RESULTS:

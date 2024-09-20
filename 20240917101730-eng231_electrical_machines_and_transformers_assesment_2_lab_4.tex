@@ -1,0 +1,91 @@
+% Created 2024-09-19 Thu 10:01
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{minted}
+\author{Baley Eccles - 652137}
+\date{\textit{{[}2024-09-17 Tue 10:17]}}
+\title{ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4}
+\hypersetup{
+ pdfauthor={Baley Eccles - 652137},
+ pdftitle={ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.4 (Org mode 9.8)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4}
+\label{sec:org70ff70e}
+\href{file:///home/Baley/UTAS/ENG231 - Electrical Machines And Transformers/Lab 4/Data.ods}{Data Collected During Lab}
+\subsection{Name Plate}
+\label{sec:org1499395}
+\begin{center}
+\begin{tabular}{lr}
+VA ratings & 500\\
+Primary Voltage & 240\\
+Secondary voltage & 115\\
+Primary current & 2.08333333333333\\
+Secondary current & 4.34782608695652\\
+Turns ratio & 2.08695652173913\\
+\end{tabular}
+\end{center}
+\subsection{DC Test}
+\label{sec:org7c8fec9}
+\begin{center}
+\begin{tabular}{lr}
+Primary resistance (R1dc) & 1.5\\
+Secondary resistance (R2dc) & 0.4\\
+\end{tabular}
+\end{center}
+\subsection{Open Circuit Test}
+\label{sec:orgde0c8b9}
+\begin{center}
+\begin{tabular}{lrrrrr}
+ & Primary &  &  &  & Secondary\\
+ & V1 & I1 & Poc & PF & V2\\
+LV side open & 110 & 0.563 & 10.3 & 0.165 & 220\\
+HV side open & 240 & 0.375 & 12.5 & 0.138 & 120\\
+\end{tabular}
+\end{center}
+\subsection{Short Circuit Test}
+\label{sec:org357fc2b}
+
+\begin{center}
+\begin{tabular}{llllll}
+ & Primary &  &  &  & Secondary\\
+ & V1 & I1 & Poc & PF & I2\\
+LV side Short circuited & 7 & 1.76 & 10 & 0.863 & 3.5\\
+\end{tabular}
+\end{center}
+\subsection{Performance Test / Full Load Test}
+\label{sec:orga4f40b2}
+\begin{center}
+\begin{tabular}{llrrrrrrrr}
+ &  & No Load & Load 1: 200ohm & Load 2: 150ohm & Load 3: 100ohm & Load 4: 75ohm & Load 5: 50ohm & Load 6: 33ohm & Load 7: 25ohm\\
+Primary & V1 & 240 & 240 & 240 & 240 & 240 & 240 & 240 & 240\\
+ & I1 & 0.375 & 0.495 & 0.56 & 0.71 & 0.88 & 1.2 & 1.75 & 2.28\\
+ & P1 & 12 & 80 & 102 & 147 & 191 & 277 & 409 & 537\\
+ & PF & 0.138 & 0.677 & 0.76 & 0.861 & 0.912 & 0.954 & 0.977 & 0.958\\
+Secondary & V2 & 120 & 120 & 119 & 118 & 118 & 117 & 116 & 115\\
+ & I2 & 0 & 0.56 & 0.753 & 1.12 & 1.5 & 2.2 & 3.3 & 4.4\\
+ & P2 & 0 & 67 & 90 & 133 & 177 & 262 & 386 & 509\\
+ & PF & NULL & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\% Efficiency &  &  &  &  &  &  &  &  & \\
+\% Voltage Regulation &  &  &  &  &  &  &  &  & \\
+\end{tabular}
+\end{center}
+\end{document}
