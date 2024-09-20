@@ -1,0 +1,66 @@
+:PROPERTIES:
+:ID:       82c97c76-8b78-4d6b-b029-b3d1d7994a64
+:END:
+#+title: ENG234 - Lab 2
+#+date: [2024-09-20 Fri 15:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG234 - Lab 2
+
+#+BEGIN_SRC octave :exports code :results output :session a
+VR3=5.079;
+R3=3258;
+IC=VR3/R3
+
+VR4=1.842;
+R4=1176;
+IE=VR4/R4
+
+VR2=2.481;
+R2=2168;
+IR2=VR2/R2
+
+VR1=9.5;
+R1=8230;
+IR1=VR1/R1
+
+IB=IR1-IR2
+
+beta=IE/IB
+
+#+END_SRC
+
+#+RESULTS:
+: IC = 1.5589e-03
+: IE = 1.5663e-03
+: IR2 = 1.1444e-03
+: IR1 = 1.1543e-03
+: IB = 9.9408e-06
+: beta = 157.57
+
+
+#+BEGIN_SRC octave :exports code :results output :session a
+RL=3300
+%ZO=1/((1/RL)+(1/R3))
+%AV=ZO/(0.026/IE)
+RS=2200
+ZO=R3
+re=(0.026/IE)
+Zin=(1/((1/R1)+(1/R2)+(1/(beta*re))))
+AV=(-Zin/(RS+Zin))*((1/((1/ZO)+(1/RL)))/re)
+VO=5.0
+Vin=0.073
+AV=VO/Vin
+#+END_SRC
+
+#+RESULTS:
+: RL = 3300
+: RS = 2200
+: ZO = 3258
+: re = 16.599
+: Zin = 1036.2
+: AV = -31.623
+: VO = 5
+: Vin = 0.073000
+: AV = 68.493
