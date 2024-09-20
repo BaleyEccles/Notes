@@ -13,6 +13,7 @@
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 #+LATEX_HEADER_EXTRA: \usepackage[backend=biber,style=apa]{biblatex}
 #+LATEX_HEADER_EXTRA: \addbibresource{citation.bib}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
 #+PROPERTY: header-args :eval no
 
 * ENG204 - Signals and Linear Systems - Assignment 1.3
@@ -63,18 +64,18 @@ imwrite(uint16(output), sprintf('ENG204-Assignment-3-b-sigma-%d.png', sigma));
 
 #+RESULTS:
 
-\\
 #+BEGIN_FIGURE
 #+CAPTION:Image produced with $\sigma=5$
+#+ATTR_LATEX: :placement [H]
 [[file:ENG204-Assignment-3-b-sigma-5.png]]
 #+END_FIGURE
 
 #+BEGIN_FIGURE
 #+CAPTION:Image produced with $\sigma=10$
+#+ATTR_LATEX: :placement [H]
 [[file:ENG204-Assignment-3-b-sigma-10.png]]
 #+END_FIGURE
-From these results we can see that the Gaussian filter blurs the image. When we increase $\sigma$ the amount of blur increases.
-At the edges the images go dark, this is because we are taking the non existant values that are out side the image to be the min value ~(R,G,B)=(0,0,0)~ and when we do the convolution we are effectivly bluring the image with black.
+From these results we can see that the Gaussian filter blurs the image. When we increase $\sigma$ the amount of blur increases. This works by replacing the current pixel wiht the average of its surrounding pixels. The pixels at the edges go dark, this is because we are taking the non existant values that are out side the image to be the min value ~(R,G,B)=(0,0,0)~ and when we do the convolution we are effectivly bluring the image with black.
 
 
 ** c
@@ -110,7 +111,7 @@ To do this we can convert the function to cylindrical coordinates. using:
 \[y= \rho \sin{\left(\phi \right)}\]
 Which will give:
 \[\frac{e^{- \frac{\rho^{2}}{2 \sigma^{2}}}}{2 \pi \sigma}\]
-As we can see this does not depend on $\phi$, which is the rotational aspect, so it is rotationaly symmetric.
+As we can see this does not depend on $\phi$, which is the rotational aspect, so it is rotationaly symmetric. This means that the filter will be applied equally in all directions.
 
 ** d
 *** a
@@ -123,7 +124,7 @@ G(x,y)&=\frac{1}{2\pi \sigma^{2}}e^{-\frac{x^2}{2 \sigma^2}}e^{-\frac{y^2}{2 \si
 \Rightarrow G_x(x)&=\frac{1}{\sqrt{2\pi \sigma^{2}}}e^{-\frac{x^2}{2 \sigma^2}} \\
 \textrm{and } G_y(y)&=\frac{1}{\sqrt{2\pi \sigma^{2}}}e^{-\frac{y^2}{2 \sigma^2}}
 \end{align*}
-This shows that the Guassian kernel can be sperated into two individual components that can be acted seperately in the $x$ and $y$ direction. We can see that the $G_x(x)$ and $G_y(y)$ are varible subsitutions of one another, this means that they will result in the same values given the same input, and hence when formed into their matrices they will be transposes of one another.
+This shows that the Guassian kernel can be sperated into two individual components that can be acted separately in the $x$ and $y$ directions. We can see that the $G_x(x)$ and $G_y(y)$ are varible subsitutions of one another, this means that they will result in the same values given the same input, and hence when formed into their matrices they will be transposes of one another.
 *** b
 We are taking the convolution of $G$ and $I$ resulting in $O$:
 \begin{align*}
@@ -206,20 +207,22 @@ imwrite(uint16(double), 'ENG204-Assignment-3-Double-sigma-10.png');
 The output with $\sigma=10$ is:
  - The time to calculate the convolution of the single matrix is 0.430982 s
  - The time to calculate the convolution of the two matrices is 0.100643 s
-As we can see the convolution of the two matricies is about four times as fast. And we can also see that this creates the exact same result.\\
+As we can see the convolution of the two matrices is about four times as fast. And we can also see that this creates the exact same result.\\
 #+BEGIN_FIGURE
 #+CAPTION:Image with one convolution
+#+ATTR_LATEX: :placement [H]
 [[file:ENG204-Assignment-3-Single-sigma-10.png]]
 #+END_FIGURE
 #+BEGIN_FIGURE
 #+CAPTION:Image with two convolution
+#+ATTR_LATEX: :placement [H]
 [[file:ENG204-Assignment-3-Double-sigma-10.png]]
 #+END_FIGURE
 Increasing the $\sigma$ we will see that the difference between the two times increases. For $\sigma=50$:
  - The time to calculate the convolution of the single matrix is 6.112394 s
  - The time to calculate the convolution of the two matrices is 0.139590 s
-Here we get a $\approx 50$ times increase in speed. These resutls will vary based upon the hardware that it is being ran on. How ever we would still expect to see the increase in speed from one convolution to two.\\
-We can also notice that the the increase in time between each $\sigma$ grows faster for the single convolution compared to the double convolution. That is, for the single convolution, from $\sigma=10$ to $\sigma=50$, we get a $\approx 14$ times time requirement, and for the double convolution we $\approx 1.4$ times time requirement. This shows that not only does the double convolution preform better than the single convolution, but it also grows slower when $\sigma$ increases. So, it is better to calculate the one dimetional matricies then the two dimentional ones. This could also be improved by using the transpose property disscused in [[id:Part-d-a][a]], this would eliminate the need to calculate the second matrix.
+Here we get a $\approx 50$ times increase in speed. These results will vary based upon the hardware that it is being run on. However, we would still expect to see the increase in speed from one convolution to two.\\
+We can also notice that the increase in time between each $\sigma$ grows faster for the single convolution compared to the double convolution. That is, for the single convolution, from $\sigma=10$ to $\sigma=50$, we get a $\approx 14$ times time requirement, and for the double convolution we $\approx 1.4$ times time requirement. This shows that not only does the double convolution perform better than the single convolution, but it also grows slower when $\sigma$ increases. So, it is better to calculate the one dimentional matrix than the two dimentional ones. This could also be improved by using the transpose property discussed in [[id:Part-d-a][a]], this would eliminate the need to calculate the second matrix.
 
 ** e
 #+BEGIN_SRC octave :exports none :results output :session c
@@ -289,9 +292,10 @@ imwrite(uint16(EdgeDetect), 'ENG204-Assignment-3-f-1.png');
 #+END_SRC
 
 #+RESULTS:
-Noise in the image makes the derivative of the image contain a lot of larger values. The noise makes the difference between each pixel a larger result than without the noise. This resulst in the edge detect image having a lot of large values, requiring the threshold to be larger and reducing the amount of true edges being detected. We can see this in the image:
+Noise in the image makes the derivative of the image contain a lot of larger values. The noise makes the difference between each pixel a larger result than without the noise. This results in the edge detect image having a lot of large values, requiring the threshold to be larger and reducing the amount of true edges being detected.
 #+BEGIN_FIGURE
 #+CAPTION:Edge detect image
+#+ATTR_LATEX: :placement [H]
 [[file:ENG204-Assignment-3-f-1.png]]
 #+END_FIGURE
 ** g
@@ -349,7 +353,7 @@ LoG(x,y) &= \nabla^2G(x,y) = \frac{\partial^2 G}{\partial x^2} + \frac{\partial^
 
 ** h
 Focusing on $1-\frac{x^2+y^2}{2\sigma^2}$ in the kernel. We can see that it contains $x^2+y^2$, which is not separable, so the entire kernel is not separable. \\
-The second derivatives of the Gaussian kernel can be expressed as a product of an individual varible and the Gaussian kernel. That is:
+The second derivative of the Gaussian kernel can be expressed as a product of an individual variable and the Gaussian kernel. That is:
 \begin{align*}
 \frac{\partial^2 G}{\partial x^2}&=-\frac{e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{3}} + \frac{x^{2} e^{-\frac{ x^{2} + y^2}{2 \sigma^{2}}}}{2 \pi \sigma^{5}} \\
 \frac{\partial^2 G}{\partial x^2}&=\frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}} \left( \frac{x^2}{\sigma^3}-\frac{1}{\sigma}\right) \\
@@ -359,8 +363,8 @@ The second derivatives of the Gaussian kernel can be expressed as a product of a
 \frac{\partial^2 G}{\partial y^2}&=\frac{1}{2\pi\sigma^2}e^{-\frac{y^2+x^2}{2\sigma^2}} \left( \frac{y^2}{\sigma^3}-\frac{1}{\sigma}\right) \\
 \frac{\partial^2 G}{\partial y^2}&=G(x,y)\left( \frac{y^2}{\sigma^3}-\frac{1}{\sigma}\right)
 \end{align*}
-We know that the Gaussian kernel is separable, and that is being multiplied by a function of the respective varible. So, the derivatives of the Guassian kernel are separable.\\
-To speed up the computation of the LoG kernel we can use:
+We know that the Gaussian kernel is separable, and that is being multiplied by a function of the respective variable. So, the derivatives of the Guassian kernel are separable.\\
+To speed up the computation of the LoG kernel, we can use:
 \[\nabla^2 G\approx \frac{\partial^2 G}{\partial x^2} + \frac{\partial^2 G}{\partial y^2}\]
 Where we can calculate the first and second derivatives from their separable forms.
 ** i
@@ -413,15 +417,17 @@ imwrite(output, 'ENG204-Assignment-3-i-LoG.png');
 #+RESULTS:
 #+BEGIN_FIGURE
 #+CAPTION:The LoG image
+#+ATTR_LATEX: :placement [H]
 [[file:ENG204-Assignment-3-i-LoG.png]]
 #+END_FIGURE
 #+BEGIN_FIGURE
 #+CAPTION:The new edge detect image
+#+ATTR_LATEX: :placement [H]
 [[file:ENG204-Assignment-3-i-EdgeDetect-sigma-2.png]]
 #+END_FIGURE
-Comparing this to the other edge detect image we notice that there are a lot less artifacts in the sky. When the standard deviation is increased it could be seen that the edges of the objects became larger and less sensitive to noise and small edges.
+Comparing this to the other edge detect image, we notice that there are a lot fewer artifacts in the sky. When the standard deviation is increased, it could be seen that the edges of the objects became larger and less sensitive to noise and small edges.
 ** j
-To sharpen the image wie will get an edge detect of the image and then take it away from the original image. How ever, as mentioned before the noise in the image will make it look bad, so first we are going to apply the Gaussian filter and then the edge detect.
+To sharpen the image, we will get an edge detection of the image and then take it away from the original image. However, as mentioned before, the noise in the image will make it look bad, so first we are going to apply the Gaussian filter and then the edge detection.
 #+BEGIN_SRC octave :exports code :results output :session j
 clear
 clc
@@ -486,14 +492,15 @@ imwrite(noise, 'ENG204-Assignment-3-Original.png');
 #+END_SRC
 
 #+RESULTS:
-\\
+
 #+BEGIN_FIGURE
 #+CAPTION:Original image
+#+ATTR_LATEX: :placement [H]
 [[file:ENG204-Assignment-3-Original.png]]
 #+END_FIGURE
-\\
 #+BEGIN_FIGURE
 #+CAPTION:Image sharpened a lot to exagerate the effects
+#+ATTR_LATEX: :placement [H]
 [[file:ENG204-Assignment-3-Sharpened.png]]
 #+END_FIGURE
-From this result we can see that it highlights the edges of the mountains and dock.
+From this result, we can see that it highlights the edges of the mountains and dock.
