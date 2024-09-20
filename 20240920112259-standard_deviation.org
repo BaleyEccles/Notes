@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       64966980-9fb2-4290-8a52-c7fd08d9d1ec
+:END:
+#+title: Standard Deviation
+#+date: [2024-09-20 Fri 11:22]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Standard Deviation
+- Defined in terms of [[id:94da5bc2-9ad7-4d6c-ad04-715b646cdf7c][variance]] ($\sigma$)
+  - \[\sigma^2=\frac{1}{n}\sum_{i=1}^n(x_i-\overline{x})^{2}\]
+- Where n is small
+  - \[s^2=\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^{2}\]

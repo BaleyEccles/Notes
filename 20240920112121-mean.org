@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb
+:END:
+#+title: Mean
+#+date: [2024-09-20 Fri 11:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Mean
+ - The expected value
+   - Doesn't have to exist as possible outcome
+   - Expected value:
+     - \[E[x]\]
+       - $x$ can be anything, just substitute into the $x$
+       - eg. $E[f(x)]$
+   - [[id:2cc4a97b-cd1e-4ac1-aab7-853fcdf2b8fb][Moment]]
+ - arithmetic
+   - \[\overline{X}=\frac{1}{n}\sum x\]
+ - Geometric
+   - \[x^{\*}=(\Pi x)^{1/n}\]

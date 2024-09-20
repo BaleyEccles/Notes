@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       60bdc443-99c4-4493-9eba-f097aac5499b
+:END:
+#+title: Types of Data
+#+date: [2024-09-20 Fri 11:18]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Types of Data
+- Categorical
+  - Binary
+    - 0 or 1
+  - Nominal
+    - Named
+  - Ordinal
+    - Can be Ordered
+- Scaled
+  - Discrete
+  - Continuous
+- [[id:7095e566-ae96-4f39-b344-927c0fb541b6][Plots]]

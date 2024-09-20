@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       c4692742-9c60-454b-910f-05b3b8fa0dea
+:END:
+#+title: Field Effect Transistors
+#+date: [2024-09-19 Thu 09:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* TODO Field Effect Transistors

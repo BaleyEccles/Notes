@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       9334ca34-a4f4-486d-9cde-d459bdedd5be
+:END:
+#+title: Minimum and Maximum
+#+date: [2024-09-20 Fri 11:20]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Minimum and Maximum
+- Range of data (max-min)

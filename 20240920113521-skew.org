@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       d96bb416-691b-483d-a44d-b68d6a2d5876
+:END:
+#+title: Skew
+#+date: [2024-09-20 Fri 11:35]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Skew
+ - The Third [[id:2cc4a97b-cd1e-4ac1-aab7-853fcdf2b8fb][Moment]].
+ - A distribution is skewed to the right if the mean is higher then the meadian
+ - Mesurment of how asymmetric a distribution of values is.
+ - Can be negative, positive, 0 or not defined.
+ - For $X=\{x_{1}...x_{n}\}$
+   - \[\gamma(X)=E\left[\left(\frac{X-\mu}{\sigma}\right)^3\right]\]
+ - [[id:c27cf89f-ef96-4911-80e7-bc9c662614ab][Kurtosis]]

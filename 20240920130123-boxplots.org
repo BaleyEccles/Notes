@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       f54d769f-8538-4461-a2c9-cb9ef89b5ea6
+:END:
+#+title: Boxplots
+#+date: [2024-09-20 Fri 13:01]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Boxplots
+ - A nice way of visualising a five number summary
+ - The whiskers on the boxplots stretch from the lower/upper quartiles out towards the min/max.
+   - Points that are more than 1.5x IQR away from the quartiles are shows separately to indicate that they are outliers
+   - These are the dotted lines
+ - [[file:Screenshot 2024-09-20 at 13-02-31 Engineering Mathematics 2B KME272 - KME272-Week08.pdf.png]]

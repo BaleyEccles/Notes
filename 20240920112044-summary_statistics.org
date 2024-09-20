@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       0c312557-bf46-466a-9a24-ca908f9f4e14
+:END:
+#+title: Summary Statistics
+#+date: [2024-09-20 Fri 11:20]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Summary Statistics
+ - Statistic that summarises a data set
+ - [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]]
+ - [[id:9334ca34-a4f4-486d-9cde-d459bdedd5be][Minimum and Maximum]]
+ - [[id:3f4aadf0-af09-406b-be78-fd867fb1b367][Quantiles]]
+ - [[id:64966980-9fb2-4290-8a52-c7fd08d9d1ec][Standard Deviation]]
+ -

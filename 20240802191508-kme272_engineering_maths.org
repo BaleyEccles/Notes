@@ -15,6 +15,9 @@
 - [[id:2a1c15f9-8be3-4510-906c-bacc45b75068][Numerical Solution of ODEs]]
 - [[id:84252b32-2d80-4702-91f3-762e69a33f0a][Numerical Integration]]
 ** Probability and Statistics
+ - [[id:60bdc443-99c4-4493-9eba-f097aac5499b][Types of Data]]
+ - [[id:0c312557-bf46-466a-9a24-ca908f9f4e14][Summary Statistics]]
+
 
 * Assesment
 ** Assessment Task 1: Computational Techniques Assignments

@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       2cc4a97b-cd1e-4ac1-aab7-853fcdf2b8fb
+:END:
+#+title: Moment
+#+date: [2024-09-20 Fri 11:30]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Moment
+- The moment of a set of values $x_i$ is the expected value of the variables $x_i$ to some power of p, is the p-th moment.
+  - \[E[X^P]\frac{1}{n}\sum_{x_i \in X}x_i^{p}\]
+- Like expected values of power of values
+** Moment about a [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]]
+- We can calculate a moment referenced to the mean
+- aka Central moments
+- The p-th central moments calculated from $x_1,...,x_n$ is
+  - \[\mu_p=E[(X-\overline{x})^p]\]
+  - \[\mu_1=0\]
+  - $\mu_2$ is the [[id:94da5bc2-9ad7-4d6c-ad04-715b646cdf7c][Variance]]
+  - $\mu_3$ is the [[id:d96bb416-691b-483d-a44d-b68d6a2d5876][Skew]]

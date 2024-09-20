@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       b3b5bb1d-48ba-47df-8f48-6e10bfafc586
+:END:
+#+title: Shapes of Distributions
+#+date: [2024-09-20 Fri 13:24]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Shapes of Distributions
+Can be summarised by [[id:0c312557-bf46-466a-9a24-ca908f9f4e14][Summary Statistics]].
+ - [[id:d96bb416-691b-483d-a44d-b68d6a2d5876][Skew]]
+ - [[id:ddf98bd7-f4cc-49cc-8853-a9158b593a09][Unimodal and Bimodal]]
+ - [[id:2fa8199f-4fce-4f34-941a-c356382e75d6][Bell-shaped]]

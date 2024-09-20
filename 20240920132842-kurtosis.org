@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       c27cf89f-ef96-4911-80e7-bc9c662614ab
+:END:
+#+title: Kurtosis
+#+date: [2024-09-20 Fri 13:28]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Kurtosis
+ - A measure of how fat tailed a distribution is
+   - \[Kurt(X)=E\left[\left(\frac{X-\mu}{\sigma}\right)^{4}\right]\]

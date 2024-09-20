@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       7095e566-ae96-4f39-b344-927c0fb541b6
+:END:
+#+title: Plots
+#+date: [2024-09-20 Fri 13:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Plots
+** Types
+- [[id:02527535-7d09-49fb-ad67-dd97804fe07a][Histograms]]
+- [[id:f54d769f-8538-4461-a2c9-cb9ef89b5ea6][Boxplots]]

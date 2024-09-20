@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       94da5bc2-9ad7-4d6c-ad04-715b646cdf7c
+:END:
+#+title: Variance
+#+date: [2024-09-20 Fri 11:26]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Variance
+The spread of a sample of some values from a bigger population.
