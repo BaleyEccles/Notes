@@ -6,7 +6,6 @@
 #+STARTUP: latexpreview
 
 * Bipolar Junction Transistors
-
 - A [[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductor]] component
 - Two types
   - Uses Two [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] materials with a [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] material in bettween (NPN)
@@ -22,8 +21,21 @@
   - \[I_{B}\] The current from/into the base
   - \[I_{E}\] The current from/into the emitter
   - \[I_E=I_B+I_C\]
-- Three configurations
-  - [[id:451a0c0d-d955-4278-8648-7f56593a4965][Common Base]]
-  - [[id:52e30487-1ef4-4023-b68c-b892fdaa0966][Common Emitter]]
-  - [[id:108f9afb-28f0-409b-8144-0628082862a2][Common Collector]]
-- [[id:4ca3dec8-db31-4287-aa7a-0c9ff27e727a][Transistor Characteristics]]
+** DC Analysis
+ - Capacitors are open circuits
+ - Equations
+   - \[I_C=\beta I_B\]
+   - \[I_E=(\beta+1)I_B\]
+   - \[V_{BE}=0.7V\]
+
+** AC Analysis
+Solve for the DC Q-point then use:
+ - [[file:Screenshot 2024-09-19 at 09-01-51 Equation sheet ENG234 and ENG741-1.pdf.png]]
+   - There will be resistors in parralel with $\beta r_e$ and $r_o$, based on the config. Which will be used to find $Z_i$ and $Z_o$.
+   - $V_i$ is the voltage from e to b
+   - $V_o$ is the voltage from e to c
+   - Connect DC sources to ground
+   - Capacitors are short circuit
+ - Equations
+   - \[r_e=\frac{26mV}{I_E}\]
+   - \[A_{v}=\frac{-Z_o}{r_{e}}\]

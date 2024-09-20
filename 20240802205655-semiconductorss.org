@@ -14,4 +14,6 @@ When the temprature of a semiconductor goes up the resistance goes up too.
 * Uses
 [[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductors]] can be used to create elecrical components.
 By combining [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] and [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] together in different ways we can create many semiconductor based components.
-[[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]]
+- [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]]
+- [[id:47517c75-582b-4948-a2a7-f88e883e7b65][Bipolar Junction Transistors]]
+- [[id:c4692742-9c60-454b-910f-05b3b8fa0dea][Field Effect Transistors]]
