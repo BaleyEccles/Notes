@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       22c73d57-8d3d-49c3-98a3-f0d52bb09187
+:END:
+#+title: ENG204 - Signals and Linear Systems - Assignment 1.4
+#+date: [2024-09-20 Fri 18:34]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Laplace Transforms to solve Partial Differential Equations
+** TODO a
+\begin{align*}
+\frac{d^3y}{d^3t}+5\frac{d^2y}{d^2t}+9\frac{dy}{dt}+45y &= -t^2u(t)+2e^{-t}u(t-2) \\
+\leftrightarrow^{\mathcal{L}} s^3Y(s)+5s^2Y(s)+9sY(s)+45Y(s) &= -\frac{2}{s^{3}} +2e^{-2s}\frac{e^{-s}}{s+1} \\
+Y(s) &= \frac{-\frac{2}{s^{3}} +2\frac{e^{-3s}}{s+1}}{s^3+5s^2+9s+45}
+\end{align*}
+** b
+*** 1
+*** 2
+*** 3
+*** 4
+*** 5
+** c
+** d
+* Harmonic Filter
