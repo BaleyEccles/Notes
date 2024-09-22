@@ -1,0 +1,76 @@
+:PROPERTIES:
+:ID:       38634596-7d68-46dc-a12c-bb0d244f7835
+:END:
+#+title: Discrete Fourier Transform
+#+date: [2024-09-21 Sat 08:19]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Discrete Fourier Transform
+ - When taking Discrete Fourier Transform of a non periodic [[id:9d44cc62-fd73-49f1-9bda-efa24d9e5538][discrete system]] the transform will repeat.
+
+** Two Transforms
+*** Discrete-Time Fourier Transform (DTFT)
+ - \[x[n] \leftrightarrow X(\Omega)\]
+   - Discrete <-> Continuous
+ - \[X(\Omega)= \mathcal{F}\{x[n]\}=\sum_{n=-\infty}^{\infty}x[n]e^{-j\Omega n}\]
+ - \[x[n]=\mathcal{F}^{-1}\{X(\Omega)\}=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(\Omega)e^{j\Omega n}d\Omega\]
+ - _Note_
+   - \[\Omega=\frac{2\pi f}{f_s}=\frac{\omega}{f_s}=\omega T_s\]
+ - Fourier to Laplace
+   - \[X(\Omega )=X(z=e^{j\Omega})\]
+ - Only unique in the range $\Omega \in [-\pi,\pi]$ from [[id:cbb625ec-3e7a-4e0c-8193-578ee9897e81][Nyquist–Shannon Sampling Theorem]]
+**** Transform Pairs
+ - \[x[n] \leftrightarrow X(\Omega)\]
+ - \[\delta[n] \leftrightarrow 1\]
+ - \[\delta[n-n_0] \leftrightarrow e^{-j\Omega n_{0}}\]
+ - \[x[n]=1 \leftrightarrow 2\pi \delta (\Omega), \lvert \Omega \rvert \leq \pi\]
+ - \[e^{j\Omega_0n} \leftrightarrow 2\pi\delta(\Omega-\Omega_0), \lvert \Omega \rvert \leq \pi , \lvert \Omega_0 \rvert \leq \pi\]
+ - \[\cos(\Omega_0n) \leftrightarrow \pi [\delta(\Omega-\Omega_0)+\delta(\Omega+\Omega_0)], \lvert \Omega \rvert \leq \pi , \lvert \Omega_0 \rvert \leq \pi\]
+ - \[\sin(\Omega_0n) \leftrightarrow -j \pi [\delta(\Omega-\Omega_0)+\delta(\Omega+\Omega_0)], \lvert \Omega \rvert \leq \pi , \lvert \Omega_0 \rvert \leq \pi\]
+ - \[u[n] \leftrightarrow \pi\delta(\Omega)+\frac{1}{1-e^{-j\Omega}}, \lvert \Omega \rvert \leq \pi\]
+   - _Note_: $X(\Omega) \neq X(z=e^{j\Omega})$
+ - \[a^nu[n], \lvert a \rvert < 1 \leftrightarrow \frac{1}{1-ae^{-j\Omega}}\]
+ - \[(n+1)a^nu[n], \lvert a \rvert < 1 \leftrightarrow \frac{1}{(1-ae^{-j\Omega})^{2}}\]
+ - \[a^{\lvert n \rvert}, \lvert a \rvert < 1 \leftrightarrow \frac{1-a^2}{1-2a\cos(\Omega)+a^2}\]
+ - \[x[n]=\begin{cases}1,\lvert n \rvert \leq N\\
+    0,\lvert n \rvert > N\end{cases}\leftrightarrow \frac{\sin[\Omega(N_1+\frac{1}{2})]}{\sin(\frac{\Omega}{2})}\]
+
+ - \[\frac{\sin(Wn)}{\pi n},0<W<\pi \leftrightarrow X(\Omega)=\begin{cases} 1,0 \leq \lvert\Omega\rvert \leq W \\ 0, W<\Omega\leq\pi \end{cases}\]
+ - \[\sum_{k=-\infty}^{\infty}\delta[n-kN_0] \leftrightarrow \Omega_0\sum_{k=-\infty}^{\infty}\delta(\Omega-k\Omega_0),\Omega_0=\frac{2\pi}{N_0}\]
+
+**** Properties
+ - Periodicity
+   - \[X(\Omega+2\pi)=X(\Omega)\]
+ - Linearity
+   - \[a_1x_1[n]+a_2x_2[n]\leftrightarrow a_1X_1(\Omega)+a_2X_2(\Omega)\]
+ - Time-shifting
+   - \[x[n-n_0]\leftrightarrow e^{-j\Omega n_{0}}X(\Omega)\]
+ - Frequency-shifting
+   - \[E^{j\Omega_0n}x[n] \leftrightarrow X(\Omega-\Omega_0)\]
+ - Time Reversal
+   - \[x[-n]\leftrightarrow X(-\Omega)\]
+ - Time Scaling
+   - \[\begin{cases}
+          x[\frac{n}{m}] if n=km\\
+          0 if n\neq km
+       \end{cases}\leftrightarrow X(m\Omega)\]
+ - Frequency Differentiation
+   - \[nx[n]\leftrightarrow j \frac{dX(\Omega)}{d\Omega}\]
+ - Accumulation
+   - \[\sum_{k=-\infty}^{n}x[k]\leftrightarrow \pi X(0)\delta(\Omega)+\frac{X(\Omega)}{1-e^{-j\Omega}}\]
+ - Convolution
+   - \[x_1[n]*x_2[n]\leftrightarrow X_1(\Omega)X_2(\Omega)\]
+ - Multiplication
+   - \[x_1[n]x_2[n] \leftrightarrow \frac{1}{2\pi}X_1(\Omega)\circledast X_2(\Omega)\]
+ - Parseval's Theorem
+   - \[\sum_{n=-\infty}^{\infty}\lvert x[n]\rvert^2=\frac{1}{2\pi}\int_{-\pi}^{\pi}\lvert X(\Omega)\rvert^2d\Omega\]
+
+
+
+
+
+
+*** Discrete Fourier Transform
+ - \[x[n] \leftrightarrow X[k]\]
+   - Discrete <-> Discrete

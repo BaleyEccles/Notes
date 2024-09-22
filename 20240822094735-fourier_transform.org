@@ -18,7 +18,7 @@
 - To convert a frequency signal into a time signal
   - \[\mathcal{F}^{-1}(X(\omega))=x(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)e^{j\omega t}d\omega\]
 ** Properties
-- Linearality:
+- Linearity:
   - \[a_1x_1(t)+a_2x_2(t)\leftrightarrow a_1X_1(\omega)+a_2X_2(\omega)\]
 - Time-shifting:
   - \[x(t-t_0) \leftrightarrow X(\omega)=\int_{-\infty}^{\infty}x(t-t_0)e^{-j\omega t}dt=e^{-j\omega t_0}\cdot X(\omega)\]

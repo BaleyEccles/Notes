@@ -13,3 +13,8 @@ x[n] \rightarrow \framebox[1.1\width]{System} \rightarrow y[n]
 - \[y[n]=Sys\{x[n]\}\]
 We can use [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equations]] to solve them.
 - [[id:e1293290-fe17-4467-8083-142aa848421e][State Space Representation]]
+** Periodicy
+For a discrete signal to be periodic, it must be equal for some number of rotations. ie the signal must repeat.
+** Operations
+ - [[id:498ec752-aafa-4a86-abaa-dc5165992cf0][Z-Transform]]
+ - [[id:38634596-7d68-46dc-a12c-bb0d244f7835][Discrete Fourier Transform]]
