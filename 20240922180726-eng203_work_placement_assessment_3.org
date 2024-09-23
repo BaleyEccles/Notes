@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       3df46222-e9b2-470c-a889-7e960121f230
+:END:
+#+title: ENG203 Work Placement - Assessment 3
+#+date: [2024-09-22 Sun 18:07]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG203 Work Placement - Assessment 3
+** Q1
+What are your interests?
+Over the past few years I have become interested in Linux, and I have been using for the past year. Using Linux has been a fun and technical experience, I have become fluent in the usage of Linux. I had decided to install Arch Linux, this was a very technical experience, the install process required me to read and understand the documentation. For example, I was unsure which file system I was going to use, so I read through all the benefits and disadvantages of each file system and concluded that I was going to use BTRFS, due to its superior backup capabilities. Going through such a complicated install process gave me wide understanding of Linux. Through out my journey with Linux I have been able to master the command line and manage my system effectively. Overall, using Linux has been an experience that has interested me and has given me a lot of technical skills.
+
+ 1. Interested in Linux
+ 2. Installed Arch
+    1. Read and understand documentation
+    2. Unsure what file system to use
+    3. Considered the advantages and disadvantages
+    4. BTRFS, due to its superior backup capabilities
+ 3. Used for one year
+ 4. Technical experience
+ 5. Fluent in using Linux
+
+
+
+
+
+
+    
+
+
+
+** Q2
+Please describe a time when your engineering know-how and knowledge was tested.
+Last year I participated in the Advent of Code 2023, where I had to answer many technical questions. One question that stood out and required me to use my engineering toolbox was one that involved displacement, velocity and acceleration. My approach to the question was to setup a differential equation to solve. This is something that non-engineers would not have been able to recognise, and their approach would have required a more complicated method.
+
+ 1. Advent of Code 2023
+ 2. Presented with difficult problems
+ 3. One notable question
+ 4. Initially seemed hard
+ 5. It had displacement, velocity and acceleration components
+ 6. Recognised the differential relation between the three components
+ 7. So, I used a differential equation
+ 8. This has been taught in my engineering career
+ 9. and made the question easier
+ 10. I was able to get this problem correct using this method
