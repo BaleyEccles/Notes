@@ -65,12 +65,37 @@
    - \[x_1[n]x_2[n] \leftrightarrow \frac{1}{2\pi}X_1(\Omega)\circledast X_2(\Omega)\]
  - Parseval's Theorem
    - \[\sum_{n=-\infty}^{\infty}\lvert x[n]\rvert^2=\frac{1}{2\pi}\int_{-\pi}^{\pi}\lvert X(\Omega)\rvert^2d\Omega\]
+**** Usage
+ - We can use it to find the output system of a linear system, but this is more complicated then using the [[id:498ec752-aafa-4a86-abaa-dc5165992cf0][Z-Transform]]
+ - [[id:9cadf4e8-a80a-4726-ba7b-b8dad0df8768][Frequency Response of Discrete Systems]]
+ - We can use [[id:513cd653-1c7d-4d14-8972-88ab41cf4b7d][3dB - Frequency/Corner Frequency]] to find the frequency cutoff
 
-
-
-
-
-
-*** Discrete Fourier Transform
+*** Discrete Fourier Transform (DFT)
  - \[x[n] \leftrightarrow X[k]\]
    - Discrete <-> Discrete
+ - \[X[k]=\sum_{n=0}^{N-1}x[n]e^{-j \frac{2\pi kn}{N}}\]
+ - Inverse
+   - \[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]e^{j\frac{2\pi kn}{N}}\]
+ - In matrix form
+   - \[\underline{X}=\underline{x}\underline{F}\]
+   - $\underline{X}$ is $N \times 1$
+   - $\underline{x}$ is $N \times 1$
+   - $\underline{F}$ is $N \times N$
+     - \[\underline{F} =\begin{bmatrix}
+       e^{-j \frac{2\pi (0)(0)}{N}} & e^{-j \frac{2\pi (1)(0)}{N}} & \hdots & e^{-j \frac{2\pi (N-1)(0)}{N}} \\
+       e^{-j \frac{2\pi (0)(1)}{N}} & e^{-j \frac{2\pi (1)(1)}{N}} & \hdots & e^{-j \frac{2\pi (N-1)(1)}{N}} \\
+       \vdots & \vdots & & \vdots \\
+       e^{-j \frac{2\pi (0)(N-1)}{N}} & e^{-j \frac{2\pi (1)(N-1)}{N}} & \hdots & e^{-j \frac{2\pi (N-1)(N-1)}{N}}
+       \end{bmatrix}\]
+   - Inverse Matrix form
+     - \[\underline{x}=\underline{X}\underline{F}^{-1}\]
+     - \[\underline{F}^{-1}=\frac{\underline{F}^{*}}{N}\]
+     - This grows at $O(N^2)$
+*** Fast Fourier Transform (FFT)
+ - We can improve the speed of the DFT
+**** Radix-2 Decimation-In-Time
+ - With $N=2^A$, $A\in\mathbb{Z}^{+}$, padding the extra terms with zeros.
+ - We can split the input into two components (even and odd terms) and apply a DFT to each of them.
+ - \[DFT=DFT_{even}+DFT_{odd}e^{-j \frac{2k\pi}{N}}\]
+ - This can applied again to each even and odd DFTs to get a tree like structure
+ - This grows at $O(N\log_2(N))$

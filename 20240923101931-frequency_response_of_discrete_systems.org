@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       9cadf4e8-a80a-4726-ba7b-b8dad0df8768
+:END:
+#+title: Frequency Response of Discrete Systems
+#+date: [2024-09-23 Mon 10:19]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Frequency Response of Discrete Systems
+ - Use the [[id:38634596-7d68-46dc-a12c-bb0d244f7835][Discrete Fourier Transform]]
+ - \[H(\Omega)=\lvert H(\Omega)\rvert e^{j\angle H(\Omega)}\]
+   - Magnitude $\lvert H(\Omega)\rvert$
+   - Phase: $\angle H(\Omega)$

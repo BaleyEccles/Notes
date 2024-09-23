@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       513cd653-1c7d-4d14-8972-88ab41cf4b7d
+:END:
+#+title: 3dB - Frequency/Corner Frequency
+#+date: [2024-09-23 Mon 10:53]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* 3dB - Frequency/Corner Frequency
+ - The definition for the point at which input frequencies are cutoff
+ - Uses [[id:d041a889-d4af-4598-8434-866ecc7ce005][Decibels]]
+** Usage
+ 1. Find $\lvert H(\Omega)\rvert_{max}$
+ 2. Find $\lvert H(\Omega_{3dB})\rvert = \frac{1}{\sqrt{2}}\lvert H(\Omega)\rvert_{max}$
