@@ -1,0 +1,74 @@
+:PROPERTIES:
+:ID:       fad348bf-cf5d-4a48-9336-fcb9e28ed879
+:END:
+#+title: DC Machines
+#+date: [2024-09-24 Tue 11:57]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* DC [[id:0d2a7422-d603-4652-8ad2-e5ed27dc2519][Machines]]
+
+** DC Generators
+ - Can be done, but uncommon
+ - The same as motors
+   - Instead on the T-S curves we are making negative torque
+   - [[file:Screenshot 2024-09-24 at 12-35-22 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
+
+** DC Motors
+ - More typical
+ - Basic example
+   - [[file:Screenshot 2024-09-24 at 12-00-14 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
+ - For one coil
+   - the induced voltage is:
+     - \[\matcal{E}_{i}=2rlB\cos(\theta_i)\omega_{m}\]
+   - The torque is:
+     - \[\tau_i=2Bli_cr\cos(\theta_i)=\Phi i_c\cos(\theta_i)\]
+ - For N coils
+   - the induced voltage is:
+     - \[\mathcal{E}_{a}=K_a\Phi \omega_m\]
+       - $K_a$ is the machine constant
+       - $\Phi$ is the flux
+       - $\omega_m$ is the speed
+   - The torque is:
+     - \[\tau_m=K_a\Phi I_a\]
+       - $\tau_m$ is the torque
+       - $I_a$ is the current
+
+*** Equivalent Circuit
+ - [[file:Screenshot 2024-09-24 at 12-14-02 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
+   - \[I_f=\frac{V_f}{R_{fw}}\]
+   - \[\Phi =K_fI_f\]
+ - [[file:Screenshot 2024-09-24 at 12-16-32 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
+   - \[V_t=E_{a}+I_aR_a\]
+   - \[I_a=\frac{V_t-\mathcal{E}_a}{R_a}\]
+   - \[\mathcal{E}_a=K_a\Phi \omega_m\]
+*** Armature Reaction
+ - The current in the armature produces an armature flux and field current in the field coil produces field flux.
+   - This is undesirable
+*** Connection Types
+**** Separately Excited DC Motor
+ - \[\tau=\frac{K_a\Phi V_t}{R_a}-\frac{(K_a\Phi)^2}{R_a}\omega_m\]
+ - [[file:Screenshot 2024-09-24 at 12-24-09 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
+   - No load speed at $\frac{V_t}{K_a\Phi}$
+ - We can vary speed
+   - Armature voltage
+     - By changing $V_t$
+   - Field Flux
+     - By changing $\Phi$ or $I_f$
+   - Armature resistance
+     - By changing $R_a$
+**** Shunt Connected DC Motor
+ - \[\tau=\frac{K_aK_fV_t^2}{R_aR_{fw}}\left(1-\frac{K_aK_f}{R_{fw}}\omega_m\right)\]
+ - [[file:Screenshot 2024-09-24 at 12-28-38 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
+**** Series Connected DC Motor
+ - \[\tau=\frac{k_{sr}V_t^2}{(R_a+R_{ae}+R_{fw}+K_{sr}\omega_m)^2}\]
+ - [[file:Screenshot 2024-09-24 at 12-31-08 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
+
+*** Power Losses
+ - Field
+   - \[I^2_fR_{fw}\]
+ - Armature Winding
+   - \[I_a^2R_a\]
+ - Rotational
+   - \[P_{rotational}\approx 3-15\%\]
+ - \[\eta=\frac{P_{out}}{P_{out}+Losses}\]

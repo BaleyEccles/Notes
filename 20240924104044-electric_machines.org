@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       0d2a7422-d603-4652-8ad2-e5ed27dc2519
+:END:
+#+title: Electric Machines
+#+date: [2024-09-24 Tue 10:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electric Machines
+ - A [[id:a889f56d-55aa-4d63-b86a-50226324c218][Magnetic Circuit]] that converts voltage and current to/from torque and rotational velocity
+   - Power $P$
+   - Torque $\tau$
+   - Rotational velocity $\omega$
+   - \[P=\tau\cdot\omega\]
+** Motor
+ - Converts electrical energy into mechanical energy
+   - \[v,i \rightarrow \tau,\omega\]
+** Generator
+ - Converts mechanical energy into electrical energy
+   - \[\tau,\omega \rightarrow v,i\]
+** Types
+ - [[id:fad348bf-cf5d-4a48-9336-fcb9e28ed879][DC Machines]]
+*** AC Machines
+ - Synchronous Machines
+ - Asynchronous Machines
+
+** Torque Speed Curves (T-S Curves)
+ - [[file:Screenshot 2024-09-24 at 10-58-21 Social and Technical Outcomes - ENG231_LectureSlideSetB4_MachineIntro.pdf.png]]
+ - Governs if the motor is able to run the connected load.
+   - If the required torque is less than the motors torque, then it will run
+   - If the required torque is more than the motors torque, then it will not run
+   - The speed will slow down until the motor and loads T-S curves are crossing
+
+** Construction
+ - Stator
+   - Dose not typically move
+ - Rotor
+   - Free to move
+   - Inside the machine
+ - Field Winding
+   - Produces the main flux component
+ - Armature Winding
+   - Where the most voltage is induced
+   - Where the majority of power transfer occurs
