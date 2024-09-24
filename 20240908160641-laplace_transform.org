@@ -7,8 +7,7 @@
 #+STARTUP: latexpreview
 
 * Laplace Transform
- - Uses [[id:d2083e8a-7a7a-48a8-89f4-9d13bba76b50][Transform Theory]] to convert signals into
- - Useful for
+ - Uses [[id:d2083e8a-7a7a-48a8-89f4-9d13bba76b50][Transform Theory]] to convert signals into a frequency and magnitude representation.
 
 ** Definition
  - \[F(s)=\int_{-\infty}^{\infty}f(t)e^{-st}dt\]
@@ -29,7 +28,7 @@
  - There is one exception for this
    - when \[f(t)=u(t)\]
 ** Properties
- - Linearality:
+ - Linearity:
    - \[a_1x_1(t)+a_2x_2(t)\leftrightarrow a_1X_1(s)+a_2X_2(s)\]
  - Time-shifting:
    - \[x(t-\tau) \leftrightarrow e^{-s\tau}X(s)\]
