@@ -39,3 +39,5 @@ Solve for the DC Q-point then use:
  - Equations
    - \[r_e=\frac{26mV}{I_E}\]
    - \[A_{v}=\frac{-Z_o}{r_{e}}\]
+** Applications
+ - [[id:ed52bfdf-bd23-4e2b-9853-257336d81a40][Darlington Configuration]]

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       f001a12d-1b96-40c9-b46f-636528af9451
+:END:
+#+title: Metal–Oxide–Semiconductor Field Effect Transistor (MOSFET)
+#+date: [2024-09-25 Wed 08:54]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* TODO Metal–Oxide–Semiconductor Field Effect Transistor (MOSFET)

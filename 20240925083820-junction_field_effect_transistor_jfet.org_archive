@@ -1,0 +1,16 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/Baley/UTAS/org-roam/20240925083820-junction_field_effect_transistor_jfet.org
+
+
+* Equations
+:PROPERTIES:
+:ARCHIVE_TIME: 2024-09-25 Wed 08:53
+:ARCHIVE_FILE: ~/UTAS/org-roam/20240925083820-junction_field_effect_transistor_jfet.org
+:ARCHIVE_OLPATH: Junction Field Effect Transistor (JFET)
+:ARCHIVE_CATEGORY: 20240925083820-junction_field_effect_transistor_jfet
+:END:
+ - \[I_D=I_{DSS}\left(1-\frac{V_{GS}}{V_p}\right)^2\]
+ - \[I_D=I_S\]
+ - \[I_G\approx 0A\]
