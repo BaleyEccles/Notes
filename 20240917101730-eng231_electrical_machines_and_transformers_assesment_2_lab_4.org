@@ -5,17 +5,98 @@
 #+date: [2024-09-17 Tue 10:17]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4
-[[file:~/UTAS/ENG231 - Electrical Machines And Transformers/Lab 4/Data.ods][Data Collected During Lab]]
 ** Name Plate
+#+ATTR_LATEX: :environment longtable :align |l|l|
+|-------------------------+-----|
+| VA ratings              | 500 |
+|-------------------------+-----|
+| Primary voltage ($V$)   | 240 |
+|-------------------------+-----|
+| Secondary voltage ($V$) | 115 |
+|-------------------------+-----|
+| Primary current ($A$)   | 2.1 |
+|-------------------------+-----|
+| Secondary current ($A$) | 4.4 |
+|-------------------------+-----|
+| Turns ratio             | 2.1 |
+|-------------------------+-----|
 
 ** DC Test
+#+ATTR_LATEX: :environment longtable :align |l|l|
+|---------------------------------------------+-----|
+| Primary resistance ($R_{1dc}$) ($\Omega$)   | 1.5 |
+|---------------------------------------------+-----|
+| Secondary resistance ($R_{2dc}$) ($\Omega$) | 0.4 |
+|---------------------------------------------+-----|
 
+The primary side has a higher resistance than the secondary side, this is because the primary side has more turns.
+\begin{align*}
+a&=2.1 \\
+R_{eqHV}&=a^{2}R_2+R_1\\
+R_{eqHV}&=3.242\Omega \\
+R_{eqHV}&=(1/a)^{2}R_1+R_2\\
+R_{eqHV}&=1.12\Omega \\
+\end{align*}
 ** Open Circuit Test
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|
+|--------------+---------+-------+------+-------+-----------|
+|              | Primary |       |      |       | Secondary |
+|--------------+---------+-------+------+-------+-----------|
+|              |      V1 |    I1 |  Poc |    PF |        V2 |
+|--------------+---------+-------+------+-------+-----------|
+| LV side open |     110 | 0.563 | 10.3 | 0.165 |       220 |
+|--------------+---------+-------+------+-------+-----------|
+| HV side open |     240 | 0.375 | 12.5 | 0.138 |       120 |
+|--------------+---------+-------+------+-------+-----------|
 
+\begin{align*}
+&\textrm{LV side open} & &\textrm{HV side open} \\
+a&=\frac{V_{2}}{V_{1}} & a&=\frac{V_{2}}{V_{1}} \\
+a&=2 & a&=2
+\end{align*}
+\begin{align*}
+&\textrm{LV side open} & &\textrm{HV side open} \\
+PF&=\frac{P_{oc}}{V_1I_1} & PF&=\frac{P_{oc}}{V_1I_1} \\
+&=0.16631 & &= 0.13889
+\end{align*}
+The calculated power factor is very close to the measured power factor.
+\begin{align*}
+&\textrm{LV side open} & &\textrm{HV side open} \\
+R_{c1}&=\frac{V_1^2}{P_{oc}} & R_{c1}&=\frac{V_1^2}{P_{oc}} \\
+&=1174.76\Omega & &=4680\Omega \\
+X_{m1}&=\frac{V_1}{\sqrt{I_1^2+\left(\frac{V_1}{R_{c1}}\right)^2}} & X_{m1}&=\frac{V_1}{\sqrt{I_1^2+\left(\frac{V_1}{R_{c1}}\right)^2}} \\
+&=192.73\Omega & &=633.92\Omega
+\end{align*}
+TODO
 ** Short Circus Test
-
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|
+|-------------------------+---------+------+-----+-------+-----------|
+|                         | Primary |      |     |       | Secondary |
+|-------------------------+---------+------+-----+-------+-----------|
+|                         | V1      |   I1 | Psc |    PF | I2        |
+|-------------------------+---------+------+-----+-------+-----------|
+| LV side Short circuited | 7       | 1.76 |  10 | 0.863 | 3.5       |
+|-------------------------+---------+------+-----+-------+-----------|
+\begin{align*}
+R_{eq}&=\frac{P_{sc}}{I_1^2} \\
+&=3.228\Omega \\
+X_{eq}&=\sqrt{\left(\frac{V_1}{I_1}\right)^2-R_{eq}^{2}} \\
+&=5.123\Omega
+\end{align*}
+\begin{align*}
+PF&=\frac{P_{sc}}{V_1I_1} \\
+&=0.81169
+\end{align*}
+The calculated power factor matches the measured one.
+TODO
 ** Performance Test / Full Load Test
 #+BEGIN_SRC octave :exports code :results output :session a
 clear
@@ -45,3 +126,77 @@ title('Voltage and Efficiency vs. Secondary Current');
 #+END_SRC
 
 #+RESULTS:
+** Three-phase Transformer Configurations
+*** Y-Y Connected Transformer
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|
+|----------+--------------+----------+---+----------+----------------+----------|
+|          | Primary Side |          |   |          | Secondary Side |          |
+|----------+--------------+----------+---+----------+----------------+----------|
+| Quantity |     Expected | Observed |   | Quantity |       Expected | Observed |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VRN      |          139 |      139 |   | Vrn      |            139 |      139 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VWN      |          139 |      141 |   | Vwn      |            139 |      142 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VBN      |          139 |      139 |   | Vbn      |            139 |      139 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VRW      |          240 |      243 |   | Vrw      |            240 |      243 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VWB      |          240 |      243 |   | Vwb      |            240 |      243 |
+| VBR      |          240 |      240 |   | Vbr      |            240 |      240 |
+|----------+--------------+----------+---+----------+----------------+----------|
+
+
+*** \Delta-Y Connected Transformer
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|
+|----------+--------------+----------+---+----------+----------------+----------|
+|          | Primary Side |          |   |          | Secondary Side |          |
+|----------+--------------+----------+---+----------+----------------+----------|
+| Quantity |     Expected | Observed |   | Quantity |       Expected | Observed |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VRW      |          181 |      183 |   | Vrn      |            181 |      180 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VWB      |          181 |      181 |   | Vwn      |            181 |      183 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VBR      |          181 |      181 |   | Vbn      |            181 |      181 |
+|----------+--------------+----------+---+----------+----------------+----------|
+|          |              |          |   | Vrw      |            315 |      315 |
+|----------+--------------+----------+---+----------+----------------+----------|
+|          |              |          |   | Vwb      |            315 |      315 |
+|----------+--------------+----------+---+----------+----------------+----------|
+|          |              |          |   | Vbr      |            315 |      320 |
+|----------+--------------+----------+---+----------+----------------+----------|
+
+*** Y-\Delta Connected Transformer
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|
+|----------+--------------+----------+---+----------+----------------+----------|
+|          | Primary Side |          |   |          | Secondary Side |          |
+|----------+--------------+----------+---+----------+----------------+----------|
+| Quantity |     Expected | Observed |   | Quantity |       Expected | Observed |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VRN      |          139 |      141 |   | Vrw      |            139 |      141 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VWN      |          139 |      142 |   | Vwb      |            139 |      140 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VBN      |          139 |      140 |   | Vbr      |            139 |      140 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VRW      |          240 |      245 |   |          |                |          |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VWB      |          240 |      243 |   |          |                |          |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VBR      |          240 |      242 |   |          |                |          |
+|----------+--------------+----------+---+----------+----------------+----------|
+
+*** \Delta-\Delta Connected Transformer
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|
+|----------+--------------+----------+---+----------+----------------+----------|
+|          | Primary Side |          |   |          | Secondary Side |          |
+|----------+--------------+----------+---+----------+----------------+----------|
+| Quantity |     Expected | Observed |   | Quantity |       Expected | Observed |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VRW      |          240 |      243 |   | Vrw      |            240 |      243 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VWB      |          240 |      243 |   | Vwb      |            240 |      243 |
+|----------+--------------+----------+---+----------+----------------+----------|
+| VBR      |          240 |      240 |   | Vbr      |            240 |      240 |
+|----------+--------------+----------+---+----------+----------------+----------|

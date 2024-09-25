@@ -1,4 +1,4 @@
-% Created 2024-09-19 Thu 10:01
+% Created 2024-09-25 Wed 12:45
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -13,6 +13,12 @@
 \usepackage{capt-of}
 \usepackage{hyperref}
 \usepackage{minted}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{minted}
+\usepackage{fontspec}
+\setmonofont{Iosevka}
+\setminted{fontsize=\small, frame=single, breaklines=true}
+\usemintedstyle{emacs}
 \author{Baley Eccles - 652137}
 \date{\textit{{[}2024-09-17 Tue 10:17]}}
 \title{ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4}
@@ -29,63 +35,300 @@
 \tableofcontents
 
 \section{ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4}
-\label{sec:org70ff70e}
+\label{sec:org768bc2f}
 \href{file:///home/Baley/UTAS/ENG231 - Electrical Machines And Transformers/Lab 4/Data.ods}{Data Collected During Lab}
 \subsection{Name Plate}
-\label{sec:org1499395}
-\begin{center}
-\begin{tabular}{lr}
+\label{sec:orgcaee541}
+\begin{longtable}{|l|l|}
+\hline
 VA ratings & 500\\
-Primary Voltage & 240\\
-Secondary voltage & 115\\
-Primary current & 2.08333333333333\\
-Secondary current & 4.34782608695652\\
-Turns ratio & 2.08695652173913\\
-\end{tabular}
-\end{center}
-\subsection{DC Test}
-\label{sec:org7c8fec9}
-\begin{center}
-\begin{tabular}{lr}
-Primary resistance (R1dc) & 1.5\\
-Secondary resistance (R2dc) & 0.4\\
-\end{tabular}
-\end{center}
-\subsection{Open Circuit Test}
-\label{sec:orgde0c8b9}
-\begin{center}
-\begin{tabular}{lrrrrr}
- & Primary &  &  &  & Secondary\\
- & V1 & I1 & Poc & PF & V2\\
-LV side open & 110 & 0.563 & 10.3 & 0.165 & 220\\
-HV side open & 240 & 0.375 & 12.5 & 0.138 & 120\\
-\end{tabular}
-\end{center}
-\subsection{Short Circuit Test}
-\label{sec:org357fc2b}
+\hline
+\endfirsthead
+\multicolumn{2}{l}{Continued from previous page} \\
+\hline
 
-\begin{center}
-\begin{tabular}{llllll}
+VA ratings & 500 \\
+
+\hline
+\endhead
+\hline\multicolumn{2}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+Primary voltage (\(V\)) & 240\\
+\hline
+Secondary voltage (\(V\)) & 115\\
+\hline
+Primary current (\(A\)) & 2.1\\
+\hline
+Secondary current (\(A\)) & 4.4\\
+\hline
+Turns ratio & 2.1\\
+\hline
+\end{longtable}
+\subsection{DC Test}
+\label{sec:orgf246c0b}
+\begin{longtable}{|l|l|}
+\hline
+Primary resistance (\(R_{1dc}\)) (\(\Omega\)) & 1.5\\
+\hline
+\endfirsthead
+\multicolumn{2}{l}{Continued from previous page} \\
+\hline
+
+Primary resistance (\(R_{1dc}\)) (\(\Omega\)) & 1.5 \\
+
+\hline
+\endhead
+\hline\multicolumn{2}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+Secondary resistance (\(R_{2dc}\)) (\(\Omega\)) & 0.4\\
+\hline
+\end{longtable}
+
+The primary side has a higher resistance than the secondary side, this is because the primary side has more turns.
+\begin{align*}
+a&=2.1 \\
+R_{eqHV}&=a^{2}R_2+R_1\\
+R_{eqHV}&=3.242\Omega \\
+R_{eqHV}&=(1/a)^{2}R_1+R_2\\
+R_{eqHV}&=1.12\Omega \\
+\end{align*}
+\subsection{Open Circuit Test}
+\label{sec:org7789cf2}
+\begin{longtable}{|l|l|l|l|l|l|}
+\hline
  & Primary &  &  &  & Secondary\\
- & V1 & I1 & Poc & PF & I2\\
+\hline
+\endfirsthead
+\multicolumn{6}{l}{Continued from previous page} \\
+\hline
+
+ & Primary &  &  &  & Secondary \\
+
+\hline
+\endhead
+\hline\multicolumn{6}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+ & V1 & I1 & Poc & PF & V2\\
+\hline
+LV side open & 110 & 0.563 & 10.3 & 0.165 & 220\\
+\hline
+HV side open & 240 & 0.375 & 12.5 & 0.138 & 120\\
+\hline
+\end{longtable}
+
+\begin{align*}
+&\textrm{LV side open} & &\textrm{HV side open} \\
+a&=\frac{V_{2}}{V_{1}} & a&=\frac{V_{2}}{V_{1}} \\
+a&=2 & a&=2
+\end{align*}
+\begin{align*}
+&\textrm{LV side open} & &\textrm{HV side open} \\
+PF&=\frac{P_{oc}}{V_1I_1} & PF&=\frac{P_{oc}}{V_1I_1} \\
+&=0.16631 & &= 0.13889
+\end{align*}
+The calculated power factor is very close to the measured power factor.
+\begin{align*}
+&\textrm{LV side open} & &\textrm{HV side open} \\
+R_{c1}&=\frac{V_1^2}{P_{oc}} & R_{c1}&=\frac{V_1^2}{P_{oc}} \\
+&=1174.76\Omega & &=4680\Omega \\
+X_{m1}&=\frac{V_1}{\sqrt{I_1^2+\left(\frac{V_1}{R_{c1}}\right)^2}} & X_{m1}&=\frac{V_1}{\sqrt{I_1^2+\left(\frac{V_1}{R_{c1}}\right)^2}} \\
+&=192.73\Omega & &=633.92\Omega
+\end{align*}
+TODO
+\subsection{Short Circus Test}
+\label{sec:orgead4bfe}
+\begin{longtable}{|l|l|l|l|l|l|}
+\hline
+ & Primary &  &  &  & Secondary\\
+\hline
+\endfirsthead
+\multicolumn{6}{l}{Continued from previous page} \\
+\hline
+
+ & Primary &  &  &  & Secondary \\
+
+\hline
+\endhead
+\hline\multicolumn{6}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+ & V1 & I1 & Psc & PF & I2\\
+\hline
 LV side Short circuited & 7 & 1.76 & 10 & 0.863 & 3.5\\
-\end{tabular}
-\end{center}
+\hline
+\end{longtable}
+\begin{align*}
+R_{eq}&=\frac{P_{sc}}{I_1^2} \\
+&=3.228\Omega \\
+X_{eq}&=\sqrt{\left(\frac{V_1}{I_1}\right)^2-R_{eq}^{2}} \\
+&=5.123\Omega
+\end{align*}
+\begin{align*}
+PF&=\frac{P_{sc}}{V_1I_1} \\
+&=0.81169
+\end{align*}
+The calculated power factor matches the measured one.
+TODO
 \subsection{Performance Test / Full Load Test}
-\label{sec:orga4f40b2}
-\begin{center}
-\begin{tabular}{llrrrrrrrr}
- &  & No Load & Load 1: 200ohm & Load 2: 150ohm & Load 3: 100ohm & Load 4: 75ohm & Load 5: 50ohm & Load 6: 33ohm & Load 7: 25ohm\\
-Primary & V1 & 240 & 240 & 240 & 240 & 240 & 240 & 240 & 240\\
- & I1 & 0.375 & 0.495 & 0.56 & 0.71 & 0.88 & 1.2 & 1.75 & 2.28\\
- & P1 & 12 & 80 & 102 & 147 & 191 & 277 & 409 & 537\\
- & PF & 0.138 & 0.677 & 0.76 & 0.861 & 0.912 & 0.954 & 0.977 & 0.958\\
-Secondary & V2 & 120 & 120 & 119 & 118 & 118 & 117 & 116 & 115\\
- & I2 & 0 & 0.56 & 0.753 & 1.12 & 1.5 & 2.2 & 3.3 & 4.4\\
- & P2 & 0 & 67 & 90 & 133 & 177 & 262 & 386 & 509\\
- & PF & NULL & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
-\% Efficiency &  &  &  &  &  &  &  &  & \\
-\% Voltage Regulation &  &  &  &  &  &  &  &  & \\
-\end{tabular}
-\end{center}
+\label{sec:org6a44ff2}
+\begin{minted}[]{octave}
+clear
+clc
+close
+V2=[120, 120, 119, 118, 118, 117, 116, 115];
+P1=[12, 80, 102, 147, 191, 277, 409, 537];
+P2=[0, 67, 90, 133, 177, 262, 386, 509];
+I2=[0, 0.56, 0.753, 1.12, 1.5, 2.2, 3.3, 4.4];
+Eff=P1./P2;
+
+subplot(2, 1, 1);
+plot(I2, V2, 'o', 'LineWidth', 2);
+xlabel('Secondary Current (A)');
+ylabel('Measured Secondary Voltage (V)');
+title('Measured Secondary Voltage vs. Secondary Current');
+grid on;
+
+subplot(2, 1, 2);
+plot(I2, Eff, 'o', 'LineWidth', 2);
+xlabel('Secondary Current (A)');
+ylabel('Efficiency');
+title('Efficiency vs. Secondary Current');
+grid on;
+
+title('Voltage and Efficiency vs. Secondary Current');
+\end{minted}
+\subsection{Three-phase Transformer Configurations}
+\label{sec:orgb145231}
+\subsubsection{Y-Y Connected Transformer}
+\label{sec:org775a045}
+\begin{longtable}{|l|l|l|l|l|l|l|}
+\hline
+ & Primary Side &  &  &  & Secondary Side & \\
+\hline
+\endfirsthead
+\multicolumn{7}{l}{Continued from previous page} \\
+\hline
+
+ & Primary Side &  &  &  & Secondary Side &  \\
+
+\hline
+\endhead
+\hline\multicolumn{7}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+Quantity & Expected & Observed &  & Quantity & Expected & Observed\\
+\hline
+VRN & 139 & 139 &  & Vrn & 139 & 139\\
+\hline
+VWN & 139 & 141 &  & Vwn & 139 & 142\\
+\hline
+VBN & 139 & 139 &  & Vbn & 139 & 139\\
+\hline
+VRW & 240 & 243 &  & Vrw & 240 & 243\\
+\hline
+VWB & 240 & 243 &  & Vwb & 240 & 243\\
+VBR & 240 & 240 &  & Vbr & 240 & 240\\
+\hline
+\end{longtable}
+\subsubsection{\(\Delta\)-Y Connected Transformer}
+\label{sec:orge9838e3}
+\begin{longtable}{|l|l|l|l|l|l|l|}
+\hline
+ & Primary Side &  &  &  & Secondary Side & \\
+\hline
+\endfirsthead
+\multicolumn{7}{l}{Continued from previous page} \\
+\hline
+
+ & Primary Side &  &  &  & Secondary Side &  \\
+
+\hline
+\endhead
+\hline\multicolumn{7}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+Quantity & Expected & Observed &  & Quantity & Expected & Observed\\
+\hline
+VRW & 181 & 183 &  & Vrn & 181 & 180\\
+\hline
+VWB & 181 & 181 &  & Vwn & 181 & 183\\
+\hline
+VBR & 181 & 181 &  & Vbn & 181 & 181\\
+\hline
+ &  &  &  & Vrw & 315 & 315\\
+\hline
+ &  &  &  & Vwb & 315 & 315\\
+\hline
+ &  &  &  & Vbr & 315 & 320\\
+\hline
+\end{longtable}
+\subsubsection{Y-\(\Delta\) Connected Transformer}
+\label{sec:org877e039}
+\begin{longtable}{|l|l|l|l|l|l|l|}
+\hline
+ & Primary Side &  &  &  & Secondary Side & \\
+\hline
+\endfirsthead
+\multicolumn{7}{l}{Continued from previous page} \\
+\hline
+
+ & Primary Side &  &  &  & Secondary Side &  \\
+
+\hline
+\endhead
+\hline\multicolumn{7}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+Quantity & Expected & Observed &  & Quantity & Expected & Observed\\
+\hline
+VRN & 139 & 141 &  & Vrw & 139 & 141\\
+\hline
+VWN & 139 & 142 &  & Vwb & 139 & 140\\
+\hline
+VBN & 139 & 140 &  & Vbr & 139 & 140\\
+\hline
+VRW & 240 & 245 &  &  &  & \\
+\hline
+VWB & 240 & 243 &  &  &  & \\
+\hline
+VBR & 240 & 242 &  &  &  & \\
+\hline
+\end{longtable}
+\subsubsection{\(\Delta\)-\(\Delta\) Connected Transformer}
+\label{sec:org72fb8fd}
+\begin{longtable}{|l|l|l|l|l|l|l|}
+\hline
+ & Primary Side &  &  &  & Secondary Side & \\
+\hline
+\endfirsthead
+\multicolumn{7}{l}{Continued from previous page} \\
+\hline
+
+ & Primary Side &  &  &  & Secondary Side &  \\
+
+\hline
+\endhead
+\hline\multicolumn{7}{r}{Continued on next page} \\
+\endfoot
+\endlastfoot
+\hline
+Quantity & Expected & Observed &  & Quantity & Expected & Observed\\
+\hline
+VRW & 240 & 243 &  & Vrw & 240 & 243\\
+\hline
+VWB & 240 & 243 &  & Vwb & 240 & 243\\
+\hline
+VBR & 240 & 240 &  & Vbr & 240 & 240\\
+\hline
+\end{longtable}
 \end{document}
