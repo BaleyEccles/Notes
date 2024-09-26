@@ -14,16 +14,17 @@
    - Instead on the T-S curves we are making negative torque
    - [[file:Screenshot 2024-09-24 at 12-35-22 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
 
+
 ** DC Motors
- - More typical
+ - More typicla
  - Basic example
    - [[file:Screenshot 2024-09-24 at 12-00-14 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
- - For one coil
+ - For one conductor
    - the induced voltage is:
-     - \[\matcal{E}_{i}=2rlB\cos(\theta_i)\omega_{m}\]
+     - \[\mathcal{E}_{i}=2rlB\cos(\theta_i)\omega_{m}=\Phi\cos(\theta_i)\omega_{m}\]
    - The torque is:
      - \[\tau_i=2Bli_cr\cos(\theta_i)=\Phi i_c\cos(\theta_i)\]
- - For N coils
+ - For N conductors
    - the induced voltage is:
      - \[\mathcal{E}_{a}=K_a\Phi \omega_m\]
        - $K_a$ is the machine constant
@@ -61,6 +62,8 @@
  - \[\tau=\frac{K_aK_fV_t^2}{R_aR_{fw}}\left(1-\frac{K_aK_f}{R_{fw}}\omega_m\right)\]
  - [[file:Screenshot 2024-09-24 at 12-28-38 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
 **** Series Connected DC Motor
+ - \[I_a=\sqrt{\frac{\tau}{K_{sr}}}\]
+ - \[\mathcal{E}_a=K_{sr}I_a\omega_{m}\]
  - \[\tau=\frac{k_{sr}V_t^2}{(R_a+R_{ae}+R_{fw}+K_{sr}\omega_m)^2}\]
  - [[file:Screenshot 2024-09-24 at 12-31-08 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
 
@@ -71,4 +74,5 @@
    - \[I_a^2R_a\]
  - Rotational
    - \[P_{rotational}\approx 3-15\%\]
- - \[\eta=\frac{P_{out}}{P_{out}+Losses}\]
+ - Efficiency
+   - \[\eta=\frac{P_{out}}{P_{out}+Losses}\]

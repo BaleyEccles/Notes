@@ -4,6 +4,7 @@
 #+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4
 #+date: [2024-09-17 Tue 10:17]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}
@@ -42,8 +43,8 @@ The primary side has a higher resistance than the secondary side, this is becaus
 a&=2.1 \\
 R_{eqHV}&=a^{2}R_2+R_1\\
 R_{eqHV}&=3.242\Omega \\
-R_{eqHV}&=(1/a)^{2}R_1+R_2\\
-R_{eqHV}&=1.12\Omega \\
+R_{eqLV}&=(1/a)^{2}R_1+R_2\\
+R_{eqLV}&=1.12\Omega \\
 \end{align*}
 ** Open Circuit Test
 #+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|
@@ -57,17 +58,22 @@ R_{eqHV}&=1.12\Omega \\
 | HV side open |     240 | 0.375 | 12.5 | 0.138 |       120 |
 |--------------+---------+-------+------+-------+-----------|
 
+[Group] Calculate turns ratio for your transformer (a = N1 / N2) based on measured open-circuit voltages. Explain why there is a difference (if there is any difference) between your measurements and the nameplate voltages?
 \begin{align*}
 &\textrm{LV side open} & &\textrm{HV side open} \\
 a&=\frac{V_{2}}{V_{1}} & a&=\frac{V_{2}}{V_{1}} \\
 a&=2 & a&=2
 \end{align*}
+
+[Group] Calculate power factor from voltage, current and power measurements and verify that it matches your measured value (from power analyser)
 \begin{align*}
 &\textrm{LV side open} & &\textrm{HV side open} \\
 PF&=\frac{P_{oc}}{V_1I_1} & PF&=\frac{P_{oc}}{V_1I_1} \\
 &=0.16631 & &= 0.13889
 \end{align*}
 The calculated power factor is very close to the measured power factor.
+
+[Group] Calculate the core resistance Rc1 and the magnetizing reactance Xm1. (Do this now in the lab and check with the demonstrator that you have something reasonable before you continue)
 \begin{align*}
 &\textrm{LV side open} & &\textrm{HV side open} \\
 R_{c1}&=\frac{V_1^2}{P_{oc}} & R_{c1}&=\frac{V_1^2}{P_{oc}} \\
@@ -75,7 +81,14 @@ R_{c1}&=\frac{V_1^2}{P_{oc}} & R_{c1}&=\frac{V_1^2}{P_{oc}} \\
 X_{m1}&=\frac{V_1}{\sqrt{I_1^2+\left(\frac{V_1}{R_{c1}}\right)^2}} & X_{m1}&=\frac{V_1}{\sqrt{I_1^2+\left(\frac{V_1}{R_{c1}}\right)^2}} \\
 &=192.73\Omega & &=633.92\Omega
 \end{align*}
-TODO
+
+[Individual] Comment on the differences, if any, between supplying power and measuring from
+the HV side or the LV side The LV side shows a higher power compared to the HV side. This means that the LV side consumes more power. This makes sense with the calculated resistances, the LV side has a higher resistance and hence a higher power draw.
+
+[Individual] Calculate the % increase in current observed when voltage is increased by 20% above rated voltage? Comment on your observations and discuss?
+TODO: I dont think we did this
+
+[Individual] On the Power Analyser (still while operating at 20% above rated voltage) observe transformer supply V and I waveforms. Include a sketch or image of a key waveform observed to help describe what you have observed and why? Does the waveform vary as supply voltage is varied?
 ** Short Circus Test
 #+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|
 |-------------------------+---------+------+-----+-------+-----------|
@@ -85,28 +98,39 @@ TODO
 |-------------------------+---------+------+-----+-------+-----------|
 | LV side Short circuited | 7       | 1.76 |  10 | 0.863 | 3.5       |
 |-------------------------+---------+------+-----+-------+-----------|
+
+[Group] Calculate $R_{eq}$ & $X_{eq}$.
 \begin{align*}
 R_{eq}&=\frac{P_{sc}}{I_1^2} \\
 &=3.228\Omega \\
 X_{eq}&=\sqrt{\left(\frac{V_1}{I_1}\right)^2-R_{eq}^{2}} \\
 &=5.123\Omega
 \end{align*}
+
+[Group] Calculate power factor from these values and verify your measured value.
 \begin{align*}
 PF&=\frac{P_{sc}}{V_1I_1} \\
 &=0.81169
 \end{align*}
 The calculated power factor matches the measured one.
-TODO
+
+[Individual] Compare $R_{eq}$ (equivalent winding AC resistance) to the DC resistance values measured earlier (you will need to refer them both to the same side). Why do you think there is a difference (if there is any)?
+\[R_{dcTotal}=3.1\Omega\]
+The AC resistance is slightly larger than the DC resistance
+
+[Individual] Draw the full equivalent circuit for your transformer, labelling impedances with your determined transformer parameters
+[[file:~/UTAS/ENG231 - Electrical Machines And Transformers/Lab 4/Transformer.png]]
+
 ** Performance Test / Full Load Test
 #+BEGIN_SRC octave :exports code :results output :session a
 clear
 clc
 close
-V2=[120, 120, 119, 118, 118, 117, 116, 115];
-P1=[12, 80, 102, 147, 191, 277, 409, 537];
-P2=[0, 67, 90, 133, 177, 262, 386, 509];
-I2=[0, 0.56, 0.753, 1.12, 1.5, 2.2, 3.3, 4.4];
-Eff=P1./P2;
+V2=[ 120, 119, 118, 118, 117, 116, 115];
+P1=[ 80, 102, 147, 191, 277, 409, 537];
+P2=[ 67, 90, 133, 177, 262, 386, 509];
+I2=[ 0.56, 0.753, 1.12, 1.5, 2.2, 3.3, 4.4];
+Eff=P2./P1*100;
 
 subplot(2, 1, 1);
 plot(I2, V2, 'o', 'LineWidth', 2);
@@ -126,6 +150,34 @@ title('Voltage and Efficiency vs. Secondary Current');
 #+END_SRC
 
 #+RESULTS:
+
+
+#+BEGIN_SRC octave :exports code :results output :session a
+clear
+clc
+close
+
+% Transformer Parameters
+V1=240; % Vin
+Req = 3.242;
+Xeq = 5.123;
+Zeq=Req+i*Xeq
+
+Rc1 = 1174;
+Xm1 = 192.73;
+Rc2 = 4680;
+Xm2 = 663;
+
+Zeq2=
+
+Loads = [0,200,150,100,75,50,33,25];
+
+
+
+#+END_SRC
+
+#+RESULTS:
+
 ** Three-phase Transformer Configurations
 *** Y-Y Connected Transformer
 #+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|

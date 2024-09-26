@@ -1,4 +1,4 @@
-% Created 2024-09-25 Wed 12:45
+% Created 2024-09-26 Thu 16:07
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -35,10 +35,9 @@
 \tableofcontents
 
 \section{ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4}
-\label{sec:org768bc2f}
-\href{file:///home/Baley/UTAS/ENG231 - Electrical Machines And Transformers/Lab 4/Data.ods}{Data Collected During Lab}
+\label{sec:orgfc9238e}
 \subsection{Name Plate}
-\label{sec:orgcaee541}
+\label{sec:org03d8851}
 \begin{longtable}{|l|l|}
 \hline
 VA ratings & 500\\
@@ -67,7 +66,7 @@ Turns ratio & 2.1\\
 \hline
 \end{longtable}
 \subsection{DC Test}
-\label{sec:orgf246c0b}
+\label{sec:orgb6f6dce}
 \begin{longtable}{|l|l|}
 \hline
 Primary resistance (\(R_{1dc}\)) (\(\Omega\)) & 1.5\\
@@ -93,11 +92,11 @@ The primary side has a higher resistance than the secondary side, this is becaus
 a&=2.1 \\
 R_{eqHV}&=a^{2}R_2+R_1\\
 R_{eqHV}&=3.242\Omega \\
-R_{eqHV}&=(1/a)^{2}R_1+R_2\\
-R_{eqHV}&=1.12\Omega \\
+R_{eqLV}&=(1/a)^{2}R_1+R_2\\
+R_{eqLV}&=1.12\Omega \\
 \end{align*}
 \subsection{Open Circuit Test}
-\label{sec:org7789cf2}
+\label{sec:orgd55cbf3}
 \begin{longtable}{|l|l|l|l|l|l|}
 \hline
  & Primary &  &  &  & Secondary\\
@@ -122,17 +121,22 @@ HV side open & 240 & 0.375 & 12.5 & 0.138 & 120\\
 \hline
 \end{longtable}
 
+{[}Group] Calculate turns ratio for your transformer (a = N1 / N2) based on measured open-circuit voltages. Explain why there is a difference (if there is any difference) between your measurements and the nameplate voltages?
 \begin{align*}
 &\textrm{LV side open} & &\textrm{HV side open} \\
 a&=\frac{V_{2}}{V_{1}} & a&=\frac{V_{2}}{V_{1}} \\
 a&=2 & a&=2
 \end{align*}
+
+{[}Group] Calculate power factor from voltage, current and power measurements and verify that it matches your measured value (from power analyser)
 \begin{align*}
 &\textrm{LV side open} & &\textrm{HV side open} \\
 PF&=\frac{P_{oc}}{V_1I_1} & PF&=\frac{P_{oc}}{V_1I_1} \\
 &=0.16631 & &= 0.13889
 \end{align*}
 The calculated power factor is very close to the measured power factor.
+
+{[}Group] Calculate the core resistance Rc1 and the magnetizing reactance Xm1. (Do this now in the lab and check with the demonstrator that you have something reasonable before you continue)
 \begin{align*}
 &\textrm{LV side open} & &\textrm{HV side open} \\
 R_{c1}&=\frac{V_1^2}{P_{oc}} & R_{c1}&=\frac{V_1^2}{P_{oc}} \\
@@ -140,9 +144,16 @@ R_{c1}&=\frac{V_1^2}{P_{oc}} & R_{c1}&=\frac{V_1^2}{P_{oc}} \\
 X_{m1}&=\frac{V_1}{\sqrt{I_1^2+\left(\frac{V_1}{R_{c1}}\right)^2}} & X_{m1}&=\frac{V_1}{\sqrt{I_1^2+\left(\frac{V_1}{R_{c1}}\right)^2}} \\
 &=192.73\Omega & &=633.92\Omega
 \end{align*}
-TODO
+
+{[}Individual] Comment on the differences, if any, between supplying power and measuring from
+the HV side or the LV side The LV side shows a higher power compared to the HV side. This means that the LV side consumes more power. This can makes sense with the calculated resistances, the LV side has a higher resistance and hence a higher power draw.
+
+{[}Individual] Calculate the \% increase in current observed when voltage is increased by 20\% above rated voltage? Comment on your observations and discuss?
+TODO: I dont think we did this
+
+{[}Individual] On the Power Analyser (still while operating at 20\% above rated voltage) observe transformer supply V and I waveforms. Include a sketch or image of a key waveform observed to help describe what you have observed and why? Does the waveform vary as supply voltage is varied?
 \subsection{Short Circus Test}
-\label{sec:orgead4bfe}
+\label{sec:org4254d38}
 \begin{longtable}{|l|l|l|l|l|l|}
 \hline
  & Primary &  &  &  & Secondary\\
@@ -164,29 +175,40 @@ TODO
 LV side Short circuited & 7 & 1.76 & 10 & 0.863 & 3.5\\
 \hline
 \end{longtable}
+
+{[}Group] Calculate \(R_{eq}\) \& \(X_{eq}\).
 \begin{align*}
 R_{eq}&=\frac{P_{sc}}{I_1^2} \\
 &=3.228\Omega \\
 X_{eq}&=\sqrt{\left(\frac{V_1}{I_1}\right)^2-R_{eq}^{2}} \\
 &=5.123\Omega
 \end{align*}
+
+{[}Group] Calculate power factor from these values and verify your measured value.
 \begin{align*}
 PF&=\frac{P_{sc}}{V_1I_1} \\
 &=0.81169
 \end{align*}
 The calculated power factor matches the measured one.
+
+{[}Individual] Compare \(R_{eq}\) (equivalent winding AC resistance) to the DC resistance values measured earlier (you will need to refer them both to the same side). Why do you think there is a difference (if there is any)?
+\[R_{dcTotal}=3.1\Omega\]
+The AC resistance is slightly larger than the DC resistance
+
+{[}Individual] Draw the full equivalent circuit for your transformer, labelling impedances with your determined transformer parameters
+
 TODO
 \subsection{Performance Test / Full Load Test}
-\label{sec:org6a44ff2}
+\label{sec:orgcdc0280}
 \begin{minted}[]{octave}
 clear
 clc
 close
-V2=[120, 120, 119, 118, 118, 117, 116, 115];
-P1=[12, 80, 102, 147, 191, 277, 409, 537];
-P2=[0, 67, 90, 133, 177, 262, 386, 509];
-I2=[0, 0.56, 0.753, 1.12, 1.5, 2.2, 3.3, 4.4];
-Eff=P1./P2;
+V2=[ 120, 119, 118, 118, 117, 116, 115];
+P1=[ 80, 102, 147, 191, 277, 409, 537];
+P2=[ 67, 90, 133, 177, 262, 386, 509];
+I2=[ 0.56, 0.753, 1.12, 1.5, 2.2, 3.3, 4.4];
+Eff=P2./P1*100;
 
 subplot(2, 1, 1);
 plot(I2, V2, 'o', 'LineWidth', 2);
@@ -204,10 +226,88 @@ grid on;
 
 title('Voltage and Efficiency vs. Secondary Current');
 \end{minted}
+
+\begin{minted}[]{octave}
+clear
+clc
+close
+% Transformer Parameters
+V1_rated = 240; % Primary rated voltage (V)
+V2_rated = 115; % Secondary rated voltage (V)
+R1 = 1.5;       % Primary resistance (Ω)
+R2 = 0.4;       % Secondary resistance (Ω)
+X1 = 192.73;       % Primary reactance (Ω)
+X2 = 633.92;       % Secondary reactance (Ω)
+S_rated = 10^3; % Rated power (VA)
+
+% Load Conditions (Ohms)
+load_resistances = [200, 150, 100, 75, 50, 33, 25]; % Load values (Ω)
+
+% Initialize results
+results = zeros(length(load_resistances), 8); % Columns for V1, I1, P1, PF, V2, I2, P2, Efficiency
+
+for i = 1:length(load_resistances)
+    R_load = load_resistances(i);
+
+    % Calculate secondary current (I2)
+    I2 = V2_rated / R_load; % Assuming full load voltage
+
+    % Calculate secondary voltage (V2)
+    V2 = V2_rated - (I2 * R2) - (I2 * 1j * X2); % Complex voltage
+
+    % Calculate primary current (I1)
+    I1 = (I2 * V2_rated) / V1_rated; % Assuming ideal transformer
+
+    % Calculate power (assuming PF = 1 for simplicity)
+    P2 = V2 * I2; % Output power
+    P1 = V1_rated * I1; % Input power (ideal case)
+
+    % Calculate efficiency
+    efficiency = (abs(P2) / abs(P1)) * 100; % Efficiency in percentage
+
+    % Store results
+    results(i, :) = [V1_rated, I1, abs(P1), 1, abs(V2), I2, abs(P2), efficiency];
+end
+
+% Display results
+disp('Results (V1, I1, P1, PF, V2, I2, P2, Efficiency):');
+disp(results);
+
+% Plotting
+figure;
+subplot(2, 1, 1);
+plot(load_resistances, results(:, 5), '-o'); % Secondary Voltage
+xlabel('Load Resistance (Ω)');
+ylabel('Secondary Voltage (V)');
+title('Secondary Voltage vs Load Resistance');
+
+subplot(2, 1, 2);
+plot(load_resistances, results(:, 8), '-o'); % Efficiency
+xlabel('Load Resistance (Ω)');
+ylabel('Efficiency (%)');
+title('Efficiency vs Load Resistance');
+
+\end{minted}
+
+\begin{minted}[]{octave}
+clear
+clc
+close
+
+% Transformer Parameters
+V1_rated = 240; % Primary rated voltage (V)
+V2_rated = 115; % Secondary rated voltage (V)
+R1 = 1.5;       % Primary resistance (Ω)
+R2 = 0.4;       % Secondary resistance (Ω)
+X1 = 5.123;    % Primary reactance (Ω)
+S_rated = 500;  % Rated power (VA)
+
+
+\end{minted}
 \subsection{Three-phase Transformer Configurations}
-\label{sec:orgb145231}
+\label{sec:org8ccf199}
 \subsubsection{Y-Y Connected Transformer}
-\label{sec:org775a045}
+\label{sec:org88b83c5}
 \begin{longtable}{|l|l|l|l|l|l|l|}
 \hline
  & Primary Side &  &  &  & Secondary Side & \\
@@ -239,7 +339,7 @@ VBR & 240 & 240 &  & Vbr & 240 & 240\\
 \hline
 \end{longtable}
 \subsubsection{\(\Delta\)-Y Connected Transformer}
-\label{sec:orge9838e3}
+\label{sec:org7fd7304}
 \begin{longtable}{|l|l|l|l|l|l|l|}
 \hline
  & Primary Side &  &  &  & Secondary Side & \\
@@ -272,7 +372,7 @@ VBR & 181 & 181 &  & Vbn & 181 & 181\\
 \hline
 \end{longtable}
 \subsubsection{Y-\(\Delta\) Connected Transformer}
-\label{sec:org877e039}
+\label{sec:org04f6dc2}
 \begin{longtable}{|l|l|l|l|l|l|l|}
 \hline
  & Primary Side &  &  &  & Secondary Side & \\
@@ -305,7 +405,7 @@ VBR & 240 & 242 &  &  &  & \\
 \hline
 \end{longtable}
 \subsubsection{\(\Delta\)-\(\Delta\) Connected Transformer}
-\label{sec:org72fb8fd}
+\label{sec:org8115f67}
 \begin{longtable}{|l|l|l|l|l|l|l|}
 \hline
  & Primary Side &  &  &  & Secondary Side & \\

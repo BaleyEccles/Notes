@@ -4,6 +4,7 @@
 #+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 2
 #+date: [2024-08-20 Tue 13:58]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:
 #+STARTUP: latexpreview
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 2

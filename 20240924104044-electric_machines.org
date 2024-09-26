@@ -11,7 +11,7 @@
    - Power $P$
    - Torque $\tau$
    - Rotational velocity $\omega$
-   - \[P=\tau\cdot\omega\]
+   - \[P=\tau\omega\]
 ** Motor
  - Converts electrical energy into mechanical energy
    - \[v,i \rightarrow \tau,\omega\]

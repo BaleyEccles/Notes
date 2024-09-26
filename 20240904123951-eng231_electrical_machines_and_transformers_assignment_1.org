@@ -4,6 +4,7 @@
 #+title: ENG231 - Electrical Machines And Transformers - Assignment 1
 #+date: [2024-09-04 Wed 12:39]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:
 #+STARTUP: latexpreview
 
 * ENG231 - Electrical Machines And Transformers - Assignment 1

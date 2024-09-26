@@ -3,6 +3,7 @@
 :END:
 #+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 1
 #+date: [2024-08-06 Tue 12:53]
+#+FILETAGS: :Assignment:
 #+STARTUP: latexpreview
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 1
