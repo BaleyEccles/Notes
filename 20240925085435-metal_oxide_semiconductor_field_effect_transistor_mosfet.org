@@ -6,4 +6,34 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* TODO Metal–Oxide–Semiconductor Field Effect Transistor (MOSFET)
+* Metal–Oxide–Semiconductor Field Effect Transistor (MOSFET)
+ - [[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductor]] device that can be used as a switch, resistor or amplifier.
+ - Voltage controlled, unlike [[id:47517c75-582b-4948-a2a7-f88e883e7b65][Bipolar Junction Transistors]]
+** Depletion
+ - When voltage is applied to the gate, the conductivity reduces
+ - [[file:Screenshot 2024-09-27 at 09-16-10 PowerPoint Presentation - Analog 3 - Field Effect Transistors.pdf.png]]
+   - Two channel types
+     [[file:Screenshot 2024-09-27 at 09-16-49 PowerPoint Presentation - Analog 3 - Field Effect Transistors.pdf.png]]
+     - P-channel
+       - Has a [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] material as the channel
+     - N-channel
+       - Has a [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] material as the channel
+*** Equations
+ - Same equations as the [[id:93c76c0b-cbbe-4688-8921-07db5a4d01ca][JFET]], except that $I_G$ is exactly 0 amps.
+ - \[I_{D}=I_{DSS}\left(1-\frac{V_{GS}}{V_P}\right)^{2}\]
+ - \[I_{D}=I_{S}\]
+ - \[I_G=0A\]
+** Enhancement
+ - When voltage is applied to the gate, the conductivity increases
+ - [[file:Screenshot 2024-09-27 at 09-15-31 PowerPoint Presentation - Analog 3 - Field Effect Transistors.pdf.png]]
+   - Two channel types
+     [[file:Screenshot 2024-09-27 at 09-18-15 PowerPoint Presentation - Analog 3 - Field Effect Transistors.pdf.png]]
+     - P-channel
+       - Has a [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] material as the channel
+     - N-channel
+       - Has a [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] material as the channel
+*** Equations
+ - Same equations as the [[id:93c76c0b-cbbe-4688-8921-07db5a4d01ca][JFET]], except that $I_G$ is exactly 0 amps.
+ - \[I_{D}=I_{DSS}\left(1-\frac{V_{GS}}{V_P}\right)^{2}\]
+ - \[I_{D}=I_{S}\]
+ - \[I_G=0A\]
