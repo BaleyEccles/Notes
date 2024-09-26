@@ -4,17 +4,60 @@
 #+title: ENG204 - Signals and Linear Systems - Assignment 1.4
 #+date: [2024-09-20 Fri 18:34]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:
 #+STARTUP: latexpreview
 
 * Laplace Transforms to solve Partial Differential Equations
-** TODO a
+** a
+#+BEGIN_SRC octave :exports none :results output :session b
+clear
+clc
+close
+pkg load symbolic
+syms s
+expr = (-3*s) /(85*(s^2+9))*exp(-2*s) ...
+    -(2)   /(85*(s^2+9))*exp(-2*s) ...
+    -(1)   /(68*(s+5))*exp(-2*s) ...
+    +(1)   /(20*(s+1))*exp(-2*s) ...
+    -(5*s) /(1377*(s^2+9)) ...
+    -(1)   /(153*(s^2+9)) ...
+    +(1)   /(2125*(s+5)) ...
+    +(32)  /(10125*s) ...
+    +(2)   /(225*s^2) ...
+    -(2)   /(45*s^3);
+ilaplace(expr)
+latex(ilaplace(expr))
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+ans = (sym)
+
+     2          2 - t             10 - 5⋅t                                                               ↪
+    t    2⋅t   ℯ     ⋅θ(t - 2)   ℯ        ⋅θ(t - 2)   sin(3⋅t)   2⋅sin(3⋅t - 6)⋅θ(t - 2)   5⋅cos(3⋅t)    ↪
+  - ── + ─── + ─────────────── - ────────────────── - ──────── - ─────────────────────── - ────────── -  ↪
+    45   225         20                  68             459                255                1377       ↪
+
+  ↪                                    -5⋅t
+  ↪ 3⋅cos(3⋅t - 6)⋅θ(t - 2)    32     ℯ
+  ↪ ─────────────────────── + ───── + ─────
+  ↪           85              10125   2125
+- \frac{t^{2}}{45} + \frac{2 t}{225} + \frac{e^{2 - t} \theta\left(t - 2\right)}{20} - \frac{e^{10 - 5 t} \theta\left(t - 2\right)}{68} - \frac{\sin{\left(3 t \right)}}{459} - \frac{2 \sin{\left(3 t - 6 \right)} \theta\left(t - 2\right)}{255} - \frac{5 \cos{\left(3 t \right)}}{1377} - \frac{3 \cos{\left(3 t - 6 \right)} \theta\left(t - 2\right)}{85} + \frac{32}{10125} + \frac{e^{- 5 t}}{2125}
+#+end_example
+
 \begin{align*}
 \frac{d^3y}{d^3t}+5\frac{d^2y}{d^2t}+9\frac{dy}{dt}+45y &= -t^2u(t)+2e^{-t}u(t-2) \\
-\leftrightarrow^{\mathcal{L}} s^3Y(s)+5s^2Y(s)+9sY(s)+45Y(s) &= -\frac{2}{s^{3}} +2e^{-2s}\frac{e^{-s}}{s+1} \\
-Y(s) &= \frac{-\frac{2}{s^{3}} +2\frac{e^{-3s}}{s+1}}{s^3+5s^2+9s+45}
+\leftrightarrow^{\mathcal{L}} s^3Y(s)+5s^2Y(s)+9sY(s)+45Y(s) &= -\frac{2}{s^{3}} +2e^{-2s}\frac{1}{s+1} \\
+Y(s) &= \frac{-\frac{2}{s^{3}} +2\frac{e^{-2s}}{s+1}}{s^3+5s^2+9s+45}\\
+&\textrm{From calculator:} \\
+Y(s)&=\frac{-3s}{85\left(s^2+9\right)}e^{-2s}-\frac{2}{85\left(s^2+9\right)}e^{-2s}-\frac{1}{68\left(s+5\right)}e^{-2s}+\frac{1}{20\left(s+1\right)}e^{-2s}-\frac{5s}{1377\left(s^2+9\right)}-\frac{1}{153\left(s^2+9\right)}+\frac{1}{2125\left(s+5\right)}+\frac{32}{10125s}+\frac{2}{225s^2}-\frac{2}{45s^3} \\
+&\textrm{From matlab:} \\
+y(t)&=- \frac{t^{2}}{45} + \frac{2 t}{225} + \frac{e^{2 - t} \theta\left(t - 2\right)}{20} - \frac{e^{10 - 5 t} \theta\left(t - 2\right)}{68} - \frac{\sin{\left(3 t \right)}}{459} - \frac{2 \sin{\left(3 t - 6 \right)} \theta\left(t - 2\right)}{255} - \frac{5 \cos{\left(3 t \right)}}{1377} - \frac{3 \cos{\left(3 t - 6 \right)} \theta\left(t - 2\right)}{85} + \frac{32}{10125} + \frac{e^{- 5 t}}{2125}
 \end{align*}
 ** b
 *** 1
+
 *** 2
 *** 3
 *** 4
@@ -22,3 +65,92 @@ Y(s) &= \frac{-\frac{2}{s^{3}} +2\frac{e^{-3s}}{s+1}}{s^3+5s^2+9s+45}
 ** c
 ** d
 * Harmonic Filter
+Please use a system voltage of 33 kV
+Please use a capacitor of size 6 MVAR
+Please use a quality factor of 28
+Please use an inductance L2 of 18 mH
+Your filter must reject harmonic numbers 3 and 7
+#+BEGIN_SRC octave :exports none :results output :session b
+clear
+clc
+close
+warning('off', 'all');
+pkg load symbolic
+%Provided from p file
+Vsys = 33*10^3;
+Qc = 6*10^6;
+Q = 28;
+L2 = 18*10^-3;
+n1 = 3;
+n2 = 7;
+% From question
+Rload=100;
+
+f0=50;
+f1=n1*f0;
+f2=n2*f0;
+
+wm=sqrt(f1*f2)*2*pi;
+C1=Qc/(100*pi*Vsys^2);
+R1=Q*L2*wm;
+C2=1/(L2*wm^2);
+L1=1/(C1*wm^2);
+
+% laplace transform
+syms s
+LapC1=1/(s*C1);
+LapC2=1/(s*C2);
+LapR1=R1;
+LapL1=s*L1;
+LapL2=s*L2;
+
+% Equivalent impeadance of the Doubly-tuned filter
+Zequ=(1/(1/LapC2+1/LapR1+LapL2))+LapC1+LapL1;
+
+syms Ih Io If
+Node = Io==Ih-If;
+
+CurrentIf=Vsys/Zequ;
+CurrentIo=Vsys/Rload;
+
+Node = subs(Node,If,CurrentIf);
+latex(Node);
+Io_expr = solve(Node, Io);
+
+H = Io_expr / Ih;
+
+disp('Transfer Function H(s) = Io/Ih:');
+H = simplify(H);
+
+
+% Calculate the impulse response h(t) using inverse Laplace transform
+h_t = ilaplace(H)
+
+% Display the impulse response
+disp('Impulse Response h(t):');
+disp(h_t);
+
+% Optionally, plot the impulse response
+fplot(h_t, [0, 0.1]); % Adjust the time range as needed
+title('Impulse Response h(t)');
+xlabel('Time (s)');
+ylabel('h(t)');
+grid on;
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Zequ = (sym)
+
+  160⋅π⋅s           1           627219
+  ─────── + ───────────────── + ──────
+   18271    3362639⋅s    17      11⋅s
+            ───────── + ─────
+            186535500   12335
+Io = Ih - \frac{33000}{\frac{160 \pi s}{18271} + \frac{1}{\frac{3362639 s}{186535500} + \frac{17}{12335}} + \frac{627219}{11 s}}
+Transfer Function H(s) = Io/Ih:
+\frac{1327300866080 \pi Ih s^{3} + 101475312000 \pi Ih s^{2} + 8650885021978286967 Ih s + 660737948840511300 Ih - 5001792288105459000 s^{2} - 382398931520100000 s}{Ih \left(1327300866080 \pi s^{3} + 101475312000 \pi s^{2} + 8650885021978286967 s + 660737948840511300\right)}
+#+end_example
+
+\[\frac{1327300866080 \pi Ih s^{3} + 101475312000 \pi Ih s^{2} + 8650885021978286967 Ih s + 660737948840511300 Ih - 5001792288105459000 s^{2} - 382398931520100000 s}{Ih \left(1327300866080 \pi s^{3} + 101475312000 \pi s^{2} + 8650885021978286967 s + 660737948840511300\right)}\]

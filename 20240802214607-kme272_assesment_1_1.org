@@ -3,6 +3,7 @@
 :END:
 #+title: KME272 - Assesment 1.1
 #+date: [2024-08-02 Fri 21:46]
+#+FILETAGS: :Assignment:
 #+STARTUP: latexpreview
 * Q1
 ** (i)

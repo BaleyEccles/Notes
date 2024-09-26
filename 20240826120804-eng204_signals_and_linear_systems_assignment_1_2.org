@@ -4,6 +4,7 @@
 #+title: ENG204 - Signals and Linear Systems – Assignment 1.2
 #+date: [2024-08-26 Mon 12:08]
 #+AUTHOR: Baley Eccles - 652137 and Tyler Robards - 651790
+#+FILETAGS: :Assignment:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
 #+LATEX_HEADER: \usepackage{minted}

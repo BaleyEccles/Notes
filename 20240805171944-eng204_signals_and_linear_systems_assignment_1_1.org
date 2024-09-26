@@ -3,6 +3,7 @@
 :END:
 #+title: ENG204 - Signals and Linear Systems – Assignment 1.1
 #+date: [2024-08-05 Mon 17:19]
+#+FILETAGS: :Assignment:
 #+STARTUP: latexpreview
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
