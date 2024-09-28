@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       7ee974e3-0d7e-420c-af7e-44fe52a9ccca
+:END:
+#+title: Probability Distributions
+#+date: [2024-09-28 Sat 12:46]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Probability Distributions
+** Discrete
+
+ - [[id:8904baec-0390-4296-b7e6-9ef4ede346a5][Cumulative Distribution Functions (cdf)]]
+
+*** Requirements
+ - \[f(x_i)=P(X=x_i)\]
+ - \[0\leq f(x_i) \leq 1\]
+ - \[\sum_{i=1}^nf(x_i)=1}\]
+ - Does not have to be finite
+
+*** [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]]
+ - \[E[x]=\sum_xxP(X=x)\]
+*** [[id:94da5bc2-9ad7-4d6c-ad04-715b646cdf7c][Variance]]
+ - \[\sigma^2=E[(x-\mu)^{2}]=\sum_x(x-\mu)^2P(X=x)\]
+*** Probability mass function (pmf)
+ - Distribution of the number of outcomes for some event
+*** Probability distribution function (pdf)
+ - The probability that a specific outcome occurs
+   - eg on a 6 side die each number has 1/6

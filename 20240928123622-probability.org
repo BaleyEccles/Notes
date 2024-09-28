@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       6c7a8528-056a-47ae-86cb-1a364a19c834
+:END:
+#+title: Probability
+#+date: [2024-09-28 Sat 12:36]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Probability
+ - [[id:12ee0ee4-4f71-40ce-afa5-23db5b8c321a][Probability Axioms]]
+ - [[id:7ee974e3-0d7e-420c-af7e-44fe52a9ccca][Probability Distributions]]
+ - [[id:79a6c1a8-9506-4bce-9daf-71f316c83cda][Conditional Probability]]

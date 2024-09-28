@@ -13,6 +13,8 @@
      - \[E[x]\]
        - $x$ can be anything, just substitute into the $x$
        - eg. $E[f(x)]$
+
+
    - [[id:2cc4a97b-cd1e-4ac1-aab7-853fcdf2b8fb][Moment]]
  - arithmetic
    - \[\overline{X}=\frac{1}{n}\sum x\]

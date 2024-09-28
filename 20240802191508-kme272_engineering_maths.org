@@ -15,8 +15,10 @@
 - [[id:2a1c15f9-8be3-4510-906c-bacc45b75068][Numerical Solution of ODEs]]
 - [[id:84252b32-2d80-4702-91f3-762e69a33f0a][Numerical Integration]]
 ** Probability and Statistics
+ - [[id:6c7a8528-056a-47ae-86cb-1a364a19c834][Probability]]
  - [[id:60bdc443-99c4-4493-9eba-f097aac5499b][Types of Data]]
  - [[id:0c312557-bf46-466a-9a24-ca908f9f4e14][Summary Statistics]]
+ - [[id:6a8b586e-af9e-4711-a7a4-c98e24e6a0e5][Correlation]]
 
 
 * Assesment

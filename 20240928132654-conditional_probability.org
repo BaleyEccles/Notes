@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       79a6c1a8-9506-4bce-9daf-71f316c83cda
+:END:
+#+title: Conditional Probability
+#+date: [2024-09-28 Sat 13:26]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Conditional Probability
+ - A given B
+   - \[P(A|B)=\frac{P(A \cap B)}{P(B)}\]
+   - [[id:b56061af-7c10-4b1b-be9f-f053aa61dc2b][Bayes' Theorem]]
+ - A and B
+   - \[P(A\cap B)=P(B)P(A|B)=P(A)P(B|A)\]
