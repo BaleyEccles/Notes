@@ -64,3 +64,124 @@ AV=VO/Vin
 : VO = 5
 : Vin = 0.073000
 : AV = 68.493
+
+
+
+Max in = 88mV
+Max out = 2.73V
+Av=2.73/0.088
+
+
+Maximised loaded voltage gain (AVLS) (note 1)
+RL=10M
+RS=10
+Av=85.5
+
+RL=100k
+RS=10
+Av=85.5
+
+RL=65k
+RS=1k
+Av=50
+| RL   | RS | C1   | C2   | C3 |   Av |
+| 10M  | 10 | 100n | 100n | 1u | 85.5 |
+| 100k | 1k | 100n | 100n | 1u | 85.5 |
+| 65k  | 1k | 100n | 100n | 1u |   50 |
+| 100k | 1k | 100n | 100n | 1u |   50 |
+| 20k  | 1k | 100n | 100n | 1u |   50 |
+| 10M  | 10 | 1u   | 1u   | 1u | 94.3 |
+
+
+-228
+-297
+
+AVl=Zin/(Zin+Rs)*(Zout||RL)/re
+=
+#+BEGIN_SRC octave :exports code :results output :session a
+VR3=5.079;
+R3=3258;
+IC=VR3/R3;
+
+VR4=1.842;
+R4=1176;
+IE=VR4/R4;
+
+VR2=2.481;
+R2=2168;
+IR2=VR2/R2;
+
+VR1=9.5;
+R1=8230;
+IR1=VR1/R1;
+
+IB=IR1-IR2;
+
+beta=IE/IB;
+re=(0.026/IE);
+Zin=(1/((1/R1)+(1/R2)+(1/(beta*re))))
+
+Rs=2.2*10^3
+Rl=3300;
+
+Zout=1/(1/(R3)+1/(Rl))
+
+AVL=(Zin/(Zin+Rs))*((Zout)/re)
+
+R1=8200
+R2=2200
+R3=3300
+R4=1000
+
+Zin=1/(1/R1+1/R2+1/(beta*re+R4))
+Zout=1/(1/(R3)+1/(Rl)+1/re)
+
+AVL=(Zin/(Zin+Rs))*((Zout)/re)
+
+Rs=10
+Rl=10*10^6
+Zin=1/(1/R1+1/R2+1/(beta*re+R4))
+Zout=1/(1/(R3)+1/(Rl))
+
+AVL=(Zin/(Zin+Rs))*((Zout)/re)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Zin = 1036.2
+Rs = 2200
+Zout = 1639.4
+AVL = 31.623
+R1 = 8200
+R2 = 2200
+R3 = 3300
+R4 = 1000
+Zin = 1172.2
+Zout = 16.434
+AVL = 0.3441
+Rs = 10
+Rl = 1.0000e+07
+Zin = 1172.2
+Zout = 3298.9
+AVL = 197.06
+#+end_example
+
+We did the next part with RL 10M, RS 10
+
+
+#+BEGIN_SRC octave :exports code :results output :session a
+Av=[108, 21.7, 62.5, 79.36, 100, 100, 86.8, 60]
+
+f=[500,1*10^3,5*10^3,10*10^3,50*10^3,100*10^3,500*10^3,1000*10^3];
+
+plot(f,Av)
+xlabel('Frequency (Hz)')
+ylabel('Absolute Voltage Gain')
+title('Voltage Gain Frequency Response')
+print('ENG234-Lab-2','-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+: Av =
+:
+:    108.000    21.700    62.500    79.360   100.000   100.000    86.800    60.000
