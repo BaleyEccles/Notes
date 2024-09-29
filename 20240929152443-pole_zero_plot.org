@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       720b73a5-8e1c-465f-a0a2-3db6189efbf4
+:END:
+#+title: Pole–Zero Plot
+#+date: [2024-09-29 Sun 15:24]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Pole–Zero Plot
+ - For a transfer function
+   - Pole when bottom is zero
+     - poles are x
+     - All poles must be on the left for [[id:847ec0e7-da66-447a-9835-cd512492d2e3][BIBO Stability]]
+   - Zero when top is zero
+     - zeros are o
