@@ -15,6 +15,7 @@
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4
 ** Name Plate
+[Group] Report your transformer nameplate ratings
 #+ATTR_LATEX: :environment longtable :align |l|l|
 |-------------------------+-----|
 | VA ratings              | 500 |
@@ -31,20 +32,21 @@
 |-------------------------+-----|
 
 ** DC Test
+[Group] Report your transformer DC test results, commenting on the relative resistances observed for each side of the transformer winding.
 #+ATTR_LATEX: :environment longtable :align |l|l|
 |---------------------------------------------+-----|
 | Primary resistance ($R_{1dc}$) ($\Omega$)   | 1.5 |
 |---------------------------------------------+-----|
 | Secondary resistance ($R_{2dc}$) ($\Omega$) | 0.4 |
 |---------------------------------------------+-----|
-
-The primary side has a higher resistance than the secondary side, this is because the primary side has more turns.
+The primary side has a higher resistance than the secondary side, this is because the primary side has more turns. This will result in a longer wire and hence a larger resistance.\\
+[Group] Calculate an ‘expected’ or ‘estimated’ total equivalent winding AC resistance Req as viewed from LV side and HV side of the transformer.
 \begin{align*}
 a&=2.1 \\
 R_{eqHV}&=a^{2}R_2+R_1\\
-R_{eqHV}&=3.242\Omega \\
-R_{eqLV}&=(1/a)^{2}R_1+R_2\\
-R_{eqLV}&=1.12\Omega \\
+R_{eqHV}&=3.264\Omega \\
+R_{eqLV}&=a^{2}R_1+R_2\\
+R_{eqLV}&=7.015\Omega \\
 \end{align*}
 ** Open Circuit Test
 #+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|
@@ -57,23 +59,21 @@ R_{eqLV}&=1.12\Omega \\
 |--------------+---------+-------+------+-------+-----------|
 | HV side open |     240 | 0.375 | 12.5 | 0.138 |       120 |
 |--------------+---------+-------+------+-------+-----------|
-
 [Group] Calculate turns ratio for your transformer (a = N1 / N2) based on measured open-circuit voltages. Explain why there is a difference (if there is any difference) between your measurements and the nameplate voltages?
 \begin{align*}
 &\textrm{LV side open} & &\textrm{HV side open} \\
 a&=\frac{V_{2}}{V_{1}} & a&=\frac{V_{2}}{V_{1}} \\
 a&=2 & a&=2
 \end{align*}
-
+Both sides result is the same turns ratio. \\
 [Group] Calculate power factor from voltage, current and power measurements and verify that it matches your measured value (from power analyser)
 \begin{align*}
 &\textrm{LV side open} & &\textrm{HV side open} \\
 PF&=\frac{P_{oc}}{V_1I_1} & PF&=\frac{P_{oc}}{V_1I_1} \\
 &=0.16631 & &= 0.13889
 \end{align*}
-The calculated power factor is very close to the measured power factor.
-
-[Group] Calculate the core resistance Rc1 and the magnetizing reactance Xm1. (Do this now in the lab and check with the demonstrator that you have something reasonable before you continue)
+The calculated power factor is very close to the measured power factor, which is to be expected. \\
+[Group] Calculate the core resistance Rc1 and the magnetising reactance Xm1. (Do this now in the lab and check with the demonstrator that you have something reasonable before you continue)
 \begin{align*}
 &\textrm{LV side open} & &\textrm{HV side open} \\
 R_{c1}&=\frac{V_1^2}{P_{oc}} & R_{c1}&=\frac{V_1^2}{P_{oc}} \\
@@ -82,13 +82,30 @@ X_{m1}&=\frac{V_1}{\sqrt{I_1^2+\left(\frac{V_1}{R_{c1}}\right)^2}} & X_{m1}&=\fr
 &=192.73\Omega & &=633.92\Omega
 \end{align*}
 
-[Individual] Comment on the differences, if any, between supplying power and measuring from
-the HV side or the LV side The LV side shows a higher power compared to the HV side. This means that the LV side consumes more power. This makes sense with the calculated resistances, the LV side has a higher resistance and hence a higher power draw.
+[Individual] Comment on the differences, if any, between supplying power and measuring from the HV side or the LV side \\
+The LV side shows a higher power factor compared to the HV side. This means that the LV side consumes more power. This makes sense with the calculated resistances, the LV side has a higher resistance and hence a higher power draw. Although, this could also be due to the differences in input voltage during each test.
 
 [Individual] Calculate the % increase in current observed when voltage is increased by 20% above rated voltage? Comment on your observations and discuss?
-TODO: I dont think we did this
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|
+|-----------+-----------+--------------+-------+-----------|
+| $V_1$ (V) | $I_1$ (A) | $P_{oc}$ (W) |    PF | $V_2$ (V) |
+|-----------+-----------+--------------+-------+-----------|
+|    138.25 |      1.28 |         18.4 | 0.102 |     275.4 |
+|-----------+-----------+--------------+-------+-----------|
+Increase in current:
+\begin{align*}
+\%I_{increase}&=\frac{1.28-0.563}{0.563}\cdot 100\\
+\%I_{increase}&=127.35\%
+\end{align*}
+This value shows that for a small increase in voltage we will get a disproportionally large increase in current. This implies a non-linear relationship between the current and voltage. Given that we are at the maximum rating for the transformer, we may be reaching the saturation region, this can be confirmed using the power factor, which is mostly reactive. This means that the energy from the increase in voltage is being used to magnetise the core, rather than transfer it to the other side. \\
+[Individual] On the Power Analyser (still while operating at 20% above rated voltage) observe transformer supply V and I waveforms. Include a sketch or image of a key waveform observed to help describe what you have observed and why? Does the waveform vary as supply voltage is varied? \\
+Our team forgot to do this. However, we would expect to see the waveforms differ from usual operation. As shown, the transformer is being saturated, when this happens the magnetic flux in the core becomes distorted, which will effect the voltage and current waveforms. The current waveform will be more distorted than the voltage waveform, due to the introduction of a third harmonic, which will make the waveform less sinusoidal. These effects will be present in the voltage waveform, but less pronounced.
+#+BEGIN_FIGURE
+#+CAPTION: Current and voltage waveform for a saturated transformer.
+#+ATTR_LATEX: :placement [H]
+[[file:Screenshot 2024-09-29 at 12-13-26 crowhurst_basic_audio_vol2-125.gif (GIF Image 409 × 167 pixels).png]]
+#+END_FIGURE
 
-[Individual] On the Power Analyser (still while operating at 20% above rated voltage) observe transformer supply V and I waveforms. Include a sketch or image of a key waveform observed to help describe what you have observed and why? Does the waveform vary as supply voltage is varied?
 ** Short Circus Test
 #+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|
 |-------------------------+---------+------+-----+-------+-----------|
@@ -112,74 +129,64 @@ X_{eq}&=\sqrt{\left(\frac{V_1}{I_1}\right)^2-R_{eq}^{2}} \\
 PF&=\frac{P_{sc}}{V_1I_1} \\
 &=0.81169
 \end{align*}
-The calculated power factor matches the measured one.
-
+The calculated power factor closely matches the measured one. \\
 [Individual] Compare $R_{eq}$ (equivalent winding AC resistance) to the DC resistance values measured earlier (you will need to refer them both to the same side). Why do you think there is a difference (if there is any)?
-\[R_{dcTotal}=3.1\Omega\]
-The AC resistance is slightly larger than the DC resistance
-
+$R_{dcTotal}=3.1\Omega$ and $R_{eq}=3.228\Omega$, we can see that AC resistance is slightly larger than the DC resistance. This is because the AC resistance takes into account more effects that don't apply during DC, such as Eddy currents. \\
 [Individual] Draw the full equivalent circuit for your transformer, labelling impedances with your determined transformer parameters
+#+BEGIN_FIGURE
+#+CAPTION: Full equivalent circuit for our transformer.
+#+ATTR_LATEX: :placement [H]
 [[file:~/UTAS/ENG231 - Electrical Machines And Transformers/Lab 4/Transformer.png]]
+#+END_FIGURE
 
 ** Performance Test / Full Load Test
-#+BEGIN_SRC octave :exports code :results output :session a
-clear
-clc
-close
-V2=[ 120, 119, 118, 118, 117, 116, 115];
-P1=[ 80, 102, 147, 191, 277, 409, 537];
-P2=[ 67, 90, 133, 177, 262, 386, 509];
-I2=[ 0.56, 0.753, 1.12, 1.5, 2.2, 3.3, 4.4];
-Eff=P2./P1*100;
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|l|l|l|
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+|              | Load |  0ohm | 200ohm | 150ohm | 100ohm | 75ohm | 50ohm | 33ohm | 25ohm |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+| Primary      | V1   |   240 |    240 |    240 |    240 |   240 |   240 |   240 |   240 |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+|              | I1   | 0.375 |  0.495 |   0.56 |   0.71 |  0.88 |   1.2 |  1.75 |  2.28 |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+|              | P1   |    12 |     80 |    102 |    147 |   191 |   277 |   409 |   537 |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+|              | PF   | 0.138 |  0.677 |   0.76 |  0.861 | 0.912 | 0.954 | 0.977 | 0.958 |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+| Secondary    | V2   |   120 |    120 |    119 |    118 |   118 |   117 |   116 |   115 |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+|              | I2   |     0 |   0.56 |  0.753 |   1.12 |   1.5 |   2.2 |   3.3 |   4.4 |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+|              | P2   |     0 |     67 |     90 |    133 |   177 |   262 |   386 |   509 |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+|              | PF   |  NULL |      1 |      1 |      1 |     1 |     1 |     1 |     1 |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+| % Voltage    |      |     0 |      0 | 0.8403 |  1.694 | 1.695 | 2.564 | 3.448 | 4.347 |
+| Regulation   |      |       |        |        |        |       |       |       |       |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
+| % Efficiency |      |     0 |  83.75 |  88.24 |  90.48 | 92.67 | 94.58 | 94.37 | 94.78 |
+|--------------+------+-------+--------+--------+--------+-------+-------+-------+-------|
 
-subplot(2, 1, 1);
-plot(I2, V2, 'o', 'LineWidth', 2);
-xlabel('Secondary Current (A)');
-ylabel('Measured Secondary Voltage (V)');
-title('Measured Secondary Voltage vs. Secondary Current');
-grid on;
+[Group] Plot measured secondary voltage and efficiency against secondary current
+#+BEGIN_FIGURE
+#+CAPTION: Measured Secondary Voltage and efficiency and secondary voltage.
+#+ATTR_LATEX: :placement [H]
+[[file:Screenshot 2024-09-29 at 12-34-22 Single and 3-Phase Transformers Lab 3 Report Miley Fleming 584058.docx.png]]
+#+END_FIGURE
 
-subplot(2, 1, 2);
-plot(I2, Eff, 'o', 'LineWidth', 2);
-xlabel('Secondary Current (A)');
-ylabel('Efficiency');
-title('Efficiency vs. Secondary Current');
-grid on;
+[Group] Compare observations with either calculated or simulated values based on your already determined equivalent circuit, by including ‘theoretical’ curves of output voltage and efficiency vs output (secondary) current on the same plots as your measured data.
+#+BEGIN_FIGURE
+#+CAPTION: Measured and theoretical secondary voltage and efficiency.
+#+ATTR_LATEX: :placement [H]
+[[file:Screenshot 2024-09-29 at 12-36-14 Single and 3-Phase Transformers Lab 3 Report Miley Fleming 584058.docx.png]]
+#+END_FIGURE
+[Individual] Discuss generally your results, noting any major differences between observed and calculated values. Please make any other comments on your observations which you think may be interesting or relevant. \\
+The voltage regulation tended to increase as the load increased, this is a measure of how well the transformer can maintain a output voltage as the load changes. Having a low voltage regulation (0% -> 4.5%) indicates that the transformer is able to keep a consistent voltage for a varying load. \\
+The power factor initially started low and increased as the load increased, this means that the energy at low loads is not being used efficiently. As the load increased the current became more resistive and hence improved power factor.
 
-title('Voltage and Efficiency vs. Secondary Current');
-#+END_SRC
-
-#+RESULTS:
-
-
-#+BEGIN_SRC octave :exports code :results output :session a
-clear
-clc
-close
-
-% Transformer Parameters
-V1=240; % Vin
-Req = 3.242;
-Xeq = 5.123;
-Zeq=Req+i*Xeq
-
-Rc1 = 1174;
-Xm1 = 192.73;
-Rc2 = 4680;
-Xm2 = 663;
-
-Zeq2=
-
-Loads = [0,200,150,100,75,50,33,25];
-
-
-
-#+END_SRC
-
-#+RESULTS:
 
 ** Three-phase Transformer Configurations
 *** Y-Y Connected Transformer
+[Group] Present data tables showing expected and measured values for Y-Y connection.
 #+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|
 |----------+--------------+----------+---+----------+----------------+----------|
 |          | Primary Side |          |   |          | Secondary Side |          |
@@ -195,31 +202,34 @@ Loads = [0,200,150,100,75,50,33,25];
 | VRW      |          240 |      243 |   | Vrw      |            240 |      243 |
 |----------+--------------+----------+---+----------+----------------+----------|
 | VWB      |          240 |      243 |   | Vwb      |            240 |      243 |
+|----------+--------------+----------+---+----------+----------------+----------|
 | VBR      |          240 |      240 |   | Vbr      |            240 |      240 |
 |----------+--------------+----------+---+----------+----------------+----------|
 
 
 *** \Delta-Y Connected Transformer
+[Group] Present data tables showing expected and measured values for \Delta-Y connection.
 #+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|
 |----------+--------------+----------+---+----------+----------------+----------|
 |          | Primary Side |          |   |          | Secondary Side |          |
 |----------+--------------+----------+---+----------+----------------+----------|
 | Quantity |     Expected | Observed |   | Quantity |       Expected | Observed |
 |----------+--------------+----------+---+----------+----------------+----------|
-| VRW      |          181 |      183 |   | Vrn      |            181 |      180 |
+| VRW      |          180 |      183 |   | Vrn      |            180 |      180 |
 |----------+--------------+----------+---+----------+----------------+----------|
-| VWB      |          181 |      181 |   | Vwn      |            181 |      183 |
+| VWB      |          180 |      181 |   | Vwn      |            180 |      183 |
 |----------+--------------+----------+---+----------+----------------+----------|
-| VBR      |          181 |      181 |   | Vbn      |            181 |      181 |
+| VBR      |          180 |      181 |   | Vbn      |            180 |      181 |
 |----------+--------------+----------+---+----------+----------------+----------|
-|          |              |          |   | Vrw      |            315 |      315 |
+|          |              |          |   | Vrw      |            311 |      315 |
 |----------+--------------+----------+---+----------+----------------+----------|
-|          |              |          |   | Vwb      |            315 |      315 |
+|          |              |          |   | Vwb      |            311 |      315 |
 |----------+--------------+----------+---+----------+----------------+----------|
-|          |              |          |   | Vbr      |            315 |      320 |
+|          |              |          |   | Vbr      |            311 |      320 |
 |----------+--------------+----------+---+----------+----------------+----------|
 
 *** Y-\Delta Connected Transformer
+[Group] Present data tables showing expected and measured values for Y-\Delta connection.
 #+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|
 |----------+--------------+----------+---+----------+----------------+----------|
 |          | Primary Side |          |   |          | Secondary Side |          |
@@ -240,6 +250,7 @@ Loads = [0,200,150,100,75,50,33,25];
 |----------+--------------+----------+---+----------+----------------+----------|
 
 *** \Delta-\Delta Connected Transformer
+[Group] Present data tables showing expected and measured values for \Delta-\Delta connection
 #+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|l|l|
 |----------+--------------+----------+---+----------+----------------+----------|
 |          | Primary Side |          |   |          | Secondary Side |          |
@@ -252,3 +263,17 @@ Loads = [0,200,150,100,75,50,33,25];
 |----------+--------------+----------+---+----------+----------------+----------|
 | VBR      |          240 |      240 |   | Vbr      |            240 |      240 |
 |----------+--------------+----------+---+----------+----------------+----------|
+[Individual] Discuss your 3-phase transformer observations, noting for example the impact connection configuration has upon primary to secondary line-to-line voltage ratio, commenting on any significant differences between observed and expected voltages. \\
+For each configuration we expected a voltage ratio that is some combination of $\sqrt{3}$. The expected and observed data varied by a couple of volts, this may be because of the inaccuracies in the measuring tools and accuracy of the three-phase variac. \\
+[Individual] Although you didn’t measure it, what else would you have expected to alter between input and output voltages, and why would that be the case? \\
+The phase shift. For \Delta-Y and Y-\Delta we would expect a $30^o$ phase shift between primary and secondary voltages. This is due to the way each of the types are connected to one another.
+
+
+\newpage
+* Bibliography
+Crowhurst, N. H. (2010). Waveforms when saturation occurs [Illustration]. Basic Audio. http://vias.org/crowhurstba/crowhurst_basic_audio_vol2_069.html
+\newpage
+* Appendix A
+Code used to produce Figures 1 and 2:
+[[file:Code1.png]]
+[[file:Code2.png]]
