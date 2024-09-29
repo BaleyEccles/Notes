@@ -34,3 +34,4 @@
   - \[\frac{dx(t)}{dt}\leftrightarrow j\omega X(\omega)\]
 - Frequency Differentiation:
   - \[(-jt)x(t) \leftrightarrow \frac{dX(\omega)}{d\omega}\]
+** Things

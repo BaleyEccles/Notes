@@ -18,6 +18,7 @@
 ** Assessment Task 2: Practical laboratory
 - During Week 11
 - 20% of mark
+- [[id:82c97c76-8b78-4d6b-b029-b3d1d7994a64][ENG234 - Lab 2]]
 ** Assessment Task 3: Design laboratory
 - During Week 13
 - 15% of mark

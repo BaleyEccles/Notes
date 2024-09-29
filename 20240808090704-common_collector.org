@@ -1,8 +1,0 @@
-:PROPERTIES:
-:ID:       108f9afb-28f0-409b-8144-0628082862a2
-:END:
-#+title: Common Collector
-#+date: [2024-08-08 Thu 09:07]
-#+STARTUP: latexpreview
-
-* TODO Common Collector

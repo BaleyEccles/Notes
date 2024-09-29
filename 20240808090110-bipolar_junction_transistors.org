@@ -7,6 +7,7 @@
 
 * Bipolar Junction Transistors
 - A [[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductor]] component
+- [[id:4ca3dec8-db31-4287-aa7a-0c9ff27e727a][Transistor Characteristics]]
 - Two types
   - Uses Two [[id:71e4c0dc-4fd7-4ad0-a4e4-9eb1f0a352bc][N-type]] materials with a [[id:18aa5061-7346-462c-9f77-d0a6c6e2752c][P-type]] material in bettween (NPN)
     - [[https://upload.wikimedia.org/wikipedia/commons/5/5d/IEEE_315-1975_%281993%29_8.6.2.svg][NPN Schematic]]

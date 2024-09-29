@@ -7,7 +7,7 @@
 #+STARTUP: latexpreview
 
 * Law Of The Unconscious Statistician (LOTUS)
- - To calculate the expected value of any function, h, of a random variable, X, we just need to take a weighted average of h
+ - To calculate the expected value of any function, h, of a random variable, X, we just need to take a weighted [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][average]] of h
    - \[E[h(X)]=\sum_xh(x)P(X=x)\]
  - Two useful results for linear functions of a random variable are
    - \[E(aX+b)=aE(x)+b\]

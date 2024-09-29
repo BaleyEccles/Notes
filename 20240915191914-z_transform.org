@@ -19,6 +19,7 @@
        - useful for determining the domain expression
      - \[\frac{1}{1-az^{-1}}\]
        - useful for transforming into a [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Difference Equation]]
+ - [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][Pole–Zero Plot]]
 ** Properties
 - Linearity
   - \[a_1x_1[n]+a_2x_2[n]\leftrightarrow^Za_1X_1(z)+a_2X_2(z)\]
@@ -40,6 +41,9 @@
     - \[\sum_{k=-\infty}^{n}x[k]\leftrightarrow^Z \frac{1}{1-z^{-1}}X(z),\frac{z}{z-1}X(z)\]
   - Convolution
     - \[x_1[n]*x_2[n]\leftrightarrow^Z X_1(z)X_2(z)\]
-  - Inital Value
+  - Initial Value
     - \[x[0]=\lim_{z\rightarrow \infty}X(z)\]
       - $x[n]$ is [[id:240aca67-b15c-4bea-ba1e-09f80a59ccd5][Causel]]
+** Things
+ - If we cannot do partial fractions, we can divide by $z$ and then take partial fractions and then multiply by $z$.
+ - 

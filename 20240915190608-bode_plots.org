@@ -13,3 +13,5 @@
    - We can either take the magnitude or phase of it
      - Take the limits as $\omega \rightarrow 0$ and $\omega \rightarrow \infty$
      - We use [[id:d041a889-d4af-4598-8434-866ecc7ce005][Decibels]] to plot them
+     - $+20dB/dec$ for [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][zeros]]
+     - $-20dB/dec$ for [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][poles]]
