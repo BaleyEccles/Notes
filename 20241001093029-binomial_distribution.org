@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       4a014306-8822-4a35-ab74-65b1a0d134d6
+:END:
+#+title: Binomial Distribution
+#+date: [2024-10-01 Tue 09:30]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Binomial Distribution
+ - A binomial distribution applies in cases where:
+   - you have a fixed number of independent trials
+   - each of the trials has two possible outcomes (success or failure)
+   - the chance of a success in any trial is constant and doesn’t depend on the results of any of the other trials.
+** Parameters
+ - number of trials
+   - $n$
+ - Probability of success
+   - $p$
+** Formula
+ - if X is a random variable that follows a binomial distribution
+   - \[P(X=x)=C_k^np^k(1-p)^{n-k}\]
+** Properties
+ - if $X\sim B(n,p)$ then
+   - [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]]: $E[x]=np$
+   - [[id:94da5bc2-9ad7-4d6c-ad04-715b646cdf7c][Variance]]: $Var(X)=np(1-p)$
+   - [[id:64966980-9fb2-4290-8a52-c7fd08d9d1ec][Standard Deviation]]: $\sqrt{np(1-p)}$

@@ -10,9 +10,10 @@
  - The expected value
    - Doesn't have to exist as possible outcome
    - Expected value:
-     - \[E[x]\]
+     - \[E[X]=\sum_{x}xP(X=x)\]
        - $x$ can be anything, just substitute into the $x$
        - eg. $E[f(x)]$
+         - [[id:e16f8240-e6b0-4c34-86ef-604c7f5506b0][Law Of The Unconscious Statistician (LOTUS)]]
 
 
    - [[id:2cc4a97b-cd1e-4ac1-aab7-853fcdf2b8fb][Moment]]

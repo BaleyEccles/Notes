@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       731e757c-e3ec-4346-97fc-ad4bd86292dc
+:END:
+#+title: Poisson Distribution
+#+date: [2024-10-01 Tue 09:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Poisson Distribution
+ - Models the number of occurrences of a specified event in a given length of time (or space), t.
+ - The events occurs independently
+ - The events occur at a constant rate $\lambda$
+** Formula
+ - \[P(X=x)=\frac{e^{-\mu}\mu^x}{x!}\]
+   - \[\mu=\lambda t\]
+** Properties
+ - If $X\sim Pois(\mu)$ then
+   - [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]]: $E[x]=\mu$
+   - [[id:94da5bc2-9ad7-4d6c-ad04-715b646cdf7c][Variance]]: $Var(X)=\mu$
+   - [[id:64966980-9fb2-4290-8a52-c7fd08d9d1ec][Standard Deviation]]: $\sqrt{\mu}$

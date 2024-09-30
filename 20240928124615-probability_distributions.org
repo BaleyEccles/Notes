@@ -7,6 +7,8 @@
 #+STARTUP: latexpreview
 
 * Probability Distributions
+ - [[id:4a014306-8822-4a35-ab74-65b1a0d134d6][Binomial Distribution]]
+ - [[id:731e757c-e3ec-4346-97fc-ad4bd86292dc][Poisson Distribution]]
 ** Discrete
 
  - [[id:8904baec-0390-4296-b7e6-9ef4ede346a5][Cumulative Distribution Functions (cdf)]]

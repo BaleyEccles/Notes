@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       de75cfa9-6eca-4ecf-b14f-e50e61f41db3
+:END:
+#+title: Permutations
+#+date: [2024-10-01 Tue 09:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Permutations
+ - The amount of times a set of objects can be ordered
+   - We use the factorial
+   - \[n!\]
+ - If we dont want to include all of permutations
+   - \[P_k^n=\frac{n!}{(n-k)!}\]
+   - $k$ objects from a set of $n$ objects

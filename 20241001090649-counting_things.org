@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       90956edf-117a-447a-9284-d291dd3847a2
+:END:
+#+title: Counting Things
+#+date: [2024-10-01 Tue 09:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Counting Things
+ -
+   - [[id:de75cfa9-6eca-4ecf-b14f-e50e61f41db3][Permutations]]
+ -
+   - [[id:2657d149-e700-4c9a-a000-7ccda6d57b35][Combinations]]
