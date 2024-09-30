@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       56282249-0495-405c-a570-7176a5121a5e
+:END:
+#+title: Butterworth Filter
+#+date: [2024-10-01 Tue 08:43]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Butterworth Filter
+ - General low pass form
+   - \[\lvert H(\omega)\rvert^2=\frac{1}{1+\left( \frac{\omega}{\omega_c} \right)^{2N}}\]
+     - $N$: filter order
+     - $\omega_c$: cut off frequency
+ - [[id:d041a889-d4af-4598-8434-866ecc7ce005][$3dB$]] frequency
+   - At $\omega=\omega_c$
+     - \[\lvert H(\omega)\rvert^2 = \frac{1}{1+1^{2N}}= \frac{1}{2}\]
+     - \[\lvert H(\omega)\rvert = \frac{1}{\sqrt{2}}\rightarrow 3dB\]
+** [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace]] form
+ - \[\lvert H(\omega)\rvert^2=H(s)H(-s)\lvert_{s=j\omega}\]
+ - \[\Rightarrow H(s)H(-s)=\frac{1}{1+\left(\frac{-s}{\omega_c}\right)^{2N}}\]
+   - The poles are mirrored for $H(s)$ and $H(-s)$
+ - \[H(s)=\frac{\omega_c^N}{\Pi (s-p_{k})}, \frac{\pi}{2}<\frac{k\pi}{N}<\frac{3\pi}{2}\]
+   - where
+     - \[p_k = \begin{cases} \omega_c e^{j\frac{k\pi}{N}} & k=0,1,...,2N-1, \textrm{if N is odd} \\
+        \omega_c e^{j\frac{(2k+1)\pi}{2N}} & k=0,1,...,2N-1, \textrm{if N is even}
+        \end{cases}\]
+** Design
+ - Need:
+   - $\omega_1$, $\omega_2$, $Rp(\Delta_1)$ and $As(\Delta_2)$
+ - Which allows us to find $N$
+   - \[N \geq \frac{\log_{10}\left(\sqrt{\frac{10^{As/10}-1}{10^{Rp/10}-1}}\right)}{\log_{10}\left(\frac{\omega_1}{\omega_2}\right)}\]
+     - $N$ must be an integer, so round up
+ - From here we can do two things:
+   1. \[\left(\frac{\omega_1}{\omega_c}\right)^{2N}=10^{Rp/10}-1\]
+      - OR
+   2. \[\left(\frac{\omega_2}{\omega_c}\right)^{2N}=10^{As/10}-1\]

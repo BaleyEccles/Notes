@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       b01c8577-794b-41fc-b88c-143b1711d726
+:END:
+#+title: Analogue And Digital Filter Design
+#+date: [2024-09-30 Mon 13:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Analogue And Digital Filter Design
+ - [[id:bcb77fab-6805-43a4-91f7-0e0840e1230c][Analogue Filters]]

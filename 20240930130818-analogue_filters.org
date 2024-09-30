@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       bcb77fab-6805-43a4-91f7-0e0840e1230c
+:END:
+#+title: Analogue Filters
+#+date: [2024-09-30 Mon 13:08]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Analogue Filters
+ - $\omega_1$ /$\omega_p$ is the pass frequency
+ - $\omega_2$ /$\omega_s$ is the block frequency
+   - Where between $\omega_1$ and $\omega_2$ is a transitional period
+ - $\Delta_1$ is the tolerance from the top of the filter
+   - Pass band tolerance
+ - $\Delta_2$ is the tolerance from the bottom of the filter
+   - Stop band tolerance
+ - [[file:Fig2m.webp]]
+** Properties
+ - \[\lvert H(-\omega)\rvert=\lvert H(\omega)\rvert\]
+ - \[\lvert H(\omega)\rvert = 1-\Delta_1 \rightarrow \lvert H(\omega)\rvert_{dB}=-Rp[dB]\]
+   - Pass band ripple
+   - \[Rp=20\log_{10}\left( \frac{1}{1-\Delta_1}\right)\]
+ - \[\lvert H(\omega)\rvert = \Delta_2 \rightarrow \lvert H(\omega)\rvert_{dB}=-As[dB]\]
+   - Stop band attenuation
+   - \[As=20\log_{10}\left( \frac{1}{\Delta_2}\right)\]
+
+** Filters
+ - We can define some filter that fits these parameters
+ - [[id:56282249-0495-405c-a570-7176a5121a5e][Butterworth Filter]]
