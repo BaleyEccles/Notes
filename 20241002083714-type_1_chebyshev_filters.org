@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       99234b34-6f57-48d9-8c43-133a62620d54
+:END:
+#+title: Type 1 Chebyshev Filters
+#+date: [2024-10-02 Wed 08:37]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Type 1 Chebyshev Filters
+ - General low pass form
+   - \[|H(\omega)|^2=\frac{1}{1+\epsilon^2C_N^2(\frac{\omega}{\omega_1})}\]
+   - $\epsilon$ is a positive constant
+   - $N$ is the filter order
+   - $\omega_1$ is the pass band edge frequency
+   - $C_N(\nu)$ is the [[id:25ea284c-2a78-4646-aa84-11b739b9020e][Chebyshev polynomials]] of order $N$
+
+** Poles
+ - They occur such that
+   - \[1+\epsilon^2C_{N}^2\left(\frac{s}{j\omega_1}\right)=0\]
+ - And take the form
+   - \[s=j\omega_1\left[\cos(\alpha_k)\cosh(\beta_k)-j\sin(\alpha_k\sinh(\beta_k)\right]\]
+     - \[\alpha_k=\frac{(2k+1)\pi}{2N}\]
+     - \[\beta_k=\frac{\sinh^{-1}(\frac{1}{\epsilon})}{N}\]
+** Design

@@ -27,3 +27,4 @@
 ** Filters
  - We can define some filter that fits these parameters
  - [[id:56282249-0495-405c-a570-7176a5121a5e][Butterworth Filter]]
+ - [[id:99234b34-6f57-48d9-8c43-133a62620d54][Type 1 Chebyshev Filters]]

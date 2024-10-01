@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       047e76cb-5cac-4ff7-ac3d-e03b424e6c7f
+:END:
+#+title: Synchronous Machines
+#+date: [2024-10-01 Tue 10:00]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Synchronous [[id:0d2a7422-d603-4652-8ad2-e5ed27dc2519][Machines]]
+** Synchronous Generators
+ - Rotor has a DC current in field winding
+   - Rotor current produces a constant flux
+ - Stator contains a winding for each of the three phases
+   - Each $120^o$ apart
+ - \[\theta_r=\omega t\]
+ - \[\mathcal{E}_a=|B_r|k\pi rl\omega\sin(\omega t)=V_m\sin(\omega t)\]
+   - $b$ and $c$ lag by $120^o$
+ - \[\vec{B_{s}}=\vec{B_{a}}+\vec{B_{b}}+\vec{B_{c}}\]
+   - \[\vec{B_{s}}=\frac{3}{2}|B_m|\left[\cos(\omega t-\frac{\pi}{2}-\phi)\hat{x}+\sin(\omega t - \frac{\pi}{2} -\phi)\hat{y}\right]\]
+   - In polar coordinates
+     - \[\vec{B_{s}}=\frac{3}{2}|B_{m}| \angle (\omega t - \frac{\pi}{2}-\phi)\]
+*** Torque
+ - \[\tau_{mech}=\tau_{dev}=k|B_r||B_s|\sin(\gamma)\]
+ - The angle $\delta$ is between $B_{net}$ and $B_r$
+   - $B_net=B_s+B_r$
+ - \[\tau_{mech}=\tau_{dev}=k|B_r||B_net|\sin(\delta)\]
+*** Voltage
+ - \[v_a=\mathcal{E}_{fa}-L_{ar}\frac{di_a}{dt}\]
+ - \[V_a=E_{fa}-jX_{ar}I_{a_{a}}\]
+ - \[V_t=E_f-jX_{ar}I_a\]
+   - This can be used for the equivalent circuit
+*** Equivalent Circuit
+ - \[X_s=X_{ar}+X_{l}\]
+ - \[E_f=V_t+I_a(R_a+jX_s)\]
+ - [[file:Screenshot 2024-10-01 at 10-41-08 files-63244095d0b0e.mp4.png]]
+ - Typically $X_s>>R_a$
+*** Determining Reactance :TODO:
+**** Open Circuit test
+ - Measure the voltage for a range of field currents
+ - This can be used ton
+**** Short Circuit test
+ - Short it and measure current
+ - \[I_a=\frac{E_f}{R_a+jX_s}\]
+   - $X_s >> R_a \rightarrow I_a$ is lagging and $\phi$ is large
+*** Poles
+ - We can change the number of poles in the machine by adding more windings and rotating them around the stator
+   - For each two poles increased $\omega_s$ doubles
+     - \[\omega_s=\frac{2\omega}{P}\]
+     - \[n_s=\frac{120f}{P}\]
+       - Where $P$ are the number of poles

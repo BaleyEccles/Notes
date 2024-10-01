@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       25ea284c-2a78-4646-aa84-11b739b9020e
+:END:
+#+title: Chebyshev Polynomials
+#+date: [2024-10-02 Wed 08:42]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Chebyshev Polynomials
+ - \[C_N(\nu)=\cos(N\cos^{-1}(\nu))\]
+ - OR
+ - Recursively:
+   - \[C_0(\nu)=1\]
+   - \[C_1(\nu)=\nu\]
+   - \[C_{N+1}(\nu)=2\nu C_N(\nu)-C_{N-1}(\nu)\]
+** Properties
+ - \[C_N(1)=1 \, \forall N\]
+ - if $\nu \leq 1$, then $|C_N(\nu)|\leq 1$
+ - For $|\nu|>1$, $|C_N(\nu)|>1$
+   - They grow monotonically without bound
+ - \[C_{N}(0)=\begin{cases}
+   0 & \textrm{, if $N$ is odd}\\
+   \pm 1 & \textrm{, if $N$ is even}
+   \end{cases}\]
