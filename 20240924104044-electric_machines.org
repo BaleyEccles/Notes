@@ -12,16 +12,19 @@
    - Torque $\tau$
    - Rotational velocity $\omega$
    - \[P=\tau\omega\]
+ - If the stator field is ahead of the rotor field, it is operating as a motor
+ - If the rotor field is ahead of the stator field, it is operating as a generator
 ** Motor
  - Converts electrical energy into mechanical energy
    - \[v,i \rightarrow \tau,\omega\]
 ** Generator
  - Converts mechanical energy into electrical energy
    - \[\tau,\omega \rightarrow v,i\]
+
 ** Types
  - [[id:fad348bf-cf5d-4a48-9336-fcb9e28ed879][DC Machines]]
 *** AC Machines
- - Synchronous Machines
+ - [[id:047e76cb-5cac-4ff7-ac3d-e03b424e6c7f][Synchronous Machines]]
  - Asynchronous Machines
 
 ** Torque Speed Curves (T-S Curves)

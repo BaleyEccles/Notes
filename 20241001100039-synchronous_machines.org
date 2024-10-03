@@ -8,6 +8,7 @@
 
 * Synchronous [[id:0d2a7422-d603-4652-8ad2-e5ed27dc2519][Machines]]
 ** Synchronous Generators
+
  - Rotor has a DC current in field winding
    - Rotor current produces a constant flux
  - Stator contains a winding for each of the three phases
@@ -22,8 +23,8 @@
 *** Torque
  - \[\tau_{mech}=\tau_{dev}=k|B_r||B_s|\sin(\gamma)\]
  - The angle $\delta$ is between $B_{net}$ and $B_r$
-   - $B_net=B_s+B_r$
- - \[\tau_{mech}=\tau_{dev}=k|B_r||B_net|\sin(\delta)\]
+   - $B_{net}=B_s+B_r$
+ - \[\tau_{mech}=\tau_{dev}=k|B_r||B_{net}|\sin(\delta)\]
 *** Voltage
  - \[v_a=\mathcal{E}_{fa}-L_{ar}\frac{di_a}{dt}\]
  - \[V_a=E_{fa}-jX_{ar}I_{a_{a}}\]
@@ -34,7 +35,7 @@
  - \[E_f=V_t+I_a(R_a+jX_s)\]
  - [[file:Screenshot 2024-10-01 at 10-41-08 files-63244095d0b0e.mp4.png]]
  - Typically $X_s>>R_a$
-*** Determining Reactance :TODO:
+*** Determining Values :TODO:
 **** Open Circuit test
  - Measure the voltage for a range of field currents
  - This can be used ton
@@ -48,3 +49,4 @@
      - \[\omega_s=\frac{2\omega}{P}\]
      - \[n_s=\frac{120f}{P}\]
        - Where $P$ are the number of poles
+       - $n_s$ is the synchronous speed
