@@ -1,0 +1,63 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{clc}
+\PYG{n}{clear}
+\PYG{n+nb}{close}
+\PYG{n}{pkg} \PYG{n+nb}{load} \PYG{n}{control}
+
+\PYG{c}{\PYGZpc{}zeros = [\PYGZhy{}8+971*i, \PYGZhy{}8\PYGZhy{}971*i, \PYGZhy{}17.5+2135.5*i, \PYGZhy{}17.5\PYGZhy{}2135.5*i];}
+\PYG{c}{\PYGZpc{}poles = [\PYGZhy{}900, \PYGZhy{}230, \PYGZhy{}90.5+1436.86*i, \PYGZhy{}90.5\PYGZhy{}1436.86*i];}
+\PYG{n+nb}{zeros}\PYG{p}{=[}\PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{17.672679232183922726973141504934} \PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{2134.9568788579925354983418033515}\PYG{o}{*}\PYG{n}{i} \PYG{p}{,}\PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{17.672679232183922726973141504934} \PYG{o}{+} \PYG{l+m+mf}{2134.9568788579925354983418033515}\PYG{o}{*}\PYG{n}{i} \PYG{p}{,}\PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{8.0355102995882391545947238890328} \PYG{o}{+} \PYG{l+m+mf}{970.73385217099055769742907468453}\PYG{o}{*}\PYG{n}{i} \PYG{p}{,}\PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{8.0355102995882391545947238890328} \PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{970.73385217099055769742907468453}\PYG{o}{*}\PYG{n}{i}\PYG{p}{]}
+\PYG{n}{poles}\PYG{p}{=[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2306.1292101125216811843091219593}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{898.74275697138288696284712221959}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{240.72250145498954243549730861195} \PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{1419.3905739866029604915898580966}\PYG{o}{*}\PYG{n}{i}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{240.72250145498954243549730861195} \PYG{o}{+} \PYG{l+m+mf}{1419.3905739866029604915898580966}\PYG{o}{*}\PYG{n}{i}\PYG{p}{]}
+\PYG{n}{gain} \PYG{p}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+
+\PYG{n}{sys} \PYG{p}{=} \PYG{n}{tf}\PYG{p}{([}\PYG{n}{gain}\PYG{p}{],} \PYG{n+nb}{poly}\PYG{p}{(}\PYG{n}{poles}\PYG{p}{));}
+\PYG{c}{\PYGZpc{} 1. Calculate the impulse response}
+\PYG{n+nb}{figure}\PYG{p}{;}
+\PYG{n}{impulse}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Impulse Response of the System\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{grid} \PYG{n}{on}\PYG{p}{;}
+
+\PYG{c}{\PYGZpc{} 2. Calculate the step response}
+\PYG{n+nb}{figure}\PYG{p}{;}
+\PYG{n}{step}\PYG{p}{(}\PYG{n}{sys}\PYG{p}{);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Step Response of the System\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{grid} \PYG{n}{on}\PYG{p}{;}
+
+\PYG{c}{\PYGZpc{}\PYGZpc{} 3. Produce Bode plots}
+\PYG{c}{\PYGZpc{}figure;}
+\PYG{c}{\PYGZpc{}bode(sys);}
+\PYG{c}{\PYGZpc{}title(\PYGZsq{}Bode Plot of the System\PYGZsq{});}
+\PYG{c}{\PYGZpc{}grid on;}
+\PYG{c}{\PYGZpc{}}
+\PYG{c}{\PYGZpc{}\PYGZpc{} 4. Calculate the output current for a pure 50 Hz sinusoid}
+\PYG{c}{\PYGZpc{}t = 0:0.001:1; \PYGZpc{} Time vector}
+\PYG{c}{\PYGZpc{}input\PYGZus{}current\PYGZus{}50Hz = sin(2 * pi * 50 * t); \PYGZpc{} 50 Hz input current}
+\PYG{c}{\PYGZpc{}output\PYGZus{}current\PYGZus{}50Hz = lsim(sys, input\PYGZus{}current\PYGZus{}50Hz, t); \PYGZpc{} Simulate the output}
+\PYG{c}{\PYGZpc{}figure;}
+\PYG{c}{\PYGZpc{}plot(t, output\PYGZus{}current\PYGZus{}50Hz);}
+\PYG{c}{\PYGZpc{}title(\PYGZsq{}Output Current for 50 Hz Sinusoid Input\PYGZsq{});}
+\PYG{c}{\PYGZpc{}xlabel(\PYGZsq{}Time (s)\PYGZsq{});}
+\PYG{c}{\PYGZpc{}ylabel(\PYGZsq{}Output Current i\PYGZus{}io(t)\PYGZsq{});}
+\PYG{c}{\PYGZpc{}grid on;}
+\PYG{c}{\PYGZpc{}}
+\PYG{c}{\PYGZpc{}\PYGZpc{} 5. Calculate the output current for a frequency to be rejected (e.g., 100 Hz)}
+\PYG{c}{\PYGZpc{}input\PYGZus{}current\PYGZus{}100Hz = sin(2 * pi * 100 * t); \PYGZpc{} 100 Hz input current}
+\PYG{c}{\PYGZpc{}output\PYGZus{}current\PYGZus{}100Hz = lsim(sys, input\PYGZus{}current\PYGZus{}100Hz, t); \PYGZpc{} Simulate the output}
+\PYG{c}{\PYGZpc{}figure;}
+\PYG{c}{\PYGZpc{}plot(t, output\PYGZus{}current\PYGZus{}100Hz);}
+\PYG{c}{\PYGZpc{}title(\PYGZsq{}Output Current for 100 Hz Sinusoid Input\PYGZsq{});}
+\PYG{c}{\PYGZpc{}xlabel(\PYGZsq{}Time (s)\PYGZsq{});}
+\PYG{c}{\PYGZpc{}ylabel(\PYGZsq{}Output Current i\PYGZus{}io(t)\PYGZsq{});}
+\PYG{c}{\PYGZpc{}grid on;}
+\PYG{c}{\PYGZpc{}}
+\PYG{c}{\PYGZpc{}\PYGZpc{} 6. Calculate the output current for a superposition of fundamental and harmonic currents}
+\PYG{c}{\PYGZpc{}\PYGZpc{} Assume harmonics at 150 Hz and 200 Hz}
+\PYG{c}{\PYGZpc{}input\PYGZus{}current\PYGZus{}superposition = sin(2 * pi * 50 * t) + 0.5 * sin(2 * pi * 150 * t) + 0.3 * sin(2 * pi * 200 * t);}
+\PYG{c}{\PYGZpc{}output\PYGZus{}current\PYGZus{}superposition = lsim(sys, input\PYGZus{}current\PYGZus{}superposition, t); \PYGZpc{} Simulate the output}
+\PYG{c}{\PYGZpc{}figure;}
+\PYG{c}{\PYGZpc{}plot(t, output\PYGZus{}current\PYGZus{}superposition);}
+\PYG{c}{\PYGZpc{}title(\PYGZsq{}Output Current for Superposition of Fundamental and Harmonics\PYGZsq{});}
+\PYG{c}{\PYGZpc{}xlabel(\PYGZsq{}Time (s)\PYGZsq{});}
+\PYG{c}{\PYGZpc{}ylabel(\PYGZsq{}Output Current i\PYGZus{}io(t)\PYGZsq{});}
+\PYG{c}{\PYGZpc{}grid on;}
+\end{Verbatim}

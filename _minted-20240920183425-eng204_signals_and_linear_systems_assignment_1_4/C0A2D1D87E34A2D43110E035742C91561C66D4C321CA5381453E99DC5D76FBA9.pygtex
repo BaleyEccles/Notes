@@ -1,0 +1,47 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{clc}
+\PYG{n}{clear}
+\PYG{n+nb}{close} \PYG{n+nb}{all}
+\PYG{n+nb}{warning}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}off\PYGZsq{}}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}all\PYGZsq{}}\PYG{p}{);}
+\PYG{n}{pkg} \PYG{n+nb}{load} \PYG{n}{symbolic}
+
+\PYG{c}{\PYGZpc{} Given values}
+\PYG{n}{Vsys}\PYG{p}{=}\PYG{l+m+mi}{33}\PYG{o}{*}\PYG{l+m+mi}{10}\PYGZca{}\PYG{l+m+mi}{3}\PYG{p}{;}
+\PYG{n}{Csize}\PYG{p}{=}\PYG{l+m+mi}{6}\PYG{o}{*}\PYG{l+m+mi}{10}\PYGZca{}\PYG{l+m+mi}{6}\PYG{p}{;}
+\PYG{n}{Q}\PYG{p}{=}\PYG{l+m+mi}{28}\PYG{p}{;}
+\PYG{n}{L2}\PYG{p}{=}\PYG{l+m+mi}{18}\PYG{o}{*}\PYG{l+m+mi}{10}\PYGZca{}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{3}\PYG{p}{;}
+\PYG{n}{n1}\PYG{p}{=}\PYG{l+m+mi}{3}\PYG{p}{;}
+\PYG{n}{n2}\PYG{p}{=}\PYG{l+m+mi}{7}\PYG{p}{;}
+\PYG{n}{RLoad}\PYG{p}{=}\PYG{l+m+mi}{100}\PYG{p}{;}
+
+\PYG{c}{\PYGZpc{}Frequecnies and w\PYGZus{}m}
+\PYG{n}{f}\PYG{p}{=}\PYG{l+m+mi}{50}\PYG{p}{;}
+\PYG{n}{f1}\PYG{p}{=}\PYG{n}{f}\PYG{o}{*}\PYG{n}{n1}\PYG{p}{;}
+\PYG{n}{f2}\PYG{p}{=}\PYG{n}{f}\PYG{o}{*}\PYG{n}{n2}\PYG{p}{;}
+\PYG{n}{fm}\PYG{p}{=}\PYG{n+nb}{sqrt}\PYG{p}{(}\PYG{n}{f1}\PYG{o}{*}\PYG{n}{f2}\PYG{p}{);}
+\PYG{n}{wm}\PYG{p}{=}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{o}{*}\PYG{n}{fm}\PYG{p}{;}
+
+\PYG{c}{\PYGZpc{} Calculate Capacitors, resistor and inductor}
+\PYG{n}{C1}\PYG{p}{=(}\PYG{n}{Csize}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{o}{*}\PYG{n+nb}{pi}\PYG{o}{*}\PYG{n}{Vsys}\PYGZca{}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{n}{R1}\PYG{p}{=}\PYG{n}{Q}\PYG{o}{*}\PYG{n}{L2}\PYG{o}{*}\PYG{n}{wm}\PYG{p}{;}
+\PYG{n}{C2}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{p}{(}\PYG{n}{L2}\PYG{o}{*}\PYG{n}{wm}\PYGZca{}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{n}{L1}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{p}{(}\PYG{n}{C1}\PYG{o}{*}\PYG{n}{wm}\PYGZca{}\PYG{l+m+mi}{2}\PYG{p}{);}
+
+\PYG{c}{\PYGZpc{}\PYGZpc{} Equivelant impeadance using laplace transform}
+\PYG{n}{syms} \PYG{n}{s}
+\PYG{n}{ZC1}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{p}{(}\PYG{n}{s}\PYG{o}{*}\PYG{n}{C1}\PYG{p}{);}
+\PYG{n}{ZR1}\PYG{p}{=}\PYG{n}{R1}\PYG{p}{;}
+\PYG{n}{ZC2}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{p}{(}\PYG{n}{s}\PYG{o}{*}\PYG{n}{C2}\PYG{p}{);}
+\PYG{n}{ZL1}\PYG{p}{=}\PYG{n}{L1}\PYG{o}{*}\PYG{n}{s}\PYG{p}{;}
+\PYG{n}{ZL2}\PYG{p}{=}\PYG{n}{L2}\PYG{o}{*}\PYG{n}{s}\PYG{p}{;}
+\PYG{n}{Zequ}\PYG{p}{=}\PYG{n}{ZL1}\PYG{o}{+}\PYG{n}{ZC1}\PYG{o}{+}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{p}{((}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{ZL2}\PYG{p}{)}\PYG{o}{+}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{ZR1}\PYG{p}{)}\PYG{o}{+}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{ZC2}\PYG{p}{)));}
+
+\PYG{c}{\PYGZpc{} Transfer function using current divider}
+\PYG{n}{TransferFunction} \PYG{p}{=} \PYG{p}{(}\PYG{n}{Zequ}\PYG{o}{/}\PYG{p}{(}\PYG{n}{RLoad}\PYG{o}{+}\PYG{n}{Zequ}\PYG{p}{));}
+\PYG{n}{TransferFunction}\PYG{p}{=}\PYG{n+nb}{factor}\PYG{p}{(}\PYG{n}{TransferFunction}\PYG{p}{);}
+
+\PYG{p}{[}\PYG{n}{den}\PYG{p}{,}\PYG{n}{num}\PYG{p}{]=}\PYG{n}{numden}\PYG{p}{(}\PYG{n}{TransferFunction}\PYG{p}{);}
+\PYG{n+nb}{zeros}\PYG{p}{=}\PYG{n}{vpasolve}\PYG{p}{(}\PYG{n}{num}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{s}\PYG{p}{)}
+\PYG{n}{poles}\PYG{p}{=}\PYG{n}{vpasolve}\PYG{p}{(}\PYG{n}{den}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{s}\PYG{p}{)}
+
+\end{Verbatim}

@@ -1,24 +1,46 @@
-:PROPERTIES:
-:ID:       22c73d57-8d3d-49c3-98a3-f0d52bb09187
-:END:
-#+title: ENG204 - Signals and Linear Systems - Assignment 1.4
-#+date: [2024-09-20 Fri 18:34]
-#+AUTHOR: Baley Eccles - 652137 and Tyler Robards - 651790
-#+FILETAGS: :Assignment:
+% Created 2024-10-02 Wed 19:12
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{minted}
+\usepackage{fontspec}
+\setmonofont{Iosevka}
+\setminted{fontsize=\small, frame=single, breaklines=true}
+\usemintedstyle{emacs}
+\usepackage[backend=biber,style=apa]{biblatex}
+\addbibresource{citation.bib}
+\usepackage{float}
+\author{Baley Eccles - 652137 and Tyler Robards - 651790}
+\date{\textit{{[}2024-09-20 Fri 18:34]}}
+\title{ENG204 - Signals and Linear Systems - Assignment 1.4}
+\hypersetup{
+ pdfauthor={Baley Eccles - 652137 and Tyler Robards - 651790},
+ pdftitle={ENG204 - Signals and Linear Systems - Assignment 1.4},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.4 (Org mode 9.8)}, 
+ pdflang={English}}
+\begin{document}
 
-#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
-#+LATEX_HEADER_EXTRA: \usepackage{minted}
-#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
-#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
-#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
-#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
-#+LATEX_HEADER_EXTRA: \usepackage[backend=biber,style=apa]{biblatex}
-#+LATEX_HEADER_EXTRA: \addbibresource{citation.bib}
-#+LATEX_HEADER_EXTRA: \usepackage{float}
-#+PROPERTY: header-args :eval no
+\maketitle
+\tableofcontents
 
-* Laplace Transforms to solve Partial Differential Equations
-** a
+\section{Laplace Transforms to solve Partial Differential Equations}
+\label{sec:org10fdf15}
+\subsection{a}
+\label{sec:orga8c94fb}
 \begin{align*}
 \frac{d^3y}{d^3t}+5\frac{d^2y}{d^2t}+9\frac{dy}{dt}+45y &= -t^2u(t)+2e^{-t}u(t-2) \\
 \leftrightarrow^{\mathcal{L}} s^3Y(s)+5s^2Y(s)+9sY(s)+45Y(s) &= -\frac{2}{s^{3}} +2e^{-2s}\frac{1}{s+1} \\
@@ -29,16 +51,18 @@ Y(s)=\frac{2e^{-2s}}{(s+1)(s+5)(s^2+9)}-&\frac{2}{s^3(s+5)(s^2+9)} \\
 y(t)=(675 u(t - 2) (-15 e^{10 - 5 t} + 51 e^{2 - t} + &8 \sin(6 - 3 t) - 36 \cos(6 - 3 t)) \\
  + 4 (-3825 t^2 + 1530 t + 81 e^{-5 t} - 375 \sin(3 t)& - 625 \cos(3 t) + 544))/688500
 \end{align*}
-
-** b
-*** 1
+\subsection{b}
+\label{sec:org178c534}
+\subsubsection{1}
+\label{sec:org11c2bad}
 \begin{align*}
 \mathcal{L}\left\{\frac{\partial f}{\partial x}\right\}+\mathcal{L}\left\{\frac{\partial f}{\partial t}\right\}+\mathcal{L}\left\{f\right\}&=0\\
 \frac{\partial F}{\partial x}+sF(x,s)-f(x,0)+F(x,s)&=0\\
 \textrm{Inital condition }f(x,0)&=sin(x):\\
 \frac{\partial F}{\partial x}+(s+1)F(x,s)&=sin(x)
 \end{align*}
-*** 2
+\subsubsection{2}
+\label{sec:org7f79dec}
 Using the integrating factor technique
 \begin{align*}
 \mu(x)&=e^{\int(s+1)dx}=e^{(s+1)x} \\
@@ -49,18 +73,21 @@ Using the integrating factor technique
 \Rightarrow &e^{(s + 1)x}F = \frac{e^{(s + 1)x}}{(s + 1)^2 + 1}((s + 1)\sin(x) - \cos(x)) + C(s)\\
 \Rightarrow & F(x, s) = \frac{(s + 1)\sin(x) - \cos(x)}{(s + 1)^2 + 1} + C(s)e^{-(s + 1)x}
 \end{align*}
-*** 3
+\subsubsection{3}
+\label{sec:org0b21eaa}
 \begin{align*}
 F(0, s) &= \frac{(s + 1)\sin(0) - \cos(0)}{(s + 1)^2 + 1} + C(s)e^{-(s + 1)0} \\
 \Rightarrow C &= \frac{1}{s^2+2s+2} \\
 \Rightarrow  F(x, s) &= \frac{(s + 1)\sin(x) - \cos(x)}{(s + 1)^2 + 1} + \frac{e^{-(s + 1)x}}{s^2+2s+2}
 \end{align*}
-*** 4
+\subsubsection{4}
+\label{sec:org8942e19}
 \begin{align*}
 \mathcal{L}\left\{F(x, s)\right\} &= \mathcal{L}\left\{\frac{(s + 1)\sin(x) - \cos(x)}{(s + 1)^2 + 1} + \frac{e^{-(s + 1)x}}{s^2+2s+2}\right\} \\
 f(x,t)&=e^{-t}[\sin(x-t)+\sin(t-x)u(t-x)]
 \end{align*}
-*** 5
+\subsubsection{5}
+\label{sec:orge6fc743}
 \begin{align*}
 \frac{\partial f}{\partial x}&=e^{-t}\cos(x-t)-\cos(t-x)u(t-x)-\sin(t-x)\delta(t-x)\\
 \frac{\partial f}{\partial t}&=-e^{-t}[\sin(x-t)+\sin(t-x)u(t-x) \\
@@ -71,7 +98,7 @@ f(x,t)&=e^{-t}[\sin(x-t)+\sin(t-x)u(t-x)]
 &+e^{-t}[\sin(x-t)+\sin(t-x)u(t-x)]
 \end{align*}
 Plugging this into a calculator shows that it equals zero, as required.
-#+BEGIN_SRC octave :exports code :results output :session b
+\begin{minted}[]{octave}
 clc
 clear
 close all
@@ -90,17 +117,16 @@ zlabel('f(x,t)');
 title('Solution of the PDE f(x,t)');
 filename = sprintf('ENG204-Assignment-4-Part-b.png');
 print(filename, '-dpng', '-r100');
-#+END_SRC
-
-#+RESULTS:
-: error: invalid default property specification
-#+BEGIN_FIGURE
-#+CAPTION:Plot of the solution to the PDE
-#+ATTR_LATEX: :placement [H]
-[[file:ENG204-Assignment-4-Part-b.png]]
-#+END_FIGURE
-
-** c
+\end{minted}
+\begin{FIGURE}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-4-Part-b.png}
+\caption{Plot of the solution to the PDE}
+\end{figure}
+\end{FIGURE}
+\subsection{c}
+\label{sec:org5e09181}
 Take the Laplace transform:
 \begin{align*}
 \frac{\partial f}{\partial t}&=\alpha \frac{\partial^2f}{\partial x^2} \\
@@ -136,7 +162,7 @@ Hence:
 \begin{align*}
 F(x,s) &= \frac{T_0}{\pi^2\alpha+s}\sin(\pi x)\\
 \end{align*}
-#+BEGIN_SRC octave :exports code :results output :session b
+\begin{minted}[]{octave}
 clc
 clear
 close all
@@ -165,26 +191,25 @@ colorbar;
 shading interp;
 filename = sprintf('ENG204-Assignment-4-Part-c.png');
 print(filename, '-dpng', '-r100');
-#+END_SRC
+\end{minted}
 
-#+RESULTS:
-: error: invalid default property specification
-
-#+BEGIN_FIGURE
-#+CAPTION:Plot of the solution to the heat equation
-#+ATTR_LATEX: :placement [H]
-[[file:ENG204-Assignment-4-Part-c.png]]
-#+END_FIGURE
-
-* Harmonic Filter
-Output of the ~harmonic_filter.p~ with student IDs 652137 and 651790:
-#+BEGIN_EXAMPLE
+\begin{FIGURE}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-4-Part-c.png}
+\caption{Plot of the solution to the heat equation}
+\end{figure}
+\end{FIGURE}
+\section{Harmonic Filter}
+\label{sec:org6411159}
+Output of the \texttt{harmonic\_filter.p} with student IDs 652137 and 651790:
+\begin{verbatim}
 Please use a system voltage of 33 kV
 Please use a capacitor of size 6 MVAR
 Please use a quality factor of 28
 Please use an inductance L2 of 18 mH
 Your filter must reject harmonic numbers 3 and 7
-#+END_EXAMPLE
+\end{verbatim}
 These were used to derive find the values for the resistors, inductors and capacitors:
 \begin{align*}
 C_1&=\frac{6M}{100\pi(33k)^2}&=17\mu F \\
@@ -222,7 +247,7 @@ H(s) = \frac{
 \end{array}}
 \end{align*}
 Here is the code that was used to calculate the transfer function:
-#+BEGIN_SRC octave :exports code :results output :session b
+\begin{minted}[]{octave}
 clc
 clear
 close all
@@ -268,9 +293,9 @@ TransferFunction=factor(TransferFunction);
 zeros=vpasolve(num(2)==0,s)
 poles=vpasolve(den(1)==0,s)
 
-#+END_SRC
+\end{minted}
 Here is the code that uses the transfer function:
-#+BEGIN_SRC octave :exports code :results output :session b
+\begin{minted}[]{octave}
 clc
 clear
 close all
@@ -368,65 +393,75 @@ grid on;
 legend show;
 filename = sprintf('ENG204-Assignment-4-Super.png');
 print(filename, '-dpng', '-r100');
-#+END_SRC
-
-#+RESULTS:
-: error: invalid default property specification
-: warning: System has a direct feedthrough!
-: The impulse 1.000000*delta(t) is omitted in the impulse response
-: from input "u1" to output "y1"
-: warning: called from
-:     __time_response__ at line 155 column 9
-:     impulse at line 79 column 13
-#+BEGIN_FIGURE
-#+CAPTION:Impulse response of the transfer function.
-#+ATTR_LATEX: :placement [H]
-[[file:ENG204-Assignment-4-Impulse.png]]
-#+END_FIGURE
-#+BEGIN_FIGURE
-#+CAPTION:Step response of the transfer function.
-#+ATTR_LATEX: :placement [H]
-[[file:ENG204-Assignment-4-Step.png]]
-#+END_FIGURE
-#+BEGIN_FIGURE
-#+CAPTION:Bode magnitude and phase of the transfer function.
-#+ATTR_LATEX: :placement [H]
-[[file:ENG204-Assignment-4-Bode1.png]]
-#+END_FIGURE
-#+BEGIN_FIGURE
-#+CAPTION:Bode magnitude of the transfer function in Hertz.
-#+ATTR_LATEX: :placement [H]
-[[file:ENG204-Assignment-4-Bode2.png]]
-#+END_FIGURE
-#+BEGIN_FIGURE
-#+CAPTION:Response of the system when 50Hz sine wave is applied.
-#+ATTR_LATEX: :placement [H]
-[[file:ENG204-Assignment-4-50Hz.png]]
-#+END_FIGURE
-#+BEGIN_FIGURE
-#+CAPTION:Response of the system when 350Hz sine wave is applied.
-#+ATTR_LATEX: :placement [H]
-[[file:ENG204-Assignment-4-350Hz.png]]
-#+END_FIGURE
-#+BEGIN_FIGURE
-#+CAPTION:Response of the system when a sum of the harmonic frequencies is applied.
-#+ATTR_LATEX: :placement [H]
-[[file:ENG204-Assignment-4-Super.png]]
-#+END_FIGURE
-
-** Impulse Response
+\end{minted}
+\begin{FIGURE}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-4-Impulse.png}
+\caption{Impulse response of the transfer function.}
+\end{figure}
+\end{FIGURE}
+\begin{FIGURE}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-4-Step.png}
+\caption{Step response of the transfer function.}
+\end{figure}
+\end{FIGURE}
+\begin{FIGURE}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-4-Bode1.png}
+\caption{Bode magnitude and phase of the transfer function.}
+\end{figure}
+\end{FIGURE}
+\begin{FIGURE}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-4-Bode2.png}
+\caption{Bode magnitude of the transfer function in Hertz.}
+\end{figure}
+\end{FIGURE}
+\begin{FIGURE}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-4-50Hz.png}
+\caption{Response of the system when 50Hz sine wave is applied.}
+\end{figure}
+\end{FIGURE}
+\begin{FIGURE}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-4-350Hz.png}
+\caption{Response of the system when 350Hz sine wave is applied.}
+\end{figure}
+\end{FIGURE}
+\begin{FIGURE}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.9\linewidth]{ENG204-Assignment-4-Super.png}
+\caption{Response of the system when a sum of the harmonic frequencies is applied.}
+\end{figure}
+\end{FIGURE}
+\subsection{Impulse Response}
+\label{sec:orga0a5b7c}
 The oscillations in the impulse response suggest a damped system because the oscillations gradually decay. The way in which the signal decays suggest an underdamped system because of the overshoot. The high initial amplitude change indicates a fast transient response, indicating a high-quality factor or resonance. This could lead to instability if the damping is not sufficient. These characteristics may not be ideal for power systems due to the large amplitude reaction sudden disturbances.
-** State Space Representation
+\subsection{State Space Representation}
+\label{sec:org98180e3}
 The general form of:
 \[q[n + 1] = Aq[n] + Bx[n]\]
 \[y[n] = Cq[n] + dx[t]\]
 Where:
- - Matrix A: Describes the internal dynamics of the system.
- - Matrix B: Describes how the input affects the system.
- - Matrix C: Maps the state to the output.
- - Matrix D: Represents direct feedthrough from input to output.
- - Matrix A is helpful to determine the stability of the system through its eigenvalues.
+\begin{itemize}
+\item Matrix A: Describes the internal dynamics of the system.
+\item Matrix B: Describes how the input affects the system.
+\item Matrix C: Maps the state to the output.
+\item Matrix D: Represents direct feedthrough from input to output.
+\item Matrix A is helpful to determine the stability of the system through its eigenvalues.
+\end{itemize}
 Matrix B,C and D describe how the system can be controlled and monitored, an important property for power systems.
-** System Response and Its Utility in Power Systems
+\subsection{System Response and Its Utility in Power Systems}
+\label{sec:org8ec8367}
 The Bode plot shows significant attenuation of the n1 and n2 harmonics, which implies successful blocking of these frequencies. This helps the power system to remain stable through harmonic current injections. The filtering stabilises the effective power transfer and system efficiency.
 The step response of the system shows that after a transient the system will settle to a steady state. This is useful in power systems to ensure reliability when there are fluctuating loads or transient conditions
+\end{document}
