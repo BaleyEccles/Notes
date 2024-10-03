@@ -13,6 +13,7 @@
 ** Formula
  - \[P(X=x)=\frac{e^{-\mu}\mu^x}{x!}\]
    - \[\mu=\lambda t\]
+   - \[\mu=np2\]
 ** Properties
  - If $X\sim Pois(\mu)$ then
    - [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]]: $E[x]=\mu$

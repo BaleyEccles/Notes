@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       e4455c7c-357e-4617-8a28-e6b45b0af1ae
+:END:
+#+title: Probability Mass Function (PMF)
+#+date: [2024-10-03 Thu 09:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Probability Mass Function (PMF)
+ - The PMF is a plot of the probabilities associated with each outcome.
+ - $P(X=n)=Pr$ ordered from lowest value to largest
+   - [[file:Screenshot 2024-10-03 at 09-12-08 ChatGPT.png]]

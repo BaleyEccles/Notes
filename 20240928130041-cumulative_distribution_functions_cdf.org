@@ -9,6 +9,8 @@
 * Cumulative Distribution Functions (cdf)
  - $F(x)$ give the probability of getting a value of X less than or equal to x
    - \[F(x)=P(X\leq x)=\sum_{k\leq x}P(X=k)\]
+ - [[file:Screenshot 2024-10-03 at 09-13-46 ChatGPT.png]]
+ - The point k is defined as the sum of the previous probabilities
 ** Requirements
  - \[F(x)=P(X\leq x) =\sum_{x_i\leq x}f(x_i)\]
  - \[0\leq F(x)\leq 1\]

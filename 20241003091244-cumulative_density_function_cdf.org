@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       71fe0eb1-8c2a-47f0-b345-b06462ca7dce
+:END:
+#+title: Cumulative Density Function (CDF)
+#+date: [2024-10-03 Thu 09:12]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Cumulative Density Function (CDF)
