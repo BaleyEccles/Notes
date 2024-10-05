@@ -13,6 +13,7 @@
 !org-files/**
 !*.org
 !*.db
+!*.md
 
 # Do not ignore all .png files
 !*.png
