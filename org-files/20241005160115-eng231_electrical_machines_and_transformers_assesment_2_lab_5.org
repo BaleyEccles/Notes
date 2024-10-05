@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       faa9a5df-17b2-46ff-9b4e-2989a57792a9
+:END:
+#+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5
+#+date: [2024-10-05 Sat 16:01]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+
+* ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5

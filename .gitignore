@@ -8,6 +8,8 @@
 !.github/
 !.github/**
 
+!org-files/
+!org-files/*.org
 
 !*.org
 !*.db

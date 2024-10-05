@@ -1,0 +1,95 @@
+:PROPERTIES:
+:ID:       7d1bb30c-084d-4895-9100-22b39a5c4f8c
+:END:
+#+title: ENG204 - Signals and Linear Systems - Assignment 2
+#+date: [2024-10-05 Sat 15:11]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:TODO:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage[backend=biber,style=apa]{biblatex}
+#+LATEX_HEADER_EXTRA: \addbibresource{citation.bib}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+
+* ENG204 - Signals and Linear Systems - Assignment 2
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+clc
+clear
+close all
+Signal = load('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/audio_signal_1.mat');
+fourierCoeffs = Signal.fourierSeriesCoeffs;
+
+% Convert to magnitude and phase
+SignalMag = abs(fourierCoeffs);
+SignalPhase = angle(fourierCoeffs);
+
+SampleFreq = 44100;
+N = length(fourierCoeffs);
+f = (0:N-1)*(SampleFreq/N);
+
+% Plot Magnitude vs Frequency
+figure;
+plot(f, SignalMag, 'b', 'LineWidth', 1.5);
+title('Magnitude of Fourier Transform');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+legend('Magnitude');
+xlim([SampleFreq/2, SampleFreq]);
+
+% Plot Phase vs Frequency
+figure;
+plot(f, SignalPhase, 'r', 'LineWidth', 1.5);
+title('Phase of Fourier Transform');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
+legend('Phase');
+xlim([SampleFreq/2, SampleFreq]);
+#+END_SRC
+
+#+RESULTS:
+
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+clc
+clear
+close all
+
+Signal = load('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/audio_signal_1.mat');
+fourierCoeffs = Signal.fourierSeriesCoeffs;
+Fs = 44100;
+
+% Compute the Fourier Transform
+N = length(fourierCoeffs);
+Y = fft(fourierCoeffs);
+f = (0:N-1)*(Fs/N); % Frequency vector
+
+% Shift the spectrum for plotting
+Y_shifted = fftshift(Y);
+f_shifted = f - Fs/2; % Shift frequency vector
+
+% Plot magnitude and phase
+
+figure;
+plot(f_shifted, abs(Y_shifted));
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([-Fs/2 Fs/2]);
+
+figure;
+plot(f_shifted, angle(Y_shifted));
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+xlim([-Fs/2 Fs/2]);
+#+END_SRC
+
+#+RESULTS:
