@@ -39,6 +39,7 @@
 ** Assessment Task 4: Probability and Statistics Assignments
 - Due 1pm Friday, weeks 11 and 13
 - \[2 \cdot 10\% =20\%\] of mark
+- [[id:fb866e0b-9934-4d65-8690-fb73e8c3e1d0][KME272 - Assesment 4.1]]
 ** Assessment Task 5: Probability and Statistics Quiz
 - During week 10 workshop
 - \[10\%\] of mark

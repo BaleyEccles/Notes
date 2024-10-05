@@ -1,0 +1,110 @@
+:PROPERTIES:
+:ID:       51f7c5ef-86da-44f3-8d30-b58e676628f3
+:END:
+#+title: ENG231 - Electrical Machines And Transformers - Assignment 2
+#+date: [2024-10-05 Sat 11:01]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:
+#+STARTUP: latexpreview
+
+* ENG231 - Electrical Machines And Transformers - Assignment 2
+** Part 1: Calculation of transformer winding voltages
+|---------------+-------------+---------------+-------------|
+| Wire Diameter | Maximum RMS | Wire Diameter | Maximum RMS |
+|          (mm) | current (A) |          (mm) | current (A) |
+|---------------+-------------+---------------+-------------|
+|          2.03 |         8.3 |           9.5 |         196 |
+|          2.34 |        10.5 |          10.2 |         227 |
+|          2.64 |        13.5 |          11.0 |         265 |
+|          2.95 |        16.6 |          11.8 |         306 |
+|          3.25 |        21.2 |          12.7 |         355 |
+|          3.66 |        26.5 |          15.0 |         495 |
+|          4.06 |        33.3 |          17.0 |         636 |
+|          4.47 |        44.2 |          20.0 |         880 |
+|          4.88 |        52.3 |          22.0 |        1064 |
+|          5.39 |        63.8 |          24.0 |        1267 |
+|          5.89 |        76.4 |          28.0 |        1724 |
+|          6.40 |        90.1 |          31.0 |        2113 |
+|          7.01 |         108 |          34.0 |        2542 |
+|          7.62 |         128 |          37.0 |        3011 |
+|          8.23 |         149 |          39.0 |        3345 |
+|          8.84 |         172 |          41.0 |        3697 |
+|---------------+-------------+---------------+-------------|
+
+#+BEGIN_SRC octave :exports both :results output :session Part1
+h = 90 *10^(-2);
+l = 130 *10^(-2);
+d = 22 *10^(-2);
+g = 1.8 *10^(-3);
+mu0 = 4*pi*10^(-7);
+mur = 1800;
+A = d^2;
+Np = 1360;
+Ns = 315;
+a=Ns/Np;
+f = 50;
+I = 3.3;
+
+Rgap = g/(mu0*A);
+Rside = (h-2*l-g)/(mu0*mur*A);
+Rbottom = l/(mu0*mur*A);
+Rtop = l/(mu0*mur*A);
+R = 2*Rside + Rbottom + Rtop + 2*Rgap;
+Phi=(1/R)*Np*I;
+V1 = 4.44*pi*Phi*f;
+V2 = a*V1;
+
+fprintf('Primary Voltage (V1): %.2f V (RMS)\n', V1);
+fprintf('Secondary Voltage (V2): %.2f V (RMS)\n', V2);
+#+END_SRC
+
+#+RESULTS:
+: Primary Voltage (V1): 60.37 V (RMS)
+: Secondary Voltage (V2): 13.98 V (RMS)
+** Part 2: Specification of transformer design to suit application
+With the last digit of my student ID being 7:
+| Student ID | Rated apparent  | Primary side rated  | Secondary side rated | 3-phase         |
+| last digit | power (3-phase) | voltage (line-line) | voltage (line-line)  | connection type |
+| 7          | 460 kVA         | 22 kV               | 400 V                | Δ-Y             |
+
+#+BEGIN_SRC octave :exports code :results output :session Part1
+f = 50;
+S = 460*10^3;
+Vp = 22*10^3;
+Vs = 400;
+mur = 2150;
+
+%% Modifiable Values
+l = ;
+h = ;
+g = ;
+d = ;
+
+%% Parameters
+gmin = 1*10^(-3);
+gmax = 3*10^(-3);
+
+Bmin = 0;
+Bmax = 1.6;
+
+gap = l-2*d-4*Layers*wireWidth;
+
+Imax = 0.05*IperWinding
+
+
+%% Equations
+A = d^2;
+
+Rgap = g/(mu0*A);
+Rside = (h-2*l-g)/(mu0*mur*A);
+Rbottom = l/(mu0*mur*A);
+Rtop = l/(mu0*mur*A);
+R = 2*Rside + Rbottom + Rtop + 2*Rgap;
+
+
+Phi = B*A;
+Phi = (1/R)*Np*I;
+V1 = 4.44*pi*Phi*f;
+V2 = a*V1;
+
+#+END_SRC

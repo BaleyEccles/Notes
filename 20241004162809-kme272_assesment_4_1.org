@@ -1,0 +1,242 @@
+:PROPERTIES:
+:ID:       fb866e0b-9934-4d65-8690-fb73e8c3e1d0
+:END:
+#+title: KME272 - Assesment 4.1
+#+date: [Friday 11th October, 23:59]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:
+#+STARTUP: latexpreview
+
+
+* KME272, Probability & Statistics Assignment 1
+
+
+
+
+
+** Your tasks
+
+ - First, make sure you have recent versions of R and RStudio installed on your computer.
+ - Read and understand the “Introduction to R and Quarto” document.
+
+Below, unless specified otherwise, you can ignore the month and day columns in the data.
+** Inspecting the data
+
+
+ - Load the airquality data into R.
+
+#+begin_src R :session Q1
+rm(list = ls())
+data("airquality")
+
+#help("airquality")
+
+
+#+end_src
+
+#+RESULTS:
+: airquality
+
+
+ - Use the help("airquality") command to find out about the data. Convert the values to m/s for wind speed and Celcius for temperature. Give a brief description of the data in your own words.
+#+begin_src R :session Q1
+
+airquality$Wind <- airquality$Wind * 0.44704
+airquality$Temp <- (airquality$Temp - 32) * 5/9
+
+#+end_src
+
+#+RESULTS:
+| 19.4444444444444 |
+| 22.2222222222222 |
+| 23.3333333333333 |
+| 16.6666666666667 |
+| 13.3333333333333 |
+| 18.8888888888889 |
+| 18.3333333333333 |
+|               15 |
+| 16.1111111111111 |
+| 20.5555555555556 |
+| 23.3333333333333 |
+| 20.5555555555556 |
+| 18.8888888888889 |
+|               20 |
+| 14.4444444444444 |
+| 17.7777777777778 |
+| 18.8888888888889 |
+| 13.8888888888889 |
+|               20 |
+| 16.6666666666667 |
+|               15 |
+| 22.7777777777778 |
+| 16.1111111111111 |
+| 16.1111111111111 |
+| 13.8888888888889 |
+| 14.4444444444444 |
+| 13.8888888888889 |
+| 19.4444444444444 |
+| 27.2222222222222 |
+| 26.1111111111111 |
+| 24.4444444444444 |
+| 25.5555555555556 |
+| 23.3333333333333 |
+| 19.4444444444444 |
+| 28.8888888888889 |
+| 29.4444444444444 |
+| 26.1111111111111 |
+| 27.7777777777778 |
+| 30.5555555555556 |
+| 32.2222222222222 |
+| 30.5555555555556 |
+| 33.8888888888889 |
+| 33.3333333333333 |
+| 27.7777777777778 |
+| 26.6666666666667 |
+| 26.1111111111111 |
+|               25 |
+| 22.2222222222222 |
+| 18.3333333333333 |
+| 22.7777777777778 |
+| 24.4444444444444 |
+|               25 |
+| 24.4444444444444 |
+| 24.4444444444444 |
+| 24.4444444444444 |
+| 23.8888888888889 |
+| 25.5555555555556 |
+| 22.7777777777778 |
+| 26.6666666666667 |
+|               25 |
+| 28.3333333333333 |
+| 28.8888888888889 |
+| 29.4444444444444 |
+| 27.2222222222222 |
+| 28.8888888888889 |
+| 28.3333333333333 |
+| 28.3333333333333 |
+| 31.1111111111111 |
+| 33.3333333333333 |
+| 33.3333333333333 |
+| 31.6666666666667 |
+| 27.7777777777778 |
+| 22.7777777777778 |
+| 27.2222222222222 |
+| 32.7777777777778 |
+| 26.6666666666667 |
+| 27.2222222222222 |
+| 27.7777777777778 |
+| 28.8888888888889 |
+| 30.5555555555556 |
+| 29.4444444444444 |
+| 23.3333333333333 |
+| 27.2222222222222 |
+| 27.7777777777778 |
+|               30 |
+| 29.4444444444444 |
+| 27.7777777777778 |
+|               30 |
+| 31.1111111111111 |
+|               30 |
+| 28.3333333333333 |
+| 27.2222222222222 |
+| 27.2222222222222 |
+| 27.2222222222222 |
+| 27.7777777777778 |
+|               30 |
+| 29.4444444444444 |
+| 30.5555555555556 |
+| 31.6666666666667 |
+| 32.2222222222222 |
+| 32.2222222222222 |
+| 33.3333333333333 |
+|               30 |
+|               30 |
+| 27.7777777777778 |
+| 26.6666666666667 |
+| 26.1111111111111 |
+|               25 |
+| 26.1111111111111 |
+| 24.4444444444444 |
+| 25.5555555555556 |
+| 25.5555555555556 |
+|               25 |
+| 22.2222222222222 |
+| 23.8888888888889 |
+| 26.1111111111111 |
+| 27.2222222222222 |
+|               30 |
+| 31.1111111111111 |
+| 36.1111111111111 |
+| 34.4444444444444 |
+| 35.5555555555556 |
+| 34.4444444444444 |
+| 32.7777777777778 |
+| 33.3333333333333 |
+| 33.8888888888889 |
+| 33.8888888888889 |
+| 30.5555555555556 |
+| 28.8888888888889 |
+| 26.6666666666667 |
+| 25.5555555555556 |
+| 23.8888888888889 |
+| 22.7777777777778 |
+| 27.2222222222222 |
+| 24.4444444444444 |
+|               25 |
+| 21.6666666666667 |
+| 21.6666666666667 |
+| 25.5555555555556 |
+| 19.4444444444444 |
+| 24.4444444444444 |
+|               20 |
+| 27.7777777777778 |
+| 17.7777777777778 |
+| 21.6666666666667 |
+| 27.2222222222222 |
+| 20.5555555555556 |
+| 17.2222222222222 |
+| 21.1111111111111 |
+|               25 |
+| 23.8888888888889 |
+| 24.4444444444444 |
+|               20 |
+
+ - Plot the daily temperature vs time, and the daily Solar.R through time, and comment on any trends or patterns you see.
+#+begin_src R :session Q1
+airquality$Date <- as.Date(paste(1973, airquality$Month, airquality$Day, sep = "-"))
+
+plot(airquality$Date, airquality$Temp, type = "l", col = "blue",
+     xlab = "Date", ylab = "Temperature (°C)",
+     main = "Daily Temperature Over Time")
+
+plot(airquality$Date, airquality$Solar.R, type = "l", col = "orange",
+     xlab = "Date", ylab = "Solar Radiation (langley)",
+     main = "Daily Solar Radiation Over Time")
+
+#+end_src
+
+#+RESULTS:
+
+
+** Summarise the data
+
+ - Calculate the mean, median, and variance of each variable. You may have to deal with missing values (look up how).
+ - Calculate the probability that the wind speed measured on any day will be above 5m/s. (Hint: the which command can be used to create a list of which values satisfy a particular condition, e.g. which(airquality$Temp < 20) and you can use the length command to see how long that list is.)
+ - Calculate the conditional probability that the temperature will be below 25C wind speed is above 5m/s.
+ - Do you think the two variables (Temp, Wind) are independent? Why / why not?
+
+** Correlations
+
+ - Plot the airquality data as x-y plots with appropriate labels (title, axes). Note any obvious patterns about the data, e.g., correlations or trends.
+   - Extension task: Find out how to fit a straight line to a set of bivariate data, and add that line to your plots. You may find the R commands abline and lm useful.
+ - Calculate all the linear correlations between the four variables of interest using the cor command. You can find out how to invoke it with help(cor).
+ - Use the cor.test command to calculate the p-values for these correlations. Remember that these p-values are a bit suspect (for reasons not yet covered in class) so should only be used as a guide. Are any of the relationships significant according to this test?
+ - Which variable (Solar.R, Wind, Temp) do you think has the strongest effect on Ozone? Justify your answer.
+
+** Distributions
+
+ - Plot the distributions of each of the variables either with a histogram or a density (or both).
+ - What distribution do you think best fits the temperature values? Why?
+ - Describe the distribution of wind speed values: is it skewed? symmetric? normal?
+ - Describe the distribution of wind speed values: is it skewed? symmetric? normal? Looks like a normal distribution or maybe a gamma distribution.
+ - Overlay a plot of the normal distribution with mean and standard deviation equal to those of the wind speed values, over your plot of the wind speed. How well or badly does it fit? Do you maintain your position on whether the wind speed is normally distributed?
