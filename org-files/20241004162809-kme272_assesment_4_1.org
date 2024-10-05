@@ -10,10 +10,6 @@
 
 * KME272, Probability & Statistics Assignment 1
 
-
-
-
-
 ** Your tasks
 
  - First, make sure you have recent versions of R and RStudio installed on your computer.
