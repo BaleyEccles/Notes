@@ -8,12 +8,8 @@
 !.github/
 !.github/**
 
-# Do not ignore all .org files
-#!org-files/
-#!org-files/**
+
 !*.org
 !*.db
 !*.md
-
-# Do not ignore all .png files
 !*.png
