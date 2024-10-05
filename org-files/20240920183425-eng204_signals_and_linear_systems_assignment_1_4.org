@@ -5,7 +5,6 @@
 #+date: [2024-09-20 Fri 18:34]
 #+AUTHOR: Baley Eccles - 652137 and Tyler Robards - 651790
 #+FILETAGS: :Assignment:
-
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}
 #+LATEX_HEADER_EXTRA: \usepackage{fontspec}

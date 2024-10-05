@@ -4,7 +4,7 @@
 #+title: KME272 - Assesment 4.1
 #+date: [Friday 11th October, 23:59]
 #+AUTHOR: Baley Eccles - 652137
-#+FILETAGS: :Assignment:
+#+FILETAGS: :Assignment:TODO:
 #+STARTUP: latexpreview
 
 

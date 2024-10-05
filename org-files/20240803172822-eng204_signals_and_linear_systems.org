@@ -26,6 +26,7 @@
 ** Assessment Task 4: Group project 2
 - Week 13
 - 20% of mark
+- [[id:7d1bb30c-084d-4895-9100-22b39a5c4f8c][ENG204 - Signals and Linear Systems - Assignment 2]]
 ** Assessment Task 5: Final Exam
 - Exam Period
 - 40% of mark
