@@ -1,5 +1,6 @@
-# Ignore Org-mode backup files
-*~
+*
+*/
 
-# Ignore auto-save files
-.#*
+# Unignore specific file types
+!*.org
+!*.png
