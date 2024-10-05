@@ -1,0 +1,7 @@
+*
+*/
+
+# Unignore specific file types
+!*.gitignore
+!*.org
+!*.png
