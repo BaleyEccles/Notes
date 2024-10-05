@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       3c48e113-965b-4c30-87b8-28a5632e545d
+:END:
+#+title: testdas
+#+date: [2024-10-05 Sat 13:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+* testdas
