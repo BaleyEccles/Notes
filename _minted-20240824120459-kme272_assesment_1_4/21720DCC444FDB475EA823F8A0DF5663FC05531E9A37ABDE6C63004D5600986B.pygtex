@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{x} \PYG{p}{=} \PYG{p}{[}\PYG{l+m+mf}{3438.332915}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{3491.409159}\PYG{p}{,}\PYG{l+m+mf}{4071.923288}\PYG{p}{];}
-\PYG{n}{d} \PYG{p}{=} \PYG{n+nb}{norm}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}
-\PYG{n}{h} \PYG{p}{=} \PYG{n}{d} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{6371}\PYG{p}{;}
-\PYG{n+nb}{fprintf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Recivers distance from the surface of the earth (km): \PYGZpc{}.4f\PYGZbs{}n\PYGZdq{}}\PYG{p}{,} \PYG{n}{h}\PYG{p}{)}
-\end{Verbatim}

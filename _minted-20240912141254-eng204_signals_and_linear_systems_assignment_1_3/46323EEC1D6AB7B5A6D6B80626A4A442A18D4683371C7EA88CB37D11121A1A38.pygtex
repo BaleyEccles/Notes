@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{output}\PYG{p}{=}\PYG{n}{conv2}\PYG{p}{(}\PYG{n}{noise}\PYG{p}{,}\PYG{n}{LoGFilter}\PYG{p}{,}\PYG{l+s}{\PYGZsq{}same\PYGZsq{}}\PYG{p}{);}
-\PYG{n+nb}{imshow}\PYG{p}{(}\PYG{n}{output}\PYG{p}{,[]);}
-\end{Verbatim}

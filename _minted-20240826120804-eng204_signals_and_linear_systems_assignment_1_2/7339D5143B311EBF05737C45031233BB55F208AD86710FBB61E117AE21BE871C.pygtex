@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{expand}\PYG{p}{(}\PYG{n}{solve}\PYG{p}{(}\PYG{n}{eq1}\PYG{p}{,}\PYG{n}{q1n}\PYG{p}{))}
-\PYG{n}{expand}\PYG{p}{(}\PYG{n}{solve}\PYG{p}{(}\PYG{n}{eq2}\PYG{p}{,}\PYG{n}{q3n}\PYG{p}{))}
-\end{Verbatim}

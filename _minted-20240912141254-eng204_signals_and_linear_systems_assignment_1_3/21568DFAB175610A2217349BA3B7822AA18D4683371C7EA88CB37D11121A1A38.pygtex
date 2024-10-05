@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{Threshold} \PYG{p}{=} \PYG{l+m+mi}{50}\PYG{p}{;}
-\PYG{n}{EdgeDetect} \PYG{p}{=} \PYG{n}{output} \PYG{o}{\PYGZgt{}} \PYG{n}{Threshold}\PYG{p}{;}
-\PYG{n+nb}{imshow}\PYG{p}{(}\PYG{n}{EdgeDetect}\PYG{p}{,[]);}
-\end{Verbatim}

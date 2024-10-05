@@ -1,5 +1,0 @@
-[0] Config.pm:307> INFO - This is Biber 2.19
-[0] Config.pm:310> INFO - Logfile is 'your_document.blg'
-[53] biber:340> INFO - === Wed Oct  2, 2024, 15:58:10
-[102] Utils.pm:410> ERROR - Cannot find 'your_document.bcf'!
-[103] Biber.pm:136> INFO - ERRORS: 1
