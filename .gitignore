@@ -1,8 +1,15 @@
+# Ignore everything
 *
-*/
 
-# Unignore specific file types
-!*.gitignore
+# Do not ignore the .gitignore file
+!.gitignore
+
+# Do not ignore the .github directory
+!.github/
+!.github/**
+
+# Do not ignore all .org files
 !*.org
+
+# Do not ignore all .png files
 !*.png
-!/.github/
