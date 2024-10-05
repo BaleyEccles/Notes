@@ -10,6 +10,7 @@
 
 # Do not ignore all .org files
 !*.org
+!*.db
 
 # Do not ignore all .png files
 !*.png
