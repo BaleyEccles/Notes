@@ -10,6 +10,7 @@
 
 !org-files/
 !org-files/*.org
+!org-files/*.db
 
 !*.org
 !*.db
