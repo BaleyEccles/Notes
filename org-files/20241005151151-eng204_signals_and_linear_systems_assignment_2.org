@@ -17,8 +17,8 @@
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 
 * ENG204 - Signals and Linear Systems - Assignment 2
-
-#+BEGIN_SRC octave :exports code :results output :session Q1
+** 1. Frequency Domain Analysis of an Audio Signal
+#+BEGIN_SRC octave :exports none :results output :session Q1
 clc
 clear
 close all
@@ -58,34 +58,66 @@ xlim([SampleFreq/2, SampleFreq]);
 
 
 #+BEGIN_SRC octave :exports code :results output :session Q1
-clc
-clear
-close all
+clc;
+clear;
+close all;
 
+% Load the data
 Signal = load('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/audio_signal_1.mat');
-fourierCoeffs = Signal.fourierSeriesCoeffs;
+Signal = Signal.fourierSeriesCoeffs;
+
 Fs = 44100;
+N = length(Signal);
+f = (-N/2:N/2-1)*(Fs/N);
 
-% Compute the Fourier Transform
-N = length(fourierCoeffs);
-Y = fft(fourierCoeffs);
-f = (0:N-1)*(Fs/N); % Frequency vector
+% Original Audio
+audiowrite('audio.wav', ifft(Signal), Fs);
 
-% Shift the spectrum for plotting
-Y_shifted = fftshift(Y);
-f_shifted = f - Fs/2; % Shift frequency vector
 
-% Plot magnitude and phase
+magnitude = abs(fftshift(Signal));
+phase = angle(fftshift(Signal));
 
+% Plot magnitude and phase spectrum
 figure;
-plot(f_shifted, abs(Y_shifted));
+subplot(2,1,1);
+plot(f, magnitude);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 xlim([-Fs/2 Fs/2]);
 
+subplot(2,1,2);
+plot(f, phase);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+xlim([-Fs/2 Fs/2]);
+
+
+n = 50000;
+[magnitudeSorted, idx] = sort(magnitude, 'descend');
+idx = idx(1:n);
+output = zeros(size(Signal));
+for i = 1:n
+  output(idx(i)) = Signal(idx(i));
+end
+
+audiowrite('synthesized_audio.wav', ifft(output), Fs);
+
+magnitude = abs(fftshift(output));
+phase = angle(fftshift(output));
+
+% Plot magnitude and phase spectrum
 figure;
-plot(f_shifted, angle(Y_shifted));
+subplot(2,1,1);
+plot(f, magnitude);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([-Fs/2 Fs/2]);
+
+subplot(2,1,2);
+plot(f, phase);
 title('Phase Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
@@ -93,3 +125,52 @@ xlim([-Fs/2 Fs/2]);
 #+END_SRC
 
 #+RESULTS:
+** 2. Ideal Filtering
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+clc
+clear
+close all
+
+f1 = 250;
+f2 = 750;
+Td = 2;
+Fs = 3200;
+N = Td*Fs;
+n = 0:(N-1);
+wd1 = 2*pi*f1/Fs;
+wd2 = 2*pi*f2/Fs;
+Phi = ((wd2-wd1)/(2*(N-1)))*n.^2+wd1*n;
+x = cos(Phi);
+audiowrite('chirp.wav', x, Fs);
+
+magnitude = abs(fftshift(fft(x)));
+f = (-N/2:N/2-1)*(Fs/N);
+
+plot(f, magnitude);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+Chirp = x;
+
+Noise = load('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/noise.mat');
+Noise = Noise.noise;
+size(Chirp)
+size(Noise)
+
+audiowrite('noise.wav', Noise, 3200);
+#+END_SRC
+
+#+RESULTS:
+: ans =
+:
+:        1   12800
+: ans =
+:
+:       1   6400
