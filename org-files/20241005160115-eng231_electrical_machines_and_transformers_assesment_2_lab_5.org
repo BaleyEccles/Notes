@@ -4,7 +4,7 @@
 #+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5
 #+date: [2024-10-05 Sat 16:01]
 #+AUTHOR: Baley Eccles - 652137
-#+FILETAGS: :Assignment:
+#+FILETAGS: :Assignment:TODO:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}
@@ -14,3 +14,86 @@
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5
+** Machine Inspection 
+[Group] Report your machine nameplate ratings
+| Rated apparent power (VA)                      | 360 VA | Rated DC field voltage                          |          |
+| Rated armature (stator) voltage                | 240 V  | Rated DC field current (work out after DC test) |          |
+| Rated armature current (per winding)           | 0.5 A  |                                                 |          |
+|                                                |        | Rated speed                                     | 1500 rpm |
+| Stator winding connection (Y or Δ)             | Y      | Rated Frequency                                 | 50 Hz    |
+| Rated line current for this winding connection | 0.5 A  | Number of poles (calculated)                    | 4        |
+
+| Rated speed                    | 1750 rpm |
+| Rated power                    | 500 W    |
+| Rated armature (rotor) voltage | 180 V    |
+| Rated armature current         | 2.6 A    |
+| Rated field (stator) voltage   | 200 V    |
+| Rated field current            | 0.5 A    |
+[Group] Given the 3-phase connection type for your stator windings, what per-phase equivalent circuit voltage and line-to-line voltage should you base your analysis on?
+** DC Test
+[Group] Report your DC test results and record your synchronous machine and DC motor winding resistances
+|        | Synch Generator Stator Winding | Synch Gen Field Winding | DC Motor Armature winding |
+| $V_dc$ |                             39 |                      50 |                         4 |
+| $I_dc$ |                            0.4 |                     0.1 |                       0.5 |
+| $R_dc$ |                          48.75 |                     500 |                         8 |
+| $R_ac$ |                        56.0625 |                         |                           |
+
+
+[Group] (if value not supplied) Determine the synchronous generator field winding rated current
+** Open Circuit Test
+[Group] Report, in table form, your measured open circuit test results
+|    | Sync. Generator Field Current (If) (A) | Sync. Generator Line to line voltage | Sync. Generator Phase voltage (Calc) |
+|  1 |                                      0 |                                      |                                 4.22 |
+|  2 |                                   0.05 |                                      |                                 66.5 |
+|  3 |                                    0.1 |                                      |                                  111 |
+|  4 |                                   0.15 |                                      |                                159.5 |
+|  5 |                                    0.2 |                                      |                                  198 |
+|  6 |                                   0.25 |                                      |                                  221 |
+|  7 |                                    0.3 |                                      |                                  246 |
+|  8 |                                   0.35 |                                      |                                  261 |
+|  9 |                                    0.4 |                                      |                                273.6 |
+| 10 |                                   0.47 |                                      |                                  288 |
+
+
+[Group] Plot the open circuit characteristics (OCC), ie. open circuit phase voltage (Ef) vs field current (If).
+[Individual] Describe why the curve has this shape, and comment on the implications for this machine?
+** Short Circuit Test
+[Group] On the same graph of your machine’s OCC, plot the short circuit characteristics (SCC) (Isc vs If)
+[Group] From your OCC and SCC graphs determine value of the machine’s synchronous reactance XS. (under the assumption that the core is saturated for most operating points of interest)
+** Stand-alone Synchronous Generator Operation Under Load
+*** Voltage regulation with unity power factor load
+
+[Group] Record in a table the measured data for each load condition, and then calculate the remaining quantities required in the table, including generator voltage as a % of no-load voltage. Note: torque angle (rotor angle) and Xs can both be calculated by considering the phasor diagram at unity power factor and the known values of Ef and Vt and solving using basic trig rules. Then calculate output power P you would expect based on these values and the power equation for a synchronous generator.
+| Load R | Gen terminal Volt (L-L) | Gen terminal Volt (L-N) | Generator Load current | Gen output power | Gen out reactive power | %V/V_NL | Torque Angle | Synch | Reactance | Calc Power output |
+|      0 |                         |                     240 |                      0 |             25mW |                      0 |         |              |       |           |                   |
+|   1200 |                         |                     233 |                  0.198 |               46 |                      0 |         |              |       |           |                   |
+|    800 |                         |                     217 |                  0.275 |               60 |                      0 |         |              |       |           |                   |
+|   2400 |                         |                     244 |                  0.102 |               25 |                      0 |         |              |       |           |                   |
+|    960 |                         |                     224 |                  0.237 |               53 |                      0 |         |              |       |           |                   |
+|   1600 |                         |                     238 |                   0.15 |               35 |                      0 |         |              |       |           |                   |
+|   4800 |                         |                     251 |                  0.052 |               13 |                      0 |         |              |       |           |                   |
+|  685.7 |                         |                     209 |                  0.308 |               65 |                      0 |         |              |       |           |                   |
+
+[Individual] For each operating point, include in the table your calculated values for the power angle, δ, and an implied or calculated value of the synchronous reactance XS. Hence also include a calculated value of generator output power. Show or describe briefly your method for calculating these values.
+[Group] Provide plots of the following data: generator power output vs. torque angle δ % voltage vs load current, calculated synchronous reactance vs generator armature (load) current,
+[Individual] Comment on your observations about generator output voltage as load is varied, and hence on the suitability of this generator to supply the load, under the generator conditions used in this experiment?
+[Individual] Comment on your calculated value of XS and how it varied, if it did vary, with load and why you think this is the case? What implications might there be for modelling the generator using the equivalent circuit?
+[Individual] Comment on the trend you observed between power output with torque angle δ, in particular whether it followed your expectations and why this was or was not the case?
+[Individual] What did you notice about how the speed of the machine changes when you increase or decrease the load? Why do you think this is happening? Hint: use your knowledge of DC machines for the connection type you are using in the lab to explain this.
+*** Operation with lagging power factor loads, and power efficiency
+[Group] Record in a table the measured data for each load condition, include efficiency of power
+|                     Load R |                   Load XL | Gen terminal Volt (L-N) | Generator Load current | Gen out power | Gen out power Reactive | DC motor Voltage | DC Motor |          Current | DC Shaft Power | Synch gene eff |
+|                       1200 |                      1200 |                     181 |                  0.225 |            30 |                   27.5 |              130 |      1.2 |           144.48 |                |                |
+|                        686 |                       686 |                     145 |                  0.314 |          34.2 |                   30.5 |            130.1 |      1.4 |           166.46 |                |                |
+|                       1600 |                      4800 |                     217 |                  0.147 |            30 |                    9.5 |            129.2 |      1.2 |           143.52 |                |                |
+|                            |                           |                         |                        |               |                        |                  |          |                  |                |                |
+| With voltage back to 415 V | SG Field current required |                         |  Armature load current | Gen out power | Gen out power Reactive |         DC motor |  Voltage | DC Motor Current | DC Shaft Power | Synch gene eff |
+|                       1600 |                      0.38 |                         |                    1.4 |            37 |                   11.7 |            130.6 |      1.3 |           156.26 |                |                |
+|                       4800 |                           |                         |                        |               |                        |                  |          |                  |                |                |
+
+delivery from prime mover (DC motor shaft) to 3-phase electrical load. [Individual] Comment on the efficiency of power delivery for this generator? Where are the most likely sources of energy loss in the system?
+[Individual] Discuss the effect that supplying power at lagging power factor has on voltage regulation for this generator (compared to unity power factor loads). By comparing the power delivery expected at rated voltage, what is the impact of poor voltage regulation on power supplied to the load?
+[Individual] For the 1200 || j1200 $\Omega$ load scenario, draw a carefully labelled and approximately to scale phasor diagram to represent the operating condition of the synchronous generator.
+[Group] For the 1600 || j4800 $\Omega$ load scenario, describe how you manipulated the synchronous generator to restore load voltage to close to the rated value. What induced emf Ef was required in this case?
+[Individual] In a real system where a generator is supplying loads, the load can sometimes change quite frequently. How do you think you might you design an automatic system so that voltage is maintained at the specified or rated value regardless of load variations?
+[Individual] Reflect on how this lab session has contributed to your learning experience and your understanding of synchronous generators
