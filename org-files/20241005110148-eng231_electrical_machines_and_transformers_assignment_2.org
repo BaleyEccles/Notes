@@ -16,6 +16,7 @@
 #+LATEX_HEADER_EXTRA: \addbibresource{citation.bib}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 #+PROPERTY: header-args :eval no
+
 * ENG231 - Electrical Machines And Transformers - Assignment 2
 ** Part 1: Calculation of transformer winding voltages
 |---------------+-------------+---------------+-------------|
