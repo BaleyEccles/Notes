@@ -22,6 +22,7 @@
 ** Assessment Task 3: Design laboratory
 - During Week 13
 - 15% of mark
+- [[id:4e56786f-9fab-41a3-8d79-937a2de93a6b][ENG234 - Lab 3]]
 ** Assessment Task 4: Assessed tutorials
 - Through out semester
 - 10% of mark
