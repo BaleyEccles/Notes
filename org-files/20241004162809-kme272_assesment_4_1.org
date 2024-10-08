@@ -21,11 +21,11 @@ Below, unless specified otherwise, you can ignore the month and day columns in t
 
  - Load the airquality data into R.
 
-#+begin_src R :session Q1
-rm(list = ls())
-data("airquality")
+#+begin_src R :session Q1 :export code :results output
+outputrm(list = ls());
+data("airquality");
 
-#help("airquality")
+#help("airquality");
 
 
 #+end_src
@@ -35,198 +35,223 @@ data("airquality")
 
 
  - Use the help("airquality") command to find out about the data. Convert the values to m/s for wind speed and Celcius for temperature. Give a brief description of the data in your own words.
-#+begin_src R :session Q1
 
+#+begin_src R :session Q1 :export code :results output
 airquality$Wind <- airquality$Wind * 0.44704
 airquality$Temp <- (airquality$Temp - 32) * 5/9
 
+result <- data.frame(Wind = airquality$Wind, Temp = airquality$Temp)
+#print(result)
 #+end_src
 
 #+RESULTS:
-| 19.4444444444444 |
-| 22.2222222222222 |
-| 23.3333333333333 |
-| 16.6666666666667 |
-| 13.3333333333333 |
-| 18.8888888888889 |
-| 18.3333333333333 |
-|               15 |
-| 16.1111111111111 |
-| 20.5555555555556 |
-| 23.3333333333333 |
-| 20.5555555555556 |
-| 18.8888888888889 |
-|               20 |
-| 14.4444444444444 |
-| 17.7777777777778 |
-| 18.8888888888889 |
-| 13.8888888888889 |
-|               20 |
-| 16.6666666666667 |
-|               15 |
-| 22.7777777777778 |
-| 16.1111111111111 |
-| 16.1111111111111 |
-| 13.8888888888889 |
-| 14.4444444444444 |
-| 13.8888888888889 |
-| 19.4444444444444 |
-| 27.2222222222222 |
-| 26.1111111111111 |
-| 24.4444444444444 |
-| 25.5555555555556 |
-| 23.3333333333333 |
-| 19.4444444444444 |
-| 28.8888888888889 |
-| 29.4444444444444 |
-| 26.1111111111111 |
-| 27.7777777777778 |
-| 30.5555555555556 |
-| 32.2222222222222 |
-| 30.5555555555556 |
-| 33.8888888888889 |
-| 33.3333333333333 |
-| 27.7777777777778 |
-| 26.6666666666667 |
-| 26.1111111111111 |
-|               25 |
-| 22.2222222222222 |
-| 18.3333333333333 |
-| 22.7777777777778 |
-| 24.4444444444444 |
-|               25 |
-| 24.4444444444444 |
-| 24.4444444444444 |
-| 24.4444444444444 |
-| 23.8888888888889 |
-| 25.5555555555556 |
-| 22.7777777777778 |
-| 26.6666666666667 |
-|               25 |
-| 28.3333333333333 |
-| 28.8888888888889 |
-| 29.4444444444444 |
-| 27.2222222222222 |
-| 28.8888888888889 |
-| 28.3333333333333 |
-| 28.3333333333333 |
-| 31.1111111111111 |
-| 33.3333333333333 |
-| 33.3333333333333 |
-| 31.6666666666667 |
-| 27.7777777777778 |
-| 22.7777777777778 |
-| 27.2222222222222 |
-| 32.7777777777778 |
-| 26.6666666666667 |
-| 27.2222222222222 |
-| 27.7777777777778 |
-| 28.8888888888889 |
-| 30.5555555555556 |
-| 29.4444444444444 |
-| 23.3333333333333 |
-| 27.2222222222222 |
-| 27.7777777777778 |
-|               30 |
-| 29.4444444444444 |
-| 27.7777777777778 |
-|               30 |
-| 31.1111111111111 |
-|               30 |
-| 28.3333333333333 |
-| 27.2222222222222 |
-| 27.2222222222222 |
-| 27.2222222222222 |
-| 27.7777777777778 |
-|               30 |
-| 29.4444444444444 |
-| 30.5555555555556 |
-| 31.6666666666667 |
-| 32.2222222222222 |
-| 32.2222222222222 |
-| 33.3333333333333 |
-|               30 |
-|               30 |
-| 27.7777777777778 |
-| 26.6666666666667 |
-| 26.1111111111111 |
-|               25 |
-| 26.1111111111111 |
-| 24.4444444444444 |
-| 25.5555555555556 |
-| 25.5555555555556 |
-|               25 |
-| 22.2222222222222 |
-| 23.8888888888889 |
-| 26.1111111111111 |
-| 27.2222222222222 |
-|               30 |
-| 31.1111111111111 |
-| 36.1111111111111 |
-| 34.4444444444444 |
-| 35.5555555555556 |
-| 34.4444444444444 |
-| 32.7777777777778 |
-| 33.3333333333333 |
-| 33.8888888888889 |
-| 33.8888888888889 |
-| 30.5555555555556 |
-| 28.8888888888889 |
-| 26.6666666666667 |
-| 25.5555555555556 |
-| 23.8888888888889 |
-| 22.7777777777778 |
-| 27.2222222222222 |
-| 24.4444444444444 |
-|               25 |
-| 21.6666666666667 |
-| 21.6666666666667 |
-| 25.5555555555556 |
-| 19.4444444444444 |
-| 24.4444444444444 |
-|               20 |
-| 27.7777777777778 |
-| 17.7777777777778 |
-| 21.6666666666667 |
-| 27.2222222222222 |
-| 20.5555555555556 |
-| 17.2222222222222 |
-| 21.1111111111111 |
-|               25 |
-| 23.8888888888889 |
-| 24.4444444444444 |
-|               20 |
+
+The ~airquality~ data set contains four measured values of the air quality in New York from May 1, 1973 to September 30, 1973.
 
  - Plot the daily temperature vs time, and the daily Solar.R through time, and comment on any trends or patterns you see.
-#+begin_src R :session Q1
+
+#+begin_src R :export code :results output
+rm(list = ls());
+data("airquality")
+
 airquality$Date <- as.Date(paste(1973, airquality$Month, airquality$Day, sep = "-"))
+airquality$Wind <- airquality$Wind * 0.44704
+airquality$Temp <- (airquality$Temp - 32) * 5/9
 
+x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
 plot(airquality$Date, airquality$Temp, type = "l", col = "blue",
-     xlab = "Date", ylab = "Temperature (°C)",
-     main = "Daily Temperature Over Time")
+     main = "Daily Average Temperature in New York (1973)",
+     xlab = "Date", ylab = "Average Temperature (°C)")
 
+x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
 plot(airquality$Date, airquality$Solar.R, type = "l", col = "orange",
-     xlab = "Date", ylab = "Solar Radiation (langley)",
-     main = "Daily Solar Radiation Over Time")
+     main = "Daily Average Solar Radiation in New York (1973)",
+     xlab = "Date", ylab = "Average Solar Radiation (Langley)")
 
 #+end_src
 
 #+RESULTS:
+
+It appears that the temperature rises during the middle months, which would relate to summer in the New York. And the solar radiation appears to remain similar through out the data, with a little lower average in the latter months.
 
 
 ** Summarise the data
 
  - Calculate the mean, median, and variance of each variable. You may have to deal with missing values (look up how).
+#+begin_src R :session Q2 :export code :results output
+rm(list = ls());
+
+data("airquality")
+
+airquality$Temp <- (airquality$Temp - 32) * 5/9
+airquality$Wind <- airquality$Wind * 0.44704
+
+mean_temp <- mean(airquality$Temp, na.rm = TRUE)
+median_temp <- median(airquality$Temp, na.rm = TRUE)
+var_temp <- var(airquality$Temp, na.rm = TRUE)
+
+mean_wind <- mean(airquality$Wind, na.rm = TRUE)
+median_wind <- median(airquality$Wind, na.rm = TRUE)
+var_wind <- var(airquality$Wind, na.rm = TRUE)
+
+print(paste("Mean Temperature (°C):", mean_temp))
+print(paste("Median Temperature (°C):", median_temp))
+print(paste("Variance of Temperature (°C):", var_temp))
+
+print(paste("Mean Wind Speed (m/s):", mean_wind))
+print(paste("Median Wind Speed (m/s):", median_wind))
+print(paste("Variance of Wind Speed (m/s):", var_wind))
+#+end_src
+
+#+RESULTS:
+: [1] "Mean Temperature (°C): 25.4901960784314"
+: [1] "Median Temperature (°C): 26.1111111111111"
+: [1] "Variance of Temperature (°C): 27.651645453503"
+: [1] "Mean Wind Speed (m/s): 4.45140810457516"
+: [1] "Median Wind Speed (m/s): 4.336288"
+: [1] "Variance of Wind Speed (m/s): 2.48038095815578"
+
  - Calculate the probability that the wind speed measured on any day will be above 5m/s. (Hint: the which command can be used to create a list of which values satisfy a particular condition, e.g. which(airquality$Temp < 20) and you can use the length command to see how long that list is.)
+#+begin_src R :session Q2 :export code :results output
+above_5ms <- which(airquality$Wind > 5)
+prob_wind_above_5 <- length(above_5ms) / nrow(airquality)
+
+print(paste("Probability that the wind speed is above 5 (m/s):", prob_wind_above_5))
+#+end_src
+
+#+RESULTS:
+: [1] "Probability that the wind speed is above 5 (m/s): 0.34640522875817"
+
  - Calculate the conditional probability that the temperature will be below 25C wind speed is above 5m/s.
+#+begin_src R :session Q2 :export code :results output
+temp_below_25_given_wind_above_5 <- airquality$Temp < 25 & airquality$Wind > 5
+conditional_prob <- sum(temp_below_25_given_wind_above_5, na.rm = TRUE) / length(above_5ms)
+
+print(paste("P(T<25°C|W>5m/s):", conditional_prob))
+#+end_src
+
+#+RESULTS:
+: [1] "P(T<25°C|W>5m/s) 0.547169811320755"
+
  - Do you think the two variables (Temp, Wind) are independent? Why / why not?
+We can check the correlation coefficient:
+#+begin_src R :session Q2 :export code :results output
+correlation <- cor(airquality$Temp, airquality$Wind, use = "complete.obs")
+
+print(paste("The correlation coefficient of the Temp and Wind:", correlation))
+#+end_src
+
+#+RESULTS:
+: [1] "The correlation coefficient of the Temp and Wind: -0.457987879104833"
+
+It is ~-0.46~, which is not particularly close to zero, so they are correlated.
 
 ** Correlations
 
  - Plot the airquality data as x-y plots with appropriate labels (title, axes). Note any obvious patterns about the data, e.g., correlations or trends.
-   - Extension task: Find out how to fit a straight line to a set of bivariate data, and add that line to your plots. You may find the R commands abline and lm useful.
+    - Extension task: Find out how to fit a straight line to a set of bivariate data, and add that line to your plots. You may find the R commands abline and lm useful.
+#+begin_src R :session Q3 :export code :results output
+data("airquality")
+
+airquality$Temp <- (airquality$Temp - 32) * 5/9
+airquality$Wind <- airquality$Wind * 0.44704
+
+
+x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
+plot(airquality$Solar.R, airquality$Ozone,
+     main = "Ozone vs. Solar Radiation",
+     xlab = "Solar Radiation (Langley)",
+     ylab = "Ozone (ppb)",
+     pch = 19, col = "blue")
+abline(lm(Ozone ~ Solar.R, data = airquality), col = "red")
+
+x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
+plot(airquality$Wind, airquality$Ozone,
+     main = "Ozone vs. Wind Speed",
+     xlab = "Wind Speed (m/s)",
+     ylab = "Ozone (ppb)",
+     pch = 19, col = "green")
+abline(lm(Ozone ~ Wind, data = airquality), col = "red")
+
+x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
+plot(airquality$Temp, airquality$Ozone,
+     main = "Ozone vs. Temperature",
+     xlab = "Temperature (°C)",
+     ylab = "Ozone (ppb)",
+     pch = 19, col = "purple")
+abline(lm(Ozone ~ Temp, data = airquality), col = "red")
+
+par(mfrow = c(1, 1))
+#+end_src
+
+#+RESULTS:
+
+From the plots we can notice that:
+ 1. As the solar radiation increase, so does the ozone
+    - This is expected, because ozone can be created using UV light, which comes from the solar radiation
+ 2. As the wind speed increases, the ozone decreases
+ 3. As the temperature increases, so does the ozone
+
  - Calculate all the linear correlations between the four variables of interest using the cor command. You can find out how to invoke it with help(cor).
+#+begin_src R :session Q3 :export code :results output
+cor_matrix <- cor(airquality[, c("Ozone", "Solar.R", "Wind", "Temp")], use = "complete.obs")
+print(cor_matrix)
+#+end_src
+
+#+RESULTS:
+:          Ozone      Solar.R   Wind        Temp
+: Ozone    1.0000000  0.3483417 -0.6124966  0.6985414
+: Solar.R  0.3483417  1.0000000 -0.1271835  0.2940876
+: Wind    -0.6124966 -0.1271835  1.0000000 -0.4971897
+: Temp     0.6985414  0.2940876 -0.4971897  1.0000000
+
+
  - Use the cor.test command to calculate the p-values for these correlations. Remember that these p-values are a bit suspect (for reasons not yet covered in class) so should only be used as a guide. Are any of the relationships significant according to this test?
+#+begin_src R :session Q3 :export code :results output
+cor_test_results <- function(x, y) {
+  test <- cor.test(x, y, use = "complete.obs")
+  return(c(correlation = test$estimate, p.value = test$p.value))
+}
+
+p_values <- list(
+  Ozone_Solar_R = cor_test_results(airquality$Ozone, airquality$Solar.R),
+  Ozone_Wind = cor_test_results(airquality$Ozone, airquality$Wind),
+  Ozone_Temp = cor_test_results(airquality$Ozone, airquality$Temp),
+  Solar_R_Wind = cor_test_results(airquality$Solar.R, airquality$Wind),
+  Solar_R_Temp = cor_test_results(airquality$Solar.R, airquality$Temp),
+  Wind_Temp = cor_test_results(airquality$Wind, airquality$Temp)
+)
+
+print(p_values)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+$Ozone_Solar_R
+correlation.cor         p.value
+   0.3483416930    0.0001793109
+
+$Ozone_Wind
+correlation.cor         p.value
+  -6.015465e-01    9.271974e-13
+
+$Ozone_Temp
+correlation.cor         p.value
+   6.983603e-01    2.931897e-18
+
+$Solar_R_Wind
+correlation.cor         p.value
+    -0.05679167      0.49595521
+
+$Solar_R_Temp
+correlation.cor         p.value
+   0.2758402713    0.0007517729
+
+$Wind_Temp
+correlation.cor         p.value
+  -4.579879e-01    2.641597e-09
+#+end_example
+
  - Which variable (Solar.R, Wind, Temp) do you think has the strongest effect on Ozone? Justify your answer.
 
 ** Distributions

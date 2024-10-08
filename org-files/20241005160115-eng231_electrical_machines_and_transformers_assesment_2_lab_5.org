@@ -30,51 +30,139 @@
 | Rated field (stator) voltage   | 200 V    |
 | Rated field current            | 0.5 A    |
 [Group] Given the 3-phase connection type for your stator windings, what per-phase equivalent circuit voltage and line-to-line voltage should you base your analysis on?
+\[V_L=\sqrt{3}\cdot V_{Ph}=\sqrt{3}\cdot 240=415.69V\]
 ** DC Test
 [Group] Report your DC test results and record your synchronous machine and DC motor winding resistances
-|        | Synch Generator Stator Winding | Synch Gen Field Winding | DC Motor Armature winding |
-| $V_dc$ |                             39 |                      50 |                         4 |
-| $I_dc$ |                            0.4 |                     0.1 |                       0.5 |
-| $R_dc$ |                          48.75 |                     500 |                         8 |
-| $R_ac$ |                        56.0625 |                         |                           |
+|          | Synch Generator Stator Winding | Synch Gen Field Winding | DC Motor Armature winding |
+| $V_{dc}$ |                             39 |                      50 |                         4 |
+| $I_{dc}$ |                            0.4 |                     0.1 |                       0.5 |
+| $R_{dc}$ |                          48.75 |                     500 |                         8 |
+| $R_{ac}$ |                        56.0625 |                 $\cdot$ |                   $\cdot$ |
 
 
 [Group] (if value not supplied) Determine the synchronous generator field winding rated current
+\[I_{dc}=\frac{V_{dc}}{R_{dc}}=\frac{50}{500}=0.1A\]
 ** Open Circuit Test
 [Group] Report, in table form, your measured open circuit test results
-|    | Sync. Generator Field Current (If) (A) | Sync. Generator Line to line voltage | Sync. Generator Phase voltage (Calc) |
-|  1 |                                      0 |                                      |                                 4.22 |
-|  2 |                                   0.05 |                                      |                                 66.5 |
-|  3 |                                    0.1 |                                      |                                  111 |
-|  4 |                                   0.15 |                                      |                                159.5 |
-|  5 |                                    0.2 |                                      |                                  198 |
-|  6 |                                   0.25 |                                      |                                  221 |
-|  7 |                                    0.3 |                                      |                                  246 |
-|  8 |                                   0.35 |                                      |                                  261 |
-|  9 |                                    0.4 |                                      |                                273.6 |
-| 10 |                                   0.47 |                                      |                                  288 |
+|    | Sync. Generator Field Current (If) (A) | Sync. Generator Line to line voltage (Calc) | Sync. Generator Phase voltage |
+|  1 |                                      0 |                                       7.309 |                          4.22 |
+|  2 |                                   0.05 |                                       115.2 |                          66.5 |
+|  3 |                                    0.1 |                                       192.3 |                           111 |
+|  4 |                                   0.15 |                                       276.3 |                         159.5 |
+|  5 |                                    0.2 |                                       342.9 |                           198 |
+|  6 |                                   0.25 |                                       382.8 |                           221 |
+|  7 |                                    0.3 |                                       426.1 |                           246 |
+|  8 |                                   0.35 |                                       452.1 |                           261 |
+|  9 |                                    0.4 |                                       473.9 |                         273.6 |
+| 10 |                                   0.47 |                                       498.8 |                           288 |
+We opted to calculate the Sync. Generator Line to line voltage rather than the Sync. Generator Phase voltage, as we already had the line to line voltage connected.
 
 
 [Group] Plot the open circuit characteristics (OCC), ie. open circuit phase voltage (Ef) vs field current (If).
+#+BEGIN_SRC octave :exports code :results output :session b
+clc
+clear
+close all
+If = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.47];
+Ef = [4.22, 66.5, 111, 159.5, 198, 221, 246, 261, 273.6, 288];
+
+% Create the plot
+figure;
+plot(If, Ef, '-o', 'LineWidth', 2, 'MarkerSize', 6);
+grid on;
+
+% Add labels and title
+xlabel('Synchronous Generator Field Current (If) (A)', 'FontSize', 12);
+ylabel('Open Circuit Phase Voltage (Ef) (V)', 'FontSize', 12);
+title('Open Circuit Characteristics (OCC) of Synchronous Generator', 'FontSize', 14);
+xlim([0, 0.5]); % Set x-axis limits
+ylim([0, 300]); % Set y-axis limits
+legend('Ef vs If', 'Location', 'Northwest');
+#+END_SRC
+
+#+RESULTS:
+
 [Individual] Describe why the curve has this shape, and comment on the implications for this machine?
+The curve has this shape due to the saturation. Initially the machine is not saturated and the curve is linear, once the current becomes large enough ($\approx 0.25A$) the magnetic materials in the circuit is less able to increase the magnetic flux. This results in a non linear region, where the curve starts to flatten out.
+If a machines was to be ran in the non linear region it would be less efficient, as more of the energy is being used to saturate the material.
+
 ** Short Circuit Test
+|  1 | Sync. Generator Field Current (If) (A) | Sync. Generator Stator current (Ia or Isc) |
+|  2 |                                      0 |                                     0.0095 |
+|  3 |                                   0.04 |                                      0.088 |
+|  4 |                                   0.08 |                                      0.155 |
+|  5 |                                   0.12 |                                      0.226 |
+|  6 |                                   0.16 |                                        0.3 |
+|  7 |                                    0.2 |                                      0.381 |
+|  8 |                                   0.24 |                                      0.446 |
+|  9 |                                   0.28 |                                      0.502 |
+| 10 |                                   0.34 |                                      0.607 |
+
 [Group] On the same graph of your machine’s OCC, plot the short circuit characteristics (SCC) (Isc vs If)
+#+BEGIN_SRC octave :exports code :results output :session b
+clc
+clear
+close all
+If_OCC = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.47];
+Ef = [4.22, 66.5, 111, 159.5, 198, 221, 246, 261, 273.6, 288];
+
+If_SCC = [0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.34];
+Isc = [0.0095, 0.088, 0.155, 0.226, 0.3, 0.381, 0.446, 0.502, 0.607];
+
+scale = 500;
+% Scale the Isc so it looks better
+Isc = scale*Isc;
+
+% Create the plot
+figure;
+hold on;
+plot(If_OCC, Ef, '-o', 'LineWidth', 2, 'MarkerSize', 6, 'DisplayName', 'OCC (Ef vs If)');
+plot(If_SCC, Isc, '-s', 'LineWidth', 2, 'MarkerSize', 6, 'Color', 'r', 'DisplayName', 'SCC (Isc vs If)');
+
+xlabel('Field Current (A)', 'FontSize', 12);
+ylabel('Voltage (V) / Current (0.5mA)', 'FontSize', 12);
+title('Open Circuit and Short Circuit Tests', 'FontSize', 14);
+legend('show');
+grid on;
+hold off;
+#+END_SRC
+
+#+RESULTS:
+
 [Group] From your OCC and SCC graphs determine value of the machine’s synchronous reactance XS. (under the assumption that the core is saturated for most operating points of interest)
+Using:
+\[X_s=\frac{E_f}{I_{sc}}\]
+#+BEGIN_SRC octave :exports code :results output :session b
+clc
+clear
+close all
+Ef = [4.22, 66.5, 111, 159.5, 198, 221, 246, 261, 273.6];
+Isc = [0.0095, 0.088, 0.155, 0.226, 0.3, 0.381, 0.446, 0.502, 0.607];
+
+Xs=Ef./Isc;
+mean(Xs)
+#+END_SRC
+
+#+RESULTS:
+: ans = 598.23
+
+From the code $X_s\approx 598.23$.
+
 ** Stand-alone Synchronous Generator Operation Under Load
 *** Voltage regulation with unity power factor load
 
 [Group] Record in a table the measured data for each load condition, and then calculate the remaining quantities required in the table, including generator voltage as a % of no-load voltage. Note: torque angle (rotor angle) and Xs can both be calculated by considering the phasor diagram at unity power factor and the known values of Ef and Vt and solving using basic trig rules. Then calculate output power P you would expect based on these values and the power equation for a synchronous generator.
-| Load R | Gen terminal Volt (L-L) | Gen terminal Volt (L-N) | Generator Load current | Gen output power | Gen out reactive power | %V/V_NL | Torque Angle | Synch | Reactance | Calc Power output |
-|      0 |                         |                     240 |                      0 |             25mW |                      0 |         |              |       |           |                   |
-|   1200 |                         |                     233 |                  0.198 |               46 |                      0 |         |              |       |           |                   |
-|    800 |                         |                     217 |                  0.275 |               60 |                      0 |         |              |       |           |                   |
-|   2400 |                         |                     244 |                  0.102 |               25 |                      0 |         |              |       |           |                   |
-|    960 |                         |                     224 |                  0.237 |               53 |                      0 |         |              |       |           |                   |
-|   1600 |                         |                     238 |                   0.15 |               35 |                      0 |         |              |       |           |                   |
-|   4800 |                         |                     251 |                  0.052 |               13 |                      0 |         |              |       |           |                   |
-|  685.7 |                         |                     209 |                  0.308 |               65 |                      0 |         |              |       |           |                   |
+| Load R | Gen terminal Volt (L-L) | Gen terminal Volt (L-N) | Generator Load current | Gen output power (mW) | Gen out reactive power | %V/V_NL | Torque Angle | Synch | Reactance | Calc Power output |
+|      0 |                         |                     240 |                      0 |                    25 |                      0 |         |              |       |           |                   |
+|   1200 |                         |                     233 |                  0.198 |                    46 |                      0 |         |              |       |           |                   |
+|    800 |                         |                     217 |                  0.275 |                    60 |                      0 |         |              |       |           |                   |
+|   2400 |                         |                     244 |                  0.102 |                    25 |                      0 |         |              |       |           |                   |
+|    960 |                         |                     224 |                  0.237 |                    53 |                      0 |         |              |       |           |                   |
+|   1600 |                         |                     238 |                   0.15 |                    35 |                      0 |         |              |       |           |                   |
+|   4800 |                         |                     251 |                  0.052 |                    13 |                      0 |         |              |       |           |                   |
+|  685.7 |                         |                     209 |                  0.308 |                    65 |                      0 |         |              |       |           |                   |
 
-[Individual] For each operating point, include in the table your calculated values for the power angle, δ, and an implied or calculated value of the synchronous reactance XS. Hence also include a calculated value of generator output power. Show or describe briefly your method for calculating these values.
+[Individual] For each operating point, include in the table your calculated values for the power angle, $\delta$, and an implied or calculated value of the synchronous reactance XS. Hence also include a calculated value of generator output power. Show or describe briefly your method for calculating these values.
 [Group] Provide plots of the following data: generator power output vs. torque angle δ % voltage vs load current, calculated synchronous reactance vs generator armature (load) current,
 [Individual] Comment on your observations about generator output voltage as load is varied, and hence on the suitability of this generator to supply the load, under the generator conditions used in this experiment?
 [Individual] Comment on your calculated value of XS and how it varied, if it did vary, with load and why you think this is the case? What implications might there be for modelling the generator using the equivalent circuit?
