@@ -10,3 +10,5 @@
  - [[id:12ee0ee4-4f71-40ce-afa5-23db5b8c321a][Probability Axioms]]
  - [[id:7ee974e3-0d7e-420c-af7e-44fe52a9ccca][Probability Distributions]]
  - [[id:79a6c1a8-9506-4bce-9daf-71f316c83cda][Conditional Probability]]
+ - [[id:e4455c7c-357e-4617-8a28-e6b45b0af1ae][Probability Mass Function (PMF)]]
+ - [[id:71fe0eb1-8c2a-47f0-b345-b06462ca7dce][Cumulative Density Function (CDF)]]

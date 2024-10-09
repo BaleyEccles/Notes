@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       95b8e50b-5360-43e7-9992-80ab6158256f
+:END:
+#+title: Negative Binomial Distribution
+#+date: [2024-10-09 Wed 17:58]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Negative Binomial Distribution
+ - Generalisation of the [[id:69e894df-a8d1-439f-9eb3-2be636d0921a][Geometric Distribution]].
+   - Now we count the number of trials to get $r$ successes
+ - \[P(X=x)=\left(\begin{matrix}x-1\\r-1 \end{matrix}\right)p^r(1-p)^{x-r}\]
+   - Requires
+     - \[x\geq r\]
+     - \[P(X=x)=0\]
+ - If $X\~ NB(p,r)$ then:
+   - Mean:
+     - \[E[x]=r/p\]
+   - Variance:
+     - \[var(x)=\frac{r(1-p)}{p^2}\]

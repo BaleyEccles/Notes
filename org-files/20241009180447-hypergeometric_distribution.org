@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       c28e4b23-57a2-4ac0-8f3f-8273dd233c53
+:END:
+#+title: Hypergeometric Distribution
+#+date: [2024-10-09 Wed 18:04]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Hypergeometric Distribution
+ - When we have a population of size $N$, that splits in two types, including $K$ things of type $A$ and $N-K$ things of type $B$. We draw $n$ things from the population (without replacement) and count how many we get of type $A$
+ - \[P(X=x)=\frac{\left(\begin{matrix}K\\x \end{matrix}\right)\left(\begin{matrix} N-K\\n-x \end{matrix}\right)}{\left(\begin{matrix}N\\n \end{matrix}\right)}\]
+   - Requires
+     - \[x\leq n\]
+     - \[n-x\leq N-K\]
+     - Need to select at least $x$ things of type $A$, otherwise
+       - \[P(X=x)=0\]
+ - If $X\~ hyper(N,K,n) then
+   - Mean:
+     - \[E[X]=n\frac{K}{N}\]
+   - Variance:
+     - \[var(x)=n \frac{K}{N}\left(\frac{N-k}{K}\right)\left(\frac{N-n}{N-1}\right)\]

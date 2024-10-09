@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       69e894df-a8d1-439f-9eb3-2be636d0921a
+:END:
+#+title: Geometric Distribution
+#+date: [2024-10-09 Wed 17:52]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Geometric Distribution
+ - Similar to the [[id:4a014306-8822-4a35-ab74-65b1a0d134d6][Binomial Distribution]], but now we count the number of events until a success.
+ - \[P(X=k)=(1-p)^{k-1}p\]
+ - If \[X \~ Geom(p)\]
+   - Mean:
+     - \[E[x]=\frac{1}{p}\]
+   - Variance:
+     - \[var(x)=\frac{1-p}{p^2}\]
+
+ - It is memory less
+   - The previous events do not effect the current and future events
