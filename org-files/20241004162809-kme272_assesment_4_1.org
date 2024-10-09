@@ -6,32 +6,29 @@
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :Assignment:TODO:
 #+STARTUP: latexpreview
-
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage[backend=biber,style=apa]{biblatex}
+#+LATEX_HEADER_EXTRA: \addbibresource{citation.bib}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
 
 * KME272, Probability & Statistics Assignment 1
 
-** Your tasks
-
- - First, make sure you have recent versions of R and RStudio installed on your computer.
- - Read and understand the “Introduction to R and Quarto” document.
-
-Below, unless specified otherwise, you can ignore the month and day columns in the data.
 ** Inspecting the data
-
-
  - Load the airquality data into R.
 
 #+begin_src R :session Q1 :export code :results output
-outputrm(list = ls());
+rm(list = ls());
 data("airquality");
 
 #help("airquality");
-
-
 #+end_src
 
 #+RESULTS:
-: airquality
 
 
  - Use the help("airquality") command to find out about the data. Convert the values to m/s for wind speed and Celcius for temperature. Give a brief description of the data in your own words.
@@ -50,7 +47,7 @@ The ~airquality~ data set contains four measured values of the air quality in Ne
 
  - Plot the daily temperature vs time, and the daily Solar.R through time, and comment on any trends or patterns you see.
 
-#+begin_src R :export code :results output
+#+begin_src R :session Q11 :export code :results output
 rm(list = ls());
 data("airquality")
 
@@ -58,19 +55,27 @@ airquality$Date <- as.Date(paste(1973, airquality$Month, airquality$Day, sep = "
 airquality$Wind <- airquality$Wind * 0.44704
 airquality$Temp <- (airquality$Temp - 32) * 5/9
 
-x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
+png("AirQuality_Temperature.png", width = 800, height = 600)
 plot(airquality$Date, airquality$Temp, type = "l", col = "blue",
      main = "Daily Average Temperature in New York (1973)",
      xlab = "Date", ylab = "Average Temperature (°C)")
+dev.off()
 
-x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
+png("AirQuality_SolarRadiation.png", width = 800, height = 600)
 plot(airquality$Date, airquality$Solar.R, type = "l", col = "orange",
      main = "Daily Average Solar Radiation in New York (1973)",
      xlab = "Date", ylab = "Average Solar Radiation (Langley)")
-
+dev.off()
 #+end_src
 
 #+RESULTS:
+: null device
+:           1
+: null device
+:           1
+
+[[file:AirQuality_Temperature.png]]
+[[file:AirQuality_SolarRadiation.png]]
 
 It appears that the temperature rises during the middle months, which would relate to summer in the New York. And the solar radiation appears to remain similar through out the data, with a little lower average in the latter months.
 
@@ -157,34 +162,45 @@ airquality$Temp <- (airquality$Temp - 32) * 5/9
 airquality$Wind <- airquality$Wind * 0.44704
 
 
-x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
+png("SolarR_Ozone.png", width = 800, height = 600)
 plot(airquality$Solar.R, airquality$Ozone,
      main = "Ozone vs. Solar Radiation",
      xlab = "Solar Radiation (Langley)",
      ylab = "Ozone (ppb)",
      pch = 19, col = "blue")
 abline(lm(Ozone ~ Solar.R, data = airquality), col = "red")
+dev.off()
 
-x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
+png("Wind_Ozone.png", width = 800, height = 600)
 plot(airquality$Wind, airquality$Ozone,
      main = "Ozone vs. Wind Speed",
      xlab = "Wind Speed (m/s)",
      ylab = "Ozone (ppb)",
      pch = 19, col = "green")
 abline(lm(Ozone ~ Wind, data = airquality), col = "red")
+dev.off()
 
-x11() # Change to windows(), for windows, or quartz(), for macOS, im using linux
+png("Temp_Ozone.png", width = 800, height = 600)
 plot(airquality$Temp, airquality$Ozone,
      main = "Ozone vs. Temperature",
      xlab = "Temperature (°C)",
      ylab = "Ozone (ppb)",
      pch = 19, col = "purple")
 abline(lm(Ozone ~ Temp, data = airquality), col = "red")
+dev.off()
 
-par(mfrow = c(1, 1))
 #+end_src
 
 #+RESULTS:
+: null device
+:           1
+: null device
+:           1
+: null device
+:           1
+[[file:SolarR_Ozone.png]]
+[[file:Wind_Ozone.png]]
+[[file:Temp_Ozone.png]]
 
 From the plots we can notice that:
  1. As the solar radiation increase, so does the ozone
@@ -253,11 +269,95 @@ correlation.cor         p.value
 #+end_example
 
  - Which variable (Solar.R, Wind, Temp) do you think has the strongest effect on Ozone? Justify your answer.
-
+Temperature has the strongest effect on ozone. It has a p-value of 2.932e-18, which is highly significant, and a correlation coefficient of 0.6985, indicating a string positive correlation.
 ** Distributions
 
  - Plot the distributions of each of the variables either with a histogram or a density (or both).
+#+begin_src R :session Q3 :export code :results output
+rm(list = ls());
+
+data("airquality")
+airquality$Temp <- (airquality$Temp - 32) * 5/9
+airquality$Wind <- airquality$Wind * 0.44704
+
+
+temp_data <- na.omit(airquality$Temp)
+ozone_data <- na.omit(airquality$Ozone)
+wind_data <- na.omit(airquality$Wind)
+SolarR_data <- na.omit(airquality$Solar.R)
+
+png("Temp.png", width = 800, height = 600)
+hist(temp_data, breaks = 20, probability = TRUE,
+     main = "Temperature Distribution",
+     xlab = "Temperature (°C)", col = "lightblue")
+lines(density(temp_data), col = "red", lwd = 2)
+dev.off()
+
+png("Ozone.png", width = 800, height = 600)
+hist(ozone_data, breaks = 20, probability = TRUE,
+     main = "Ozone Distribution",
+     xlab = "Ozone (ppb)", col = "lightblue")
+lines(density(ozone_data), col = "red", lwd = 2)
+dev.off()
+
+png("Wind.png", width = 800, height = 600)
+hist(wind_data, breaks = 20, probability = TRUE,
+     main = "Wind Speed Distribution",
+     xlab = "Wind (m/s)", col = "lightblue")
+lines(density(wind_data), col = "red", lwd = 2)
+dev.off()
+
+png("SolarR.png", width = 800, height = 600)
+hist(SolarR_data, breaks = 20, probability = TRUE,
+     main = "Solar Radiation Distribution",
+     xlab = "Solar Radiation (Langley)", col = "lightblue")
+lines(density(SolarR_data), col = "red", lwd = 2)
+dev.off()
+#+end_src
+
+#+RESULTS:
+: null device
+:           1
+: null device
+:           1
+: null device
+:           1
+: null device
+:           1
+
+
+[[file:Temp.png]]
+[[file:Ozone.png]]
+[[file:Wind.png]]
+[[file:SolarR.png]]
+
  - What distribution do you think best fits the temperature values? Why?
+The best fit appears to be a normal distribution. This is because it is unimodal, and is bell shaped.
  - Describe the distribution of wind speed values: is it skewed? symmetric? normal?
- - Describe the distribution of wind speed values: is it skewed? symmetric? normal? Looks like a normal distribution or maybe a gamma distribution.
+It appears to have two peaks (bimodal) and looks skewed to the right. It does not look symmetric and does not appear to fit a normal distribution.
  - Overlay a plot of the normal distribution with mean and standard deviation equal to those of the wind speed values, over your plot of the wind speed. How well or badly does it fit? Do you maintain your position on whether the wind speed is normally distributed?
+#+begin_src R :session Q3 :export code :results output
+mean_wind <- mean(airquality$Wind, na.rm = TRUE)
+sd_wind <- sd(airquality$Wind, na.rm = TRUE)
+
+x_values <- seq(min(airquality$Wind), max(airquality$Wind), length.out = 100)
+y_values <- dnorm(x_values, mean = mean_wind, sd = sd_wind)
+
+png("Wind_Normal.png", width = 800, height = 600)
+hist(airquality$Wind, breaks = 20, probability = TRUE,
+     main = "Wind Speed Distribution with Normal Overlay",
+     xlab = "Wind Speed (m/s)", col = "lightblue")
+lines(density(airquality$Wind), col = "blue", lwd = 2)
+lines(x_values, y_values, col = "red", lwd = 2)
+dev.off()
+#+end_src
+
+#+RESULTS:
+: null device
+:           1
+
+[[file:Wind_Normal.png]]
+
+
+
+This normal distribution fits very well. I am retracting my previous assessment of the distribution. It does appear to be normally distributed.
