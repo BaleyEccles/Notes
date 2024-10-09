@@ -163,7 +163,7 @@ From the code $X_s\approx 598.23$.
 |  685.7 |                         |                     209 |                  0.308 |                    65 |                      0 |         |              |       |           |                   |
 
 [Individual] For each operating point, include in the table your calculated values for the power angle, $\delta$, and an implied or calculated value of the synchronous reactance XS. Hence also include a calculated value of generator output power. Show or describe briefly your method for calculating these values.
-[Group] Provide plots of the following data: generator power output vs. torque angle δ % voltage vs load current, calculated synchronous reactance vs generator armature (load) current,
+[Group] Provide plots of the following data: generator power output vs. torque angle $\delta$ % voltage vs load current, calculated synchronous reactance vs generator armature (load) current,
 [Individual] Comment on your observations about generator output voltage as load is varied, and hence on the suitability of this generator to supply the load, under the generator conditions used in this experiment?
 [Individual] Comment on your calculated value of XS and how it varied, if it did vary, with load and why you think this is the case? What implications might there be for modelling the generator using the equivalent circuit?
 [Individual] Comment on the trend you observed between power output with torque angle δ, in particular whether it followed your expectations and why this was or was not the case?
