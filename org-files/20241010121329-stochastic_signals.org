@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       0b4602d8-f569-4bb8-a8cf-1ba0fdec84d9
+:END:
+#+title: Stochastic Signals
+#+date: [2024-10-10 Thu 12:13]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Stochastic Signals
+ - These are random signals
+ - Given some sample space we can take two averages of the resulting signals
+   - [[id:7de75cab-3325-43e8-9458-7f43676d91c6][Ensemble Average]]
+   - [[id:e953576c-0535-4a62-ab7b-202dbd967e6f][Time Average]]
+ - [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]]
+** Notation
+ - Denoted with a uppercase letter and time ($X(t)$)
+ - Example [[id:8904baec-0390-4296-b7e6-9ef4ede346a5][PDF]]: $X(t)=a\cos(\omega_0t+\Theta)$
+   - Here $\Theta$ (uppercase) is the random value that takes a sample $\theta$ (lowercase).

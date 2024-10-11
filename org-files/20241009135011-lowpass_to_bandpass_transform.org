@@ -1,0 +1,40 @@
+:PROPERTIES:
+:ID:       8b337d07-0cd0-4b11-b685-d9096b5d65af
+:END:
+#+title: Lowpass to Bandpass Transform
+#+date: [2024-10-09 Wed 13:50]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+
+* Lowpass to Bandpass Transform
+Using the transform:
+ - \[s=\frac{\lambda^2+\omega_0^2}{B\lambda}\]
+   - \[\omega_0=\sqrt{\omega_{B2}\omega_{B3}}\]
+   - \[B=\frac{\omega_{B3}-\omega_{B2}}{\omega_{L1}}\]
+ - Which allows
+   - \[|H(\omega_{B2})|=|G(-\omega_{L1)|}\]
+   - \[|H(\omega_{B3})|=|G(\omega_{L1)|}\]
+We can transform lowpass filters to bandpass filters
+ - We require
+   - \[\omega_0^2=\omega_{B2}\omega_{B3}=\omega_{B1}\omega_{B4}\]
+ - If $\omega_{B2}\omega_{B3}>\omega_{B1}\omega_{B4}$
+   - We can do _either_
+   1. set $\omega_{B2}=\frac{\omega_{B1}\omega_{B4}}{\omega_{B3}}$
+      - Which gives
+        - Wider passband
+        - Shorter left transition
+   2. set $\omega_{B1}=\frac{\omega_{B2}\omega_{B3}}{\omega_{B4}}$
+      - Which gives
+        - No passband change
+        - Shorter left transition
+ - If $\omega_{B2}\omega_{B3}<\omega_{B1}\omega_{B4}$
+   - We can do _either_
+   1. set $\omega_{B3}=\frac{\omega_{B1}\omega_{B4}}{\omega_{B2}}$
+      - Which gives
+        - Wider passband
+        - Shorter right transition
+   2. set $\omega_{B4}=\frac{\omega_{B2}\omega_{B3}}{\omega_{B1}}$
+      - Which gives
+        - No passband change
+        - Shorter right transition

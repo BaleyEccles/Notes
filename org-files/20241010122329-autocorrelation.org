@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       2e3961b9-fea7-451f-af2b-02cbd9559c8e
+:END:
+#+title: Autocorrelation
+#+date: [2024-10-10 Thu 12:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Autocorrelation
+ - The relation of the signal at $t_1$ to $t_2$.
+   - \[R_{XX}(t_1,t_2)=E[X(t_1)X(t_2)]\]
+   - \[R_{XX}(t_1,t_2)=\int_{-\infty}^{\infty}x_1(t_1)x_2(t_2)f_X(x)dx\]
+ - Can also be used using $\tau$
+   - \[\tau=t_2-t_1\]
+   - \[R_{XX}(t,t+\tau)=E[X(t)X(t+\tau)]\]
+** Note
+ - \[R_{XX}(t,t)=E[X(t)^2]\]

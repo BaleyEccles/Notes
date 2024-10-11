@@ -6,7 +6,7 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* Cumulative Distribution Functions (cdf)
+* Cumulative Distribution Functions (cdf)/ Probability Density Function (PDF)
  - $F(x)$ give the probability of getting a value of X less than or equal to x
    - \[F(x)=P(X\leq x)=\sum_{k\leq x}P(X=k)\]
  - [[file:Screenshot 2024-10-03 at 09-13-46 ChatGPT.png]]

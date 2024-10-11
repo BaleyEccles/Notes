@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       7de75cab-3325-43e8-9458-7f43676d91c6
+:END:
+#+title: Ensemble Average
+#+date: [2024-10-10 Thu 12:15]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Ensemble Average
+ - The average of all signals from a sample space at $t=t_0$
+** Continuous
+ - \[\mu_{X}(t)=E[X(t)]=\int_{-\infty}^{\infty}xf_{X}(x,t)dx\]
+ - If the [[id:8904baec-0390-4296-b7e6-9ef4ede346a5][PDF]] is time invariant
+   - \[\mu_{X}(t)=E[X(t)]=\int_{-\infty}^{\infty}xf_{X}(x)dx\]
+** Discrete
+  - \[\mu_{X}[n]=E[X[n]]=\sum_{n}x_nP_X(x_n)\]

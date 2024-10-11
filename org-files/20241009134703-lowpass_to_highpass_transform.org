@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       d6a5ee11-cf8b-4bc1-a7d0-bee23c61d7ac
+:END:
+#+title: Lowpass to Highpass Transform
+#+date: [2024-10-09 Wed 13:47]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Lowpass to Highpass Transform
+Using the transform
+ - \[s=\frac{\omega_{L1}\omega_{H2}}{\lambda}\]
+ - This allows
+   - \[|H(\omega_{H2})|=|G(\omega_{L1})|\]
+   - \[|H(\omega_{H1})|=|G(\omega_{L2)|}\]
+We can transform lowpass filters to highpass filters
