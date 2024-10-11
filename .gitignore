@@ -14,5 +14,5 @@
 
 !*.org
 !*.db
-!*.md
+README.md
 !*.png
