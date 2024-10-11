@@ -25,7 +25,7 @@
 rm(list = ls());
 data("airquality");
 
-#help("airquality");
+
 #+end_src
 
 #+RESULTS:
@@ -34,14 +34,14 @@ data("airquality");
  - Use the help("airquality") command to find out about the data. Convert the values to m/s for wind speed and Celcius for temperature. Give a brief description of the data in your own words.
 
 #+begin_src R :session Q1 :export code :results output
+#help("airquality");
 airquality$Wind <- airquality$Wind * 0.44704
 airquality$Temp <- (airquality$Temp - 32) * 5/9
 
 result <- data.frame(Wind = airquality$Wind, Temp = airquality$Temp)
-#print(result)
+print(result)
 #+end_src
 
-#+RESULTS:
 
 The ~airquality~ data set contains four measured values of the air quality in New York from May 1, 1973 to September 30, 1973.
 
@@ -91,30 +91,40 @@ data("airquality")
 airquality$Temp <- (airquality$Temp - 32) * 5/9
 airquality$Wind <- airquality$Wind * 0.44704
 
-mean_temp <- mean(airquality$Temp, na.rm = TRUE)
-median_temp <- median(airquality$Temp, na.rm = TRUE)
-var_temp <- var(airquality$Temp, na.rm = TRUE)
-
-mean_wind <- mean(airquality$Wind, na.rm = TRUE)
-median_wind <- median(airquality$Wind, na.rm = TRUE)
-var_wind <- var(airquality$Wind, na.rm = TRUE)
-
-print(paste("Mean Temperature (°C):", mean_temp))
-print(paste("Median Temperature (°C):", median_temp))
-print(paste("Variance of Temperature (°C):", var_temp))
-
-print(paste("Mean Wind Speed (m/s):", mean_wind))
-print(paste("Median Wind Speed (m/s):", median_wind))
-print(paste("Variance of Wind Speed (m/s):", var_wind))
+summary_stats <- summary(airquality)
+print(summary_stats)
+var(airquality$Ozone)
+var(airquality$Solar.R)
+var(airquality$Wind)
+var(airquality$Temp)
+var(airquality$Month)
+var(airquality$Day)
 #+end_src
 
 #+RESULTS:
-: [1] "Mean Temperature (°C): 25.4901960784314"
-: [1] "Median Temperature (°C): 26.1111111111111"
-: [1] "Variance of Temperature (°C): 27.651645453503"
-: [1] "Mean Wind Speed (m/s): 4.45140810457516"
-: [1] "Median Wind Speed (m/s): 4.336288"
-: [1] "Variance of Wind Speed (m/s): 2.48038095815578"
+#+begin_example
+Ozone           Solar.R           Wind            Temp           Month            Day
+ Min.   :  1.00   Min.   :  7.0   Min.   :0.760   Min.   :13.33   Min.   :5.000   Min.   : 1.0
+ 1st Qu.: 18.00   1st Qu.:115.8   1st Qu.:3.308   1st Qu.:22.22   1st Qu.:6.000   1st Qu.: 8.0
+ Median : 31.50   Median :205.0   Median :4.336   Median :26.11   Median :7.000   Median :16.0
+ Mean   : 42.13   Mean   :185.9   Mean   :4.451   Mean   :25.49   Mean   :6.993   Mean   :15.8
+ 3rd Qu.: 63.25   3rd Qu.:258.8   3rd Qu.:5.141   3rd Qu.:29.44   3rd Qu.:8.000   3rd Qu.:23.0
+ Max.   :168.00   Max.   :334.0   Max.   :9.254   Max.   :36.11   Max.   :9.000   Max.   :31.0
+ NA's   :37       NA's   :7
+[1] NA
+[1] NA
+[1] 2.480381
+[1] 27.65165
+[1] 2.006536
+[1] 78.57972
+#+end_example
+
+
+Mean Temperature (°C): 25.490196 \\
+Median Temperature (°C): 26.111111 \\
+Variance of Temperature (°C): 27.651645 \\
+Mean Wind Speed (m/s): 4.451408 \\
+Median Wind Speed (m/s): 4.336288 of Wind Speed (m/s): 2.480380 \\
 
  - Calculate the probability that the wind speed measured on any day will be above 5m/s. (Hint: the which command can be used to create a list of which values satisfy a particular condition, e.g. which(airquality$Temp < 20) and you can use the length command to see how long that list is.)
 #+begin_src R :session Q2 :export code :results output
@@ -161,46 +171,58 @@ data("airquality")
 airquality$Temp <- (airquality$Temp - 32) * 5/9
 airquality$Wind <- airquality$Wind * 0.44704
 
+png("Subplots.png", width = 1200, height = 800)
 
-png("SolarR_Ozone.png", width = 800, height = 600)
+par(mfrow = c(2, 3))
+
 plot(airquality$Solar.R, airquality$Ozone,
      main = "Ozone vs. Solar Radiation",
      xlab = "Solar Radiation (Langley)",
      ylab = "Ozone (ppb)",
      pch = 19, col = "blue")
 abline(lm(Ozone ~ Solar.R, data = airquality), col = "red")
-dev.off()
 
-png("Wind_Ozone.png", width = 800, height = 600)
 plot(airquality$Wind, airquality$Ozone,
      main = "Ozone vs. Wind Speed",
      xlab = "Wind Speed (m/s)",
      ylab = "Ozone (ppb)",
-     pch = 19, col = "green")
+     pch = 19, col = "blue")
 abline(lm(Ozone ~ Wind, data = airquality), col = "red")
-dev.off()
 
-png("Temp_Ozone.png", width = 800, height = 600)
 plot(airquality$Temp, airquality$Ozone,
      main = "Ozone vs. Temperature",
      xlab = "Temperature (°C)",
      ylab = "Ozone (ppb)",
-     pch = 19, col = "purple")
+     pch = 19, col = "blue")
 abline(lm(Ozone ~ Temp, data = airquality), col = "red")
-dev.off()
 
+plot(airquality$Solar.R, airquality$Wind,
+     main = "Wind Speed vs. Solar Radiation",
+     xlab = "Solar Radiation (Langley)",
+     ylab = "Wind Speed (m/s)",
+     pch = 19, col = "blue")
+abline(lm(Wind ~ Solar.R, data = airquality), col = "red")
+
+plot(airquality$Solar.R, airquality$Temp,
+     main = "Temperature vs. Solar Radiation",
+     xlab = "Solar Radiation (Langley)",
+     ylab = "Temperature (°C)",
+     pch = 19, col = "blue")
+abline(lm(Temp ~ Solar.R, data = airquality), col = "red")
+
+plot(airquality$Wind, airquality$Temp,
+     main = "Temperature vs. Wind Speed",
+     xlab = "Wind Speed (m/s)",
+     ylab = "Temperature (°C)",
+     pch = 19, col = "blue")
+abline(lm(Temp ~ Wind, data = airquality), col = "red")
+dev.off()
 #+end_src
 
 #+RESULTS:
 : null device
 :           1
-: null device
-:           1
-: null device
-:           1
-[[file:SolarR_Ozone.png]]
-[[file:Wind_Ozone.png]]
-[[file:Temp_Ozone.png]]
+
 
 From the plots we can notice that:
  1. As the solar radiation increase, so does the ozone
