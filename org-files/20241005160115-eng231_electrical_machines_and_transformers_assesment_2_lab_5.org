@@ -3,7 +3,7 @@
 :END:
 #+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5
 #+date: [2024-10-05 Sat 16:01]
-#+AUTHOR: Baley Eccles - 652137
+#+AUTHOR: Baley Eccles - 652137 | Kalindu Sahan Wijeweera Wijeweera Patabendige | Michael Fagan
 #+FILETAGS: :Assignment:TODO:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
@@ -12,52 +12,88 @@
 #+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
 #+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER: \usepackage{graphicx}
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5
 ** Machine Inspection 
 [Group] Report your machine nameplate ratings
-| Rated apparent power (VA)                      | 360 VA | Rated DC field voltage                          |          |
-| Rated armature (stator) voltage                | 240 V  | Rated DC field current (work out after DC test) |          |
-| Rated armature current (per winding)           | 0.5 A  |                                                 |          |
-|                                                |        | Rated speed                                     | 1500 rpm |
-| Stator winding connection (Y or Δ)             | Y      | Rated Frequency                                 | 50 Hz    |
-| Rated line current for this winding connection | 0.5 A  | Number of poles (calculated)                    | 4        |
+#+ATTR_LATEX: :environment longtable :align |p{0.25\linewidth}|l|p{0.25\linewidth}|l|
+|------------------------------------------------+---------+-------------------------------------------------+----------|
+| Rated apparent power (VA)                      | 360 VA  | Rated DC field voltage                          | :TODO:   |
+|------------------------------------------------+---------+-------------------------------------------------+----------|
+| Rated armature (stator) voltage                | 240 V   | Rated DC field current (work out after DC test) | :TODO:   |
+|------------------------------------------------+---------+-------------------------------------------------+----------|
+| Rated armature current (per winding)           | 0.5 A   | $\cdot$                                         | $\cdot$  |
+|------------------------------------------------+---------+-------------------------------------------------+----------|
+| $\cdot$                                        | $\cdot$ | Rated speed                                     | 1500 rpm |
+|------------------------------------------------+---------+-------------------------------------------------+----------|
+| Stator winding connection (Y or Δ)             | Y       | Rated Frequency                                 | 50 Hz    |
+|------------------------------------------------+---------+-------------------------------------------------+----------|
+| Rated line current for this winding connection | 0.5 A   | Number of poles (calculated)                    | 4        |
+|------------------------------------------------+---------+-------------------------------------------------+----------|
 
+#+ATTR_LATEX: :environment longtable :align |l|l|
+|--------------------------------+----------|
 | Rated speed                    | 1750 rpm |
+|--------------------------------+----------|
 | Rated power                    | 500 W    |
+|--------------------------------+----------|
 | Rated armature (rotor) voltage | 180 V    |
+|--------------------------------+----------|
 | Rated armature current         | 2.6 A    |
+|--------------------------------+----------|
 | Rated field (stator) voltage   | 200 V    |
+|--------------------------------+----------|
 | Rated field current            | 0.5 A    |
+|--------------------------------+----------|
+
 [Group] Given the 3-phase connection type for your stator windings, what per-phase equivalent circuit voltage and line-to-line voltage should you base your analysis on?
 \[V_L=\sqrt{3}\cdot V_{Ph}=\sqrt{3}\cdot 240=415.69V\]
 ** DC Test
 [Group] Report your DC test results and record your synchronous machine and DC motor winding resistances
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|
+|----------+--------------------------------+-------------------------+---------------------------|
 |          | Synch Generator Stator Winding | Synch Gen Field Winding | DC Motor Armature winding |
+|----------+--------------------------------+-------------------------+---------------------------|
 | $V_{dc}$ |                             39 |                      50 |                         4 |
+|----------+--------------------------------+-------------------------+---------------------------|
 | $I_{dc}$ |                            0.4 |                     0.1 |                       0.5 |
+|----------+--------------------------------+-------------------------+---------------------------|
 | $R_{dc}$ |                          48.75 |                     500 |                         8 |
+|----------+--------------------------------+-------------------------+---------------------------|
 | $R_{ac}$ |                        56.0625 |                 $\cdot$ |                   $\cdot$ |
+|----------+--------------------------------+-------------------------+---------------------------|
 
 
 [Group] (if value not supplied) Determine the synchronous generator field winding rated current
 \[I_{dc}=\frac{V_{dc}}{R_{dc}}=\frac{50}{500}=0.1A\]
 ** Open Circuit Test
 [Group] Report, in table form, your measured open circuit test results
+#+ATTR_LATEX: :environment longtable :align |l|p{0.25\linewidth}|p{0.25\linewidth}|p{0.25\linewidth}|
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |    | Sync. Generator Field Current (If) (A) | Sync. Generator Line to line voltage (Calc) | Sync. Generator Phase voltage |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |  1 |                                      0 |                                       7.309 |                          4.22 |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |  2 |                                   0.05 |                                       115.2 |                          66.5 |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |  3 |                                    0.1 |                                       192.3 |                           111 |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |  4 |                                   0.15 |                                       276.3 |                         159.5 |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |  5 |                                    0.2 |                                       342.9 |                           198 |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |  6 |                                   0.25 |                                       382.8 |                           221 |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |  7 |                                    0.3 |                                       426.1 |                           246 |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |  8 |                                   0.35 |                                       452.1 |                           261 |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 |  9 |                                    0.4 |                                       473.9 |                         273.6 |
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
 | 10 |                                   0.47 |                                       498.8 |                           288 |
-We opted to calculate the Sync. Generator Line to line voltage rather than the Sync. Generator Phase voltage, as we already had the line to line voltage connected.
-
-
+|----+----------------------------------------+---------------------------------------------+-------------------------------|
+We opted to calculate the Sync. Generator Line to line voltage rather than the Sync. Generator Phase voltage, as we already had the line to line voltage connected to the voltmeter. \\
 [Group] Plot the open circuit characteristics (OCC), ie. open circuit phase voltage (Ef) vs field current (If).
 #+BEGIN_SRC octave :exports code :results output :session b
 clc
@@ -68,9 +104,8 @@ Ef = [4.22, 66.5, 111, 159.5, 198, 221, 246, 261, 273.6, 288];
 
 % Create the plot
 figure;
-plot(If, Ef, '-o', 'LineWidth', 2, 'MarkerSize', 6);
+plot(If, Ef, '-o', 'LineWidth', 2, 'MarkerSize', 6;)
 grid on;
-
 % Add labels and title
 xlabel('Synchronous Generator Field Current (If) (A)', 'FontSize', 12);
 ylabel('Open Circuit Phase Voltage (Ef) (V)', 'FontSize', 12);
@@ -78,25 +113,40 @@ title('Open Circuit Characteristics (OCC) of Synchronous Generator', 'FontSize',
 xlim([0, 0.5]); % Set x-axis limits
 ylim([0, 300]); % Set y-axis limits
 legend('Ef vs If', 'Location', 'Northwest');
+
+filename = sprintf('ENG231-FieldCurrnet-Voltage.png');
+print(filename,'-dpng','-r100');
 #+END_SRC
 
 #+RESULTS:
 
-[Individual] Describe why the curve has this shape, and comment on the implications for this machine?
-The curve has this shape due to the saturation. Initially the machine is not saturated and the curve is linear, once the current becomes large enough ($\approx 0.25A$) the magnetic materials in the circuit is less able to increase the magnetic flux. This results in a non linear region, where the curve starts to flatten out.
-If a machines was to be ran in the non linear region it would be less efficient, as more of the energy is being used to saturate the material.
+[[file:ENG231-FieldCurrnet-Voltage.png]]
+[Individual] Describe why the curve has this shape, and comment on the implications for this machine?\\
+The curve has this shape due to the saturation. Initially the machine is not saturated and the curve is linear, once the current becomes large enough ($\approx 0.25A$) the magnetic materials in the circuit is less able to increase the magnetic flux. This results in a non linear region, where the curve starts to flatten out. If a machines were to be ran in the non linear region it would be less efficient, as more of the energy is being used to saturate the material.
 
 ** Short Circuit Test
-|  1 | Sync. Generator Field Current (If) (A) | Sync. Generator Stator current (Ia or Isc) |
-|  2 |                                      0 |                                     0.0095 |
-|  3 |                                   0.04 |                                      0.088 |
-|  4 |                                   0.08 |                                      0.155 |
-|  5 |                                   0.12 |                                      0.226 |
-|  6 |                                   0.16 |                                        0.3 |
-|  7 |                                    0.2 |                                      0.381 |
-|  8 |                                   0.24 |                                      0.446 |
-|  9 |                                   0.28 |                                      0.502 |
-| 10 |                                   0.34 |                                      0.607 |
+#+ATTR_LATEX: :environment longtable :align |l|l|l|
+|---+----------------------------------------+------------------------------------------------|
+|   | Sync. Generator Field Current (If) (A) | Sync. Generator Stator current (Ia or Isc) (A) |
+|---+----------------------------------------+------------------------------------------------|
+| 1 |                                      0 |                                         0.0095 |
+|---+----------------------------------------+------------------------------------------------|
+| 2 |                                   0.04 |                                          0.088 |
+|---+----------------------------------------+------------------------------------------------|
+| 3 |                                   0.08 |                                          0.155 |
+|---+----------------------------------------+------------------------------------------------|
+| 4 |                                   0.12 |                                          0.226 |
+|---+----------------------------------------+------------------------------------------------|
+| 5 |                                   0.16 |                                            0.3 |
+|---+----------------------------------------+------------------------------------------------|
+| 6 |                                    0.2 |                                          0.381 |
+|---+----------------------------------------+------------------------------------------------|
+| 7 |                                   0.24 |                                          0.446 |
+|---+----------------------------------------+------------------------------------------------|
+| 8 |                                   0.28 |                                          0.502 |
+|---+----------------------------------------+------------------------------------------------|
+| 9 |                                   0.34 |                                          0.607 |
+|---+----------------------------------------+------------------------------------------------|
 
 [Group] On the same graph of your machine’s OCC, plot the short circuit characteristics (SCC) (Isc vs If)
 #+BEGIN_SRC octave :exports code :results output :session b
@@ -111,6 +161,7 @@ Isc = [0.0095, 0.088, 0.155, 0.226, 0.3, 0.381, 0.446, 0.502, 0.607];
 
 scale = 500;
 % Scale the Isc so it looks better
+% Results in 0.5mA of the orignal current
 Isc = scale*Isc;
 
 % Create the plot
@@ -125,11 +176,14 @@ title('Open Circuit and Short Circuit Tests', 'FontSize', 14);
 legend('show');
 grid on;
 hold off;
+filename = sprintf('ENG231-FieldCurrnet-Voltage-Current.png');
+print(filename,'-dpng','-r100');
 #+END_SRC
 
 #+RESULTS:
 
-[Group] From your OCC and SCC graphs determine value of the machine’s synchronous reactance XS. (under the assumption that the core is saturated for most operating points of interest)
+[[file:ENG231-FieldCurrnet-Voltage-Current.png]]
+[Group] From your OCC and SCC graphs determine value of the machine’s synchronous reactance XS. (under the assumption that the core is saturated for most operating points of interest)\\
 Using:
 \[X_s=\frac{E_f}{I_{sc}}\]
 #+BEGIN_SRC octave :exports code :results output :session b
@@ -151,37 +205,240 @@ From the code $X_s\approx 598.23$.
 ** Stand-alone Synchronous Generator Operation Under Load
 *** Voltage regulation with unity power factor load
 
-[Group] Record in a table the measured data for each load condition, and then calculate the remaining quantities required in the table, including generator voltage as a % of no-load voltage. Note: torque angle (rotor angle) and Xs can both be calculated by considering the phasor diagram at unity power factor and the known values of Ef and Vt and solving using basic trig rules. Then calculate output power P you would expect based on these values and the power equation for a synchronous generator.
-| Load R | Gen terminal Volt (L-L) | Gen terminal Volt (L-N) | Generator Load current | Gen output power (mW) | Gen out reactive power | %V/V_NL | Torque Angle | Synch | Reactance | Calc Power output |
-|      0 |                         |                     240 |                      0 |                    25 |                      0 |         |              |       |           |                   |
-|   1200 |                         |                     233 |                  0.198 |                    46 |                      0 |         |              |       |           |                   |
-|    800 |                         |                     217 |                  0.275 |                    60 |                      0 |         |              |       |           |                   |
-|   2400 |                         |                     244 |                  0.102 |                    25 |                      0 |         |              |       |           |                   |
-|    960 |                         |                     224 |                  0.237 |                    53 |                      0 |         |              |       |           |                   |
-|   1600 |                         |                     238 |                   0.15 |                    35 |                      0 |         |              |       |           |                   |
-|   4800 |                         |                     251 |                  0.052 |                    13 |                      0 |         |              |       |           |                   |
-|  685.7 |                         |                     209 |                  0.308 |                    65 |                      0 |         |              |       |           |                   |
+[Group] Record in a table the measured data for each load condition, and then calculate the remaining quantities required in the table, including generator voltage as a % of no-load voltage. Note: torque angle (rotor angle) and Xs can both be calculated by considering the phasor diagram at unity power factor and the known values of Ef and Vt and solving using basic trig rules. Then calculate output power P you would expect based on these values and the power equation for a synchronous generator.\\
+[Individual] For each operating point, include in the table your calculated values for the power angle, $\delta$, and an implied or calculated value of the synchronous reactance XS. Hence also include a calculated value of generator output power. Show or describe briefly your method for calculating these values.\\
+A mistake was made during this part of the lab. The terminal voltage was adjusted during the second load. This resulted in a no load voltage of $\approx 252V$, the data was adjusted to match this.
+#+ATTR_LATEX: :environment longtable :align |p{0.13\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
+| Load R ($\Omega$) | Gen terminal Volt (L-L) (V) | Gen terminal Volt (L-N) (V) | Generator Load current (A) | Gen output power (W) | ... |
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
+|          $\infty$ |                      436.47 |                         252 |                          0 |                   25 | ... |
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
+|             685.7 |                      361.99 |                         209 |                      0.308 |                   65 | ... |
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
+|               800 |                      375.85 |                         217 |                      0.275 |                   60 | ... |
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
+|               960 |                      387.97 |                         224 |                      0.237 |                   53 | ... |
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
+|              1200 |                      403.56 |                         233 |                      0.198 |                   46 | ... |
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
+|              1600 |                      412.22 |                         238 |                       0.15 |                   35 | ... |
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
+|              2400 |                      422.62 |                         244 |                      0.102 |                   25 | ... |
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
+|              4800 |                      434.74 |                         251 |                      0.052 |                   13 | ... |
+|-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
 
-[Individual] For each operating point, include in the table your calculated values for the power angle, $\delta$, and an implied or calculated value of the synchronous reactance XS. Hence also include a calculated value of generator output power. Show or describe briefly your method for calculating these values.
-[Group] Provide plots of the following data: generator power output vs. torque angle $\delta$ % voltage vs load current, calculated synchronous reactance vs generator armature (load) current,
-[Individual] Comment on your observations about generator output voltage as load is varied, and hence on the suitability of this generator to supply the load, under the generator conditions used in this experiment?
-[Individual] Comment on your calculated value of XS and how it varied, if it did vary, with load and why you think this is the case? What implications might there be for modelling the generator using the equivalent circuit?
-[Individual] Comment on the trend you observed between power output with torque angle δ, in particular whether it followed your expectations and why this was or was not the case?
-[Individual] What did you notice about how the speed of the machine changes when you increase or decrease the load? Why do you think this is happening? Hint: use your knowledge of DC machines for the connection type you are using in the lab to explain this.
+#+ATTR_LATEX: :environment longtable :align |p{0.13\linewidth}|p{0.12\linewidth}|p{0.2\linewidth}|p{0.22\linewidth}|p{0.22\linewidth}|
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+| Gen out reactive power (VAR) | %V/V_NL | Torque Angle \delta (degrees) | Synch Reactance (\Omega) | Calc Power output (W) |
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+|                            0 |     100 |                             0 |                      NaN |                   NaN |
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+|                            0 |   82.93 |                          33.9 |                   379.12 |               232.848 |
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+|                            0 |   86.11 |                          30.5 |                   401.18 |                 207.9 |
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+|                            0 |   88.88 |                          27.2 |                   432.99 |               179.172 |
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+|                            0 |   92.46 |                          22.3 |                   448.26 |               149.688 |
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+|                            0 |   94.44 |                          19.1 |                   521.49 |                 113.4 |
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+|                            0 |   96.82 |                          14.4 |                   597.96 |                77.112 |
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+|                            0 |   99.60 |                          5.10 |                   429.58 |                39.312 |
+|------------------------------+---------+-------------------------------+--------------------------+-----------------------|
+
+The torque angle was calculated using:
+\[\delta=\arccos\left(\frac{V}{V_{NL}}\right)\]
+The synch reactant was calculated using a phasor diagram, which was used to derive the equation:
+\[X_{s}=\frac{Im\{E_f\}}{I_a}=\sin\left(\delta\right)\frac{E_f}{I_a}\]
+The power was calculated using:
+\[P=\frac{3|V_t||E_f|}{X_s}\sin(\delta)\]
+[Group] Proviqde plots of the following data: generator power output vs. torque angle $\delta$ % voltage vs load current, calculated synchronous reactance vs generator armature (load) current.
+#+BEGIN_SRC octave :exports code :results output :session Unity
+clc
+clear
+close all
+delta = [33.9664285566508, 30.5584317859349, 27.2660444507328, 22.3914070114617, 19.1881364537209, 14.4756484196819, 5.10600317296998];
+P = [232.848, 207.9, 179.172, 149.688, 113.4, 77.112, 39.312];
+
+figure;
+plot(delta, P, 'b-', 'LineWidth', 2);
+xlabel('Torque Angle [degrees]');
+ylabel('Generator Power Output [W]');
+title('Generator Power Output vs. Torque Angle');
+grid on;
+filename = sprintf('ENG231-Delta-Power.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+
+[[file:ENG231-Delta-Power.png]]
+#+BEGIN_SRC octave :exports code :results output :session Unity
+clc
+clear
+close all
+I = [0.308, 0.275, 0.237, 0.198, 0.15, 0.102, 0.052, 0];
+
+V = [82.9365079365079, 86.1111111111111, 88.8888888888889, 92.4603174603175, 94.4444444444444, 96.8253968253968, 99.6031746031746, 100];
+
+figure;
+plot(I, V, 'b-', 'LineWidth', 2);
+xlabel('Load Current [A]');
+ylabel('Voltage [V]');
+title('Voltage vs. Load Current');
+grid on;
+filename = sprintf('ENG231-Load-Voltage.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+
+[[file:ENG231-Load-Voltage.png]]
+#+BEGIN_SRC octave :exports code :results output :session Unity
+clc
+clear
+close all
+I = [0.308, 0.275, 0.237, 0.198, 0.15, 0.102, 0.052];
+
+X = [379.122639498633, 401.187084065245, 432.993745962661, 448.268126210762, 521.491477176929, 597.963872162739, 429.589669909451];
+
+figure;
+plot(I, X, 'b-', 'LineWidth', 2);
+xlabel('Generator Armature Current [A]');
+ylabel('Calculated Synchronous Reactance [ohms]');
+title('Calculated Synchronous Reactance vs. Generator Armature Current');
+grid on;
+filename = sprintf('ENG231-Current-Reactance.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG231-Current-Reactance.png]]
+
+[Individual] Comment on your observations about generator output voltage as load is varied, and hence on the suitability of this generator to supply the load, under the generator conditions used in this experiment?\\
+When the load is increased the voltage output decreases, when there is no load the efficiency is at its maximum. So, increasing the load reduces the voltage output. At the largest load tested ($685.7\Omega$) we recorded a $83\%$ decrease in voltage, and the  % voltage vs load current plot appears to be non-linear. This means that this generator should not operate with loads much higher than $685.7\Omega$.\\
+
+[Individual] Comment on your calculated value of $X_S$ and how it varied, if it did vary, with load and why you think this is the case? What implications might there be for modelling the generator using the equivalent circuit?\\
+In general it appears that increasing the load decreased $X_S$. This is because as the load increased the current did too, which will create a larger magnetic field in the motor and produce saturation effects. The saturation due to the increased magnetic field will alter the reactance. \\
+
+[Individual] Comment on the trend you observed between power output with torque angle $\delta$, in particular whether it followed your expectations and why this was or was not the case?\\
+As the torque angle increased the power increased. If we notice that $P \propto \tau$ and $\delta \propto \tau$, given that we have a constant magnetic field. We can conclude that $P \propto \delta$, which means that increasing the torque angle will increase power. Which can also be seen by intuition, decreasing the alignment of the rotor and  the magnetic field will increase the torque and hence the power output.\\
+
+[Individual] What did you notice about how the speed of the machine changes when you increase or decrease the load? Why do you think this is happening? Hint: use your knowledge of DC machines for the connection type you are using in the lab to explain this.\\
+As the load increased the speed decreased. This is because when the load is increased the voltage is lowered. In other words the voltage is proportional to the speed of the machine ($V\propto \omega$).
 *** Operation with lagging power factor loads, and power efficiency
-[Group] Record in a table the measured data for each load condition, include efficiency of power
-|                     Load R |                   Load XL | Gen terminal Volt (L-N) | Generator Load current | Gen out power | Gen out power Reactive | DC motor Voltage | DC Motor |          Current | DC Shaft Power | Synch gene eff |
-|                       1200 |                      1200 |                     181 |                  0.225 |            30 |                   27.5 |              130 |      1.2 |           144.48 |                |                |
-|                        686 |                       686 |                     145 |                  0.314 |          34.2 |                   30.5 |            130.1 |      1.4 |           166.46 |                |                |
-|                       1600 |                      4800 |                     217 |                  0.147 |            30 |                    9.5 |            129.2 |      1.2 |           143.52 |                |                |
-|                            |                           |                         |                        |               |                        |                  |          |                  |                |                |
-| With voltage back to 415 V | SG Field current required |                         |  Armature load current | Gen out power | Gen out power Reactive |         DC motor |  Voltage | DC Motor Current | DC Shaft Power | Synch gene eff |
-|                       1600 |                      0.38 |                         |                    1.4 |            37 |                   11.7 |            130.6 |      1.3 |           156.26 |                |                |
-|                       4800 |                           |                         |                        |               |                        |                  |          |                  |                |                |
+[Group] Record in a table the measured data for each load condition, include efficiency of power delivery from prime mover (DC motor shaft) to 3-phase electrical load.\\
+#+ATTR_LATEX: :environment longtable :align |p{0.13\linewidth}|l|p{0.15\linewidth}|p{0.15\linewidth}|p{0.1\linewidth}|p{0.2\linewidth}|l|
+|-----------------+---------------------+-----------------------------+------------------------------+----------------------+---------------------------------+-----|
+| Load R (\Omega) | Load $X_L$ (\Omega) | Gen terminal Volt (L-N) (V) | Generator (Load) current (A) | Gen output power (W) | Gen output power Reactive (VAR) | ... |
+|-----------------+---------------------+-----------------------------+------------------------------+----------------------+---------------------------------+-----|
+|             686 |                 686 |                         145 |                        0.314 |                 34.2 |                            30.5 | ... |
+|-----------------+---------------------+-----------------------------+------------------------------+----------------------+---------------------------------+-----|
+|            1200 |                1200 |                         181 |                        0.225 |                   30 |                            27.5 | ... |
+|-----------------+---------------------+-----------------------------+------------------------------+----------------------+---------------------------------+-----|
+|            1600 |                4800 |                         217 |                        0.147 |                   30 |                             9.5 | ... |
+|-----------------+---------------------+-----------------------------+------------------------------+----------------------+---------------------------------+-----|
 
-delivery from prime mover (DC motor shaft) to 3-phase electrical load. [Individual] Comment on the efficiency of power delivery for this generator? Where are the most likely sources of energy loss in the system?
-[Individual] Discuss the effect that supplying power at lagging power factor has on voltage regulation for this generator (compared to unity power factor loads). By comparing the power delivery expected at rated voltage, what is the impact of poor voltage regulation on power supplied to the load?
-[Individual] For the 1200 || j1200 $\Omega$ load scenario, draw a carefully labelled and approximately to scale phasor diagram to represent the operating condition of the synchronous generator.
-[Group] For the 1600 || j4800 $\Omega$ load scenario, describe how you manipulated the synchronous generator to restore load voltage to close to the rated value. What induced emf Ef was required in this case?
-[Individual] In a real system where a generator is supplying loads, the load can sometimes change quite frequently. How do you think you might you design an automatic system so that voltage is maintained at the specified or rated value regardless of load variations?
-[Individual] Reflect on how this lab session has contributed to your learning experience and your understanding of synchronous generators
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|
+|----------------------+----------------------+--------------------+-----------------------|
+| DC motor Voltage (V) | DC Motor Current (A) | DC Shaft Power (W) | Synch gene efficiency |
+|----------------------+----------------------+--------------------+-----------------------|
+|                130.1 |                  1.4 |             166.46 |                 74.63 |
+|----------------------+----------------------+--------------------+-----------------------|
+|                  130 |                  1.2 |             144.48 |                 73.71 |
+|----------------------+----------------------+--------------------+-----------------------|
+|                129.2 |                  1.2 |             143.52 |                 95.33 |
+|----------------------+----------------------+--------------------+-----------------------|
+
+With voltage back to 240 V
+#+ATTR_LATEX: :environment longtable :align |p{0.13\linewidth}|l|p{0.15\linewidth}|p{0.15\linewidth}|p{0.1\linewidth}|p{0.2\linewidth}|l|
+|-----------------+---------------------+-------------------------------+------------------------------+----------------------+---------------------------------+-----|
+| Load R (\Omega) | Load $X_L$ (\Omega) | SG Field current required (A) | Generator (Load) current (A) | Gen output power (W) | Gen output power Reactive (VAR) | ... |
+|-----------------+---------------------+-------------------------------+------------------------------+----------------------+---------------------------------+-----|
+|            1600 |                4800 |                          0.38 |                          1.4 |                   37 |                            11.7 | ... |
+|-----------------+---------------------+-------------------------------+------------------------------+----------------------+---------------------------------+-----|
+
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|
+|----------------------+----------------------+--------------------+-----------------------|
+| DC motor Voltage (V) | DC Motor Current (A) | DC Shaft Power (W) | Synch gene efficiency |
+|----------------------+----------------------+--------------------+-----------------------|
+|                130.6 |                  1.3 |             156.26 |                 95.34 |
+|----------------------+----------------------+--------------------+-----------------------|
+
+
+[Individual] Comment on the efficiency of power delivery for this generator? Where are the most likely sources of energy loss in the system?\\
+The energy loss is likely due to the reactive power resulting from the inductive load. As the load increased the efficiency drastically decreased, from 95% to 75%. There are also other energy losses in the system, such as copper losses and mechanical losses (friction, heat, etc.). \\
+
+[Individual] Discuss the effect that supplying power at lagging power factor has on voltage regulation for this generator (compared to unity power factor loads). By comparing the power delivery expected at rated voltage, what is the impact of poor voltage regulation on power supplied to the load?\\
+When the machine is being ran with a lagging power factor, the machine must provide reactive power. This will lead to a larger voltage drop, and hence a worse voltage regulation. Comparing this to unity power factor, there will be a smaller voltage drop and better voltage regulation. This will cause worse power delivery for a lagging power factor.
+
+[Individual] For the 1200 || j1200 $\Omega$ load scenario, draw a carefully labelled and approximately to scale phasor diagram to represent the operating condition of the synchronous generator.\\
+We need to make a phasor diagram of:
+\[\begin{align*}E_f&=V_t+I_a(R_a+jX_s) \\
+                E_f&= 181.00 - 381.84j\end{align*}\]
+#+BEGIN_SRC octave :exports none :results output :session Phasor
+clc
+clear
+close all
+
+Ra = 1200;
+Xs = -1200*j;
+Vt = 181;
+Ia = 0.225*exp(-1*j*pi/4);
+Ef = Vt+Ia*(Ra+Xs)
+
+figure;
+hold on;
+
+plot([0, real(Vt)], [0, imag(Vt)], 'r', 'LineWidth', 2, 'DisplayName', 'Vt');
+plot([0, real(Ia)], [0, imag(Ia)], 'r', 'LineWidth', 2, 'DisplayName', 'Ia');
+
+plot([real(Vt), real(Ia*(Ra+Xs)+Vt)], [imag(Vt), imag(Ia*(Ra+Xs)+Vt)], 'g', 'LineWidth', 2, 'DisplayName', ' Vt+Ia*(Ra+Xs)');
+
+plot([0, real(Ef)], [0, imag(Ef)], 'b', 'LineWidth', 2, 'DisplayName', 'Ef');
+
+
+
+xlim([-500, 500]);
+ylim([-500, 500]);
+
+line([-500 500], [0 0], 'Color', 'k', 'LineWidth', 1, 'HandleVisibility', 'off');
+line([0 0], [-500 500], 'Color', 'k', 'LineWidth', 1, 'HandleVisibility', 'off');
+
+grid on;
+xlabel('Real Part');
+ylabel('Imaginary Part');
+title('Phasor Diagram');
+legend show;
+
+hold off;
+
+filename = sprintf('ENG231-Phasor-1.png');
+print(filename,'-dpng','-r100');
+
+#+END_SRC
+
+#+RESULTS:
+: Ef =  181.00 - 381.84i
+: Ef = -5426.8 - 4250.1i
+
+[[file:ENG231-Phasor-1.png]]
+
+[Group] For the 1600 || j4800 $\Omega$ load scenario, describe how you manipulated the synchronous generator to restore load voltage to close to the rated value. What induced emf Ef was required in this case?\\
+We adjusted the field current, by increasing this we increased $E_f$. Which allowed us to return to the required voltage.
+\[\begin{align*}E_f&=V_t+I_a(R_a+jX_s) \\
+                E_f&=240+1.4e^{-j\arctan\left(\frac{4800}{1600}\right)}\left(1600-j4800\right)\\
+                E_f&=-5426.8-j4250.1\end{align*}\]
+
+[Individual] In a real system where a generator is supplying loads, the load can sometimes change quite frequently. How do you think you might you design an automatic system so that voltage is maintained at the specified or rated value regardless of load variations?\\
+We can add variable reactive load. A system can be designed to increase or lower the load to match the required voltage output.\\
+
+[Individual] Reflect on how this lab session has contributed to your learning experience and your understanding of synchronous generators\\
+This lab has allowed me to understand synch machines in a more practical way. Coming into the lab I had very little idea of how these machines operate, now that I have done it I can confidently say that I understand synch machines. Overall, this lab has been a great learning experience and has furthered my understanding of machines.

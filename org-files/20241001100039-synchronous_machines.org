@@ -8,7 +8,6 @@
 
 * Synchronous [[id:0d2a7422-d603-4652-8ad2-e5ed27dc2519][Machines]]
 ** Synchronous Generators
-
  - Rotor has a DC current in field winding
    - Rotor current produces a constant flux
  - Stator contains a winding for each of the three phases
@@ -64,8 +63,8 @@ So we can either
  - Or, apply a torque to accelerate it.
 *** Equations
  - \[V_t=|V_t|\angle 0^o\]
- - \[E_f=V_t-I_a(R_a+jX_s)=|E_f|\angle -\delta\]z
+ - \[E_f=V_t-I_a(R_a+jX_s)=|E_f|\angle -\delta\]
  - \[Z_s=R_a+jX_s=|Z_s|\angle \theta_s\]
 *** [[id:a64c9330-c330-43ad-844e-70100e9e3d08][Power]]
- - \[P=\frac{3|V_L||E_f|}{X_s}\sin(\delta)\]
- - \[Q=\frac{3|V_L||E_f|}{X_s}\cos(\delta)-\frac{3|V_L|^2}{X_s}\]
+ - \[P=\frac{3|V_t||E_f|}{X_s}\sin(\delta)\]
+ - \[Q=\frac{3|V_t||E_f|}{X_s}\cos(\delta)-\frac{3|V_t|^2}{X_s}\]

@@ -25,6 +25,7 @@
 - Due week 6 and week 12
 - 15% of mark
 - [[id:d0bf116b-bff9-48bb-938d-7fa8766d1088][ENG231 - Electrical Machines And Transformers - Assignment 1]]
+- [[id:51f7c5ef-86da-44f3-8d30-b58e676628f3][ENG231 - Electrical Machines And Transformers - Assignment 2]]
 
 ** Assessment Task 4: Engineering Machines and Transformers Labs
 - Weeks 8, 10 and 12

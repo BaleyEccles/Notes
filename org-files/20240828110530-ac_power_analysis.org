@@ -25,7 +25,7 @@
    - \[p(t)=\frac{V_{m}I_{m}}{2}[\cos(\theta_v-\theta_i)+\cos(2\omega t+\theta_v+\theta_i)]\]
    - \[P=\frac{V_{m}I_{m}}{2}\cos(\theta_v-\theta_i)\]
  - Power types
-   - Reactive Power (VA)
+   - Reactive Power (VAR)
      - \[Q=V_{rms}I_{rms}\sin(\theta_v-\theta_i)=V_{rms}I_{rms}\sin(\phi)\]
      - Positive for inductive load
      - Negative for capcitive load
