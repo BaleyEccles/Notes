@@ -15,7 +15,7 @@
 #+LATEX_HEADER_EXTRA: \usepackage[backend=biber,style=apa]{biblatex}
 #+LATEX_HEADER_EXTRA: \addbibresource{citation.bib}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
-#+PROPERTY: header-args :eval no
+
 
 * ENG231 - Electrical Machines And Transformers - Assignment 2
 ** Part 1: Calculation of transformer winding voltages
@@ -55,11 +55,15 @@ a=Ns/Np;
 f = 50;
 I = 3.3;
 
+% Reluctance
 Rgap = g/(mu0*A);
 Rside = (h-2*l-g)/(mu0*mur*A);
 Rbottom = l/(mu0*mur*A);
 Rtop = l/(mu0*mur*A);
 R = 2*Rside + Rbottom + Rtop + 2*Rgap;
+
+
+
 Phi=(1/R)*Np*I;
 V1 = 4.44*pi*Phi*f;
 V2 = a*V1;
@@ -71,50 +75,104 @@ fprintf('Secondary Voltage (V2): %.2f V (RMS)\n', V2);
 #+RESULTS:
 : Primary Voltage (V1): 60.37 V (RMS)
 : Secondary Voltage (V2): 13.98 V (RMS)
+
 ** Part 2: Specification of transformer design to suit application
 With the last digit of my student ID being 7:
 | Student ID | Rated apparent  | Primary side rated  | Secondary side rated | 3-phase         |
 | last digit | power (3-phase) | voltage (line-line) | voltage (line-line)  | connection type |
 | 7          | 460 kVA         | 22 kV               | 400 V                | Δ-Y             |
 
-#+BEGIN_SRC octave :exports code :results output :session Part1
+#+BEGIN_SRC octave :exports code :results output :session Part2
+clc
+clear
+close all
+a=400/(22*10^3);
+layersP = 5;
+layersS = 1;
+WindingsP = layersP*1000
+WindingsS = a*layersP*WindingsP/layersS
+airGap = 1*10^-3;
+#+END_SRC
+
+#+RESULTS:
+: WindingsP = 5000
+: WindingsS = 454.55
+
+#+BEGIN_SRC octave :exports code :results output :session Part2
+S = 460*10^3;
+Vp = 22*10^3;
+Vs = 400;
+
+Ip = S/(sqrt(3)*Vp);
+IPerLayerP = Ip/layersP;
+Is = S/(sqrt(3)*Vs);
+IPerLayerS = Is/layersS;
+
+IP = 0.05*IPerLayerP
+IS = 0.05*IPerLayerS
+
+#+END_SRC
+
+#+RESULTS:
+: IP = 0.1207
+: IS = 33.198
+
+This allows us to choose a wire size for each side.
+#+BEGIN_SRC octave :exports code :results output :session Part2
+WireDiamP = 2.03 *10^-3;
+WireDiamS = 4.06 *10^-3;
+#+END_SRC
+
+#+RESULTS:
+
+Choosing the wire size allows us to calculate the required gap between the wires.
+#+BEGIN_SRC octave :exports code :results output :session Part2
+GapWire = WireDiamP*layersP*2;
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports code :results output :session Part2
 f = 50;
 S = 460*10^3;
 Vp = 22*10^3;
 Vs = 400;
 mur = 2150;
 
-%% Modifiable Values
-l = ;
-h = ;
-g = ;
-d = ;
-
-%% Parameters
-gmin = 1*10^(-3);
-gmax = 3*10^(-3);
-
-Bmin = 0;
-Bmax = 1.6;
-
-gap = l-2*d-4*Layers*wireWidth;
-
-Imax = 0.05*IperWinding
+mu0=4*pi*10^-7;
 
 
-%% Equations
-A = d^2;
+%% Somtging here is wrong
 
-Rgap = g/(mu0*A);
-Rside = (h-2*l-g)/(mu0*mur*A);
+B=1.6;
+Phi=Vp/(4.44*pi*f);
+A=Phi/B;
+d=sqrt(A)
+
+l = 2*d+layersS*WireDiamS+layersP*WireDiamP+GapWire
+%h = airGap + 2* l - 0.5* Ip* WindingsP  / (mu0* mur*(Ip* WindingsP*(2* l / (A* mu0* mur) + 2* airGap / (A* mu0)) / A - B)* A^2)
+
+h = A*mu0*mur*(Ip*WindingsP / Phi + 2*(airGap + 2*l) / (A*mu0*mur) - 2*l / (A*mu0*mur) - 2*airGap / (A*mu0)) / 2
+
+Rgap = airGap/(mu0*A);
+Rside = (h-2*l-airGap)/(mu0*mur*A);
 Rbottom = l/(mu0*mur*A);
 Rtop = l/(mu0*mur*A);
 R = 2*Rside + Rbottom + Rtop + 2*Rgap;
 
 
-Phi = B*A;
-Phi = (1/R)*Np*I;
-V1 = 4.44*pi*Phi*f;
-V2 = a*V1;
+
+Phi=(1/R)*WindingsP*Ip;
+V1 = 4.44*pi*Phi*f
+V2 = a*V1
 
 #+END_SRC
+
+#+RESULTS:
+: d = 4.4402
+: l = 9.5369
+: h = 58.349
+: V1 = 22000
+: V2 = 400
+THESE NUMBERS DONT MAKE SENSE
+d, l AND h SHOULD BE LESS THAN 2
