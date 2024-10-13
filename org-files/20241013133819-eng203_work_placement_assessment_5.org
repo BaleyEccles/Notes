@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       cf59eafa-914e-416c-94b9-0fa6559c974d
+:END:
+#+title: ENG203 Work Placement - Assessment 5
+#+date: [2024-10-13 Sun 13:38]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:
+
+* ENG203 Work Placement - Assessment 5
+** Introduction
+I chose McConnell Dowell and ACEN Australia, as these two companies have employment opportunities in Australia. In the future I may have to work with these two companies, so having look into their procedures will improve my knowledge on the industry.  The information about these companies will be sourced from the their websites and various panel sessions that are held with their engineers present.
+
+McConnell Dowell is an infrastructure construction company, which was founded in New Zealand (1961), however they operate mostly in Australia and occasionally in some Asian countries. ACEN Australia is the Australian branch of the ACEN Corporation, which was founded in 2011 and is based in the Philippines. ACEN operates in the Oceanic region, and has done many projects in energy infrastructure.
+** Compare and Contrast
+*** Business Operations
+The business of ACEN Australia has to deal with many complex operations to satisfy their clients. They spend a lot of time managing and optimising their operations, this could include ensuring that their final product is done as cheap as possible, while also exceeding the clients requirements.
+
+McConnell Dowell has done many projects where they are required to work with their clients to satisfy their expectations. For example they worked on the New Bridgewater Bridge project that was awarded to them by the The Tasmanian Department of State Growth. They had to satisfy the requirements that were provided to them.
+*** Engineering Practices
+Both of these companies take extra caution to ensure that their practices are being done and are the best possible. ACEN Australia works with a lot of renewable energy, where they are a signatory to the Clean Energy Council’s Best Practice Charter for Renewable Energy Developments. Which outlines their practices to ensuring that they provide a cleaner future.
+
+McConnell Dowell has many practices that the engineers follow to ensure the safety of them, and their fellow engineers. On top of that they operate such that when their project is being used once its done, there are no negative consequences for anyone involved due to their engineering.
+*** Duties of Engineers
+The engineers of ACEN Australia have to deal with many complicated requirements. They manage this by constantly engaging with their partners and updating their clients on their current state. These engineers have to ensure that they are following their companies requirements while also ensuring that what they do will not endanger anyone once the project is complete.
+
+Engineers of McConnell Dowell are required to ensure that the project that they are delegated is done efficiently and on time, while ensuring the outcome has no negative side effects. Each engineer is expected to work to their best abilities, and to update each other on their current state for the project.
+
+** Conclusion
+Exploring the operations and practices of these two companies has helped me understand the requirements that I, as an engineer, must operate with. Understanding the complexities of their operations has helped me identify things that I need to improve and other things that I have became good at.
+
+For my future work placement I now understand what will be required of me and how I can improve during it. My future career will depend on how much I am able to express my interest early on. Overall, this has developed my understanding of the operations of engineers and their companies and what is required of me.
+
+** References
+https://acenrenewables.com.au/sustainability/
+https://cleanenergycouncil.org.au/news-resources/best-practice-charter
+https://www.mcconnelldowell.com/people/our-purpose-values
+https://www.mcconnelldowell.com/projects/new-bridgewater-bridge-project
