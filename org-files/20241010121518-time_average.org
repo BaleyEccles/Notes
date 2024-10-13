@@ -7,3 +7,6 @@
 #+STARTUP: latexpreview
 
 * Time Average
+ - \[\overline{x}=<x(t)>=\lim_{T\rightarrow \infty}\int_{-T/2}^{T/2}x(t)dt\]
+ - When $x(t)$ is periodic
+   - \[\overline{x}=<x(t)>=\int_{-T/2}^{T/2}x(t)dt\]

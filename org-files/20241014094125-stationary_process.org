@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       fc7d67e1-d69e-4079-b78e-3223e9d62787
+:END:
+#+title: Stationary Process
+#+date: [2024-10-14 Mon 09:41]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Stationary Process
+** Types
+*** Strict-Sense Stationary (SSS)
+ - Every statistic of $X(t)$ does not depend on $t$, and is self similar.
+*** Wide-Sense Stationary (WSS)
+ - $E[X(t)]=\mu_X$ is not a function of time
+ - _AND_ $E[X(t)X(t+\tau)=R_{XX}(t)]$ is only a function of $\tau$, and not time explicitly.
+**** Jointly WSS
+ - $X(t)$ and $Y(t)$ are jointly WSS if:
+   - Each is WSS on their own
+   - _AND_ $R_{XY}(t,t+\tau)=R_{XT}(\tau)$

@@ -5,6 +5,8 @@
 #+date: [2024-10-10 Thu 12:31]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
-#+FILETAGS :TODO:
+
 
 * Autoconvergence
+ - \[C_{XX}(t_1,t_2)=E[(x(t_1)-\mu_X(t_1))(x(t_2)-\mu_X(t_2))\]
+   - \[=R_{XX}(t_1,t_2)-\mu_X(t_1)\mu_X(t_2)\]

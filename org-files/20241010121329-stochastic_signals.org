@@ -11,7 +11,15 @@
  - Given some sample space we can take two averages of the resulting signals
    - [[id:7de75cab-3325-43e8-9458-7f43676d91c6][Ensemble Average]]
    - [[id:e953576c-0535-4a62-ab7b-202dbd967e6f][Time Average]]
+ - [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][Stationary Process]]
+ - [[id:876bb7e2-3907-40db-9a50-d790402b6552][Independent Processes]]
+** Definitions
  - [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]]
+ - [[id:1b1da4d7-bc6e-420e-9533-c2371e090b64][Autoconvergence]]
+ - [[id:a79c58c1-2a5d-49b3-aaf4-c623e6717cc8][Cross Correlation]]
+ - [[id:c7a30f05-13eb-4f1a-a34a-c17279f68299][Cross Convergence]]
+ - [[id:3370e425-fb6e-4bf6-b5f3-7a866ceaec0f][Time Autocorrelation]]
+ - [[id:4dbf2cd9-1a0d-4898-905c-158d9d7b79b3][Ergodic Theorem]]
 ** Notation
  - Denoted with a uppercase letter and time ($X(t)$)
  - Example [[id:8904baec-0390-4296-b7e6-9ef4ede346a5][PDF]]: $X(t)=a\cos(\omega_0t+\Theta)$

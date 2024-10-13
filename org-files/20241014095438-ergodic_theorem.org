@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       4dbf2cd9-1a0d-4898-905c-158d9d7b79b3
+:END:
+#+title: Ergodic Theorem
+#+date: [2024-10-14 Mon 09:54]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Ergodic Theorem
+ - If $X(t)$ is Ergodic, the [[id:e953576c-0535-4a62-ab7b-202dbd967e6f][Time Averages]] of each sample signal $x(t)$ are all the same value and all equal to $\mu_X$. All ample [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelations]] of $x(t)$ are the same and equal to $R_{XX](\tau)$.

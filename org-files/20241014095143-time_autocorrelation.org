@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       3370e425-fb6e-4bf6-b5f3-7a866ceaec0f
+:END:
+#+title: Time Autocorrelation
+#+date: [2024-10-14 Mon 09:51]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Time Autocorrelation
+ - \[\overline{R_{XX}}(\tau)=<x(t)x(t+\tau)>\]q

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       c7a30f05-13eb-4f1a-a34a-c17279f68299
+:END:
+#+title: Cross Convergence
+#+date: [2024-10-14 Mon 09:38]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Cross Convergence
+ - \[C_{XY}(t_1,t_2)=E[(x(t_1)-\mu_X(t_1))(y(t_2)-\mu_Y(t_2))\]
+   - \[=R_{XY}(t_1,t_2)-\mu_X(t_1)\mu_Y(t_2)\]

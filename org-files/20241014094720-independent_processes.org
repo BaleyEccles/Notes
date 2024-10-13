@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       876bb7e2-3907-40db-9a50-d790402b6552
+:END:
+#+title: Independent Processes
+#+date: [2024-10-14 Mon 09:47]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Independent Processes
+ - \[f_{XY}(x,y)=f_X(x)f_Y(y)\]
+ - They are uncorrelated for all $\tau$ if:
+   - \[C_{XY}(\tau)=R_{XY}(\tau)-\mu_X\mu_Y=0\]
+ - Orthogonal if:
+   - \[R_{XY}(\tau)=0\]
