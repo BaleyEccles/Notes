@@ -16,7 +16,7 @@
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5
 ** Machine Inspection 
-[Group] Report your machine nameplate ratings
+[Group] Report your machine nameplate ratings\\
 The rated DC field voltage was missed when measuring, which means that the rated DC field current could not be calculated. If it were known it would be calculated using the resistance in the DC test along with the rated DC field voltage using ohms law.
 
 #+ATTR_LATEX: :environment longtable :align |p{0.25\linewidth}|l|p{0.25\linewidth}|l|
