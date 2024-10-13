@@ -7,4 +7,4 @@
 #+STARTUP: latexpreview
 
 * Time Autocorrelation
- - \[\overline{R_{XX}}(\tau)=<x(t)x(t+\tau)>\]q
+ - \[\overline{R_{XX}}(\tau)=<x(t)x(t+\tau)>\]
