@@ -4,7 +4,7 @@
 #+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5
 #+date: [2024-10-05 Sat 16:01]
 #+AUTHOR: Baley Eccles - 652137 | Kalindu Sahan Wijeweera Wijeweera Patabendige | Michael Fagan
-#+FILETAGS: :Assignment:TODO:
+#+FILETAGS: :Assignment:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}
@@ -17,20 +17,22 @@
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5
 ** Machine Inspection 
 [Group] Report your machine nameplate ratings
+The rated DC field voltage was missed when measuring, which means that the rated DC field current could not be calculated. If it were known it would be calculated using the resistance in the DC test along with the rated DC field voltage using ohms law.
+
 #+ATTR_LATEX: :environment longtable :align |p{0.25\linewidth}|l|p{0.25\linewidth}|l|
-|------------------------------------------------+---------+-------------------------------------------------+----------|
-| Rated apparent power (VA)                      | 360 VA  | Rated DC field voltage                          | :TODO:   |
-|------------------------------------------------+---------+-------------------------------------------------+----------|
-| Rated armature (stator) voltage                | 240 V   | Rated DC field current (work out after DC test) | :TODO:   |
-|------------------------------------------------+---------+-------------------------------------------------+----------|
-| Rated armature current (per winding)           | 0.5 A   | $\cdot$                                         | $\cdot$  |
-|------------------------------------------------+---------+-------------------------------------------------+----------|
-| $\cdot$                                        | $\cdot$ | Rated speed                                     | 1500 rpm |
-|------------------------------------------------+---------+-------------------------------------------------+----------|
-| Stator winding connection (Y or Δ)             | Y       | Rated Frequency                                 | 50 Hz    |
-|------------------------------------------------+---------+-------------------------------------------------+----------|
-| Rated line current for this winding connection | 0.5 A   | Number of poles (calculated)                    | 4        |
-|------------------------------------------------+---------+-------------------------------------------------+----------|
+|------------------------------------------------+---------+------------------------+----------|
+| Rated apparent power (VA)                      | 360 VA  | Rated DC field voltage | $\cdot$  |
+|------------------------------------------------+---------+------------------------+----------|
+| Rated armature (stator) voltage                | 240 V   | Rated DC field current | $\cdot$  |
+|------------------------------------------------+---------+------------------------+----------|
+| Rated armature current (per winding)           | 0.5 A   | $\cdot$                | $\cdot$  |
+|------------------------------------------------+---------+------------------------+----------|
+| $\cdot$                                        | $\cdot$ | Rated speed            | 1500 rpm |
+|------------------------------------------------+---------+------------------------+----------|
+| Stator winding connection (Y or Δ)             | Y       | Rated Frequency        | 50 Hz    |
+|------------------------------------------------+---------+------------------------+----------|
+| Rated line current for this winding connection | 0.5 A   | Number of poles        | 4        |
+|------------------------------------------------+---------+------------------------+----------|
 
 #+ATTR_LATEX: :environment longtable :align |l|l|
 |--------------------------------+----------|
@@ -104,7 +106,7 @@ Ef = [4.22, 66.5, 111, 159.5, 198, 221, 246, 261, 273.6, 288];
 
 % Create the plot
 figure;
-plot(If, Ef, '-o', 'LineWidth', 2, 'MarkerSize', 6;)
+plot(If, Ef, '-o', 'LineWidth', 2, 'MarkerSize', 6);
 grid on;
 % Add labels and title
 xlabel('Synchronous Generator Field Current (If) (A)', 'FontSize', 12);
@@ -208,7 +210,7 @@ From the code $X_s\approx 598.23$.
 [Group] Record in a table the measured data for each load condition, and then calculate the remaining quantities required in the table, including generator voltage as a % of no-load voltage. Note: torque angle (rotor angle) and Xs can both be calculated by considering the phasor diagram at unity power factor and the known values of Ef and Vt and solving using basic trig rules. Then calculate output power P you would expect based on these values and the power equation for a synchronous generator.\\
 [Individual] For each operating point, include in the table your calculated values for the power angle, $\delta$, and an implied or calculated value of the synchronous reactance XS. Hence also include a calculated value of generator output power. Show or describe briefly your method for calculating these values.\\
 A mistake was made during this part of the lab. The terminal voltage was adjusted during the second load. This resulted in a no load voltage of $\approx 252V$, the data was adjusted to match this.
-#+ATTR_LATEX: :environment longtable :align |p{0.13\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|
+#+ATTR_LATEX: :environment longtable :align |p{0.13\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|l|
 |-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|
 | Load R ($\Omega$) | Gen terminal Volt (L-L) (V) | Gen terminal Volt (L-N) (V) | Generator Load current (A) | Gen output power (W) | ... |
 |-------------------+-----------------------------+-----------------------------+----------------------------+----------------------+-----|

@@ -127,7 +127,7 @@ xlim([-Fs/2 Fs/2]);
 #+RESULTS:
 ** 2. Ideal Filtering
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports code :results output :session Filter
 clc
 clear
 close all
@@ -144,10 +144,10 @@ Phi = ((wd2-wd1)/(2*(N-1)))*n.^2+wd1*n;
 Chirp = cos(Phi);
 audiowrite('chirp.wav', Chirp, Fs);
 
-magnitude = abs(fftshift(fft(Chirp)));
+magnitudeChirp = abs(fftshift(fft(Chirp)));
 f = (-N/2:N/2-1)*(Fs/N);
 figure;
-plot(f, magnitude);
+plot(f, magnitudeChirp);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
@@ -158,10 +158,10 @@ Noise = Noise.noise;
 
 audiowrite('noise.wav', Noise, 3200);
 
-magnitude = abs(fftshift(fft(Noise)));
+magnitudeNoise = abs(fftshift(fft(Noise)));
 f = (-N/2:N/2-1)*(Fs/N);
 figure;
-plot(f, magnitude);
+plot(f, magnitudeNoise);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
@@ -171,29 +171,88 @@ chirp_and_noise = Chirp + Noise;
 audiowrite('chirp_and_noise.wav', chirp_and_noise, 3200);
 
 
-magnitude = abs(fftshift(fft(chirp_and_noise)));
+magnitudeCandN = abs(fftshift(fft(chirp_and_noise)));
 f = (-N/2:N/2-1)*(Fs/N);
 figure;
-plot(f, magnitude);
+plot(f, magnitudeCandN);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 grid on;
 
 
-t = 0:length(chirp_and_noise):2;
-figure;
-plot(t, chirp_and_noise);
-title('Magnitude Spectrum');
-xlabel('Time (Hz)');
-ylabel('Magnitude');
-grid on;
+%t = 0:length(chirp_and_noise):2;
+%fIgure;
+%plot(t, chirp_and_noise);
+%title('Magnitude Spectrum');
+%xlabel('Time (Hz)');
+%ylabel('Magnitude');
+%grid on;
+
 
 
 #+END_SRC
 
 #+RESULTS:
+: ans = 1599.5
 
 
-:TODO:
-From these plots we can see that there is noise at 1000Hz
+
+From the frequency domain plot we can see that there is a large amount of noise at 1000Hz. On top of this there is a small mount of noise across the entire signal. So, to design our filter we will need to remove the 1000Hz component.\\
+Our filter must block 1000Hz, so we can define our filter as such:
+\[\begin{align*}
+H(\omega)&=\begin{cases}
+        1, & |\omega-2\pi1000|>\Delta\omega \\
+        0, & |\omega-2\pi1000|\leq\Delta\omega
+\end{cases} \\
+h(t)&=\mathcal{F}^{-1}\{H(\omega)\} \\
+h(t)&=\frac{1}{2\pi}\int_{0}^{2\pi 1000-\Delta\omega}1\cdot e^{j\omega t}d\omega+\frac{1}{2\pi}\int_{2\pi 1000+\Delta\omega}^{f_{end}}1\cdot e^{j\omega t}d\omega \\
+h(t)&=\frac{1}{2\pi jt} \left( e^{j(2000\pi t - 2\pi \Delta\omega t)} - 1 + e^{j(f_{end}) t} - e^{j(2000\pi t + 2\pi \Delta\omega t)} \right)
+\end{align*}\]
+Here we use $\Delta\omega$, so we can define some tolerance for the filter.
+
+#+BEGIN_SRC octave :exports code :results output :session Filter
+%Delta_omega = 1;
+%t = linspace(0, 1, 1000);
+%h = (1 ./ (2 * pi * j * t)) .* (exp(j * (2000 * pi * t - 2 * pi * Delta_omega * t)) - 1 + exp(j * f_{end} * t) - exp(j * (2000 * pi * t + 2 * pi * Delta_omega * t)));
+
+%% Plot the result
+%figure;
+%plot(t, real(h), 'b', 'DisplayName', 'Real Part');
+%hold on;
+%plot(t, imag(h), 'r', 'DisplayName', 'Imaginary Part');
+%xlabel('Time (s)');
+%ylabel('Amplitude');
+%title('Result of the Expression');
+%legend;
+%grid on;
+
+
+H = @(f, Delta_f) double(abs(f - 1000) > Delta_f);
+freq = (-N/2:N/2-1)*(Fs/N);
+Df = 100;
+filter = H(freq, Df);
+chirp_and_noise_filtered = chirp_and_noise.*filter;
+
+magnitudeFiltered = abs(fftshift(fft(chirp_and_noise_filtered)));
+f = (-N/2:N/2-1)*(Fs/N);
+figure;
+plot(f, magnitudeFiltered);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+
+f = (-N/2:N/2-1)*(Fs/N);
+figure;
+plot(f, filter);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+
+
+audiowrite('chirp_and_noise_filtered.wav', chirp_and_noise_filtered, 3200);
+#+END_SRC
+
+#+RESULTS:

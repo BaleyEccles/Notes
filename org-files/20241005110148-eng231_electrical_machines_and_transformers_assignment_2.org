@@ -82,97 +82,117 @@ With the last digit of my student ID being 7:
 | last digit | power (3-phase) | voltage (line-line) | voltage (line-line)  | connection type |
 | 7          | 460 kVA         | 22 kV               | 400 V                | Δ-Y             |
 
+
+
+
 #+BEGIN_SRC octave :exports code :results output :session Part2
 clc
 clear
 close all
-a=400/(22*10^3);
-layersP = 5;
-layersS = 1;
-WindingsP = layersP*1000
-WindingsS = a*layersP*WindingsP/layersS
-airGap = 1*10^-3;
-#+END_SRC
 
-#+RESULTS:
-: WindingsP = 5000
-: WindingsS = 454.55
 
-#+BEGIN_SRC octave :exports code :results output :session Part2
-S = 460*10^3;
-Vp = 22*10^3;
+%VARIBLES
+
+layersP = 1
+layersS = 5
+NPConst = 1000
+g = 1*10.^-3
+B=1.6
+
+h = 2;
+d = 2.5;
+
+h = 0.1:0.1:10;
+d = 0.1:0.1:10;
+
+a=400./(22*10.^3);
+NP = layersP*NPConst
+NS = a*NP
+WindingsPerLayerS = NS./layersS
+
+
+
+S = 460*10.^3;
+Vp = 22*10.^3;
 Vs = 400;
 
-Ip = S/(sqrt(3)*Vp);
-IPerLayerP = Ip/layersP;
-Is = S/(sqrt(3)*Vs);
-IPerLayerS = Is/layersS;
+Ip = S./(sqrt(3)*Vp);
+IPerLayerP = Ip./layersP;
+Is = S./(sqrt(3)*Vs);
+IPerLayerS = Is./layersS;
 
-IP = 0.05*IPerLayerP
-IS = 0.05*IPerLayerS
+IpMax = 0.05*IPerLayerP
+IsMax = 0.05*IPerLayerS
 
-#+END_SRC
+%This allows us to choose a wire size for each side.
+WireDiamP = 2.03 *10.^-3;
+WireDiamS = 2.03 *10.^-3;
 
-#+RESULTS:
-: IP = 0.1207
-: IS = 33.198
-
-This allows us to choose a wire size for each side.
-#+BEGIN_SRC octave :exports code :results output :session Part2
-WireDiamP = 2.03 *10^-3;
-WireDiamS = 4.06 *10^-3;
-#+END_SRC
-
-#+RESULTS:
-
-Choosing the wire size allows us to calculate the required gap between the wires.
-#+BEGIN_SRC octave :exports code :results output :session Part2
+%Choosing the wire size allows us to calculate the required gap between the wires.
 GapWire = WireDiamP*layersP*2;
-#+END_SRC
 
-#+RESULTS:
-
-#+BEGIN_SRC octave :exports code :results output :session Part2
 f = 50;
-S = 460*10^3;
-Vp = 22*10^3;
+S = 460*10.^3;
+Vp = 22*10.^3;
 Vs = 400;
 mur = 2150;
-
-mu0=4*pi*10^-7;
-
-
-%% Somtging here is wrong
-
-B=1.6;
-Phi=Vp/(4.44*pi*f);
-A=Phi/B;
-d=sqrt(A)
-
-l = 2*d+layersS*WireDiamS+layersP*WireDiamP+GapWire
-%h = airGap + 2* l - 0.5* Ip* WindingsP  / (mu0* mur*(Ip* WindingsP*(2* l / (A* mu0* mur) + 2* airGap / (A* mu0)) / A - B)* A^2)
-
-h = A*mu0*mur*(Ip*WindingsP / Phi + 2*(airGap + 2*l) / (A*mu0*mur) - 2*l / (A*mu0*mur) - 2*airGap / (A*mu0)) / 2
-
-Rgap = airGap/(mu0*A);
-Rside = (h-2*l-airGap)/(mu0*mur*A);
-Rbottom = l/(mu0*mur*A);
-Rtop = l/(mu0*mur*A);
-R = 2*Rside + Rbottom + Rtop + 2*Rgap;
+mu0=4*pi*10.^(-7);
+mu = mu0*mur
 
 
+A = d.^2;
+Phi=B*A;
 
-Phi=(1/R)*WindingsP*Ip;
-V1 = 4.44*pi*Phi*f
-V2 = a*V1
+% These two must be the same
+R = NP*Ip./Phi;
+R = NS*Is./Phi;
 
+l=(mu*(R-2*((h-d)./mu)-g./mu0)./2)+d;
+
+Volume = 2.*(((mu.*(R-2.*((h-d)./mu)-g./mu0)./2)+d).*d.*d)+2.*((h-d-d).*d.*d);
+Volume(Volume<0) = [];
+[minVol, minIndex] = min(A);
+
+Volume(minIndex)
+l(minIndex)
+h(minIndex)
+d(minIndex)
 #+END_SRC
 
 #+RESULTS:
-: d = 4.4402
-: l = 9.5369
-: h = 58.349
-: V1 = 22000
-: V2 = 400
-THESE NUMBERS DONT MAKE SENSE
-d, l AND h SHOULD BE LESS THAN 2
+#+begin_example
+layersP = 1
+layersS = 5
+NPConst = 1000
+g = 1.0000e-03
+B = 1.6000
+NP = 1000
+NS = 18.182
+WindingsPerLayerS = 3.6364
+IpMax = 0.6036
+IsMax = 6.6395
+mu = 2.7018e-03
+ans = 20.363
+ans = 1018.3
+ans = 0.1000
+ans = 0.1000
+#+end_example
+
+To minimise volume we can choose values:
+Volume = 20.363\\
+Length = 1018.3\\
+height = 0.1000\\
+depth  = 0.1000\\
+** Part 3: Discussion about transformer design trade-offs
+ - Describe the influence that your winding design choices (number of turns and layers) have on transformer size and mass? How might you design for minimum total mass, and what trade-off do you see between iron core mass and copper mass?
+
+To minimise volume/mass we can choose values:
+ - Volume = 20.363
+ - Length = 1018.3
+ - height = 0.1000
+ - depth  = 0.1000
+However this is obviously not good, as the length is over 1km long.
+ - Discuss how maximum operating core flux density impacts the required magnetising current and transformer mass?
+ - Calculate, by adding to your code, the winding losses for your transformer (calculated power loss at rated operation, as a % of rated throughput power)? You may assume that the AC resistance in normal operation is 20% larger than the calculated DC resistance (owing to skin effect and elevated temperatures). Discuss how transformer design influences this loss?
+ - What aspects of the transformer design (size and mass) or operation (magnetising current, losses) are influenced by core gap width for this transformer?
+ - For a power transformer, the main components which influence how it impacts the power system are generally the winding resistance and the leakage reactance. Comment on how you think your design choices, in particular the way you have configured each winding, will influence these parameters?
