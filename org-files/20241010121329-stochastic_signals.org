@@ -13,6 +13,7 @@
    - [[id:e953576c-0535-4a62-ab7b-202dbd967e6f][Time Average]]
  - [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][Stationary Process]]
  - [[id:876bb7e2-3907-40db-9a50-d790402b6552][Independent Processes]]
+ - [[id:3b9651be-01b0-4132-b4b2-8c9c7d686473][Response of Linear Systems to Random Signals]]
 ** Definitions
  - [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]]
  - [[id:1b1da4d7-bc6e-420e-9533-c2371e090b64][Autoconvergence]]
@@ -20,7 +21,11 @@
  - [[id:c7a30f05-13eb-4f1a-a34a-c17279f68299][Cross Convergence]]
  - [[id:3370e425-fb6e-4bf6-b5f3-7a866ceaec0f][Time Autocorrelation]]
  - [[id:4dbf2cd9-1a0d-4898-905c-158d9d7b79b3][Ergodic Theorem]]
+ - [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]
 ** Notation
  - Denoted with a uppercase letter and time ($X(t)$)
  - Example [[id:8904baec-0390-4296-b7e6-9ef4ede346a5][PDF]]: $X(t)=a\cos(\omega_0t+\Theta)$
    - Here $\Theta$ (uppercase) is the random value that takes a sample $\theta$ (lowercase).
+** Noise
+ - [[id:84768f70-2b00-498c-a795-765c7916c48f][White Noise]]
+ - [[id:fee0fd6e-af58-4d41-9573-71cc2227e896][Band-Limited Noise]]

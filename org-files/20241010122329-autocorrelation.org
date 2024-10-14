@@ -15,3 +15,8 @@
    - \[R_{XX}(t,t+\tau)=E[X(t)X(t+\tau)]\]
 ** Note
  - \[R_{XX}(t,t)=E[X(t)^2]\]
+** Properties
+ - \[R_{XX}(-\tau)=R_{XX}(\tau)\]
+ - \[|R_{XX}(\tau)|\leq R_{XX}(0)\]
+   - The is a peak at $\tau=0$, which can repeat
+ - \[R_{XX}(0)=E[X^2(t)]\]

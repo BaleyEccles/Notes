@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       def80455-6762-45b0-a916-3d9daa457cb8
+:END:
+#+title: Power Spectral Density
+#+date: [2024-10-15 Tue 10:24]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Power Spectral Density
+ - Definition (Wiener–Khinchin Theorem)
+   - \[S_{XX}(\omega) = \int_{-\infty}^{\infty}R_{XX}(\tau)e^{j\omega\tau}d\tau \]
+   - \[S_{XX}=\mathcal{F}\{R_{XX}(\tau)\}\]
+   - The [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier Transform]] of the [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]]
+** Properties
+ - $S_{XX}(\omega)$ must be real
+   - $S_{XX}(\omega)\geq0$
+ - \[S_{XX}(-\omega)=S_{XX}(\omega)\]
+   - It is an even function
+ - \[\frac{1}{2\pi}\int_{-\infty}^{\infty}S_{XX}(\omega)d\omega=R_{XX}(0)=E[X^2(t)\]

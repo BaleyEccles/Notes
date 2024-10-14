@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       3b9651be-01b0-4132-b4b2-8c9c7d686473
+:END:
+#+title: Response of Linear Systems to Random Signals
+#+date: [2024-10-15 Tue 10:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Response of Linear Systems to Random Signals
+ - \[\begin{math} X(t) \rightarrow \framebox[1.1\width]{h(t)} \rightarrow Y(t) \end{math}\]
+ - [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]]:
+   - \[\mu_{X}(t)=h(t)*\mu_{X}(t)\]
+   - If $X(t)$ is [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][WSS]]
+     - \[\mu_{Y}(t)=\mu_{X}H(0)\]
+ - \[R_{XY}(\tau)=h(\tau)*R_{XY}(\tau)\]

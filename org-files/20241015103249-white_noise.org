@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       84768f70-2b00-498c-a795-765c7916c48f
+:END:
+#+title: White Noise
+#+date: [2024-10-15 Tue 10:32]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* White Noise
+ - $X(t)$ is a white noise signal if:
+   - \[S_{XX}(\omega)=\frac{\eta}{2}\]
+   - \[\Rightarrow R_{XX}(\tau)=\frac{\eta}{2}\delta(\tau)\]

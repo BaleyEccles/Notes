@@ -9,3 +9,7 @@
 * Cross Correlation
  - With $X(t)$ and $Y(t)$
  - \[R_{XY}(t_1,t_2)=E[X(t_1)Y(t_1)\]
+** Properties
+ - \[R_{XY}(-\tau)=R_{XX}(\tau)\]
+ - \[|R_{XY}(\tau)|\leq \sqrt{R_{XX}(0)R_{YY}(0)\]
+ - \[|R_{XY}(\tau)|\geq \frac{1}{2}\[R_{XX}(0)+R_{YY}(0)\]

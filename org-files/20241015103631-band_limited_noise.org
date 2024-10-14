@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       fee0fd6e-af58-4d41-9573-71cc2227e896
+:END:
+#+title: Band-Limited Noise
+#+date: [2024-10-15 Tue 10:36]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Band-Limited Noise
+  - $X(t)$ is a band-limited noise signal if:
+    - \[S_{XX}(\omega)=\begin{cases}
+         \frac{\eta}{2} &, |\omega|<\omega_s \\
+         0 &, else
+      \end{cases}\]
+    - \[\Rightarrow R_{XX}(\tau)=\frac{2\omega_s}{2\pi}\cdot \frac{\sin(\omega_s\tau)}{\omega_s\tau}\]
+      - _Note_
+        - We need to take the absolute value of this signal to ensure that it is greater than zero.
