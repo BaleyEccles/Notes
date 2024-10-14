@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       8f1a01fe-4924-4c2c-b306-ea31a02b168f
+:END:
+#+title: Induction Machines
+#+date: [2024-10-15 Tue 08:34]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :TODO:
+* Induction Machines
+** Construction
+ - Stator
+   - Same construction as a [[id:047e76cb-5cac-4ff7-ac3d-e03b424e6c7f][Synchronous Machines]].
+ - Rotor
+   - Dose not require external electrical contacts
+   - Two construction types
+     - Squirrel cage
+     - Wound
+ - Torque speed curve
+   - [[file:Screenshot 2024-10-15 at 08-58-09 files-633592704cbc3.mp4.png]]
+** Equations
+ - \[n_s=\frac{120f}{P}\]
+ - Stator
+   - \[e_1=-N_1 \frac{d\Phi_{ag}}{dt}=N_1\Phi_{max}\omega_1\sin(\omega_1t)\]
+   - \[E_1=4.44N_1\Phi_{max}f_{1}\]
+ - Rotor (stationary)
+   - \[e_2=-N_2 \frac{d\Phi_{ag}}{dt}=N_2\Phi_{max}\omega_2\sin(\omega_2t)\]
+   - \[E_2=4.44N_2\Phi_{max}f_{2}\]
+ - With a statinary rotor
+   - \[f_1=f-2=f\]
+   - \[\frac{E_1}{E_2}=\frac{4.44N_1\Phi_{max}f}{4.44N_2\Phi_{max}f}=\frac{N_1}{N_2}=a\]
+ - With a moving rotor
+   - \[f_2=sf\]
+   - \[E_{2s}=4.44N_2\Phi_{max}sf=sE_2\]
+*** Equivalent Circuit
+**** Stator circuit
+   - Same as [[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformers]]
+   - [[file:Screenshot 2024-10-15 at 09-10-37 files-633592704cbc3.mp4.png]]
+**** Rotor circuit
+   - [[file:Screenshot 2024-10-15 at 09-12-23 files-633592af98ed7.mp4.png]]
+   - \[I_2=\frac{sE_2}{R_2+js\omega L_2}\]
+   - This can be converted to same frequency as the stator by multiplying by the fraction by $1/s$
+     - \[I_2=\frac{E_2}{\frac{R_2}{s}+j\omega L_2}\]
+**** Combined circuit
+   - [[file:Screenshot 2024-10-15 at 09-15-56 files-633592af98ed7.mp4.png]]
+   - \[R_{mech}=R_2 \frac{1-s}{s} \rightarrow R_2+R_2 \frac{1-s}{s}=\frac{R_2}{s}\]
+   - We can refer everything to the stator/primary side
+     - [[file:Screenshot 2024-10-15 at 09-21-01 files-633592af98ed7.mp4.png]]
+     - \[R_{mech}=R_2'\frac{1-s}{s}\]
+
+*** Slip
+ - \[s=\frac{\omega_s-\omega_r}{\omega_s}\]
+   - $\omega_s$ is the stator speed
+   - $\omega_r$ is the rotor speed
+ - Slip speed
+   - \[=n_s-n_r=sn_s\]
+
+** Induction Motors
+** Induction Generators
+ - Unlike [[id:047e76cb-5cac-4ff7-ac3d-e03b424e6c7f][Synchronous Machines]], these require a 3-phase voltage source to operate a generator.

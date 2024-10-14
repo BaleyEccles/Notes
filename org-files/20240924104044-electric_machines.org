@@ -26,6 +26,7 @@
 *** AC Machines
  - [[id:047e76cb-5cac-4ff7-ac3d-e03b424e6c7f][Synchronous Machines]]
  - Asynchronous Machines
+*** [[id:8f1a01fe-4924-4c2c-b306-ea31a02b168f][Induction Machines]]
 
 ** Torque Speed Curves (T-S Curves)
  - [[file:Screenshot 2024-09-24 at 10-58-21 Social and Technical Outcomes - ENG231_LectureSlideSetB4_MachineIntro.pdf.png]]
