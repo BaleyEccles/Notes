@@ -5,9 +5,9 @@
 #+date: [2024-08-03 Sat 17:28]
 #+STARTUP: latexpreview
 * Topics
- - [[id:20669232-9d64-47e4-b0ee-db2c88ab9eaf][Signals]]
  - [[id:14718dfe-c826-48a7-bc6c-b6ef37d0badc][Generalised Functions]]
  - [[id:b01c8577-794b-41fc-b88c-143b1711d726][Analogue And Digital Filter Design]]
+ - [[id:0b4602d8-f569-4bb8-a8cf-1ba0fdec84d9][Stochastic Signals]]
 * Assesment
 ** Assessment Task 1: Semester test 1
 - During Week 5
