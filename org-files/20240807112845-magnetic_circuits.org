@@ -29,4 +29,5 @@
  - \[\mathcal{E}(t)=-N \frac{d\Phi(t)}{dt}\]
 
 ** Applications
-[[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformers]]
+ - [[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformers]]
+ - [[id:0d2a7422-d603-4652-8ad2-e5ed27dc2519][Electric Machines]]

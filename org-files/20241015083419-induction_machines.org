@@ -52,7 +52,7 @@
    - $\omega_s$ is the stator speed
    - $\omega_r$ is the rotor speed
  - Slip speed
-   - \[=n_s-n_r=sn_s\]
+   - \[=\omega_s-\omega_r=s\omega_s\]
 
 ** Induction Motors
 ** Induction Generators

@@ -15,3 +15,29 @@
 #+LATEX_HEADER: \usepackage{graphicx}
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 6
+** DC Test
+ - [Group] Report your machine DC test results, commenting on the relative resistances observed for the stator and rotor windings.
+ - [Individual] Comment on the significance or importance of knowing the AC resistance, especially what it means for the rotor winding resistance
+** No Load Test
+ - [Group] Accurately record your no-load test measurements in a table.
+ - [Individual] Comment on the observed motor speed. Is it different to what you expected and, if so, why?
+ - [Group] Calculate the rotational losses? Comment on what relationship you would expect to see between rotational losses and motor speed?
+ - [Group] Determine the combined magnetising inductance and winding leakage reactance (Xm + X1)
+ - [Individual] Now change the supply phase sequence and comment on what you observe. (but remember to change back to ‘normal’ sequence for remainder of lab)
+** Blocked Rotor Test
+ - [Group] Accurately record your blocked rotor test measurements in a table.
+ - [Group] Calculate the remaining motor parameters and draw the complete equivalent circuit.
+ - [Individual] Plot a phasor diagram showing current and supply voltage phasors for blocked rotor condition. What would happen (draw new phasors on the diagram) if the voltage was increased to the rated supply voltage but the rotor remained blocked? What would happen next (re-draw phasor diagram again) if the rotor was no longer blocked and the motor was allowed to accelerate up to speed (hint: consider what happens to slip and its impact upon the equivalent circuit)
+** Induction Machine Performance Testing
+*** Load test – without external rotor resistance
+ - [Individual] {DC machines question} What significant observations can you make when the field current is applied (but with the dc generator load still disconnected)? Explain why?
+ - [Individual] What significant change do you now observe and why?
+ - [Group] From your measured data, plot torque vs speed for the induction motor. Comment on the relationship you observe?
+ - [Group] Plot motor efficiency vs speed and comment on whether you can relate this observed data to the “ideal efficiency” vs slip relationship?
+ - [Group] {Warning: this will require quite a bit of work to answer properly} Using the equivalent circuit you determined for your machine, plot calculated or modelled curves (Torque-speed, and Efficiency-speed (or vs. slip if you prefer)) and compare with the observed or measured data. Discuss any significant differences?
+*** Load test – with external rotor resistance
+ - [Individual] Take note of what you observe and carefully explain why?
+ - [Individual] Explain what you see happening to rotor current / voltage frequency as you load unload the motor? Choose one operating point and verify that the measured rotor frequency is as expected by comparing with measured motor speed?
+ - [Group] From your measured data, plot torque vs speed and efficiency vs speed for the induction motor with external rotor resistance. Comment on the relationship you observe and compare with the motor without external rotor resistance?
+ - [Individual] Comment on the performance of the induction motor generally and, in particular, on the different operating characteristics produced by the external rotor resistance.
+ - [Individual] Reflect on how this lab session has contributed to your learning experience and your understanding of induction motors.
