@@ -13,11 +13,12 @@ Week 3
 Week 6
 ** Assessment Task 3: Interview skills development
 Week 8
-[[id:3df46222-e9b2-470c-a889-7e960121f230][ENG203 Work Placement - Assessment 3]]
+ - [[id:3df46222-e9b2-470c-a889-7e960121f230][ENG203 Work Placement - Assessment 3]]
 ** Assessment Task 4: Professional network development
 Week 10
 ** Assessment Task 5: Industry assessment report
 Week 11
+ - [[id:cf59eafa-914e-416c-94b9-0fa6559c974d][ENG203 Work Placement - Assessment 5]]
 ** Assessment Task 6: Acknowledgement quiz
 Week 13
 ** Notes

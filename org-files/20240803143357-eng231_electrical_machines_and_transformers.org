@@ -32,6 +32,7 @@
 - 20% of mark
 - [[id:2efbfff1-5be0-4ca3-9a5c-4a2e0373d72d][ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4]]
 - [[id:faa9a5df-17b2-46ff-9b4e-2989a57792a9][ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 5]]
+- [[id:385f4e94-30c2-4d14-913e-2ecdbf5a5366][ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 6]]
 ** Assessment Task 5: Final Exam
 - During Exam Period
 - 40% of mark
