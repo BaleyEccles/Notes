@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       a56cee53-b518-4c06-8b97-beeaafc7ff2a
+:END:
+#+title: Uniform Distribution
+#+date: [2024-10-15 Tue 17:38]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Uniform Distribution
+ - \[f(x)=\begin{cases}
+   \frac{1}{b-a}, & if\ a\leq x \leq b\\
+   0, & else
+   \end{cases}\]
+   - \[\mu=\frac{b-a}{2}\]
+   - \[\sigma^2=\frac{(b-a)^{2}}{12}\]

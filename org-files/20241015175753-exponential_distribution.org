@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       7dc941fe-89a3-49ff-8639-556e1fa0d215
+:END:
+#+title: Exponential Distribution
+#+date: [2024-10-15 Tue 17:57]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Exponential Distribution
+ - \[f(x)=\lambda e^{-\lambda x}\]
+ - \[F(x)=1-e^{-\lambda x}\]
+ - \[E[X]=\frac{1}{\lambda}\]
+ - \[Var(X)=\frac{1}{\lambda^2}\]
+** [[id:731e757c-e3ec-4346-97fc-ad4bd86292dc][Poisson]] Link :UNSURE:
+ - the distance between each Poisson even is exponentially distribution.

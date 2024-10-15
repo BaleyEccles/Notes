@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       09b7922a-caa6-4eb4-b3d7-b56035ad4604
+:END:
+#+title: Normal Distribution
+#+date: [2024-10-15 Tue 17:41]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Normal Distribution
+ - \[f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]
+ - With $\mu=0$ and $\sigma^2=1$ we can transform to the standard normal distribution
+   - \[f(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{(x)^2}{2}}\]
+** Transforms :TODO:
+ - Other distributions can be transformed into normal distribution using some $Z$ transform

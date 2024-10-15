@@ -7,12 +7,23 @@
 #+STARTUP: latexpreview
 
 * Probability Distributions
+** Continuous
+- \[f(x)\geq 0\]
+- \[\int_{-\infty}^{\infty}\f(v)dv=1\]
+- \[f(x)=F'(x)\]
+- [[id:a56cee53-b518-4c06-8b97-beeaafc7ff2a][Uniform Distribution]]
+- [[id:09b7922a-caa6-4eb4-b3d7-b56035ad4604][Normal Distribution]]
+- [[id:7dc941fe-89a3-49ff-8639-556e1fa0d215][Exponential Distribution]]
+
+- [[id:8662b281-ddd2-482c-b278-1a466e8a85a5][Central Limit Theorem]]
+** Discrete
+
  - [[id:4a014306-8822-4a35-ab74-65b1a0d134d6][Binomial Distribution]]
  - [[id:731e757c-e3ec-4346-97fc-ad4bd86292dc][Poisson Distribution]]
  - [[id:69e894df-a8d1-439f-9eb3-2be636d0921a][Geometric Distribution]]
  - [[id:95b8e50b-5360-43e7-9992-80ab6158256f][Negative Binomial Distribution]]
  - [[id:c28e4b23-57a2-4ac0-8f3f-8273dd233c53][Hypergeometric Distribution]]
-** Discrete
+
 
  - [[id:8904baec-0390-4296-b7e6-9ef4ede346a5][Cumulative Distribution Functions (cdf)]]
 
