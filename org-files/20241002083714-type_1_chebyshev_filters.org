@@ -18,7 +18,7 @@
  - They occur such that
    - \[1+\epsilon^2C_{N}^2\left(\frac{s}{j\omega_1}\right)=0\]
  - And take the form
-   - \[s=j\omega_1\left[\cos(\alpha_k)\cosh(\beta_k)-j\sin(\alpha_k\sinh(\beta_k)\right]\]
+   - \[s=j\omega_1\left[\cos(\alpha_k)\cosh(\beta_k)-j\sin(\alpha_k)\sinh(\beta_k)\right]\]
      - \[\alpha_k=\frac{(2k+1)\pi}{2N}\]
      - \[\beta_k=\frac{\sinh^{-1}(\frac{1}{\epsilon})}{N}\]
 ** Design

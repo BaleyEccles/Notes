@@ -179,18 +179,6 @@ title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 grid on;
-
-
-%t = 0:length(chirp_and_noise):2;
-%fIgure;
-%plot(t, chirp_and_noise);
-%title('Magnitude Spectrum');
-%xlabel('Time (Hz)');
-%ylabel('Magnitude');
-%grid on;
-
-
-
 #+END_SRC
 
 #+RESULTS:
@@ -242,6 +230,21 @@ audiowrite('chirp_and_noise_filtered.wav', ifft(ifftshift(chirp_and_noise_filter
 #+END_SRC
 
 #+RESULTS:
+
+However, this filter is not causal. To make it cause we need to shift the time domain signal: :TODO:
+#+BEGIN_SRC octave :exports code :results output :session Filter
+close all
+freq = (-N/2:N/2-1)*(Fs/N);
+Df = 3;
+filter = ones(size(freq));
+filter((freq >= -1000 - Df & freq <= -1000 + Df) | (freq >= 1000 - Df & freq <= 1000 + Df)) = 0;
+filterTimeDomain = ifft(fftshift(filter));
+plot(1:length(filterTimeDomain), filterTimeDomain)
+
+#+END_SRC
+
+#+RESULTS:
+
 ** Aliasing and Anti-Aliasing Filters
 
 
@@ -249,6 +252,8 @@ audiowrite('chirp_and_noise_filtered.wav', ifft(ifftshift(chirp_and_noise_filter
 clc
 clear
 close all
+pkg load control
+pkg load signal
 [wav, Fs] = audioread('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/audio_signal_2.wav');
 
 t = (0:length(wav)-1) / Fs;
@@ -292,34 +297,55 @@ for i = 1:num_new_freqs
     audiowrite(['Signal Sampled at ', num2str(Fs_new(i)/1*10^3), ' kHz.wav'], wav_new, Fs_new(i));
 end
 
-title('Interpolated Signals at Different Sampling Frequencies');
-
-function [poles, zeros] butterWorth(wc, N) % gives the poles and zeros for a butterworth filter
-  zeros = wc^N;
+function [Bpoles] = butterWorth(wc, N) % gives the poles and zeros for a Butterworth filter
+  Bpoles = zeros(1, N);
   if mod(N, 2) == 0 % Even
-    for k = 0:2*N-1
-      poles = wc*e^(j*pi*(2*k+1)/(2N));
+    for k = 0:N-1
+      Bpoles(k+1) = wc * exp(j * pi * (2*k + 1) / (2*N));
     end
   else % Odd
-    for k = 0:2*N-1
-      poles = wc*e^(j*pi*k/(N));
+    for k = 0:N-1
+      Bpoles(k+1) = wc * exp(j * pi * k / N);
     end
   end
 endfunction
 
-
-function [poles, zeros] chebyshev(wc, N) % gives the poles and zeros for a chebyshev filter
-  zeros = wc^N;
-  if mod(N, 2) == 0 % Even
-    for k = 0:2*N-1
-      poles = wc*e^(j*pi*(2*k+1)/(2N));
-    end
-  else % Odd
-    for k = 0:2*N-1
-      poles = wc*e^(j*pi*k/(N));
-    end
+function [Cpoles] = chebyshev(w1, e, N) % gives the poles for a Chebyshev filter
+  Cpoles = zeros(1, N*2);
+  for k = 1:N*2
+    ak = ((2*k-1)*pi)/(2*N);
+    bk = asinh(1/e);
+    s = 1j * w1 * (cos(ak) * cosh(bk) - 1j * sin(ak) * sinh(bk));
+    Cpoles(k) = s;
   end
 endfunction
+
+wc = 1;
+N = 10;
+[Bpole] = butterWorth(wc, N);
+
+ButterTF = zp2tf([], Bpole, [1]);
+
+w1 = 1;
+e = 10;
+N = 10;
+[Cpole] = chebyshev(w1, e, N);
+
+%ChebyTF = tf([1], real(poly(Cpole)));
+
+wav_butter_filtered = ButterTF.*(fftshift(fft(wav)));
+audiowrite(['Signal filtered with butter.wav'], ifft(ifftshift(wav_butter_filtered)), 44.1*10^3);
+t_new = (0:1/Fs_new(4):(length(wav)-1)/Fs_original);
+wav_2k = interp1(t_original, ifftshift(ifft(wav)), t_new, 'linear');
+audiowrite(['Signal Sampled at ', num2str(Fs_new(4)/1*10^3), ' kHz butter.wav'], ifft(ifftshift(ButterTF.*(fftshift(fft(wav_2k))))), Fs_new(4)); %% Somthings wrong here
+%
+%wav_cheby_filtered = ChebyTF.*wav;
+%audiowrite(['Signal filtered with cheby.wav'], wav_cheby_filtered, 44.1*10^3);
+%t_new = (0:1/Fs_new(4):(length(wav)-1)/Fs_original);
+%wav_2k = interp1(t_original, wav_cheby_filtered, t_new, 'linear');
+%audiowrite(['Signal Sampled at ', num2str(Fs_new(4)/1*10^3), ' kHz cheby.wav'], wav_2k, Fs_new(4));
+
+
 
 #+END_SRC
 

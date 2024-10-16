@@ -6,6 +6,7 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 #+FILETAGS: :TODO:
+
 * Induction Machines
 ** Construction
  - Stator
@@ -45,7 +46,16 @@
    - \[R_{mech}=R_2 \frac{1-s}{s} \rightarrow R_2+R_2 \frac{1-s}{s}=\frac{R_2}{s}\]
    - We can refer everything to the stator/primary side
      - [[file:Screenshot 2024-10-15 at 09-21-01 files-633592af98ed7.mp4.png]]
-     - \[R_{mech}=R_2'\frac{1-s}{s}\]
+     - $R_1$: The primary/stator winding resistance
+     - $X_1$: The primary/stator winding leakage reactance
+     - $R_2'$: The secondary/rotor winding resistance
+       - referred to the primary side
+     - $X_2'$: The secondary/rotor winding leakage reactance
+       - referred to the primary side
+     - $X_m$: The magnetising resistance
+     - $R_{mech}=R_2'\frac{1-s}{s}$
+       - The mechanical load equivalent resistance
+       - This is not a real resistance, but rather a equivalent resistance of the mechanical load
 
 *** Slip
  - \[s=\frac{\omega_s-\omega_r}{\omega_s}\]
@@ -53,6 +63,7 @@
    - $\omega_r$ is the rotor speed
  - Slip speed
    - \[=\omega_s-\omega_r=s\omega_s\]
+ - \[f_{slip}=sf\]
 
 ** Induction Motors
 ** Induction Generators
