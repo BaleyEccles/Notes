@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       478cc0be-9fdb-491c-b4f3-f26c12f61de7
+:END:
+#+title: KME272 - Assesment 4.2
+#+date: [2024-10-16 Wed 13:55]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:TODO:
+#+STARTUP: latexpreview
+
+* KME272 - Assesment 4.2

@@ -57,7 +57,7 @@ I = 3.3;
 
 % Reluctance
 Rgap = g/(mu0*A);
-Rside = (h-2*l-g)/(mu0*mur*A);
+Rside = (h-2*d-g)/(mu0*mur*A);
 Rbottom = l/(mu0*mur*A);
 Rtop = l/(mu0*mur*A);
 R = 2*Rside + Rbottom + Rtop + 2*Rgap;
@@ -65,7 +65,7 @@ R = 2*Rside + Rbottom + Rtop + 2*Rgap;
 
 
 Phi=(1/R)*Np*I;
-V1 = 4.44*pi*Phi*f;
+V1 = 2*pi*Np*Phi*f/sqrt(2);
 V2 = a*V1;
 
 fprintf('Primary Voltage (V1): %.2f V (RMS)\n', V1);
@@ -73,8 +73,8 @@ fprintf('Secondary Voltage (V2): %.2f V (RMS)\n', V2);
 #+END_SRC
 
 #+RESULTS:
-: Primary Voltage (V1): 60.37 V (RMS)
-: Secondary Voltage (V2): 13.98 V (RMS)
+: Primary Voltage (V1): 14849.46 V (RMS)
+: Secondary Voltage (V2): 3439.40 V (RMS)
 
 ** Part 2: Specification of transformer design to suit application
 With the last digit of my student ID being 7:
@@ -147,7 +147,7 @@ Phi=B*A;
 R = NP*Ip./Phi;
 R = NS*Is./Phi;
 
-l=(mu*(R-2*((h-d)./mu)-g./mu0)./2)+d;
+l=(mu*(R-2*((h-d)./mu)-g./mu0)./2)+d; % WRONG WE CHANGE THE RELUCANCE EQUATINON FROM ABOVE :TODO:
 
 Volume = 2.*(((mu.*(R-2.*((h-d)./mu)-g./mu0)./2)+d).*d.*d)+2.*((h-d-d).*d.*d);
 Volume(Volume<0) = [];
