@@ -281,6 +281,8 @@ t_original = (0:length(wav)-1) / Fs_original;
 Fs_new = [88.2*10^3, 11.025*10^3, 5.5*10^3, 2.8*10^3];
 num_new_freqs = length(Fs_new);
 
+wav_all = cell(num_new_freqs, 1);
+
 figure;
 for i = 1:num_new_freqs
     t_new = (0:1/Fs_new(i):(length(wav)-1)/Fs_original);
@@ -295,55 +297,49 @@ for i = 1:num_new_freqs
     ylabel('Amplitude');
     grid on;
     audiowrite(['Signal Sampled at ', num2str(Fs_new(i)/1*10^3), ' kHz.wav'], wav_new, Fs_new(i));
+
+    wav_all{i} = wav_new;
 end
 
-function [Bpoles] = butterWorth(wc, N) % gives the poles and zeros for a Butterworth filter
-  Bpoles = zeros(1, N);
-  if mod(N, 2) == 0 % Even
-    for k = 0:N-1
-      Bpoles(k+1) = wc * exp(j * pi * (2*k + 1) / (2*N));
-    end
-  else % Odd
-    for k = 0:N-1
-      Bpoles(k+1) = wc * exp(j * pi * k / N);
-    end
-  end
+
+function [Bpoles] = butterWorth(wc, N) % gives the poles for a Butterworth filter
+  Bpoles = wc * exp (j * pi * (2 * [1:N] + N - 1) / (2 * N));
+  if (mod (N, 2) == 1)
+    Bpoles((N + 1) / 2) = -wc;
+  endif
 endfunction
 
 function [Cpoles] = chebyshev(w1, e, N) % gives the poles for a Chebyshev filter
-  Cpoles = zeros(1, N*2);
-  for k = 1:N*2
+  Cpoles = zeros(1, N);
+  for k = 1:N
     ak = ((2*k-1)*pi)/(2*N);
     bk = asinh(1/e);
     s = 1j * w1 * (cos(ak) * cosh(bk) - 1j * sin(ak) * sinh(bk));
     Cpoles(k) = s;
   end
+  Cpoles = -1*Cpoles; % Return the left side poles
 endfunction
 
-wc = 1;
-N = 10;
+f = 10000;
+wc = 2*pi*f;
+N = 5;
 [Bpole] = butterWorth(wc, N);
+ButterTF = tf(poly([]), real(poly(Bpole)));
 
-ButterTF = zp2tf([], Bpole, [1]);
+figure;
+flogButter = logspace(-2, 4, 100);
+freqs(poly([]), real(poly(Bpole)), 2*pi*flogButter);
+xlabel('Frequency (Hz)');
 
-w1 = 1;
+w1 = 2*pi*f;
 e = 10;
-N = 10;
 [Cpole] = chebyshev(w1, e, N);
+ChebyTF = tf(poly([]), real(poly(Cpole)));
 
-%ChebyTF = tf([1], real(poly(Cpole)));
-
-wav_butter_filtered = ButterTF.*(fftshift(fft(wav)));
-audiowrite(['Signal filtered with butter.wav'], ifft(ifftshift(wav_butter_filtered)), 44.1*10^3);
-t_new = (0:1/Fs_new(4):(length(wav)-1)/Fs_original);
-wav_2k = interp1(t_original, ifftshift(ifft(wav)), t_new, 'linear');
-audiowrite(['Signal Sampled at ', num2str(Fs_new(4)/1*10^3), ' kHz butter.wav'], ifft(ifftshift(ButterTF.*(fftshift(fft(wav_2k))))), Fs_new(4)); %% Somthings wrong here
-%
-%wav_cheby_filtered = ChebyTF.*wav;
-%audiowrite(['Signal filtered with cheby.wav'], wav_cheby_filtered, 44.1*10^3);
-%t_new = (0:1/Fs_new(4):(length(wav)-1)/Fs_original);
-%wav_2k = interp1(t_original, wav_cheby_filtered, t_new, 'linear');
-%audiowrite(['Signal Sampled at ', num2str(Fs_new(4)/1*10^3), ' kHz cheby.wav'], wav_2k, Fs_new(4));
+figure;
+flogCheby = logspace(-2, 4, 100);
+freqs(poly([]), real(poly(Cpole)), 2*pi*flogCheby);
+xlabel('Frequency (Hz)');
 
 
 

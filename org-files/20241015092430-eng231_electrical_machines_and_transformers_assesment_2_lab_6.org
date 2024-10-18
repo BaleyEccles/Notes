@@ -15,18 +15,41 @@
 #+LATEX_HEADER: \usepackage{graphicx}
 
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 6
+** Machine Inspection
+ - [Group] Report your machine nameplate ratings and DC machine parameters
 ** DC Test
  - [Group] Report your machine DC test results, commenting on the relative resistances observed for the stator and rotor windings.
  - [Individual] Comment on the significance or importance of knowing the AC resistance, especially what it means for the rotor winding resistance
+Having higher AC resistance means that the machine has to spend more energy to overcome the resistance and hence it will produce more heat. Having a higher resistance in the rotor windings will reduce the torque that is produced, due to a larger voltage drop across the resistance.
 ** No Load Test
  - [Group] Accurately record your no-load test measurements in a table.
  - [Individual] Comment on the observed motor speed. Is it different to what you expected and, if so, why?
+The measured speed is slightly lower than the calculated synchronous speed. This is due to slip, which is caused by the loading conditions. This is no load test, so theoretically there should be no slip, however due to imperfections in the motor, such as the resistance from the DC test, there is a marginal amount of slip.
  - [Group] Calculate the rotational losses? Comment on what relationship you would expect to see between rotational losses and motor speed?
+\[\begin{align*}
+\textrm{Losses} &= P_{\textrm{input}}-P_{\textrm{output}} \\
+&= V_{rms}I_{rms}PF-P_{\textrm{output}} \\
+&= \frac{1}{\sqrt{3}}415\cdot 0.334\cdot 0.235 - \frac{56}{3} \\
+&= 0.1396 W \textrm{ per line} \\
+&= 0.4187 W \textrm{ total}
+\end{align*}\]
+We would predict that as the speed $\omega_r$ increases the losses would also increase. This is predicted because as the speed increases the current increases which will increase the winding leakage reactance.
  - [Group] Determine the combined magnetising inductance and winding leakage reactance (Xm + X1)
+:TODO: UNSURE ABOUT THE FOLLOWING CALCULATIONS
+Given that the resistance is negligible, we can find the combined magnetising inductance and winding leakage reactance:
+\[\begin{align*}
+Q &= \frac{V^2}{X_m+X_1} \\
+\Rightarrow X_m+X_1&=\frac{V^2}{Q} \\
+X_m+X_1 &= \frac{(415)^2}{235} \\
+X_m+X_1 &=  732.87 \Omega
+\end{align*}\]
+
  - [Individual] Now change the supply phase sequence and comment on what you observe. (but remember to change back to ‘normal’ sequence for remainder of lab)
+:TODO:
 ** Blocked Rotor Test
  - [Group] Accurately record your blocked rotor test measurements in a table.
  - [Group] Calculate the remaining motor parameters and draw the complete equivalent circuit.
+
  - [Individual] Plot a phasor diagram showing current and supply voltage phasors for blocked rotor condition. What would happen (draw new phasors on the diagram) if the voltage was increased to the rated supply voltage but the rotor remained blocked? What would happen next (re-draw phasor diagram again) if the rotor was no longer blocked and the motor was allowed to accelerate up to speed (hint: consider what happens to slip and its impact upon the equivalent circuit)
 ** Induction Machine Performance Testing
 *** Load test – without external rotor resistance
