@@ -248,6 +248,8 @@ plot(1:length(filterTimeDomain), filterTimeDomain)
 ** Aliasing and Anti-Aliasing Filters
 
 
+
+
 #+BEGIN_SRC octave :exports code :results output :session Aliasing
 clc
 clear
@@ -346,3 +348,213 @@ xlabel('Frequency (Hz)');
 #+END_SRC
 
 #+RESULTS:
+
+** Impact of Noise on Analogue and Digital Systems
+*** Autocorrelation and Wide-Sense Stationary Signals
+
+#+BEGIN_SRC octave :exports code :results output :session Autocorrelation
+clc
+clear
+close all
+pkg load signal
+
+num_samples = 1000;
+signal_length = 200;
+w1 = 2 * pi * 0.01;
+w2 = 2 * pi * 0.02;
+
+
+for i = 1:num_samples
+  phi1 = rand() * 2 * pi;
+  phi2 = rand() * 2 * pi;
+  A = rand() * 4 - 2;
+
+  t = 0:signal_length-1;
+  X1(i, :) = cos(w1 * t + phi1) - sin(w2 * t + phi2);
+  X2(i, :) = A * (cos(w1 * t) + sin(w2 * t));
+end
+
+ensemble_mean_X1 = mean(X1, 1);
+ensemble_mean_X2 = mean(X2, 1);
+
+time_mean_X1 = mean(X1, 2);
+time_mean_X2 = mean(X2, 2);
+
+[auto_corr_X1, lags_X1] = xcorr(X1(:, 1)); % THE AUTO CORR SEEMS WRONG :TODO:
+[auto_corr_X2, lags_X2] = xcorr(X2(:, 1));
+
+time = 0:(signal_length-1);
+figure;
+subplot(2, 1, 1);
+plot(time, ensemble_mean_X1);
+title('Ensemble Mean of X_1(t)');
+xlabel('Time');
+ylabel('Ensemble Mean of X_1(t)');
+
+subplot(2, 1, 2);
+plot(time, ensemble_mean_X2);
+title('Ensemble Mean of X_2(t)');
+xlabel('Time');
+ylabel('Ensemble Mean of X_2(t)');
+
+time = 0:(num_samples-1);
+figure;
+subplot(2, 1, 1);
+plot(time, time_mean_X1);
+title('Time Mean of X_1(t)');
+xlabel('Time');
+ylabel('Time Mean of X_1(t)');
+
+subplot(2, 1, 2);
+plot(time, time_mean_X2);
+title('Time Mean of X_2(t)');
+xlabel('Time');
+ylabel('Time Mean of X_2(t)');
+
+figure;
+subplot(2, 1, 1);
+plot(lags_X1, auto_corr_X1);
+title('Autocorrelation of X_1(t)');
+xlabel('Lag');
+ylabel('Autocorrelation of X_1(t)');
+
+subplot(2, 1, 2);
+plot(lags_X2, auto_corr_X2);
+title('Autocorrelation of X_2(t)');
+xlabel('Lag');
+ylabel('Autocorrelation of X_2(t)');
+
+#+END_SRC
+
+#+RESULTS:
+
+**** Ensemble Mean
+The ensemble mean of $X_1(t)$ can be calculated as follows:
+\[\begin{align*}
+E[X_1(t)] &= E[\cos(\omega_1t+\Phi_1) - \sin(\omega_2t+\Phi_2)] \\
+          &= \int_0^{2\pi}\cos(\omega_1t+\Phi_1)\frac{1}{2\pi}d\phi_1- \int_0^{2\pi}\sin(\omega_2t+\Phi_2)\frac{1}{2\pi}d\phi_2 \\
+          &= 0
+\end{align*}\]
+The ensemble mean of $X_2(t)$ can be calculated as follows:
+\[\begin{align*}
+E[X_2(t)] &= E[A]\cdot E[\cos(\omega_1t)]+E[A]\cdot E[\sin(\omega_2t)] \\
+\textrm{where: } E[A]  &= \int_{-2}^{2}a\frac{1}{4}da = 0 \\
+\Rightarrow E[X_2(t)] &= 0\cdot E[\cos(\omega_1t)]+0\cdot E[\sin(\omega_2t)] = 0
+\end{align*}\]
+**** Time Mean
+The time mean of $X_1(t)$ can be calculated as follows:
+\[\begin{align*}
+\overline{X_1(t)} &= \lim_{T\rightarrow\infty}\frac{1}{T}\int_{\frac{T}{2}}^{\frac{T}{2}}\cos(\omega_1t+\Phi_1) - \sin(\omega_2t+\Phi_2)dt \\
+         &= 0
+\end{align*}\]
+The time mean of $X_2(t)$ can be calculated as follows:
+\[\begin{align*}
+\overline{X_2(t)} &= \lim_{T\rightarrow\infty}\frac{1}{T}\int_{\frac{T}{2}}^{\frac{T}{2}}A(\cos(\omega_1t)+\sin(\omega_2t)) dt \\
+         &= 0
+\end{align*}\]
+Both of which are not functions of time, satisfying the first prong of being wide-sense stationary.
+**** Autocorrelation
+The autocorrelation of $X_1(t)$ can be calculated as follows:
+\[\begin{align*}
+R_{X_1}(t,t+\tau) &= E[X_1(t)X_1(t+\tau)] \\
+&= E[\cos(\omega_1​t+\Phi_1​)-\sin(\omega_2​t+\Phi_2​))(\cos(\omega_1​(t+\tau)+\Phi_1​)-\sin(\omega_2​(t+\tau)+\Phi_2​)] \\
+&\textrm{After some arithmatic and trigonometric identies:} \\
+R_{X_1}(t,t+\tau) &= \frac{1}{2}\cos(\omega_1\tau)+\frac{1}{2}\cos(\omega_2\tau)
+\end{align*}\]
+The autocorrelation of $X_1(t)$ can be calculated as follows:
+\[\begin{align*}
+R_{X_2}(t,t+\tau) &= E[X_2(t)X_2(t+\tau)] \\
+&= E[A^2(\cos(\omega_1t)+\sin(\omega_2t))(\omega_1(t+\tau))+\sin(\omega_2(t+\tau))] \\
+&\textrm{Which becomes:} \\
+R_{X_2}(t,t+\tau) &= \frac{4}{3}(\cos(\omega_1\tau)+\sin(\omega_2\tau))
+\end{align*}\]
+Both of which are only functions of $\tau$, satisfying the second prong of wide-sense stationary. So, both of the functions are wide-sense stationary.
+**** Different Stochastic Processes
+#+BEGIN_SRC octave :exports code :results output :session Diff
+clc
+clear
+close all
+pkg load signal
+
+num_samples = 1000;
+signal_length = 200;
+w1 = 2 * pi * 0.01;
+w2 = 2 * pi * 0.02;
+
+
+for i = 1:num_samples
+  phi1 = rand() * 2 * pi;
+  phi2 = rand() * 2 * pi;
+  A = rand() * 4 - 2;
+
+  t = 0:signal_length-1;
+  X1(i, :) = cos(w1 * t + phi1) - sin(w2 * t + phi2);
+  X2(i, :) = A * (cos(w1 * t) + sin(w2 * t));
+end
+
+ensemble_mean_X1 = mean(X1, 1);
+ensemble_mean_X2 = mean(X2, 1);
+
+time_mean_X1 = mean(X1, 2);
+time_mean_X2 = mean(X2, 2);
+
+[auto_corr_X1, lags_X1] = xcorr(X1(:, 1)); % THE AUTO CORR SEEMS WRONG :TODO:
+[auto_corr_X2, lags_X2] = xcorr(X2(:, 1));
+
+time = 0:(signal_length-1);
+figure;
+subplot(2, 1, 1);
+plot(time, ensemble_mean_X1);
+title('Ensemble Mean of X_1(t)');
+xlabel('Time');
+ylabel('Ensemble Mean of X_1(t)');
+
+subplot(2, 1, 2);
+plot(time, ensemble_mean_X2);
+title('Ensemble Mean of X_2(t)');
+xlabel('Time');
+ylabel('Ensemble Mean of X_2(t)');
+
+time = 0:(num_samples-1);
+figure;
+subplot(2, 1, 1);
+plot(time, time_mean_X1);
+title('Time Mean of X_1(t)');
+xlabel('Time');
+ylabel('Time Mean of X_1(t)');
+
+subplot(2, 1, 2);
+plot(time, time_mean_X2);
+title('Time Mean of X_2(t)');
+xlabel('Time');
+ylabel('Time Mean of X_2(t)');
+
+figure;
+subplot(2, 1, 1);
+plot(lags_X1, auto_corr_X1);
+title('Autocorrelation of X_1(t)');
+xlabel('Lag');
+ylabel('Autocorrelation of X_1(t)');
+
+subplot(2, 1, 2);
+plot(lags_X2, auto_corr_X2);
+title('Autocorrelation of X_2(t)');
+xlabel('Lag');
+ylabel('Autocorrelation of X_2(t)');
+
+
+#+END_SRC
+
+#+RESULTS:
+
+*** Power spectral density :TODO:
+
+The transfer function of the LCL filter is given by:
+
+#+BEGIN_SRC octave :exports code :results output :session PSD
+clc
+clear
+close all
+
+H = tf(poly([]), [L])
+#+END_SRC
