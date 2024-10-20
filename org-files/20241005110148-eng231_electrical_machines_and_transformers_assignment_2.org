@@ -67,8 +67,7 @@ fprintf('Secondary Voltage (V2): %.2f V (RMS)\n', V2);
 With the last digit of my student ID being 7:
 | Student ID | Rated apparent  | Primary side rated  | Secondary side rated | 3-phase         |
 | last digit | power (3-phase) | voltage (line-line) | voltage (line-line)  | connection type |
-| 7          | 460 kVA         | 22 kV               | 400 V                | Δ-Y             |
-
+| 7          | 460 kVA         | 22 kV               | 400 V                | $\Delta$-Y     |
 
 
 
@@ -85,13 +84,19 @@ VsLineToLinePeak = sqrt(2)*VsLineToLineRMS;
 
 a = VsLineToLineRMS/(sqrt(3)*VpLineToLineRMS)
 
-Np = 1000;
-Ns = Np*a;
+NpLayers = 1;
+Np = 1000/NpLayers;
+NsLayers = 2;
+Ns = Np*a/NsLayers;
 
 % Currnet
 S = (460*10^3)/3;
 IpLineRMS = S/(sqrt(3)*VpLineToLineRMS)
+IpLinePerLayerRMS = IpLineRMS/NpLayers;
 IsRMS = IpLineRMS/(a)
+IsLinePerLayerRMS = IsRMS/NsLayers;
+
+
 
 % Flux
 f = 50;
@@ -109,40 +114,31 @@ mu = mu0*mur;
 
 g = 10^-3;
 % Dimensions
-%Rgap = g/(mu0*(d^2));
-%RTopGap = (d/2)/(mu*(d^2));
-%RTop = (l-d)/(mu*(d^2));
-%Rheight = (h-d-g-d/2)/(mu*(d^2));
-%RBottom = (l-d)/(mu*(d^2));
-%R = RBottom + 2*Rheight + RTop + 2*RTopGap + 2*Rgap;
-% This gives one equation with three unknowns
-% ploting this:
-
-%R = (l-d)/(mu*(d^2)) + 2*(h-d-g-d/2)/(mu*(d^2)) + (l-d)/(mu*(d^2)) + 2*(d/2)/(mu*(d^2)) + 2*g/(mu0*(d^2));
-
-[h, d] = meshgrid(0:0.5:10, 0:0.5:10);
-
-l = d.*mu.*(2.*g ./ (d.*mu0) + 1 ./ mu + 2.*h ./ (d.*mu) - R.*d - 3 ./ mu - 2.*g ./ (d.*mu) - 2 ./ mu) ./ -2;
-figure
-surf(h, d, l);
-xlabel('h');
-ylabel('d');
-zlabel('l');
-grid on;
-
-figure
-contour(h, d, l);
-xlabel('h');
-ylabel('d');
-zlabel('l');
-grid on;
-
-d = 2000
-h = 4
+d = 0.5
+h = 0.2
 l = d.*mu.*(2.*g ./ (d.*mu0) + 1 ./ mu + 2.*h ./ (d.*mu) - R.*d - 3 ./ mu - 2.*g ./ (d.*mu) - 2 ./ mu) ./ -2
-Np
-Ns
 
+% Choosing a Wire Diameter
+wireDiameters = [2.03, 2.34, 2.64, 2.95, 3.25, 3.66, 4.06, 4.47, 4.88, 5.39, 5.89, 6.40, 7.01, 7.62, 8.23, 8.84, 9.5, 10.2, 11.0, 11.8, 12.7, 15.0, 17.0, 20.0, 22.0, 24.0, 28.0, 31.0, 34.0, 37.0, 39.0, 41.0] * 10^-3;
+maxCurrentRMS = [8.3, 10.5, 13.5, 16.6, 21.2, 26.5, 33.3, 44.2, 52.3, 63.8, 76.4, 90.1, 108, 128, 149, 172, 196, 227, 265, 306, 355, 495, 636, 880, 1064, 1267, 1724, 2113, 2542, 3011, 3345, 3697];
+
+IpMax = 0.05*IpLinePerLayerRMS;
+IsMax = 0.05*IsLinePerLayerRMS;
+
+indexPrimary = find(maxCurrentRMS >= IpMax, 1);
+wireDiameterP = wireDiameters(indexPrimary);
+indexSecondary = find(maxCurrentRMS >= IsMax, 1);
+wireDiameterS = wireDiameters(indexSecondary);
+
+% Verify that the transformer is conformant with the required specifications
+if (Phi/(d^2) > 1.6)
+  sprintf("Flux is too big");
+endif
+gapSize = l-d-d-NpLayers*wireDiameterP-NsLayers*wireDiameterS;
+gapSizeMin = max([2*NpLayers*wireDiameterP, 2*NsLayers*wireDiameterS]);
+if (gapSize < gapSizeMin)
+  sprintf("The gap is not big enough");
+endif
 #+END_SRC
 
 #+RESULTS:
@@ -151,20 +147,22 @@ a = 0.010497
 IpLineRMS = 4.0240
 IsRMS = 383.33
 Phi = 0.099099
-Phi = 0.099099
-R = 4.0605e+04
-R = 4.0605e+04
-d = 2000
-h = 4
-l = 2.1942e+08
-Np = 1000
-Ns = 10.497
+Phi = 0.1982
+R = 2.0303e+04
+R = 1.0151e+04
+d = 0.5000
+h = 0.2000
+l = 2.0793
+IpMax = 0.2012
+IsMax = 9.5833
+wireDiameterP = 2.0300e-03
+wireDiameterS = 2.3400e-03
 #+end_example
 
 
 
 
-#+BEGIN_SRC octave :exports both :results output :session Verification
+#+BEGIN_SRC octave :exports none :results output :session Verification
 h = 4;
 l = 2.1942*10^8;
 d = 2000;
@@ -187,15 +185,101 @@ R = RBottom + 2*Rheight + RTop + 2*RTopGap + 2*Rgap;
 
 Phi=(1/R)*Np*Ip;
 Vp = 2*pi*Np*Phi*f/sqrt(2);
-Vs = a*Vp;
+Vs = a*Vp*sqrt(3);
 
 fprintf('Primary Voltage (Vp): %.2f V (RMS)\n', Vp);
 fprintf('Secondary Voltage (Vs): %.2f V (RMS)\n', Vs);
 #+END_SRC
 
 #+RESULTS:
+: B = 2.4775e-08
 : Primary Voltage (Vp): 22014.20 V (RMS)
-: Secondary Voltage (Vs): 231.08 V (RMS)
+: Secondary Voltage (Vs): 400.25 V (RMS)
+
+
+#+BEGIN_SRC octave :exports code :results output :session Part2Function
+clc
+clear
+close all
+
+
+
+NpLayersArray = 1:10;
+NpCountArray = 100:10:10000;
+NsLayersArray = 1:10;
+gArray = 10^-3:10^-5:3*10^-3;
+dArray = 0:0.01:10;
+hArray = 0:0.01:10;
+
+results = [];
+for NpLayers = NpLayersArray
+  for NpCount = NpCountArray
+    for NsLayers = NsLayersArray
+      for g = gArray
+        for d = dArray
+          for h = hArray
+            [output] = Transformer(NpLayers, NpCount, NsLayers, g, d, h);
+            results = [results; output];
+          end
+        end
+      end
+    end
+  end
+end
+function output = Transformer (NpLayers, NpCount, NsLayers, g, d, h)
+                                % Constatans
+  VpLineToLineRMS = 22*10^3;
+  VsLineToLineRMS = 400;
+  VpLineToLinePeak = sqrt(2)*VpLineToLineRMS;
+  VsLineToLinePeak = sqrt(2)*VsLineToLineRMS;
+  a = VsLineToLineRMS/(sqrt(3)*VpLineToLineRMS);
+  S = (460*10^3)/3;
+  f = 50;
+  mu0 = 4*pi*10^(-7);
+  mur = 2150;
+  mu = mu0*mur;
+
+  Np = NpCount/NpLayers;
+  Ns = Np*a/NsLayers;
+                                % Currnet
+  IpLineRMS = S/(sqrt(3)*VpLineToLineRMS)
+  IpLinePerLayerRMS = IpLineRMS/NpLayers;
+  IsRMS = IpLineRMS/(a);
+  IsLinePerLayerRMS = IsRMS/NsLayers;
+                                    % Flux
+  Phi = (VpLineToLineRMS)/(4.44*Np*f);
+  Phi = (VsLineToLineRMS/sqrt(3))/(4.44*Ns*f);
+                                % Relucatance
+  R = (1/Phi)*Np*IpLineRMS;
+  R = (1/Phi)*Ns*IsRMS;
+                                % Dimensions
+  l = d.*mu.*(2.*g ./ (d.*mu0) + 1 ./ mu + 2.*h ./ (d.*mu) - R.*d - 3 ./ mu - 2.*g ./ (d.*mu) - 2 ./ mu) ./ -2;
+                                % Choosing a Wire Diameter
+  wireDiameters = [2.03, 2.34, 2.64, 2.95, 3.25, 3.66, 4.06, 4.47, 4.88, 5.39, 5.89, 6.40, 7.01, 7.62, 8.23, 8.84, 9.5, 10.2, 11.0, 11.8, 12.7, 15.0, 17.0, 20.0, 22.0, 24.0, 28.0, 31.0, 34.0, 37.0, 39.0, 41.0] * 10^-3;
+  maxCurrentRMS = [8.3, 10.5, 13.5, 16.6, 21.2, 26.5, 33.3, 44.2, 52.3, 63.8, 76.4, 90.1, 108, 128, 149, 172, 196, 227, 265, 306, 355, 495, 636, 880, 1064, 1267, 1724, 2113, 2542, 3011, 3345, 3697];
+  IpMax = 0.05*IpLinePerLayerRMS;
+  IsMax = 0.05*IsLinePerLayerRMS;
+  indexPrimary = find(maxCurrentRMS >= IpMax, 1);
+  wireDiameterP = wireDiameters(indexPrimary);
+  indexSecondary = find(maxCurrentRMS >= IsMax, 1);
+  wireDiameterS = wireDiameters(indexSecondary);
+  % Verify that the transformer is conformant with the required specifications
+  if (Phi/(d^2) > 1.6)
+    sprintf("Flux is too big");
+  endif
+  gapSize = l-d-d-NpLayers*wireDiameterP-NsLayers*wireDiameterS;
+  gapSizeMin = max([2*NpLayers*wireDiameterP, 2*NsLayers*wireDiameterS]);
+  if (gapSize < gapSizeMin)
+    sprintf("The gap is not big enough");
+  endif
+  output = struct('NpLayers', NpLayers, 'NpCount', NpCount, 'NsLayers', NsLayers, 'g', g, 'd', d, 'h', h);
+endfunction
+#+END_SRC
+
+#+RESULTS:
+: error: 'a' undefined near line 3, column 11
+: error: called from
+:     Transformer at line 3 column 6
 
 ** Part 3: Discussion about transformer design trade-offs
  - Describe the influence that your winding design choices (number of turns and layers) have on transformer size and mass? How might you design for minimum total mass, and what trade-off do you see between iron core mass and copper mass?
