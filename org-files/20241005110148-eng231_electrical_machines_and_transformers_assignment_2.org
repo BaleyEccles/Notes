@@ -76,16 +76,117 @@ With the last digit of my student ID being 7:
 clc
 clear
 close all
-l = 1;
-h = 1;
-d = 1;
-A = d^2;
-g = 1*10^-3;
 
+% Turns
+VpLineToLineRMS = 22*10^3;
+VsLineToLineRMS = 400;
+VpPhaseRMS = VpLineToLineRMS*sqrt(3);
+VsPhaseRMS = VsLineToLineRMS*sqrt(3);
+
+VpPhasePeak = sqrt(2)*VpPhaseRMS;
+VsPhasePeak = sqrt(2)*VsPhaseRMS;
+
+a = VsPhaseRMS/(sqrt(3)*VpPhaseRMS)
+
+Np = 1000;
+Ns = Np*a;
+
+% Currnet
+S = (460*10^3)/3;
+IpLineRMS = S/(sqrt(3)*VpPhaseRMS)
+IsRMS = IpLineRMS/(a)
+
+% Flux
 f = 50;
+Phi = (VpPhaseRMS)/(4.44*Np*f) % These may be wrong I am unsure where the sqrt(3) goes.
+Phi = (VsPhaseRMS/sqrt(3))/(4.44*Ns*f)
+
+% Relucatance
+R = (1/Phi)*Np*IpLineRMS
+R = (1/Phi)*Ns*IsRMS
+
 
 mu0 = 4*pi*10^(-7);
 mur = 2150;
+mu = mu0*mur;
+
+g = 10^-3;
+% Dimensions
+%Rgap = g/(mu0*(d^2));
+%RTopGap = (d/2)/(mu*(d^2));
+%RTop = (l-d)/(mu*(d^2));
+%Rheight = (h-d-g-d/2)/(mu*(d^2));
+%RBottom = (l-d)/(mu*(d^2));
+%R = RBottom + 2*Rheight + RTop + 2*RTopGap + 2*Rgap;
+% This gives one equation with three unknowns
+% ploting this:
+
+%R = (l-d)/(mu*(d^2)) + 2*(h-d-g-d/2)/(mu*(d^2)) + (l-d)/(mu*(d^2)) + 2*(d/2)/(mu*(d^2)) + 2*g/(mu0*(d^2));
+
+[h, d] = meshgrid(0:0.5:10, 0:0.5:10);
+
+l = d.*mu.*(2.*g ./ (d.*mu0) + 1 ./ mu + 2.*h ./ (d.*mu) - R.*d - 3 ./ mu - 2.*g ./ (d.*mu) - 2 ./ mu) ./ -2;
+figure
+surf(h, d, l);
+xlabel('h');
+ylabel('d');
+zlabel('l');
+grid on;
+
+figure
+contour(h, d, l);
+xlabel('h');
+ylabel('d');
+zlabel('l');
+grid on;
+
+d = 2000
+h = 4
+l = d.*mu.*(2.*g ./ (d.*mu0) + 1 ./ mu + 2.*h ./ (d.*mu) - R.*d - 3 ./ mu - 2.*g ./ (d.*mu) - 2 ./ mu) ./ -2
+Np
+Ns
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+a = 0.010497
+IpLineRMS = 4.0240
+IsRMS = 383.33
+Phi = 0.099099
+Phi = 0.099099
+R = 4.0605e+04
+R = 4.0605e+04
+d = 2000
+h = 4
+l = 2.1942e+08
+Np = 1000
+Ns = 10.497
+#+end_example
+
+
+
+
+#+BEGIN_SRC octave :exports both :results output :session Verification
+h = 4;
+l = 2.1942*10^8;
+d = 2000;
+g = 1*10^(-3);
+mu0 = 4*pi*10^(-7);
+mur = 2150;
+A = d^2;
+Np = 1000;
+Ns = 10.497;
+a=Ns/Np;
+f = 50;
+Ip = 4.0240;
+
+% Reluctance
+%Rgap = g/(mu0*A);
+%Rside = (h-2*d-g)/(mu0*mur*A);
+%Rbottom = l/(mu0*mur*A);
+%Rtop = l/(mu0*mur*A);
+%R = 2*Rside + Rbottom + Rtop + 2*Rgap;
 
 
 Rgap = g/(mu0*A);
@@ -95,46 +196,23 @@ Rheight = (h-d-g-d/2)/(mu0*mur*A);
 RBottom = (l-d)/(mu0*mur*A);
 R = RBottom + 2*Rheight + RTop + 2*RTopGap + 2*Rgap;
 
-% Turns
-Vp = sqrt(2)*132*10^3;
-Vs = sqrt(2)*400;
-a = Vs/(Vp*sqrt(3))
-SecondaryLayers = 10;
-Ns = SecondaryLayers*100;
-Np = Ns/a;
-
-% Current
-S = 460*10^3;
-Ip = S/(sqrt(3)*Vp)
-VsPhase = Vs/sqrt(3);
-IsPerWinding = (S/(3*VsPhase))/SecondaryLayers
-
-B=(1/R)*Np*Ip/A
-V1 = 2*pi*Np*B*A*f/sqrt(2)
-
-B=(1/R)*Ns*IsPerWinding/A
-V2 = 2*pi*Ns*B*A*f/sqrt(2)
 
 
+Phi=(1/R)*Np*Ip;
+Vp = 2*pi*Np*Phi*f/sqrt(2);
+Vs = a*Vp;
+
+fprintf('Primary Voltage (Vp): %.2f V (RMS)\n', Vp);
+fprintf('Secondary Voltage (Vs): %.2f V (RMS)\n', Vs);
 #+END_SRC
 
 #+RESULTS:
-: a = 1.7495e-03
-: Ip = 1.4227
-: Is = 469.49
-: B = 511.17
-: V1 = 6.4904e+10
-
-
+: Primary Voltage (Vp): 22014.20 V (RMS)
+: Secondary Voltage (Vs): 231.08 V (RMS)
 
 ** Part 3: Discussion about transformer design trade-offs
  - Describe the influence that your winding design choices (number of turns and layers) have on transformer size and mass? How might you design for minimum total mass, and what trade-off do you see between iron core mass and copper mass?
 
-To minimise volume/mass we can choose values:
- - Volume = 20.363
- - Length = 1018.3
- - height = 0.1000
- - depth  = 0.1000
 However this is obviously not good, as the length is over 1km long.
  - Discuss how maximum operating core flux density impacts the required magnetising current and transformer mass?
  - Calculate, by adding to your code, the winding losses for your transformer (calculated power loss at rated operation, as a % of rated throughput power)? You may assume that the AC resistance in normal operation is 20% larger than the calculated DC resistance (owing to skin effect and elevated temperatures). Discuss how transformer design influences this loss?
