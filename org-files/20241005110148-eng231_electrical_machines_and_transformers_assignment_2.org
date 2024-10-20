@@ -19,27 +19,6 @@
 
 * ENG231 - Electrical Machines And Transformers - Assignment 2
 ** Part 1: Calculation of transformer winding voltages
-|---------------+-------------+---------------+-------------|
-| Wire Diameter | Maximum RMS | Wire Diameter | Maximum RMS |
-|          (mm) | current (A) |          (mm) | current (A) |
-|---------------+-------------+---------------+-------------|
-|          2.03 |         8.3 |           9.5 |         196 |
-|          2.34 |        10.5 |          10.2 |         227 |
-|          2.64 |        13.5 |          11.0 |         265 |
-|          2.95 |        16.6 |          11.8 |         306 |
-|          3.25 |        21.2 |          12.7 |         355 |
-|          3.66 |        26.5 |          15.0 |         495 |
-|          4.06 |        33.3 |          17.0 |         636 |
-|          4.47 |        44.2 |          20.0 |         880 |
-|          4.88 |        52.3 |          22.0 |        1064 |
-|          5.39 |        63.8 |          24.0 |        1267 |
-|          5.89 |        76.4 |          28.0 |        1724 |
-|          6.40 |        90.1 |          31.0 |        2113 |
-|          7.01 |         108 |          34.0 |        2542 |
-|          7.62 |         128 |          37.0 |        3011 |
-|          8.23 |         149 |          39.0 |        3345 |
-|          8.84 |         172 |          41.0 |        3697 |
-|---------------+-------------+---------------+-------------|
 
 #+BEGIN_SRC octave :exports both :results output :session Part1
 h = 90 *10^(-2);
@@ -56,11 +35,19 @@ f = 50;
 I = 3.3;
 
 % Reluctance
+%Rgap = g/(mu0*A);
+%Rside = (h-2*d-g)/(mu0*mur*A);
+%Rbottom = l/(mu0*mur*A);
+%Rtop = l/(mu0*mur*A);
+%R = 2*Rside + Rbottom + Rtop + 2*Rgap;
+
+
 Rgap = g/(mu0*A);
-Rside = (h-2*d-g)/(mu0*mur*A);
-Rbottom = l/(mu0*mur*A);
-Rtop = l/(mu0*mur*A);
-R = 2*Rside + Rbottom + Rtop + 2*Rgap;
+RTopGap = (d/2)/(mu0*mur*A);
+RTop = (l-d)/(mu0*mur*A);
+Rheight = (h-d-g-d/2)/(mu0*mur*A);
+RBottom = (l-d)/(mu0*mur*A);
+R = RBottom + 2*Rheight + RTop + 2*RTopGap + 2*Rgap;
 
 
 
@@ -90,51 +77,47 @@ clc
 clear
 close all
 
-
 %VARIBLES
-
 layersP = 1
 layersS = 5
 NPConst = 1000
 g = 1*10.^-3
-B=1.6
-
-h = 2;
-d = 2.5;
-
-h = 0.1:0.1:10;
-d = 0.1:0.1:10;
-
-a=400./(22*10.^3);
-NP = layersP*NPConst
-NS = a*NP
-WindingsPerLayerS = NS./layersS
+B = 1.6
 
 
+h = 1;
+d = 0.5;
 
-S = 460*10.^3;
 Vp = 22*10.^3;
 Vs = 400;
 
-Ip = S./(sqrt(3)*Vp);
-IPerLayerP = Ip./layersP;
-Is = S./(sqrt(3)*Vs);
-IPerLayerS = Is./layersS;
+a = Vs / (Vp*sqrt(3));
+NP = layersP*NPConst;
+NS = a*NP;
+WindingsPerLayerP = NP./layersP;
+WindingsPerLayerS = NS./layersS;
 
-IpMax = 0.05*IPerLayerP
-IsMax = 0.05*IPerLayerS
+S = 460*10.^3;
+
+Ip = S/(sqrt(3)*Vp)
+Is = S/(sqrt(3)*Vs)
+
+%TotalIp = S./(sqrt(3)*Vp)
+%IPerLayerP = TotalIp./layersP
+%TotalIs = S./(sqrt(3)*Vs)
+%IPerLayerS = TotalIs./layersS
+%
+%IpMax = 0.05*IPerLayerP
+%IsMax = 0.05*IPerLayerS
 
 %This allows us to choose a wire size for each side.
 WireDiamP = 2.03 *10.^-3;
 WireDiamS = 2.03 *10.^-3;
 
 %Choosing the wire size allows us to calculate the required gap between the wires.
-GapWire = WireDiamP*layersP*2;
+GapWireMin = max([WireDiamP*layersP*2, WireDiamS*layersS*2]);
 
 f = 50;
-S = 460*10.^3;
-Vp = 22*10.^3;
-Vs = 400;
 mur = 2150;
 mu0=4*pi*10.^(-7);
 mu = mu0*mur
@@ -144,21 +127,36 @@ A = d.^2;
 Phi=B*A;
 
 % These two must be the same
-R = NP*Ip./Phi;
-R = NS*Is./Phi;
+R = NP*(Ip/sqrt(3))./Phi
+R = NS*Is./Phi
 
-l=(mu*(R-2*((h-d)./mu)-g./mu0)./2)+d; % WRONG WE CHANGE THE RELUCANCE EQUATINON FROM ABOVE :TODO:
 
-Volume = 2.*(((mu.*(R-2.*((h-d)./mu)-g./mu0)./2)+d).*d.*d)+2.*((h-d-d).*d.*d);
-Volume(Volume<0) = [];
-[minVol, minIndex] = min(A);
 
-Volume(minIndex)
-l(minIndex)
-h(minIndex)
-d(minIndex)
+%l = d + (mu0.*mur.*A./2)*(R-2.*g./(mu0.*A));
+l = A.*mu0.*mur.*(2.*g ./ (A.*mu0) + d./ (A.*mu0.*mur) - R - 3.*d ./ (A.*mu0.*mur) - 2.*d ./ (A.*mu0.*mur)) ./ -2;
+
+l = ((A*R*mu0*mur)/2)+2*d-g*mur+g-h
+
+GapWireReal = l-2*d-WireDiamP*layersP-WireDiamS*layersS
+
+if GapWireReal < GapWireMin
+  fprintf("The gap is too small, a lenght of %f is too small", l)
+endif
+%VTop = d.*d.*l;
+%VBottom = VTop;
+%VSide = (h-d-d-g).*d.*d;
+%Volume = VTop + VBottom + 2.*VSide;
+%Volume(Volume<0) = [];
+%[minVol, minIndex] = min(A);
+
+%Volume(minIndex)
+l
+h
+d
+NP
+NS
+Ip
 #+END_SRC
-
 #+RESULTS:
 #+begin_example
 layersP = 1
@@ -166,23 +164,96 @@ layersS = 5
 NPConst = 1000
 g = 1.0000e-03
 B = 1.6000
-NP = 1000
-NS = 18.182
-WindingsPerLayerS = 3.6364
-IpMax = 0.6036
-IsMax = 6.6395
+Ip = 12.072
+Is = 663.95
 mu = 2.7018e-03
-ans = 20.363
-ans = 1018.3
-ans = 0.1000
-ans = 0.1000
+R = 1.7424e+04
+R = 1.7424e+04
+l = 3.7355
+GapWireReal = 2.7234
+l = 3.7355
+h = 1
+d = 0.5000
+NP = 1000
+NS = 10.497
+Ip = 12.072
 #+end_example
 
-To minimise volume we can choose values:
-Volume = 20.363\\
-Length = 1018.3\\
-height = 0.1000\\
-depth  = 0.1000\\
+#+BEGIN_SRC octave :exports both :results output :session Verification
+h = 1;
+l = 3.7355;
+d = 3;
+g = 1*10^(-3);
+mu0 = 4*pi*10^(-7);
+mur = 2150;
+A = d^2;
+Np = 1000;
+Ns = 10.497;
+a=Ns/Np;
+f = 50;
+I = 12.072/sqrt(3);
+
+% Reluctance
+
+Rgap = g/(mu0*A);
+RTopGap = (d/2)/(mu0*mur*A);
+RTop = (l-d)/(mu0*mur*A);
+Rheight = (h-d-g-d/2)/(mu0*mur*A);
+RBottom = (l-d)/(mu0*mur*A);
+R = RBottom + 2*Rheight + RTop + 2*RTopGap + 2*Rgap;
+
+
+Phi=(1/R)*Np*I;
+V1 = 2*pi*Np*Phi*f/sqrt(2);
+V2 = a*V1;
+
+fprintf('Primary Voltage (V1): %.2f V (RMS)\n', V1);
+fprintf('Secondary Voltage (V2): %.2f V (RMS)\n', V2);
+
+#+END_SRC
+
+#+RESULTS:
+: Primary Voltage (V1): 21282197.77 V (RMS)
+: Secondary Voltage (V2): 223399.23 V (RMS)
+
+#+BEGIN_SRC octave :exports both :results output :session Part2At2
+h = 2;
+l = 2;
+g = 10^-3;
+mu0 = 4*pi*10^(-7);
+mur = 2150;
+f = 50;
+B = 1.6;
+% Finding the secondary windings based on the voltages
+Np = 1000;
+Vp = 22*10^3;
+Vs = 400;
+a = Vs/(Vp*sqrt(3))
+Ns = Np*a
+
+
+
+% Finding the current based on the rated power
+S = 460*10^6;
+
+Is = S/Vs;
+Ip = (Is/sqrt(3))*a;
+
+% Rearanging the reluctance equation and the flux equation allows us to find an expression for d
+
+d = g*mur/2 - g/2 + h/2 + l/2 - Ip*Np*mu0*mur/(4*B)
+
+
+#+END_SRC
+
+#+RESULTS:
+: a = 0.010497
+: Ns = 10.497
+: Vp = 3.8105e+04
+: d = -2939.2
+
+
+
 ** Part 3: Discussion about transformer design trade-offs
  - Describe the influence that your winding design choices (number of turns and layers) have on transformer size and mass? How might you design for minimum total mass, and what trade-off do you see between iron core mass and copper mass?
 
