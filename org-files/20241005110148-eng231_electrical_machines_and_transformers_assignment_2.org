@@ -80,26 +80,23 @@ close all
 % Turns
 VpLineToLineRMS = 22*10^3;
 VsLineToLineRMS = 400;
-VpPhaseRMS = VpLineToLineRMS*sqrt(3);
-VsPhaseRMS = VsLineToLineRMS*sqrt(3);
+VpLineToLinePeak = sqrt(2)*VpLineToLineRMS;
+VsLineToLinePeak = sqrt(2)*VsLineToLineRMS;
 
-VpPhasePeak = sqrt(2)*VpPhaseRMS;
-VsPhasePeak = sqrt(2)*VsPhaseRMS;
-
-a = VsPhaseRMS/(sqrt(3)*VpPhaseRMS)
+a = VsLineToLineRMS/(sqrt(3)*VpLineToLineRMS)
 
 Np = 1000;
 Ns = Np*a;
 
 % Currnet
 S = (460*10^3)/3;
-IpLineRMS = S/(sqrt(3)*VpPhaseRMS)
+IpLineRMS = S/(sqrt(3)*VpLineToLineRMS)
 IsRMS = IpLineRMS/(a)
 
 % Flux
 f = 50;
-Phi = (VpPhaseRMS)/(4.44*Np*f) % These may be wrong I am unsure where the sqrt(3) goes.
-Phi = (VsPhaseRMS/sqrt(3))/(4.44*Ns*f)
+Phi = (VpLineToLineRMS)/(4.44*Np*f) % These may be wrong I am unsure where the sqrt(3) goes.
+Phi = (VsLineToLineRMS/sqrt(3))/(4.44*Ns*f)
 
 % Relucatance
 R = (1/Phi)*Np*IpLineRMS
@@ -181,22 +178,12 @@ a=Ns/Np;
 f = 50;
 Ip = 4.0240;
 
-% Reluctance
-%Rgap = g/(mu0*A);
-%Rside = (h-2*d-g)/(mu0*mur*A);
-%Rbottom = l/(mu0*mur*A);
-%Rtop = l/(mu0*mur*A);
-%R = 2*Rside + Rbottom + Rtop + 2*Rgap;
-
-
 Rgap = g/(mu0*A);
 RTopGap = (d/2)/(mu0*mur*A);
 RTop = (l-d)/(mu0*mur*A);
 Rheight = (h-d-g-d/2)/(mu0*mur*A);
 RBottom = (l-d)/(mu0*mur*A);
 R = RBottom + 2*Rheight + RTop + 2*RTopGap + 2*Rgap;
-
-
 
 Phi=(1/R)*Np*Ip;
 Vp = 2*pi*Np*Phi*f/sqrt(2);
