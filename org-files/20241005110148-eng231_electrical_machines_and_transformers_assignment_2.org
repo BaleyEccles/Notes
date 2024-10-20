@@ -76,124 +76,17 @@ With the last digit of my student ID being 7:
 clc
 clear
 close all
-
-%VARIBLES
-layersP = 1
-layersS = 5
-NPConst = 1000
-g = 1*10.^-3
-B = 1.6
-
-
+l = 1;
 h = 1;
-d = 0.5;
-
-Vp = 22*10.^3;
-Vs = 400;
-
-a = Vs / (Vp*sqrt(3));
-NP = layersP*NPConst;
-NS = a*NP;
-WindingsPerLayerP = NP./layersP;
-WindingsPerLayerS = NS./layersS;
-
-S = 460*10.^3;
-
-Ip = S/(sqrt(3)*Vp)
-Is = S/(sqrt(3)*Vs)
-
-%TotalIp = S./(sqrt(3)*Vp)
-%IPerLayerP = TotalIp./layersP
-%TotalIs = S./(sqrt(3)*Vs)
-%IPerLayerS = TotalIs./layersS
-%
-%IpMax = 0.05*IPerLayerP
-%IsMax = 0.05*IPerLayerS
-
-%This allows us to choose a wire size for each side.
-WireDiamP = 2.03 *10.^-3;
-WireDiamS = 2.03 *10.^-3;
-
-%Choosing the wire size allows us to calculate the required gap between the wires.
-GapWireMin = max([WireDiamP*layersP*2, WireDiamS*layersS*2]);
+d = 1;
+A = d^2;
+g = 1*10^-3;
 
 f = 50;
-mur = 2150;
-mu0=4*pi*10.^(-7);
-mu = mu0*mur
 
-
-A = d.^2;
-Phi=B*A;
-
-% These two must be the same
-R = NP*(Ip/sqrt(3))./Phi
-R = NS*Is./Phi
-
-
-
-%l = d + (mu0.*mur.*A./2)*(R-2.*g./(mu0.*A));
-l = A.*mu0.*mur.*(2.*g ./ (A.*mu0) + d./ (A.*mu0.*mur) - R - 3.*d ./ (A.*mu0.*mur) - 2.*d ./ (A.*mu0.*mur)) ./ -2;
-
-l = ((A*R*mu0*mur)/2)+2*d-g*mur+g-h
-
-GapWireReal = l-2*d-WireDiamP*layersP-WireDiamS*layersS
-
-if GapWireReal < GapWireMin
-  fprintf("The gap is too small, a lenght of %f is too small", l)
-endif
-%VTop = d.*d.*l;
-%VBottom = VTop;
-%VSide = (h-d-d-g).*d.*d;
-%Volume = VTop + VBottom + 2.*VSide;
-%Volume(Volume<0) = [];
-%[minVol, minIndex] = min(A);
-
-%Volume(minIndex)
-l
-h
-d
-NP
-NS
-Ip
-#+END_SRC
-#+RESULTS:
-#+begin_example
-layersP = 1
-layersS = 5
-NPConst = 1000
-g = 1.0000e-03
-B = 1.6000
-Ip = 12.072
-Is = 663.95
-mu = 2.7018e-03
-R = 1.7424e+04
-R = 1.7424e+04
-l = 3.7355
-GapWireReal = 2.7234
-l = 3.7355
-h = 1
-d = 0.5000
-NP = 1000
-NS = 10.497
-Ip = 12.072
-#+end_example
-
-#+BEGIN_SRC octave :exports both :results output :session Verification
-h = 1;
-l = 3.7355;
-d = 3;
-g = 1*10^(-3);
 mu0 = 4*pi*10^(-7);
 mur = 2150;
-A = d^2;
-Np = 1000;
-Ns = 10.497;
-a=Ns/Np;
-f = 50;
-I = 12.072/sqrt(3);
 
-% Reluctance
 
 Rgap = g/(mu0*A);
 RTopGap = (d/2)/(mu0*mur*A);
@@ -202,55 +95,35 @@ Rheight = (h-d-g-d/2)/(mu0*mur*A);
 RBottom = (l-d)/(mu0*mur*A);
 R = RBottom + 2*Rheight + RTop + 2*RTopGap + 2*Rgap;
 
-
-Phi=(1/R)*Np*I;
-V1 = 2*pi*Np*Phi*f/sqrt(2);
-V2 = a*V1;
-
-fprintf('Primary Voltage (V1): %.2f V (RMS)\n', V1);
-fprintf('Secondary Voltage (V2): %.2f V (RMS)\n', V2);
-
-#+END_SRC
-
-#+RESULTS:
-: Primary Voltage (V1): 21282197.77 V (RMS)
-: Secondary Voltage (V2): 223399.23 V (RMS)
-
-#+BEGIN_SRC octave :exports both :results output :session Part2At2
-h = 2;
-l = 2;
-g = 10^-3;
-mu0 = 4*pi*10^(-7);
-mur = 2150;
-f = 50;
-B = 1.6;
-% Finding the secondary windings based on the voltages
-Np = 1000;
-Vp = 22*10^3;
-Vs = 400;
+% Turns
+Vp = sqrt(2)*132*10^3;
+Vs = sqrt(2)*400;
 a = Vs/(Vp*sqrt(3))
-Ns = Np*a
+SecondaryLayers = 10;
+Ns = SecondaryLayers*100;
+Np = Ns/a;
 
+% Current
+S = 460*10^3;
+Ip = S/(sqrt(3)*Vp)
+VsPhase = Vs/sqrt(3);
+IsPerWinding = (S/(3*VsPhase))/SecondaryLayers
 
+B=(1/R)*Np*Ip/A
+V1 = 2*pi*Np*B*A*f/sqrt(2)
 
-% Finding the current based on the rated power
-S = 460*10^6;
-
-Is = S/Vs;
-Ip = (Is/sqrt(3))*a;
-
-% Rearanging the reluctance equation and the flux equation allows us to find an expression for d
-
-d = g*mur/2 - g/2 + h/2 + l/2 - Ip*Np*mu0*mur/(4*B)
+B=(1/R)*Ns*IsPerWinding/A
+V2 = 2*pi*Ns*B*A*f/sqrt(2)
 
 
 #+END_SRC
 
 #+RESULTS:
-: a = 0.010497
-: Ns = 10.497
-: Vp = 3.8105e+04
-: d = -2939.2
+: a = 1.7495e-03
+: Ip = 1.4227
+: Is = 469.49
+: B = 511.17
+: V1 = 6.4904e+10
 
 
 
