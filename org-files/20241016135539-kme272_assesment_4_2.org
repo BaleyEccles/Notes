@@ -8,3 +8,22 @@
 #+STARTUP: latexpreview
 
 * KME272 - Assesment 4.2
+ - Do the distributions of male *vs.* female athletes' *age* and *weight* differ? (e.g., are male athletes generally gamma-distributed and female athletes normally distributed? If they both have the same kind of distribution, do they have different characteristics?)
+   - To answer this question you will need to plot histograms of the two categories, for both age and weight, and:
+   - Choose a distribution (or distributions) that you think fit(s) the observed data in the histogram: e.g., gamma, log-normal, uniform, normal, Poisson, etc.
+   - Use the *method of moments* to estimate the parameters for this model from the data.
+   - Use a Q-Q plot or chi-square test with binning (or some other appropriate means), to judge how well this fits the distribution.
+   - Comment on these results to confirm or deny that the male and female athletes' age and weight distributions differ.
+
+ - Select a favourite sport and create a copy of the data containing only data for that sport. For example, if you were interested in curling, you might use ~Athletics <- OA[which(OA$Sport=="Athletics"),]~.  Now, answer these questions:
+   - Are the heights, weights and ages of athletes in this sport *changing* over time?
+   - Is there a change in the distribution of BMI over time?  The BMI is calculated as (mass in kg) / (height in metres, squared).  For example, someone 1.8m tall with a mass of 80kg has a BMI of $(80/(1.8^2)) \approx 24.7.$
+   - **Extension:** Does being *taller*, *heavier* or *older* help you *win* in this sport? (That is, are medallists significantly taller, etc., than non-medallists in this sport? By how much?)
+   - To answer this question you could begin by plotting distributions of heights, separated into male and female athletes, for each medal category, and then estimate the distribution, or mean height of medal winners and compare it with the mean heights of the non-medallists: are they the same?
+   - **Extension:** Is this a good representation of how the general human population has changed in the last 120 years?  Justify your answer.
+
+ - The various countries often compete for medal tally: the total number of medals won, number of golds, etc.  Use the data set to estimate the following:
+   - What is the country that tends to win the most medals per athlete?
+   - The country with the most extreme (non-infinite) bias in male:female athletes (that is, the one with the highest or lowest ratio of the two).
+   - The conditional probability that, given you are an American athlete (USA), you will win a medal (you can do this using just one line of the CountrySummary data frame)
+   - **Optional extension:** What, if anything, strikes you as interesting or surprising in this aspect of the data? Explain and provide a statistical analysis to test this.  (E.g., if you think it one country excels in a particular sport or event, calculate some statistic that illustrates, or possibly disproves, your point.)
