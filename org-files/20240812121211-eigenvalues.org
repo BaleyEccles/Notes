@@ -8,4 +8,4 @@
 
 
 * Eigenvalues
-To solve eigenvalues we need to solve \[det(A-\lambda I)=0\]
+To get eigenvalues we need to solve \[det(A-\lambda I)=0\]
