@@ -19,7 +19,9 @@
 
 * ENG231 - Electrical Machines And Transformers - Assignment 2
 ** Part 1: Calculation of transformer winding voltages
-
+  :PROPERTIES:
+  :ID: ENG231 - Electrical Machines And Transformers - Assignment 2 - Part 1: Calculation of transformer winding voltages
+  :END:
 #+BEGIN_SRC octave :exports both :results output :session Part1
 h = 90 *10^(-2);
 l = 130 *10^(-2);
@@ -70,55 +72,53 @@ With the last digit of my student ID being 7:
 | 7          | 460 kVA         | 22 kV               | 400 V                | $\Delta$-Y     |
 
 
-
+We know the voltages and the connection type, this means that we can calculate the turns ratio:
+\[a = \frac{V_{secondary}}{\sqrt{3}V_{primary}}\]
 #+BEGIN_SRC octave :exports code :results output :session Part2
 clc
 clear
 close all
 
-% Turns
 VpLineToLineRMS = 22*10^3;
 VsLineToLineRMS = 400;
 VpLineToLinePeak = sqrt(2)*VpLineToLineRMS;
 VsLineToLinePeak = sqrt(2)*VsLineToLineRMS;
-
 a = VsLineToLineRMS/(sqrt(3)*VpLineToLineRMS)
+#+END_SRC
 
+#+RESULTS:
+: a = 0.010497
+
+Now that we know the turns ratio, we can find specify the layers for both sides and the turns for one side and calculate the other side required turns:
+\[a = \frac{N_{secondary}}{N_{primary}}\]
+#+BEGIN_SRC octave :exports code :results output :session Part2 :TODO: There is somthing wrong with how the layers are being handled
 NpLayers = 1;
-Np = 1000/NpLayers;
+Np = 1000/NpLayers
 NsLayers = 2;
-Ns = Np*a/NsLayers;
+Ns = Np*a/NsLayers
+#+END_SRC
 
-% Currnet
+#+RESULTS:
+: Np = 1000
+: Ns = 5.2486
+
+We also know the max complex power for the three total transformers, by dividing by three we can find the per transformer rating. And with the following equation we can calculate the required current, noting that we have to divide by $\sqrt{3}$ for the primary side, as its $\Delta$ connected.
+\[I = \frac{S}{V}\]
+#+BEGIN_SRC octave :exports code :results output :session Part2
 S = (460*10^3)/3;
 IpLineRMS = S/(sqrt(3)*VpLineToLineRMS)
 IpLinePerLayerRMS = IpLineRMS/NpLayers;
 IsRMS = IpLineRMS/(a)
 IsLinePerLayerRMS = IsRMS/NsLayers;
+#+END_SRC
+
+#+RESULTS:
+: IpLineRMS = 4.0240
+: IsRMS = 383.33
 
 
-
-% Flux
-f = 50;
-Phi = (VpLineToLineRMS)/(4.44*Np*f) % These may be wrong I am unsure where the sqrt(3) goes.
-Phi = (VsLineToLineRMS/sqrt(3))/(4.44*Ns*f)
-
-% Relucatance
-R = (1/Phi)*Np*IpLineRMS
-R = (1/Phi)*Ns*IsRMS
-
-
-mu0 = 4*pi*10^(-7);
-mur = 2150;
-mu = mu0*mur;
-
-g = 10^-3;
-% Dimensions
-d = 0.5
-h = 0.2
-l = d.*mu.*(2.*g ./ (d.*mu0) + 1 ./ mu + 2.*h ./ (d.*mu) - R.*d - 3 ./ mu - 2.*g ./ (d.*mu) - 2 ./ mu) ./ -2
-
-% Choosing a Wire Diameter
+Now that we know the current we can find the smallest diameter wiring for our transformer.
+#+BEGIN_SRC octave :exports code :results output :session Part2
 wireDiameters = [2.03, 2.34, 2.64, 2.95, 3.25, 3.66, 4.06, 4.47, 4.88, 5.39, 5.89, 6.40, 7.01, 7.62, 8.23, 8.84, 9.5, 10.2, 11.0, 11.8, 12.7, 15.0, 17.0, 20.0, 22.0, 24.0, 28.0, 31.0, 34.0, 37.0, 39.0, 41.0] * 10^-3;
 maxCurrentRMS = [8.3, 10.5, 13.5, 16.6, 21.2, 26.5, 33.3, 44.2, 52.3, 63.8, 76.4, 90.1, 108, 128, 149, 172, 196, 227, 265, 306, 355, 495, 636, 880, 1064, 1267, 1724, 2113, 2542, 3011, 3345, 3697];
 
@@ -126,52 +126,91 @@ IpMax = 0.05*IpLinePerLayerRMS;
 IsMax = 0.05*IsLinePerLayerRMS;
 
 indexPrimary = find(maxCurrentRMS >= IpMax, 1);
-wireDiameterP = wireDiameters(indexPrimary);
+wireDiameterP = wireDiameters(indexPrimary)
 indexSecondary = find(maxCurrentRMS >= IsMax, 1);
-wireDiameterS = wireDiameters(indexSecondary);
+wireDiameterS = wireDiameters(indexSecondary)
+#+END_SRC
 
-% Verify that the transformer is conformant with the required specifications
-if (Phi/(d^2) > 1.6)
-  sprintf("Flux is too big");
-endif
+#+RESULTS:
+: wireDiameterP = 2.0300e-03
+: wireDiameterS = 2.3400e-03
+
+
+From here we can specify a magnetic flux density to be used, which can allow us to find the cross sectional and magnetic flux, using the two following equations.
+\[\mathcal{E} = \frac{2\pi}{\sqrt{2}}Nf\Phi\]
+\[\Phi = B\cdot A\]
+#+BEGIN_SRC octave :exports code :results output :session Part2
+B = 1.6;
+f = 50;
+A = ((VpLineToLineRMS)/(4.44*Np*f))/B
+A = ((VsLineToLineRMS/sqrt(3))/(4.44*Ns*f))/B
+d = sqrt(A)
+Phi = B*A;
+#+END_SRC
+
+#+RESULTS:
+: A = 0.061937
+: A = 0.1239
+: d = 0.3520
+
+Next we can find the required reluctance using:
+\[\Phi = \frac{Ni}{\mathfrak{R}}\]
+#+BEGIN_SRC octave :exports code :results output :session Part2
+R = (1/Phi)*Np*IpLineRMS
+R = (1/Phi)*Ns*IsRMS
+#+END_SRC
+
+#+RESULTS:
+: R = 2.0303e+04
+: R = 1.0151e+04
+
+Now knowing the reluctance we can choose a height and gap size and rearrange the equation from [[id:ENG231 - Electrical Machines And Transformers - Assignment 2 - Part 1: Calculation of transformer winding voltages][Part 1]] for length. This will result in a transformer that meets the voltage and power requirements.
+#+BEGIN_SRC octave :exports code :results output :session Part2
+mu0 = 4*pi*10^(-7);
+mur = 2150;
+mu = mu0*mur;
+g = 10^-3;
+h = 0.2
+l = d.*mu.*(2.*g ./ (d.*mu0) + 1 ./ mu + 2.*h ./ (d.*mu) - R.*d - 3 ./ mu - 2.*g ./ (d.*mu) - 2 ./ mu) ./ -2
+#+END_SRC
+
+#+RESULTS:
+: h = 0.2000
+: l = 0.053634
+
+How ever, this does not take into account the required gap between the windings in the middle. So, we can add a check that throws an error if the gap is not big enough.
+#+BEGIN_SRC octave :exports code :results output :session Part2
 gapSize = l-d-d-NpLayers*wireDiameterP-NsLayers*wireDiameterS;
 gapSizeMin = max([2*NpLayers*wireDiameterP, 2*NsLayers*wireDiameterS]);
 if (gapSize < gapSizeMin)
   sprintf("The gap is not big enough");
 endif
+
+IpLineRMS
+
+Ns
+Np
+
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-a = 0.010497
-IpLineRMS = 4.0240
-IsRMS = 383.33
-Phi = 0.099099
-Phi = 0.1982
-R = 2.0303e+04
-R = 1.0151e+04
-d = 0.5000
-h = 0.2000
-l = 2.0793
-IpMax = 0.2012
-IsMax = 9.5833
-wireDiameterP = 2.0300e-03
-wireDiameterS = 2.3400e-03
-#+end_example
+: IpLineRMS = 4.0240
+: Ns = 5.2486
+: Np = 1000
 
 
-
+Various outputs from the sets of code above was checked with the code from [[id:ENG231 - Electrical Machines And Transformers - Assignment 2 - Part 1: Calculation of transformer winding voltages][Part 1]] and the out put satisfied all of the required specifications.
 
 #+BEGIN_SRC octave :exports none :results output :session Verification
-h = 4;
-l = 2.1942*10^8;
-d = 2000;
+h = 0.2;
+l = 0.053634;
+d = 0.3520;
 g = 1*10^(-3);
 mu0 = 4*pi*10^(-7);
 mur = 2150;
 A = d^2;
 Np = 1000;
-Ns = 10.497;
+Ns = 5.25;
 a=Ns/Np;
 f = 50;
 Ip = 4.0240;
@@ -192,94 +231,11 @@ fprintf('Secondary Voltage (Vs): %.2f V (RMS)\n', Vs);
 #+END_SRC
 
 #+RESULTS:
-: B = 2.4775e-08
-: Primary Voltage (Vp): 22014.20 V (RMS)
-: Secondary Voltage (Vs): 400.25 V (RMS)
-
-
-#+BEGIN_SRC octave :exports code :results output :session Part2Function
-clc
-clear
-close all
+: Primary Voltage (Vp): 88083.93 V (RMS)
+: Secondary Voltage (Vs): 800.97 V (RMS)
 
 
 
-NpLayersArray = 1:10;
-NpCountArray = 100:10:10000;
-NsLayersArray = 1:10;
-gArray = 10^-3:10^-5:3*10^-3;
-dArray = 0:0.01:10;
-hArray = 0:0.01:10;
-
-results = [];
-for NpLayers = NpLayersArray
-  for NpCount = NpCountArray
-    for NsLayers = NsLayersArray
-      for g = gArray
-        for d = dArray
-          for h = hArray
-            [output] = Transformer(NpLayers, NpCount, NsLayers, g, d, h);
-            results = [results; output];
-          end
-        end
-      end
-    end
-  end
-end
-function output = Transformer (NpLayers, NpCount, NsLayers, g, d, h)
-                                % Constatans
-  VpLineToLineRMS = 22*10^3;
-  VsLineToLineRMS = 400;
-  VpLineToLinePeak = sqrt(2)*VpLineToLineRMS;
-  VsLineToLinePeak = sqrt(2)*VsLineToLineRMS;
-  a = VsLineToLineRMS/(sqrt(3)*VpLineToLineRMS);
-  S = (460*10^3)/3;
-  f = 50;
-  mu0 = 4*pi*10^(-7);
-  mur = 2150;
-  mu = mu0*mur;
-
-  Np = NpCount/NpLayers;
-  Ns = Np*a/NsLayers;
-                                % Currnet
-  IpLineRMS = S/(sqrt(3)*VpLineToLineRMS)
-  IpLinePerLayerRMS = IpLineRMS/NpLayers;
-  IsRMS = IpLineRMS/(a);
-  IsLinePerLayerRMS = IsRMS/NsLayers;
-                                    % Flux
-  Phi = (VpLineToLineRMS)/(4.44*Np*f);
-  Phi = (VsLineToLineRMS/sqrt(3))/(4.44*Ns*f);
-                                % Relucatance
-  R = (1/Phi)*Np*IpLineRMS;
-  R = (1/Phi)*Ns*IsRMS;
-                                % Dimensions
-  l = d.*mu.*(2.*g ./ (d.*mu0) + 1 ./ mu + 2.*h ./ (d.*mu) - R.*d - 3 ./ mu - 2.*g ./ (d.*mu) - 2 ./ mu) ./ -2;
-                                % Choosing a Wire Diameter
-  wireDiameters = [2.03, 2.34, 2.64, 2.95, 3.25, 3.66, 4.06, 4.47, 4.88, 5.39, 5.89, 6.40, 7.01, 7.62, 8.23, 8.84, 9.5, 10.2, 11.0, 11.8, 12.7, 15.0, 17.0, 20.0, 22.0, 24.0, 28.0, 31.0, 34.0, 37.0, 39.0, 41.0] * 10^-3;
-  maxCurrentRMS = [8.3, 10.5, 13.5, 16.6, 21.2, 26.5, 33.3, 44.2, 52.3, 63.8, 76.4, 90.1, 108, 128, 149, 172, 196, 227, 265, 306, 355, 495, 636, 880, 1064, 1267, 1724, 2113, 2542, 3011, 3345, 3697];
-  IpMax = 0.05*IpLinePerLayerRMS;
-  IsMax = 0.05*IsLinePerLayerRMS;
-  indexPrimary = find(maxCurrentRMS >= IpMax, 1);
-  wireDiameterP = wireDiameters(indexPrimary);
-  indexSecondary = find(maxCurrentRMS >= IsMax, 1);
-  wireDiameterS = wireDiameters(indexSecondary);
-  % Verify that the transformer is conformant with the required specifications
-  if (Phi/(d^2) > 1.6)
-    sprintf("Flux is too big");
-  endif
-  gapSize = l-d-d-NpLayers*wireDiameterP-NsLayers*wireDiameterS;
-  gapSizeMin = max([2*NpLayers*wireDiameterP, 2*NsLayers*wireDiameterS]);
-  if (gapSize < gapSizeMin)
-    sprintf("The gap is not big enough");
-  endif
-  output = struct('NpLayers', NpLayers, 'NpCount', NpCount, 'NsLayers', NsLayers, 'g', g, 'd', d, 'h', h);
-endfunction
-#+END_SRC
-
-#+RESULTS:
-: error: 'a' undefined near line 3, column 11
-: error: called from
-:     Transformer at line 3 column 6
 
 ** Part 3: Discussion about transformer design trade-offs
  - Describe the influence that your winding design choices (number of turns and layers) have on transformer size and mass? How might you design for minimum total mass, and what trade-off do you see between iron core mass and copper mass?
