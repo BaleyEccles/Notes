@@ -4,7 +4,7 @@
 #+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 4
 #+date: [2024-09-17 Tue 10:17]
 #+AUTHOR: Baley Eccles - 652137
-#+FILETAGS: :Assignment:
+#+FILETAGS: :Assignment:UTAS:2024:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}

@@ -4,7 +4,7 @@
 #+title: KME272 - Assesment 1.4
 #+date: [2024-08-24 Sat 12:04]
 #+AUTHOR: Baley Eccles - 652137
-#+FILETAGS: :Assignment:
+#+FILETAGS: :Assignment:UTAS:2024:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
 #+LATEX_HEADER: \usepackage{minted}

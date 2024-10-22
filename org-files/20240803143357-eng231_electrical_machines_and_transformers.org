@@ -4,6 +4,7 @@
 #+title: ENG231 - Electrical Machines And Transformers
 #+date: [2024-08-03 Sat 14:33]
 #+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2024:
 * Topics
 
 [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][Magnetic Field]]

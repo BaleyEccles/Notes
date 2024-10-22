@@ -5,6 +5,7 @@
 #+date: [2024-08-02 Fri 19:15]
 :PROPERTIES:
 #+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2024:
 
 * Topics
 ** Computational Techniques
