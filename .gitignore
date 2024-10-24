@@ -11,8 +11,10 @@
 !org-files/
 !org-files/*.org
 !org-files/*.db
+!org-files/*.bib
 
 !*.org
+!*.bib
 !*.db
 README.md
 !*.png
