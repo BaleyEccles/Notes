@@ -4,9 +4,9 @@
 #+title: ENG231 - Electrical Machines And Transformers - Assignment 2
 #+date: [2024-10-05 Sat 11:01]
 #+AUTHOR: Baley Eccles - 652137
-#+FILETAGS: :Assignment:TODO:UTAS:2024:
+#+FILETAGS: :Assignment:UTAS:2024:
 #+STARTUP: latexpreview
-#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}
 #+LATEX_HEADER_EXTRA: \usepackage{fontspec}
 #+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
@@ -122,6 +122,7 @@ wireDiameterS = wireDiameters(indexSecondary)
 From here we can specify a magnetic flux density to be used, which can allow us to find the cross sectional and magnetic flux, using the two following equations.
 \[\mathcal{E} = \frac{2\pi}{\sqrt{2}}Nf\Phi\]
 \[\Phi = B\cdot A\]
+This code also acts as verification, both the cross sectional areas must be the same, which they are.
 #+BEGIN_SRC octave :exports code :results output :session Part2
 B = 1.6;
 f = 50;
@@ -138,6 +139,7 @@ Phi = B*A;
 
 Next we can find the required reluctance using:
 \[\Phi = \frac{Ni}{\mathfrak{R}}\]
+This code also acts as verification, both the reluctance must be the same.
 #+BEGIN_SRC octave :exports code :results output :session Part2
 R = (1/Phi)*Np*IpLineRMS
 R = (1/Phi)*Ns*IsRMS
@@ -174,33 +176,35 @@ l = d.*mu.*(2.*g ./ (d.*mu0) + 1 ./ mu + 2.*h ./ (d.*mu) - R.*d - 3 ./ mu - 2.*g
 : l = 1.0695
 
 How ever, this does not take into account the required gap between the windings in the middle. So, we can add a check that throws an error if the gap is not big enough.
-#+BEGIN_SRC octave :exports code :results output :session Part2
+#+BEGIN_SRC octave :exports both :results output :session Part2
 gapSize = l-d-d-NpLayers*wireDiameterP-NsLayers*wireDiameterS;
 gapSizeMin = max([2*NpLayers*wireDiameterP, 2*NsLayers*wireDiameterS]);
 if (gapSize < gapSizeMin)
-  sprintf("The gap is not big enough!!!");
+  fprintf("The gap is not big enough!!!\n")
 endif
 if (any([h, l, d, g, Np, Ns, IpLineRMS] <= 0))
-  sprintf("One or more values are less than zero, which is in valid!!!");
+  fprintf("One or more values are less than zero, which is in valid!!!\n")
 endif
 #+END_SRC
 
 #+RESULTS:
 
+
+
 Knowing the dimensions of the transformer we can calculate its volume and hence its mass. Using the iron density as 7874 $kg/m^3$ (\cite{Wiki_Iron}).
-#+BEGIN_SRC octave :exports code :results output :session Part2 :TODO: Cite https://en.wikipedia.org/wiki/Iron for the density (Converted to kg/m3)
+#+BEGIN_SRC octave :exports both :results output :session Part2
 CoreVolume = 2*l*A+2*(h-g-d-d)*A;
 IronDensity = 7874;
 weight = CoreVolume*IronDensity;
-sprintf("The transformer core weighs %.2f kg \n", weight)
+fprintf("The transformer core weighs %.2f kg \n", weight)
 #+END_SRC
 
 #+RESULTS:
-: ans = The transformers core weighs 1216.73 kg
+: The transformer core weighs 1216.73 kg
 
 
 Likewise, knowing the dimensions and the windings properties allows us to calculate their volume, length and mass. Using the copper density as 8935 $kg/m^3$ (\cite{Wiki_Copper}).
-#+BEGIN_SRC octave :exports code :results output :session Part2
+#+BEGIN_SRC octave :exports both :results output :session Part2
 WindingPrimaryLength = 0;
 for i = 1:NpLayers
   WindingPrimaryLength += Np*2*(d+(2*i-1)*wireDiameterP/2)/NpLayers;
@@ -219,34 +223,28 @@ CopperDensity = 8935;
 WindingsPrimaryWeight = WindingsPrimaryVolume*CopperDensity;
 WindingsSecondaryWeight = WindingsSecondaryVolume*CopperDensity;
 
-sprintf("The length of the primary windings is %.2f m \n", WindingPrimaryLength)
-sprintf("The length of the secondary windings is %.2f m \n", WindingSecondaryLength)
+fprintf("The length of the primary windings is %.2fm \n", WindingPrimaryLength)
+fprintf("The length of the secondary windings is %.2fm \n", WindingSecondaryLength)
 
-sprintf("The weight of the primary windings is %.2f kg \n", WindingsPrimaryWeight)
-sprintf("The weight of the secondary windings is %.2f kg \n", WindingsSecondaryWeight)
+fprintf("The weight of the primary windings is %.2fkg \n", WindingsPrimaryWeight)
+fprintf("The weight of the secondary windings is %.2fkg \n", WindingsSecondaryWeight)
 #+END_SRC
 
 #+RESULTS:
-: ans = The length of the primary windings is 503.83 m
-: ans = The length of the secondary windings is 5.29 m
-: ans = The weight of the primary windings is 14.57 kg
-: ans = The weight of the secondary windings is 0.39 kg
-
-
-
-#+RESULTS:
-: PowerLossTotal = 1.6664e-04
-: ans = The total power loss percentage due to winding resistacne is 0.000167%.
+: The length of the primary windings is 503.83m
+: The length of the secondary windings is 5.29m
+: The weight of the primary windings is 14.57kg
+: The weight of the secondary windings is 0.39kg
 
 
 Summing the results allows us to calculate the total weight. Using the copper density as 8935 $kg/m^3$ (\cite{Wiki_Copper}).
-#+BEGIN_SRC octave :exports code :results output :session Part2
+#+BEGIN_SRC octave :exports both :results output :session Part2
 TotalWeight = weight + WindingsPrimaryWeight + WindingsSecondaryWeight;
-sprintf("The total wieght of the transformer is %.2f \n", TotalWeight)
+fprintf("The total wieght of the transformer is %.2fkg \n", TotalWeight)
 #+END_SRC
 
 #+RESULTS:
-: ans = The total wieght of the transformer is 1231.69
+: The total wieght of the transformer is 1231.69kg
 
 Calculating losses due to winding resistance.
 #+BEGIN_SRC octave :exports code :results output :session Part2
@@ -260,10 +258,43 @@ PowerSecondaryLoss = IsRMS^2*RacSecondary;
 PowerLossPrimary = (PowerPrimaryLoss/S)*100;
 PowerLossSecondary = (PowerSecondaryLoss/S)*100;
 PowerLossTotal = PowerLossPrimary+PowerLossSecondary;
-sprintf("The total power loss percentage due to winding resistacne is %f%%. \n", PowerLossTotal)
+fprintf("The total power loss percentage due to winding resistacne is %f%%. \n", PowerLossTotal)
 #+END_SRC
 
-Various outputs from the sets of code above was checked with the code from [[id:ENG231 - Electrical Machines And Transformers - Assignment 2 - Part 1: Calculation of transformer winding voltages][Part 1]] and the output satisfied all of the required specifications.
+#+RESULTS:
+: The total power loss percentage due to winding resistacne is 0.000167%.
+
+Various outputs from the sets of code above was checked with the code from [[id:ENG231 - Electrical Machines And Transformers - Assignment 2 - Part 1: Calculation of transformer winding voltages][Part 1]] and the output satisfied all of the required specifications.\\
+Finally we can print the specifications of the transformer
+
+#+BEGIN_SRC octave :exports both :results output :session Part2
+fprintf("Dimensions:\n")
+fprintf("The transformers length is %.3fm\n", l)
+fprintf("The transformers height is %.3fm\n", h)
+fprintf("The transformers depth is %.3fm\n", d)
+fprintf("Winding details:\n")
+fprintf("The number of windings on the primary side is %.3f\n", Np)
+fprintf("The number of layers on the primary side is %.3f\n", NpLayers)
+fprintf("The wire diameter on the primary side is %.3fm\n", wireDiameterP)
+fprintf("The number of windings on the secondary side is %.3f\n", Ns)
+fprintf("The number of layers on the secondary side is %.3f\n", NsLayers)
+fprintf("The wire diameter on the primary side is %.3fm\n", wireDiameterS)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Dimensions:
+The transformers length is 1.070m
+The transformers height is 0.677m
+The transformers depth is 0.249m
+Winding details:
+The number of windings on the primary side is 1000.000
+The number of layers on the primary side is 3.000
+The wire diameter on the primary side is 0.002m
+The number of windings on the secondary side is 10.497
+The number of layers on the secondary side is 2.000
+The wire diameter on the primary side is 0.003m
+#+end_example
 
 #+BEGIN_SRC octave :exports none :results output :session Verification
 h =  0.6767;
@@ -301,15 +332,15 @@ fprintf('Secondary Voltage (Vs): %.2f V (RMS)\n', Vs);
 
 ** Part 3: Discussion about transformer design trade-offs
  - Describe the influence that your winding design choices (number of turns and layers) have on transformer size and mass? How might you design for minimum total mass, and what trade-off do you see between iron core mass and copper mass?\\
-   The winding choices effect the transformers size and mass by creating restrictions on the size. The number of windings effect how tall the transformer must be and the number of layers effect how long it must be. When we increase the number of windings without increasing the layers we increase the height by forcing more windings to be next to one another. When the number of layers are increased we increase the length by forcing the gap between the primary and secondary windings to be larger. From the output of the code we can see that the mass of the core outweighs the mass of the windings, so, to reduce the total mass we should aim to reduce the core mass. However, when we reduce the mass of the core we will increase the mass of the copper, this is because reducing the number of windings will increase the current per winding and will require a larger winding diameter.
+   The winding choices effect the transformers size and mass by creating restrictions on the size. The number of windings effect how tall the transformer must be and the number of layers effect how long it must be. When we increase the number of windings without increasing the layers the  height is increased by forcing more windings to be next to one another. When the number of layers are increased we increase the length by forcing the gap between the primary and secondary windings to be larger. From the output of the code we can see that the mass of the core outweighs the mass of the windings, so, to reduce the total mass we should aim to reduce the core mass. However, when we reduce the mass of the core we will increase the mass of the copper, this is because reducing the number of windings will increase the current per winding and will require a larger winding diameter.
 
  - Discuss how maximum operating core flux density impacts the required magnetising current and transformer mass?\\
    One of the equations that were used was:
    \[A = \frac{\sqrt{2}V}{2\pi NfB}\]
-   from this we can see that reducing the flux density will increase the cross sectional area and hence the mass of the core.
+   from this we can see that reducing the flux density will increase the cross sectional area and hence the mass of the core. Also, reducing the flux density will lower the required magnetisation current.
 
  - Calculate, by adding to your code, the winding losses for your transformer (calculated power loss at rated operation, as a % of rated throughput power)? You may assume that the AC resistance in normal operation is 20% larger than the calculated DC resistance (owing to skin effect and elevated temperatures). Discuss how transformer design influences this loss?\\
-   To do this we must calculate the DC resistance of each side, using *Pouillet's law*:
+   To do this we must calculate the DC resistance of each side, using Pouillet's law (\cite{Wiki_Elec}).\\
    \[R_{DC} = \rho \frac{l}{A}\]
    Here $\rho$ is the electrical resistivity of copper which is $16.78\ n\Omega\cdot m$ (\cite{Wiki_Copper}). \\
    Now we can find the AC resistance:
@@ -320,7 +351,7 @@ fprintf('Secondary Voltage (Vs): %.2f V (RMS)\n', Vs);
    \[\textrm{Power Loss\%} = \frac{P_{\textrm{loss}}}{P_{\textrm{rated}}}\cdot 100\]
 
  - What aspects of the transformer design (size and mass) or operation (magnetising current, losses) are influenced by core gap width for this transformer?\\
-   Increasing the gap will increase the reluctance of the magnetic circuit, which based upon the way I have programmed it, will increase the length of the transformer, and hence its size and mass.
+   Increasing the gap will increase the reluctance of the magnetic circuit, which based upon the way I have programmed it, will increase the length of the transformer, and hence its size and mass. Likewise, increasing the reluctance will increase the required magnetising current and hence the losses.
 
  - For a power transformer, the main components which influence how it impacts the power system are generally the winding resistance and the leakage reactance. Comment on how you think your design choices, in particular the way you have configured each winding, will influence these parameters?\\
    To create a well preforming transformer our goal is to reduce winding resistance and the leakage reactance, To do this we must minimise the length of the windings, as $R_{\textrm{winding}}\propto l$, from Pouillet's law. Like wise, we could also increase the cross sectional area, as $R_{\textrm{winding}}\propto 1/A$.
