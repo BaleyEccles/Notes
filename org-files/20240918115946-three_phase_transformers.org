@@ -40,7 +40,7 @@ A standard way to define 3-phase connections
    - $N$
      - $HV$ side neutral connected '$N$'
    - $w$
-     - $LV$ side connection ($d$ or $y, $a$ for auto)
+     - $LV$ side connection ($d$ or $y$, $a$ for auto)
    - $n$
      - $LV$ side neutral connected '$n$'
    - $\#$

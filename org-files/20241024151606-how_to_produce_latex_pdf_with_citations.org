@@ -4,6 +4,7 @@
 #+title: How to produce latex pdf with citations
 #+date: [2024-10-24 Thu 15:16]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :MISC:
 #+STARTUP: latexpreview
 
 * How to produce latex pdf with citations
