@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       d99a1f42-2eb2-4695-b24e-bbd9f9c85e9f
+:END:
+#+title: How to produce latex pdf with citations
+#+date: [2024-10-24 Thu 15:16]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* How to produce latex pdf with citations
+ - Make a ~.bib~ file with the citations
+ - Add \cite{*CITATION*} to the citation point
+ - Add \newpage and \printbibliography to the end of the ~.org~ file
+ - run ~xelatex *NAME*~
+ - run ~biber *NAME*~
+ - run ~xelatex *NAME*~ twice
