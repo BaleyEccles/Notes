@@ -8,7 +8,7 @@
 
 * Transformer Power Losses
 ** Losses To [[id:bd829d16-0ded-4f21-8ce7-a99a79d1a078][Hysteresis]]
-- Some energy is lossed to hysteresis
+- Some energy is lost to hysteresis
   - \[P_{h}=K_h\cdot f \cdot B^{1.6}_{max}\]
     - \[K_h\] is a constant depending on the mateiral
     - \[f\] is the frequency

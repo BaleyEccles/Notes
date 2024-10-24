@@ -46,7 +46,7 @@ Change in secondary voltage magnitude as a percentage of voltage magnitude under
      - \[P_c=\frac{V_1^2}{R_{c1}}=\frac{V_2^2}{R_{c2}}\]
    - $P_{cu}$ are the copper losses
      - \[P_{cu}=I^2_1R_1=I^2_2R_2=I^2_1R_{eq1}=I^2_2R_{eq2}=I^2_LR_{eq}\]
- - Max efficency $\frac{d\eta}{dI_2}=0$
+ - Max efficiency $\frac{d\eta}{dI_2}=0$
    - \[P_c=P_{cu}\]
    - \[I_2=\sqrt{\frac{P_c}{R_{eq2}}}\approx \frac{V_2}{\sqrt{R_{c2}R_{eq2}}}\approx \frac{V_1}{\sqrt{R_{c1}R_{eq1}}}\]
 [[file:Screenshot 2024-09-18 at 14-46-04 Machines&Transformers - ENG231_LectureSlideSetB3_Transformers.pdf.png]]
