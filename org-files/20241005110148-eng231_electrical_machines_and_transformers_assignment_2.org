@@ -36,22 +36,13 @@ a=Ns/Np;
 f = 50;
 I = 3.3;
 
-% Reluctance
-%Rgap = g/(mu0*A);
-%Rside = (h-2*d-g)/(mu0*mur*A);
-%Rbottom = l/(mu0*mur*A);
-%Rtop = l/(mu0*mur*A);
-%R = 2*Rside + Rbottom + Rtop + 2*Rgap;
-
-
-Rgap = g/(mu0*A);
+Aeff = A + g*4*d; % Account for fringing
+Rgap = g/(mu0*Aeff);
 RTopGap = (d/2)/(mu0*mur*A);
 RTop = (l-d)/(mu0*mur*A);
 Rheight = (h-d-g-d/2)/(mu0*mur*A);
 RBottom = (l-d)/(mu0*mur*A);
 R = RBottom + 2*Rheight + RTop + 2*RTopGap + 2*Rgap;
-
-
 
 Phi=(1/R)*Np*I;
 V1 = 2*pi*Np*Phi*f/sqrt(2);
@@ -62,8 +53,8 @@ fprintf('Secondary Voltage (V2): %.2f V (RMS)\n', V2);
 #+END_SRC
 
 #+RESULTS:
-: Primary Voltage (V1): 14849.46 V (RMS)
-: Secondary Voltage (V2): 3439.40 V (RMS)
+: Primary Voltage (V1): 15160.91 V (RMS)
+: Secondary Voltage (V2): 3511.53 V (RMS)
 
 ** Part 2: Specification of transformer design to suit application
 With the last digit of my student ID being 7:
@@ -111,6 +102,7 @@ IsRMS = IpLineRMS/(a)
 #+RESULTS:
 : IpLineRMS = 4.0240
 : IsRMS = 383.33
+
 
 
 Now that we know the current we can find the smallest diameter wiring for our transformer.
@@ -298,7 +290,6 @@ fprintf('Secondary Voltage (Vs): %.2f V (RMS)\n', Vs);
 
 ** Part 3: Discussion about transformer design trade-offs
  - Describe the influence that your winding design choices (number of turns and layers) have on transformer size and mass? How might you design for minimum total mass, and what trade-off do you see between iron core mass and copper mass?
-
  - Discuss how maximum operating core flux density impacts the required magnetising current and transformer mass?
  - Calculate, by adding to your code, the winding losses for your transformer (calculated power loss at rated operation, as a % of rated throughput power)? You may assume that the AC resistance in normal operation is 20% larger than the calculated DC resistance (owing to skin effect and elevated temperatures). Discuss how transformer design influences this loss?
  - What aspects of the transformer design (size and mass) or operation (magnetising current, losses) are influenced by core gap width for this transformer?
