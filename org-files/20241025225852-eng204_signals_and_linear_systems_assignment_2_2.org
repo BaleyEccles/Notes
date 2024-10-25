@@ -1,0 +1,841 @@
+:PROPERTIES:
+:ID:       a3d3cc8c-d626-4e38-93be-e6247722d6b4
+:END:
+#+title: ENG204 - Signals and Linear Systems - Assignment 2
+#+date: [2024-10-05 Sat 15:11]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:TODO:UTAS:2024:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage[backend=biber,style=apa]{biblatex}
+#+LATEX_HEADER_EXTRA: \addbibresource{ENG204-Ass2.bib}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+
+* ENG204 - Signals and Linear Systems - Assignment 2
+** 1. Frequency Domain Analysis of an Audio Signal
+#+BEGIN_SRC octave :exports none :results output :session Q1
+clc
+clear
+close all
+Signal = load('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/audio_signal_1.mat');
+fourierCoeffs = Signal.fourierSeriesCoeffs;
+
+% Convert to magnitude and phase
+SignalMag = abs(fftshift(fourierCoeffs));
+SignalPhase = angle(fftshift(fourierCoeffs));
+
+SampleFreq = 44100;
+N = length(fourierCoeffs);
+f = (-N/2:N/2-1)*(SampleFreq/N);
+
+% Plot Magnitude vs Frequency
+figure;
+subplot(2,1,1);
+plot(f, SignalMag, 'LineWidth', 1.5);
+title('Magnitude of Fourier Transform');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+legend('Magnitude');
+
+
+% Plot Phase vs Frequency
+subplot(2,1,2);
+plot(f, SignalPhase, 'LineWidth', 1.5);
+title('Phase of Fourier Transform');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
+legend('Phase');
+filename = sprintf('ENG204-Assignment-2-Q1-1.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG204-Assignment-2-Q1-1.png]]
+
+The reason that $44.1\ k\textrm{Hz}$ produces a good sound for the human ear is because the Nyquist Sampling Theorem. It requires that the sampling frequency must be twice the max frequency being produced, in this case the human ear can hear between 20Hz-20kHz (\cite{Wiki_Hearing}), so the sampling frequency must be more than 40kHz, which it is.
+
+
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+clc;
+clear;
+close all;
+
+% Load the data
+Signal = load('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/audio_signal_1.mat');
+Signal = Signal.fourierSeriesCoeffs;
+
+Fs = 44100;
+N = length(Signal);
+f = (-N/2:N/2-1)*(Fs/N);
+
+% Original Audio
+audiowrite('Original Audio.wav', ifft(Signal), Fs);
+
+
+magnitude = abs(fftshift(Signal));
+phase = angle(fftshift(Signal));
+
+% Plot magnitude and phase spectrum
+figure;
+subplot(2,1,1);
+plot(f, magnitude);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+
+subplot(2,1,2);
+plot(f, phase);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+filename = sprintf('ENG204-Assignment-2-Q2-1.png');
+print(filename,'-dpng','-r100');
+
+n = 100000;
+[magnitudeSorted, idx] = sort(magnitude, 'descend');
+idx = idx(1:n);
+output = zeros(size(Signal));
+for i = 1:n
+  output(idx(i)) = Signal(idx(i));
+end
+
+audiowrite('synthesised_audio.wav', ifft(output), Fs);
+
+magnitude = abs(fftshift(output));
+phase = angle(fftshift(output));
+
+% Plot magnitude and phase spectrum
+figure;
+subplot(2,1,1);
+plot(f, magnitude);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+
+subplot(2,1,2);
+plot(f, phase);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+filename = sprintf('ENG204-Assignment-2-Q2-2.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+[[file:ENG204-Assignment-2-Q2-1.png]]
+[[file:ENG204-Assignment-2-Q2-2.png]]
+
+This approach is not linear, the Fourier transform component is linear, however sorting and discarding specific values is not linear. This means that the original is not linearly related to the synthesised audio.
+
+** 2. Ideal Filtering
+
+#+BEGIN_SRC octave :exports code :results output :session Filter
+clc
+clear
+close all
+
+f1 = 250;
+f2 = 750;
+Td = 2;
+Fs = 3200;
+N = Td*Fs;
+n = 0:(N-1);
+wd1 = 2*pi*f1/Fs;
+wd2 = 2*pi*f2/Fs;
+Phi = ((wd2-wd1)/(2*(N-1)))*n.^2+wd1*n;
+Chirp = cos(Phi);
+audiowrite('chirp.wav', Chirp, Fs);
+
+magnitudeChirp = abs(fftshift(fft(Chirp)));
+angleChirp = angle(fftshift(fft(Chirp)));
+f = (-N/2:N/2-1)*(Fs/N);
+figure;
+subplot(2,1,1);
+plot(f, magnitudeChirp);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+subplot(2,1,2);
+plot(f, angleChirp);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q3-1.png');
+print(filename,'-dpng','-r100');
+
+
+Noise = load('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/noise.mat');
+Noise = Noise.noise;
+
+audiowrite('noise.wav', Noise, 3200);
+
+magnitudeNoise = abs(fftshift(fft(Noise)));
+angleNoise = angle(fftshift(fft(Noise)));
+f = (-N/2:N/2-1)*(Fs/N);
+figure;
+subplot(2,1,1);
+plot(f, magnitudeNoise);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+subplot(2,1,2);
+plot(f, angleNoise);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q3-2.png');
+print(filename,'-dpng','-r100');
+
+chirp_and_noise = Chirp + Noise;
+audiowrite('chirp_and_noise.wav', chirp_and_noise, 3200);
+
+magnitudeCandN = abs(fftshift(fft(chirp_and_noise)));
+angleCandN = angle(fftshift(fft(chirp_and_noise)));
+f = (-N/2:N/2-1)*(Fs/N);
+figure;
+subplot(2,1,1);
+plot(f, magnitudeCandN);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+subplot(2,1,2);
+plot(f, angleCandN);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q3-3.png');
+print(filename,'-dpng','-r100');
+
+% Time domain noise + chirp representation
+
+t = 0:length(chirp_and_noise)-1;
+t = 2*t/length(chirp_and_noise);
+figure;
+plot(t, chirp_and_noise);
+title('chirp and noise time domain');
+xlabel('Time (s)');
+ylabel('Magnitude');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q3-4.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+[[file:ENG204-Assignment-2-Q3-1.png]]
+[[file:ENG204-Assignment-2-Q3-2.png]]
+[[file:ENG204-Assignment-2-Q3-3.png]]
+[[file:ENG204-Assignment-2-Q3-4.png]]
+
+From the frequency domain plot we can see that there is a large amount of noise at $\pm$1000Hz. On top of this there is a small mount of noise across the entire signal. So, to design our filter we will need to remove the 1000Hz component.\\
+Our filter must block 1000Hz, so we can define our filter as such:
+\[\begin{align*}
+H(\omega)&=\begin{cases}
+        1, & |\omega-2\pi1000|>\Delta\omega \\
+        0, & |\omega-2\pi1000|\leq\Delta\omega
+\end{cases} \\
+h(t)&=\mathcal{F}^{-1}\{H(\omega)\} \\
+h(t)&=\frac{1}{2\pi}\int_{0}^{2\pi 1000-\Delta\omega}1\cdot e^{j\omega t}d\omega+\frac{1}{2\pi}\int_{2\pi 1000+\Delta\omega}^{f_{end}}1\cdot e^{j\omega t}d\omega \\
+h(t)&=\frac{1}{2\pi jt} \left( e^{j(2000\pi t - 2\pi \Delta\omega t)} - 1 + e^{j(f_{end}) t} - e^{j(2000\pi t + 2\pi \Delta\omega t)} \right)
+\end{align*}\]
+Here we use $\Delta\omega$, so we can define some tolerance for the filter.
+
+#+BEGIN_SRC octave :exports code :results output :session Filter
+freq = (-N/2:N/2-1)*(Fs/N);
+Df = 1;
+idealFilter = ones(size(freq));
+idealFilter((freq >= -1000 - Df & freq <= -1000 + Df) | (freq >= 1000 - Df & freq <= 1000 + Df)) = 0;
+#+END_SRC
+
+#+RESULTS:
+
+However this filter is not causal, to make it causal we can shift the time domain signal, such that most of the signal is causal and then set the values that aren't to zero. The values that are non-causal will have little effect on the result, as we will have shifted the filter enough to make them all close to zero.
+#+BEGIN_SRC octave :exports code :results output :session Filter
+filterTimeDomain = ifft(ifftshift(idealFilter));
+shift = N/200;
+filterTimeDomainShifted = circshift(filterTimeDomain, shift);
+filterTimeDomainShifted(1:shift) = 0;
+filterFourierDomainShifted = fftshift(fft(filterTimeDomainShifted));
+#+END_SRC
+
+#+RESULTS:
+
+Now we can apply the filter:
+#+BEGIN_SRC octave :exports code :results output :session Filter
+chirp_and_noise_filtered = fftshift(fft(chirp_and_noise)).*filterFourierDomainShifted;
+
+magnitudeFiltered = abs(chirp_and_noise_filtered);
+angleFiltered = angle(chirp_and_noise_filtered);
+f = (-N/2:N/2-1)*(Fs/N);
+figure;
+subplot(2,1,1);
+plot(f, magnitudeFiltered);
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+subplot(2,1,2);
+plot(f, angleFiltered);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q4-1.png');
+print(filename,'-dpng','-r100');
+% Fourier domain filter representation
+filterAngle = angle(filterFourierDomainShifted);
+filterMagnitude = abs(filterFourierDomainShifted);
+f = (-N/2:N/2-1)*(Fs/N);
+figure;
+subplot(2,1,1);
+plot(f, filterMagnitude);
+title('Filter');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+subplot(2,1,2);
+plot(f, filterAngle);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q4-2.png');
+print(filename,'-dpng','-r100');
+% Time domain filter representation
+t = 0:length(filterTimeDomainShifted)-1;
+t = 2*t/length(filterTimeDomainShifted);
+figure;
+plot(t, filterTimeDomainShifted);
+title('Filter');
+xlabel('time (s)');
+ylabel('Magnitude');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q4-3.png');
+print(filename,'-dpng','-r100');
+audiowrite('chirp_and_noise_filtered.wav', ifft(ifftshift(chirp_and_noise_filtered)), 3200);
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG204-Assignment-2-Q4-1.png]]
+[[file:ENG204-Assignment-2-Q4-2.png]]
+[[file:ENG204-Assignment-2-Q4-3.png]]
+
+From the frequency domain representation of the filter we can see that the filter is able to block all of the pesky 1000Hz noise and keep the rest. From making the filter causal we can also see that there are some ripples around the 1000Hz, although these ripples have a very small magnitude, so they will have little to no effect on the result.\\
+From the plots of the filtered result we can see that there is still a present white noise component in the signal.
+
+** Aliasing and Anti-Aliasing Filters
+
+
+#+BEGIN_SRC octave :exports code :results output :session Aliasing
+clc
+clear
+close all
+pkg load control
+pkg load signal
+[wav, Fs] = audioread('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/audio_signal_2.wav');
+
+t = (0:length(wav)-1) / Fs;
+figure;
+subplot(2,1,1);
+plot(t, wav);
+title('Time Domain Signal');
+xlabel('Time (seconds)');
+ylabel('Amplitude');
+grid on;
+
+subplot(2,1,2);
+magnitude = abs(fftshift(fft(wav)));
+N = length(magnitude);
+f = (-N/2:N/2-1)*(Fs/N);
+plot(f, magnitude);
+title('Fourier Magnitude');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q5-1.png');
+print(filename,'-dpng','-r100');
+
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG204-Assignment-2-Q5-1.png]]
+The time domain plot shows that the audio should last 4 seconds. It also appears that events in the audio will repeat. The magnitude plot shows that there are a lot of low frequency noises and some higher frequencies. There also appears to be less frequencies around $\pm 8\ \textrm{kHz}$ and some lower magnitude frequencies from $\pm 10\ \textrm{kHz}$ to $\pm 15\ \textrm{kHz}$.
+
+#+BEGIN_SRC octave :exports code :results output :session Aliasing
+close all
+Fs_original = Fs;
+t_original = (0:length(wav)-1) / Fs_original;
+
+Fs_new = [88.2*10^3, 11.025*10^3, 5.5*10^3, 2.8*10^3];
+num_new_freqs = length(Fs_new);
+
+wav_all = cell(num_new_freqs, 1);
+
+figure;
+for i = 1:num_new_freqs
+    t_new = (0:1/Fs_new(i):(length(wav)-1)/Fs_original);
+    wav_new = interp1(t_original, wav, t_new, 'linear');
+
+    subplot(num_new_freqs, 1, i);
+    plot(t_new, wav_new);
+    title(['Signal Sampled at ', num2str(Fs_new(i)/(1*10^3)), ' kHz']);
+    xlabel('Time (seconds)');
+    ylabel('Amplitude');
+    grid on;
+
+    audiowrite(['Signal Sampled at ', num2str(Fs_new(i)/(1*10^3)), ' kHz.wav'], wav_new, Fs_new(i));
+
+    wav_all{i} = wav_new;
+end
+
+filename = sprintf('ENG204-Assignment-2-Q6-1.png', i);
+print(filename,'-dpng','-r100');
+figure;
+for i = 1:length(wav_all)
+    subplot(num_new_freqs, 1, i);
+    magnitude = abs(fftshift(fft(wav_all{i})));
+    N = length(magnitude);
+    f = (-N/2:N/2-1)*(Fs_new(i)/N);
+    plot(f, magnitude);
+    title(['Signal Sampled at ', num2str(Fs_new(i)/(1*10^3)), ' kHz']);
+    xlabel('Frequecny (Hz)');
+    ylabel('Magnitude');
+
+    xlim([-45000, 45000])
+    grid on;
+end
+filename = sprintf('ENG204-Assignment-2-Q6-2.png', i);
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG204-Assignment-2-Q6-1.png]]
+[[file:ENG204-Assignment-2-Q6-2.png]]
+
+From the plots we can see that there is a clear loss of data when down sampling. When looking at the time domain $2.8\ \textrm{kHz}$ down sampled plot we can see that there is clearly more space between each point. From the frequency plot we can see that the down sampling removes a lot of higher frequencies in the audio.
+*** Butterworth Filter
+
+#+BEGIN_SRC octave :exports code :results output :session Aliasing
+close all
+Signal = wav;
+
+function [Bpoles] = butterWorth(wc, N)
+  Bpoles = wc * exp(1i * pi * (2 * [1:N] + N - 1) / (2 * N));
+  if mod(N, 2) == 1
+    Bpoles((N + 1) / 2) = -wc;
+  end
+end
+
+f = 5.5*10^3;
+wc = 2 * pi * f;
+N = 4;
+
+Bpoles = butterWorth(wc, N);
+
+H_tf = tf([wc^N], real(poly(Bpoles)));
+
+SigFft = fftshift(fft(Signal));
+t = 4*(0:length(Signal)-1)/length(Signal);
+Filtered = lsim(H_tf, Signal, t);
+
+FilteredSignalTime = (Filtered);
+audiowrite(['Signal Butter 1.wav'], FilteredSignalTime, 44.1*10^3);
+i = 3;
+t_new = (0:1/f:(length(FilteredSignalTime)-1)/Fs_original);
+wav_new = interp1(t, FilteredSignalTime, t_new, 'linear');
+figure;
+plot(t_new, wav_new);
+title(['Signal Sampled at ', num2str(f/(1*10^3)), ' kHz + Butterworth']);
+xlabel('Time (seconds)');
+ylabel('Amplitude');
+grid on;
+filename = sprintf('ENG204-Assignment-2-B-1.png', i);
+print(filename,'-dpng','-r100');
+audiowrite(['Signal Butter.wav'], wav_new, f);
+figure;
+magnitude = abs(fftshift(fft(wav_new)));
+N = length(magnitude);
+f = (-N/2:N/2-1)*(f/N);
+plot(f, magnitude);
+title(['Signal Sampled at ', num2str(f/(1*10^3)), ' kHz + Butterworth']);
+xlabel('Frequecny (Hz)');
+ylabel('Magnitude');
+grid on;
+filename = sprintf('ENG204-Assignment-2-B-2.png', i);
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+[[file:ENG204-Assignment-2-B-1.png]]
+[[file:ENG204-Assignment-2-B-2.png]]
+
+*** Type 1 Chebyshev Filter
+
+#+BEGIN_SRC octave :exports code :results output :session Aliasing
+function [Cpoles] = chebyshev(w1, e, N) % gives the poles for a Chebyshev filter
+  Cpoles = zeros(1, N);
+  for k = 1:N
+    ak = ((2*k-1)*pi)/(2*N);
+    bk = asinh(1/e);
+    s = 1j * w1 * (cos(ak) * cosh(bk) - 1j * sin(ak) * sinh(bk));
+    Cpoles(k) = s;
+  end
+  Cpoles = -1*Cpoles; % Return the left side poles
+endfunction
+
+f = 5.5*10^3;
+w1 = 2 * pi * f;
+N = 4;
+
+Cpoles = chebyshev(w1, 3, N);
+
+H_tf = tf([wc^N], real(poly(Cpoles)));
+
+SigFft = fftshift(fft(Signal));
+t = 4*(0:length(Signal)-1)/length(Signal);
+Filtered = lsim(H_tf, Signal, t);
+
+FilteredSignalTime = (Filtered);
+audiowrite(['Signal Cheby 1.wav'], FilteredSignalTime, 44.1*10^3);
+i = 3;
+t_new = (0:1/f:(length(FilteredSignalTime)-1)/Fs_original);
+wav_new = interp1(t, FilteredSignalTime, t_new, 'linear');
+figure;
+plot(t_new, wav_new);
+title(['Signal Sampled at ', num2str(f/(1*10^3)), ' kHz + Cheby']);
+xlabel('Time (seconds)');
+ylabel('Amplitude');
+grid on;
+filename = sprintf('ENG204-Assignment-2-C-1.png', i);
+print(filename,'-dpng','-r100');
+audiowrite(['Signal Cheby.wav'], wav_new, f);
+figure;
+magnitude = abs(fftshift(fft(wav_new)));
+N = length(magnitude);
+f = (-N/2:N/2-1)*(f/N);
+plot(f, magnitude);
+title(['Signal Sampled at ', num2str(f/(1*10^3)), ' kHz + Cheby']);
+xlabel('Frequecny (Hz)');
+ylabel('Magnitude');
+grid on;
+filename = sprintf('ENG204-Assignment-2-C-2.png', i);
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG204-Assignment-2-C-1.png]]
+[[file:ENG204-Assignment-2-C-2.png]]
+
+** Impact of Noise on Analogue and Digital Systems
+*** Autocorrelation and Wide-Sense Stationary Signals
+
+#+BEGIN_SRC octave :exports code :results output :session Autocorrelation
+clc
+clear
+close all
+pkg load signal
+
+SampleSignals = 1000;
+
+SignalLength = 200;
+t = linspace(0, 1, SignalLength);
+w1 = 2 * pi * 2;
+w2 = 2 * pi * 10;
+
+X1 = zeros(SampleSignals, SignalLength);
+X2 = zeros(SampleSignals,SignalLength);
+
+for i = 1:SampleSignals
+  phi1 = 2 * pi * rand();
+  phi2 = 2 * pi * rand();
+  A = -2 + 4 * rand;
+  X1(i, :) = cos(w1 * t + phi1) - sin(w2 * t + phi2);
+  X2(i,:) = A*(cos(w1*t)+sin(w2*t));
+endfor
+
+meanX1 = mean(X1, 1);
+meanX2 = mean(X2, 1);
+AutoCorrX1 = zeros(SampleSignals, 2 * SignalLength - 1);
+AutoCorrX2 = zeros(SampleSignals, 2 * SignalLength - 1);
+
+for i = 1:SampleSignals
+AutoCorrX1(i, :) = xcorr(X1(i, :), 'unbiased');
+AutoCorrX2(i, :) = xcorr(X2(i, :), 'unbiased');
+end
+
+EnsembleAutoCorrX1 = mean(AutoCorrX1, 1);
+EnsembleAutoCorrX2 = mean(AutoCorrX2, 1);
+
+
+figure;
+subplot(2,1,1);
+plot(t, meanX1);
+title('Ensemble Mean of X1(t)');
+xlabel('Time (s)');
+ylabel('Mean Value');
+grid on;
+
+subplot(2,1,2);
+plot(t,meanX2);
+title('Ensemble Mean of X2(t)');
+xlabel('Time (s)');
+ylabel('Mean Value');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q7-1.png', i);
+print(filename,'-dpng','-r100');
+t = -SignalLength + 1 : SignalLength - 1;
+figure;
+subplot(2,1,1);
+plot(t, EnsembleAutoCorrX1);
+title('Ensemble Average Mean of X1(t)');
+xlabel('Time Difference');
+ylabel('Autocorrelation');
+grid on;
+
+subplot(2,1,2);
+plot(t, EnsembleAutoCorrX2);
+title('Ensemble Average Mean of X2(t)');
+xlabel('Time Difference');
+ylabel('Autocorrelation');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q7-2.png', i);
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG204-Assignment-2-Q7-1.png]]
+[[file:ENG204-Assignment-2-Q7-2.png]]
+
+**** Calculations
+***** Ensemble Mean
+The ensemble mean of $X_1(t)$ can be calculated as follows:
+\[\begin{align*}
+E[X_1(t)] &= E[\cos(\w_1t+\Phi_1) - \sin(\w_2t+\Phi_2)] \\
+          &= \int_0^{2\pi}\cos(\w_1t+\Phi_1)\frac{1}{2\pi}d\phi_1- \int_0^{2\pi}\sin(\w_2t+\Phi_2)\frac{1}{2\pi}d\phi_2 \\
+          &= 0
+\end{align*}\]
+The ensemble mean of $X_2(t)$ can be calculated as follows:
+\[\begin{align*}
+E[X_2(t)] &= E[A]\cdot E[\cos(\w_1t)]+E[A]\cdot E[\sin(\w_2t)] \\
+\textrm{where: } E[A]  &= \int_{-2}^{2}a\frac{1}{4}da = 0 \\
+\Rightarrow E[X_2(t)] &= 0\cdot E[\cos(\w_1t)]+0\cdot E[\sin(\w_2t)] = 0
+\end{align*}\]
+***** Time Mean
+The time mean of $X_1(t)$ can be calculated as follows:
+\[\begin{align*}
+\overline{X_1(t)} &= \lim_{T\rightarrow\infty}\frac{1}{T}\int_{\frac{T}{2}}^{\frac{T}{2}}\cos(\w_1t+\Phi_1) - \sin(\omega_2t+\Phi_2)dt \\
+         &= 0
+\end{align*}\]
+The time mean of $X_2(t)$ can be calculated as follows:
+\[\begin{align*}
+\overline{X_2(t)} &= \lim_{T\rightarrow\infty}\frac{1}{T}\int_{\frac{T}{2}}^{\frac{T}{2}}A(\cos(\omega_1t)+\sin(\omega_2t)) dt \\
+         &= 0
+\end{align*}\]
+Both of which are not functions of time, satisfying the first prong of being wide-sense stationary.
+***** Autocorrelation
+The autocorrelation of $X_1(t)$ can be calculated as follows:
+\[\begin{align*}
+R_{X_1}(t,t+\tau) &= E[X_1(t)X_1(t+\tau)] \\
+&= E[\cos(\omega_1​t+\Phi_1​)-\sin(\omega_2​t+\Phi_2​))(\cos(\omega_1​(t+\tau)+\Phi_1​)-\sin(\omega_2​(t+\tau)+\Phi_2​)] \\
+&\textrm{After some arithmatic and trigonometric identies:} \\
+R_{X_1}(t,t+\tau) &= \frac{1}{2}\cos(\omega_1\tau)+\frac{1}{2}\cos(\omega_2\tau)
+\end{align*}\]
+The autocorrelation of $X_1(t)$ can be calculated as follows:
+\[\begin{align*}
+R_{X_2}(t,t+\tau) &= E[X_2(t)X_2(t+\tau)] \\
+&= E[A^2(\cos(\omega_1t)+\sin(\omega_2t))(\omega_1(t+\tau))+\sin(\omega_2(t+\tau))] \\
+&\textrm{Which becomes:} \\
+R_{X_2}(t,t+\tau) &= \frac{4}{3}(\cos(\omega_1\tau)+\sin(\omega_2\tau))
+\end{align*}\]
+Both of which are only functions of $\tau$, satisfying the second prong of wide-sense stationary. So, both of the functions are wide-sense stationary.
+**** Discussion
+The ensemble mean of each of the signals appear to be sinusoidal, how ever they have very small magnitudes. As we increase the number of signals and samples we would expect this to tend to zero, as per the calculations. The ensemble mean autocorrelation appears to be correct when compared to the calculations.
+**** Different Stochastic Processes
+
+#+BEGIN_SRC octave :exports code :results output :session Autocorrelation
+clc
+clear
+close all
+pkg load signal
+
+SampleSignals = 100;
+SignalLength = 200;
+
+t = linspace(0, 1, SignalLength);
+w1 = 2 * pi * 2;
+w2 = 2 * pi * 10;
+
+X1 = zeros(SampleSignals, SignalLength);
+
+sig = 1;
+mu  = 0;
+for i = 1:SampleSignals
+  X1(i, :) = randn(sig, SignalLength) + mu;
+endfor
+
+meanX1 = mean(X1, 1);
+AutoCorrX1 = zeros(SampleSignals, 2 * SignalLength - 1);
+
+for i = 1:SampleSignals
+  AutoCorrX1(i, :) = xcorr(X1(i, :), 'unbiased');
+endfor
+
+EnsembleAutoCorrX1 = mean(AutoCorrX1, 1);
+
+figure;
+subplot(2,1,1);
+plot(t, meanX1);
+title('Ensemble Mean of X1(t)');
+xlabel('Time (s)');
+ylabel('Mean Value');
+grid on;
+
+t = -SignalLength + 1 : SignalLength - 1;
+subplot(2,1,2);
+plot(t, EnsembleAutoCorrX1);
+title('Ensemble Average Mean of X1(t)');
+xlabel('Time Difference');
+ylabel('Autocorrelation');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q8-1.png', i);
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG204-Assignment-2-Q8-1.png]]
+
+Gaussian noise is ergodic, as the time average of each sample signal is equal to its mean. And all autocorrelation of each signal only depends on the time difference. This also means that it is wide-sense stationary.
+
+*** Power spectral density
+
+The transfer function of the LCL can be found by transforming the components to their Laplace domain and some voltage dividers:
+\[H(s) = \frac{Rs}{L_1 L_2 C   s^3 + (L_1 + L_2)   s + R}\]
+
+#+BEGIN_SRC octave :exports code :results output :session PSD2
+clc
+clear
+close all
+pkg load symbolic
+pkg load control;
+pkg load signal;
+warning('off','all');
+
+L1 = 1*10^-3;
+L2 = 1*10^-3;
+C = 5*10^-6;
+R = 10;
+numerator = [R];
+denominator = [C*L1*L2,C*L1*R,L2,R];
+
+H = tf(numerator, denominator);
+
+Fs = 1*10^5;
+T = 5;
+t = 0:1/Fs:T;
+
+Vin = randn(size(t));
+
+
+Vout = lsim(H, Vin, t);
+
+figure;
+subplot(2,1,1);
+plot(t, Vin);
+xlabel('Time (s)');
+ylabel('Magnitude');
+title('White Noise Input Signal');
+grid on;
+subplot(2,1,2);
+plot(t, Vout);
+xlabel('Time (s)');
+ylabel('Magnitude');
+title('Output Signal after LCL Filter');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q9-1.png', i);
+print(filename,'-dpng','-r100');
+
+[autocorrin, lagsin] = xcorr(Vin, 'normalized');
+figure;
+plot(lagsin/Fs, autocorrin);
+xlabel('Time Difference (s)');
+ylabel('Autocorrelation');
+title('Autocorrelation of White Noise Input');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q9-2.png', i);
+print(filename,'-dpng','-r100');
+
+[autocorrout, lagsout] = xcorr(Vout, 'normalized');
+figure;
+plot(lagsout/Fs, autocorrout);
+xlabel('Time Difference (s)');
+ylabel('Autocorrelation');
+title('Autocorrelation of Output Signal after LCL Filter');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q9-3.png', i);
+print(filename,'-dpng','-r100');
+
+[crosscorr, lagscross] = xcorr(Vin, Vout, 'normalized');
+figure;
+plot(lagscross/Fs, crosscorr);
+xlabel('Time Difference (s)');
+ylabel('Cross-Correlation');
+title('Cross Correlation between Input and Output Signals');
+grid on;
+filename = sprintf('ENG204-Assignment-2-Q9-4.png', i);
+print(filename,'-dpng','-r100');
+
+figure;
+subplot(2,1,1);
+[pxx, f] = pwelch(Vin, [], [], [], Fs);
+plot(f, 20*log10(pxx));
+xlabel('Frequency (Hz)');
+ylabel('Power/Frequency (dB/Hz)');
+title('Power Spectral Density');
+
+grid on;
+subplot(2,1,2);
+[pxx, f] = pwelch(Vout, [], [], [], Fs);
+plot(f, 20*log10(pxx));
+xlabel('Frequency (Hz)');
+ylabel('Power/Frequency (dB/Hz)');
+title('Power Spectral Density');
+filename = sprintf('ENG204-Assignment-2-Q9-6.png', i);
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG204-Assignment-2-Q9-2.png]]
+
+[[file:ENG204-Assignment-2-Q9-3.png]]
+The autocorrelation indicates that this system has memory. As the time difference increases the correlation decreases.
+
+[[file:ENG204-Assignment-2-Q9-4.png]]
+
+[[file:ENG204-Assignment-2-Q9-6.png]]
+
+Increasing the size of the components tended to move the peak of the power spectral density closer to zero. Likewise decreasing the values moved the peak away from zero. It also appears that using smaller values made the auto correlation of the output decrease faster, which would indicate the system having 'less' memory.
+
+
+\newpage
+\printbibliography
