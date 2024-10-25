@@ -26,36 +26,41 @@ Signal = load('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2
 fourierCoeffs = Signal.fourierSeriesCoeffs;
 
 % Convert to magnitude and phase
-SignalMag = abs(fourierCoeffs);
-SignalPhase = angle(fourierCoeffs);
+SignalMag = abs(fftshift(fourierCoeffs));
+SignalPhase = angle(fftshift(fourierCoeffs));
 
 SampleFreq = 44100;
 N = length(fourierCoeffs);
-f = (0:N-1)*(SampleFreq/N);
+f = (-N/2:N/2-1)*(SampleFreq/N);
 
 % Plot Magnitude vs Frequency
 figure;
-plot(f, SignalMag, 'b', 'LineWidth', 1.5);
+subplot(2,1,1);
+plot(f, SignalMag, 'LineWidth', 1.5);
 title('Magnitude of Fourier Transform');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 grid on;
 legend('Magnitude');
-xlim([SampleFreq/2, SampleFreq]);
 
 % Plot Phase vs Frequency
-figure;
-plot(f, SignalPhase, 'r', 'LineWidth', 1.5);
+subplot(2,1,2);
+plot(f, SignalPhase, 'LineWidth', 1.5);
 title('Phase of Fourier Transform');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
 grid on;
 legend('Phase');
-xlim([SampleFreq/2, SampleFreq]);
 #+END_SRC
 
 #+RESULTS:
 
+
+
+:TODO: CITE https://en.wikipedia.org/wiki/Hearing_range
+The reason that $44.1\ k\textrm{Hz}$ produces a good sound for the human ear is because the Nyquist Sampling Theorem. It requires that the sampling frequency must be twice the max frequency being produced, in this case the human ear can hear between 20Hz-20kHz (CITATION NEEDED), so the sampling frequency must be more than 40kHz, which it is.
+
+:TODO: ADD PLOTS FROM ABOVE
 
 #+BEGIN_SRC octave :exports code :results output :session Q1
 clc;
@@ -71,7 +76,7 @@ N = length(Signal);
 f = (-N/2:N/2-1)*(Fs/N);
 
 % Original Audio
-audiowrite('audio.wav', ifft(Signal), Fs);
+audiowrite('Original Audio.wav', ifft(Signal), Fs);
 
 
 magnitude = abs(fftshift(Signal));
@@ -84,17 +89,15 @@ plot(f, magnitude);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
-xlim([-Fs/2 Fs/2]);
 
 subplot(2,1,2);
 plot(f, phase);
 title('Phase Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
-xlim([-Fs/2 Fs/2]);
 
 
-n = 50000;
+n = 100000;
 [magnitudeSorted, idx] = sort(magnitude, 'descend');
 idx = idx(1:n);
 output = zeros(size(Signal));
@@ -102,7 +105,7 @@ for i = 1:n
   output(idx(i)) = Signal(idx(i));
 end
 
-audiowrite('synthesized_audio.wav', ifft(output), Fs);
+audiowrite('synthesised_audio.wav', ifft(output), Fs);
 
 magnitude = abs(fftshift(output));
 phase = angle(fftshift(output));
@@ -114,17 +117,18 @@ plot(f, magnitude);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
-xlim([-Fs/2 Fs/2]);
 
 subplot(2,1,2);
 plot(f, phase);
 title('Phase Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
-xlim([-Fs/2 Fs/2]);
 #+END_SRC
 
 #+RESULTS:
+
+This approach is not linear, the Fourier transform component is linear, however sorting and discarding specific values is not linear. This means that the original is not linearly related to the synthesised audio.
+
 ** 2. Ideal Filtering :TODO:
 
 #+BEGIN_SRC octave :exports code :results output :session Filter
@@ -145,12 +149,20 @@ Chirp = cos(Phi);
 audiowrite('chirp.wav', Chirp, Fs);
 
 magnitudeChirp = abs(fftshift(fft(Chirp)));
+angleChirp = angle(fftshift(fft(Chirp)));
 f = (-N/2:N/2-1)*(Fs/N);
 figure;
+subplot(2,1,1);
 plot(f, magnitudeChirp);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
+grid on;
+subplot(2,1,2);
+plot(f, angleChirp);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
 grid on;
 
 Noise = load('/home/Baley/UTAS/ENG204 - Signals And Linear Systems/Assignment 2.1/noise.mat');
@@ -159,33 +171,47 @@ Noise = Noise.noise;
 audiowrite('noise.wav', Noise, 3200);
 
 magnitudeNoise = abs(fftshift(fft(Noise)));
+angleNoise = angle(fftshift(fft(Noise)));
 f = (-N/2:N/2-1)*(Fs/N);
 figure;
+subplot(2,1,1);
 plot(f, magnitudeNoise);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 grid on;
+subplot(2,1,2);
+plot(f, angleNoise);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
 
 chirp_and_noise = Chirp + Noise;
 audiowrite('chirp_and_noise.wav', chirp_and_noise, 3200);
 
-
 magnitudeCandN = abs(fftshift(fft(chirp_and_noise)));
+angleCandN = angle(fftshift(fft(chirp_and_noise)));
 f = (-N/2:N/2-1)*(Fs/N);
 figure;
+subplot(2,1,1);
 plot(f, magnitudeCandN);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
+grid on;
+subplot(2,1,2);
+plot(f, angleCandN);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
 grid on;
 #+END_SRC
 
 #+RESULTS:
 
 
-
-From the frequency domain plot we can see that there is a large amount of noise at 1000Hz. On top of this there is a small mount of noise across the entire signal. So, to design our filter we will need to remove the 1000Hz component.\\
+From the frequency domain plot we can see that there is a large amount of noise at $\pm$1000Hz. On top of this there is a small mount of noise across the entire signal. So, to design our filter we will need to remove the 1000Hz component.\\
 Our filter must block 1000Hz, so we can define our filter as such:
 \[\begin{align*}
 H(\omega)&=\begin{cases}
@@ -199,55 +225,69 @@ h(t)&=\frac{1}{2\pi jt} \left( e^{j(2000\pi t - 2\pi \Delta\omega t)} - 1 + e^{j
 Here we use $\Delta\omega$, so we can define some tolerance for the filter.
 
 #+BEGIN_SRC octave :exports code :results output :session Filter
-close all
-
 freq = (-N/2:N/2-1)*(Fs/N);
 Df = 1;
-filter = ones(size(freq));
-filter((freq >= -1000 - Df & freq <= -1000 + Df) | (freq >= 1000 - Df & freq <= 1000 + Df)) = 0;
+idealFilter = ones(size(freq));
+idealFilter((freq >= -1000 - Df & freq <= -1000 + Df) | (freq >= 1000 - Df & freq <= 1000 + Df)) = 0;
+#+END_SRC
 
-chirp_and_noise_filtered = fftshift(fft(chirp_and_noise)).*filter;
+#+RESULTS:
+
+However this filter is not causal, to make it causal we can shift the time domain signal, such that most of the signal is causal and then set the values that aren't to zero. The values that are non-causal will have little effect on the result, as we will have shifted the filter enough to make them all close to zero.
+#+BEGIN_SRC octave :exports code :results output :session Filter
+filterTimeDomain = ifft(ifftshift(idealFilter));
+shift = N/100;
+filterTimeDomainShifted = circshift(filterTimeDomain, shift);
+filterTimeDomainShifted(1:shift) = 0;
+filterFourierDomainShifted = fftshift(fft(filterTimeDomainShifted));
+#+END_SRC
+
+#+RESULTS:
+
+Now we can apply the filter:
+#+BEGIN_SRC octave :exports code :results output :session Filter
+chirp_and_noise_filtered = fftshift(fft(chirp_and_noise)).*filterFourierDomainShifted;
 
 magnitudeFiltered = abs(chirp_and_noise_filtered);
+angleFiltered = angle(chirp_and_noise_filtered);
 f = (-N/2:N/2-1)*(Fs/N);
 figure;
+subplot(2,1,1);
 plot(f, magnitudeFiltered);
 title('Magnitude Spectrum');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 grid on;
+subplot(2,1,2);
+plot(f, angleFiltered);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
 
+filterAngle = angle(filterFourierDomainShifted);
+filterMagnitude = abs(filterFourierDomainShifted);
 f = (-N/2:N/2-1)*(Fs/N);
 figure;
-plot(f, filter);
+subplot(2,1,1);
+plot(f, filterMagnitude);
 title('Filter');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 grid on;
-
+subplot(2,1,2);
+plot(f, filterAngle);
+title('Phase Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+grid on;
 
 audiowrite('chirp_and_noise_filtered.wav', ifft(ifftshift(chirp_and_noise_filtered)), 3200);
 #+END_SRC
 
 #+RESULTS:
 
-However, this filter is not causal. To make it cause we need to shift the time domain signal: :TODO:
-#+BEGIN_SRC octave :exports code :results output :session Filter
-close all
-freq = (-N/2:N/2-1)*(Fs/N);
-Df = 3;
-filter = ones(size(freq));
-filter((freq >= -1000 - Df & freq <= -1000 + Df) | (freq >= 1000 - Df & freq <= 1000 + Df)) = 0;
-filterTimeDomain = ifft(fftshift(filter));
-plot(1:length(filterTimeDomain), filterTimeDomain)
-
-#+END_SRC
-
-#+RESULTS:
-
 ** Aliasing and Anti-Aliasing Filters
-
-
 
 
 #+BEGIN_SRC octave :exports code :results output :session Aliasing

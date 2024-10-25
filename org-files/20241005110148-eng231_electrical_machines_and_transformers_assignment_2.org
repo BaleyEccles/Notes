@@ -133,9 +133,9 @@ Phi = B*A;
 #+END_SRC
 
 #+RESULTS:
-: A = 0.061937
-: A = 0.061937
-: d = 0.2489
+: A = 6.1937e-03
+: A = 6.1937e-03
+: d = 0.078700
 
 Next we can find the required reluctance using:
 \[\Phi = \frac{Ni}{\mathfrak{R}}\]
@@ -273,12 +273,12 @@ fprintf("The transformers length is %.3fm\n", l)
 fprintf("The transformers height is %.3fm\n", h)
 fprintf("The transformers depth is %.3fm\n", d)
 fprintf("Winding details:\n")
-fprintf("The number of windings on the primary side is %.3f\n", Np)
-fprintf("The number of layers on the primary side is %.3f\n", NpLayers)
-fprintf("The wire diameter on the primary side is %.3fm\n", wireDiameterP)
-fprintf("The number of windings on the secondary side is %.3f\n", Ns)
-fprintf("The number of layers on the secondary side is %.3f\n", NsLayers)
-fprintf("The wire diameter on the primary side is %.3fm\n", wireDiameterS)
+fprintf("The number of windings on the primary side is %i\n", Np)
+fprintf("The number of layers on the primary side is %i\n", NpLayers)
+fprintf("The wire diameter on the primary side is %.6fm\n", wireDiameterP)
+fprintf("The number of windings on the secondary side is %.0f\n", Ns)
+fprintf("The number of layers on the secondary side is %i\n", NsLayers)
+fprintf("The wire diameter on the primary side is %.6fm\n", wireDiameterS)
 #+END_SRC
 
 #+RESULTS:
@@ -288,12 +288,12 @@ The transformers length is 1.070m
 The transformers height is 0.677m
 The transformers depth is 0.249m
 Winding details:
-The number of windings on the primary side is 1000.000
-The number of layers on the primary side is 3.000
-The wire diameter on the primary side is 0.002m
-The number of windings on the secondary side is 10.497
-The number of layers on the secondary side is 2.000
-The wire diameter on the primary side is 0.003m
+The number of windings on the primary side is 1000
+The number of layers on the primary side is 3
+The wire diameter on the primary side is 0.002030m
+The number of windings on the secondary side is 10
+The number of layers on the secondary side is 2
+The wire diameter on the primary side is 0.003250m
 #+end_example
 
 #+BEGIN_SRC octave :exports none :results output :session Verification
