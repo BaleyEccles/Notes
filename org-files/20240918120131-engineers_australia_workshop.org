@@ -4,6 +4,7 @@
 #+title: Engineers Australia Workshop
 #+date: [2024-09-18 Wed 12:01]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:
 #+STARTUP: latexpreview
 
 * Engineers Australia Workshop

@@ -4,6 +4,7 @@
 #+title: Searching for Placement
 #+date: [2024-08-14 Wed 11:58]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:
 #+STARTUP: latexpreview
 
 * Searching for Placement
