@@ -3,8 +3,8 @@
 :END:
 #+title: ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 6
 #+date: [2024-10-15 Tue 09:24]
-#+AUTHOR: Baley Eccles - 652137
-#+FILETAGS: :Assignment:UTAS:2024:TODO:
+#+AUTHOR: Baley Eccles - 652137 | Kalindu Sahan Wijeweera Wijeweera Patabendige | Michael Fagan
+#+FILETAGS: :Assignment:UTAS:2024:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}
@@ -17,50 +17,380 @@
 * ENG231 - Electrical Machines And Transformers - Assesment 2 Lab 6
 ** Machine Inspection
  - [Group] Report your machine nameplate ratings and DC machine parameters
+Machine nameplate:
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|
+|------------------------------------------------+------+-----------------------------+------|
+| Rated power (W)                                |  175 | Rotor rated voltage         |  120 |
+|------------------------------------------------+------+-----------------------------+------|
+| Rated speed (rpm)                              | 1315 | Rotor rated current         |    1 |
+|------------------------------------------------+------+-----------------------------+------|
+| Rated Frequency (Hz)                           |   50 | tor connection (Y/Δ)        |    Y |
+|------------------------------------------------+------+-----------------------------+------|
+| Stator rated voltage (per phase) (V)           |  240 |                             |      |
+|------------------------------------------------+------+-----------------------------+------|
+| Stator rated current (per phase) (A)           |  0.7 | Number of poles             |    4 |
+|------------------------------------------------+------+-----------------------------+------|
+| Current stator winding connection (Y/$\Delta$) |    Y | Calculated sync speed (rpm) | 1500 |
+|------------------------------------------------+------+-----------------------------+------|
+
+DC machine:
+#+ATTR_LATEX: :environment longtable :align |l|l|
+|----------------------------+----------|
+| Rated armature voltage (A) |      180 |
+|----------------------------+----------|
+| Rated armature current (A) |      2.6 |
+|----------------------------+----------|
+| Rated field voltage (V)    |  200-100 |
+|----------------------------+----------|
+| Rated field current (A)    | 0.25-0.5 |
+|----------------------------+----------|
+
+
 ** DC Test
  - [Group] Report your machine DC test results, commenting on the relative resistances observed for the stator and rotor windings.
+   #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
+   |----------------+-----------+----------+-------------|
+   |                | IM Stator | IM Rotor | DC Armature |
+   |----------------+-----------+----------+-------------|
+   | Vdc (V))       |      32.9 |     40.7 |        16.3 |
+   |----------------+-----------+----------+-------------|
+   | Idc (A)        |      0.69 |     0.99 |         2.6 |
+   |----------------+-----------+----------+-------------|
+   | Rdc ($\Omega$) |     47.68 |    20.55 |        6.26 |
+   |----------------+-----------+----------+-------------|
+   | Rac ($\Omega$) |     54.83 |    23.63 |             |
+   |----------------+-----------+----------+-------------|
+
  - [Individual] Comment on the significance or importance of knowing the AC resistance, especially what it means for the rotor winding resistance
 Having higher AC resistance means that the machine has to spend more energy to overcome the resistance and hence it will produce more heat. Having a higher resistance in the rotor windings will reduce the torque that is produced, due to a larger voltage drop across the resistance.
 ** No Load Test
  - [Group] Accurately record your no-load test measurements in a table.
+   #+ATTR_LATEX: :environment longtable :align |l|l|
+   |---------------------------------+--------|
+   | Line-Line voltage, VLL (V)      |    415 |
+   |---------------------------------+--------|
+   | Line current, IL (A)            |  0.334 |
+   |---------------------------------+--------|
+   | 3-Phase Power, P (W)            |     56 |
+   |---------------------------------+--------|
+   | 3-Phase Reactive Power, Q (VAR) |    235 |
+   |---------------------------------+--------|
+   | Power Factor, PF                |  0.235 |
+   |---------------------------------+--------|
+   | Rotor Speed, $\omega_r$ (rad/s) | 76.707 |
+   |---------------------------------+--------|
+   | Rotor Speed, $n_r$ (rpm)        |   1465 |
+   |---------------------------------+--------|
+
+
  - [Individual] Comment on the observed motor speed. Is it different to what you expected and, if so, why?
 The measured speed is slightly lower than the calculated synchronous speed. This is due to slip, which is caused by the loading conditions. This is no load test, so theoretically there should be no slip, however due to imperfections in the motor, such as the resistance from the DC test, there is a marginal amount of slip.
  - [Group] Calculate the rotational losses? Comment on what relationship you would expect to see between rotational losses and motor speed?
 \[\begin{align*}
-\textrm{Losses} &= P_{\textrm{input}}-P_{\textrm{output}} \\
-&= V_{rms}I_{rms}PF-P_{\textrm{output}} \\
-&= \frac{1}{\sqrt{3}}415\cdot 0.334\cdot 0.235 - \frac{56}{3} \\
-&= 0.1396 W \textrm{ per line} \\
-&= 0.4187 W \textrm{ total}
+R_{ac,stator} &= 27.42\Omega\\
+S &= 3VI \\
+S &= 3 \frac{415}{\sqrt{3}}0.334 \\
+S &= 240 VA \\
+P_{in} &= S\cdot PF \\
+P_{in} &= 240\cdot 0.235\\
+P_{in} &= 56.4 W\\
+P_{Cu} &= 3I^2R_{ac,stator}\\
+P_{Cu} &= 3\cdot0.334^2\cdot 27.42\\
+P_{Cu} &= 9.177 W\\
+P_{ro} &= P_{in}-P_{Cu} \\
+P_{ro} &= 56.4-9.177 \\
+P_{ro} &= 47.22 W
 \end{align*}\]
 We would predict that as the speed $\omega_r$ increases the losses would also increase. This is predicted because as the speed increases the current increases which will increase the winding leakage reactance.
  - [Group] Determine the combined magnetising inductance and winding leakage reactance (Xm + X1)
-:TODO: UNSURE ABOUT THE FOLLOWING CALCULATIONS
-Given that the resistance is negligible, we can find the combined magnetising inductance and winding leakage reactance:
 \[\begin{align*}
-Q &= \frac{V^2}{X_m+X_1} \\
-\Rightarrow X_m+X_1&=\frac{V^2}{Q} \\
-X_m+X_1 &= \frac{(415)^2}{235} \\
-X_m+X_1 &=  732.87 \Omega
+R_{NL} &= \frac{P_{NL}}{3I_1^2} \\
+R_{NL} &= \frac{56}{3\cdot 0.334^2} \\
+R_{NL} &= 167.33 \Omega \\
+\lvert Z_{NL}\rvert &= \frac{V_1}{I_1} \\
+&= \frac{415/\sqrt{3}}{0.334} \\
+&= 717.4 \Omega \\
+X_1+X_m &= \sqrt{Z_{NL}^2-R_{NL}^2} \\
+X_1+X_m &= \sqrt{717.4^2-23.84^2} \\
+X_1+X_m &= 717\Omega
 \end{align*}\]
 
  - [Individual] Now change the supply phase sequence and comment on what you observe. (but remember to change back to ‘normal’ sequence for remainder of lab)
-:TODO:
+Swapping one of the phases causes the motor to spin in the opposite direction. This is a property of three phase systems and induction motors, we have changed the direction of the direction of the rotating magnetic field.
 ** Blocked Rotor Test
  - [Group] Accurately record your blocked rotor test measurements in a table.
- - [Group] Calculate the remaining motor parameters and draw the complete equivalent circuit.
+   #+ATTR_LATEX: :environment longtable :align |l|l|
+   |---------------------------------+-------|
+   | Line-Line voltage, VLL (V)      |   106 |
+   |---------------------------------+-------|
+   | Line current, IL (A)            | 0.701 |
+   |---------------------------------+-------|
+   | 3-Phase Power, P (W)            |   170 |
+   |---------------------------------+-------|
+   | 3-Phase Reactive Power, Q (VAR) |   141 |
+   |---------------------------------+-------|
+   | Power Factor, PF                | 0.769 |
+   |---------------------------------+-------|
 
+ - [Group] Calculate the remaining motor parameters and draw the complete equivalent circuit.
+Stator resistance, from the DC test:
+\[\begin{align*}
+R_1=\frac{V_{dc}}{2I_{dc}} \\
+R_1=\frac{32.9}{2\cdot 0.69} \\
+R_1=23.84 \Omega
+\end{align*}\]
+
+From the blocked rotor test we can calculate the rest of the values:
+\[\begin{align*}
+R_{BR}=\frac{P_{BR}}{3I_1^2}\\
+R_{BR}=\frac{170}{3\cdot 0.701^2}\\
+R_{BR}= 115.3 \Omega \\
+R_2' &= R_{BR}-R_1\\
+R_2' &= 115.3-23.84\\
+R_2' &= 91.48\Omega\\
+\lvert Z_{BR,0.25f}\rvert &= \frac{V_1}{\sqrt{3}I_1} \\
+\lvert Z_{BR,0.25f}\rvert &= \frac{106}{\sqrt{3}\cdot 0.701} \\
+\lvert Z_{BR,0.25f}\rvert &= 199.7 \Omega\\
+X_{BR} &= \frac{\sqrt{\lvert Z_{BR,0.25f}\rvert^2-R_{BR}^2}}{0.25} \\
+X_{BR} &= \frac{\sqrt{199.7^2-115.3^2}}{0.25} \\
+X_{BR} &= 652.2 \Omega \\
+\textrm{as }& X_{BR}\approx X_1+X_2'\\
+X_1=X_2'&=\frac{X_{BR}}{2} \\
+X_1=X_2'&=\frac{652.2}{2} \\
+X_1=X_2'&=326.1\Omega\\
+\textrm{From No-Load test: } X_m &= X_1+X_m-X_1 \\
+X_m &= 717-326.1\\
+X_m &= 390.9 \Omega
+\end{align*}\]
+From this we can draw the equivalent circuit:
+[[file:~/UTAS/ENG231 - Electrical Machines And Transformers/Lab 6/Screenshot 2024-10-27 at 14-01-17 Social and Technical Outcomes - ENG231_LectureSlideSetB7_InductionMotors.pdf.png]]
  - [Individual] Plot a phasor diagram showing current and supply voltage phasors for blocked rotor condition. What would happen (draw new phasors on the diagram) if the voltage was increased to the rated supply voltage but the rotor remained blocked? What would happen next (re-draw phasor diagram again) if the rotor was no longer blocked and the motor was allowed to accelerate up to speed (hint: consider what happens to slip and its impact upon the equivalent circuit)
+If the voltage was increased to the rated supply voltage but the rotor remained blocked the voltage and current phasor would increase in magnitude but their angle would remain similar, in the diagram this is the new green current.\\
+\\
+If the rotor was no longer blocked and the motor was allowed to accelerate up to speed the angle between the current and voltage phasors would decrease, this can be seen as the magenta. \\
+
+#+BEGIN_SRC octave :exports none :results output :session Phasor
+clc
+clear
+close all
+V = 1;
+Imag = 1;
+PF = 0.769;
+phi = acos(0.769);
+
+I = Imag*e^(-j*phi);
+
+Imag2 = 1.5;
+I2 = Imag2*e^(-j*phi);
+
+phi3 = phi - pi/7;
+I3 = Imag*e^(-j*phi3);
+
+figure;
+hold on;
+
+plot([0, real(V)], [0, imag(V)], 'r', 'LineWidth', 2, 'DisplayName', 'V');
+plot([0, real(I2)], [0, imag(I2)], 'g', 'LineWidth', 2, 'DisplayName', 'I increased voltage, still blocked');
+plot([0, real(I)], [0, imag(I)], 'b', 'LineWidth', 2, 'DisplayName', 'I');
+plot([0, real(I3)], [0, imag(I3)], 'm', 'LineWidth', 2, 'DisplayName', 'I, allowed to spin');
+
+xlim([-150, 150]);
+ylim([-2, 2]);
+xlim([-2, 2]);
+
+line([-500 500], [0 0], 'Color', 'k', 'LineWidth', 1, 'HandleVisibility', 'off');
+line([0 0], [-500 500], 'Color', 'k', 'LineWidth', 1, 'HandleVisibility', 'off');
+
+grid on;
+xlabel('Real Part');
+ylabel('Imaginary Part');
+title('Phasor Diagram');
+legend show;
+
+hold off;
+
+filename = sprintf('ENG231-Lab-6-Phasor-1.png');
+print(filename,'-dpng','-r100');
+
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG231-Lab-6-Phasor-1.png]]
+_NOTE:_ Not to scale
 ** Induction Machine Performance Testing
 *** Load test – without external rotor resistance
  - [Individual] {DC machines question} What significant observations can you make when the field current is applied (but with the dc generator load still disconnected)? Explain why?
+There is a field in the core of the DC machine, where it is ready to produce a electromotive force once a load is applied. As there is no load there is also no current.
  - [Individual] What significant change do you now observe and why?
+When the $50\Omega$ load is applied there is an increased load on the DC generator, as there is now a current flowing through the load. And an increased mechanical load on the induction machine, as the DC generator is supplying it.
  - [Group] From your measured data, plot torque vs speed for the induction motor. Comment on the relationship you observe?
+#+BEGIN_SRC octave :exports none :results output :session Q1
+clc
+clear
+close all
+speed = [1262, 1289, 1310, 1329, 1377, 1440, 1460, 1469, 1466];
+torque = [1.47523710486819, 1.22613321476841, 1.08737498171628, 0.950659917501242, 0.67569768540997, 0.245710746758026, 0.0643797677071831, 0.0028127346333725, 0];
+
+plot(speed, torque)
+ylabel('Torque (Nm)')
+xlabel('Speed (rpm)')
+filename = sprintf('ENG231-Lab-Induction-Machine-Torque-Speed.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG231-Lab-Induction-Machine-Torque-Speed.png]]
+The plot appears to be linear, which is to be expected, as we have not saturated the motor. During our test we stayed in the standard operation region, where induction motors have a linear torque speed characteristic.
+
+
  - [Group] Plot motor efficiency vs speed and comment on whether you can relate this observed data to the “ideal efficiency” vs slip relationship?
+
+#+BEGIN_SRC octave :exports none :results output :session Q2
+clc
+clear
+close all
+speed = [1262, 1289, 1310, 1329, 1377, 1440, 1460, 1469, 1466];
+eff = [0.628909429280397, 0.59750208275479, 0.591941391941392, 0.588025641025641, 0.57314705882353, 0.390024291497976, 0.149137529137529, 0.00786713286713287, 0];
+
+plot(speed, eff)
+ylabel('Efficiency')
+xlabel('Speed (rpm)')
+filename = sprintf('ENG231-Lab-Induction-Machine-Eff-Speed.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG231-Lab-Induction-Machine-Eff-Speed.png]]
  - [Group] {Warning: this will require quite a bit of work to answer properly} Using the equivalent circuit you determined for your machine, plot calculated or modelled curves (Torque-speed, and Efficiency-speed (or vs. slip if you prefer)) and compare with the observed or measured data. Discuss any significant differences?
+
+#+BEGIN_SRC octave :exports code :results output :session Q3
+clc
+clear
+close all
+V1 = 415 / sqrt(3);
+R1 = 23.84;
+X1 = 326.1;
+X2 = X1;
+R2 = 91.48;
+Xm = 390.9;
+n_sync = 1500
+w_sync = n_sync*2*pi/60;
+
+slip_range = 0:0.01:1.5;
+
+Torque = zeros(size(slip_range));
+Efficiency = zeros(size(slip_range));
+Speed = zeros(size(slip_range));
+
+for i = 1:length(slip_range)
+    s = slip_range(i);
+
+    V_th = V1 * j*Xm/(R1+j*(X1+Xm));
+    Z_th = (j * Xm * (R1 + j * X1)) / (R1 + j * (X1 + Xm));
+    R_th = real(Z_th);
+    X_th = imag(Z_th);
+
+    Torque(i) = (3 * abs(V_th)^2 * R2 / s) / (w_sync * ((R_th + R2 / s)^2 + (X_th + X2)^2));
+
+    P_out = Torque(i) * (1 - s) * w_sync;
+
+    P_in = 3 * V1^2 / (R1 + R2 / s + ((X1 + X2)^2) / (R1 + R2 / s));
+    Efficiency(i) = P_out / P_in * 100;
+
+    Speed(i) = (1 - s) * n_sync;
+end
+figure;
+plot(Speed, Torque, 'LineWidth', 2);
+hold on;
+xlabel('Speed (RPM)');
+ylabel('Torque (Nm)');
+title('Torque-Speed Curve');
+legend('Modelled Torque-Speed');
+xlim([-100, 1800]);
+grid on;
+filename = sprintf('ENG231-Lab-Induction-Machine-Torque-Speed-theo.png');
+print(filename,'-dpng','-r100');
+
+figure;
+plot(Speed, Efficiency, 'LineWidth', 2);
+hold on;
+xlabel('Speed (RPM)');
+ylabel('Efficiency (%)');
+title('Efficiency-Speed Curve');
+legend('Modelled Efficiency-Speed');
+%xlim([0, 2000]);
+filename = sprintf('ENG231-Lab-Induction-Machine-Eff-Speed-theo.png');
+print(filename,'-dpng','-r100');
+grid on;
+#+END_SRC
+
+#+RESULTS:
+: n_sync = 1500
+
+[[file:ENG231-Lab-Induction-Machine-Torque-Speed-theo.png]]
+The torque speed curve matches the expected shape, however the values do not match, we believe that there is a mistake in the code or the calculations.
+[[file:ENG231-Lab-Induction-Machine-Eff-Speed-theo.png]]
+The efficiency speed curve does not match at all, we would expect as the slip goes to zero, so does the efficiency.
+
 *** Load test – with external rotor resistance
  - [Individual] Take note of what you observe and carefully explain why?
+As we increase the load the speed of the decreased, with more motor resistance slip rises because a larger resistive load requires a greater difference in speed between the rotating field and the rotor.
  - [Individual] Explain what you see happening to rotor current / voltage frequency as you load unload the motor? Choose one operating point and verify that the measured rotor frequency is as expected by comparing with measured motor speed?
+The rotor current increases with the load, as more torque is required to drive the load. This happens because the load requires a larger slip to sustain the load. The rotor frequency increased with load.
  - [Group] From your measured data, plot torque vs speed and efficiency vs speed for the induction motor with external rotor resistance. Comment on the relationship you observe and compare with the motor without external rotor resistance?
+#+BEGIN_SRC octave :exports none :results output :session Q4
+clc
+clear
+close all
+speed = [1157, 1194, 1249, 1306, 1342, 1372, 1383, 1384];
+
+torque = [0.312296472570392, 0.306571670821621, 0.222576771526181, 0.143728781332441, 0.0694713242366962, 0.00927570998789108, 0.00298764076386421, 0.00160552590991435];
+
+
+plot(speed, torque)
+ylabel('Torque (Nm)')
+xlabel('Speed (rpm)')
+filename = sprintf('ENG231-Lab-Induction-Machine-Torque-Speed-2.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG231-Lab-Induction-Machine-Torque-Speed-2.png]]
+
+The torque speed curve with load is also linear, this is once again because the machine is being ran in the linear region.
+The gradient of the curve is shallower when compared to the no load curve. The motor is unable to produce as much torque at an equivalent speed when loaded vs unloaded. This is because there is now a voltage drop across the load, which is ‘stealing’ power from the rest of the machine.
+
+#+BEGIN_SRC octave :exports none :results output :session Q5
+clc
+clear
+close all
+speed = [1157, 1194, 1249, 1306, 1342, 1372, 1383, 1384];
+
+eff = [0.323402366863905, 0.358245866283249, 0.316433946488294, 0.258643724696356, 0.147925407925408, 0.0229774535809019, 0.00801282051282051, 0.00430911680911681];
+
+plot(speed, eff)
+ylabel('Efficiency')
+xlabel('Speed (rpm)')
+filename = sprintf('ENG231-Lab-Induction-Machine-Eff-Speed-2.png');
+print(filename,'-dpng','-r100');
+#+END_SRC
+
+#+RESULTS:
+
+[[file:ENG231-Lab-Induction-Machine-Eff-Speed-2.png]]
+The efficiency of the motor is decreased per unit of speed compared to the no resistance case, this is due to the load. The load requires energy and this will decrease the efficiency. It also appears that the efficiency reduces at a faster rate as the slip goes to zero.
+
  - [Individual] Comment on the performance of the induction motor generally and, in particular, on the different operating characteristics produced by the external rotor resistance.
+
  - [Individual] Reflect on how this lab session has contributed to your learning experience and your understanding of induction motors.
+From this lab I was able to get a better understanding of how induction machines operate.
+\newpage
+Load Test without external rotor resistance:
+ [[file:Screenshot 2024-10-27 at 18-56-22 ENG231 LabSession5 InductionMotors.docx - Google Docs.png]]
+
+Load test with external rotor resistance
+ [[file:Screenshot 2024-10-27 at 18-56-41 ENG231 LabSession5 InductionMotors.docx - Google Docs.png]]
