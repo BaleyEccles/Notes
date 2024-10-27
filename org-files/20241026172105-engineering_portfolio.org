@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       a922a5a1-a65e-4589-a57c-2a82c58ad99e
+:END:
+#+title: Engineering Portfolio
+#+date: [2024-10-26 Sat 17:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Engineering Portfolio
+** PRIMED
+*** McConnell Dowell
+McConnell Dowell, a construction and design company, focused on large civil engineering projects. They have done projects on bridges, train networks and pipelines.
+This company does not fit my interests, as I am doing electrical engineering, and this is a civil engineering company. However, their presentation has given me a better understanding of what is expected as an engineer and how I should interact once I am in their position. Their graduate program seemed interesting, as it would give me experience in many aspects of a project.
+
+*** TasWater
+Their presentation focused on projects that they are currently under taking. Including a staircase at lake Barrington pump site, management of their old sewer pipes and management of a new treatment facility.
+It was interesting hearing about their project management utilities, even though this is not a company that I am too interested in.
+
+*** CPB
+CPB is a civil engineering company that, during their presentation, had talked about their graduate program. Their graduate program seemed very flexible, they take in all sorts of engineers, from civil to project managers.
+Having an understanding of their graduate program gave me a better understanding of how I will need to get into the industry after graduating.
+
+*** Hazell Brothers
+It was nice finally meeting the people of the cement trucks that are seen everywhere. Hazell Brothers is a civil engineering company that has takes contracts around Australia. Hazell Brothers mainly focus on civil engineering, however their company has a lot of interesting aspects when it comes to the way they manage their projects.
+Having an understanding of how they manage their projects will help me in the future for when I am placed in a similar role.
+
+*** Tas Networks
+Tas Networks was the most interesting company to me, as I am doing electrical engineering. One of my lectures work at Tas Networks, having an understanding of how the engineers manage the power grid of Tasmania gave me a deeper appreciation for their job, particularly the control systems that they manage.
+
+*** AECOM
+AECOMs presentation was interesting, they went into detail about how they are going to be building a stadium in Hobart. The project appears to be extremely complicated, as they have to analyse how the world interacts with their buildings, for example they went in depth about how the wind will effect people watching and how they have made their design comfortable for them. Overall, it was enjoyable learning about the work that their engineers do.
+
+** ENG203 Events
+*** Industry Panel session 1
+
+*** Industry Panel session 2
+** TasNetworks Transformers Visit
+** Norske Skog Visit
