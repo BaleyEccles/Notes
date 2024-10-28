@@ -12,7 +12,7 @@
  - Every statistic of $X(t)$ does not depend on $t$, and is self similar.
 *** Wide-Sense Stationary (WSS)
  - $E[X(t)]=\mu_X$ is not a function of time
- - _AND_ $E[X(t)X(t+\tau)=R_{XX}(t)]$ is only a function of $\tau$, and not time explicitly.
+ - _AND_ $E[X(t)X(t+\tau)]=R_{XX}(\tau)$ is only a function of $\tau$, and not time explicitly.
 **** Jointly WSS
  - $X(t)$ and $Y(t)$ are jointly WSS if:
    - Each is WSS on their own
