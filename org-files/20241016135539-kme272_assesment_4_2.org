@@ -8,13 +8,187 @@
 #+STARTUP: latexpreview
 
 * KME272 - Assesment 4.2
- - Do the distributions of male *vs.* female athletes' *age* and *weight* differ? (e.g., are male athletes generally gamma-distributed and female athletes normally distributed? If they both have the same kind of distribution, do they have different characteristics?)
-   - To answer this question you will need to plot histograms of the two categories, for both age and weight, and:
-   - Choose a distribution (or distributions) that you think fit(s) the observed data in the histogram: e.g., gamma, log-normal, uniform, normal, Poisson, etc.
-   - Use the *method of moments* to estimate the parameters for this model from the data.
-   - Use a Q-Q plot or chi-square test with binning (or some other appropriate means), to judge how well this fits the distribution.
-   - Comment on these results to confirm or deny that the male and female athletes' age and weight distributions differ.
 
+
+
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
+OA <- read.csv(file="athlete_events.csv", header=TRUE)
+OA$Medal[which(is.na(OA$Medal))] <- "None"
+OA$Medal <- as.factor(OA$Medal)
+OA$Sex <- as.factor(OA$Sex)
+str(OA)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+'data.frame':	271116 obs. of  15 variables:
+ $ ID    : int  1 2 3 4 5 5 5 5 5 5 ...
+ $ Name  : chr  "A Dijiang" "A Lamusi" "Gunnar Nielsen Aaby" "Edgar Lindenau Aabye" ...
+ $ Sex   : Factor w/ 2 levels "F","M": 2 2 2 2 1 1 1 1 1 1 ...
+ $ Age   : int  24 23 24 34 21 21 25 25 27 27 ...
+ $ Height: int  180 170 NA NA 185 185 185 185 185 185 ...
+ $ Weight: num  80 60 NA NA 82 82 82 82 82 82 ...
+ $ Team  : chr  "China" "China" "Denmark" "Denmark/Sweden" ...
+ $ NOC   : chr  "CHN" "CHN" "DEN" "DEN" ...
+ $ Games : chr  "1992 Summer" "2012 Summer" "1920 Summer" "1900 Summer" ...
+ $ Year  : int  1992 2012 1920 1900 1988 1988 1992 1992 1994 1994 ...
+ $ Season: chr  "Summer" "Summer" "Summer" "Summer" ...
+ $ City  : chr  "Barcelona" "London" "Antwerpen" "Paris" ...
+ $ Sport : chr  "Basketball" "Judo" "Football" "Tug-Of-War" ...
+ $ Event : chr  "Basketball Men's Basketball" "Judo Men's Extra-Lightweight" "Football Men's Football" "Tug-Of-War Men's Tug-Of-War" ...
+ $ Medal : Factor w/ 4 levels "Bronze","Gold",..: 3 3 3 2 3 3 3 3 3 3 ...
+#+end_example
+
+ - Do the distributions of male *vs.* female athletes' *age* and *weight* differ? (e.g., are male athletes generally gamma-distributed and female athletes normally distributed? If they both have the same kind of distribution, do they have different characteristics?)
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
+male_data <- subset(OA, Sex == 'M' & !is.na(Age) & !is.na(Weight) & !is.na(Sex))
+female_data <- subset(OA, Sex == 'F' & !is.na(Age) & !is.na(Weight) & !is.na(Sex))
+
+# Plot histograms and density plots for age
+png("athlete_age_distribution.png", width = 800, height = 800)
+par(mfrow = c(2, 2))
+hist(male_data$Age, main = "Male Athletes' Age", xlab = "Age", col = "blue", breaks = 20)
+hist(female_data$Age, main = "Female Athletes' Age", xlab = "Age", col = "pink", breaks = 20)
+plot(density(male_data$Age), main = "Density of Male Athletes' Age", col = "blue", lwd = 2)
+plot(density(female_data$Age), main = "Density of Female Athletes' Age", col = "pink", lwd = 2)
+dev.off()
+
+png("athlete_weight_distribution.png", width = 800, height = 800)
+par(mfrow = c(2, 2))
+hist(male_data$Weight, main = "Male Athletes' Weight", xlab = "Weight", col = "blue", breaks = 20)
+hist(female_data$Weight, main = "Female Athletes' Weight", xlab = "Weight", col = "pink", breaks = 20)
+plot(density(male_data$Weight, na.rm = TRUE), main = "Density of Male Athletes' Weight", col = "blue", lwd = 2)
+plot(density(female_data$Weight, na.rm = TRUE), main = "Density of Female Athletes' Weight", col = "pink", lwd = 2)
+
+dev.off()
+
+#+END_SRC
+
+#+RESULTS:
+: null device
+:           1
+: null device
+:           1
+
+[[file:athlete_age_distribution.png]]
+
+[[file:athlete_weight_distribution.png]]
+:TODO: TALK ABOUT THE DIIFFERENCE IN DATA
+Both the age and weight for each gender appears to be gamma distributed.
+
+
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
+mom_gamma <- function(data) {
+  mean_est <- mean(data)
+  var_est <- var(data)
+  shape_est <- mean_est^2 / var_est
+  scale_est <- var_est / mean_est
+  return(list(shape=shape_est, scale=scale_est))
+}
+
+mom_gamma_age_male = mom_gamma(male_data$Age)
+print(mom_gamma_age_male)
+mom_gamma_age_female = mom_gamma(female_data$Age)
+print(mom_gamma_age_female)
+
+mom_gamma_weight_male = mom_gamma(male_data$Weight)
+print(mom_gamma_weight_male)
+mom_gamma_weight_female = mom_gamma(male_data$Weight)
+print(mom_gamma_weight_female)
+
+# Age - Male
+png("male_age_gamma.png", width = 800, height = 800)
+hist(male_data$Age, probability = TRUE, main="Gamma Fit for Age - Males", xlab="Age", col="lightblue", breaks=20)
+curve(dgamma(x, shape=mom_gamma_age_male$shape, scale=mom_gamma_age_male$scale),
+      col="blue", lwd=2, add=TRUE)
+dev.off()
+
+# Age - Female
+png("female_age_gamma.png", width = 800, height = 800)
+hist(female_data$Age, probability = TRUE, main="Gamma Fit for Age - Females", xlab="Age", col="lightpink", breaks=20)
+curve(dgamma(x, shape=mom_gamma_age_female$shape, scale=mom_gamma_age_female$scale),
+      col="red", lwd=2, add=TRUE)
+dev.off()
+
+# Weight - Male
+png("male_weight_gamma.png", width = 800, height = 800)
+hist(male_data$Weight, probability = TRUE, main="Gamma Fit for Weight - Males", xlab="Weight", col="lightblue", breaks=20)
+curve(dgamma(x, shape=mom_gamma_weight_male$shape, scale=mom_gamma_weight_male$scale),
+      col="blue", lwd=2, add=TRUE)
+dev.off()
+
+# Weight - Female
+png("female_weight_gamma.png", width = 800, height = 800)
+hist(female_data$Weight, probability = TRUE, main="Gamma Fit for Weight - Females", xlab="Weight", col="lightpink", breaks=20)
+curve(dgamma(x, shape=mom_gamma_weight_female$shape, scale=mom_gamma_weight_female$scale),
+      col="red", lwd=2, add=TRUE)
+dev.off()
+#+END_SRC
+
+#+RESULTS:
+: null device
+:           1
+: null device
+:           1
+: null device
+:           1
+: null device
+:           1
+#+ATTR_ORG: :width 300
+[[file:male_age_gamma.png]]
+[[file:male_weight_gamma.png]]
+[[file:female_age_gamma.png]]
+[[file:female_weight_gamma.png]]
+
+It looks like the gamma distribution fits all the distributions, but the female weight one.
+   - Use a Q-Q plot or chi-square test with binning (or some other appropriate means), to judge how well this fits the distribution.
+
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
+# Generate theoretical quantiles from the fitted gamma distribution
+gamma_qq_plot <- function(data, shape, scale, main_title) {
+  # Sort data and calculate theoretical quantiles
+  theoretical_quantiles <- qgamma(ppoints(length(data)), shape = shape, scale = scale)
+  # Plot Q-Q plot
+  qqplot(theoretical_quantiles, sort(data), main = main_title,
+         xlab = "Theoretical Quantiles", ylab = "Sample Quantiles")
+  abline(0, 1, col = "red")  # Adds a reference line
+}
+
+png("male_age_qq.png", width = 800, height = 800)
+gamma_qq_plot(male_data$Age, shape = mom_gamma_age_male$shape,
+              scale = mom_gamma_age_male$scale, main_title = "Q-Q Plot for Gamma Fit - Age (Males)")
+dev.off()
+png("female_age_qq.png", width = 800, height = 800)
+gamma_qq_plot(female_data$Age, shape = mom_gamma_age_female$shape,
+              scale = mom_gamma_age_female$scale, main_title = "Q-Q Plot for Gamma Fit - Age (Females)")
+dev.off()
+png("male_weight_qq.png", width = 800, height = 800)
+gamma_qq_plot(male_data$Weight, shape = mom_gamma_weight_male$shape,
+              scale = mom_gamma_weight_male$scale, main_title = "Q-Q Plot for Gamma Fit - Weight (Males)")
+dev.off()
+png("female_weight_qq.png", width = 800, height = 800)
+gamma_qq_plot(female_data$Weight, shape = mom_gamma_weight_female$shape,
+              scale = mom_gamma_weight_female$scale, main_title = "Q-Q Plot for Gamma Fit - Weight (Females)")
+dev.off()
+#+END_SRC
+
+#+RESULTS:
+: null device
+:           1
+: null device
+:           1
+: null device
+:           1
+: null device
+:           1
+#+ATTR_ORG: :width 300
+[[file:male_age_qq.png]]
+[[file:female_age_qq.png]]
+[[file:male_weight_qq.png]]
+[[file:female_weight_qq.png]]
+
+   - Comment on these results to confirm or deny that the male and female athletes' age and weight distributions differ.
+From the Q-Q plots it appears that the gamma distribution fits the male and female age well, and the male weight but not the female weight. This is because most of the points are close to the line with the age and male weight, but no the female weight. This suggests that the female weight is not gamma distributed.
  - Select a favourite sport and create a copy of the data containing only data for that sport. For example, if you were interested in curling, you might use ~Athletics <- OA[which(OA$Sport=="Athletics"),]~.  Now, answer these questions:
    - Are the heights, weights and ages of athletes in this sport *changing* over time?
    - Is there a change in the distribution of BMI over time?  The BMI is calculated as (mass in kg) / (height in metres, squared).  For example, someone 1.8m tall with a mass of 80kg has a BMI of $(80/(1.8^2)) \approx 24.7.$
@@ -25,5 +199,5 @@
  - The various countries often compete for medal tally: the total number of medals won, number of golds, etc.  Use the data set to estimate the following:
    - What is the country that tends to win the most medals per athlete?
    - The country with the most extreme (non-infinite) bias in male:female athletes (that is, the one with the highest or lowest ratio of the two).
-   - The conditional probability that, given you are an American athlete (USA), you will win a medal (you can do this using just one line of the CountrySummary data frame)
+   - The conditional probability that, given you are an American athlete (USA), you will win a medal (you can do this using just one line of the OA data frame)
    - **Optional extension:** What, if anything, strikes you as interesting or surprising in this aspect of the data? Explain and provide a statistical analysis to test this.  (E.g., if you think it one country excels in a particular sport or event, calculate some statistic that illustrates, or possibly disproves, your point.)
