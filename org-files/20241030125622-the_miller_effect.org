@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       1c559316-5797-465c-b720-2e62215ac4d0
+:END:
+#+title: The Miller Effect
+#+date: [2024-10-30 Wed 12:56]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* The Miller Effect
+ - [[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductor]] devices create a capacitance known as the Miller Effect at high frequencies.
+ - This needs to be considered when finding the frequency response.
+** [[id:47517c75-582b-4948-a2a7-f88e883e7b65][Bipolar Junction Transistors]]
+ - On the input side
+   - \[f_{Hi}=\frac{1}{2\pi R_{Th_i}C_i}\]
+     - $R_{Th_i}$ is the Thévenin resistance from the input Miller capacitor.
+     - $C_i$ is the input Miller capacitance
+       - \[C_i=C_{W_i}+C_{be}+C_{M_i}=C_{W_i}+C_{be}+(1-A_v)C_{bc}\]
+ - On the output side
+   - \[f_{Ho}=\frac{1}{2\pi R_{Th_o}C_o}\]
+     - $R_{Th_o}$ is the Thévenin resistance from the output Miller capacitor.
+     - $C_o$ is the output Miller capacitance
+       - \[C_o=C_{W_o}+C_{ce}+C_{M_o}\approx C_{W_o}+C_{ce}+C_{bc}\]

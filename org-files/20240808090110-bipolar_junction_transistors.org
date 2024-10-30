@@ -40,5 +40,35 @@ Solve for the DC Q-point then use:
  - Equations
    - \[r_e=\frac{26mV}{I_E}\]
    - \[A_{v}=\frac{-Z_o}{r_{e}}\]
+** Frequency Response
+To determent what frequencies will work with the BJT we need to look at the capacitors.
+ - There are two calculations we need to do
+ - We can use [[id:79b422d5-ff34-41ab-8b86-67e6ecfc68ad][Bode Plots]] to represent the frequency response
+*** Low frequency
+ - We are trying to find the lowest frequency that will work for the current BJT configuration
+   - So, we need to take the largest of:
+     - The base input capacitor
+     - The collector output capacitor
+     - The any other capacitor
+       - Example: emitter bypass capacitor
+   - Using the following equation
+     - \[f_{1}=\frac{1}{2\pi R C\]
+     - Where:
+       - $R$ can be found by assuming the other capacitors are short circuits
+         - And finding the equivalent resistance
+       - $C$ is the current capacitor being analysed
+*** High frequency
+ - We are trying to find the highest frequency that will work for the current BJT configuration
+   - $C_S$, $C_E$ and $C_C$ are not considered at high frequencies
+   - So, we need to take the smallest of:
+     - The collector bypass capacitor
+     - The [[id:1c559316-5797-465c-b720-2e62215ac4d0][Miller capacitance]]
+   - Using the following equation
+     - \[f_{2}=\frac{1}{2\pi R C\]
+     - Where:
+       - $R$ can be found by assuming the other capacitors are short circuits
+         - And finding the equivalent resistance
+       - $C$ is the current capacitor being analysed
 ** Applications
  - [[id:ed52bfdf-bd23-4e2b-9853-257336d81a40][Darlington Configuration]]
+ -
