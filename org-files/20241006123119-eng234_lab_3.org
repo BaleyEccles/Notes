@@ -56,28 +56,100 @@ Resistors: 10Ω, 12Ω, 15Ω, 18Ω, 22Ω, 27Ω, 33Ω, 39Ω, 47Ω, 56Ω, 68Ω, 82 
  - R2 = 1M
 
 
+*** Bill of Materials
+|-------------+----------+-------+--------------------+-------------|
+| Item Number | Quantity | Value | Identifier         | Part number |
+|-------------+----------+-------+--------------------+-------------|
+|           1 |        2 |       | Q1, Q2             | 2N2222      |
+|           2 |        4 | 1uF   | C1, C2, C3, C4, C5 | ECA-2WHG010 |
+|           3 |        1 | 1M    | RB1                | CF14JT1M00  |
+|           4 |        1 | 100k  | R1                 | CF14JT100K  |
+|           5 |        1 | 56k   | R2                 | CF14JT56K0  |
+|           6 |        1 | 5.6k  | RC2, RE2           | CF14JT5K60  |
+|           7 |        1 | 1k    | RE1                | CF14JT1K00  |
+|-------------+----------+-------+--------------------+-------------|
+
+
 
 *** Calculations
-#+BEGIN_SRC octave :exports both :results output :session Calc
-clear
+#+BEGIN_SRC octave :exports both :results output :session Gain
 clc
+clear
 close all
+pkg load optim
+Av = [-85.71428571, -97.25, -78.23076923, -49.14285714, -34.71428571, -19.07142857];
+Av = -Av;
+R = [462, 1180, 2170, 5610, 9790, 21800];
 
-%% VALUES
-% Emitter follower
-CEmitterIn = ;
-REmitter1 = ;
-REmitter2 = ;
-CEmitterOut = ;
+% Fit an exponential decay function
+fitFunc = @(params, x) params(1) * exp(-params(2) * x);
+initial_guess = [100, 1e-5];  % Initial guesses for a and b
 
-CVoltDivIn = CEmitterOut;
-RVoltDiv1 = ;
-RVoltDiv2 = ;
-RVoltDivE = ;
-RVoltDivC = ;
+% Perform non-linear least squares fitting
+opt_params = lsqcurvefit(fitFunc, initial_guess, R, Av);
 
+% Get optimized parameters
+a_opt = opt_params(1);
+b_opt = opt_params(2);
 
+% Generate fitted values
+R_fit = linspace(min(R), max(R), 100);
+Av_fit = fitFunc([a_opt, b_opt], R_fit);
 
-ZEmitterIn = R1
+figure;
+plot(R_fit, Av_fit, 'b-', 'LineWidth', 2.5);
+
+xlabel('Resistance (Ω)');
+ylabel('Gain');
+title('Gain Equation For The Amplifier');
+grid on;
+ylim([10, 50])
+fprintf('Equation for determining gain %.4e*e^(-%.4e*R)\n', a_opt, b_opt);
 
 #+END_SRC
+
+#+RESULTS:
+: Equation for determining gain 9.6728e+01*e^(-9.8617e-05*R)
+
+#+BEGIN_SRC octave :exports both :results output :session Gain2
+clc
+clear
+close all
+pkg load optim
+Av = [-85.71428571, -97.25, -78.23076923, -49.14285714, -34.71428571, -19.07142857];
+Av = -Av;
+R = [462, 1180, 2170, 5610, 9790, 21800];
+
+% Define the logarithmic function for fitting
+fitFunc = @(params, x) params(1) * log(x) + params(2);
+initial_guess = [100, 1*10^3];  % Initial guesses for a and b
+
+% Perform non-linear least squares fitting
+opt_params = lsqcurvefit(fitFunc, initial_guess, Av, R);
+
+% Get optimized parameters
+a_opt = opt_params(1);
+b_opt = opt_params(2);
+
+% Generate fitted values
+Av_fit = linspace(min(Av), max(Av), 100);
+R_fit = fitFunc([a_opt, b_opt], Av_fit);
+
+
+% Plotting the results
+figure;
+hold on;
+plot(Av_fit, R_fit, 'b-', 'LineWidth', 2.5);
+plot(Av, R, 'ro', 'LineWidth', 2.5);
+xlabel('Gain (Av)');
+ylabel('Resistance (Ω)');
+title('Gain Equation For The Amplifier');
+grid on;
+filename = sprintf('Zin-Av-Equation-Graph.png');
+print(filename,'-dpng','-r100');
+
+fprintf('Equation for determining input impedance %.3e log(Av) + %.3e \n', a_opt, b_opt);
+#+END_SRC
+
+#+RESULTS:
+: Equation for determining input impedance -1.251e+04 log(Av) + 5.640e+04
