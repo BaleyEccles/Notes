@@ -8,8 +8,7 @@
 
 * Topics
  - [[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductors]]
- - [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]]
- - [[id:47517c75-582b-4948-a2a7-f88e883e7b65][Bipolar Junction Transistors]]
+ -
 
 * Assesment
 ** Assessment Task 1: Semester Test

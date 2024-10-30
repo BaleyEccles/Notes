@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       d2abe7ed-6ee0-4f34-9208-518825748c48
+:END:
+#+title: Operational Amplifiers
+#+date: [2024-10-30 Wed 14:32]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Operational Amplifiers (Op Amps)
+[[file:Screenshot 2024-10-30 at 14-33-32 Pre-notes - Operational amplifiers.pdf.png]]
+** Equations
+*** DC
+ - \[V_d=V_+-V_-\]
+ - \[A_d=\frac{V_o}{V_d}\]
+ - \[A_c=\frac{V_o}{V_c}\]
+ - \[CMRR = \frac{A_d}{A_c}\]
+*** Ideal Op Amp
+ - \[A_v=\infty\]
+ - \[R_i=\infity \Omega\]
+ - \[R_o=0\Omega\]
+ - \[I_+=I_-=0A\]
+ - \[V_+=V_-\]
+** Types
+*** Inverting Amplifier
+ - [[file:Screenshot 2024-10-30 at 14-39-45 Pre-notes - Operational amplifiers.pdf.png]]
+ - \[V_o=-\frac{R_f}{R_1}V_1\]
+*** Non-Inverting Amplifier
+ - [[file:Screenshot 2024-10-30 at 14-40-33 Pre-notes - Operational amplifiers.pdf.png]]
+ - \[V_o=\left(1+\frac{R_f}{R_1}\right) V_1\]
+*** Voltage Follower (Unity Follower)
+ - [[file:Screenshot 2024-10-30 at 14-41-55 Pre-notes - Operational amplifiers.pdf.png]]
+*** Summing Amplifier
+ - [[file:Screenshot 2024-10-30 at 14-42-31 Pre-notes - Operational amplifiers.pdf.png]]
+ - \[V_o=-\left( \frac{R_f}{R_1}V_1+\frac{R_f}{R_2}V_2 + \frac{R_f}{R_3}V_3 + ...\right)\]
+*** Integrator
+ - [[file:Screenshot 2024-10-30 at 14-43-59 Pre-notes - Operational amplifiers.pdf.png]]
+ - \[\frac{V_o}{V_1}=\frac{-1}{sCR}\]
+ - \[V_o(t)=-\frac{1}{RC}\int V_1(t)dt\]
+*** Differentiator
+ - [[file:Screenshot 2024-10-30 at 14-45-20 Pre-notes - Operational amplifiers.pdf.png]]
+ - \[V_o(t)=-RC \frac{dV_1(t)}{dt}\]
+*** Summing integrator
+ - [[file:Screenshot 2024-10-30 at 14-46-32 Pre-notes - Operational amplifiers.pdf.png]]
+ - \[V_o(t)=-\left[\frac{1}{R_1C}\int V_1(t)dt +\frac{1}{R_2C}\int V_2(t)dt + \frac{1}{R_3C}\int V_3(t)dt + ...\right]\]
+*** Input voltage offset $V_{IO}$
+ - [[file:Screenshot 2024-10-30 at 14-49-57 Pre-notes - Operational amplifiers.pdf.png]]
+ - \[V_o=AV_i=A\left( V_{IO}-V_{o}\frac{R_1}{R_1+R_f} \right)\]
+ - \[V_{o}(offset)=V_{IO}\frac{R_1+R_f}{R_1}\]
+*** Input current offset
+ - [[file:Screenshot 2024-10-30 at 14-51-25 Pre-notes - Operational amplifiers.pdf.png]]
+ - \[V_o=I_{IB}^+R_C+R_fI_{IO}\]

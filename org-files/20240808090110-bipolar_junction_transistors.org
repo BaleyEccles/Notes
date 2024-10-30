@@ -71,4 +71,4 @@ To determent what frequencies will work with the BJT we need to look at the capa
        - $C$ is the current capacitor being analysed
 ** Applications
  - [[id:ed52bfdf-bd23-4e2b-9853-257336d81a40][Darlington Configuration]]
- -
+ - [[id:d2abe7ed-6ee0-4f34-9208-518825748c48][Operational Amplifiers]]
