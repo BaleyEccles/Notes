@@ -126,14 +126,36 @@ dev.off()
 #+END_SRC
 
 #+RESULTS:
-: null device
-:           1
-: null device
-:           1
-: null device
-:           1
-: null device
-:           1
+#+begin_example
+$shape
+[1] 22.97346
+
+$scale
+[1] 1.117522
+$shape
+[1] 18.38664
+
+$scale
+[1] 1.293223
+$shape
+[1] 32.90154
+
+$scale
+[1] 2.303424
+$shape
+[1] 32.90154
+
+$scale
+[1] 2.303424
+null device
+          1
+null device
+          1
+null device
+          1
+null device
+          1
+#+end_example
 #+ATTR_ORG: :width 300
 [[file:male_age_gamma.png]]
 [[file:male_weight_gamma.png]]
@@ -187,17 +209,234 @@ dev.off()
 [[file:male_weight_qq.png]]
 [[file:female_weight_qq.png]]
 
+
    - Comment on these results to confirm or deny that the male and female athletes' age and weight distributions differ.
+     :TODO: TALK ABOUT HOW THEY DIFFER
 From the Q-Q plots it appears that the gamma distribution fits the male and female age well, and the male weight but not the female weight. This is because most of the points are close to the line with the age and male weight, but no the female weight. This suggests that the female weight is not gamma distributed.
+
  - Select a favourite sport and create a copy of the data containing only data for that sport. For example, if you were interested in curling, you might use ~Athletics <- OA[which(OA$Sport=="Athletics"),]~.  Now, answer these questions:
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
+Football <- OA[which(OA$Sport=="Football"),]
+#str(Football)
+#+END_SRC
+
+#+RESULTS:
+
    - Are the heights, weights and ages of athletes in this sport *changing* over time?
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
+library(ggplot2)
+Football_height_clean <- Football[is.finite(Football$Height) & is.finite(Football$Year), ]
+Football_weight_clean <- Football[is.finite(Football$Weight) & is.finite(Football$Year), ]
+Football_age_clean <- Football[is.finite(Football$Age) & is.finite(Football$Year), ]
+
+
+png("football_height_time.png", width = 800, height = 800)
+ggplot(Football_height_clean, aes(x = Year, y = Height)) +
+  geom_point(color = "blue", alpha = 0.5) +
+  geom_smooth(method = "loess", color = "red", se = FALSE) +
+  labs(title = "Height Over Time", x = "Year", y = "Height (cm)") +
+  theme_minimal()
+dev.off()
+
+png("football_weight_time.png", width = 800, height = 800)
+ggplot(Football_weight_clean, aes(x = Year, y = Weight)) +
+  geom_point(color = "blue", alpha = 0.5) +
+  geom_smooth(method = "loess", color = "red", se = FALSE) +
+  labs(title = "Weight Over Time", x = "Year", y = "Weight (kg)") +
+  theme_minimal()
+dev.off()
+
+png("football_age_time.png", width = 800, height = 800)
+ggplot(Football_age_clean, aes(x = Year, y = Age)) +
+  geom_point(color = "blue", alpha = 0.5) +
+  geom_smooth(method = "loess", color = "red", se = FALSE) +
+  labs(title = "Age Over Time", x = "Year", y = "Age (years)") +
+  theme_minimal()
+dev.off()
+#+END_SRC
+
+#+RESULTS:
+: [1m[22m`geom_smooth()` using formula = 'y ~ x'
+: null device
+:           1
+: [1m[22m`geom_smooth()` using formula = 'y ~ x'
+: null device
+:           1
+: [1m[22m`geom_smooth()` using formula = 'y ~ x'
+: null device
+:           1
+
+#+ATTR_ORG: :width 300
+[[file:football_height_time.png]]
+[[file:football_weight_time.png]]
+[[file:football_age_time.png]]
+
+The weight has gone down considerably since the start of the data being recorded. The height has remained relatively constant over time. Both the weight and height have a bump around 1980, which is not present in the age. The age has also remained mostly constant over time.
+
    - Is there a change in the distribution of BMI over time?  The BMI is calculated as (mass in kg) / (height in metres, squared).  For example, someone 1.8m tall with a mass of 80kg has a BMI of $(80/(1.8^2)) \approx 24.7.$
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
+Football$BMI <- Football$Weight/(((10^-2)*Football$Height)^2)
+png("football_BMI_time.png", width = 800, height = 800)
+ggplot(Football, aes(x = Year, y = BMI)) +
+  geom_point(color = "blue", alpha = 0.5) +
+  geom_smooth(method = "loess", color = "red", se = FALSE) +
+  labs(title = "BMI Over Time", x = "Year", y = "BMI (kg/m^2)") +
+  theme_minimal()
+dev.off()
+#+END_SRC
+
+#+RESULTS:
+: [1m[22m`geom_smooth()` using formula = 'y ~ x'
+: Warning messages:
+: 1: [1m[22mRemoved 2213 rows containing non-finite outside the scale range (`stat_smooth()`).
+: 2: [1m[22mRemoved 2213 rows containing missing values or values outside the scale range (`geom_point()`).
+: null device
+:           1
+
+#+ATTR_ORG: :width 300
+[[file:football_BMI_time.png]]
+The BMI has changed over time, it has gone down.
+
    - **Extension:** Does being *taller*, *heavier* or *older* help you *win* in this sport? (That is, are medallists significantly taller, etc., than non-medallists in this sport? By how much?)
+
+
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1 :TODO: SAVE PLOTS
+library(ggplot2)
+library(dplyr)
+
+# Filter medalists and non-medalists
+medal_data <- Football %>% filter(!is.na(Medal))
+non_medal_data <- Football %>% filter(is.na(Medal))
+
+# Filter out non-finite values for Height, Weight, and Age for plotting
+Football_clean <- Football %>%
+  filter(is.finite(Height), is.finite(Weight), is.finite(Age))
+
+# Plot distributions of heights, separated by medal category and sex
+ggplot(Football_clean, aes(x = Height, fill = Medal)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~ Sex) +
+  labs(title = "Height Distribution by Medal Category and Sex", x = "Height (cm)", y = "Density") +
+  theme_minimal()
+
+# Plot distributions of weights, separated by medal category and sex
+ggplot(Football_clean, aes(x = Weight, fill = Medal)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~ Sex) +
+  labs(title = "Weight Distribution by Medal Category and Sex", x = "Weight (kg)", y = "Density") +
+  theme_minimal()
+
+# Plot distributions of ages, separated by medal category and sex
+ggplot(Football_clean, aes(x = Age, fill = Medal)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~ Sex) +
+  labs(title = "Age Distribution by Medal Category and Sex", x = "Age (years)", y = "Density") +
+  theme_minimal()
+
+# Calculate mean height, weight, and age for each group (Medalist vs Non-Medalist)
+summary_stats <- Football %>%
+  group_by(Medal) %>%
+  summarize(
+    Mean_Height = mean(Height, na.rm = TRUE),
+    Mean_Weight = mean(Weight, na.rm = TRUE),
+    Mean_Age = mean(Age, na.rm = TRUE),
+    Count = n()
+  )
+
+# Display the summary statistics
+print(summary_stats)
+
+#+END_SRC
+
+#+RESULTS:
+: [38;5;246m# A tibble: 4 × 5[39m
+:   Medal  Mean_Height Mean_Weight Mean_Age Count
+:   [3m[38;5;246m<fct>[39m[23m        [3m[38;5;246m<dbl>[39m[23m       [3m[38;5;246m<dbl>[39m[23m    [3m[38;5;246m<dbl>[39m[23m [3m[38;5;246m<int>[39m[23m
+: [38;5;250m1[39m Bronze        176.        71.0     24.1   543
+: [38;5;250m2[39m Gold          175.        70.2     24.6   515
+: [38;5;250m3[39m None          175.        70.4     23.5  [4m5[24m174
+: [38;5;250m4[39m Silver        176.        71.0     23.8   513
+
    - To answer this question you could begin by plotting distributions of heights, separated into male and female athletes, for each medal category, and then estimate the distribution, or mean height of medal winners and compare it with the mean heights of the non-medallists: are they the same?
+|   | Medal  | Mean Height | Mean Weight | Mean Age | Count |
+| 1 | Bronze |        176. |        71.0 |     24.1 |   543 |
+| 2 | Gold   |        175. |        70.2 |     24.6 |   515 |
+| 3 | None   |        175. |        70.4 |     23.5 |  5174 |
+| 4 | Silver |        176. |        71.0 |     23.8 |   513 |
+Height and weight appear to be non-factors, the mean of each medal are similar to one another. The age appears to be a minor factor, being slightly older increases your chances of getting a medal.
    - **Extension:** Is this a good representation of how the general human population has changed in the last 120 years?  Justify your answer.
+This data does not represent how the general human population has nagged over time, as this data only includes Olympic athletes. The general population is not an Olympic athlete, so this data should not be used to estimate the general population. On top of that there are many factors that have may have changed in Olympic athletes and not other people, for example, Olympic athletes are more inclined to maintain a healthier diet. This data represents the *peak* human, and not the general population.
 
  - The various countries often compete for medal tally: the total number of medals won, number of golds, etc.  Use the data set to estimate the following:
    - What is the country that tends to win the most medals per athlete?
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1 :TODO: SAVE PLOTS
+library(dplyr)
+
+# Calculate medals per athlete by country
+medals_per_athlete <- OA %>%
+  filter(!is.na(Medal)) %>%
+  group_by(NOC) %>%
+  summarize(
+    Total_Medals = n(),
+    Unique_Athletes = n_distinct(ID),
+    Medals_per_Athlete = Total_Medals / Unique_Athletes
+  ) %>%
+  arrange(desc(Medals_per_Athlete))
+
+# Display the top country
+head(medals_per_athlete, 1)
+#+END_SRC
+
+#+RESULTS:
+: [38;5;246m# A tibble: 1 × 4[39m
+:   NOC   Total_Medals Unique_Athletes Medals_per_Athlete
+:   [3m[38;5;246m<chr>[39m[23m        [3m[38;5;246m<int>[39m[23m           [3m[38;5;246m<int>[39m[23m              [3m[38;5;246m<dbl>[39m[23m
+: [38;5;250m1[39m LIE            369             131               2.82
+
+|   | NOC | Total_Medals | Unique_Athletes | Medals_per_Athlete |
+| 1 | NZL |           80 |              58 |               1.38 |
+
    - The country with the most extreme (non-infinite) bias in male:female athletes (that is, the one with the highest or lowest ratio of the two).
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1 :TODO: SAVE PLOTS
+# Calculate male-to-female ratio by country
+gender_ratio <- OA %>%
+  group_by(NOC) %>%
+  summarize(
+    Male_Athletes = sum(Sex == "M"),
+    Female_Athletes = sum(Sex == "F"),
+    Male_Female_Ratio = Male_Athletes / Female_Athletes
+  ) %>%
+  filter(is.finite(Male_Female_Ratio)) %>%
+  arrange(desc(abs(log(Male_Female_Ratio))))  # To find the most extreme ratio
+
+# Display the top country with extreme male-to-female ratio
+head(gender_ratio, 1)
+
+#+END_SRC
+
+#+RESULTS:
+: [38;5;246m# A tibble: 1 × 4[39m
+:   NOC   Male_Athletes Female_Athletes Male_Female_Ratio
+:   [3m[38;5;246m<chr>[39m[23m         [3m[38;5;246m<int>[39m[23m           [3m[38;5;246m<int>[39m[23m             [3m[38;5;246m<dbl>[39m[23m
+: [38;5;250m1[39m BOH             151               2              75.5
+
+
+|   | NOC | Male_Athletes | Female_Athletes | Male_Female_Ratio |
+| 1 | BOH |           151 |               2 |              75.5 |
+
    - The conditional probability that, given you are an American athlete (USA), you will win a medal (you can do this using just one line of the OA data frame)
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1 :TODO: SAVE PLOTS
+# Conditional probability that a USA athlete wins a medal
+usa_medal_probability <- OA %>%
+  filter(OA$NOC == "USA") %>%
+  summarize(Probability = mean(!is.na(Medal)))
+
+usa_medal_probability
+
+#+END_SRC
+
+#+RESULTS:
+: Probability
+: 1           1
+
    - **Optional extension:** What, if anything, strikes you as interesting or surprising in this aspect of the data? Explain and provide a statistical analysis to test this.  (E.g., if you think it one country excels in a particular sport or event, calculate some statistic that illustrates, or possibly disproves, your point.)
