@@ -6,11 +6,18 @@
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :Assignment:TODO:UTAS:2024:
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage[backend=biber,style=apa]{biblatex}
+#+LATEX_HEADER_EXTRA: \addbibresource{ENG204-Ass2.bib}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
 
 * KME272 - Assesment 4.2
-
-
-
+** Olympic Athlete Analysation
 #+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 OA <- read.csv(file="athlete_events.csv", header=TRUE)
 OA$Medal[which(is.na(OA$Medal))] <- "None"
@@ -39,7 +46,7 @@ str(OA)
  $ Medal : Factor w/ 4 levels "Bronze","Gold",..: 3 3 3 2 3 3 3 3 3 3 ...
 #+end_example
 
- - Do the distributions of male *vs.* female athletes' *age* and *weight* differ? (e.g., are male athletes generally gamma-distributed and female athletes normally distributed? If they both have the same kind of distribution, do they have different characteristics?)
+To determine how each genders height and weight is distributed we can look at their histograms and make guesses from there. However we will need to do more analysis to verify our findings. From the histograms we can also find how the genders differ from one another.
 #+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 male_data <- subset(OA, Sex == 'M' & !is.na(Age) & !is.na(Weight) & !is.na(Sex))
 female_data <- subset(OA, Sex == 'F' & !is.na(Age) & !is.na(Weight) & !is.na(Sex))
@@ -70,13 +77,13 @@ dev.off()
 : null device
 :           1
 
+#+ATTR_ORG: :width 300
 [[file:athlete_age_distribution.png]]
-
 [[file:athlete_weight_distribution.png]]
-:TODO: TALK ABOUT THE DIIFFERENCE IN DATA
-Both the age and weight for each gender appears to be gamma distributed.
 
+Both the age and weight for each gender appears to be gamma distributed. Males appear to be slightly heavier than females. Both males and females appear most frequently at the same age.
 
+We can use the method of moments technique to fit a distribution to the histograms.
 #+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 mom_gamma <- function(data) {
   mean_est <- mean(data)
@@ -93,7 +100,7 @@ print(mom_gamma_age_female)
 
 mom_gamma_weight_male = mom_gamma(male_data$Weight)
 print(mom_gamma_weight_male)
-mom_gamma_weight_female = mom_gamma(male_data$Weight)
+mom_gamma_weight_female = mom_gamma(female_data$Weight)
 print(mom_gamma_weight_female)
 
 # Age - Male
@@ -143,12 +150,10 @@ $shape
 $scale
 [1] 2.303424
 $shape
-[1] 32.90154
+[1] 34.55202
 
 $scale
-[1] 2.303424
-null device
-          1
+[1] 1.737214
 null device
           1
 null device
@@ -162,18 +167,43 @@ null device
 [[file:female_age_gamma.png]]
 [[file:female_weight_gamma.png]]
 
-It looks like the gamma distribution fits all the distributions, but the female weight one.
-   - Use a Q-Q plot or chi-square test with binning (or some other appropriate means), to judge how well this fits the distribution.
+It looks like the gamma distribution fits all the distributions. As previously stated the females weight appears to be gamma distributed. Lets also try a normal distribution on the females weight.
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
+mom_normal <- function(data) {
+  mean_est <- mean(data, na.rm = TRUE)
+  sd_est <- sd(data, na.rm = TRUE)
+  return(list(mean = mean_est, sd = sd_est))
+}
 
+mom_normal_weight_female = mom_normal(female_data$Weight)
+print(mom_gamma_weight_female)
+
+png("female_weight_normal.png", width = 800, height = 800)
+hist(female_data$Weight, probability = TRUE, main="Normal Fit for Weight - Females", xlab="Weight", col="lightpink", breaks=20)
+curve(dnorm(x, mean=mom_normal_weight_female$mean, sd=mom_normal_weight_female$sd),
+      col="red", lwd=2, add=TRUE)
+dev.off()
+#+END_SRC
+
+#+RESULTS:
+: $shape
+: [1] 32.90154
+:
+: $scale
+: [1] 2.303424
+: null device
+:           1
+
+[[file:female_weight_normal.png]]
+As we can see this also fits the females weight.\\
+To verify how well each distribution fits we can do a Q-Q plot for each. By seeing how close the points on the Q-Q plot is to the line we can see if the distribution is a good fit.
 #+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 # Generate theoretical quantiles from the fitted gamma distribution
 gamma_qq_plot <- function(data, shape, scale, main_title) {
-  # Sort data and calculate theoretical quantiles
   theoretical_quantiles <- qgamma(ppoints(length(data)), shape = shape, scale = scale)
-  # Plot Q-Q plot
   qqplot(theoretical_quantiles, sort(data), main = main_title,
          xlab = "Theoretical Quantiles", ylab = "Sample Quantiles")
-  abline(0, 1, col = "red")  # Adds a reference line
+  abline(0, 1, col = "red")
 }
 
 png("male_age_qq.png", width = 800, height = 800)
@@ -188,33 +218,50 @@ png("male_weight_qq.png", width = 800, height = 800)
 gamma_qq_plot(male_data$Weight, shape = mom_gamma_weight_male$shape,
               scale = mom_gamma_weight_male$scale, main_title = "Q-Q Plot for Gamma Fit - Weight (Males)")
 dev.off()
-png("female_weight_qq.png", width = 800, height = 800)
+# Both gamma and normal for females weight
+normal_qq_plot <- function(data, mean, sd, main_title) {
+  theoretical_quantiles <- qnorm(ppoints(length(data)), mean = mean, sd = sd)
+  qqplot(theoretical_quantiles, sort(data), main = main_title,
+         xlab = "Theoretical Quantiles", ylab = "Sample Quantiles")
+  abline(0, 1, col = "red")
+}
+
+
+png("female_weight_gamma_qq.png", width = 800, height = 800)
 gamma_qq_plot(female_data$Weight, shape = mom_gamma_weight_female$shape,
               scale = mom_gamma_weight_female$scale, main_title = "Q-Q Plot for Gamma Fit - Weight (Females)")
+dev.off()
+
+png("female_weight_normal_qq.png", width = 800, height = 800)
+normal_qq_plot(female_data$Weight, mean = mom_normal_weight_female$mean,
+               sd = mom_normal_weight_female$sd, main_title = "Q-Q Plot for Normal Fit - Weight (Females)")
 dev.off()
 #+END_SRC
 
 #+RESULTS:
-: null device
-:           1
-: null device
-:           1
-: null device
-:           1
-: null device
-:           1
+#+begin_example
+null device
+          1
+null device
+          1
+null device
+          1
+null device
+          1
+null device
+          1
+#+end_example
 #+ATTR_ORG: :width 300
 [[file:male_age_qq.png]]
 [[file:female_age_qq.png]]
 [[file:male_weight_qq.png]]
-[[file:female_weight_qq.png]]
+[[file:female_weight_gamma_qq.png]]
 
-
-   - Comment on these results to confirm or deny that the male and female athletes' age and weight distributions differ.
-     :TODO: TALK ABOUT HOW THEY DIFFER
-From the Q-Q plots it appears that the gamma distribution fits the male and female age well, and the male weight but not the female weight. This is because most of the points are close to the line with the age and male weight, but no the female weight. This suggests that the female weight is not gamma distributed.
-
- - Select a favourite sport and create a copy of the data containing only data for that sport. For example, if you were interested in curling, you might use ~Athletics <- OA[which(OA$Sport=="Athletics"),]~.  Now, answer these questions:
+From the Q-Q plots it appears that the gamma distribution fits all the plots well. This is because most of the points are close to the line with the age and male weight. This suggests that the all of the data is gamma distributed. Since we had seen that the female weight is also normal distribution, lets also check its Q-Q plot:
+[[file:female_weight_normal_qq.png]]
+From the normal female Q-Q plot we can see that the female weight is also normally distributed, as the points are close to the line. However, compared to the gamma Q-Q plot we can see that the normal Q-Q plot has values that are further away from the line towards the tail end of the theoretical quantiles. All of this suggests that the gamma distribution fits the data better than the normal distribution does
+** Analysing Football
+Next, lets analyse the football data:
 #+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 Football <- OA[which(OA$Sport=="Football"),]
 #str(Football)
@@ -222,7 +269,7 @@ Football <- OA[which(OA$Sport=="Football"),]
 
 #+RESULTS:
 
-   - Are the heights, weights and ages of athletes in this sport *changing* over time?
+To analyse how the heights and weights are changing over time we can plot them over time and take an average per year and plot that:
 #+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 library(ggplot2)
 Football_height_clean <- Football[is.finite(Football$Height) & is.finite(Football$Year), ]
@@ -273,7 +320,7 @@ dev.off()
 
 The weight has gone down considerably since the start of the data being recorded. The height has remained relatively constant over time. Both the weight and height have a bump around 1980, which is not present in the age. The age has also remained mostly constant over time.
 
-   - Is there a change in the distribution of BMI over time?  The BMI is calculated as (mass in kg) / (height in metres, squared).  For example, someone 1.8m tall with a mass of 80kg has a BMI of $(80/(1.8^2)) \approx 24.7.$
+Likewise, we can create a similar plot for BMI:
 #+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 Football$BMI <- Football$Weight/(((10^-2)*Football$Height)^2)
 png("football_BMI_time.png", width = 800, height = 800)
@@ -295,46 +342,16 @@ dev.off()
 
 #+ATTR_ORG: :width 300
 [[file:football_BMI_time.png]]
-The BMI has changed over time, it has gone down.
+The BMI has changed over time, it has gone down. This is to be expected as the weight has gone down and the weight is directly proportional to the BMI.
 
-   - **Extension:** Does being *taller*, *heavier* or *older* help you *win* in this sport? (That is, are medallists significantly taller, etc., than non-medallists in this sport? By how much?)
+**Extension:** To analyse how much effect height, weight and age has on your ability to get a medal we can compare the means of the medallist to the mean of the non-medallist.
 
-
-#+BEGIN_SRC R :session Q1 :export code :results output :session Part1 :TODO: SAVE PLOTS
-library(ggplot2)
-library(dplyr)
-
-# Filter medalists and non-medalists
-medal_data <- Football %>% filter(!is.na(Medal))
-non_medal_data <- Football %>% filter(is.na(Medal))
-
-# Filter out non-finite values for Height, Weight, and Age for plotting
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
+# Filter out non-finite values for Height, Weight, and Age
 Football_clean <- Football %>%
   filter(is.finite(Height), is.finite(Weight), is.finite(Age))
 
-# Plot distributions of heights, separated by medal category and sex
-ggplot(Football_clean, aes(x = Height, fill = Medal)) +
-  geom_density(alpha = 0.5) +
-  facet_wrap(~ Sex) +
-  labs(title = "Height Distribution by Medal Category and Sex", x = "Height (cm)", y = "Density") +
-  theme_minimal()
-
-# Plot distributions of weights, separated by medal category and sex
-ggplot(Football_clean, aes(x = Weight, fill = Medal)) +
-  geom_density(alpha = 0.5) +
-  facet_wrap(~ Sex) +
-  labs(title = "Weight Distribution by Medal Category and Sex", x = "Weight (kg)", y = "Density") +
-  theme_minimal()
-
-# Plot distributions of ages, separated by medal category and sex
-ggplot(Football_clean, aes(x = Age, fill = Medal)) +
-  geom_density(alpha = 0.5) +
-  facet_wrap(~ Sex) +
-  labs(title = "Age Distribution by Medal Category and Sex", x = "Age (years)", y = "Density") +
-  theme_minimal()
-
-# Calculate mean height, weight, and age for each group (Medalist vs Non-Medalist)
-summary_stats <- Football %>%
+summary_stats <- Football_clean %>%
   group_by(Medal) %>%
   summarize(
     Mean_Height = mean(Height, na.rm = TRUE),
@@ -343,33 +360,38 @@ summary_stats <- Football %>%
     Count = n()
   )
 
-# Display the summary statistics
 print(summary_stats)
-
 #+END_SRC
 
 #+RESULTS:
 : [38;5;246m# A tibble: 4 × 5[39m
 :   Medal  Mean_Height Mean_Weight Mean_Age Count
 :   [3m[38;5;246m<fct>[39m[23m        [3m[38;5;246m<dbl>[39m[23m       [3m[38;5;246m<dbl>[39m[23m    [3m[38;5;246m<dbl>[39m[23m [3m[38;5;246m<int>[39m[23m
-: [38;5;250m1[39m Bronze        176.        71.0     24.1   543
-: [38;5;250m2[39m Gold          175.        70.2     24.6   515
-: [38;5;250m3[39m None          175.        70.4     23.5  [4m5[24m174
-: [38;5;250m4[39m Silver        176.        71.0     23.8   513
+: [38;5;250m1[39m Bronze        176.        71.0     24.3   366
+: [38;5;250m2[39m Gold          175.        70.2     24.4   364
+: [38;5;250m3[39m None          175.        70.4     23.4  [4m3[24m359
+: [38;5;250m4[39m Silver        176.        71.0     24.0   354
 
-   - To answer this question you could begin by plotting distributions of heights, separated into male and female athletes, for each medal category, and then estimate the distribution, or mean height of medal winners and compare it with the mean heights of the non-medallists: are they the same?
-|   | Medal  | Mean Height | Mean Weight | Mean Age | Count |
-| 1 | Bronze |        176. |        71.0 |     24.1 |   543 |
-| 2 | Gold   |        175. |        70.2 |     24.6 |   515 |
-| 3 | None   |        175. |        70.4 |     23.5 |  5174 |
-| 4 | Silver |        176. |        71.0 |     23.8 |   513 |
-Height and weight appear to be non-factors, the mean of each medal are similar to one another. The age appears to be a minor factor, being slightly older increases your chances of getting a medal.
-   - **Extension:** Is this a good representation of how the general human population has changed in the last 120 years?  Justify your answer.
-This data does not represent how the general human population has nagged over time, as this data only includes Olympic athletes. The general population is not an Olympic athlete, so this data should not be used to estimate the general population. On top of that there are many factors that have may have changed in Olympic athletes and not other people, for example, Olympic athletes are more inclined to maintain a healthier diet. This data represents the *peak* human, and not the general population.
 
- - The various countries often compete for medal tally: the total number of medals won, number of golds, etc.  Use the data set to estimate the following:
-   - What is the country that tends to win the most medals per athlete?
-#+BEGIN_SRC R :session Q1 :export code :results output :session Part1 :TODO: SAVE PLOTS
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|l|
+|--------+-------------+-------------+----------+-------|
+| Medal  | Mean Height | Mean Weight | Mean Age | Count |
+|--------+-------------+-------------+----------+-------|
+| Bronze |        176. |        71.0 |     24.3 |   366 |
+|--------+-------------+-------------+----------+-------|
+| Gold   |        175. |        70.2 |     24.4 |   364 |
+|--------+-------------+-------------+----------+-------|
+| None   |        175. |        70.4 |     23.4 |   359 |
+|--------+-------------+-------------+----------+-------|
+| Silver |        176. |        71.0 |     24.0 |   354 |
+|--------+-------------+-------------+----------+-------|
+
+Height and weight appear to be non-factors, the mean of each medal are similar to one another. The age appears to be a minor factor. Being slightly older increases your chances of getting a medal.
+
+**Extension:** This data does not represent how the general human population has changed over time, as this data only includes Olympic athletes. The general population is not an Olympic athlete, so this data should not be used to estimate the general population. On top of that there are many factors that have may have changed in Olympic athletes and not other people, for example, Olympic athletes are more inclined to maintain a healthier diet. This data represents the *peak* human, and not the general population.
+
+Lets check which country tents to win the most medals.
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 library(dplyr)
 
 # Calculate medals per athlete by country
@@ -393,12 +415,15 @@ head(medals_per_athlete, 1)
 :   [3m[38;5;246m<chr>[39m[23m        [3m[38;5;246m<int>[39m[23m           [3m[38;5;246m<int>[39m[23m              [3m[38;5;246m<dbl>[39m[23m
 : [38;5;250m1[39m LIE            369             131               2.82
 
-|   | NOC | Total_Medals | Unique_Athletes | Medals_per_Athlete |
-| 1 | NZL |           80 |              58 |               1.38 |
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|
+|-----+--------------+-----------------+--------------------|
+| NOC | Total Medals | Unique Athletes | Medals per Athlete |
+|-----+--------------+-----------------+--------------------|
+| NIL |           80 |              58 |               1.38 |
+|-----+--------------+-----------------+--------------------|
 
-   - The country with the most extreme (non-infinite) bias in male:female athletes (that is, the one with the highest or lowest ratio of the two).
-#+BEGIN_SRC R :session Q1 :export code :results output :session Part1 :TODO: SAVE PLOTS
-# Calculate male-to-female ratio by country
+Lets check which nationality has the most biased male to female ratio.
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 gender_ratio <- OA %>%
   group_by(NOC) %>%
   summarize(
@@ -407,11 +432,9 @@ gender_ratio <- OA %>%
     Male_Female_Ratio = Male_Athletes / Female_Athletes
   ) %>%
   filter(is.finite(Male_Female_Ratio)) %>%
-  arrange(desc(abs(log(Male_Female_Ratio))))  # To find the most extreme ratio
+  arrange(desc(abs(log(Male_Female_Ratio))))
 
-# Display the top country with extreme male-to-female ratio
 head(gender_ratio, 1)
-
 #+END_SRC
 
 #+RESULTS:
@@ -420,23 +443,23 @@ head(gender_ratio, 1)
 :   [3m[38;5;246m<chr>[39m[23m         [3m[38;5;246m<int>[39m[23m           [3m[38;5;246m<int>[39m[23m             [3m[38;5;246m<dbl>[39m[23m
 : [38;5;250m1[39m BOH             151               2              75.5
 
+#+ATTR_LATEX: :environment longtable :align |l|l|l|l|
+|-----+---------------+-----------------+-------------------|
+| NOC | Male Athletes | Female Athletes | Male Female Ratio |
+|-----+---------------+-----------------+-------------------|
+| BOH |           151 |               2 |              75.5 |
+|-----+---------------+-----------------+-------------------|
 
-|   | NOC | Male_Athletes | Female_Athletes | Male_Female_Ratio |
-| 1 | BOH |           151 |               2 |              75.5 |
 
-   - The conditional probability that, given you are an American athlete (USA), you will win a medal (you can do this using just one line of the OA data frame)
-#+BEGIN_SRC R :session Q1 :export code :results output :session Part1 :TODO: SAVE PLOTS
-# Conditional probability that a USA athlete wins a medal
+Lets check the probability that someone from the USA will win a medal.
+#+BEGIN_SRC R :session Q1 :export code :results output :session Part1
 usa_medal_probability <- OA %>%
-  filter(OA$NOC == "USA") %>%
-  summarize(Probability = mean(!is.na(Medal)))
-
+  filter(NOC == "USA") %>%
+  summarize(Probability = mean(Medal != "None"))
 usa_medal_probability
-
 #+END_SRC
 
 #+RESULTS:
 : Probability
-: 1           1
-
-   - **Optional extension:** What, if anything, strikes you as interesting or surprising in this aspect of the data? Explain and provide a statistical analysis to test this.  (E.g., if you think it one country excels in a particular sport or event, calculate some statistic that illustrates, or possibly disproves, your point.)
+: 1   0.2989975
+The probability of a person with the nationality of The United States of America wins a medal is 0.2989975.
