@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       b53c3bb1-ef6f-465c-93d2-40d790e17638
+:END:
+#+title: Active Filters
+#+date: [2024-11-05 Tue 15:37]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Active Filters
+*** Low-Pass Active Filter
+ - [[file:Screenshot 2024-11-05 at 15-34-39 0132975165.pdf - Robert L. Boylestad Louis Nashelsky - Electronic Devices and Circuit Theory (11th Edition)-Prentice Hall (2012).pdf.png]]
+ - \[f_{OH}=\frac{1}{2\pi R_1C_1}\]
+*** High-Pass Active Filter
+ - [[file:Screenshot 2024-11-05 at 15-35-44 0132975165.pdf - Robert L. Boylestad Louis Nashelsky - Electronic Devices and Circuit Theory (11th Edition)-Prentice Hall (2012).pdf.png]]
+ - \[f_{OL}=\frac{1}{2\pi R_1C_1}\]
+*** Band-Pass Active Filter
+ - [[file:Screenshot 2024-11-05 at 15-36-31 0132975165.pdf - Robert L. Boylestad Louis Nashelsky - Electronic Devices and Circuit Theory (11th Edition)-Prentice Hall (2012).pdf.png]]
+ - This is a cascade of a High-pass filter and Low-pass filter.
+ - [[file:Screenshot 2024-11-05 at 15-38-15 0132975165.pdf - Robert L. Boylestad Louis Nashelsky - Electronic Devices and Circuit Theory (11th Edition)-Prentice Hall (2012).pdf.png]]

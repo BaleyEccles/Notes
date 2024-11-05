@@ -49,3 +49,5 @@
 *** Input current offset
  - [[file:Screenshot 2024-10-30 at 14-51-25 Pre-notes - Operational amplifiers.pdf.png]]
  - \[V_o=I_{IB}^+R_C+R_fI_{IO}\]
+** Filters
+[[id:b53c3bb1-ef6f-465c-93d2-40d790e17638][Active Filters]]

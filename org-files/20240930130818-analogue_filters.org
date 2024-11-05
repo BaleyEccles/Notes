@@ -28,6 +28,8 @@
  - We can define some filter that fits these parameters
  - [[id:56282249-0495-405c-a570-7176a5121a5e][Butterworth Filter]]
  - [[id:99234b34-6f57-48d9-8c43-133a62620d54][Type 1 Chebyshev Filters]]
+ - [[id:d2abe7ed-6ee0-4f34-9208-518825748c48][Operational Amplifiers]] can be used to create [[id:b53c3bb1-ef6f-465c-93d2-40d790e17638][Active Filters]]
+
 ** Transformations
  - [[id:d6a5ee11-cf8b-4bc1-a7d0-bee23c61d7ac][Lowpass to Highpass Transform]]
  - [[id:8b337d07-0cd0-4b11-b685-d9096b5d65af][Lowpass to Bandpass Transform]]
