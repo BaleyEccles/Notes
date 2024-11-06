@@ -5,5 +5,6 @@
 #+date: [2024-09-25 Wed 08:49]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+FILETAGS: :TODO:
 
 * TODO Darlington Configuration
