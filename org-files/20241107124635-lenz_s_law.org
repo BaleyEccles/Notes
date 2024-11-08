@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       081780d8-6b6b-4e9d-ac1f-475ff5e057f7
+:END:
+#+title: Lenz's law
+#+date: [2024-11-07 Thu 12:46]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Lenz's law
+ - The direction of current induced in a coil due to [[id:0b3f01d9-4742-47d0-b78d-a2399a25c3c2][Faraday's law]]/ a changing magnetic field, is such that the magnetic field produced opposes the changing magnetic field.

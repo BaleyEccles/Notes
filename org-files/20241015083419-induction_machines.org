@@ -56,7 +56,10 @@
      - $R_{mech}=R_2'\frac{1-s}{s}$
        - The mechanical load equivalent resistance
        - This is not a real resistance, but rather a equivalent resistance of the mechanical load
-
+*** Thevenin Equivalent Circuit
+ - [[file:Screenshot 2024-11-07 at 14-18-49 Social and Technical Outcomes - ENG231_LectureSlideSetB7_InductionMotors.pdf.png]]
+ - \[V_{th}=\frac{V_1}{\sqrt{R_1^2+(X_1+X_m)^2}}X_m\]
+ - \[\tau_{mech}=\frac{3}{\omega_s}\frac{V_{th}^2}{(R_{th}+\frac{R'_2}{s})+(X_{th}+X'_2)^2}\frac{R'_2}{s}\]
 *** Slip
  - \[s=\frac{\omega_s-\omega_r}{\omega_s}\]
    - $\omega_s$ is the stator speed

@@ -11,4 +11,4 @@
   - \[\vec{B}=\mu\vec{H}\]
   - \[B=\mu_0 H+ \mu_0 M\]
     - when the material is magnetic
-- -\[\mu\] is the [[id:b70c8efe-e501-479a-8d58-6093bd1e891a][Magnetic Permeability]].
+- \[\mu\] is the [[id:b70c8efe-e501-479a-8d58-6093bd1e891a][Magnetic Permeability]].

@@ -16,7 +16,7 @@
 
 
 ** DC Motors
- - More typicla
+ - More typical
  - Basic example
    - [[file:Screenshot 2024-09-24 at 12-00-14 Social and Technical Outcomes - ENG231_LectureSlideSetB5_DCMachines.pdf.png]]
  - For one conductor
