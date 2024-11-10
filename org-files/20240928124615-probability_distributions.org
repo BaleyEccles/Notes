@@ -8,14 +8,16 @@
 
 * Probability Distributions
 ** Continuous
-- \[f(x)\geq 0\]
-- \[\int_{-\infty}^{\infty}\f(v)dv=1\]
-- \[f(x)=F'(x)\]
-- [[id:a56cee53-b518-4c06-8b97-beeaafc7ff2a][Uniform Distribution]]
-- [[id:09b7922a-caa6-4eb4-b3d7-b56035ad4604][Normal Distribution]]
-- [[id:7dc941fe-89a3-49ff-8639-556e1fa0d215][Exponential Distribution]]
-
-- [[id:8662b281-ddd2-482c-b278-1a466e8a85a5][Central Limit Theorem]]
+ - \[f(x)\geq 0\]
+ - \[\int_{-\infty}^{\infty}\f(v)dv=1\]
+ - \[f(x)=F'(x)\]
+ - [[id:a56cee53-b518-4c06-8b97-beeaafc7ff2a][Uniform Distribution]]
+ - [[id:09b7922a-caa6-4eb4-b3d7-b56035ad4604][Normal Distribution]]
+ - [[id:7dc941fe-89a3-49ff-8639-556e1fa0d215][Exponential Distribution]]
+ - [[id:a0c530a2-8890-481c-a65e-e4fdfb3dede4][Gamma Distribution]]
+ - [[id:de37e6d3-8c56-4113-bcd1-429d63d7e3e8][Weibull Distribution]]
+ - [[id:3aad1707-ee50-4f86-acff-ca2ba634bab4][Log-normal Distribution]]
+ - [[id:8662b281-ddd2-482c-b278-1a466e8a85a5][Central Limit Theorem]]
 ** Discrete
 
  - [[id:4a014306-8822-4a35-ab74-65b1a0d134d6][Binomial Distribution]]

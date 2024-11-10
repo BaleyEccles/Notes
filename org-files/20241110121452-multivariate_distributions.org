@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       82d5f26e-56d8-4de0-b8b9-ab71709d518b
+:END:
+#+title: Multivariate Distributions
+#+date: [2024-11-10 Sun 12:14]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Multivariate Distributions
+ - Contains more than one random variable
+   - Now things become 3D, 4D ... Instead of 2D.
+ - If $X$ and $Y$ are independent:
+   - \[f(x,y) = f_X(x)\cdot f_Y(y)\]
+** Marginalising
+We can make one constant (marginal), then the marginal distributions are given by:
+ - \[f_X(x)=\int f_{XY}(x,y)dy\]
+ - \[f_Y(y)=\int f_{XY}(x,y)dx\]
+** Conditional Probability Distributions
+ - \[f_{Y|X=x}=\frac{f_{XY}(x,y)}{f_X(x)}\]
+** Independence
+For two random variables the following hold if they are independent
+ - \[f_{XY}(x,y)=f_X(x)f_Y(y)\]
+ - \[f_{Y|X=x}=f_y(y)\]
+ - \[f_{X|Y=y}=f_x(x)\]
+ - \[P(X\in A, Y \in B)= P(X\in A)P(Y\in B)\]
+** Covariance and [[id:6a8b586e-af9e-4711-a7a4-c98e24e6a0e5][Correlation]]
+ - Covariance
+   - \[\sigma_{XY}=E((X-\mu_{X})(Y-\mu_{Y}))=E(XY)-\mu_X\mu_Y\]
+ - Correlation
+   - \[\rho_{XY}=\frac{cov(X,Y)}{\sqrt{Var(X)Var(Y)}}=\frac{\sigma_{XY}}{\sigma_X\sigma_Y}\]
+   - Between $-1$ and $1$
+   - If $X$ and $Y$ are independent $\rho_XY=0$

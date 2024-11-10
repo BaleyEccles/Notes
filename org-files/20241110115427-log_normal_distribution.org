@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       3aad1707-ee50-4f86-acff-ca2ba634bab4
+:END:
+#+title: Log-normal Distribution
+#+date: [2024-11-10 Sun 11:54]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Log-normal

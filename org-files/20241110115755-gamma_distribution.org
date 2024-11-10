@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       a0c530a2-8890-481c-a65e-e4fdfb3dede4
+:END:
+#+title: Gamma Distribution
+#+date: [2024-11-10 Sun 11:57]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Gamma/Erlang Distribution
+ - Uses the Gamma function (continuous factorial)
+   - \[\Gamma (r)= \int_0^{\infty}x^{r-1}e^{-x}dx\]
+   - \[\Gamma (r)= (r-1)\Gamma(r-1)\]
+ - Related to the [[id:7dc941fe-89a3-49ff-8639-556e1fa0d215][Exponential Distribution]]
+** Formula
+ - \[f(x)=\frac{\lambda^{r}x^{r-1}e^{\lambda x}}{\Gamma(r)}\]
+   - for $x>0$
+** Properties
+ - [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]]: $\mu = E(x) = \frac{r}{\lambda}$
+ - [[id:94da5bc2-9ad7-4d6c-ad04-715b646cdf7c][Variance]]: $\sigma^2 = Var(X) = \frac{r}{\lambda^2}$

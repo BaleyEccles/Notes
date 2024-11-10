@@ -19,9 +19,10 @@
  - [[id:6c7a8528-056a-47ae-86cb-1a364a19c834][Probability]]
  - [[id:60bdc443-99c4-4493-9eba-f097aac5499b][Types of Data]]
  - [[id:0c312557-bf46-466a-9a24-ca908f9f4e14][Summary Statistics]]
- - [[id:6a8b586e-af9e-4711-a7a4-c98e24e6a0e5][Correlation]]
  - [[id:1a8af1c6-6ed5-4f19-bccc-7acd5c1e6e1a][Bivariate Scaled Data]]
  - [[id:90956edf-117a-447a-9284-d291dd3847a2][Counting Things]]
+ - [[id:82d5f26e-56d8-4de0-b8b9-ab71709d518b][Multivariate Distributions]]
+ - [[id:1a8af1c6-6ed5-4f19-bccc-7acd5c1e6e1a][Bivariate Scaled Data]]
 * Assesment
 ** Assessment Task 1: Computational Techniques Assignments
 - Due 9am Monday weeks 3-7

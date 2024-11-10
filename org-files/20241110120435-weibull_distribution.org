@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       de37e6d3-8c56-4113-bcd1-429d63d7e3e8
+:END:
+#+title: Weibull Distribution
+#+date: [2024-11-10 Sun 12:04]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Weibull Distribution
+ - Measures the time to failure of many different systems through time
+** Formula
+ - \[f(x)=\begin{cases}
+   \frac{k}{\lambda}(\frac{x}{\lambda})^{k-1}e^{x/\lambda}^{k} & x\geq 0 \\
+   0 & x< 0 \end{cases}
+   \]
+ - \[F(x)=\begin{cases}
+   1-e^{-(x/\lambda)^{k}} & x\geq 0 \\
+   0 & x< 0 \end{cases}
+   \]
+   - $k$: number of failures
+   - $\lambda$: Time between failures
+** Properties
+- [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]]: $\mu = E(X) = \lambda\Gamma(1+1/k)$
+- [[id:94da5bc2-9ad7-4d6c-ad04-715b646cdf7c][Variance]]: $\sigma^2=\lambda^2\Gamma(1+2/k)-\lambda^2(\Gamma(1+1/k))^2$
