@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       6c7f182d-c45a-4184-8a21-b4186e211538
+:END:
+#+title: Q-Q Plots
+#+date: [2024-11-11 Mon 13:31]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Q-Q Plots
+ - A way to determine if your distribution fits the data
+** Interpreting Q-Q plots
+ - Closer to the centre line is better
+ - The tails are more useful than the centre

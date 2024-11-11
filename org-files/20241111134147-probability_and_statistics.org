@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       900b555f-7882-443c-b204-82be2ea3ffff
+:END:
+#+title: Probability and Statistics
+#+date: [2024-11-11 Mon 13:41]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+* Probability and Statistics
+ - [[id:6c7a8528-056a-47ae-86cb-1a364a19c834][Probability]]
+ - [[id:60bdc443-99c4-4493-9eba-f097aac5499b][Types of Data]]
+ - [[id:0c312557-bf46-466a-9a24-ca908f9f4e14][Summary Statistics]]
+ - [[id:1a8af1c6-6ed5-4f19-bccc-7acd5c1e6e1a][Bivariate Scaled Data]]
+ - [[id:90956edf-117a-447a-9284-d291dd3847a2][Counting Things]]
+ - [[id:82d5f26e-56d8-4de0-b8b9-ab71709d518b][Multivariate Distributions]]
+ - [[id:1a8af1c6-6ed5-4f19-bccc-7acd5c1e6e1a][Bivariate Scaled Data]]
+ - [[id:5495b382-50fc-4acc-bef8-4568f342f161][Method Of Moments]]
+ - [[id:3264309d-2788-41fc-8b79-167b20b13c4f][Xi Square Test]]
+ - [[id:6c7f182d-c45a-4184-8a21-b4186e211538][Q-Q Plots]]
+ - [[id:006e58ff-a7ac-4a3e-a7f2-df246a13cc04][Likelihood]]

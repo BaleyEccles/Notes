@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       006e58ff-a7ac-4a3e-a7f2-df246a13cc04
+:END:
+#+title: Likelihood
+#+date: [2024-11-10 Sun 13:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Likelihood
+ - \[L(\theta)=\prod_{i=1}^nP(x=x_i|\theta)\]
+ - \[l(p)=\ln(L(p))\]

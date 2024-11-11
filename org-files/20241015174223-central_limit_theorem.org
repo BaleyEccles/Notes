@@ -7,7 +7,7 @@
 #+STARTUP: latexpreview
 
 * Central Limit Theorem
- - Let $x_1,x_2,...$ be a sequence of of IID variables with mean $\mu$ and standard deviation $\sigma$
+ - Let $x_1,x_2,x_3...$ be a sequence of of IID variables with mean $\mu$ and standard deviation $\sigma$
  - let $\overline{x}=\frac{x_1+x_2+...+x_n}{n}$
  - Then for large enough $n$, $\overline{x}$ is approximately normally distributed with mean $\mu$ and standard deviation of $\frac{\sigma}{\sqrt{n}}$
  - This does not depend on the shape of the underlying distribution

@@ -208,7 +208,7 @@ gamma_qq_plot <- function(data, shape, scale, main_title) {
 
 png("male_age_qq.png", width = 800, height = 800)
 gamma_qq_plot(male_data$Age, shape = mom_gamma_age_male$shape,
-              scale = mom_gamma_age_male$scale, main_title = "Q-Q Plot for Gamma Fit - Age (Males)")
+              scale = mom_gamma_age_male$scale, main_title = "Q-Q Plot for Gamma Fit - Age nn(Males)")
 dev.off()
 png("female_age_qq.png", width = 800, height = 800)
 gamma_qq_plot(female_data$Age, shape = mom_gamma_age_female$shape,
@@ -256,7 +256,6 @@ null device
 [[file:female_age_qq.png]]
 [[file:male_weight_qq.png]]
 [[file:female_weight_gamma_qq.png]]
-
 From the Q-Q plots it appears that the gamma distribution fits all the plots well. This is because most of the points are close to the line with the age and male weight. This suggests that the all of the data is gamma distributed. Since we had seen that the female weight is also normal distribution, lets also check its Q-Q plot:
 [[file:female_weight_normal_qq.png]]
 From the normal female Q-Q plot we can see that the female weight is also normally distributed, as the points are close to the line. However, compared to the gamma Q-Q plot we can see that the normal Q-Q plot has values that are further away from the line towards the tail end of the theoretical quantiles. All of this suggests that the gamma distribution fits the data better than the normal distribution does

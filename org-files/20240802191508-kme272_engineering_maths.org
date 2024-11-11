@@ -8,21 +8,8 @@
 #+FILETAGS: :UTAS:2024:
 
 * Topics
-** Computational Techniques
-- [[id:9ff1e7f6-b6f2-447b-81b9-f64b89a9d834][How Computers Represent Numbers]]
-- [[id:dc6ece72-c6c1-4317-9bbc-f8de60766b23][Root Finding]]
-- [[id:3a948b0c-e597-4007-9a11-e84b73a560ba][Solutions of Matrix Equations]]
-- [[id:844ebf39-6e0e-402c-a845-affbe92accc3][Interpolation]]
-- [[id:2a1c15f9-8be3-4510-906c-bacc45b75068][Numerical Solution of ODEs]]
-- [[id:84252b32-2d80-4702-91f3-762e69a33f0a][Numerical Integration]]
-** Probability and Statistics
- - [[id:6c7a8528-056a-47ae-86cb-1a364a19c834][Probability]]
- - [[id:60bdc443-99c4-4493-9eba-f097aac5499b][Types of Data]]
- - [[id:0c312557-bf46-466a-9a24-ca908f9f4e14][Summary Statistics]]
- - [[id:1a8af1c6-6ed5-4f19-bccc-7acd5c1e6e1a][Bivariate Scaled Data]]
- - [[id:90956edf-117a-447a-9284-d291dd3847a2][Counting Things]]
- - [[id:82d5f26e-56d8-4de0-b8b9-ab71709d518b][Multivariate Distributions]]
- - [[id:1a8af1c6-6ed5-4f19-bccc-7acd5c1e6e1a][Bivariate Scaled Data]]
+** [[id:e4c5b091-8acb-4109-aa9d-13b596341d9b][Computational Techniques]]
+** [[id:900b555f-7882-443c-b204-82be2ea3ffff][Probability and Statistics]]
 * Assesment
 ** Assessment Task 1: Computational Techniques Assignments
 - Due 9am Monday weeks 3-7
