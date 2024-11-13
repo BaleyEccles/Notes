@@ -7,3 +7,8 @@
 #+STARTUP: latexpreview
 
 * Log-normal
+ - \[f(x)=\frac{1}{x\sigma\sqrt{2\pi}}e^{-\frac{(\ln x -\mu)^2}{2\sigma^2}}\]
+ - \[E[X]=e^{\mu+\frac{\sigma^2}{2}}\]
+ - \[Var(x)=e^{2\mu + \sigma^2}\left[ e^{\sigma^2}-1\right]\]
+ - The logarithm of the random variable is [[id:09b7922a-caa6-4eb4-b3d7-b56035ad4604][Normally Distributed]]
+   - $Y=\ln(x)$ has a [[id:09b7922a-caa6-4eb4-b3d7-b56035ad4604][Normal Distribution]]
