@@ -11,3 +11,4 @@
 ** Interpreting Q-Q plots
  - Closer to the centre line is better
  - The tails are more useful than the centre
+

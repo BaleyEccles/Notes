@@ -52,7 +52,7 @@ To determent what frequencies will work with the BJT we need to look at the capa
      - The any other capacitor
        - Example: emitter bypass capacitor
    - Using the following equation
-     - \[f_{1}=\frac{1}{2\pi R C\]
+     - \[f_{1}=\frac{1}{2\pi R C}\]
      - Where:
        - $R$ can be found by assuming the other capacitors are short circuits
          - And finding the equivalent resistance
@@ -64,7 +64,7 @@ To determent what frequencies will work with the BJT we need to look at the capa
      - The collector bypass capacitor
      - The [[id:1c559316-5797-465c-b720-2e62215ac4d0][Miller capacitance]]
    - Using the following equation
-     - \[f_{2}=\frac{1}{2\pi R C\]
+     - \[f_{2}=\frac{1}{2\pi R C}\]
      - Where:
        - $R$ can be found by assuming the other capacitors are short circuits
          - And finding the equivalent resistance

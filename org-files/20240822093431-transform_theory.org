@@ -19,3 +19,8 @@
   - \[F(u)=\sum_{n=n_1}^{n_2}K(u,n)\cdot f[n]\]
     - the function \[f[n]\] is being transformed into \[F(u)\]
     - \[K\] is the kernel, which defines the transform
+** Transforms
+ - [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier Transform]]
+   - [[id:38634596-7d68-46dc-a12c-bb0d244f7835][Discrete Fourier Transform]]
+ - [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace Transform]]
+ - [[id:498ec752-aafa-4a86-abaa-dc5165992cf0][Z-Transform]]

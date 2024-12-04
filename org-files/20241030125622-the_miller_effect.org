@@ -20,3 +20,4 @@
      - $R_{Th_o}$ is the Thévenin resistance from the output Miller capacitor.
      - $C_o$ is the output Miller capacitance
        - \[C_o=C_{W_o}+C_{ce}+C_{M_o}\approx C_{W_o}+C_{ce}+C_{bc}\]
+

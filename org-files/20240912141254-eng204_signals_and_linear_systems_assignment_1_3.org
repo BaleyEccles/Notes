@@ -107,6 +107,7 @@ latex(simplify(G))
 : p \cos{\left(\phi \right)}
 : p \sin{\left(\phi \right)}
 : \frac{e^{- \frac{p^{2}}{2 \sigma^{2}}}}{2 \pi \sigma}
+
 To do this we can convert the function to cylindrical coordinates. using:
 \[x= \rho \cos{\left(\phi \right)}\]
 \[y= \rho \sin{\left(\phi \right)}\]
