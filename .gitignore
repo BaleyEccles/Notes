@@ -12,6 +12,7 @@
 !org-files/*.org
 !org-files/*.db
 !org-files/*.bib
+!org-files/*.xopp
 
 !*.org
 !*.bib
