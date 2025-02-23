@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       53c4bf10-2e4d-4992-8720-3b644118481a
+:END:
+#+title: ENG307 - Electrical and Mechatronic Design
+#+date: [2025-02-24 Mon 08:07]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:2025:
+
+* Topics
+
+* Assesment
+** Project Report
+ - Week 13
+ - 40% of mark
+** Technical Demonstration
+ - Week 14
+ - 10% of mark
+** Personal reflection and performance
+ - DUE: Refer to Assessment Description
+ - 10% of mark
+** Laboratory Demonstration
+ - DUE: Refer to Assessment Description
+ - 10% of mark
+** Design Assignments
+ - DUE: Refer to Assessment Description
+ - 30% of mark

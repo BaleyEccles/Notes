@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       cdc6c00c-d529-44f8-944f-2cefb8321e0c
+:END:
+#+title: KIT107 - Programming
+#+date: [2025-02-24 Mon 08:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2025:
+
+* Topics
+
+* Assesment
+** Assignment 0
+ - Week 3
+ - 0% of mark
+** Assignment 1
+ - Week 5
+ - 12% of mark
+** Assignment 2
+ - Week 10
+ - 24% of mark
+** Assignment 3
+ - Week 13
+ - 24% of mark
+** Exam
+ - Exam period
+ - 40% of mark

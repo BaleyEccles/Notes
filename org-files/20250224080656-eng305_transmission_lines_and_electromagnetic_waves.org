@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       ce0c7328-ddd0-4e97-8f84-f1e373c1436c
+:END:
+#+title: ENG305 - Transmission Lines and Electromagnetic Waves
+#+date: [2025-02-24 Mon 08:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2025:
+
+* Topics
+
+* Assesment
