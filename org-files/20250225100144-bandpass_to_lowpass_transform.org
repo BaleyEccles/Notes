@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       ef5c5b6c-59eb-4673-a247-6fb8da6590c8
+:END:
+#+title: Bandpass to Lowpass Transform
+#+date: [2025-02-25 Tue 10:01]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bandpass to Lowpass Transform
+\[ = x(t)\cos(2\pi f_{0}t) + \hat{x}(t)\cos(2\pi f_{0}t)
++j(\hat{x}(t)\cos(2\pi f_{0}t) + x(t)\cos(2\pi f_{0}t))\]
+ - Which uses the [[id:cd529ee1-5877-4e55-8588-141427ca601a][Hilbert Transform]]

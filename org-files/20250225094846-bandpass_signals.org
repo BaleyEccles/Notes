@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       43a759ee-3cad-411c-a23f-4db60e9342e1
+:END:
+#+title: Bandpass Signals
+#+date: [2025-02-25 Tue 09:48]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bandpass Signals
+ - In the frequency domain the signal has two parts equal distant ($f_{0}$) from the origin
+   - $f_{0}$ is the center of the signal
+** Look Like
+ - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Banpass Magnitude.xopp]]
+** Energy
+ - \[E_{x} = \frac{E_{x_{l}}}{2}\]
+ - The bandpass equivalent signal has half as much energy than the [[id:f677e2ac-10a8-4754-82f9-57f93fb56789][Lowpass Signal]] 

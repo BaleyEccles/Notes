@@ -7,6 +7,7 @@
 #+STARTUP: latexpreview
 
 
+
 * Lowpass to Bandpass Transform
 Using the transform:
  - \[s=\frac{\lambda^2+\omega_0^2}{B\lambda}\]
@@ -38,3 +39,8 @@ We can transform lowpass filters to bandpass filters
       - Which gives
         - No passband change
         - Shorter right transition
+
+* OR
+ - \[X(f) = \frac{1}{2} \left[
+   X_l(f-f_0) + X_l^{*}(f-f_0)
+   \right]\]

@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       f677e2ac-10a8-4754-82f9-57f93fb56789
+:END:
+#+title: Lowpass/Baseband Signals
+#+date: [2025-02-25 Tue 09:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Lowpass/Baseband Signals
+ - In the frequency domain the signal is centered around the origin
+   - Have a bandwidth $w$ measured from the origin to the right most frequency
+** Look Like
+ - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Lowpass Magnitude.xopp]]
+ - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Lowpass Phase.xopp]]
+     
+** In-Phase and Quadrature Components
+ - $x_l(t)$ can be expressed as
+   - $x_l(t) = x_i(t) + jx_q(t)$
+ - \[\begin{cases}
+   x_i(t) = x(t)\cos(2\pi f_0 t) + \hat{x}(t)\sin(2\pi f_0 t) \\
+   x_q(t) = \hat{x}(t)\cos(2\pi f_0 t) + x(t)\sin(2\pi f_0 t)
+   \end{cases}\]
+ - \[\begin{cases}
+   x(t) = x_i(t)\cos(2\pi f_0 t) + x_q(t)\sin(2\pi f_0 t) \\
+   \hat{x}(t) = x_q(t)\cos(2\pi f_0 t) + x_i(t)\sin(2\pi f_0 t)
+   \end{cases}\]
+ - Which can be used in polar form:
+   - \[r_x(t) = \sqrt{x_i^(t)^2 + x_q(t)^2}\]
+   - \[\theta_x(t) = \tan^{-1}\left(\frac{x_q(t)}{x_i(t)}\right)\]
+   - \[x(t) = r_x(t)e^{j\theta_x(t)}\]
+** Energy
+ - \[E_x = 2E_{X_+}\]
+ - The lowpass equivalent signal has double the energy than the  [[id:43a759ee-3cad-411c-a23f-4db60e9342e1][Bandpass Signal]]

@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       b90da113-9aad-4168-93f6-da016a54f577
+:END:
+#+title: Nyquist-Shannon Capacity Theorem
+#+date: [2025-02-25 Tue 09:18]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Nyquist-Shannon Capacity Theorem
+ - $c = w\log_{2}\left( 1 + \frac{P}{wN_0}\right)$
+   - $c$: max bits/second
+   - $wN_0$: Noise power
+   - $P$: Signal power
+ - $\frac{P}{wN_0}$: Signal to noise ratio

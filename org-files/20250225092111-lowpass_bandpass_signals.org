@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       6e3bc75c-999b-4d36-bfed-11168f239394
+:END:
+#+title: Lowpass + Bandpass Signals
+#+date: [2025-02-25 Tue 09:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Lowpass + Bandpass Signals
+ - A real signal $x(t)$ has [[id:97e5f03c-4986-409e-abbd-e3c1acf639a1][Hermitian symmetry]]
+ - There are two types of signals:
+   - [[id:f677e2ac-10a8-4754-82f9-57f93fb56789][Lowpass/Baseband Signals]]
+   - [[id:43a759ee-3cad-411c-a23f-4db60e9342e1][Bandpass Signals]]
+** $X_+(f)$ and $X_-(f)$
+ - \[X_+(f) = \begin{cases}
+   X(f) &, f>0 \\
+   \frac{1}{2} X(f) &, f=0 \\
+   0 &, f<0 
+   \end{cases}\]
+ - \[X_-(f) = \begin{cases}
+   X(f) &, f<0 \\
+   \frac{1}{2} X(f) &, f=0 \\
+   0 &, f>0 
+   \end{cases}\]

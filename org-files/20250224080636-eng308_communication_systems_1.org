@@ -6,7 +6,34 @@
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :UTAS:2025:
 
+* Overview
+\[|\textrm{Infomation source}|\rightarrow |\textrm{Transmitter}| \rightarrow\ |\textrm{Channel}| \rightarrow |\textrm{Reciver}| \rightarrow \textrm{output}\]
+** Transmitter (Tx)
+ - map to wave form
+   - Modulate
+** Channel
+ - This is where the problems occur
+   - Interferance
+   - Noise
+   - Dispersion
+** Reciver (Rx)
+ - Reverse the mapping
+   - Demodualtion
+ - Detect
 * Topics
-
+[[id:b90da113-9aad-4168-93f6-da016a54f577][Nyquist-Shannon Capacity Theorem]]
+[[id:6e3bc75c-999b-4d36-bfed-11168f239394][Lowpass + Bandpass Signals]]
 * Assesment
-
+** Test 1
+ - 5% of mark
+** Test 2
+ - 10% of mark
+** Practical laboratory
+ - 20% of mark
+ - Weeks 4, 5, 6
+** Simulation project
+ - 25% of mark
+ - Two parts
+   - Analog and digital
+** Final exam
+ - 40% of mark
