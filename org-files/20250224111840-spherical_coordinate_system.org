@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       3011b35b-9466-4303-8707-8f740ea5cb80
+:END:
+#+title: Spherical Coordinate System
+#+date: [2025-02-24 Mon 11:18]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Spherical Coordinate System
+defined with $(R, \theta, \phi)$
+** Differential Lenght
+$dl = dl_{R}\hat{R} + dl_{\theta}\hat{\theta} + dl_{\phi}\hat{\phi} = {\displaystyle dr\,{\hat {\mathbf {r} }}+r\,d\theta \,{\hat {\boldsymbol {\theta }}}+r\,\sin \theta \,d\phi \,{\hat {\boldsymbol {\phi }}}}$
+** Differential Area
+$ds = {\displaystyle {\begin{aligned}r^{2}\sin \theta \,d\theta \,d\phi &\,{\hat {\mathbf {r} }}\\{}+r\sin \theta \,dr\,d\phi &\,{\hat {\boldsymbol {\theta }}}\\{}+r\,dr\,d\theta &\,{\hat {\boldsymbol {\phi }}}\end{aligned}}}$
+** Differential volume
+$dv = {\displaystyle r^{2}\sin \theta \,dr\,d\theta \,d\phi }$
+
+
+
+

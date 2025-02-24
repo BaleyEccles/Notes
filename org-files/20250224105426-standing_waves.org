@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       c32a1e4d-5f55-4266-a585-a89185bcb39a
+:END:
+#+title: Standing Waves
+#+date: [2025-02-24 Mon 10:54]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Standing Waves
+ - when a wave has no velocity.
+ - Problematic as we will have points in time where there will be the sum of the two amplitudes
+

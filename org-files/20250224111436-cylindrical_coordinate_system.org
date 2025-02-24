@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       e2718074-16a2-413b-b793-b5179ca917c5
+:END:
+#+title: Cylindrical Coordinate System
+#+date: [2025-02-24 Mon 11:14]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Cylindrical Coordinate System
+defined with $(r, \phi, z)$
+** Differential Lenght
+$dl = dl_{r}\hat{r} + dl_{\phi}\hat{\phi} + dl_{z}\hat{z} = \hat{r}dr + r\hat{\phi}d\phi + \hat{z}dz$
+** Differential Area
+$ds = {\displaystyle {\begin{aligned}r \,d\phi \,dz&\,{\hat {\boldsymbol {r }}}\\{}+dr \,dz&\,{\hat {\boldsymbol {\phi }}}\\{}+r \,dr \,d\phi &\,{\hat {\mathbf {z} }}\end{aligned}}}$
+** Differential volume
+$dv = rdrd\phi dz$

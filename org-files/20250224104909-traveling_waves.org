@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       44cf340f-5ba3-4221-80a4-379615048b59
+:END:
+#+title: Traveling Waves
+#+date: [2025-02-24 Mon 10:49]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Traveling Waves
+** Properties
+ - Carry energy
+ - Have velocity
+ - Linear
+ - [[id:c32a1e4d-5f55-4266-a585-a89185bcb39a][Standing Waves]]
+** Definition
+\[y(x,t) = A\cos\left(\frac{2\pi t}{T} - \frac{2\pi x}{\lambda} + \phi_0\right)\]
+\[y(x,t) = A\cos\left(\omega t + \beta x + \phi_0\right)\]
+measured in meters (m)
+*** Velocity
+\[u_p=\frac{dx}{dt} = \frac{\lambda}{T} = f\lambda\]
+*** Direction
+ - Waves travel in the $+x$ direction if $t$ and $x$ have different signs
+ - Waves travel in the $-x$ direction if $t$ and $x$ have the same signs
+** Lossy Media
+ - If a wave is in a lossy medium the amplitude will decrease
+ - at $e^{-\alpha x}$
+   - $\alpha$ is measured in $\frac{Np}{m}$ (neper)

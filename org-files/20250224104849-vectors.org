@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       ba70aa3c-d191-45ed-bbdb-6f040387960a
+:END:
+#+title: Vectors
+#+date: [2025-02-24 Mon 10:48]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Vectors
+ - [[id:6b6f0fa6-e53c-479c-9edf-98c39ddaaf5f][Coordinate Systems]]
+ - $\textbf{X} = A_x \hat{x} + A_y \hat{y} + A_z \hat{z} = A_x \hat{i} + A_y \hat{j} + A_z \hat{k}$
+** Definitions
+*** Magnitude
+ - $|A| = \sqrt{A_x^2 + A_y^2 + A_z^2}$
+*** Dot Product
+ - $A\cdot B = |A||B|\cos(\theta)$
+ - $= A_x * B_x = A_y * B_y + A_z * B_z$
+*** Cross Product
+ - $A\times B = \begin{bmatrix}
+   \hat{x} & \hat{y} & \hat{z} \\
+   A_{x} & A_{y} & A_{z} \\
+   B_{x} & B_{y} & B_{z} 
+   \end{bmatrix}$
+

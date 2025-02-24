@@ -8,5 +8,27 @@
 #+FILETAGS: :UTAS:2025:
 
 * Topics
-
+[[id:9ee07437-0f04-4724-b158-5663d88af7d9][Electromagnetism]]
 * Assesment
+ - Text Books:
+   - Fundementals of Applied Electromagnetic, F.Ulaby
+   - Microwave engineering C. Bowick
+   - RF Circuit Design, M.Steer
+** Assessed tutorial
+ - 20% of mark
+ - Every week 5pm Friday
+   - 10 best count
+** Lab
+ - 20% of mark
+ - Two weeks after final lab
+** Mid-term test
+ - 20% of mark
+ - ~week 8, maybe before
+   - 2hr
+ - Allowed 1 page (one sided) of personal notes
+   - And given formular sheet
+** Exam
+ - 40% of mark
+ - Allowed 1 page (double sided) of personal notes
+   - And given formular sheet
+

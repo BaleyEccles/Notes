@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       5ebaef48-8ae5-4de6-beb6-4325f0973b52
+:END:
+#+title: Cartesian Coordinate System
+#+date: [2025-02-24 Mon 11:07]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Cartesian Coordinate System
+defined with $(x, y, z)$
+** Differential Lenght
+$dl = dl_{x}\hat{x} + dl_{y}\hat{y} + dl_{z}\hat{z} = \hat{x}dx + \hat{y}dy + \hat{z}dz$
+** Differential Area
+$ds = {\displaystyle {\begin{aligned}\rho \,d\varphi \,dz&\,{\hat {\boldsymbol {\rho }}}\\{}+d\rho \,dz&\,{\hat {\boldsymbol {\varphi }}}\\{}+\rho \,d\rho \,d\varphi &\,{\hat {\mathbf {z} }}\end{aligned}}}$
+** Differential volume
+$dv = dxdydz$

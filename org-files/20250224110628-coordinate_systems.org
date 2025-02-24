@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       6b6f0fa6-e53c-479c-9edf-98c39ddaaf5f
+:END:
+#+title: Coordinate Systems
+#+date: [2025-02-24 Mon 11:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Coordinate Systems
+ - [[id:5ebaef48-8ae5-4de6-beb6-4325f0973b52][Cartesian Coordinate System]]
+ - [[id:e2718074-16a2-413b-b793-b5179ca917c5][Cylindrical Coordinate System]]
+ - [[id:3011b35b-9466-4303-8707-8f740ea5cb80][Spherical Coordinate System]]
+
+

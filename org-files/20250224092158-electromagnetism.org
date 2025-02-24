@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       9ee07437-0f04-4724-b158-5663d88af7d9
+:END:
+#+title: Electromagnetism
+#+date: [2025-02-24 Mon 09:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electromagnetism
+
