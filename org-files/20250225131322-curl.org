@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       9b460905-9129-4b46-b670-c67446bfe1a3
+:END:
+#+title: Curl
+#+date: [2025-02-25 Tue 13:13]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Curl
+ - $\textrm{curl}(F) = \nabla \times F$
+ - Measures the tendency to rotate about a point in a vector field in ${\displaystyle \mathbb {R} ^{3}}$.

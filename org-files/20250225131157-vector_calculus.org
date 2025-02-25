@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       9abc4f3b-b4a4-4f61-99b2-d3776452a4ef
+:END:
+#+title: Vector Calculus
+#+date: [2025-02-25 Tue 13:11]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Vector Calculus
+ - $F$ is a [[id:6b6f0fa6-e53c-479c-9edf-98c39ddaaf5f][vector field]]
+ - $f$ is a scalar field
+** Del
+ - Del is an operator
+   - Denoted using: $\nabla$
+*** Properties
+ - We can specify the following properties of del
+   - [[id:71f8a895-1987-4fe7-943a-4c23d71b0bed][Gradient]]
+   - [[id:3b87788c-7318-4158-8ace-a23b4ee89226][Divergence]]
+   - [[id:9b460905-9129-4b46-b670-c67446bfe1a3][Curl]]

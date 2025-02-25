@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       71f8a895-1987-4fe7-943a-4c23d71b0bed
+:END:
+#+title: Gradient
+#+date: [2025-02-25 Tue 13:13]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Gradient
+ - $\textrm{grad}(f) = \nabla f$
+ - Measures the rate and direction of change in a scalar field
+** Definition
+ - $\nabla f = \left( \frac{\partial}{\partial x}\hat{x} + \frac{\partial}{\partial y}\hat{y} + \frac{\partial}{\partial z}\hat{z}\right)
+   f$
+** Directional Derivative
+Given some vector $l$ and a scalar field $f$ the directional derivative is given by:
+ - $\frac{df}{dl} = \nabla f \cdot \hat{e_{l}}$
+ - Where $\hat{e_{l}}$ is the unit vector in the direction of $l$
+** Properties
+ - $\nabla (U + V) = \nabla U + \nabla V$
+ - $\nabla (UV) = U \nabla V + V \nabla U$
+ - $\nabla V^n = n V^{n-1}\nabla V$
+
