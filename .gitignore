@@ -13,6 +13,7 @@
 !org-files/*.db
 !org-files/*.bib
 !org-files/*.xopp
+!org-files/*.java
 
 !*.org
 !*.bib

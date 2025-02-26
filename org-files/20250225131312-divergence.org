@@ -7,5 +7,7 @@
 #+STARTUP: latexpreview
 
 * Divergence
- - $\textrm{div}(F) = \nabla \cdot F$
- - Measures the scalar of a source or sink at a given point in a vector field. 
+ - $\textrm{div}(F) = \nabla \cdot F = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}$
+ - Measures the amount of flux flowing from a point
+ - A field is divergenceless if there is an equal amount of flux entering and exiting the point
+ - [[id:9998aec3-aa06-4f68-9b8e-e314ce3b44e1][Divergence Theorem]]

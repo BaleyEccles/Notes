@@ -6,5 +6,12 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* Electromagnetism
+* Eleectromagnetism
+ - [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equations]]
+** Electromagnetic Force
+Responsible for:
+ - Electric Fields
+ - Magnetic Fields
+ - Electromagnetic Waves
 
+ 

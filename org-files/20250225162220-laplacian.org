@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       451948de-217d-4e9f-8210-188a4f614489
+:END:
+#+title: Laplacian
+#+date: [2025-02-25 Tue 16:22]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Laplacian
+ - 
+ - Denoted using $\nabla^2\mathbf{F}$ or $\nabla \cdot (\nabla f)$
+** Of a scalar field
+ - $\nabla^2 f = \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} + \frac{\partial^2 V}{\partial z^2}$
+ - This will result in a scalar
+** Of a [[id:ba70aa3c-d191-45ed-bbdb-6f040387960a][vector field]]
+ - $\nabla^2 \mathbf{F} =
+   \left(\frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} + \frac{\partial^2 V}{\partial z^2}\right)\mathbf{F} =
+   \hat{x}\nabla^2F_{x} + \hat{y}\nabla^2F_{y} + \hat{z}\nabla^2F_{z}$
+ - This will result in a vector
+** Properties
+ - In the [[id:5ebaef48-8ae5-4de6-beb6-4325f0973b52][Cartesian Coordinate System]] 
+   - $\nabla^2\mathbf{F} =
+     \nabla(\nabla\cdot \mathbf{F}) - \nabla \times (\nabla \times \mathbf{F})$

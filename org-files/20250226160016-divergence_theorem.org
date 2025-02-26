@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       9998aec3-aa06-4f68-9b8e-e314ce3b44e1
+:END:
+#+title: Divergence Theorem
+#+date: [2025-02-26 Wed 16:00]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Divergence Theorem
+ - $\int_{v}\nabla \cdot E dv = \oint_s E\cdot ds$

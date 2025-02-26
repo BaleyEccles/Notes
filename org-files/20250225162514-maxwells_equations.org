@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       6654124a-2525-4f33-bce0-8ad1c80369ee
+:END:
+#+title: Maxwells Equations
+#+date: [2025-02-25 Tue 16:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Maxwells Equations
+** Equations
+1. Gausses Law
+  - $\nabla\cdot \mathbf{D} = \rho_{V}$
+2. [[id:0b3f01d9-4742-47d0-b78d-a2399a25c3c2][Faradays Law]]
+  - $\nabla\times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}$
+3. Gausses Law for Magnetism
+  - $\nabla \cdot \mathbf{B} = 0$
+4. [[id:5090162e-9bbe-482c-bb65-0c906392309a][Amperes Law]] (with Maxwells correction)
+  - $\nabla\times\mathbf{H} = \mathbf{J} + \frac{\partial \mathbf{D}}{\partial t}$
+Where:
+ - $\mathbf{E}$ is represents the electric field intensity
+ - $\mathbf{B}$ is represents the [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][magnetic field]] intensity
+ - $\mathbf{D}$ is represents the electric flux intensity
+ - $\mathbf{H}$ is represents the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][magnetic flux]] intensity
+ - $\mathbf{J}$ is the current density per unit area
+ - $\rho_{V}$ is the electric charge density per unit volume
+*** Simplified
+If the media is homogeneous and linear we can simplify them into:
+1. $\nabla\cdot \mathbf{E} = \frac{\rho_V}{\epsilon}$
+2. $\nabla\times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}$
+3. $\nabla\cdot \mathbf{B} = 0$
+4. $\nabla\times \mathbf{B} = \mu \left( \mathbf{J} + \frac{\partial \mathbf{D}}{\partial t}\right)$
+where we used the following relationships:
+ - $\mathbf{D} = \epsilon \mathbf{E}$
+ - $\mathbf{B} = \mu \mathbf{H}$
+*** Statics
+When the system is static we can change the equations. The derivatives become zero, as time isn't changing
+1. $\nabla\cdot \mathbf{D} = \rho_V$
+2. $\nabla\times \mathbf{E} = 0$
+3. $\nabla\cdot \mathbf{B} = 0$
+4. $\nabla\times \mathbf{H} = \mathbf{J}$
+*** Dynamics
+When the system is dynamic we must use the origninal [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equations]].
+

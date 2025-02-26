@@ -9,11 +9,14 @@
 * Vector Calculus
  - $F$ is a [[id:6b6f0fa6-e53c-479c-9edf-98c39ddaaf5f][vector field]]
  - $f$ is a scalar field
+
 ** Del
  - Del is an operator
    - Denoted using: $\nabla$
-*** Properties
- - We can specify the following properties of del
+*** Definitions
+ - We can specify the following definitions of del
    - [[id:71f8a895-1987-4fe7-943a-4c23d71b0bed][Gradient]]
    - [[id:3b87788c-7318-4158-8ace-a23b4ee89226][Divergence]]
    - [[id:9b460905-9129-4b46-b670-c67446bfe1a3][Curl]]
+   - [[id:451948de-217d-4e9f-8210-188a4f614489][Laplacian]]
+ - [[https://en.wikipedia.org/wiki/Del_in_cylindrical_and_spherical_coordinates][More Definitions]]

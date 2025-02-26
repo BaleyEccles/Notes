@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       7452a469-6eed-49be-b90e-3ff68d28b92b
+:END:
+#+title: Stokes Theorem
+#+date: [2025-02-25 Tue 16:20]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+TAGS
+
+* Stokes Theorem
+ - $\int_S (\nabla\times \textbf{B})\cdot d\textbf{s} =
+    \oint_C \textbf{B}\cdot d\textbf{l}$
+ - This allows us to convert a surface integral into a contour line integeral.
+
+** Example
+ - [[xopp-pages:2025-02-25-Note-00-35.xopp][Stokes Theorem Example (Last question)]]

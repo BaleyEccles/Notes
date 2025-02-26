@@ -7,5 +7,11 @@
 #+STARTUP: latexpreview
 
 * Curl
- - $\textrm{curl}(F) = \nabla \times F$
+ - $\textrm{curl}(F) = \nabla \times F = \begin{bmatrix}
+   \hat{x} & \hat{y} & \hat{z} \\
+   \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+   F_{x} & F_{y} & F_{z} 
+   \end{bmatrix}$
+   - Or: $\nabla \times F = {\displaystyle {\begin{aligned}\left({\frac {\partial F_{z}}{\partial y}}-{\frac {\partial F_{y}}{\partial z}}\right)&{\hat {\mathbf {x} }}\\+\left({\frac {\partial F_{x}}{\partial z}}-{\frac {\partial F_{z}}{\partial x}}\right)&{\hat {\mathbf {y} }}\\+\left({\frac {\partial F_{y}}{\partial x}}-{\frac {\partial F_{x}}{\partial y}}\right)&{\hat {\mathbf {z} }}\end{aligned}}}$
  - Measures the tendency to rotate about a point in a vector field in ${\displaystyle \mathbb {R} ^{3}}$.
+ - We can use [[id:7452a469-6eed-49be-b90e-3ff68d28b92b][Stokes Theorem]] to simplify integrals that use [[id:9b460905-9129-4b46-b670-c67446bfe1a3][Curl]]
