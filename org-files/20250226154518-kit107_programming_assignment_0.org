@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       cdaa3b3a-5fca-45f7-bed6-c439ebf73d50
+:END:
+#+title: KIT107 - Programming - Assignment 0
+#+date: [2025-02-26 Wed 15:45]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* KIT107 - Programming - Assignment 0
+** Question 1
+[[file:KIT107Assignment0Q1.java]]
+
+** Question 2
+[[file:KIT107Assignment0Q2.java]]
+
+** Question 3
+[[file:KIT107Assignment0Q3.java]]
+
+
+
+
