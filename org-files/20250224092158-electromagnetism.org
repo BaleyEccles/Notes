@@ -12,6 +12,6 @@
 Responsible for:
  - Electric Fields
  - Magnetic Fields
- - Electromagnetic Waves
+ - Electromagnetic [[id:44cf340f-5ba3-4221-80a4-379615048b59][Waves]]
 
  

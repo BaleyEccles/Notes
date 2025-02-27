@@ -30,4 +30,4 @@
    - \[x(t) = r_x(t)e^{j\theta_x(t)}\]
 ** Energy
  - \[E_x = 2E_{X_+}\]
- - The lowpass equivalent signal has double the energy than the  [[id:43a759ee-3cad-411c-a23f-4db60e9342e1][Bandpass Signal]]
+ - The lowpass equivalent signal has double the energy than the [[id:43a759ee-3cad-411c-a23f-4db60e9342e1][Bandpass Signal]]

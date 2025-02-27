@@ -11,6 +11,11 @@
  - There are two types of signals:
    - [[id:f677e2ac-10a8-4754-82f9-57f93fb56789][Lowpass/Baseband Signals]]
    - [[id:43a759ee-3cad-411c-a23f-4db60e9342e1][Bandpass Signals]]
+** Transforms
+ - [[id:8b337d07-0cd0-4b11-b685-d9096b5d65af][Lowpass to Bandpass Transform]]
+ - [[id:ef5c5b6c-59eb-4673-a247-6fb8da6590c8][Bandpass to Lowpass Transform]]
+ - [[id:a8738643-f815-4bc2-8ebf-6c97df48f956][Lowpass to Band Reject Transform]]
+ - [[id:d6a5ee11-cf8b-4bc1-a7d0-bee23c61d7ac][Lowpass to Highpass Transform]]
 ** $X_+(f)$ and $X_-(f)$
  - \[X_+(f) = \begin{cases}
    X(f) &, f>0 \\
