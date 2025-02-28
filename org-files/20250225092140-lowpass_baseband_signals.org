@@ -8,7 +8,7 @@
 
 * Lowpass/Baseband Signals
  - In the frequency domain the signal is centered around the origin
-   - Have a bandwidth $w$ measured from the origin to the right most frequency
+   - Have a [[id:a647872e-240f-4ef0-8304-b713e15505ea][bandwidth]] $w$ measured from the origin to the right most frequency
 ** Look Like
  - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Lowpass Magnitude.xopp]]
  - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Lowpass Phase.xopp]]

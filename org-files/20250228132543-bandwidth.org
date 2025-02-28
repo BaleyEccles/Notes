@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       a647872e-240f-4ef0-8304-b713e15505ea
+:END:
+#+title: Bandwidth
+#+date: [2025-02-28 Fri 13:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bandwidth
+ - If there are two or more signals on a bandwidth we will encounter interferance
+ - Bandwidth is expensive
+   - There is a limited amount of bandwidth avalible
+     

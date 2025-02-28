@@ -20,3 +20,5 @@
  - \[|R_{XX}(\tau)|\leq R_{XX}(0)\]
    - The is a peak at $\tau=0$, which can repeat
  - \[R_{XX}(0)=E[X^2(t)]\]
+** Time-averaged autocorrelation
+ - $R_x(\tau) = \lim_{T\rightarrow \infty}\frac{1}{T}\int_{-T/2}^{T/2}x(t)x^{*}(t-\tau)dt}$

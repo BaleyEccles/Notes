@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       c9b76a54-da68-4891-9ed1-3d64a182d026
+:END:
+#+title: Amplitude Modulation
+#+date: [2025-02-28 Fri 13:00]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Amplitude Modulation
+ - Modulating the amplitude of a signal to transmit data
+  
+   - 
+** Types
+[[id:7feece04-ef5b-4375-96be-9f0feeddc2ad][DSB-SC AM]]
+

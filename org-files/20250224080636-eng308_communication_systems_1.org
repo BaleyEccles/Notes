@@ -21,6 +21,7 @@
    - Demodualtion
  - Detect
 * Topics
+[[id:c9b76a54-da68-4891-9ed1-3d64a182d026][Amplitude Modulation]]
 [[id:b90da113-9aad-4168-93f6-da016a54f577][Nyquist-Shannon Capacity Theorem]]
 [[id:6e3bc75c-999b-4d36-bfed-11168f239394][Lowpass + Bandpass Signals]]
 * Assesment

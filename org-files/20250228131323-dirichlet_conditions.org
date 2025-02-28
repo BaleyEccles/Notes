@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       b41a4202-cdf5-4d5e-b1b1-1ae36b637b63
+:END:
+#+title: Dirichlet Conditions
+#+date: [2025-02-28 Fri 13:13]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Dirichlet Conditions
+The [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier Transform]] of a signal if it meets the following conditions:
+1. $x(t)$ is absolutely inegrable
+   - $\int_{-\infty}^{\infty}|x(t)|dt < \infty$
+2. Number of maxima and minima of $x(t)$ is finite in any finite time interval
+3. Number of discontinuites of $x(t)$ is finite in any finite time interval

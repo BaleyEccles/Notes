@@ -1,0 +1,56 @@
+:PROPERTIES:
+:ID:       7feece04-ef5b-4375-96be-9f0feeddc2ad
+:END:
+#+title: DSB-SC AM
+#+date: [2025-02-28 Fri 13:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* DSB-SC AM (Double Sideband - Suppressed Carrier Amplitude Modulation)
+ - $u(t) = m(t)\cdot c(t)$
+   - message signal $m(t)$
+   - carrier signal $c(t)$
+     - $c(t) = A_c\cos(2\pi f_ct + \phi_c)$
+   - transmitted signal $u(t)$
+ - [[file:Screenshot 2025-02-28 at 13-03-37 1.3. Lowpass and Bandpass Signals - ENG308 ENG743 Communication Systems 1 and Communication Systems.png][Amplitude Modulation]]
+ - The [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier Transform]] of a signal will exist if it meets the [[id:b41a4202-cdf5-4d5e-b1b1-1ae36b637b63][Dirichlet Conditions]]
+   
+** TODO Fourier Transform of $u(t)$
+ - $u(f) = \frac{A_c}{2}\left[M(f-f_c)e^{j\phi_c} + M(f+f_c)e^{-j\phi_c}\right]$
+   - Where: $M(f) = \mathcal{F}\{m(t)\}$
+ - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/DSB-SC AM Fourier.xopp]] - :TODO:
+
+** Properties
+ - $m(t)$ is shifted by $f_c$
+ - $m(t)$ is phase offset by the carrier phase $\phi_c$
+ - $m(t)$ has a [[id:a647872e-240f-4ef0-8304-b713e15505ea][bandwidth]] of $w$ but $u(t)$ has a bandwidth of $2w$
+   - The [[id:a647872e-240f-4ef0-8304-b713e15505ea][bandwidth]] has doubled
+ - Uppersideband: $|f|>f_c$
+ - lower sideband: $|f|<f_c$
+ - "SC": Suppressed Carrier: $\rightarrow$ when $m(t)$ has no DC component
+   - $u(t)$ does not have the carrier present
+ - [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]]:
+   - $R_{u}(\tau) = \frac{A_c^2}{2}\cos(2\pi f_c\tau)R_m(\tau)}$
+ - [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]:
+   - $S_u(f) = \frac{A_c^2}{4}\left[S_m(f-f_c) + S_m(f+f_c)\right]$
+ - Total Power:
+   - $P_u=\frac{A^2}{2}P_m}$
+     - Where $P_m$ is the power in the message signal
+       
+** TODO Demodulation
+ - Assuming no impairments of the original signal
+ - $r(t) = u(t)$
+   - $r(t)\cdot \cos(2\pi f_c+\phi_c) = \frac{1}{2}m(t)A_c\cos(\phi_c-\phi) + \frac{1}{2}m(t)A_c\cos(4\pi f_{c} + \phi_c+\phi)$
+     - Where $\cos(2\pi f_c+\phi_c)$ is the Local Ocillator/Local Carrier
+       - Which is a copy of $c(t)$
+     - Which looks like: [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Demodulated DSB SC.xopp]] :TODO:
+   - So we apply a filter, giving
+     - $y_l(t) = \frac{1}{2}A_cm(t)\cos(\phi_c-\phi)$
+       - if $\phi_c = \phi$ and $\phi_c-phi = 0$
+         - $y_l(t) = \frac{1}{2}A_cm(t)$
+         - This is known as Coherent Detection
+       - if $\phi_c = \phi + 45^o$ and $\phi_c-phi = 45^o$
+         - $y_l(t) = \frac{1}{2\sqrt{2}}A_cm(t)$
+       - if $\phi_c = \phi + 90^o$ and $\phi_c-phi = 90^o$
+         - $y_l(t) = 0$
+

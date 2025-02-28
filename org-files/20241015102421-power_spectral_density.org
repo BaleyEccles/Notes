@@ -10,7 +10,7 @@
  - Definition (Wiener–Khinchin Theorem)
    - \[S_{XX}(\omega) = \int_{-\infty}^{\infty}R_{XX}(\tau)e^{j\omega\tau}d\tau \]
    - \[S_{XX}=\mathcal{F}\{R_{XX}(\tau)\}\]
-   - The [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier Transform]] of the [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]]
+     - The [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier Transform]] of the [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]]
    - \[S_{YY}(\omega)=|H(\omega)|^2S_{XX}(\omega)\]
 ** Properties
  - $S_{XX}(\omega)$ must be real
