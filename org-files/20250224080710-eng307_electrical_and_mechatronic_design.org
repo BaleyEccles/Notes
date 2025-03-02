@@ -22,5 +22,7 @@
  - DUE: Refer to Assessment Description
  - 10% of mark
 ** Design Assignments
- - DUE: Refer to Assessment Description
+ - Weeks:
+   - 3, 6, 9 and 12
  - 30% of mark
+ - [[id:e1a8a179-0487-4d1f-ad59-83ebeb8cad0c][ENG307 - Electrical and Mechatronic Design - Design Assignment 1]]

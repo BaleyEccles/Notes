@@ -1,0 +1,57 @@
+:PROPERTIES:
+:ID:       e1a8a179-0487-4d1f-ad59-83ebeb8cad0c
+:END:
+#+title: ENG307 - Electrical and Mechatronic Design - Design Assignment 1
+#+date: [2025-02-27 Thu 15:30]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG307 - Electrical and Mechatronic Design - Design Assignment 1
+** Exercise 1 - Specifications
+*** LED
+ - An LED that is visible in day and night lighting conditions
+   - It must brighten during the day and dim during the night
+ - [[https://coloer.com/blogs/news/guide-to-outdoor-lighting-brightness]]
+
+*** Speakers
+ - Speaker(s) must be loud enough to overcome the ambiant outside noise.
+ - [[https://soundproof.expert/decibel-chart-noise-level/]]
+ - Greater than 50dB
+   - Must be able to hear during the rain
+*** Microphone
+ - The voice must be clear
+   - Senistive to 20Hz - 20KHz
+     - [[https://en.wikipedia.org/wiki/Microphone#Measurements_and_specifications]]
+
+*** Dimensions
+ - The door bell must not be too heavy/large
+   - So it can be wall mounted
+ - [[https://static.ring.com/assets/static/RING-MEDIA-KIT-8818533c56ed35d9abb217b36c110282.pdf]]
+   - 4.98 in. x 2.43 in. x 0.87 in
+*** Wi-Fi
+ - Wi-Fi must be strong enough to reach on the other side of the house
+   - It must be strong enough to go through multiple walls
+
+** Exercise 2 - System Topology
+*** AC -> DC
+ - Mains powered (240V AC)
+   - The door bell must reduce the power for the LED and other components
+   - AC -> DC converter
+     - 5V? 10V? 15V?
+*** Microphone
+**** Filter
+ - The microphone must have a filter on it
+   - It will be outside, so there will be background noise
+*** Speaker
+*** LED
+**** Change Brigtmess
+*** Wi-Fi Rx/Tx
+** Exercise 3 - Test Cases
+*** AC -> DC
+ - 
+*** Microphone
+**** Filter
+*** Speaker
+*** LED
+**** Change Brigtness
+*** Wi-Fi Rx/Tx
