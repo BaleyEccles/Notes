@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       5294fb51-f4e9-48cc-9cf8-85ff911f9547
+:END:
+#+title: Laplace's Equation
+#+date: [2025-03-03 Mon 11:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Laplace's Equation
+ - \[\del^2V =0\]
+   - Used to find $V$ in regions with boundries

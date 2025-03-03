@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       645bf86b-4946-4952-9b90-0c4c4e867a6d
+:END:
+#+title: Gauss's Law
+#+date: [2025-03-03 Mon 09:28]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Gauss's Law
+ - $\nabla\cdot \mathbf{D} = \rho_{V}$
+ - This can be used to validate [[id:1486a718-5212-4ac7-8abe-24fb69f500a6][Coulombs Law]]
+** Integral form
+ - \[\int_v\del\cdot Ddv = \int_v\rho_vdv = Q\]
+   - Where $Q$ is the total charge in the volume $v$
+ - Using the [[id:9998aec3-aa06-4f68-9b8e-e314ce3b44e1][Divergence Theorem]]
+   - \[Q = \oint_{v}D\cdot ds\]
+
+** Example
+ - [[xopp-pages:/home/baley/UTAS/ENG305 - Transmission Lines and Electromagnetic Waves/notes/2025-03-03-Note-48-51.xopp][Page 3]]

@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       e5f19fd2-0970-4021-83ac-1dc4266acba9
+:END:
+#+title: Dielectrics
+#+date: [2025-03-03 Mon 11:35]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Dielectrics
+

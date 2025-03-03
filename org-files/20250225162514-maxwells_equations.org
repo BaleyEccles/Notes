@@ -8,7 +8,7 @@
 
 * Maxwells Equations
 ** Equations
-1. Gausses Law
+1. [[id:645bf86b-4946-4952-9b90-0c4c4e867a6d][Gausses Law]]
   - $\nabla\cdot \mathbf{D} = \rho_{V}$
 2. [[id:0b3f01d9-4742-47d0-b78d-a2399a25c3c2][Faradays Law]]
   - $\nabla\times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}$
@@ -32,12 +32,15 @@ If the media is homogeneous and linear we can simplify them into:
 where we used the following relationships:
  - $\mathbf{D} = \epsilon \mathbf{E}$
  - $\mathbf{B} = \mu \mathbf{H}$
-*** Statics
-When the system is static we can change the equations. The derivatives become zero, as time isn't changing
-1. $\nabla\cdot \mathbf{D} = \rho_V$
-2. $\nabla\times \mathbf{E} = 0$
-3. $\nabla\cdot \mathbf{B} = 0$
-4. $\nabla\times \mathbf{H} = \mathbf{J}$
+*** [[id:cc820405-22a8-491a-a52c-3f3c5e0e0826][Electrostatics]]
 *** Dynamics
 When the system is dynamic we must use the origninal [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equations]].
-
+*** Charge Distributions
+The total charge in a volume can be calculated using
+ - $Q = \int_{v}\rho_{V}dV$
+The total charge across a surface can be calculated using
+ - $Q = \int_s\rho_sds$
+   - $\rho_{s} = \lim_{\Delta s \rightarrow 0}\frac{\Delta q}{\Delta s} = \frac{dq}{ds}$
+The total charge across a line can be calculated using
+ - $Q = \int_l\rho_ldl$
+   - $\rho_{l} = \lim_{\Delta l \rightarrow 0}\frac{\Delta q}{\Delta l} = \frac{dq}{dl}$

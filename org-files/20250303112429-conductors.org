@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       470e50aa-5154-4107-9a2f-3a838f5b4fd6
+:END:
+#+title: Conductors
+#+date: [2025-03-03 Mon 11:24]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Conductors
+ - The paramateres for a conductor is:
+   - [[id:663a3509-4790-462c-a894-72da4fca5e17][Permittivity]]
+   - [[id:b70c8efe-e501-479a-8d58-6093bd1e891a][Magnetic Permeability]]
+   - Conductivity
+ - The measure of how easily electrons can flow through the material
+   - \[J=E\sigma\]
+** Drift Velocity
+ - Denoted $u_e$
+ - \[u_e=\mu_eE\]
+   - $\mu_e$ is the electron mobility
+ - \[J=\rho_vu = -\mu_e\rho_vE\]
+** Conductivity
+ - Denoted $\sigma$
+ - \[\sigma = -\mu_e\rho_v=N_e\mu_ee\]
+   - $e$ is the charge of an electron
+     - $e=1.61\cdot 10^{-19}C$
+   - $N_e$ is the number of free electrons per unit volume.
+** Observations
+ - $\sigma = \infty$
+   - The material is a perfect conductor
+ - $\sigma = 0$
+   - The material is a perfect [[id:e5f19fd2-0970-4021-83ac-1dc4266acba9][dielectric]]
+** Chart
+ - [[file:Screenshot 2025-03-03 at 11-31-32 ENG305 Week 2 Lecture Slides - Electrostatics.pdf.png]]
+** Boundry Conditions
+ - [[id:89749991-c329-462e-a4c6-084653dec2d0][Conductor-Dielectric Boundary Conditions]]
+ - [[id:24aae450-1ccb-4e7a-a11b-5d4b207b3518][Conductor-Conductor Boundary Conditions]]
+ - \[D_{1n}-D_{2n}=\rho_s\]
+   - $D_{1n}$ and $D_{2n}$ denote the normal components of the two materials $D_1$ and $D_2$
+   - The normal component of $D$ changes between two media equal to the surface charge density
+ - For $E$
+   - \[\epsilon_2 E_{1n} - \epsilon_2 E_{2n} = \rho_s\]
+** Example
+ - [[xopp-pages:/home/baley/UTAS/ENG305 - Transmission Lines and Electromagnetic Waves/notes/2025-03-03-Note-48-51.xopp][Page 5]]

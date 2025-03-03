@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       663a3509-4790-462c-a894-72da4fca5e17
+:END:
+#+title: Permittivity
+#+date: [2025-03-03 Mon 10:57]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Permittivity
+A property of a material to distort a electric field
+ - $\epsilon = \epsilon_0\epsilon_r$
+ - $\epsilon_0=8.854 \cdot 10^{-12}$
+ - If the permittivity and the [[id:b70c8efe-e501-479a-8d58-6093bd1e891a][magnetic permeability]] is independent of the magnitude of the electric field $E$, then the matrial is linear.
+   - This is because $D$ and $E$ can be represented using
+     - $D = \epsilon E$
+
+
+** Chart
+[[file:Screenshot 2025-03-03 at 09-14-50 ENG305 Week 2 Lecture Slides - Electrostatics.pdf.png]]

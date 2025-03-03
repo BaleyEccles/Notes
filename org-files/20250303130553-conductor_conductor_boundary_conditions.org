@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       24aae450-1ccb-4e7a-a11b-5d4b207b3518
+:END:
+#+title: Conductor-Conductor Boundary Conditions
+#+date: [2025-03-03 Mon 13:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Conductor-Conductor Boundary Conditions
+ - Consider that medium 1 and 2 is a non-perfect [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][conductor]]
+ - \[J_{1n}\left(\frac{\epsilon_1}{\sigma_1} - \frac{\epsilon_2}{\sigma_2} = \rho_s\]

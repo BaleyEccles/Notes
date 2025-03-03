@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       a495f198-77e7-490e-8b83-eecd3433a77f
+:END:
+#+title: Poisson’s Equation
+#+date: [2025-03-03 Mon 10:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Poisson’s Equation
+ - Using [[id:645bf86b-4946-4952-9b90-0c4c4e867a6d][Gauss's Law]] and an equation in [[id:6a403a89-72e3-4fde-9eb7-2678ec595acb][Electric Scalar Potential]]
+   - \[\del^2V = -\frac{\rho_v}{\epsilon}\]
+ - The [[id:6a403a89-72e3-4fde-9eb7-2678ec595acb][Electric Scalar Potential]] equation for a continuous distribution will satisfy this

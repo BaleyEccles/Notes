@@ -7,8 +7,8 @@
 #+STARTUP: latexpreview
 
 * Laplacian
- - 
  - Denoted using $\nabla^2\mathbf{F}$ or $\nabla \cdot (\nabla f)$
+ - [[id:5294fb51-f4e9-48cc-9cf8-85ff911f9547][Laplace's Equation]]
 ** Of a scalar field
  - $\nabla^2 f = \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} + \frac{\partial^2 V}{\partial z^2}$
  - This will result in a scalar

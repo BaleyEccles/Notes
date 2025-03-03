@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       cc820405-22a8-491a-a52c-3f3c5e0e0826
+:END:
+#+title: Electrostatics
+#+date: [2025-03-03 Mon 08:44]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electrostatics
+When the system is static we can change the equations. The derivatives become zero, as time isn't changing. This is known as [[id:cc820405-22a8-491a-a52c-3f3c5e0e0826][Electrostatics]]
+1. $\nabla\cdot \mathbf{D} = \rho_V$
+2. $\nabla\times \mathbf{E} = 0$
+3. $\nabla\cdot \mathbf{B} = 0$
+4. $\nabla\times \mathbf{H} = \mathbf{J}$
+ - [[id:1486a718-5212-4ac7-8abe-24fb69f500a6][Coulombs Law]]
+

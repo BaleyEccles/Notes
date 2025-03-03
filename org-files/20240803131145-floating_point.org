@@ -6,5 +6,5 @@
 #+STARTUP: latexpreview
 
 * Floating Point
-There are two types of floating point numbers, [[id:927f4ddf-8c9b-454c-b4cd-54cc2e184d11][Single Precision]] and [[id:787abd3a-b156-4729-8fce-e82a14c7777d][Double Precision]]. They both work on the same principle, that is they use some bits to represent the sign, exponent and a mantisa that comes to gether with the this equation \[Number=(-1)^{sign}(1+mantisa)2^{exponent}\]. [[id:ace79a98-46ca-49e3-a7ee-cceba767714a][
-Floating Point]] numbers do not have 100% accuracy. And this is where errors arrise, the largest form of error is [[id:9e78b4ec-0ab4-42e2-b379-0fef36675d4e][Catastrophic Cancellation]].
+There are two types of floating point numbers, [[id:927f4ddf-8c9b-454c-b4cd-54cc2e184d11][Single Precision]] and [[id:787abd3a-b156-4729-8fce-e82a14c7777d][Double Precision]]. They both work on the same principle, that is they use some bits to represent the sign, exponent and a mantisa that comes to gether with the this equation \[Number=(-1)^{sign}(1+mantisa)2^{exponent}\].
+[[id:ace79a98-46ca-49e3-a7ee-cceba767714a][Floating Point]] numbers do not have 100% accuracy. And this is where errors arrise, the largest form of error is [[id:9e78b4ec-0ab4-42e2-b379-0fef36675d4e][Catastrophic Cancellation]].

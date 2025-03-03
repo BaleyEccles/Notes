@@ -6,8 +6,12 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* Eleectromagnetism
+* Electromagnetism
  - [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equations]]
+ - [[id:6a403a89-72e3-4fde-9eb7-2678ec595acb][Electric Scalar Potential]]
+ - [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][Conductors]]
+ - [[id:e5f19fd2-0970-4021-83ac-1dc4266acba9][Dielectrics]]
+ - [[id:83c7530e-2da2-4025-a329-105b95806a29][Joule’s law]]
 ** Electromagnetic Force
 Responsible for:
  - Electric Fields

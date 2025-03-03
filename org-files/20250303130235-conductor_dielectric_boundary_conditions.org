@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       89749991-c329-462e-a4c6-084653dec2d0
+:END:
+#+title: Conductor-Dielectric Boundary Conditions
+#+date: [2025-03-03 Mon 13:02]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Conductor-Dielectric Boundary Conditions
+ - Consider that medium 1 is a [[id:e5f19fd2-0970-4021-83ac-1dc4266acba9][dielectric]] and medium 2 is a perfect [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][conductor]]
+ - \[D_1=\epsilon E_1 = \hat{n}\rho_s\]

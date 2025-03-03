@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       83c7530e-2da2-4025-a329-105b95806a29
+:END:
+#+title: Joule’s law
+#+date: [2025-03-03 Mon 11:41]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Joule’s law
+ - \[P=\int_vE\cdot Jdv\]
+   - Measured in Watts
+- Using the [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][Conductance]] equation ($J=\sigma E$)
+  - \[P=\int_v\sigma|E|^2dv\]

@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       0bab4eaa-a87f-4711-a3ab-945f94adcfa4
+:END:
+#+title: Resistance and Conductance
+#+date: [2025-03-03 Mon 11:36]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Resistance and Conductance
+ - \[R = \frac{V}{I}\]
+ - \[G = \frac{1}{R}\]
+** Calculating Resistance
+ - \[R = \frac{V}{I} = \frac{-\int_lE\cdot dl}{\int_sE\sigma\cdot ds}\]
+   - Using [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][Conductance]] ($J=E\sigma$)
+   - [[id:6a403a89-72e3-4fde-9eb7-2678ec595acb][Electric Scalar Potential]]

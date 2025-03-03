@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       6a403a89-72e3-4fde-9eb7-2678ec595acb
+:END:
+#+title: Electric Scalar Potential
+#+date: [2025-03-03 Mon 09:55]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electric Scalar Potential
+The required work requried to move a unit charge from one point to another
+ - \[V_{21}=V_2-V_1= -\int_{P_1}^{P_2}E\cdot dl\]
+   - Where $V$ is the electric potential
+   - And $P$ is a point
+ - The work required to move a charge from one point and the back is equal to zero
+   - \[\oint E\cdot dl=0\]
+** Due to Point Charges
+ - Due to a single charge $q$
+   - \[V = \frac{q}{4\pi\epsilon|R-R_1|}\]
+ - Due to many charges
+   - \[V = \frac{1}{4\pi\epsilon}\sum_{n=1}^{N}\frac{q_n}{|R-R_n|}\]
+** Due to Continuous Distributions
+ - for a volume distribution
+   - \[V = \frac{1}{4\pi\epsilon}\int_{v'}\frac{\rho_v}{R'}dv'\]
+ - for a surface distribution
+   - \[V = \frac{1}{4\pi\epsilon}\int_{s'}\frac{\rho_s}{R'}ds'\]
+ - for a line distribution
+   - \[V = \frac{1}{4\pi\epsilon}\int_{l'}\frac{\rho_l}{R'}dl'\]
+*** Example
+ - [[xopp-pages:/home/baley/UTAS/ENG305 - Transmission Lines and Electromagnetic Waves/notes/2025-03-03-Note-48-51.xopp][Page 4]]
+** Electric Field as a Function of Electric Potential
+If we want to go the other way
+ - \[E = -\del V\]
