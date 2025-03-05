@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       28f7edd3-4920-4d72-bac4-e4a2b743e943
+:END:
+#+title: Array
+#+date: [2025-03-05 Wed 15:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Array
+A list of varibles.
+
+** Example In java
+#+begin_src java
+int[] A = new int[6];
+
+for (int i = 0; i < 6; i++) {
+  A[i] = i*3;
+}
+
+for (int i = 0; i < A.length; i++) {
+  System.out.println("Element of A at " + i + " is " + A[i]);
+}
+#+end_src
+
+#+RESULTS:
+: Element of A at 0 is 0
+: Element of A at 1 is 3
+: Element of A at 2 is 6
+: Element of A at 3 is 9
+: Element of A at 4 is 12
+: Element of A at 5 is 15
+

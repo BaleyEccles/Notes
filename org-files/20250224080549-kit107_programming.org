@@ -8,7 +8,8 @@
 #+FILETAGS: :UTAS:2025:
 
 * Topics
-
+ - [[id:28f7edd3-4920-4d72-bac4-e4a2b743e943][Array]]
+ - [[id:be75a0e7-8d18-443b-89b5-2edf70730763][Primitive Operators]]
 * Assesment
 ** Assignment 0
  - Week 3

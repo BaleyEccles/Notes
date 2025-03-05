@@ -1,0 +1,48 @@
+:PROPERTIES:
+:ID:       be75a0e7-8d18-443b-89b5-2edf70730763
+:END:
+#+title: Primitive Operators
+#+date: [2025-03-05 Wed 15:18]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Primitive Operators
+** In java
+*** Logical
+ - And: &&
+ - Or: ||
+ - Not: !
+*** Relational
+ - Equal: ==
+ - Not Equal: !=
+ - Less Than: <
+ - Less Than Or Equal: <=
+ - Greater Than: >
+ - Greater Than Or Equal: >=
+*** Arithmetic
+ - Add: +
+ - Subtract: -
+ - Multiply: *
+ - Divide: /
+ - Modulo: %
+ - Add Equal: +=
+ - Minus Eqal: -=
+ - Multiply Equal: *=
+ - Divide Equal: /=
+ - Modulo Equal: %=
+ - Increment: ++
+ - Decrement: --
+*** Member
+Used to access a member
+ - .
+*** Assignment
+ - Becomes: =
+ - Turnary: ? :
+*** Bitwise
+Does bitwise operations
+ - AND: &
+ - OR: |
+ - XOR: ^
+ - Complement: ~
+ - Shift left: <<
+ - Shift right: >>
