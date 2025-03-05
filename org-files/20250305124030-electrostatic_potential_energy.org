@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       afaf1f4e-547f-4669-9bdb-74247c479c07
+:END:
+#+title: Electrostatic Potential Energy
+#+date: [2025-03-05 Wed 12:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electrostatic Potential Energy
+ - The energy stored in any [[id:605fa252-6718-4527-bad5-7fc2f8d29bca][capacitor]]
+   - \[W_e=\frac{1}{2}CV^2\]

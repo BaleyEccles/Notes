@@ -30,3 +30,4 @@ The required work requried to move a unit charge from one point to another
 ** Electric Field as a Function of Electric Potential
 If we want to go the other way
  - \[E = -\del V\]
+** [[id:afaf1f4e-547f-4669-9bdb-74247c479c07][Electrostatic Potential Energy]]

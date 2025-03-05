@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       85e72419-b86c-4f8a-a5a6-6b7874a5bfd0
+:END:
+#+title: Electrical Force
+#+date: [2025-03-05 Wed 12:43]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electrical Force
+ - In a [[id:605fa252-6718-4527-bad5-7fc2f8d29bca][Capacitor]] a force from one [[id:0bab4eaa-a87f-4711-a3ab-945f94adcfa4][plate]] to another will form ($F_e$)
+ - Using the [[id:afaf1f4e-547f-4669-9bdb-74247c479c07][Electrostatic Potential Energy]] we can form the equation
+   - \[F_e=-\hat{z}\frac{1}{2}\frac{\epsilon A}{z^2}V^2}\]
+
