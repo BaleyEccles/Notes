@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       93cc7a76-b114-4b58-8116-200294578267
+:END:
+#+title: Modulation Index
+#+date: [2025-03-05 Wed 12:51]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Modulation Index
+ - Defined as
+   - \[a = |\min(m(t))|\]
+   - \[a = \frac{E_{max}- E_{min}}{E_{max}+E_{min}}\]
+ - The modulation is linear if $a \leq 1$
+   - Otherwise it is non linear
+ - TOOD [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Modulation Index.xopp]]

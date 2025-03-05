@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       f302ba87-7879-46d4-8060-e679b8e84067
+:END:
+#+title: Conventional AM/DSB
+#+date: [2025-03-05 Wed 12:48]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Conventional AM/DSB
+ - Compared to [[id:7feece04-ef5b-4375-96be-9f0feeddc2ad][DSB-SC AM]] Conventional AM has a frequency at the carrier frequency
+   - That is it is not suppresed-carrier
+ - \[u(t) = A_c(1+m(t))\cos(2\pi f_ct + \phi_c\]
+
+** Fourier Transform
+ - Using the [[id:93cc7a76-b114-4b58-8116-200294578267][Modulation Index]] we can find the transform of the signal
+   - \[U(t) = \frac{A_c}{2}
+     \left[
+     e^{j\phi_c} \delta(f-f_c) + e^{-j\phi_c}\delta(f+f_c)
+     \right] + 
+     \frac{A_ca}{2}
+     \left[
+     e^{j\phi_c} M_n(f-f_c) + e^{-j\phi_c}M_n(f+f_c)
+     \right]
+     \]
+   - Where the first part is the carrier ?stats?
+   - And the second part is the message side band
+ - [[file:Screenshot 2025-03-05 at 13-42-35 3. Conventional AM (DSB AM).pdf.png]]
+
+** Power Content
+ - \[P_a = \frac{A_c^2}{2}[1 + a^2P_{m_n}\]
+** Demodulation
+ We can use a [[id:4a71cca5-c797-4735-9fa3-4e5f1edfcc20][Envelope Detector]]
+
+
+

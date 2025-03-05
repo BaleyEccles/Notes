@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       2ab349f3-d8a4-48d3-b45a-a787fb74ac11
+:END:
+#+title: SSB AM
+#+date: [2025-03-05 Wed 13:22]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* SSB AM  (Single Sideband Amplitude Modulation)
+** Modulation
+ - \[u(t) = A_cm(t)\cos(2\pi f_ct) \mp A_c\hat{m}(t)\cos(2\pi f_ct)\]
+   - Where the negative variant is the Upper Side Band (USB)
+   - And the positive variant is the Lower Side Band (LSB)
+   - This uses the [[id:cd529ee1-5877-4e55-8588-141427ca601a][Hilbert Transform]]
+ - [[file:Screenshot 2025-03-05 at 13-30-03 4. Single Sideband Amplitude Modulation (SSB AM).pdf.png]]
+** Fourier Transform
+ - \[U(f) = \frac{A_c}{2}
+   \left[
+   M(f-f_c) + M(f+f_c)
+   \right]
+   \mp \frac{A_c}{2}\begin{cases}
+   -M(f-f_c) + M(f+f_c) &, f>0 \\
+   M(f-f_c) - M(f+f_c) &, f<0 
+   \end{cases}
+   \]
+ - Each of the cases can be simplifed
+   - \[U_{USB}(f) = A_cM(f-f_c)\]
+   - \[U_{LSB}(f) = A_cM(f+f_c)\]
+     
+** Demodulation
+ - Only choerent demodualtion works
+ - Using a lowpass filter we can remove the higher frequencies that are present
+ - \[y(t) = \frac{A_cm(t)}{2}\]

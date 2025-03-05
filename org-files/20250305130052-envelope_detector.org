@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       4a71cca5-c797-4735-9fa3-4e5f1edfcc20
+:END:
+#+title: Envelope Detector
+#+date: [2025-03-05 Wed 13:00]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Envelope Detector
+ - This is nonchorent, that is it does not care about phase
+ - [[file:Screenshot 2025-03-05 at 13-20-05 Simple-diode-detector-AM-demodulator-generic-RC-circuit-svg.svg.png (PNG Image 1920 × 935 pixels) — Scaled (99%).png]]
