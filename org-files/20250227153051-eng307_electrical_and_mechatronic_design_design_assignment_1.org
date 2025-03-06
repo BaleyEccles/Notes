@@ -16,8 +16,9 @@
 *** Speakers
  - Speaker(s) must be loud enough to overcome the ambiant outside noise.
  - [[https://soundproof.expert/decibel-chart-noise-level/]]
- - Greater than 50dB
-   - Must be able to hear during the rain
+ - Metric
+   - Greater than 50dB
+     - Must be able to hear during the rain
 *** Microphone
  - The voice must be clear
    - Senistive to 20Hz - 20KHz
@@ -55,3 +56,10 @@
 *** LED
 **** Change Brigtness
 *** Wi-Fi Rx/Tx
+* Page 1
+** Exercise 1
+...
+** Exercise 2
+Seen in table ...
+** Exercise 3
+Seen in figure ...

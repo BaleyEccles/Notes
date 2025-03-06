@@ -6,7 +6,23 @@
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :UTAS:2025:
 
-* Topics
+* Notes
+** Metrics
+ - Must have units
+ - Very specific
+   - Can be ranges
+ - Satisfy users specifications
+** DFMEA (Design Failure Mode and EFfect Analysis)
+ - Used to verify the specifications are correct
+*** Design
+ - Used when designing a product or service
+*** Failure Mode
+ - Specific way in which the system/component may fail to meet the specifications
+*** Effect Analysis
+ - Consequences of the failure
+   
+** Software Design
+
 
 * Assesment
 ** Project Report
@@ -26,3 +42,5 @@
    - 3, 6, 9 and 12
  - 30% of mark
  - [[id:e1a8a179-0487-4d1f-ad59-83ebeb8cad0c][ENG307 - Electrical and Mechatronic Design - Design Assignment 1]]
+
+
