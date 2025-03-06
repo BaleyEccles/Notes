@@ -39,7 +39,7 @@
  - \[E_f=V_t+I_a(R_a+jX_s)=|E_f|\angle \delta\]
  - \[Z_s=R_a+jX_s=|Z_s|\angle \theta_s\]
 
-*** Determining Values :TODO:
+*** Determining Values
 **** Open Circuit test
  - Measure the voltage for a range of field currents
  - This can be used ton

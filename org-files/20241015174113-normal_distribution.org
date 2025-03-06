@@ -10,5 +10,5 @@
  - \[f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]
  - With $\mu=0$ and $\sigma^2=1$ we can transform to the standard normal distribution
    - \[f(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{(x)^2}{2}}\]
-** Transforms :TODO:
+** Transforms
  - Other distributions can be transformed into normal distribution using some $Z$ transform

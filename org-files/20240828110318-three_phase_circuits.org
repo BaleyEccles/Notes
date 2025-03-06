@@ -25,7 +25,7 @@
  - Two Configurations
    - Y-Config $Y$
    - Delta-Config $\Delta$
-   - ~TODO~ This gives four possible input -> output configs
+   - This gives four possible input -> output configs
      - \[\Delta \rightarrow Y\]
        - \[Z_Y=\frac{Z_{\Delta}}{3}\]
      - \[\Delta \rightarrow \Delta\]
