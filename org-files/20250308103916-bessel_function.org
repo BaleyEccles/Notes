@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       6aa137e2-5360-440a-adc0-ed6a8e29c957
+:END:
+#+title: Bessel Function
+#+date: [2025-03-08 Sat 10:39]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bessel Function
+ - \[J_n(\beta) = \sum_{k = 0}^{\infty}\frac{(-1)^k(\frac{\beta}{2})^{n+2k}}{k!(k+n)!}\]
+** Look Like
+ - [[file:Screenshot 2025-03-08 at 10-44-37 Recordings for Week 2 - ENG308 ENG743 Communication Systems 1 and Communication Systems.png]]
+** Table
+The values for each $n$ at $\beta$ can be tabulated
+

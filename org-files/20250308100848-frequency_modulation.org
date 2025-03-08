@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       c58a6aa3-c218-4d30-aa97-e7b227e2175f
+:END:
+#+title: Frequency Modulation
+#+date: [2025-03-08 Sat 10:08]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Frequency Modulation
+ - By modulating $\f_c$ the carrier signal: $c(t) = A_c\cos(2\pi f_c + \phi_c)$

@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       c4ede74e-3112-4ed9-88ff-399472f8d73f
+:END:
+#+title: Phase Modulation
+#+date: [2025-03-08 Sat 10:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Phase Modulation
+ - By modulating $\phi_c$ the carrier signal: $c(t) = A_c\cos(2\pi f_c + \phi_c)$

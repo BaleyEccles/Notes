@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       ff5d8c46-b6a5-4993-94fb-a233769b10bf
+:END:
+#+title: Analogue Modulation
+#+date: [2025-03-08 Sat 10:11]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Analogue Modulation
+[[id:c9b76a54-da68-4891-9ed1-3d64a182d026][Amplitude Modulation]]
+[[id:193ec810-72b5-4a36-be12-8feee43e711a][Angle Modulation]]
