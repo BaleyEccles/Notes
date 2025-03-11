@@ -1,0 +1,55 @@
+:PROPERTIES:
+:ID:       aa89e0a2-e7a6-4527-ac8b-6d40955aed96
+:END:
+#+title: ENG307 - Electrical and Mechatronic Design - Lab 1
+#+date: [2025-03-11 Tue 12:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG307 - Electrical and Mechatronic Design - Lab 1
+Using TL071CN
+** Part 1
+ - GBP: 5.25 or 3 (MHz)
+ - Slew Rate: 20V/us
+ - Input Offset Voltage: $\pm 3$ to $\pm 10$ (mV)
+
+** Part 2
+$R_f$ = 100k, 50k, 10k
+$R_1$ = 14.8k, 14.8k, 14.8k
+Gain = -6.75, -3.38, -0.675
+f = 10, 100, 1k, 10k, 100k, 1M
+
+
+| f    | Rf   |   R1 |  Gain | Vin  |  Vout |
+| 10   | 100k | 14.8 | -6.75 | 500m | -1.68 |
+| 100  | 100k | 14.8 | -6.75 | 500m | -1.68 |
+| 1k   | 100k | 14.8 | -6.75 | 500m | -1.68 |
+| 50k  | 100k | 14.8 | -6.75 | 500m | -1.68 |
+| 100k | 100k | 14.8 | -6.75 | 500m | -1.68 |
+| 1M   | 100k | 14.8 | -6.75 | 500m | -0.55 |
+| 500k | 100k | 14.8 | -6.75 | 500m |  -1.4 |
+| 250k | 100k | 14.8 | -6.75 | 500m | -1.68 |
+| 750k | 100k | 14.8 | -6.75 | 500m | -0.9  |
+
+#+begin_src octave
+f = [10, 100, 1e3, 100e3, 50e6, 1e6, 500e3, 250e3, 750e3];
+vout = [1.68, 1.68, 1.68, 1.68, 1.68, 0.55,  1.4, 1.68, 0.9];
+plot(f, vout, 'x')
+#+end_src 
+
+#+RESULTS:
+** Part 3
+ - Cut of was around 400kHz
+ - This is what we expected 
+** Part 4
+ - we recorded 5mV/6.75=0.74mV
+ - The data sheet says it should be around 1mV
+   - So, this is correct
+** Part 5
+ - At 1MHz
+ - Vin = 1V
+ - We recorded 10.5 V/us
+ - The datasheet says 5-20 V/us
+   - So, this is correct
+** Part 6
+

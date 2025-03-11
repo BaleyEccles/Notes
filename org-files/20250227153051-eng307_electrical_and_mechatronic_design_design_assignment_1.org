@@ -32,7 +32,14 @@
 *** Wi-Fi
  - Wi-Fi must be strong enough to reach on the other side of the house
    - It must be strong enough to go through multiple walls
-
+*** Metrics
+ - Force of button https://ergoweb.com/force-guidelines/
+ - Mic sens https://www.knowles.com/docs/default-source/default-document-library/mm25-33663-000.pdf?Status=Master&sfvrsn=c3ae71b1_0
+ - Speaker Vol https://soundproof.expert/decibel-chart-noise-level/
+ - Light brightness https://coloer.com/blogs/news/guide-to-outdoor-lighting-brightness
+   - https://www.lightingcouncil.com.au/wp-content/uploads/2018/12/Lighting-Council-Australia-LED-Buyers-Guide.pdf
+ - Wi-Fi https://en.wikipedia.org/wiki/IEEE_802.11
+   - https://www.whippedcreamsounds.com/mp3-bitrate-differences/
 ** Exercise 2 - System Topology
 *** AC -> DC
  - Mains powered (240V AC)
@@ -56,9 +63,12 @@
 *** LED
 **** Change Brigtness
 *** Wi-Fi Rx/Tx
+
 * Page 1
 ** Exercise 1
-...
+_THIS WAS LONGISH_
+It was decided that the door bell must have three main input methods, a button, a microphone and an application that would connect via Wi-Fi. 
+
 ** Exercise 2
 Seen in table ...
 ** Exercise 3

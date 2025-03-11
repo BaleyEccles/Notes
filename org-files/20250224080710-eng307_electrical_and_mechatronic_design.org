@@ -35,7 +35,7 @@
  - DUE: Refer to Assessment Description
  - 10% of mark
 ** Laboratory Demonstration
- - DUE: Refer to Assessment Description
+ - [[id:aa89e0a2-e7a6-4527-ac8b-6d40955aed96][ENG307 - Electrical and Mechatronic Design - Lab 1]]
  - 10% of mark
 ** Design Assignments
  - Weeks:
