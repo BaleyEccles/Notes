@@ -5,6 +5,7 @@
 #+date: [2025-03-06 Thu 20:18]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2025:
 
 * KIT107 - Programming - Assignment 1
 [[file:~/UTAS/KIT107 - Programming/KIT107Assignment1/PostCodes.java]]
