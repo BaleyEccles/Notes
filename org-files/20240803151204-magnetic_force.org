@@ -8,10 +8,21 @@
 * Magnetic Force
 A magnetic field acted upon a current will create a force.
 This force can be calculated using:
-\[\vec{F}=i\vec{l}\times \vec{B} \Rightarrow F=ilB\sin(\theta)\]
-\[F\] is the force, measured in Newtons (N)
-\[i\] is the conventional current, measured in Amperes (A)
-\[l\] is the length, measured in meters (m)
-\[B\] is the magnetic flux density, measured in Tesla (T)
-\[\theta\] is the angle between \[i\] \[B\]
-\[F\], \[i\] and \[B\] are at right angles. So the right hand rule can be used to find the direction, with the index finger as \[i\], the middle finger as \[B\] and the thumb as \[F\]. If the magnetic field is at an angle to the current, then only the perpendicular component of the magnetic field is translated into force.
+ -  \[\vec{F}=i\vec{l}\times \vec{B} \Rightarrow F=ilB\sin(\theta)\]
+   - $F$ is the force, measured in Newtons (N)
+   - $i$ is the conventional current, measured in Amperes (A)
+   - $l$ is the length, measured in meters (m)
+   - $B$ is the magnetic flux density, measured in Tesla (T)
+   - $\theta$ is the angle between \[i\] \[B\]
+   - $F$, \[i\] and \[B\] are at right angles. So the right hand rule can be used to find the direction, with the index finger as \[i\], the middle finger as \[B\] and the thumb as \[F\]. If the magnetic field is at an angle to the current, then only the perpendicular component of the magnetic field is translated into force.
+** Using [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equations]]
+$F_m$ is always perpendicular to the [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][magnetic field]]
+*** Magnetic Force on a Current Carrying Conductor
+ - \[F_m=I\oint_cdl\times B\]
+
+*** Magnetic Force on a Wire Segment
+ - \[F_m=\left(\int_lIdl\right)\times B = Il\times B\]
+* Magnetic Torque
+ - \[T = m\times  B\]
+   - Where $T$ is measured in $Nm$
+** TODO Examples

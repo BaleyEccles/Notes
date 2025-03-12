@@ -6,5 +6,6 @@
 #+STARTUP: latexpreview
 
 * Biot-Savart Law
-\[\vec{B}=\frac{\mu_0}{4\pi}\int \frac{\vec{i}\times\hat{R}}{R^{2}}dl\] where \[\hat{R}=\frac{\vec{R}}{\lvert R\rvert}\]
-This law is used to calculate the [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] at a point away from a wire.
+ - \[\vec{B}=\frac{\mu_0}{4\pi}\int \frac{\vec{i}\times\hat{R}}{R^{2}}dl\]
+   -  where \[\hat{R}=\frac{\vec{R}}{\lvert R\rvert}\]
+This law is used to calculate the [[id:cf104375-09b0-4334-84ce-3e0e1f41c234][Magnetic Flux Density]] or the [[id:f15ab8cb-30df-45d4-ab39-707648dea1be][Magnetic Flux Intensity]] at a point away from a wire.

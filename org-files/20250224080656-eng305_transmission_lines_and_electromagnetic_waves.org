@@ -9,7 +9,7 @@
 
 * Topics
  - [[id:9ee07437-0f04-4724-b158-5663d88af7d9][Electromagnetism]]
- - 
+ - [[id:e4ea6b25-0e15-4f1d-a44b-488db956d300][Magnetostatics]]
 * Assesment
  - Text Books:
    - Fundementals of Applied Electromagnetic, F.Ulaby

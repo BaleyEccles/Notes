@@ -11,3 +11,8 @@
 - \[\mu_{0}=4\pi\cdot 10^{-7}\], which is the permeability of vacuum and is measured in Hennery per meter (H/m).
 - \[\mu_{r}\] is the permeability of the specified material, in air \[\mu_{r}\approx 1\]
 - \[\mu_r=\frac{B}{\mu_0H}\]
+- \[B =\mu_0H + \mu_0M\]
+  - Where $M = \chi_mH$
+  - Which uses [[id:891d06d4-06be-40c3-b7d1-70a485f56e5a][Magnetic Susceptibility]]
+
+

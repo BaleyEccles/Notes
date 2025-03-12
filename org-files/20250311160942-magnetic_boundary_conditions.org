@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       a8608994-a060-4adb-b64a-2734a7ca2c01
+:END:
+#+title: Magnetic Boundary Conditions
+#+date: [2025-03-11 Tue 16:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Magnetic Boundary Conditions
+At the boundry of two magnetic materials the [[id:3ab115b0-6e42-46ec-b987-bd09c10d0ec6][Magnetic Flux]] is the same
+ - \[H_1=H_2\]
+   - Using [[id:5090162e-9bbe-482c-bb65-0c906392309a][Ampere's Law]]
+ - \[B_1=B_2\]
+   - Using [[id:645bf86b-4946-4952-9b90-0c4c4e867a6d][Gauss's Law]]

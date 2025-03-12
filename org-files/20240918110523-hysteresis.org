@@ -7,4 +7,6 @@
 #+STARTUP: latexpreview
 
 * Hysteresis
-When a matrial has a  [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][Magnetic Field]] applied and removed it wont return to the exact magnetic properties
+When a matrial has a [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][Magnetic Field]] applied and removed it wont return to the exact magnetic properties
+** B-H Curve
+[[file:Screenshot 2025-03-11 at 15-26-53 ENG305 Week 3 2025 - Magnetostatics.pdf.png]]

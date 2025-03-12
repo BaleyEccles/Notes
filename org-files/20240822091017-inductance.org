@@ -9,14 +9,22 @@
 * Inductance
 - \[L\] is the inductance, which a representation for an object to its ability to conduct flux. It only depends on the dimensions of the object.
 - \[L=N \frac{\phi}{i}\]
-** Cylindrical Coil
+** Cylindrical Coil / Solenoid
 - \[L=\mu \frac{N^2A}{l}\]
 ** Toroidal Coil
 - \[L=\mu \frac{N^2h}{2\pi}\ln(\frac{b}{a})\]
   - where \[\mu\] is the permeability of the material, \[N\] is the number of turns, \[h\] is the height of the coil, and \[a\] and \[b\] are the inner and outer radius respectively.
+** Other Conductors
+ - \[L = \int_sB\cdot ds\]
 ** EMF Relation
 - It can be related to emf using, which is [[id:0b3f01d9-4742-47d0-b78d-a2399a25c3c2][Faraday's law]].
   - \[\mathcal{E}=-N \frac{\partial \phi}{\partial t}=-L \frac{\partial i}{\partial t}\]
 ** Energy Relation
 - The magnetic energy stored by an inductor is
-  - \[W=\frac{1}{2}Li^2\]
+  - \[W=\frac{1}{2}Li^2 = \frac{1}{2}\mu H^2v\]
+    - Where $v$ is the volume of the interior of the solenoid
+- \[W_m=\frac{1}{2}\int_v\mu H^2dv\]
+  - For any non-solenoid conductor
+*** Magnetic Energy Density
+ - \[w_h=\frac{W_m}{v}= \frac{1}{2}\mu H^2\]
+
