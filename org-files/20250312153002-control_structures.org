@@ -1,0 +1,120 @@
+:PROPERTIES:
+:ID:       b98a88d3-459b-40cd-a151-6c04c9fd7bfd
+:END:
+#+title: Control Structures
+#+date: [2025-03-12 Wed 15:30]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Control Structures
+** if
+takes in a function/block that returns a boolean
+*** else
+after an if statement
+*** In Java
+#+begin_src java
+int a = 3;
+if (a == 3) {
+    System.out.print("a is 3");
+} else if (a == 4) {
+    System.out.print("a is 4");
+} else {
+    System.out.print("a is not 3 or 4");
+}
+#+end_src 
+
+#+RESULTS:
+: a is 3
+
+** switch
+takes in a int, char, enum and compares them to a value
+ - syntax sugar for else if blocks
+*** In Java
+#+begin_src java
+enum types {
+    INT, BOOL, STRING, FLOAT
+};
+int a = 0;
+int var = 100;
+types type = types.INT;
+
+switch (type) {
+case INT: {
+    a = 1;
+    System.out.print("int");
+    break;
+}
+case BOOL: {
+    a = 2;
+    System.out.print("bool");
+    break;
+}
+case STRING: {
+    a = 3;
+    System.out.print("string");
+    break;
+}
+default: {
+    System.out.print("type not handled");
+}
+}
+#+end_src 
+
+#+RESULTS:
+: int
+** Iteration
+*** while loop
+**** In Java
+#+begin_src java
+boolean a = true;
+int idx = 1;
+while (a) {
+    System.out.print("iteration: " + idx + "\n");
+    if (idx == 3) {
+        a = false;
+    }
+    idx++;
+}
+#+end_src 
+
+#+RESULTS:
+: iteration: 1
+: iteration: 2
+: iteration: 3
+
+*** do while loop
+Runs the 'do' block before cheking the statment
+**** In Java
+#+begin_src java
+boolean a = true;
+int idx = 3;
+do {
+    System.out.print("iteration: " + idx + "\n");
+    if (idx == 3) {
+        a = false;
+    }
+} while (a);
+#+end_src 
+
+#+RESULTS:
+: iter: 3
+*** for loop
+has three parts
+ - init
+   - The code that is ran before starting the loop
+ - check
+   - The code that checks if the loop should stop
+ - post
+   - The code that is ran before running the loop again
+**** In Java
+#+begin_src java
+for (int i = 1; i <= 3; i++) {
+    System.out.print("iteration: " + i + "\n");
+}
+#+end_src 
+
+#+RESULTS:
+: iteration: 1
+: iteration: 2
+: iteration: 3
+

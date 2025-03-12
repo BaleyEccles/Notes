@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       76903efb-60eb-4b9b-8749-2b650f40a784
+:END:
+#+title: Varibles
+#+date: [2025-03-12 Wed 15:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Varibles
+** Default Initialisation
+What varibles default values are
+*** In Java
+ - Most varibles have an inital value
+|--------------------------+----------------------|
+| Type                     | Inital Value         |
+|--------------------------+----------------------|
+| int                      | 0                    |
+| double                   | 0.0                  |
+| float                    | 0.0                  |
+| boolean                  | false                |
+| array                    | ptr to first element |
+| class type               | null                 |
+| String (is a class type) | null                 |
+|--------------------------+----------------------|
+
