@@ -47,7 +47,7 @@
      - $y_l(t) = \frac{1}{2}A_cm(t)\cos(\phi_c-\phi)$
        - if $\phi_c = \phi$ and $\phi_c-phi = 0$
          - $y_l(t) = \frac{1}{2}A_cm(t)$
-         - This is known as Coherent Detection
+         - This is known as Coherent Detectionn
        - if $\phi_c = \phi + 45^o$ and $\phi_c-phi = 45^o$
          - $y_l(t) = \frac{1}{2\sqrt{2}}A_cm(t)$
        - if $\phi_c = \phi + 90^o$ and $\phi_c-phi = 90^o$
