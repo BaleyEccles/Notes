@@ -11,3 +11,4 @@
  - Using the [[id:afaf1f4e-547f-4669-9bdb-74247c479c07][Electrostatic Potential Energy]] we can form the equation
    - \[F_e=-\hat{z}\frac{1}{2}\frac{\epsilon A}{z^2}V^2}\]
 
+ - [[id:202d61cf-e0ee-427b-9bd1-085818b508db][Lorentz Force]]

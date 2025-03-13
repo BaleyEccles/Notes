@@ -16,12 +16,17 @@ This force can be calculated using:
    - $\theta$ is the angle between \[i\] \[B\]
    - $F$, \[i\] and \[B\] are at right angles. So the right hand rule can be used to find the direction, with the index finger as \[i\], the middle finger as \[B\] and the thumb as \[F\]. If the magnetic field is at an angle to the current, then only the perpendicular component of the magnetic field is translated into force.
 ** Using [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equations]]
+ - [[id:202d61cf-e0ee-427b-9bd1-085818b508db][Lorentz Force]]
 $F_m$ is always perpendicular to the [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][magnetic field]]
-*** Magnetic Force on a Current Carrying Conductor
+*** On a charge
+ - \[F_m=q u\times B\]
+*** Magnetic Force on a Current Carrying [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][Conductor]]
  - \[F_m=I\oint_cdl\times B\]
-
 *** Magnetic Force on a Wire Segment
  - \[F_m=\left(\int_lIdl\right)\times B = Il\times B\]
+*** Between Two Parallel [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][Conductors]]
+ - \[F_1 = -\hat{y} \frac{I_2l\mu_0I_1}{2\pi d}\]
+ - \[F_2 = \hat{y} \frac{I_1l\mu_0I_2}{2\pi d}\]
 * Magnetic Torque
  - \[T = m\times  B\]
    - Where $T$ is measured in $Nm$

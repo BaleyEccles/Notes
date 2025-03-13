@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       202d61cf-e0ee-427b-9bd1-085818b508db
+:END:
+#+title: Lorentz Force
+#+date: [2025-03-13 Thu 13:31]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Lorentz Force
+ - When a charged particle is in both a [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][Magnetic Field]] and a Electric Field we can find the force using
+ - \[F = F_e + F_m = qE + q u\times B\]
