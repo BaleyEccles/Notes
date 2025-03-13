@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       cf8ee8da-8806-448c-b5b7-d713a9adfe65
+:END:
+#+title: Voltage-Controlled Oscillator
+#+date: [2025-03-13 Thu 12:41]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+
+* Voltage-Controlled Oscillator
+ - \[v_o(t) = \sin(\omega_ft + K_v\int_0^ty(\tau)d\tau + \phi_o)\]
+   -\[\theta_o(t) = \omega_ft + K_v\int_0^ty(\tau)d\tau + \phi_o\]
+
+
+
+ 

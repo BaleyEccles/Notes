@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       9b6e1221-e8ea-415c-863e-04f70de190b2
+:END:
+#+title: Phase-locked Loop
+#+date: [2025-03-13 Thu 12:35]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Phase-locked Loop
+ - \[V_i(t) = A\cos(\omega_ct + \phi_i)\]
+   -\[\theta_i(t) = \omega_ct + \phi_i\]
+ - \[V_o(t) = A\cos(\omega_ft + \phi_o)\]
+ - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Phase-locked-Loop.xopp]]
+ - This uses a [[id:a3c5885d-1c23-4591-8d6d-7901d9348983][Phase Detector]], [[id:9ef59dc5-5468-41ad-aa2b-e6d49dce04fa][Loop Filter]] and a [[id:cf8ee8da-8806-448c-b5b7-d713a9adfe65][Voltage-Controlled Oscillator]]
+** Steady State Locking Analysis
+ - We assume that $\phi_o(t)$ is constant (Steady State)
+   - \[\Rightarrow \phi_o(t) = \phi_o\]
+ - This allows us to find that:
+   - \[|\omega_c-\omega_f| < \frac{\pi}{2} - K_vA_cK_oK_{PD}\]
+** TODO Transient Locking Analysis
+ - Assume we are in a locked state
+ - The integral term in the [[id:cf8ee8da-8806-448c-b5b7-d713a9adfe65][Voltage-Controlled Oscillator]] responds to the change
+   - \[\Delta \theta_o(t) = K_v\int_{-\infty}^ty(\tau)d\tau\]
+ - Assuming that $\Delta \theta_o(t)$ is small
+   - This means that $\Delta \theta_o(t)$ is linear
+ - This allows us to find the transfer function
+   - \[\frac{\Delta \Theta_o(f)}{\Delta \Theta_o(f)} = H(f) =
+     \frac{A_cK_{PD}K_vG(f)}
+     {j2\pi f + A_cK_{PD}K_vG(f)}\]
+*** Using a first order filter
+ - Assume $G(f)$ is a first order filter
+   - \[G(f) = \frac{K_o}{1 + 2\pi \left(\frac{f}{f_0}\right)}\]
+ - Which gives
+   - \[H(f) = \frac{K_vK_{PD}K_oA_c}{(j2\pi f)^2+j4\pi \xi f_nf + (2\pi f_n)^2}\]
+   - $\xi$ is the damping ratio
+   - $f_n$ is the natural frequency
+   - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/2nd-Order-PLL.xopp]]
+
+

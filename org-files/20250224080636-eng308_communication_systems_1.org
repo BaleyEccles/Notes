@@ -24,6 +24,7 @@
 [[id:ff5d8c46-b6a5-4993-94fb-a233769b10bf][Analogue Modulation]]
 [[id:b90da113-9aad-4168-93f6-da016a54f577][Nyquist-Shannon Capacity Theorem]]
 [[id:6e3bc75c-999b-4d36-bfed-11168f239394][Lowpass + Bandpass Signals]]
+[[id:9b6e1221-e8ea-415c-863e-04f70de190b2][Phase-locked Loop]]
 * Assesment
 ** Test 1
  - 5% of mark
@@ -36,5 +37,6 @@
  - 25% of mark
  - Two parts
    - Analog and digital
+ - [[id:4e1476b3-c09e-4372-81de-a54b491d8a1d][ENG308 - Communication Systems 1 - Assignment 1]]
 ** Final exam
  - 40% of mark

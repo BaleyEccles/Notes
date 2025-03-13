@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       9ef59dc5-5468-41ad-aa2b-e6d49dce04fa
+:END:
+#+title: Loop Filter
+#+date: [2025-03-13 Thu 12:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Loop Filter
+ - Makes the input, which is an error go to zero
+   - \[e(t)\rightarrow 0\]
+ - Lowpass usually with an integrating function

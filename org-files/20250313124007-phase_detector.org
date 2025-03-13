@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       a3c5885d-1c23-4591-8d6d-7901d9348983
+:END:
+#+title: Phase Detector
+#+date: [2025-03-13 Thu 12:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+
+* Phase Detector
+ - \[e(t) = K_{PD}(\phi_i-\phi_o)\]
+ - Can be implemented using
+   - Multiplier
+   - XOR gates
+   - etc
+
+
