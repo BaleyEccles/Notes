@@ -5,6 +5,7 @@
 #+date: [2025-02-27 Thu 15:30]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2025:
 
 * ENG307 - Electrical and Mechatronic Design - Design Assignment 1
 ** Exercise 1 - Specifications
@@ -52,7 +53,7 @@
    - It will be outside, so there will be background noise
 *** Speaker
 *** LED
-**** Change Brigtmess
+**** Change Brightness
 *** Wi-Fi Rx/Tx
 ** Exercise 3 - Test Cases
 *** AC -> DC
@@ -61,15 +62,24 @@
 **** Filter
 *** Speaker
 *** LED
-**** Change Brigtness
+**** Change Brightness
 *** Wi-Fi Rx/Tx
 
 * Page 1
 ** Exercise 1
 _THIS WAS LONGISH_
-It was decided that the door bell must have three main input methods, a button, a microphone and an application that would connect via Wi-Fi. 
+It was decided from the design description that the door bell would have three main input methods, a button, a microphone and an application that would connect via Wi-Fi. The button is intended to be used to activate the microphone, this ensures that the microphone is not constantly listening to its surroundings, it will also play a chime when pressed. The microphone should be used to capture audio from people at the door, these messages will be stored on the internal storage device, before being sent to the mobile phone application via Wi-Fi. The application is able to play the stored audio recordings.
+
+It was also decided that there would be three output methods, a speaker, an indicator light and various methods in the application. The speaker should be used to play door bell chimes and the aforementioned audio recordings, the speaker must be loud enough for the user to hear, as the door bell will be outside, where there potentially a lot of ambient noise. The indicator light will indicate the status of the door bell by changing colours, the light must be visible under the natural day light. The application is able to connect to external speakers to play door bell chimes when a person has pressed the button, this allows the user to know someone is at the door where ever they are in the house. The application is also able to receive notifications, which will notify the user when someone is at the door or has left a message.
+
+The door bell is powered by 240V AC. This gives the user an easy method for installing the door bell, they will not be required to change batteries or recharge the door bell.
+
+A full specification list can be seen in *TODO* Table A. And their metrics can be seen in *TODO* Table B.
 
 ** Exercise 2
-Seen in table ...
+A table containing the component hierarchy can be seen in Table C. A hierarchical topology can be seen in Figure E. And system block diagram can be seen in Figure E.
 ** Exercise 3
-Seen in figure ...
+
+** Exercise 4
+
+
