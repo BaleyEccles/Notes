@@ -12,6 +12,7 @@
  - [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][Conductors]]
  - [[id:e5f19fd2-0970-4021-83ac-1dc4266acba9][Dielectrics]]
  - [[id:83c7530e-2da2-4025-a329-105b95806a29][Joule’s law]]
+ - [[id:a2c3981b-1a63-4d45-a5e9-65e2b5b4a99e][Vector Magnetic Potential]]
 ** Electromagnetic Force
 Responsible for:
  - Electric Fields

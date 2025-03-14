@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       d9289696-bb67-4d43-898e-6b0bee75cc8a
+:END:
+#+title: Vector Poisson Equation
+#+date: [2025-03-14 Fri 13:52]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Vector Poisson Equation
+Using [[id:5090162e-9bbe-482c-bb65-0c906392309a][Ampere's Law]] we can derive an expression evolving the [[id:451948de-217d-4e9f-8210-188a4f614489][Laplacian]]
+ - \[\nabla^2A = -\mu J\]
+ - Which can be manipulated into the following forms
+   - \[A = \frac{\mu}{4\pi}\int_{v'}\frac{J}{R'}dv'\]
+     - For a volume
+   - \[A = \frac{\mu}{4\pi}\int_{s'}\frac{J_s}{R'}ds'\]
+     - For a surface
+   - \[A = \frac{\mu}{4\pi}\int_{l'}\frac{I}{R'}dl'\]
+     - For a line
+   - This gives us another approach for computing the magnetic field due to a current-carrying [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][conductor]]. The others are:
+     - [[id:82b046b4-6f10-4b83-8009-939b694f7277][Biot-Savart Law]]
+     - [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equations]]

@@ -9,3 +9,8 @@
 \[\oint\vec{H}\cdot d\vec{l}=i_{enc}=N\cdot i\]
 It says that the current through a wire can be related to the [[id:f15ab8cb-30df-45d4-ab39-707648dea1be][Magnetic Flux Intensity]] around the wire. The contour intergral means that we need to take one full loop around the wire and sum the magnetic field at each point. Use the formular for the circumference for the shape your trying to find H for or sum up all of the sides multiplied by \[\vec{H}\] and set that equal to \[N\cdot i\].
 The \[i_{enc}=N\cdot i\] part is derived from [[id:5090162e-9bbe-482c-bb65-0c906392309a][Ampere's Law]] and can used for motors, where \[N\] is the number of windings and \[i\] is the current in the wire.
+* Amperes law For [[id:e4ea6b25-0e15-4f1d-a44b-488db956d300][Magnetostatics]]
+ - \[\nabla \times H = J\]
+ - \[\oint_cH\cdot dl = I\]
+ - The integral of $H$ around a closed contour $C$ is equal to the current traversing the surface bounded by the contour
+** TODO Examples

@@ -12,3 +12,4 @@ We can use [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equations]] to an
  - [[id:ed756a7d-950b-4f00-81dc-91310ab5c48c][Magnetic Force]]
  - [[id:82b046b4-6f10-4b83-8009-939b694f7277][Biot-Savart Law]]
  - [[id:a8608994-a060-4adb-b64a-2734a7ca2c01][Magnetic Boundary Conditions]]
+ - [[id:d0669e4e-f6d9-4e41-99db-82ef46301b66][Magnetic Energy]]

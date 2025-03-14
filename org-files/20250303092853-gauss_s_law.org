@@ -6,7 +6,7 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* Gauss's Law
+* Gauss's Law For Electrostatics
  - $\nabla\cdot \mathbf{D} = \rho_{V}$
  - This can be used to validate [[id:1486a718-5212-4ac7-8abe-24fb69f500a6][Coulombs Law]]
 ** Integral form
@@ -14,6 +14,8 @@
    - Where $Q$ is the total charge in the volume $v$
  - Using the [[id:9998aec3-aa06-4f68-9b8e-e314ce3b44e1][Divergence Theorem]]
    - \[Q = \oint_{v}D\cdot ds\]
-
+* Gauss's Law For Magnetism
+ - \[\nabla \cdot B = 0\]
+ - \[\oint_sB\cdot ds = 0\]
 ** Example
  - [[xopp-pages:/home/baley/UTAS/ENG305 - Transmission Lines and Electromagnetic Waves/notes/2025-03-03-Note-48-51.xopp][Page 3]]

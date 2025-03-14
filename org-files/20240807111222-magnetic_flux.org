@@ -8,7 +8,12 @@
 * Magnetic Flux
 - The amount of magnetic field that is ${90}^{\circ}$ to the surface
 - Measured in Webbers (Wb)
-- \[\phi =\vec{B}\cdot \hat{n}A=BA\cos(\theta)\]
+- \[\Phi =\vec{B}\cdot \hat{n}A=BA\cos(\theta)\]
 - For a transformer \[\phi \approx BA\]
-- Within motor \[\theta =\omega t \rightarrow \phi = BA \cos(\omega t)\]
+- Within motor \[\theta =\omega t \rightarrow \Phi = BA \cos(\omega t)\]
 - [[id:bb47a409-62bc-4872-aea0-e0ebfb24a6c6][Conservation Of Magnetic Flux]]
+** In [[id:e4ea6b25-0e15-4f1d-a44b-488db956d300][Magnetostatics]]
+ - \[\Phi = \int_sB\cdot ds\]
+   - This uses the [[id:f15ab8cb-30df-45d4-ab39-707648dea1be][Magnetic Flux Intensity]]
+ - \[\Phi = \oint_CA\cdot dl\]
+   - This uses the [[id:a2c3981b-1a63-4d45-a5e9-65e2b5b4a99e][Vector Magnetic Potential]]

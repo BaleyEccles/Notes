@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       d0669e4e-f6d9-4e41-99db-82ef46301b66
+:END:
+#+title: Magnetic Energy
+#+date: [2025-03-14 Fri 14:01]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Magnetic Energy
+ - The amount of energy stored in a [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][Magnetic Field]]
+ - \[W_m = \frac{1}{2}\int_v\mu H^2dv\]
+** In a Solenoid
+ - \[W_m = \frac{1}{2}\mu H^2v\]
+   - Where $v$ is the volume of the interior of the solenoid
+ - \[w_h=\frac{1}{2}\mu H^2\]
+   - This is the magnetic energy density
+ - 
+
+

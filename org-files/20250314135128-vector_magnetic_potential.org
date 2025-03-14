@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       a2c3981b-1a63-4d45-a5e9-65e2b5b4a99e
+:END:
+#+title: Vector Magnetic Potential
+#+date: [2025-03-14 Fri 13:51]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Vector Magnetic Potential
+ - \[B = \nabla \times A \]
+   - Measured in $\frac{Wb}{m^2}$
