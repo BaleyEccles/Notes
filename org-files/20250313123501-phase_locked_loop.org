@@ -17,7 +17,7 @@
    - \[\Rightarrow \phi_o(t) = \phi_o\]
  - This allows us to find that:
    - \[|\omega_c-\omega_f| < \frac{\pi}{2} - K_vA_cK_oK_{PD}\]
-** TODO Transient Locking Analysis
+** Transient Locking Analysis
  - Assume we are in a locked state
  - The integral term in the [[id:cf8ee8da-8806-448c-b5b7-d713a9adfe65][Voltage-Controlled Oscillator]] responds to the change
    - \[\Delta \theta_o(t) = K_v\int_{-\infty}^ty(\tau)d\tau\]
@@ -30,10 +30,8 @@
 *** Using a first order filter
  - Assume $G(f)$ is a first order filter
    - \[G(f) = \frac{K_o}{1 + 2\pi \left(\frac{f}{f_0}\right)}\]
- - Which gives
+ - Which gives the prototype 2nd order response
    - \[H(f) = \frac{K_vK_{PD}K_oA_c}{(j2\pi f)^2+j4\pi \xi f_nf + (2\pi f_n)^2}\]
    - $\xi$ is the damping ratio
    - $f_n$ is the natural frequency
    - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/2nd-Order-PLL.xopp]]
-
-
