@@ -12,7 +12,7 @@
  - Very specific
    - Can be ranges
  - Satisfy users specifications
-** DFMEA (Design Failure Mode and EFfect Analysis)
+** DFMEA (Design Failure Mode and Effect Analysis)
  - Used to verify the specifications are correct
 *** Design
  - Used when designing a product or service
@@ -20,11 +20,9 @@
  - Specific way in which the system/component may fail to meet the specifications
 *** Effect Analysis
  - Consequences of the failure
-   
-** Software Design
+** Stuff
 
-
-* Assesment
+* Assessment
 ** Project Report
  - Week 13
  - 40% of mark
@@ -36,11 +34,11 @@
  - 10% of mark
 ** Laboratory Demonstration
  - [[id:aa89e0a2-e7a6-4527-ac8b-6d40955aed96][ENG307 - Electrical and Mechatronic Design - Lab 1]]
- - 10% of mark
+ - 20% - 10% of mark?
 ** Design Assignments
  - Weeks:
    - 3, 6, 9 and 12
- - 30% of mark
- - [[id:e1a8a179-0487-4d1f-ad59-83ebeb8cad0c][ENG307 - Electrical and Mechatronic Design - Design Assignment 1]]
+ - 20% - 30% of mark?
+  - [[id:e1a8a179-0487-4d1f-ad59-83ebeb8cad0c][ENG307 - Electrical and Mechatronic Design - Design Assignment 1]]
 
 

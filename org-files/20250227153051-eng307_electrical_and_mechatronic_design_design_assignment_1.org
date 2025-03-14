@@ -8,6 +8,9 @@
 #+FILETAGS: :UTAS:2025:
 
 * ENG307 - Electrical and Mechatronic Design - Design Assignment 1
+ - [[file:~/UTAS/ENG307 - Electrical and Mechatronic Design/Assignment1/Assignment1.odt][Report]]
+ - [[file:~/UTAS/ENG307 - Electrical and Mechatronic Design/Assignment1/ENG307-Assignment1-Design-Sheet-Baley-Eccles.xlsm][Assignment Sheet]]
+
 ** Exercise 1 - Specifications
 *** LED
  - An LED that is visible in day and night lighting conditions
