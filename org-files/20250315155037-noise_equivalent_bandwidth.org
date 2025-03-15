@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       2d5eeb78-b10b-4e5b-8b0c-241c0b4023e3
+:END:
+#+title: Noise Equivalent Bandwidth
+#+date: [2025-03-15 Sat 15:50]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* [[id:84768f70-2b00-498c-a795-765c7916c48f][Noise]] Equivalent [[id:a647872e-240f-4ef0-8304-b713e15505ea][Bandwidth]]
+ - \[S_{YY} = \frac{N_0}{2}|H(f)|^2 = \frac{N_0}{2}|H(f)|^2\]
+   - \[B_{neq} = \frac{\int_{-\infty}^{\infty}|H(f)|^2df}{2H_{max}^2}\]
+   - \[P_y = N_0B_{neq}H_{max}^2\]
+   - TODO [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Noise_Equivalent_Bandwidth.xopp]]

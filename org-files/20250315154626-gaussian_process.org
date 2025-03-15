@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       36d505ca-5581-478e-9c72-acaa883d4404
+:END:
+#+title: Gaussian Process
+#+date: [2025-03-15 Sat 15:46]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Gaussian Process
+ - \[X(t) = f(X_1, X_2, X_3 ...)\]
+   - $X_1, X_2, X_3 ...$ are jointly [[id:09b7922a-caa6-4eb4-b3d7-b56035ad4604][Gaussion Distribution]]
+** Apply to a Linear System
+ - Gaussian in, Gaussian out
+   - The [[id:94da5bc2-9ad7-4d6c-ad04-715b646cdf7c][variance]] and [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][mean]] may change, but it will still be a [[id:36d505ca-5581-478e-9c72-acaa883d4404][Gaussian Process]]

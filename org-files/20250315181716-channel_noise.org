@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       cfec5fb5-467e-4a16-a78c-32ebbdd4fb9a
+:END:
+#+title: Channel Noise
+#+date: [2025-03-15 Sat 18:17]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Channel Noise
+ - Typically [[id:09b7922a-caa6-4eb4-b3d7-b56035ad4604][Gaussian]] distributed or [[id:84768f70-2b00-498c-a795-765c7916c48f][White Noise]]
+ 

@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       57d1b4a5-6dfd-46d6-b9c4-a4c4226df7a2
+:END:
+#+title: Sampling a Random Process
+#+date: [2025-03-15 Sat 16:26]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Sampling a Random Process
+ - \[T_s \leq \frac{1}{2\omega}\]
+   - [[id:cbb625ec-3e7a-4e0c-8193-578ee9897e81][Nyquist–Shannon Sampling Theorem]]
+ - \[p(t) - \sum_{n = -\infty}^{\infty}2w'T_sp(nT_n)\textrm{sinc}\left[2w'(t-nT_s)\right]\]
+ - \[\lvert E[X(t) - \sum_{k = -\infty}^{\infty} X(kT_s) \textrm{sinc} (2w(t - kT_s))\rvert^{2} = 0\]
+   - \[S_x(f) = \begin{cases}
+     K, & |f| < w \\
+     0, & \textrm{else}
+     \end{cases}\]

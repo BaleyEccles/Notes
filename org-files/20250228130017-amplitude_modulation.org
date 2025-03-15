@@ -8,8 +8,7 @@
 
 * Amplitude Modulation
  - Modulating the amplitude of a signal to transmit data
-  
-   - 
+
 ** Types
 [[id:7feece04-ef5b-4375-96be-9f0feeddc2ad][DSB-SC AM]]
 

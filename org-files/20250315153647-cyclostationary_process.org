@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       72d219b7-639c-4c38-93da-6962f0ca1158
+:END:
+#+title: Cyclostationary Process
+#+date: [2025-03-15 Sat 15:36]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Cyclostationary Process
+ - \[\mu_X(t + T_0) = \mu_X(t)\]
+ - \[R_{XX}(t +T_0, t + \tau + T_0) = R_{XX}(t, t + \tau)\]
+    - Both repeat its self every $T_0$ seconds
+      
+** Properties
+1. \[R_{XX}(\tau) = R_{XX}(-\tau)\]
+2. \[\max\left\{R_{XX}(\tau)\right\} \leq R_X(0)\]
+3. If for some $T_0$ we have $R_{XX}(T_0) = R_{XX}(0)$, then for all $k \in \mathbb{Z}$, we have $R_{XX}(k T_0) = R_{XX}(0)$
+   - Peaks occur at the same distance ($T_0$) from each other
+
+** Applying to a Impulse
+ - WSS in, WSS out
+ - \[\mu_Y=\mu_X\int_{-\infty}^{\infty}h(\tau)d\tau = \mu_X|H(0)|\]
+ - \[R_{YY}(\tau) = R_{XX}(\tau) * h(\tau) * h(-\tau)\]
+ - \[S_{YY}(\omega) = S_{XX}(\omega) |H(\omega)|^2\]
+   - Where $S_{XX}(\omega) = \mathcal{F}\left\{R_{XX}(\tau)\right\}$

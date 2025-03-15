@@ -8,6 +8,8 @@
 
 * Stationary Process
 ** Types
+ - [[id:72d219b7-639c-4c38-93da-6962f0ca1158][Cyclostationary Process]]
+
 *** Strict-Sense Stationary (SSS)
  - Every statistic of $X(t)$ does not depend on $t$, and is self similar.
 *** Wide-Sense Stationary (WSS)

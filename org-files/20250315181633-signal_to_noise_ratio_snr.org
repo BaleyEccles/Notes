@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       13d613eb-9630-41af-ab3f-c15eabc686f5
+:END:
+#+title: Signal To Noise Ratio (SNR)
+#+date: [2025-03-15 Sat 18:16]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Signal To Noise Ratio (SNR)
+ - The ratio from signal to noise
+ - \[\frac{S}{N}\]
+   - Signal power divide by noise power
+ - Using the [[id:cfec5fb5-467e-4a16-a78c-32ebbdd4fb9a][Channel Noise]]
+   - \[S_{NN}(f) = \frac{N_0}{2}\]
+ - Signal
+   - \[X_0(t)\]
+     - with a power $P_R$
+ - \[\frac{S}{N} = \frac{E[X_0^2(t)]}{E[n_0^2(t)} = \frac{P_R}{N_0W}\]
+

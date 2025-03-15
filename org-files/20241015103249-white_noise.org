@@ -6,7 +6,9 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* White Noise
+* White Noise / White Process
  - $X(t)$ is a white noise signal if:
    - \[S_{XX}(\omega)=\frac{\eta}{2}\]
    - \[\Rightarrow R_{XX}(\tau)=\frac{\eta}{2}\delta(\tau)\]
+** Apply to a Linear System
+ - White in, not guaranteed white out

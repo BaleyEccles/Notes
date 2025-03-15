@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       248d3e9d-20fd-47d7-bda0-99e3c209a69f
+:END:
+#+title: Bandlimited Random Process
+#+date: [2025-03-15 Sat 16:33]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Band limited Random Process
+ - TODO [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Band_limited_Random_Process.xopp]]
+** $X(t)$ is [[id:43a759ee-3cad-411c-a23f-4db60e9342e1][Bandpass]]
+ - $\hat{X}(t)$ is also lowpass
+ - \[X_c(t) = X(t) \cos(2\pi f_0t) + \hat{X}(t) \sin(2\pi f_0t)\]
+ - \[X_s(t) = \hat{X}(t) \cos(2\pi f_0t) - X(t) \sin(2\pi f_0t)\]
+   - If $X(t)$ is zero [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]], [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][Stationary]] bandpass process
+     - Then $X_c(t)$ and $X_s(t)$ will be zero [[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]] jointly [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][Stationary Process]]
+   - \[R_{X_cX_c}(\tau) = R_{XX}(\tau)\sin(2\pi f_0\tau) - \hat{R}_{XX}\cos(2\pi f_0t\]
+   - $X_c(t)$ and $X_s(t)$ are lowpass processes
+     - With [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]] $|f| < w$
+ - Define:
+   - \[S_{X_cX_c}(f) = S_{X_sX_s}(f) = \begin{cases}
+     S_{XX}(f - f_0) + S_{XX}(f + f_0), & |f| < f_0 \\
+     0, & otherwise
+     \end{cases}\]
+ - We also have $R_{X_cX_c}(0) = 0$
+ - $X_c(t)$ and $X_s(t)$ are always uncorrelated
+   - Provided $S_{XX}(f + f_0) = S_{XX}(f - f_0)$
+ - $X_c(t)$ and $X_s(t)$ are independent if:
+   - $X(t)$ is zero-[[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][Mean]], [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][Stationary]] and [[id:09b7922a-caa6-4eb4-b3d7-b56035ad4604][Gaussian]]
+*** Power Content
+ - \[P_{X_c} = P_{X_s} = R_{X_cX_c}(0) = R_{XX}(0) = P_X\]
