@@ -9,4 +9,61 @@
 * ENG308 - Communication Systems 1 - Assignment 1
 ** Question 1
 *** Part a
+Take:
+\begin{table}[htbp]
+  \centering
+  \caption{Chosen Values}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    $A_1 = 5$ & $A_2 = 10$ & $A_3 = 20$ \\ \hline
+    $\omega_1 = 2\pi \times 3$ & $\omega_2 = 2\pi \times 30$ & $\omega_3 = 2\pi \times 100$ \\ \hline
+    $\phi_1 = \frac{\pi}{2}$ & $\phi_2 = \pi$ & $\phi_3 = \frac{\pi}{3}$ \\ 
+    \hline
+  \end{tabular}
+  \label{tab:Chosen_Values}
+\end{table}
+\[\Rightarrow m(t) = 5\cos\left(6\pi + \frac{\pi}{2}\right) + 10\cos\left(60\pi + \pi\right) + 20\cos\left(200\pi + \frac{\pi}{3}\right)\]
+\[  \textrm{Taking } A_c = 1\textrm{, } f_c &= TODO \textrm{ and } \phi_c = 0 \]
+**** DSB-SC AM
+\begin{align*}
+  c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
+  &\textrm{Taking } A_c = 1\textrm{, } f_c = TODO \textrm{ and } \phi_c = 0 \\
+  u(t) &= m(t) \cdot c(t) \\
+  u(t) &= \left[5\cos\left(6\pi + \frac{\pi}{2}\right) +
+  10\cos\left(60\pi + \pi\right) +
+  20\cos\left(200\pi + \frac{\pi}{3}\right)\right]
+  \cdot A_c\cos(2\pi f_c t + \phi_c) \\
+\end{align*}
+
+#+BEGIN_SRC octave :exports code :results output :session DSB_SC
+clear all;
+close all;
+
+f_c = 50;
+t = 0:1/(10000*f_c):1;
+u = 5*cos(6*pi*t + pi/2) + 10*cos(60*pi*t + 1*pi) + 20*cos(200*pi*t + pi/3);
+#c = cos(2*pi * f_c * t);
+#u = m.*c;
+
+figure;
+plot(t, u)
+print -dpng 'DSB_SC_plot_time.png'
+
+N = length(t);
+f = (-N/2:N/2-1)*(2*f_c/N);
+mag = abs(fft(u));
+angle = angle(fft(u));
+
+figure;
+plot(f, mag)
+#xlim([49, 51]);
+print -dpng 'DSB_SC_plot_f_mag.png'
+
+figure;
+plot(f, angle)
+print -dpng 'DSB_SC_plot_f_angle.png'
+
+#+END_SRC
+
+#+RESULTS:
 
