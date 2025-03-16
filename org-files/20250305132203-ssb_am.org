@@ -8,7 +8,7 @@
 
 * SSB AM  (Single Sideband Amplitude Modulation)
 ** Modulation
- - \[u(t) = A_cm(t)\cos(2\pi f_ct) \mp A_c\hat{m}(t)\cos(2\pi f_ct)\]
+ - \[u(t) = A_cm(t)\cos(2\pi f_ct) \mp A_c\hat{m}(t)\sin(2\pi f_ct)\]
    - Where the negative variant is the Upper Side Band (USB)
    - And the positive variant is the Lower Side Band (LSB)
    - This uses the [[id:cd529ee1-5877-4e55-8588-141427ca601a][Hilbert Transform]]
