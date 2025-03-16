@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       39194088-2133-4665-a67d-2f4ef48a9367
+:END:
+#+title: Coherent Detection
+#+date: [2025-03-16 Sun 16:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Coherent Detection
+ - Coherent detectors keep the phase information

@@ -41,15 +41,15 @@
  - Assuming no impairments of the original signal
  - $r(t) = u(t)$
    - $r(t)\cdot \cos(2\pi f_c+\phi_c) = \frac{1}{2}m(t)A_c\cos(\phi_c-\phi) + \frac{1}{2}m(t)A_c\cos(4\pi f_{c} + \phi_c+\phi)$
-     - Where $\cos(2\pi f_c+\phi_c)$ is the Local Ocillator/Local Carrier
+     - Where $\cos(2\pi f_c+\phi_c)$ is the Local Oscillator/Local Carrier
        - Which is a copy of $c(t)$
    - So we apply a filter, giving
      - $y_l(t) = \frac{1}{2}A_cm(t)\cos(\phi_c-\phi)$
-       - if $\phi_c = \phi$ and $\phi_c-phi = 0$
+       - if $\phi_c = \phi$ and $\phi_c-\phi = 0$
          - $y_l(t) = \frac{1}{2}A_cm(t)$
-         - This is known as Coherent Detectionn
-       - if $\phi_c = \phi + 45^o$ and $\phi_c-phi = 45^o$
+         - This is known as [[id:39194088-2133-4665-a67d-2f4ef48a9367][Coherent Detection]]
+       - if $\phi_c = \phi + 45^o$ and $\phi_c-\phi = 45^o$
          - $y_l(t) = \frac{1}{2\sqrt{2}}A_cm(t)$
-       - if $\phi_c = \phi + 90^o$ and $\phi_c-phi = 90^o$
+       - if $\phi_c = \phi + 90^o$ and $\phi_c-\phi = 90^o$
          - $y_l(t) = 0$
 
