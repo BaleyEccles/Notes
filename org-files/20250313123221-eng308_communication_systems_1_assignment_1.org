@@ -68,7 +68,6 @@ ylabel('Amplitude');
 print -dpng 'DSB_SC_plot_time.png'
 
 N = length(t);
-
 f = (-N/2:N/2-1)*(Fs/N);
 
 U = fftshift(fft(u));
@@ -218,7 +217,6 @@ phi1 = pi/2;
 phi2 = pi;
 phi3 = pi/3;
 
-
 m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
 c_cos = cos(2*pi * fc * t);
 c_sin = sin(2*pi * fc * t);
@@ -267,3 +265,70 @@ print -dpng 'SSB_plot_f_angle.png'
 
 #+RESULTS:
 *** Part b
+
+**** DSB-SC Demodulation
+
+#+BEGIN_SRC octave :exports code :results output :session DSB_SC_Demodulation
+clear all;
+close all;
+
+if exist('OCTAVE_VERSION', 'builtin')
+  # needed for Butterworth filter
+  pkg load signal
+end
+
+fc = 250;
+Fs = 1000*fc;
+t = 0:1/(Fs):0.2;
+
+# Values
+A1 = 5;
+A2 = 20;
+A3 = 10;
+w = 2*pi;
+f1 = 50;
+f2 = 100;
+f3 = 150;
+phi1 = pi/2;
+phi2 = pi;
+phi3 = pi/3;
+
+m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
+c = cos(2*pi * fc * t);
+u = m.*c;
+
+figure;
+plot(t, m);
+title('DSB-SC Message Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+print -dpng 'DSB_SC_plot_time_message.png'
+
+# Demodulation
+r = u.*c;
+
+order = 5;
+cutoff = 1.5*fc/Fs;
+[b, a] = butter(order, cutoff, 'low');
+
+# Use filtfilt, which applies the filter both forwards and backwards
+# This cancels out the phase shift from the butterworth filter
+# I dont this works for real time applications
+# We cannot apply a filter backwards in real time
+# We can calculate the filters phase delay, I think?
+y = filtfilt(b, a, r);
+#y = filter(b, a, r);
+
+figure;
+plot(t, y);
+title('DSB-SC Demodulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+print -dpng 'DSB_SC_plot_time_demodulated.png'
+
+
+
+#+END_SRC
+
+#+RESULTS:
+
