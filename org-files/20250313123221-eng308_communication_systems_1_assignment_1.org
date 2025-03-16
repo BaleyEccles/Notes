@@ -15,19 +15,19 @@ Take:
   \caption{Chosen Values}
   \begin{tabular}{|c|c|c|}
     \hline
-    $A_1 = 5$ & $A_2 = 10$ & $A_3 = 20$ \\ \hline
-    $\omega_1 = 2\pi \times 3$ & $\omega_2 = 2\pi \times 30$ & $\omega_3 = 2\pi \times 100$ \\ \hline
+    $A_1 = 5$ & $A_2 = 20$ & $A_3 = 10$ \\ \hline
+    $f_1 = 50$ & $f_2 = 100 & $f_3 = 150$ \\ \hline
     $\phi_1 = \frac{\pi}{2}$ & $\phi_2 = \pi$ & $\phi_3 = \frac{\pi}{3}$ \\ 
     \hline
   \end{tabular}
   \label{tab:Chosen_Values}
 \end{table}
-\[\Rightarrow m(t) = 5\cos\left(6\pi + \frac{\pi}{2}\right) + 10\cos\left(60\pi + \pi\right) + 20\cos\left(200\pi + \frac{\pi}{3}\right)\]
-\[  \textrm{Taking } A_c = 1\textrm{, } f_c &= TODO \textrm{ and } \phi_c = 0 \]
+\[\Rightarrow m(t) = 5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right)\]
+Taking $A_c = 1$, $f_c = 50$Hz and $\phi_c = 0$
 **** DSB-SC AM
 \begin{align*}
   c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
-  &\textrm{Taking } A_c = 1\textrm{, } f_c = TODO \textrm{ and } \phi_c = 0 \\
+  &\textrm{Taking } A_c = 1\textrm{, } f_c = 250 \textrm{ and } \phi_c = 0 \\
   u(t) &= m(t) \cdot c(t) \\
   u(t) &= \left[5\cos\left(6\pi + \frac{\pi}{2}\right) +
   10\cos\left(60\pi + \pi\right) +
@@ -39,31 +39,231 @@ Take:
 clear all;
 close all;
 
-f_c = 50;
-t = 0:1/(10000*f_c):1;
-u = 5*cos(6*pi*t + pi/2) + 10*cos(60*pi*t + 1*pi) + 20*cos(200*pi*t + pi/3);
-#c = cos(2*pi * f_c * t);
-#u = m.*c;
+fc = 250;
+Fs = 1000*fc;
+t = 0:1/(Fs):0.2;
+
+# Values
+A1 = 5;
+A2 = 20;
+A3 = 10;
+w = 2*pi;
+f1 = 50;
+f2 = 100;
+f3 = 150;
+phi1 = pi/2;
+phi2 = pi;
+phi3 = pi/3;
+
+
+m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
+c = cos(2*pi * fc * t);
+u = m.*c;
 
 figure;
-plot(t, u)
+plot(t, u);
+title('DSB-SC Modulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
 print -dpng 'DSB_SC_plot_time.png'
 
 N = length(t);
-f = (-N/2:N/2-1)*(2*f_c/N);
-mag = abs(fft(u));
-angle = angle(fft(u));
+
+f = (-N/2:N/2-1)*(Fs/N);
+
+U = fftshift(fft(u));
+mag = abs(U);
+angle = angle(U);
 
 figure;
-plot(f, mag)
-#xlim([49, 51]);
+plot(f, mag);
+title('Magnitude of DSB-SC Signal');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([-1000 1000]);
 print -dpng 'DSB_SC_plot_f_mag.png'
 
 figure;
-plot(f, angle)
+plot(f, mag/max(mag));
+title('Magnitude of DSB-SC Signal');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([fc - 1.25*max([f1, f2, f3]), fc + 1.25*max([f1, f2, f3])]);
+print -dpng 'DSB_SC_plot_f_mag_centered.png'
+
+figure;
+plot(f, angle);
+title('Phase of DSB-SC Signal');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+#xlim([fc-150 fc+150]);
 print -dpng 'DSB_SC_plot_f_angle.png'
 
 #+END_SRC
 
 #+RESULTS:
+**** Conventional AM/DSB AM
+\begin{align*}
+  c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
+  &\textrm{Taking } A_c = 1\textrm{, } f_c = 250 \textrm{ and } \phi_c = 0 \\
+  u(t) &= (1 + m(t)) \cdot c(t) \\
+  u(t) &= (1 + 5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right)) \cdot \cos(2\pi 250 t)
+\end{align*}
 
+#+BEGIN_SRC octave :exports code :results output :session DSB
+clear all;
+close all;
+
+fc = 250;
+Fs = 1000*fc;
+t = 0:1/(Fs):0.2;
+
+# Values
+A1 = 5;
+A2 = 20;
+A3 = 10;
+w = 2*pi;
+f1 = 50;
+f2 = 100;
+f3 = 150;
+phi1 = pi/2;
+phi2 = pi;
+phi3 = pi/3;
+
+
+m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
+c = cos(2*pi * fc * t);
+u = (1 + m).*c;
+
+figure;
+plot(t, u);
+title('DSB Modulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+print -dpng 'DSB_plot_time.png'
+
+N = length(t);
+
+f = (-N/2:N/2-1)*(Fs/N);
+
+U = fftshift(fft(u));
+mag = abs(U);
+angle = angle(U);
+
+figure;
+plot(f, mag);
+title('Magnitude of DSB Signal');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([-1000 1000]);
+print -dpng 'DSB_plot_f_mag.png'
+
+figure;
+plot(f, mag/max(mag));
+title('Magnitude of DSB Signal');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([fc - 1.25*max([f1, f2, f3]), fc + 1.25*max([f1, f2, f3])]);
+print -dpng 'DSB_plot_f_mag_centered.png'
+
+figure;
+plot(f, angle);
+title('Phase of DSB Signal');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+#xlim([fc-150 fc+150]);
+print -dpng 'DSB_plot_f_angle.png'
+
+#+END_SRC
+
+#+RESULTS:
+**** SSB AM
+\begin{align*}
+  c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
+  &\textrm{Taking } A_c = 1\textrm{, } f_c = 250 \textrm{ and } \phi_c = 0 \\
+  u(t) &= m(t)\cdot c(t) \mp \hat{m}(t)\cdot c(t) \\
+  &\textrm{Taking the negative variant/upper side band (USB)} \\
+  \hat{m}(t) &= m(t) * \frac{1}{\pi t}\\
+  u(t) &= \left[5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right) \right]
+  \cdot \cos(2\pi 250 t) \\
+  &- \left[\left[5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right) \right] * \frac{1}{\pi t} \right]\cdot
+  \cos(2\pi 250 t)
+\end{align*}
+The Lower Side Band (LSB) could be found by taking the positive variant.
+
+#+BEGIN_SRC octave :exports code :results output :session SSB
+clear all;
+close all;
+
+# make compatible with matlab
+# This way if we run this in matlab it wont throw an error
+if exist('OCTAVE_VERSION', 'builtin')
+  # needed for Hilbert transform
+  pkg load signal
+end
+
+fc = 250;
+Fs = 1000*fc;
+t = 0:1/(Fs):0.2;
+
+# Values
+A1 = 5;
+A2 = 20;
+A3 = 10;
+w = 2*pi;
+f1 = 50;
+f2 = 100;
+f3 = 150;
+phi1 = pi/2;
+phi2 = pi;
+phi3 = pi/3;
+
+
+m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
+c_cos = cos(2*pi * fc * t);
+c_sin = sin(2*pi * fc * t);
+u = m.*c_cos - imag(hilbert(m)).*c_sin;
+
+figure;
+plot(t, u);
+title('SSB (LSB) Modulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+print -dpng 'SSB_plot_time.png'
+
+N = length(t);
+
+f = (-N/2:N/2-1)*(Fs/N);
+
+U = fftshift(fft(u));
+mag = abs(U);
+angle = angle(U);
+
+figure;
+plot(f, mag);
+title('Magnitude of SSB (LSB) Signal');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([-1000 1000]);
+print -dpng 'SSB_plot_f_mag.png'
+
+figure;
+plot(f, mag/max(mag));
+title('Magnitude of SSB (LSB) Signal');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([fc - 1.25*max([f1, f2, f3]), fc + 1.25*max([f1, f2, f3])]);
+print -dpng 'SSB_plot_f_mag_centered.png'
+
+figure;
+plot(f, angle);
+title('Phase of SSB (LSB) Signal');
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+#xlim([fc-150 fc+150]);
+print -dpng 'SSB_plot_f_angle.png'
+
+#+END_SRC
+
+#+RESULTS:
+*** Part b
