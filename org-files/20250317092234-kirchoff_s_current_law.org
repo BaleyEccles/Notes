@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       7d91ef65-cc36-42e2-8ff6-02923d6b5a29
+:END:
+#+title: Kirchoff's Current Law
+#+date: [2025-03-17 Mon 09:22]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Kirchoff's Current Law
+ - \[I = \oint_sJ\cdot ds = 0\]
+ - \[\sum_i I_i =0\]

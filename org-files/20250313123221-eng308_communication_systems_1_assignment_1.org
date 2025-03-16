@@ -311,6 +311,8 @@ order = 5;
 cutoff = 1.5*fc/Fs;
 [b, a] = butter(order, cutoff, 'low');
 
+
+# TODO: USE AN IDEAL FILTER
 # Use filtfilt, which applies the filter both forwards and backwards
 # This cancels out the phase shift from the butterworth filter
 # I dont this works for real time applications

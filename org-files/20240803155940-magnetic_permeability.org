@@ -15,4 +15,8 @@
   - Where $M = \chi_mH$
   - Which uses [[id:891d06d4-06be-40c3-b7d1-70a485f56e5a][Magnetic Susceptibility]]
 
+** Complex Permeability
+ - \[\mu_c = \mu' + j\mu''\]
+   - \[\mu_c = \mu'\]
+     - For all non-ferromagnetic materials
 

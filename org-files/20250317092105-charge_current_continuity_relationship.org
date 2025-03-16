@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       e0fa5fdf-8b66-4a31-9a47-636570307aee
+:END:
+#+title: Charge-Current Continuity Relationship
+#+date: [2025-03-17 Mon 09:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Charge-Current Continuity Relationship
+ - Using [[id:9998aec3-aa06-4f68-9b8e-e314ce3b44e1][Divergence Theorem]]:
+   - \[\nabla \cdot J = -\frac{\partial \rho_v}{\partial t}\]
+ - This can be used to derive [[id:7d91ef65-cc36-42e2-8ff6-02923d6b5a29][Kirchoff's Current Law]]

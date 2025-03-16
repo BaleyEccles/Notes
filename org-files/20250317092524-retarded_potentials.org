@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       572bf4f3-a638-4a18-8485-0e9a5543dc22
+:END:
+#+title: Retarded Potentials
+#+date: [2025-03-17 Mon 09:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Retarded Potentials
+** Retarded Scalar Potentials
+ - \[V(R, t) = \frac{1}{4\pi\epsilon}\int_{v'}\frac{\rho_v(R_i,t-R'/u_p}{R'}dv'\]
+** Retarded Vector Potentials
+ - \[A(R, t) = \frac{\mu}{4\pi}\int_{v'}\frac{J(R_i,t-R'/u_p}{R'}dv'\]

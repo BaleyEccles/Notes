@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       f638f495-9369-42cc-b811-36f8fa9a81aa
+:END:
+#+title: Electromagnetic Potentials
+#+date: [2025-03-17 Mon 09:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electromagnetic Potentials
+ - The [[id:6a403a89-72e3-4fde-9eb7-2678ec595acb][Electric Scalar Potential]] in [[id:4d33b632-a96c-4932-9ede-938418f558ae][Dynamic Fields]]
+ - Using [[id:0b3f01d9-4742-47d0-b78d-a2399a25c3c2][Faraday's law]]
+   - \[E = -\nabla V = - \frac{\partial A}{\partial t}\]

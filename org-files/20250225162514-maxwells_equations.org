@@ -12,7 +12,7 @@
   - $\nabla\cdot \mathbf{D} = \rho_{V}$
 2. [[id:0b3f01d9-4742-47d0-b78d-a2399a25c3c2][Faradays Law]]
   - $\nabla\times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}$
-3. Gausses Law for Magnetism
+3. [[id:45aa735a-bae1-4a1e-93fa-7bc46f6e56d5][Gausses Law for Magnetism]]
   - $\nabla \cdot \mathbf{B} = 0$
 4. [[id:5090162e-9bbe-482c-bb65-0c906392309a][Amperes Law]] (with Maxwells correction)
   - $\nabla\times\mathbf{H} = \mathbf{J} + \frac{\partial \mathbf{D}}{\partial t}$
@@ -33,7 +33,7 @@ where we used the following relationships:
  - $\mathbf{D} = \epsilon \mathbf{E}$
  - $\mathbf{B} = \mu \mathbf{H}$
 *** [[id:cc820405-22a8-491a-a52c-3f3c5e0e0826][Electrostatics]]
-*** Dynamics
+*** [[id:4d33b632-a96c-4932-9ede-938418f558ae][Dynamics]]
 When the system is dynamic we must use the origninal [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equations]].
 *** Charge Distributions
 The total charge in a volume can be calculated using
@@ -44,3 +44,19 @@ The total charge across a surface can be calculated using
 The total charge across a line can be calculated using
  - $Q = \int_l\rho_ldl$
    - $\rho_{l} = \lim_{\Delta l \rightarrow 0}\frac{\Delta q}{\Delta l} = \frac{dq}{dl}$
+*** [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasors]] Form
+ - $\nabla\cdot \tilde{\mathbf{E}} = \frac{\tilde{\rho_{v}}}{\epsilon}$
+ - $\nabla\times \tilde{\mathbf{E}} = -j\omega\mu \tilde{\mathbf{H}}$
+ - $\nabla \cdot \tilde{\mathbf{H}} = 0$
+ - $\nabla\times\tilde{\mathbf{H}} = \tilde{\mathbf{J}} + j\omega\epsilon\tilde{\mathbf{E}}$
+   - Derived using
+     - $\mathbf{D} = \epsilon \mathbf{E}$
+     - $\mathbf{B} = \mu \mathbf{H}$
+*** Source Free Medium
+ - In free space i.e $\tilde{\rho_v}=0$
+   - \[\nabla\cdot \tilde{\mathbf{E}} = 0\]
+   - \[\nabla\times \tilde{\mathbf{E}} = -j\omega\mu \tilde{\mathbf{H}}\]
+   - \[\nabla \cdot \tilde{\mathbf{H}} = 0\]
+   - \[\nabla\times\tilde{\mathbf{H}} = j\omega\epsilon_c\tilde{\mathbf{E}}\]
+ - This means the wave is *unbounded*
+*** [[id:97a0e6e7-0a41-4597-9897-df6785384d70][Electromagnetic Wave Equations]]

@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       7cf8779c-445b-4e4f-99ea-95b7ec93f31f
+:END:
+#+title: Time Harmonic Potentials
+#+date: [2025-03-17 Mon 09:49]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Time Harmonic Potentials
+ - If $\rho_v(R_i,t) = \rho_v(R_i)\cos(\omega t + \phi)$
+ - \[\tilde{H} = \frac{1}{\mu}\nabla \times \tilde{A}\]
+   - Where $\tilde{H}$ and $\tilde{A}$ are the [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasors]] form of their respective things
+** TODO Example
+[[file:~/UTAS/ENG305 - Transmission Lines and Electromagnetic Waves/notes/2025-03-17-Note-33-57.xopp]]

@@ -13,5 +13,6 @@ When any two [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][conductors]] are sperate
    - \[R &= \frac{-\int_lE\cdot dl}{\int_s\sigma E\cdot ds}\]
    - \[RC = \frac{\epsilon}{\sigma}\]
      - If we know the [[id:0bab4eaa-a87f-4711-a3ab-945f94adcfa4][resistance]] we can easily find the capacitance, and vice versa
-       
+** [[id:97f96caf-3cda-430e-b284-e5d17b043b8e][Displacement Current]]
+ - \[I_2 = I_{2d}= -CV_0\omega \sin(\omega t)\]
 ** TODO Example

@@ -9,5 +9,8 @@
 * Faraday's law
  - The same as [[id:081780d8-6b6b-4e9d-ac1f-475ff5e057f7][Lenz's law]]
  - EMF is equal to the negative of the rate of change of flux over time:
-- \[\mathcal{E}=-N \frac{\partial \phi}{\partial t}\]
-- If a magnet enters a magnetic field, an opossing field is create to counteract the magnet.
+ - For a [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][Conductor]] with $N$ turns
+   - \[\mathcal{E}=-N \frac{\partial \Phi}{\partial t} = -N\frac{d}{dt}\int_sB\cdot ds\]
+ - If a magnet enters a magnetic field, an opposing field is created to counteract the magnet.
+ - Integral form
+   - \[\oint_cE\cdot dl = -N \int_s\frac{\partial}{\partial t}B\cdot ds\]

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       b5f6d9bc-db5e-413f-820c-9dfb59bf9796
+:END:
+#+title: Intrinsic Impedance
+#+date: [2025-03-17 Mon 10:38]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Intrinsic Impedance
+ - Intrinsic impedance of free space
+   - \[\eta_0 = \sqrt{\epsilon_0}{\mu_0} \approx 377\Omega\]

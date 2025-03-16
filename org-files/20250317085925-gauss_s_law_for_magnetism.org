@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       45aa735a-bae1-4a1e-93fa-7bc46f6e56d5
+:END:
+#+title: Gauss's Law For Magnetism
+#+date: [2025-03-17 Mon 08:59]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Gauss's Law For Magnetism
+ - \[\nabla \cdot B = 0\]
+ - \[\oint_sB\cdot ds = 0\]
+** Example
+ - [[xopp-pages:/home/baley/UTAS/ENG305 - Transmission Lines and Electromagnetic Waves/notes/2025-03-03-Note-48-51.xopp][Page 3]]* Gauss's Law For Magnetism

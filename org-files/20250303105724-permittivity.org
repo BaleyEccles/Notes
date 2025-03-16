@@ -17,3 +17,9 @@ A property of a material to distort a electric field
 
 ** Chart
 [[file:Screenshot 2025-03-03 at 09-14-50 ENG305 Week 2 Lecture Slides - Electrostatics.pdf.png]]
+** Complex Permittivity
+ - Using the 4th [[id:6654124a-2525-4f33-bce0-8ad1c80369ee][Maxwells Equation]] in [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasor]] form
+ - \[\epsilon_c = \epsilon' + j\epsilon''\]
+   - Where:
+     - \[\epsilon' = \epsilon\]
+     - \[\epsilon'' = \frac{\sigma}{\omega}\]

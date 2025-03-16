@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       4d33b632-a96c-4932-9ede-938418f558ae
+:END:
+#+title: Dynamic Fields
+#+date: [2025-03-17 Mon 09:13]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Dynamic Fields
+ - [[id:2779b14b-dadd-4873-ba45-53f7692ce933][Motional EMF]]
+ - [[id:97f96caf-3cda-430e-b284-e5d17b043b8e][Displacement Current]]
+ - [[id:e0fa5fdf-8b66-4a31-9a47-636570307aee][Charge-Current Continuity Relationship]]
+ - [[id:f638f495-9369-42cc-b811-36f8fa9a81aa][Electromagnetic Potentials]]
+ - [[id:572bf4f3-a638-4a18-8485-0e9a5543dc22][Retarded Potentials]]
+ - [[id:7cf8779c-445b-4e4f-99ea-95b7ec93f31f][Time Harmonic Potentials]]
+** Boundary Conditions
+ - The same as [[id:a8608994-a060-4adb-b64a-2734a7ca2c01][Magnetic Boundary Conditions]] in [[id:e4ea6b25-0e15-4f1d-a44b-488db956d300][Magnetostatics]]
+
+

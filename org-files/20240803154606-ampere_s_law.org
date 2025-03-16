@@ -14,3 +14,11 @@ The \[i_{enc}=N\cdot i\] part is derived from [[id:5090162e-9bbe-482c-bb65-0c906
  - \[\oint_cH\cdot dl = I\]
  - The integral of $H$ around a closed contour $C$ is equal to the current traversing the surface bounded by the contour
 ** TODO Examples
+* Using [[id:572bf4f3-a638-4a18-8485-0e9a5543dc22][Retarded Potentials]]
+ - \[\nabla \times \tilde{H} = j\omega \epsilon \tilde{E}\]
+ - \[\tilde{E} = \frac{1}{j\omega \epsilon}\nabla\times \tilde{H}\]
+** In Time Harmonic Form
+ - \[\nabla \times \tilde{E} = -j\omega \mu \tilde{H}\]
+ - \[\tilde{H} = \frac{-1}{j\omega \mu}\nabla\times \tilde{E}\]
+** TODO Example
+[[file:~/UTAS/ENG305 - Transmission Lines and Electromagnetic Waves/notes/2025-03-17-Note-33-57.xopp]] 

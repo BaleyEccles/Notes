@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       97f96caf-3cda-430e-b284-e5d17b043b8e
+:END:
+#+title: Displacement Current
+#+date: [2025-03-17 Mon 09:14]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Displacement Current
+ - Using [[id:5090162e-9bbe-482c-bb65-0c906392309a][Ampere's Law]]
+ - \[\oint_cH\cdot dl = I_c + I_d = I_{tot}\]
+   - In [[id:e4ea6b25-0e15-4f1d-a44b-488db956d300][Magnetostatics]] $I_d = 0$
+   - $I_d$ is the displacement current
+   - $I_c$ is the conduction current

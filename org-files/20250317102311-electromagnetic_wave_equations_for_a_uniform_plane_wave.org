@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       88a8f629-0f2f-4c5f-ba5d-7fb32c2e18e2
+:END:
+#+title: Electromagnetic Wave Equations for a Uniform Plane Wave
+#+date: [2025-03-17 Mon 10:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electromagnetic Wave Equations for a Uniform Plane Wave
+ - [[id:14a251ee-fcb7-4c61-ba6f-1872f5dab379][Phase Velocity]]
+ - \[\tilde{E}(z,t) = E_x^+ = \hat{x} |\tilde{E}_{x0}^+|\cos(\omega t - kz + \phi^+)\]
+ - \[\tilde{H}(z,t) = H_y^+ = \hat{y} \frac{1}{\eta}|\tilde{E}_{x0}^+|\cos(\omega t - kz + \phi^+)\]
+ - \[\eta = \frac{\omega\mu}{k}= \sqrt{\frac{\mu}{\epsilon}}\]
+** Components
+ - There are two components
+ - Forward travelling
+   - \[\tilde{E}^+_{x0}\]
+ - Backwards travelling
+   - \[\tilde{E}^-_{x0}\]
+ - The backwards travelling component only exist when reflecting 
+   
