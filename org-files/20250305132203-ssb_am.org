@@ -28,6 +28,6 @@
    - \[U_{LSB}(f) = A_cM(f+f_c)\]
      
 ** Demodulation
- - Only choerent demodualtion works
+ - Only choerent demodulation works
  - Using a lowpass filter we can remove the higher frequencies that are present
  - \[y(t) = \frac{A_cm(t)}{2}\]

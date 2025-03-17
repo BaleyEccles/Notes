@@ -7,5 +7,5 @@
 #+STARTUP: latexpreview
 
 * Envelope Detector
- - This is nonchorent, that is it does not care about phase
+ - This is non-[[id:39194088-2133-4665-a67d-2f4ef48a9367][coherent]], that is it does not care about phase
  - [[file:Screenshot 2025-03-05 at 13-20-05 Simple-diode-detector-AM-demodulator-generic-RC-circuit-svg.svg.png (PNG Image 1920 × 935 pixels) — Scaled (99%).png]]
