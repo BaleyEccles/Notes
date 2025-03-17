@@ -26,7 +26,9 @@
  - Each of the cases can be simplifed
    - \[U_{USB}(f) = A_cM(f-f_c)\]
    - \[U_{LSB}(f) = A_cM(f+f_c)\]
-     
+** Power
+ - \[P_R = A_c^2P_m\]
+** [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][Signal To Noise Ratio (SNR)]]
 ** Demodulation
  - Only choerent demodulation works
  - Using a lowpass filter we can remove the higher frequencies that are present

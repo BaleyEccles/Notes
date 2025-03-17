@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       a23a8aba-4910-4b08-a2bb-077accce5685
+:END:
+#+title: ENG308 - Communication Systems 1 - Lab 1
+#+date: [2025-03-18 Tue 09:25]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:2025:
+#+STARTUP: latexpreview
+
+* ENG308 - Communication Systems 1 - Lab 1

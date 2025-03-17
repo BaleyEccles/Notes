@@ -4,6 +4,7 @@
 #+title: ENG308 - Communication Systems 1 - Assignment 1
 #+date: [2025-03-13 Thu 12:32]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:2025:
 #+STARTUP: latexpreview
 
 * ENG308 - Communication Systems 1 - Assignment 1
@@ -185,6 +186,7 @@ print -dpng 'DSB_plot_f_angle.png'
 
 #+RESULTS:
 **** SSB AM
+:FIXME: THIS MIGHT BE WRONG
 \begin{align*}
   c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
   &\textrm{Taking } A_c = 1\textrm{, } f_c = 250 \textrm{ and } \phi_c = 0 \\
@@ -209,9 +211,9 @@ if exist('OCTAVE_VERSION', 'builtin')
   pkg load signal
 end
 
-fc = 20e3;
+fc = 250;
 Fs = 1000*fc;
-t = 0:1/(Fs):5e-3;
+t = 0:1/(Fs):0.2;
 
 % Values
 A1 = 5;
@@ -228,7 +230,7 @@ w = 2*pi;
 m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
 c_cos = cos(2*pi * fc * t);
 c_sin = sin(2*pi * fc * t);
-u = m.*c_cos - imag(hilbert(m)).*c_sin;
+u = m.*c_cos - imag(hilbert(m)).*c_sin; % This is wrong some how
 
 figure;
 grid on;

@@ -5,6 +5,7 @@
 #+date: [2025-02-24 Mon 08:06]
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :UTAS:2025:
+#+STARTUP: latexpreview
 
 * Overview
 \[|\textrm{Infomation source}|\rightarrow |\textrm{Transmitter}| \rightarrow\ |\textrm{Channel}| \rightarrow |\textrm{Reciver}| \rightarrow \textrm{output}\]
@@ -29,7 +30,12 @@
 [[id:36d505ca-5581-478e-9c72-acaa883d4404][Gaussian Process]]
 * Assessment
 ** Test 1
+ - Week 6
  - 5% of mark
+ - One page of notes
+ - No formula sheet
+   - But will have trig stuff if needed
+ - 1 Hr
 ** Test 2
  - 10% of mark
 ** Practical laboratory
