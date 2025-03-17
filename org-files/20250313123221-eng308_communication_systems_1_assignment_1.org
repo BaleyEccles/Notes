@@ -43,7 +43,7 @@ fc = 250;
 Fs = 1000*fc;
 t = 0:1/(Fs):0.2;
 
-# Values
+% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
@@ -61,6 +61,7 @@ c = cos(2*pi * fc * t);
 u = m.*c;
 
 figure;
+grid on;
 plot(t, u);
 title('DSB-SC Modulated Signal');
 xlabel('Time (s)');
@@ -75,6 +76,7 @@ mag = abs(U);
 angle = angle(U);
 
 figure;
+grid on;
 plot(f, mag);
 title('Magnitude of DSB-SC Signal');
 xlabel('Frequency (Hz)');
@@ -83,6 +85,7 @@ xlim([-1000 1000]);
 print -dpng 'DSB_SC_plot_f_mag.png'
 
 figure;
+grid on;
 plot(f, mag/max(mag));
 title('Magnitude of DSB-SC Signal');
 xlabel('Frequency (Hz)');
@@ -91,11 +94,12 @@ xlim([fc - 1.25*max([f1, f2, f3]), fc + 1.25*max([f1, f2, f3])]);
 print -dpng 'DSB_SC_plot_f_mag_centered.png'
 
 figure;
+grid on;
 plot(f, angle);
 title('Phase of DSB-SC Signal');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
-#xlim([fc-150 fc+150]);
+%xlim([fc-150 fc+150]);
 print -dpng 'DSB_SC_plot_f_angle.png'
 
 #+END_SRC
@@ -117,7 +121,7 @@ fc = 250;
 Fs = 1000*fc;
 t = 0:1/(Fs):0.2;
 
-# Values
+% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
@@ -135,6 +139,7 @@ c = cos(2*pi * fc * t);
 u = (1 + m).*c;
 
 figure;
+grid on;
 plot(t, u);
 title('DSB Modulated Signal');
 xlabel('Time (s)');
@@ -150,6 +155,7 @@ mag = abs(U);
 angle = angle(U);
 
 figure;
+grid on;
 plot(f, mag);
 title('Magnitude of DSB Signal');
 xlabel('Frequency (Hz)');
@@ -158,6 +164,7 @@ xlim([-1000 1000]);
 print -dpng 'DSB_plot_f_mag.png'
 
 figure;
+grid on;
 plot(f, mag/max(mag));
 title('Magnitude of DSB Signal');
 xlabel('Frequency (Hz)');
@@ -166,11 +173,12 @@ xlim([fc - 1.25*max([f1, f2, f3]), fc + 1.25*max([f1, f2, f3])]);
 print -dpng 'DSB_plot_f_mag_centered.png'
 
 figure;
+grid on;
 plot(f, angle);
 title('Phase of DSB Signal');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
-#xlim([fc-150 fc+150]);
+%xlim([fc-150 fc+150]);
 print -dpng 'DSB_plot_f_angle.png'
 
 #+END_SRC
@@ -194,28 +202,28 @@ The Lower Side Band (LSB) could be found by taking the positive variant.
 clear all;
 close all;
 
-# make compatible with matlab
-# This way if we run this in matlab it wont throw an error
+% make compatible with matlab
+% This way if we run this in matlab it wont throw an error
 if exist('OCTAVE_VERSION', 'builtin')
-  # needed for Hilbert transform
+  % needed for Hilbert transform
   pkg load signal
 end
 
-fc = 250;
+fc = 20e3;
 Fs = 1000*fc;
-t = 0:1/(Fs):0.2;
+t = 0:1/(Fs):5e-3;
 
-# Values
+% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
-w = 2*pi;
 f1 = 50;
 f2 = 100;
 f3 = 150;
 phi1 = pi/2;
 phi2 = pi;
 phi3 = pi/3;
+w = 2*pi;
 
 m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
 c_cos = cos(2*pi * fc * t);
@@ -223,6 +231,7 @@ c_sin = sin(2*pi * fc * t);
 u = m.*c_cos - imag(hilbert(m)).*c_sin;
 
 figure;
+grid on;
 plot(t, u);
 title('SSB (LSB) Modulated Signal');
 xlabel('Time (s)');
@@ -238,6 +247,7 @@ mag = abs(U);
 angle = angle(U);
 
 figure;
+grid on;
 plot(f, mag);
 title('Magnitude of SSB (LSB) Signal');
 xlabel('Frequency (Hz)');
@@ -246,6 +256,7 @@ xlim([-1000 1000]);
 print -dpng 'SSB_plot_f_mag.png'
 
 figure;
+grid on;
 plot(f, mag/max(mag));
 title('Magnitude of SSB (LSB) Signal');
 xlabel('Frequency (Hz)');
@@ -254,26 +265,58 @@ xlim([fc - 1.25*max([f1, f2, f3]), fc + 1.25*max([f1, f2, f3])]);
 print -dpng 'SSB_plot_f_mag_centered.png'
 
 figure;
+grid on;
 plot(f, angle);
 title('Phase of SSB (LSB) Signal');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
-#xlim([fc-150 fc+150]);
+%xlim([fc-150 fc+150]);
 print -dpng 'SSB_plot_f_angle.png'
 
 #+END_SRC
 
 #+RESULTS:
+**** TODO Comparing
+
 *** Part b
 
-**** DSB-SC Demodulation
 
-#+BEGIN_SRC octave :exports code :results output :session DSB_SC_Demodulation
+#+BEGIN_SRC falstad
+$ 1 0.000005 10.20027730826997 50 5 43 5e-11
+c 256 192 256 352 4 0.00001 16.608892077919815 0.001 0
+r 352 192 352 352 0 1000
+w 256 352 352 352 0
+w 352 192 256 192 0
+w 256 352 48 352 0
+w 352 352 400 352 0
+w 352 192 400 192 0
+v 48 352 48 304 0 1 50 5 0 1.5707963267948966 0.5
+v 48 304 48 256 0 1 100 20 0 3.141592653589793 0.5
+v 48 256 48 192 0 1 150 10 0 1.0471975511965976 0.5
+g 256 352 256 384 0 0
+w 48 192 80 192 0
+d 80 192 256 192 2 default
+o 6 1024 0 4099 80 0.05 0 2 6 3
+#+END_SRC
+
+#+BEGIN_SRC octave :exports code :results output :session Demodulation
+
 clear all;
 close all;
 
+%% Filter
+% Have to do this cause octave does not have lowpass function
+function y = lowpassOctave (r, fs, fc)
+  N = length(r);
+  f = (0:N-1) * (fs/N);
+  mask = (f <= fc) | (f >= (fs - fc));
+  R = fft(r);
+  R(~mask) = 0;
+  y = ifft(R);  
+end
+
 if exist('OCTAVE_VERSION', 'builtin')
-  # needed for Butterworth filter
+                                % needed for Butterworth filter
   pkg load signal
 end
 
@@ -281,7 +324,7 @@ fc = 250;
 Fs = 1000*fc;
 t = 0:1/(Fs):0.2;
 
-# Values
+                                % Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
@@ -293,44 +336,197 @@ phi1 = pi/2;
 phi2 = pi;
 phi3 = pi/3;
 
-m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
-c = cos(2*pi * fc * t);
-u = m.*c;
+
+m_DSB = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
+c_DSB = cos(2*pi * fc * t);
+u_DSB = m_DSB.*c_DSB;
+
+m_SSB = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
+c_cos = cos(2*pi * fc * t);
+c_sin = sin(2*pi * fc * t);
+u_SSB = m_SSB.*c_cos - imag(hilbert(m_SSB)).*c_sin;
+
+
 
 figure;
-plot(t, m);
+grid on;
+plot(t, m_DSB);
 title('DSB-SC Message Signal');
 xlabel('Time (s)');
 ylabel('Amplitude');
 print -dpng 'DSB_SC_plot_time_message.png'
 
-# Demodulation
-r = u.*c;
+figure;
+grid on;
+plot(t, m_SSB);
+title('SSB Message Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+print -dpng 'SSB_plot_time_message.png'
 
-order = 5;
-cutoff = 1.5*fc/Fs;
-[b, a] = butter(order, cutoff, 'low');
+D_phi = 0;
+D_f = 0;
+local_oscillator = cos(2*pi * (fc + D_f) * t + D_phi);
 
+r_DSB = u_DSB.*local_oscillator;
+r_SSB = u_SSB.*local_oscillator;
 
-# TODO: USE AN IDEAL FILTER
-# Use filtfilt, which applies the filter both forwards and backwards
-# This cancels out the phase shift from the butterworth filter
-# I dont this works for real time applications
-# We cannot apply a filter backwards in real time
-# We can calculate the filters phase delay, I think?
-y = filtfilt(b, a, r);
-#y = filter(b, a, r);
+N = length(t);
+
+% Define the useage of lowpassOctave if we are using octave
+% And lowpass if your using matlab
+if exist('OCTAVE_VERSION', 'builtin')
+  y_DSB = lowpassOctave(r_DSB, Fs, 1.1*fc);
+  y_SSB = lowpassOctave(r_SSB, Fs, 1.1*fc);
+else
+  y_DSB = lowpass(r_DSB, 1.1*fc, Fs);
+  y_SSB = lowpass(r_SSB, 1.1*fc, Fs);
+end
+
 
 figure;
-plot(t, y);
+grid on;
+plot(t, y_DSB);
 title('DSB-SC Demodulated Signal');
 xlabel('Time (s)');
 ylabel('Amplitude');
 print -dpng 'DSB_SC_plot_time_demodulated.png'
 
-
+figure;
+grid on;
+plot(t, y_SSB);
+title('SSB Demodulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+print -dpng 'SSB_plot_time_demodulated.png'
 
 #+END_SRC
 
 #+RESULTS:
 
+:TODO: Theoretically
+
+*** Part c
+
+
+#+BEGIN_SRC octave :exports code :results output :session test
+if exist('OCTAVE_VERSION', 'builtin')
+  pkg load symbolic
+end
+
+fc = 25000;
+Fs = 1000*fc;
+
+
+% Values
+A1 = 5;
+A2 = 20;
+A3 = 10;
+f1 = 50;
+f2 = 100;
+f3 = 150;
+phi1 = pi/2;
+phi2 = pi;
+phi3 = pi/3;
+w = 2*pi;
+
+syms time
+
+m = A1*cos(w*f1*time + phi1) + A2*cos(w*f2*time + phi2) + A3*cos(w*f3*time + phi3);
+c = cos(2*pi * fc * time);
+u = (1 + m).*c
+sympref display flat;
+expand(u);
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    mtimes at line 54 column 5
+
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    plus at line 53 column 5
+
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    mtimes at line 54 column 5
+
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    mtimes at line 54 column 5
+
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    plus at line 53 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    mtimes at line 54 column 5
+u = (sym) (-5*sin(26*sqrt(146)*time) - 20*cos(52*sqrt(146)*time) + 10*cos(78*sqrt(146)*time + pi/3) + 1)*cos(sqrt(24674011003)*time)
+#+end_example
+
+
+#+BEGIN_SRC octave :exports code :results output :session AM_Demodulation
+clear all;
+close all;
+
+if exist('OCTAVE_VERSION', 'builtin')
+  % needed for findpeaks
+  pkg load signal
+end
+
+fc = 2500;
+Fs = 1000*fc;
+t = 0:1/(Fs):0.1;
+
+% Values
+A1 = 5;
+A2 = 20;
+A3 = 10;
+f1 = 50;
+f2 = 100;
+f3 = 150;
+phi1 = pi/2;
+phi2 = pi;
+phi3 = pi/3;
+w = 2*pi;
+
+m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
+c = cos(2*pi * fc * t);
+u = (1 + m).*c;
+
+figure;
+grid on;
+plot(t, u, t, m);
+title('DSB Modulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+
+[pks, idx] = findpeaks(u, "DoubleSided");
+E_max = max(abs(pks));
+E_min = min(abs(pks));
+a = (E_max - E_min)/(E_max + E_min);
+printf("the modulation index is %f \n", a)
+
+#+END_SRC
+
+#+RESULTS:
+: the modulation index is 0.991802
+
+
+**** Envelope Detector
+We want $f_c < \frac{1}{RC} < f_m$
