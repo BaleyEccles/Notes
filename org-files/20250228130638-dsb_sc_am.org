@@ -53,3 +53,11 @@
        - if $\phi_c = \phi + 90^o$ and $\phi_c-\phi = 90^o$
          - $y_l(t) = 0$
 
+** Power Content
+ - \[P_0 = \frac{A_c^2}{2}\cdot P_m\]
+   - Where $P_m$ is the power in the message signal
+
+** [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][Signal To Noise Ratio (SNR)]]
+ - \[\left(\frac{S}{N}\right)_0 = \frac{P_0}{P_{N0}} = \frac{P_mA_c^2}{2}\cdot \frac{1}{N_0w}\]
+   - Where ${P_{N0}$ is the noise power
+ - The same ratio applies to the [[id:f677e2ac-10a8-4754-82f9-57f93fb56789][baseband]] signal as well

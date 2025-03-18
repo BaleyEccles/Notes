@@ -28,7 +28,10 @@
    - \[U_{LSB}(f) = A_cM(f+f_c)\]
 ** Power
  - \[P_R = A_c^2P_m\]
+   - Where $P_R$ is the received power
+   - And $P_m$ is the message power
 ** [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][Signal To Noise Ratio (SNR)]]
+ - \[\left(\frac{S}{N}\right)_0 = \frac{P_0}{P_{N0}} = \frac{P_mA_c^2}{N_0a}\]
 ** Demodulation
  - Only choerent demodulation works
  - Using a lowpass filter we can remove the higher frequencies that are present
