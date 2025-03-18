@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       87fc5940-38db-4101-a9b6-1f5a02158f36
+:END:
+#+title: Skin Effect
+#+date: [2025-03-18 Tue 16:31]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Skin Effect
+ - Due to [[id:a8608994-a060-4adb-b64a-2734a7ca2c01][Magnetic Boundary Conditions]] most of the current will flow close to the edge of the [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][Conductor]]
+ - \[Z = Z_s \frac{l}{w}\]
+   - \[Z_s = \frac{1+j}{\sigma\delta_s}\]
+** Skin Depth Formula
+ - \[\delta_s = \frac{1}{\alpha'}\]

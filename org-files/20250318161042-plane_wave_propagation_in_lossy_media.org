@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       62e5b025-9d9b-4195-9113-d2f0797a3315
+:END:
+#+title: Plane Wave Propagation in Lossy Media
+#+date: [2025-03-18 Tue 16:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Plane Wave Propagation in Lossy Media
+ - [[id:1fa23f12-e63d-4619-9818-c46778eac55d][Electromagnetic Power Density]]
+ - $\gamma$ becomes
+   - \[\gamma^2 = -\omega^2\mu\epsilon_c = -\omega^2\mu(\epsilon + j\frac{\sigma}{\omega}\]
+   - \[\gamma^2 = \alpha^2 - 2j\alpha\beta - \beta^2\]
+** Media Conductivity
+ - if $\frac{\epsilon''}{\epsilon'} << 1$
+   - Low-Loss Dielectric
+ - if $\frac{\epsilon''}{\epsilon'} >> 1$
+   - Good Conductor
+** Perfect Equations
+These two equations *will* give the right answer
+ - \[\alpha = \omega\left\{\frac{\mu\epsilon'}{2}\left(\sqrt{1 + \left(\frac{\epsilon''}{\epsilon'}\right)^2 - 1\right)\right\}^{\frac{1}{2}}\]
+ - \[\alpha = \omega\left\{\frac{\mu\epsilon}{2}\left(\sqrt{1 + \left(\frac{\epsilon''}{\epsilon'}\right)^2 + 1\right)\right\}^{\frac{1}{2}}\]
+** Not Perfect Equations
+These equations are a good approximation
+ - We can use these when
+   - \[\frac{\epsilon''}{\epsilon'} >> 1\]
+ - \[\alpha\approx \frac{\omega\epsilon''}{2}\sqrt{\frac{\mu}{\epsilon'}}=\frac{\sigma}{2}\sqrt{\frac{\mu}{\epsilon}}\]
+ - \[\beta\approx \omega\sqrt{\mu\epsilon'}=\omega\sqrt{\mu\epsilon}\]
+ - and [[id:b5f6d9bc-db5e-413f-820c-9dfb59bf9796][Intrinsic Impedance]] in lossy media
+   - \[\eta_c \approx \sqrt{\mu}{\epsilon}\approx (1+j)\sqrt{\frac{\mu\omega}{2\sigma}}\]
+
+

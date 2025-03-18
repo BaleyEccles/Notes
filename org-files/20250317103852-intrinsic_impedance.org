@@ -7,5 +7,9 @@
 #+STARTUP: latexpreview
 
 * Intrinsic Impedance
+ - \[\eta = \frac{\omega \mu}{k}= \sqrt{\frac{\epsilon}{\mu}}\]
  - Intrinsic impedance of free space
-   - \[\eta_0 = \sqrt{\epsilon_0}{\mu_0} \approx 377\Omega\]
+   - \[\eta_0 = \sqrt{\epsilon_0\mu_0} \approx 377\Omega\]
+
+** In Lossy Media
+ - \[\eta_c = \sqrt{\frac{\mu}{\epsilon_c}} = \sqrt{\frac{\mu}{\epsilon' - j \epsilon''}}\]

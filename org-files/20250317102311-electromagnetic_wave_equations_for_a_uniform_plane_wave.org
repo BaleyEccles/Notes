@@ -18,4 +18,6 @@
  - Backwards travelling
    - \[\tilde{E}^-_{x0}\]
  - The backwards travelling component only exist when reflecting 
-   
+** $E$ and $H$ Relationship
+ - \[\tilde{E} = -\eta \hat{k}\times \tilde{H}\]
+ - \[\tilde{H} = \frac{1}{\eta} \hat{k}\times \tilde{E}\]

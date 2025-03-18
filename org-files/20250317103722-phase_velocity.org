@@ -7,5 +7,5 @@
 #+STARTUP: latexpreview
 
 * Phase Velocity
- - \[u_p = frac{dz}{dt} = \frac{\omega}{k} = \frac{1}{\sqrt{\mu\epsilon}}\]
+ - \[u_p = \frac{dz}{dt} = \frac{\omega}{k} = \frac{1}{\sqrt{\mu\epsilon}}\]
  - In free space $c = u_p = 2.9979\times 10^8 \approx 3\times 10^8$

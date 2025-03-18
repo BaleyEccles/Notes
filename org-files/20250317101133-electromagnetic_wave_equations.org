@@ -10,6 +10,7 @@
  - [[id:14a251ee-fcb7-4c61-ba6f-1872f5dab379][Phase Velocity]]
  - [[id:b5f6d9bc-db5e-413f-820c-9dfb59bf9796][Intrinsic Impedance]]
  - [[id:88a8f629-0f2f-4c5f-ba5d-7fb32c2e18e2][Electromagnetic Wave Equations for a Uniform Plane Wave]]
+ - [[id:62e5b025-9d9b-4195-9113-d2f0797a3315][Plane Wave Propagation in Lossy Media]]
  - Using [[id:0b3f01d9-4742-47d0-b78d-a2399a25c3c2][Faraday's law]], [[id:5090162e-9bbe-482c-bb65-0c906392309a][Ampere's Law]] and the [[id:451948de-217d-4e9f-8210-188a4f614489][Laplacian]]
    - Then the [[id:645bf86b-4946-4952-9b90-0c4c4e867a6d][Gauss's Law]] for source free medium
      - We can get the homogeneous wave equation for $\tilde{E}$

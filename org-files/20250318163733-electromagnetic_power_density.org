@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       1fa23f12-e63d-4619-9818-c46778eac55d
+:END:
+#+title: Electromagnetic Power Density
+#+date: [2025-03-18 Tue 16:37]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electromagnetic Power Density
+ - For any [[id:97a0e6e7-0a41-4597-9897-df6785384d70][wave]] with an electric field and a [[id:5d2e4040-1702-407a-9c6a-d83239e40d85][Magnetic Field]]
+   - \[S = E\times H\]
+   - $S$ is the Poynting vector
+ - \[P = SA\cos(\theat)\]
+** Average Power Density
+ - \[S_{av} = \frac{1}{2}\Re\left\{\tilde{E}\times \tilde{H}^{*}\right\}\]
+ - \[P_{av} = \frac{1}{2} \Re\{VI^{*}\}\]
+** In Lossy Media
+ - \[S_{av} = \hat{z} \frac{
+   \left(|E_{x0}|^2 + E_{y0}|^2\right)
+   }{
+   2|\eta_c|
+   }e^{-2\alpha z}\cos(\theta_{\eta})
+   \]
+   - Where $\eta_c = |\eta_c|e^{j\theta_{\eta}}$
