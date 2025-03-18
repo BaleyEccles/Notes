@@ -24,11 +24,11 @@ Take:
   \label{tab:Chosen_Values}
 \end{table}
 \[\Rightarrow m(t) = 5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right)\]
-Taking $A_c = 1$, $f_c = 50$Hz and $\phi_c = 0$
+Taking $A_c = 1$, $f_c = 1000$ Hz and $\phi_c = 0$
+
 **** DSB-SC AM
 \begin{align*}
   c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
-  &\textrm{Taking } A_c = 1\textrm{, } f_c = 250 \textrm{ and } \phi_c = 0 \\
   u(t) &= m(t) \cdot c(t) \\
   u(t) &= \left[5\cos\left(6\pi + \frac{\pi}{2}\right) +
   10\cos\left(60\pi + \pi\right) +
@@ -36,25 +36,25 @@ Taking $A_c = 1$, $f_c = 50$Hz and $\phi_c = 0$
   \cdot A_c\cos(2\pi f_c t + \phi_c) \\
 \end{align*}
 
-#+BEGIN_SRC octave :exports code :results output :session DSB_SC
+#+BEGIN_SRC octave :exports none :results output :session DSB_SC
 clear all;
 close all;
 
-fc = 250;
+fc = 1000;
 Fs = 1000*fc;
-t = 0:1/(Fs):0.2;
+t = 0:1/(Fs):0.25;
 
-% Values
+%% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
-w = 2*pi;
 f1 = 50;
 f2 = 100;
 f3 = 150;
 phi1 = pi/2;
 phi2 = pi;
 phi3 = pi/3;
+w = 2*pi;
 
 
 m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
@@ -63,10 +63,11 @@ u = m.*c;
 
 figure;
 grid on;
-plot(t, u);
+plot(t, u, 'LineWidth', 2, t, m, 'LineWidth', 2);
 title('DSB-SC Modulated Signal');
 xlabel('Time (s)');
 ylabel('Amplitude');
+xlim([0, 0.075]);
 print -dpng 'DSB_SC_plot_time.png'
 
 N = length(t);
@@ -78,16 +79,16 @@ angle = angle(U);
 
 figure;
 grid on;
-plot(f, mag);
+plot(f, mag, 'LineWidth', 2);
 title('Magnitude of DSB-SC Signal');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
-xlim([-1000 1000]);
+xlim([-fc - 200, fc + 200]);
 print -dpng 'DSB_SC_plot_f_mag.png'
 
 figure;
 grid on;
-plot(f, mag/max(mag));
+plot(f, mag/max(mag), 'LineWidth', 2);
 title('Magnitude of DSB-SC Signal');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
@@ -96,11 +97,11 @@ print -dpng 'DSB_SC_plot_f_mag_centered.png'
 
 figure;
 grid on;
-plot(f, angle);
+plot(f, angle, 'LineWidth', 2);
 title('Phase of DSB-SC Signal');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
-%xlim([fc-150 fc+150]);
+%%xlim([-fc - 200, fc + 200]);
 print -dpng 'DSB_SC_plot_f_angle.png'
 
 #+END_SRC
@@ -109,31 +110,29 @@ print -dpng 'DSB_SC_plot_f_angle.png'
 **** Conventional AM/DSB AM
 \begin{align*}
   c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
-  &\textrm{Taking } A_c = 1\textrm{, } f_c = 250 \textrm{ and } \phi_c = 0 \\
   u(t) &= (1 + m(t)) \cdot c(t) \\
-  u(t) &= (1 + 5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right)) \cdot \cos(2\pi 250 t)
+  u(t) &= (1 + 5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right)) \cdot \cos(2\pi 1000 t)
 \end{align*}
 
-#+BEGIN_SRC octave :exports code :results output :session DSB
+#+BEGIN_SRC octave :exports none :results output :session DSB
 clear all;
 close all;
 
-fc = 250;
+fc = 1000;
 Fs = 1000*fc;
-t = 0:1/(Fs):0.2;
+t = 0:1/(Fs):0.25;
 
-% Values
+%% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
-w = 2*pi;
 f1 = 50;
 f2 = 100;
 f3 = 150;
 phi1 = pi/2;
 phi2 = pi;
 phi3 = pi/3;
-
+w = 2*pi;
 
 m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
 c = cos(2*pi * fc * t);
@@ -141,10 +140,11 @@ u = (1 + m).*c;
 
 figure;
 grid on;
-plot(t, u);
+plot(t, u, 'LineWidth', 2, t, m, 'LineWidth', 2);
 title('DSB Modulated Signal');
 xlabel('Time (s)');
 ylabel('Amplitude');
+xlim([0, 0.075]);
 print -dpng 'DSB_plot_time.png'
 
 N = length(t);
@@ -157,7 +157,7 @@ angle = angle(U);
 
 figure;
 grid on;
-plot(f, mag);
+plot(f, mag, 'LineWidth', 2);
 title('Magnitude of DSB Signal');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
@@ -166,7 +166,7 @@ print -dpng 'DSB_plot_f_mag.png'
 
 figure;
 grid on;
-plot(f, mag/max(mag));
+plot(f, mag/max(mag), 'LineWidth', 2);
 title('Magnitude of DSB Signal');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
@@ -175,47 +175,46 @@ print -dpng 'DSB_plot_f_mag_centered.png'
 
 figure;
 grid on;
-plot(f, angle);
+plot(f, angle, 'LineWidth', 2);
 title('Phase of DSB Signal');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
-%xlim([fc-150 fc+150]);
+%%xlim([fc-150 fc+150]);
 print -dpng 'DSB_plot_f_angle.png'
 
 #+END_SRC
 
 #+RESULTS:
 **** SSB AM
-:FIXME: THIS MIGHT BE WRONG
 \begin{align*}
   c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
-  &\textrm{Taking } A_c = 1\textrm{, } f_c = 250 \textrm{ and } \phi_c = 0 \\
   u(t) &= m(t)\cdot c(t) \mp \hat{m}(t)\cdot c(t) \\
   &\textrm{Taking the negative variant/upper side band (USB)} \\
   \hat{m}(t) &= m(t) * \frac{1}{\pi t}\\
   u(t) &= \left[5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right) \right]
-  \cdot \cos(2\pi 250 t) \\
+  \cdot \cos(2\pi 1000 t) \\
   &- \left[\left[5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right) \right] * \frac{1}{\pi t} \right]\cdot
-  \cos(2\pi 250 t)
+  \cos(2\pi 1000 t)
 \end{align*}
 The Lower Side Band (LSB) could be found by taking the positive variant.
 
-#+BEGIN_SRC octave :exports code :results output :session SSB
+#+BEGIN_SRC octave :exports none :results output :session SSB
 clear all;
 close all;
 
-% make compatible with matlab
-% This way if we run this in matlab it wont throw an error
+%% make compatible with matlab
+%% This way if we run this in matlab it wont throw an error
 if exist('OCTAVE_VERSION', 'builtin')
-  % needed for Hilbert transform
+  %% needed for Hilbert transform
   pkg load signal
 end
 
-fc = 250;
-Fs = 1000*fc;
-t = 0:1/(Fs):0.2;
 
-% Values
+fc = 1000;
+Fs = 1000*fc;
+t = 0:1/(Fs):0.25;
+
+%% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
@@ -230,14 +229,15 @@ w = 2*pi;
 m = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
 c_cos = cos(2*pi * fc * t);
 c_sin = sin(2*pi * fc * t);
-u = m.*c_cos - imag(hilbert(m)).*c_sin; % This is wrong some how
+u = m.*c_cos - imag(hilbert(m)).*c_sin;
 
 figure;
 grid on;
-plot(t, u);
+plot(t, u, 'LineWidth', 2, t, m, 'LineWidth', 2);
 title('SSB (LSB) Modulated Signal');
 xlabel('Time (s)');
 ylabel('Amplitude');
+xlim([0, 0.075]);
 print -dpng 'SSB_plot_time.png'
 
 N = length(t);
@@ -250,16 +250,16 @@ angle = angle(U);
 
 figure;
 grid on;
-plot(f, mag);
+plot(f, mag, 'LineWidth', 2);
 title('Magnitude of SSB (LSB) Signal');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
-xlim([-1000 1000]);
+xlim([-fc - 200, fc + 200]);
 print -dpng 'SSB_plot_f_mag.png'
 
 figure;
 grid on;
-plot(f, mag/max(mag));
+plot(f, mag/max(mag), 'LineWidth', 2);
 title('Magnitude of SSB (LSB) Signal');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
@@ -268,11 +268,11 @@ print -dpng 'SSB_plot_f_mag_centered.png'
 
 figure;
 grid on;
-plot(f, angle);
+plot(f, angle, 'LineWidth', 2);
 title('Phase of SSB (LSB) Signal');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
-%xlim([fc-150 fc+150]);
+%%xlim([fc-150 fc+150]);
 print -dpng 'SSB_plot_f_angle.png'
 
 #+END_SRC
@@ -281,33 +281,13 @@ print -dpng 'SSB_plot_f_angle.png'
 **** TODO Comparing
 
 *** Part b
-
-
-#+BEGIN_SRC falstad
-$ 1 0.000005 10.20027730826997 50 5 43 5e-11
-c 256 192 256 352 4 0.00001 16.608892077919815 0.001 0
-r 352 192 352 352 0 1000
-w 256 352 352 352 0
-w 352 192 256 192 0
-w 256 352 48 352 0
-w 352 352 400 352 0
-w 352 192 400 192 0
-v 48 352 48 304 0 1 50 5 0 1.5707963267948966 0.5
-v 48 304 48 256 0 1 100 20 0 3.141592653589793 0.5
-v 48 256 48 192 0 1 150 10 0 1.0471975511965976 0.5
-g 256 352 256 384 0 0
-w 48 192 80 192 0
-d 80 192 256 192 2 default
-o 6 1024 0 4099 80 0.05 0 2 6 3
-#+END_SRC
-
-#+BEGIN_SRC octave :exports code :results output :session Demodulation
+#+BEGIN_SRC octave :exports none :results output :session Demodulation
 
 clear all;
 close all;
 
 %% Filter
-% Have to do this cause octave does not have lowpass function
+%% Have to do this cause octave does not have lowpass function
 function y = lowpassOctave (r, fs, fc)
   N = length(r);
   f = (0:N-1) * (fs/N);
@@ -318,15 +298,15 @@ function y = lowpassOctave (r, fs, fc)
 end
 
 if exist('OCTAVE_VERSION', 'builtin')
-                                % needed for Butterworth filter
+  %% needed for Butterworth filter
   pkg load signal
 end
 
-fc = 250;
+fc = 1000;
 Fs = 1000*fc;
 t = 0:1/(Fs):0.2;
 
-                                % Values
+%% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
@@ -349,23 +329,6 @@ c_sin = sin(2*pi * fc * t);
 u_SSB = m_SSB.*c_cos - imag(hilbert(m_SSB)).*c_sin;
 
 
-
-figure;
-grid on;
-plot(t, m_DSB);
-title('DSB-SC Message Signal');
-xlabel('Time (s)');
-ylabel('Amplitude');
-print -dpng 'DSB_SC_plot_time_message.png'
-
-figure;
-grid on;
-plot(t, m_SSB);
-title('SSB Message Signal');
-xlabel('Time (s)');
-ylabel('Amplitude');
-print -dpng 'SSB_plot_time_message.png'
-
 D_phi = 0;
 D_f = 0;
 local_oscillator = cos(2*pi * (fc + D_f) * t + D_phi);
@@ -375,8 +338,8 @@ r_SSB = u_SSB.*local_oscillator;
 
 N = length(t);
 
-% Define the useage of lowpassOctave if we are using octave
-% And lowpass if your using matlab
+%% Define the useage of lowpassOctave if we are using octave
+%% And lowpass if your using matlab
 if exist('OCTAVE_VERSION', 'builtin')
   y_DSB = lowpassOctave(r_DSB, Fs, 1.1*fc);
   y_SSB = lowpassOctave(r_SSB, Fs, 1.1*fc);
@@ -388,7 +351,7 @@ end
 
 figure;
 grid on;
-plot(t, y_DSB);
+plot(t, y_DSB, 'LineWidth', 2);
 title('DSB-SC Demodulated Signal');
 xlabel('Time (s)');
 ylabel('Amplitude');
@@ -396,7 +359,7 @@ print -dpng 'DSB_SC_plot_time_demodulated.png'
 
 figure;
 grid on;
-plot(t, y_SSB);
+plot(t, y_SSB, 'LineWidth', 2);
 title('SSB Demodulated Signal');
 xlabel('Time (s)');
 ylabel('Amplitude');
@@ -411,16 +374,16 @@ print -dpng 'SSB_plot_time_demodulated.png'
 *** Part c
 
 
-#+BEGIN_SRC octave :exports code :results output :session test
+#+BEGIN_SRC octave :exports none :results output :session test
 if exist('OCTAVE_VERSION', 'builtin')
   pkg load symbolic
 end
 
-fc = 25000;
+fc = 1000;
 Fs = 1000*fc;
 
 
-% Values
+%% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
@@ -436,9 +399,10 @@ syms time
 
 m = A1*cos(w*f1*time + phi1) + A2*cos(w*f2*time + phi2) + A3*cos(w*f3*time + phi3);
 c = cos(2*pi * fc * time);
-u = (1 + m).*c
+u = (1 + m).*c;
 sympref display flat;
-expand(u);
+u
+m
 
 #+END_SRC
 
@@ -478,24 +442,25 @@ warning: called from
     double_to_sym_heuristic at line 50 column 7
     sym at line 384 column 13
     mtimes at line 54 column 5
-u = (sym) (-5*sin(26*sqrt(146)*time) - 20*cos(52*sqrt(146)*time) + 10*cos(78*sqrt(146)*time + pi/3) + 1)*cos(sqrt(24674011003)*time)
+u = (sym) (-5*sin(26*sqrt(146)*time) - 20*cos(52*sqrt(146)*time) + 10*cos(78*sqrt(146)*time + pi/3) + 1)*cos(7*sqrt(805682)*time)
+m = (sym) -5*sin(26*sqrt(146)*time) - 20*cos(52*sqrt(146)*time) + 10*cos(78*sqrt(146)*time + pi/3)
 #+end_example
 
 
-#+BEGIN_SRC octave :exports code :results output :session AM_Demodulation
+#+BEGIN_SRC octave :exports none :results output :session AM_Demodulation
 clear all;
 close all;
 
 if exist('OCTAVE_VERSION', 'builtin')
-  % needed for findpeaks
+  %% needed for findpeaks
   pkg load signal
 end
 
-fc = 2500;
+fc = 1000;
 Fs = 1000*fc;
 t = 0:1/(Fs):0.1;
 
-% Values
+%% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
@@ -513,7 +478,7 @@ u = (1 + m).*c;
 
 figure;
 grid on;
-plot(t, u, t, m);
+plot(t, u, 'LineWidth', 2, t, m, 'LineWidth', 2);
 title('DSB Modulated Signal');
 xlabel('Time (s)');
 ylabel('Amplitude');
@@ -530,5 +495,27 @@ printf("the modulation index is %f \n", a)
 : the modulation index is 0.991802
 
 
+
 **** Envelope Detector
-We want $f_c < \frac{1}{RC} < f_m$
+We want $f_m < \frac{1}{RC} < f_c$, this will remove the carrier frequency, but no the message frequencies.
+
+#+BEGIN_SRC octave :exports none :results output :session AM_Env
+data = dlmread('/home/baley/UTAS/org-roam/org-files/ENG308Assignment1Env.data', '\t');
+t = data(:, 1);
+u = data(:, 2);
+m_demod = data(:, 3);
+m_true = data(:, 4);
+
+figure;
+plot(t, u, 'LineWidth', 2, t, m_demod, 'LineWidth', 2, t, m_true, 'LineWidth', 2);
+xlabel('Time (s)');
+ylabel('Voltage (V)');
+title('Conventional AM Envelope Detector Demodulation');
+grid on;
+#+END_SRC
+
+#+RESULTS:
+
+
+
+
