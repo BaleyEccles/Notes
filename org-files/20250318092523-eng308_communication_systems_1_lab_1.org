@@ -8,3 +8,26 @@
 #+STARTUP: latexpreview
 
 * ENG308 - Communication Systems 1 - Lab 1
+** Pre-lab
+*** Question 1
+\[500\Omega - 300\Omega\]
+*** Question 2
+\[500\Omega - 300\Omega\]
+
+*** Question 3
+\[
+\begin{align*}
+R_{V3} &= \frac{1}{2\pi f C_4} \\
+R_{V3} &= \frac{1}{2\pi 1.1\cdot10^3 \cdot 10\cdot10^{-9}} \\
+R_{V3} &= 14.468k\Omega
+\end{align*}
+\]
+** Exercise 1 - FM modulator
+*** Question 4
+*** Question 5
+*** Question 6
+** Exercise 2 - FM demodulator
+*** Question 7
+*** Question 8
+*** Question 9
+*** Question 10
