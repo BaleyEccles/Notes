@@ -4,14 +4,20 @@
 #+title: ENG308 - Communication Systems 1 - Assignment 1
 #+date: [2025-03-13 Thu 12:32]
 #+AUTHOR: Baley Eccles - 652137
-#+FILETAGS: :UTAS:2025:
+#+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.5cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
 
-* ENG308 - Communication Systems 1 - Assignment 1
-** Question 1
-*** Part a
-Take:
-\begin{table}[htbp]
+
+* Part a
+The values were chosen to be the following.
+\begin{table}[H]
   \centering
   \caption{Chosen Values}
   \begin{tabular}{|c|c|c|}
@@ -23,20 +29,23 @@ Take:
   \end{tabular}
   \label{tab:Chosen_Values}
 \end{table}
+The message signal is:
 \[\Rightarrow m(t) = 5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right)\]
-Taking $A_c = 1$, $f_c = 1000$ Hz and $\phi_c = 0$
 
-**** DSB-SC AM
+I took $A_c = 1$, $f_c = 1000$ Hz and $\phi_c = 0$. Which means the carrier signal is:
+\[c(t) &= \cos(2\pi 1000 t)\]
+The full code for this part can be seen in ~PartA.m~.
+** DSB-SC AM
+The DSB-SC signal can be modulated using the following equation
 \begin{align*}
-  c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
   u(t) &= m(t) \cdot c(t) \\
   u(t) &= \left[5\cos\left(6\pi + \frac{\pi}{2}\right) +
   10\cos\left(60\pi + \pi\right) +
   20\cos\left(200\pi + \frac{\pi}{3}\right)\right]
-  \cdot A_c\cos(2\pi f_c t + \phi_c) \\
+  \cdot \cos(2\pi1000 t) \\
 \end{align*}
 
-#+BEGIN_SRC octave :exports none :results output :session DSB_SC
+#+BEGIN_SRC octave :exports none :results output :session DSB_SC :eval no-export
 clear all;
 close all;
 
@@ -107,14 +116,14 @@ print -dpng 'DSB_SC_plot_f_angle.png'
 #+END_SRC
 
 #+RESULTS:
-**** Conventional AM/DSB AM
+** Conventional AM/DSB AM
+The Conventional AM signal can be modulated using the following equation
 \begin{align*}
-  c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
   u(t) &= (1 + m(t)) \cdot c(t) \\
   u(t) &= (1 + 5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right)) \cdot \cos(2\pi 1000 t)
 \end{align*}
 
-#+BEGIN_SRC octave :exports none :results output :session DSB
+#+BEGIN_SRC octave :exports none :results output :session DSB :eval no-export
 clear all;
 close all;
 
@@ -185,12 +194,11 @@ print -dpng 'DSB_plot_f_angle.png'
 #+END_SRC
 
 #+RESULTS:
-**** SSB AM
+** SSB AM
+The SSB signal can be modulated using the following equations
 \begin{align*}
-  c(t) &= A_c\cos(2\pi f_c t + \phi_c) \\
   u(t) &= m(t)\cdot c(t) \mp \hat{m}(t)\cdot c(t) \\
   &\textrm{Taking the negative variant/upper side band (USB)} \\
-  \hat{m}(t) &= m(t) * \frac{1}{\pi t}\\
   u(t) &= \left[5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right) \right]
   \cdot \cos(2\pi 1000 t) \\
   &- \left[\left[5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right) \right] * \frac{1}{\pi t} \right]\cdot
@@ -198,7 +206,7 @@ print -dpng 'DSB_plot_f_angle.png'
 \end{align*}
 The Lower Side Band (LSB) could be found by taking the positive variant.
 
-#+BEGIN_SRC octave :exports none :results output :session SSB
+#+BEGIN_SRC octave :exports none :results output :session SSB :eval no-export
 clear all;
 close all;
 
@@ -272,17 +280,28 @@ plot(f, angle, 'LineWidth', 2);
 title('Phase of SSB (LSB) Signal');
 xlabel('Frequency (Hz)');
 ylabel('Phase (radians)');
-%%xlim([fc-150 fc+150]);
 print -dpng 'SSB_plot_f_angle.png'
 
 #+END_SRC
 
 #+RESULTS:
-**** TODO Comparing
+** Comparison
+All of the signals were plotted, along with their frequency magnitudes and phases. These can be seen in the following plots.
+#+ATTER_LATEX: :width 1\textwidth
+[[./Time_Domain_ThreeSubplots.png]]
 
-*** Part b
-#+BEGIN_SRC octave :exports none :results output :session Demodulation
+#+ATTER_LATEX: :width 1\textwidth
+[[./Freq_Magnitude_ThreeSubplots.png]]
 
+#+ATTER_LATEX: :width 1\textwidth
+[[./Freq_Phase_ThreeSubplots.png]]
+
+The DSB-SC and conventional AM have the same time domain plot. Where as the SSB signal does not, this is because the SSB signal has only half the frequency content. This means that we cannot use a envelope detector on the SSB signal, whereas we can on both the DSB-SC and conventional AM signals. 
+The magnitude plots show what is expected, the DSB-SC and SSB signals have no carrier frequency, whereas the conventional AM signal does. The SSB signal only has the upper side band present, which is to be expected, as we took the negative variant during the calculations.
+From the phase plots we can see that the phases are similar for each of signals. They differ in the similar ways that the magnitude plots do. There is only a carrier frequency phase present in the conventional AM signal. 
+
+* Part b
+#+BEGIN_SRC octave :exports none :results output :session Demodulation :eval no-export
 clear all;
 close all;
 
@@ -331,50 +350,90 @@ u_SSB = m_SSB.*c_cos - imag(hilbert(m_SSB)).*c_sin;
 
 D_phi = 0;
 D_f = 0;
-local_oscillator = cos(2*pi * (fc + D_f) * t + D_phi);
+local_oscillator = cos(2*pi*(fc + D_f)*t + D_phi);
 
 r_DSB = u_DSB.*local_oscillator;
 r_SSB = u_SSB.*local_oscillator;
 
 N = length(t);
 
+%% FIR Filter
+ord = (3*Fs)/(22*(1.1*fc-fc));
+hc = fir1(round(ord)-1, fc/(Fs/2),'low');
+
 %% Define the useage of lowpassOctave if we are using octave
 %% And lowpass if your using matlab
 if exist('OCTAVE_VERSION', 'builtin')
-  y_DSB = lowpassOctave(r_DSB, Fs, 1.1*fc);
-  y_SSB = lowpassOctave(r_SSB, Fs, 1.1*fc);
+  y_DSB_ideal = lowpassOctave(r_DSB, Fs, 1.1*fc);
+  y_SSB_ideal = lowpassOctave(r_SSB, Fs, 1.1*fc);
 else
-  y_DSB = lowpass(r_DSB, 1.1*fc, Fs);
-  y_SSB = lowpass(r_SSB, 1.1*fc, Fs);
+  y_DSB_ideal = lowpass(r_DSB, 1.1*fc, Fs);
+  y_SSB_ideal = lowpass(r_SSB, 1.1*fc, Fs);
 end
 
+y_DSB_fir = filter(hc, 1, r_DSB);
+y_SSB_fir = filter(hc, 1, r_SSB);
 
 figure;
 grid on;
-plot(t, y_DSB, 'LineWidth', 2);
+plot(t, m_DSB, 'LineWidth', 2, t, y_DSB_ideal, 'LineWidth', 2, t, y_DSB_fir, 'LineWidth', 2);
 title('DSB-SC Demodulated Signal');
 xlabel('Time (s)');
+xlim([0, 0.05]);
 ylabel('Amplitude');
-print -dpng 'DSB_SC_plot_time_demodulated.png'
+legend('Original Message Signal', 'Ideally Filtered Signal', 'FIR Filtered Signal');
+print -dpng 'DSB_SC_plot_time_demodulated.png';
 
 figure;
 grid on;
-plot(t, y_SSB, 'LineWidth', 2);
+plot(t, m_SSB, 'LineWidth', 2, t, y_SSB_ideal, 'LineWidth', 2, t, y_SSB_fir, 'LineWidth', 2);
 title('SSB Demodulated Signal');
 xlabel('Time (s)');
+xlim([0, 0.05]);
 ylabel('Amplitude');
-print -dpng 'SSB_plot_time_demodulated.png'
+legend('Original Message Signal', 'Ideally Filtered Signal', 'FIR Filtered Signal');
+print -dpng 'SSB_plot_time_demodulated.png';
 
 #+END_SRC
 
+The full code for this part can be seen in ~PartB.m~.
+
+
 #+RESULTS:
 
-:TODO: Theoretically
+#+ATTER_LATEX: :width 1\textwidth
+[[./DSB_SC_plot_time_demodulated.png]]
 
-*** Part c
+#+ATTER_LATEX: :width 1\textwidth
+[[./SSB_plot_time_demodulated.png]]
 
 
-#+BEGIN_SRC octave :exports none :results output :session test
+The DSB-SC and SSB signals were demodulated using a filtering technique. Mathematically it can be expressed as the following for SSB (USB):
+\begin{align*}
+u(t) &= m(t)\cos(2\pi1000t) - \hat{m}(t)\sin(2\pi1000t) \\
+&\textrm{Multiply by local oscillator} \\
+y(t) &= (m(t)\cos(2\pi1000t) - \hat{m}(t)\sin(2\pi1000t))\cdot (\cos(2\pi1000t + \Delta\phi) \\
+y(t) &= m(t)\left(\frac{1}{2}\cos(\Delta\phi)+\frac{1}{2}\cos(4\pi1000t + \Delta\phi)\right) -
+\hat{m}(t)\left(\frac{1}{2}\sin(-\Delta\phi)+\frac{1}{2}\sin(4\pi1000t + \Delta\phi)\right) \\
+&\textrm{Applying a lowpass filter} \\
+y(t) &= \frac{1}{2}m(t)\cos(\Delta\phi) - \frac{1}{2}\hat{m}(t)\sin(\Delta\phi) \\
+&\textrm{Finally when } \Delta\phi = 0\\
+y(t) &= \frac{1}{2}m(t)
+\end{align*}
+A similar approach can be used for DSB-SC, which would arrive at the following expression
+\[y(t) = \frac{1}{2}m(t)\cos(\Delta\phi)\]
+A FIR filter was chosen in the non-ideal case to do the lowpass filter. This filter was chosen because it has a linear phase relationship and our use case if phase sensitive. In the plot we can see a small phase offset compared to the ideal case, however this has a minimal effect on the demodulated signal. The design for the FIR filter can be seen in the following code:
+#+BEGIN_SRC octave :exports code :results output :session FIR :eval no-export
+order = (3*Fs)/(22*(1.1*fc-fc));
+b = fir1(round(order)-1, fc/(Fs/2),'low');
+#+END_SRC
+When no phase offset is present we can clearly see that both of the signals have half the total magnitude, which obviously lines up with the a above theory.
+Introducing a $\Delta \phi$ to the local oscillator distorts the demodulated signal. As we increase $\Delta \phi$ from $0$ to $\frac{\pi}{2}$ radians we start to see the magnitude of the DSB-SC signal go to zero, this can clearly be seen in the above equation, as $\cos(\frac{\pi}{2}) = 0$. When $\Delta\phi = \pi$ we see both of the signals have flipped, this can also be seen in the theory, as $\cos(\pi) = -1$ and $\sin(\pi) = 0$, giving $y(t) = -\frac{1}{2}m(t)$ for both DSB-SC and SSB. 
+Introducing a $\Delta f$ to the local oscillator also distorts the demodulated signal. It appears that adding the $\Delta f$ causes the demodulated signal magnitude to change over time. 
+* Part c
+The full code for this part can be seen in ~PartC.m~.
+
+#+BEGIN_SRC octave :exports none :results output :session test :eval no-export
 if exist('OCTAVE_VERSION', 'builtin')
   pkg load symbolic
 end
@@ -446,21 +505,299 @@ u = (sym) (-5*sin(26*sqrt(146)*time) - 20*cos(52*sqrt(146)*time) + 10*cos(78*sqr
 m = (sym) -5*sin(26*sqrt(146)*time) - 20*cos(52*sqrt(146)*time) + 10*cos(78*sqrt(146)*time + pi/3)
 #+end_example
 
+The modulation index was calculated using the following code snippet:
+#+BEGIN_SRC octave :exports code :results output :session mIndex :eval no-export
+E_max = max(m)
+E_min = min(m)
 
-#+BEGIN_SRC octave :exports none :results output :session AM_Demodulation
+%% The abs is required becaues abs(E_min) > abs(E_max)
+%% otherwise we would get a negative modulation index
+a = abs((E_max - E_min)/(E_max + E_min));
+#+END_SRC
+The modulation index came out to be ~12.98~. This means that the modulation is non-linear, this outcome was expected. The message signal crosses the time-axis, which means that envelope does not exist for our expected signal. But rather the envelope of the signal represents the absolute value of our signal. We could add a DC component to our message signal to regain the envelope.
+
+** Envelope Detector
+We want $f_m < \frac{1}{RC} < f_c$, this will remove the carrier frequency, but no the message frequencies. It was decided that we would use $R = 5k\Omega$ and $C = 0.4\mu F$, which gives $\frac{1}{RC} = 500$ Hz. This is between the highest message frequency and the carrier frequency, so we should expect to see the message signal when passed into the circuit.
+
+#+ATTER_LATEX: :width 1\textwidth
+[[./DSB_plot_envelope.png]]
+
+From the plot we can see that the envelope detector was able to successfully demodulate the signal. However it is the absolute value of the signal, which was expected and describe previously. This is a terrible implementation of a envelope detector for various reasons, and should not be implemented in the real world,. This is a terrible implementation mainly because we are using such a low carrier frequency, if this were increased and the resistor and capacitor values were adjusted accordingly we would see a much smoother envelope. On top of that a more advance circuit would allow for a smoother transition from peak to peak of the envelope, overall this is still a good demonstration of how a envelope detector works and could be designed. The envelope detector was simulated in LTSpice, the circuit can be seen below, where $B1$ is the modulated signal and the voltage across the two rightmost terminals is the demodulated signal.
+#+ATTER_LATEX: :width 1\textwidth
+[[./LTSpice_Env.png]]
+
+#+BEGIN_SRC octave :exports none :results output :session AM_Env :eval no-export
 clear all;
 close all;
 
+data = dlmread('/home/baley/UTAS/org-roam/org-files/ENG308Assignment1Env.data', '\t');
+t = data(:, 1);
+u = data(:, 2);
+m_demod = data(:, 3);
+m_true = data(:, 4);
+
+figure;
+plot(t, u, 'LineWidth', 2, t, m_demod, 'LineWidth', 2, t, m_true, 'LineWidth', 2);
+xlabel('Time (s)');
+ylabel('Voltage (V)');
+title('Conventional AM Envelope Detector Demodulation');
+grid on;
+print -dpng 'DSB_plot_envelope.png'
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports none :results output :session ALL :eval no-export
+%% Part A
+clear all;
+close all;
+
+%% Make compatible with MATLAB and Octave
 if exist('OCTAVE_VERSION', 'builtin')
-  %% needed for findpeaks
+  % needed for Hilbert transform in Octave
+  pkg load signal
+end
+
+%% Parameters
+fc = 1000;                    % carrier frequency (Hz)
+Fs = 1000 * fc;               % sampling frequency
+t = 0 : 1/Fs : 0.25;          % time vector
+N = length(t);                % number of samples
+f = (-N/2 : N/2-1) * (Fs/N);  % frequency vector
+w = 2 * pi;
+
+%% Modulating signal parameters
+A1 = 5;
+A2 = 20;
+A3 = 10;
+f1 = 50;
+f2 = 100;
+f3 = 150;
+phi1 = pi/2;
+phi2 = pi;
+phi3 = pi/3;
+
+%% Carrier and Message Signal
+c = cos(2*pi*fc*t);
+m = A1 * cos(w * f1 * t + phi1) + A2 * cos(w * f2 * t + phi2) + A3 * cos(w * f3 * t + phi3);
+
+%% Generate modulated signals
+
+% 1. DSB-SC modulation
+u_dsbsc = m .* c;
+
+% 2. Conventional AM modulation
+u_dsb = (1 + m) .* c;
+
+% 3. SSB (USB) modulation
+c_cos = cos(2*pi*fc*t);
+c_sin = sin(2*pi*fc*t);
+u_ssb = m .* c_cos - imag(hilbert(m)) .* c_sin;
+
+
+%% DSB-SC FFT
+U_dsbsc = fftshift(fft(u_dsbsc));
+mag_dsbsc = abs(U_dsbsc);
+phase_dsbsc = angle(U_dsbsc) * (180/pi);
+
+%% DSB (AM) FFT
+U_dsb = fftshift(fft(u_dsb));
+mag_dsb = abs(U_dsb);
+phase_dsb = angle(U_dsb) * (180/pi);
+
+%% SSB FFT
+U_ssb = fftshift(fft(u_ssb));
+mag_ssb = abs(U_ssb);
+phase_ssb = angle(U_ssb) * (180/pi);
+
+
+figure;
+
+subplot(3,1,1);  %% DSB-SC time domain
+grid on;
+plot(t, u_dsbsc, 'LineWidth', 2);
+title('DSB-SC Time Domain');
+xlabel('Time (s)');
+ylabel('Amplitude');
+xlim([0 0.075]);
+
+subplot(3,1,2);  %% Conventional AM (DSB) time domain
+grid on;
+plot(t, u_dsb, 'LineWidth', 2);
+title('DSB/Conventional AM Time Domain');
+xlabel('Time (s)');
+ylabel('Amplitude');
+xlim([0 0.075]);
+
+subplot(3,1,3);  %% SSB time domain
+grid on;
+plot(t, u_ssb, 'LineWidth', 2);
+title('SSB (USB) Time Domain');
+xlabel('Time (s)');
+ylabel('Amplitude');
+xlim([0 0.075]);
+
+print -dpng 'Time_Domain_ThreeSubplots.png'
+
+figure;
+
+subplot(3,1,1);  %% DSB-SC magnitude
+grid on;
+plot(f, mag_dsbsc, 'LineWidth', 2);
+title('DSB-SC Frequency Magnitude');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([fc - 1.25*max([f1,f2,f3]), fc + 1.25*max([f1,f2,f3])]);
+
+subplot(3,1,2);  %% Conventional AM (DSB) magnitude
+grid on;
+plot(f, mag_dsb, 'LineWidth', 2);
+title('DSB/Conventional AM Frequency Magnitude');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([fc - 1.25*max([f1,f2,f3]), fc + 1.25*max([f1,f2,f3])]);
+
+subplot(3,1,3);  %% SSB magnitude
+grid on;
+plot(f, mag_ssb, 'LineWidth', 2);
+title('SSB (USB) Frequency Magnitude');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([fc - 1.25*max([f1,f2,f3]), fc + 1.25*max([f1,f2,f3])]);
+
+print -dpng 'Freq_Magnitude_ThreeSubplots.png'
+
+figure;
+subplot(3,1,1);   %% DSB-SC phase
+grid on;
+plot(f, phase_dsbsc, 'LineWidth', 2);
+title('DSB-SC Frequency Phase');
+xlabel('Frequency (Hz)');
+ylabel('Phase (degrees)');
+xlim([fc - 1.25*max([f1,f2,f3]), fc + 1.25*max([f1,f2,f3])]);
+
+subplot(3,1,2);   %% Conventional AM (DSB) phase
+grid on;
+plot(f, phase_dsb, 'LineWidth', 2);
+title('DSB/Conventional AM Frequency Phase');
+xlabel('Frequency (Hz)');
+ylabel('Phase (degrees)');
+xlim([fc - 1.25*max([f1,f2,f3]), fc + 1.25*max([f1,f2,f3])]);
+
+subplot(3,1,3);   %% SSB phase
+grid on;
+plot(f, phase_ssb, 'LineWidth', 2);
+title('SSB (USB) Frequency Phase');
+xlabel('Frequency (Hz)');
+ylabel('Phase (degrees)');
+xlim([fc - 1.25*max([f1,f2,f3]), fc + 1.25*max([f1,f2,f3])]);
+
+print -dpng 'Freq_Phase_ThreeSubplots.png'
+
+%% Part B
+clear all;
+close all;
+
+%% Filter
+%% Have to do this cause octave does not have lowpass function
+function y = lowpassOctave (r, fs, fc)
+  N = length(r);
+  f = (0:N-1) * (fs/N);
+  mask = (f <= fc) | (f >= (fs - fc));
+  R = fft(r);
+  R(~mask) = 0;
+  y = ifft(R);  
+end
+
+if exist('OCTAVE_VERSION', 'builtin')
+  %% needed for Butterworth filter
   pkg load signal
 end
 
 fc = 1000;
 Fs = 1000*fc;
-t = 0:1/(Fs):0.1;
+t = 0:1/(Fs):0.2;
 
 %% Values
+A1 = 5;
+A2 = 20;
+A3 = 10;
+w = 2*pi;
+f1 = 50;
+f2 = 100;
+f3 = 150;
+phi1 = pi/2;
+phi2 = pi;
+phi3 = pi/3;
+
+
+m_DSB = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
+c_DSB = cos(2*pi * fc * t);
+u_DSB = m_DSB.*c_DSB;
+
+m_SSB = A1*cos(w*f1*t + phi1) + A2*cos(w*f2*t + phi2) + A3*cos(w*f3*t + phi3);
+c_cos = cos(2*pi * fc * t);
+c_sin = sin(2*pi * fc * t);
+u_SSB = m_SSB.*c_cos - imag(hilbert(m_SSB)).*c_sin;
+
+
+D_phi = 0;
+D_f = 0;
+local_oscillator = cos(2*pi*(fc + D_f)*t + D_phi);
+
+r_DSB = u_DSB.*local_oscillator;
+r_SSB = u_SSB.*local_oscillator;
+
+N = length(t);
+
+%% FIR Filter
+ord = (3*Fs)/(22*(1.1*fc-fc));
+hc = fir1(round(ord)-1, fc/(Fs/2),'low');
+
+%% Define the useage of lowpassOctave if we are using octave
+%% And lowpass if your using matlab
+if exist('OCTAVE_VERSION', 'builtin')
+  y_DSB_ideal = lowpassOctave(r_DSB, Fs, 1.1*fc);
+  y_SSB_ideal = lowpassOctave(r_SSB, Fs, 1.1*fc);
+else
+  y_DSB_ideal = lowpass(r_DSB, 1.1*fc, Fs);
+  y_SSB_ideal = lowpass(r_SSB, 1.1*fc, Fs);
+end
+
+y_DSB_fir = filter(hc, 1, r_DSB);
+y_SSB_fir = filter(hc, 1, r_SSB);
+
+figure;
+grid on;
+plot(t, m_DSB, 'LineWidth', 2, t, y_DSB_ideal, 'LineWidth', 2, t, y_DSB_fir, 'LineWidth', 2);
+title('DSB-SC Demodulated Signal');
+xlabel('Time (s)');
+xlim([0, 0.05]);
+ylabel('Amplitude');
+legend('Original Message Signal', 'Ideally Filtered Signal', 'FIR Filtered Signal');
+print -dpng 'DSB_SC_plot_time_demodulated.png';
+
+figure;
+grid on;
+plot(t, m_SSB, 'LineWidth', 2, t, y_SSB_ideal, 'LineWidth', 2, t, y_SSB_fir, 'LineWidth', 2);
+title('SSB Demodulated Signal');
+xlabel('Time (s)');
+xlim([0, 0.05]);
+ylabel('Amplitude');
+legend('Original Message Signal', 'Ideally Filtered Signal', 'FIR Filtered Signal');
+print -dpng 'SSB_plot_time_demodulated.png';
+
+
+%% Part C
+clear all;
+close all;
+
+fc = 1000;
+Fs = 1000*fc;
+t = 0:1/(Fs):0.1;
+
+%%% Values
 A1 = 5;
 A2 = 20;
 A3 = 10;
@@ -481,25 +818,15 @@ grid on;
 plot(t, u, 'LineWidth', 2, t, m, 'LineWidth', 2);
 title('DSB Modulated Signal');
 xlabel('Time (s)');
+xlim([0, 0.05]);
 ylabel('Amplitude');
 
-[pks, idx] = findpeaks(u, "DoubleSided");
-E_max = max(abs(pks));
-E_min = min(abs(pks));
-a = (E_max - E_min)/(E_max + E_min);
-printf("the modulation index is %f \n", a)
+E_max = max(m)
+E_min = min(m)
+a = abs((E_max - E_min)/(E_max + E_min));
+fprintf("the modulation index is %f \n", a)
 
-#+END_SRC
-
-#+RESULTS:
-: the modulation index is 0.991802
-
-
-
-**** Envelope Detector
-We want $f_m < \frac{1}{RC} < f_c$, this will remove the carrier frequency, but no the message frequencies.
-
-#+BEGIN_SRC octave :exports none :results output :session AM_Env
+%%% From LTSpice
 data = dlmread('/home/baley/UTAS/org-roam/org-files/ENG308Assignment1Env.data', '\t');
 t = data(:, 1);
 u = data(:, 2);
@@ -511,11 +838,13 @@ plot(t, u, 'LineWidth', 2, t, m_demod, 'LineWidth', 2, t, m_true, 'LineWidth', 2
 xlabel('Time (s)');
 ylabel('Voltage (V)');
 title('Conventional AM Envelope Detector Demodulation');
+legend('Original Signal', 'Demodulated Signal', 'True Message Signal');
 grid on;
+print -dpng 'DSB_plot_envelope.png'
 #+END_SRC
 
 #+RESULTS:
-
-
-
+: E_max = 24.379
+: E_min = -28.448
+: the modulation index is -12.983673
 
