@@ -11,23 +11,65 @@
 ** Pre-lab
 *** Question 1
 \[500\Omega - 300\Omega\]
+
+$R_{V1} = 1.48k\Omega$
+$R_{1} = 1.7k\Omega$
 *** Question 2
 \[500\Omega - 300\Omega\]
 
 *** Question 3
-\[
 \begin{align*}
 R_{V3} &= \frac{1}{2\pi f C_4} \\
 R_{V3} &= \frac{1}{2\pi 1.1\cdot10^3 \cdot 10\cdot10^{-9}} \\
 R_{V3} &= 14.468k\Omega
 \end{align*}
-\]
 ** Exercise 1 - FM modulator
 *** Question 4
 *** Question 5
 *** Question 6
 ** Exercise 2 - FM demodulator
 *** Question 7
+$C_5 = 113.0nF$
+$C_4 = 11.39nF$
+$C_3 = 1.05nF$
+
+$R_7 = 989\Omega$
+$R_4 = 2.7k\Omega$
+
+$R_{V3} = 14.73k\Omega$
+$R_{V3} = 980\Omega$
 *** Question 8
 *** Question 9
 *** Question 10
+#+BEGIN_SRC octave :exports none :results output :session Xcorr
+clear all;
+close all;
+if exist('OCTAVE_VERSION', 'builtin')
+  pkg load signal
+end
+
+dataNoCap = dlmread('/home/baley/UTAS/org-roam/org-files/DataNoCap.csv', ',');
+tN = dataNoCap(:, 1);
+dN = dataNoCap(:, 2);
+dataCap = dlmread('/home/baley/UTAS/org-roam/org-files/DataCap.csv', ',');
+tC = dataCap(:, 1);
+dC = dataCap(:, 2);
+
+figure;
+plot(tN, dN)
+
+figure;
+plot(tC, dC)
+
+[corrN_c, corrNLag] = xcorr(dN);
+[corrC_c, corrCLag] = xcorr(dC);
+
+figure;
+stem(corrNLag, corrN_c)
+figure;
+stem(corrCLag, corrC_c)
+
+#+END_SRC
+
+#+RESULTS:
+
