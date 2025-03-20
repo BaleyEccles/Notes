@@ -32,13 +32,19 @@ f = 10, 100, 1k, 10k, 100k, 1M
 | 250k | 100k | 14.8 | -6.75 | 500m | -1.68 |
 | 750k | 100k | 14.8 | -6.75 | 500m | -0.9  |
 
-#+begin_src octave
+#+BEGIN_SRC octave :exports none :results output :session thing :eval no-export
 f = [10, 100, 1e3, 100e3,  1e6, 500e3, 250e3, 750e3];
 vout = [1.68, 1.68, 1.68,  1.68, 0.55,  1.4, 1.68, 0.9];
-plot(f, vout, 'x')
+vin = 500e-3;
+[f_sorted, idx] = sort(f);
+gain_sorted = 2*vout(idx)./vin;
+plot(f_sorted, gain_sorted, 'linewidth', 2)
 #+end_src 
 
 #+RESULTS:
+: gain_sorted =
+: 
+:    6.7200   6.7200   6.7200   6.7200   6.7200   5.6000   3.6000   2.2000
 ** Part 3
  - Cut of was around 400kHz
  - This is what we expected 

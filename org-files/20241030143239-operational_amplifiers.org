@@ -16,7 +16,7 @@
  - \[CMRR = \frac{A_d}{A_c}\]
 *** Ideal Op Amp
  - \[A_v=\infty\]
- - \[R_i=\infity \Omega\]
+ - \[R_i=\infty \Omega\]
  - \[R_o=0\Omega\]
  - \[I_+=I_-=0A\]
  - \[V_+=V_-\]

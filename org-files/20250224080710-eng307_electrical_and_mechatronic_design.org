@@ -26,6 +26,12 @@
 ** Project Report
  - Week 13
  - 40% of mark
+*** Notes
+ - Water pump system
+ - Two tanks
+ - Manage the amount of water in each tank
+ - Closed loop water control
+ - Fault management
 ** Technical Demonstration
  - Week 14
  - 10% of mark
@@ -35,10 +41,13 @@
 ** Laboratory Demonstration
  - [[id:aa89e0a2-e7a6-4527-ac8b-6d40955aed96][ENG307 - Electrical and Mechatronic Design - Lab 1]]
  - 20% - 10% of mark?
+*** Lab 2
+Design a band pass filter
 ** Design Assignments
  - Weeks:
    - 3, 6, 9 and 12
  - 20% - 30% of mark?
-  - [[id:e1a8a179-0487-4d1f-ad59-83ebeb8cad0c][ENG307 - Electrical and Mechatronic Design - Design Assignment 1]]
+   - [[id:e1a8a179-0487-4d1f-ad59-83ebeb8cad0c][ENG307 - Electrical and Mechatronic Design - Design Assignment 1]]
+   - [[id:2750d46e-0d6c-491c-9103-432b09cd0064][ENG307 - Electrical and Mechatronic Design - Design Assignment 2]]
 
 
