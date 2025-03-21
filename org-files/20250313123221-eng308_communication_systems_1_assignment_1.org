@@ -30,13 +30,13 @@ The values were chosen to be the following.
   \label{tab:Chosen_Values}
 \end{table}
 The message signal is:
-\[\Rightarrow m(t) = 5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right)\]
+\[m(t) = 5\cos\left(2\pi 50t + \frac{\pi}{2}\right) + 20\cos\left(2\pi 100t + \pi\right) + 10\cos\left(2\pi 150t + \frac{\pi}{3}\right)\]
 
 I took $A_c = 1$, $f_c = 1000$ Hz and $\phi_c = 0$. Which means the carrier signal is:
 \[c(t) &= \cos(2\pi 1000 t)\]
 The full code for this part can be seen in ~PartA.m~.
 ** DSB-SC AM
-The DSB-SC signal can be modulated using the following equation
+The DSB-SC signal can be modulated using the following equation:
 \begin{align*}
   u(t) &= m(t) \cdot c(t) \\
   u(t) &= \left[5\cos\left(6\pi + \frac{\pi}{2}\right) +
@@ -286,14 +286,22 @@ print -dpng 'SSB_plot_f_angle.png'
 
 #+RESULTS:
 ** Comparison
-All of the signals were plotted, along with their frequency magnitudes and phases. These can be seen in the following plots.
+All of the signals were plotted, along with their frequency magnitudes and phases. These can be seen in Figures 1-3.
+
+
 #+ATTER_LATEX: :width 1\textwidth
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Plot of each modulated signal in the time domain
 [[./Time_Domain_ThreeSubplots.png]]
 
 #+ATTER_LATEX: :width 1\textwidth
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Plot of the frequency magnitude of each signal
 [[./Freq_Magnitude_ThreeSubplots.png]]
 
 #+ATTER_LATEX: :width 1\textwidth
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Plot of the frequency phase of each signal
 [[./Freq_Phase_ThreeSubplots.png]]
 
 The DSB-SC and conventional AM have the same time domain plot. Where as the SSB signal does not, this is because the SSB signal has only half the frequency content. This means that we cannot use a envelope detector on the SSB signal, whereas we can on both the DSB-SC and conventional AM signals. 
@@ -398,13 +406,14 @@ print -dpng 'SSB_plot_time_demodulated.png';
 
 The full code for this part can be seen in ~PartB.m~.
 
-
-#+RESULTS:
-
 #+ATTER_LATEX: :width 1\textwidth
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Plot of the DSB-SC message, ideal demodulated and FIR demodulated signal in the time domain
 [[./DSB_SC_plot_time_demodulated.png]]
 
 #+ATTER_LATEX: :width 1\textwidth
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Plot of the SSB message, ideal demodulated and FIR demodulated signal in the time domain
 [[./SSB_plot_time_demodulated.png]]
 
 
@@ -427,8 +436,8 @@ A FIR filter was chosen in the non-ideal case to do the lowpass filter. This fil
 order = (3*Fs)/(22*(1.1*fc-fc));
 b = fir1(round(order)-1, fc/(Fs/2),'low');
 #+END_SRC
-When no phase offset is present we can clearly see that both of the signals have half the total magnitude, which obviously lines up with the a above theory.
-Introducing a $\Delta \phi$ to the local oscillator distorts the demodulated signal. As we increase $\Delta \phi$ from $0$ to $\frac{\pi}{2}$ radians we start to see the magnitude of the DSB-SC signal go to zero, this can clearly be seen in the above equation, as $\cos(\frac{\pi}{2}) = 0$. When $\Delta\phi = \pi$ we see both of the signals have flipped, this can also be seen in the theory, as $\cos(\pi) = -1$ and $\sin(\pi) = 0$, giving $y(t) = -\frac{1}{2}m(t)$ for both DSB-SC and SSB. 
+In figures 4 and 5 we can see that when no phase offset is present both of the signals have half the total magnitude, which obviously lines up with the a above theory.
+Introducing a $\Delta \phi$ to the local oscillator distorts the demodulated signal. As we increase $\Delta \phi$ from $0$ to $\frac{\pi}{2}$ radians we start to see the magnitude of the DSB-SC signal go to zero, this can clearly be seen in the above equation, as $\cos(\frac{\pi}{2}) = 0$. When $\Delta\phi = \pi$ we see both of the signals have flipped, this can also be seen in the theory, as $\cos(\pi) = -1$ and $\sin(\pi) = 0$, giving $y(t) = -\frac{1}{2}m(t)$ for both DSB-SC and SSB.
 Introducing a $\Delta f$ to the local oscillator also distorts the demodulated signal. It appears that adding the $\Delta f$ causes the demodulated signal magnitude to change over time. 
 * Part c
 The full code for this part can be seen in ~PartC.m~.
@@ -507,23 +516,29 @@ m = (sym) -5*sin(26*sqrt(146)*time) - 20*cos(52*sqrt(146)*time) + 10*cos(78*sqrt
 
 The modulation index was calculated using the following code snippet:
 #+BEGIN_SRC octave :exports code :results output :session mIndex :eval no-export
-E_max = max(m)
-E_min = min(m)
+E_max = max(m);
+E_min = min(m);
 
 %% The abs is required becaues abs(E_min) > abs(E_max)
 %% otherwise we would get a negative modulation index
 a = abs((E_max - E_min)/(E_max + E_min));
 #+END_SRC
-The modulation index came out to be ~12.98~. This means that the modulation is non-linear, this outcome was expected. The message signal crosses the time-axis, which means that envelope does not exist for our expected signal. But rather the envelope of the signal represents the absolute value of our signal. We could add a DC component to our message signal to regain the envelope.
+The modulation index came out to be ~12.98~. This means that the modulation is non-linear, this outcome was expected. The message signal crosses the time-axis, which means that envelope does not exist for our expected signal. But rather the envelope of the signal represents the absolute value of our signal. We could add a DC component to our message signal to make it linear, adding a DC component of 28.379 volts would do this.
 
 ** Envelope Detector
 We want $f_m < \frac{1}{RC} < f_c$, this will remove the carrier frequency, but no the message frequencies. It was decided that we would use $R = 5k\Omega$ and $C = 0.4\mu F$, which gives $\frac{1}{RC} = 500$ Hz. This is between the highest message frequency and the carrier frequency, so we should expect to see the message signal when passed into the circuit.
 
 #+ATTER_LATEX: :width 1\textwidth
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Plot of the conventional AM modulated signal, demodulated ideally and using an envelope detector
 [[./DSB_plot_envelope.png]]
 
-From the plot we can see that the envelope detector was able to successfully demodulate the signal. However it is the absolute value of the signal, which was expected and describe previously. This is a terrible implementation of a envelope detector for various reasons, and should not be implemented in the real world,. This is a terrible implementation mainly because we are using such a low carrier frequency, if this were increased and the resistor and capacitor values were adjusted accordingly we would see a much smoother envelope. On top of that a more advance circuit would allow for a smoother transition from peak to peak of the envelope, overall this is still a good demonstration of how a envelope detector works and could be designed. The envelope detector was simulated in LTSpice, the circuit can be seen below, where $B1$ is the modulated signal and the voltage across the two rightmost terminals is the demodulated signal.
+From the plot we can see that the envelope detector was able to successfully demodulate the signal. However it is the absolute value of the signal, which was expected and describe previously. This is a terrible implementation of a envelope detector for various reasons, and should not be implemented in the real world. This is mainly because we are using such a low carrier frequency, if this were increased and the resistor and capacitor values were adjusted accordingly we would see a much smoother envelope. On top of that a more advance circuit would allow for a smoother transition from peak to peak of the envelope. \\
+One advantage of using an envelope detector, compared to the other methods, to demodulate a signal is that there is no loss in magnitude. That is, the demodulated signal captures the full message signal. This could have implications when it comes to noise, we would expect the envelope detector to be more resilient to noise compared to the other methods that reduced the magnitude. The envelope detector was simulated in LTSpice, the circuit can be seen below, where $B1$ is the modulated signal and the voltage across the two rightmost terminals is the demodulated signal.
+
 #+ATTER_LATEX: :width 1\textwidth
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: LTSpice circuit
 [[./LTSpice_Env.png]]
 
 #+BEGIN_SRC octave :exports none :results output :session AM_Env :eval no-export
@@ -557,6 +572,7 @@ close all;
 if exist('OCTAVE_VERSION', 'builtin')
   % needed for Hilbert transform in Octave
   pkg load signal
+  set(0, "DefaultAxesFontSize", 25);
 end
 
 %% Parameters
@@ -846,5 +862,5 @@ print -dpng 'DSB_plot_envelope.png'
 #+RESULTS:
 : E_max = 24.379
 : E_min = -28.448
-: the modulation index is -12.983673
+: the modulation index is 12.983673
 
