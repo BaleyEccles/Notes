@@ -15,25 +15,67 @@
    - Instantaneous Frequency:
      - \[f_i(t) = \frac{1}{2\pi}\frac{d\theta(t)}{dt}\]
  - [[id:43a759ee-3cad-411c-a23f-4db60e9342e1][Bandpass]] modulated signal:
-   - \[u(t)=A_c\cos(2\pi f_ct + \phi(t)\]
+   - \[u(t)=A_c\cos(2\pi f_ct + \phi(t))\]
    - Instantaneous Frequency:
      - \[f_i(t) = f_c + \frac{1}{2\pi}\frac{d\theta(t)}{dt}\]
    - \[\phi(t)=\begin{cases}   k_pm(t) & , PM \\
      2\pi k_f\int_{-\infty}^tm(\tau)d\tau & , FM   \end{cases}\]
-   - \[\frac{d\phi(t)}{dt} = \begin{cases}
-     k_p\frac{dm(t)}{dt} & , PM \\
-   2\pi k_fm(t) & , FM   \end{cases}\]
+   - \[\frac{d \phi (t)}{dt} = \begin{cases} k_p\frac{dm(t)}{dt} & , PM \\ 2\pi k_fm(t) & , FM   \end{cases}\]
  - By subsituting in a signal we can find a relation to the [[id:6aa137e2-5360-440a-adc0-ed6a8e29c957][Bessel Function]]
    - \[u(t) = Re\left\{\sum_{n=-\infty}^{\infty}A_cJ_n(\beta)\cos(f_c+nf_m)t\right\}\]
    - For higher frequencies $f_c\pm nf_m$, the amplitude generally attenuates
      - Hence we can define an effective bandwidth
-   - $\beta$ is the modulation index
+   - $\beta$ is the [[id:93cc7a76-b114-4b58-8116-200294578267][modulation index]]
 
-** Baendwidth
+** Bandwidth
  - [[id:193ec810-72b5-4a36-be12-8feee43e711a][Angle Modulation]] requires more bandwidth than [[id:c9b76a54-da68-4891-9ed1-3d64a182d026][Amplitude Modulation]]
 *** Carsons Rule
  - \[B_w = 2(\beta + 1) f_m\]
-   
+** Effect of [[id:cfec5fb5-467e-4a16-a78c-32ebbdd4fb9a][Noise]]
+ - [[file:Screenshot 2025-03-22 at 15-32-10 Recordings for Week 4 - ENG308 ENG743 Communication Systems 1 and Communication Systems.png]]
+ - \[\begin{cases}
+   A_c\cos(2\pi f_ct + k_pm(t)) & PM \\
+   A_c\cos(2\pi f_ct + 2\pi k_f\int_{-\infty}^tm(\tau)d\tau) & FM 
+   \end{cases}\]
+ - Take the noise to be
+   - \[\sqrt{n_c^2(t) + n_s^2(t)}\cos(2\pi f_ct + \Phi_n(t))\]
+     - where $V_n(t) = \sqrt{n_c^2(t) + n_s^2(t)}$
+     - $V_n(t)$ is an envelope
+     - $\Phi_n(t)$ is the angle between $V_n(t)}$ and the x-axis
+ - Assumptions
+   - \[\Pr(V_n(t) << A_c) \approx 1\]
+     - We have a high [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][Signal To Noise Ratio (SNR)]]
+ - \[r(t) \approx (A_c + V_n\cos(\Phi_n(t) - \phi(t)))\cdot \cos(2\pi f_ct + \phi(t) + \frac{v_n(t)}{A_c}\sin(\Phi_n(t) - \phi(t)))\]
+   - \[Y_n(t) = \frac{v_n(t)}{A_c}\sin(\Phi_n(t) - \phi(t)))\]
+     - Which is the noise
+ - \[y(t) = \begin{cases}
+   k_pm(t) + Y_n(t) & PM \\
+   k_fm(t) + \frac{1}{2\pi}\frac{d}{dt}Y_n(t) & FM
+   \end{cases}\]
+   - \[y(t) = \begin{cases}
+     k_pm(t) + \frac{v_n(t)}{A_c}\sin(\Phi_n(t) - \phi(t))) & PM \\
+     k_fm(t) + \frac{1}{2\pi}\frac{d}{dt}\frac{v_n(t)}{A_c}\sin(\Phi_n(t) - \phi(t))) & FM
+     \end{cases}\]
+ - Looking at $Y_n(t)$
+   - Assume the noise is [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][Stationary]]/[[id:36d505ca-5581-478e-9c72-acaa883d4404][Gaussian]] and [[id:6a8b586e-af9e-4711-a7a4-c98e24e6a0e5][uncorrelated]]
+   - We can get the [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]]
+     - \[R_{Y_nY_n}(t, t + \tau) = \frac{1}{A_c^2}R_{nn}(\tau)\cdot E[\cos(\phi(t+\tau) - \phi(t))]\]
+   - If $m(t)$ is a sample function of $M(t)$, and $M(t)$ is [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][Stationary]], zero-[[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][mean]], [[id:36d505ca-5581-478e-9c72-acaa883d4404][Gaussian Process]] with $R_{MM}(\tau)$, then
+     - \[\Phi(t) = k_pM(t)\]
+       - for PM
+     - \[\Phi(t) = 2\pik_p\int_{-\infty}^tM(\tau)d\tau\]
+       - for PM
+     - Which means
+       - \[R_{Y_nY_n}(t, t + \tau) = \frac{1}{A_c^2}R_{nn}(\tau)\cdot E[\cos(\Phi(t+\tau) - \Phi(t))]\]
+     - Define
+       - \[z(t, t + \tau) = \Phi(t + \tau) - \Phi(t)\]
+       - \[\mu_z=0\]
+       - \[\Var(z) = E[z^2] - [E[z]]^2\]
+       - Which means:
+       - \[\sigma_z^2 = 2[R_{\Phi\Phi}(0) - R_{\Phi\Phi}(\tau)]\]
+ - [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]] of noise
+   - \[S_{Y_nY_n}(f) = \frac{N_0}{A_c^2}\]
+
 ** Angle Modulators
  - We must make a non-linear system, as we are creating new frequencies from $m(t) \rightarrow u(t)$
    - Angle modulators are time-varying, non-linear systems
@@ -43,8 +85,7 @@
  - \[c(t) = c_0+k_0m(t)\]
  - \[f_i(t) \approx f_c\left(1- \frac{k_0}{2c_0}m(t)\right)\]
 
-**** Voltage Controlled Ocillator
-
+**** [[id:cf8ee8da-8806-448c-b5b7-d713a9adfe65][Voltage Controlled Oscillator]]
 
 *** Narrowband FM
  - When $\beta_f<<1$

@@ -31,3 +31,5 @@
 ** Energy
  - \[E_x = 2E_{X_+}\]
  - The lowpass equivalent signal has double the energy than the [[id:43a759ee-3cad-411c-a23f-4db60e9342e1][Bandpass Signal]]
+** Noise in baseband
+ - \[\left(\frac{S}{N}\right)_0 = \frac{P_0}{P_{N0}} = \frac{P_mA_c^2}{2}\cdot \frac{1}{N_0w}\]
