@@ -1,0 +1,113 @@
+:PROPERTIES:
+:ID:       358ec344-ce1e-4d60-be9f-b0b6529d4649
+:END:
+#+title: ENG308 - Communication Systems 1 - Assignment 1 - Question 2
+#+date: [2025-03-23 Sun 13:28]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Part a
+If we integrate the message signal and then do phase modulation on it we will get the frequency modulated signal. Likewise, if we differentiate the message and then do frequency modulation on it we will get the phase modulated signal
+Where:
+\[u_{PM}(t) = A_c\cos(2\pi f_ct + k_pm(t))\]
+\[u_{FM}(t) = A_c\cos(2\pi f_ct + 2\pi k_f\int_{-\infty}^tm(\tau)d\tau)\]
+taking $k_p = 2\cdotpi\cdot0.0001$ and $k_f = 0.0001$. $k_p$ must be a factor of $2\pi$ larger than $k_f$ to produce the desired results, as in the FM equation there is an extra $2\pi$ on $k_f$.
+#+BEGIN_SRC octave :exports none :results output :session ALL :eval no-export
+%% Part A
+clear all;
+close all;
+
+%% Make compatible with MATLAB and Octave
+if exist('OCTAVE_VERSION', 'builtin')
+  pkg load signal
+  set(0, "DefaultAxesFontSize", 25);
+end
+
+%% Parameters
+fc = 1000;                    % carrier frequency (Hz)
+Fs = 1000 * fc;               % sampling frequency
+t = 0 : 1/Fs : 0.075;          % time vector
+N = length(t);                % number of samples
+f = (-N/2 : N/2-1) * (Fs/N);  % frequency vector
+w = 2 * pi;
+
+%% Modulating signal parameters
+Ac = 1;
+kp = 2*pi*0.0001;
+kf = 0.0001;
+A1 = 1;
+A2 = 20;
+A3 = 10;
+f1 = 50;
+f2 = 100;
+f3 = 150;
+phi1 = pi/2;
+phi2 = pi;
+phi3 = pi/3;
+
+m = A1 * cos(w * f1 * t + phi1) + A2 * cos(w * f2 * t + phi2) + A3 * cos(w * f3 * t + phi3);
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports none :results output :session ALL :eval no-export
+im = cumtrapz(m);
+iu_PM = Ac*cos(2*pi*fc*t + kp*im);
+u_FM = Ac*cos(2*pi*fc*t + 2*pi*kf*cumtrapz(m));
+
+dm = diff(m);
+du_FM = Ac*cos(2*pi*fc*t(2:end) + 2*pi*kf*cumtrapz(dm(1:end)));
+u_PM = Ac*cos(2*pi*fc*t + kp*m);
+
+
+figure;
+subplot(2,1,1);
+plot(t(1:end), iu_PM, 'linewidth', 2)
+title('Integral of message signal then phase modulated');
+xlabel('Time (s)');
+ylabel('Amplitude');
+xlim([0, 0.0075]);
+subplot(2,1,2);
+plot(t(1:end), u_FM, 'linewidth', 2)
+title('Frequency modulation of the message signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+xlim([0, 0.0075]);
+print -dpng 'Integral_then_phase_modulated.png'
+
+%% Plot 2
+figure;
+subplot(2,1,1);
+plot(t(2:end), du_FM, 'linewidth', 2)
+title('Derivative of message signal then frequency modulated');
+xlabel('Time (s)');
+ylabel('Amplitude');
+xlim([0, 0.075]);
+subplot(2,1,2);
+plot(t(2:end), u_PM(2:end), 'linewidth', 2)
+title('Phase modulation of the message signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+xlim([0, 0.075]);
+print -dpng 'Derivative_then_frequency_modulated.png'
+#+END_SRC
+
+#+RESULTS:
+
+The modulation index can be calculated using:
+\[\beta_f = \frac{k_f A_m}{\max(f_m)}\]
+For FM, and
+\[\beta_p = k_pA_m\]
+For PM.
+#+BEGIN_SRC octave :exports none :results output :session ALL :eval no-export
+Am = max(abs(m));
+
+bf = kf*Am/max([f1, f2, f3]);
+bp = kp*Am;
+fprintf("The modulation index for FM is %.6f\n", bf);
+fprintf("The modulation index for PM is %.6f\n", bp);
+#+END_SRC
+
+#+RESULTS:
+: The modulation index for FM is 0.000019
+: The modulation index for PM is 0.017820
