@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       2750d46e-0d6c-491c-9103-432b09cd0064
+:END:
+#+title: ENG307 - Electrical and Mechatronic Design - Design Assignment 2
+#+date: [2025-03-20 Thu 19:46]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2025:
+
+Min 3 pages
+
+* ENG307 - Electrical and Mechatronic Design - Design Assignment 2
+
