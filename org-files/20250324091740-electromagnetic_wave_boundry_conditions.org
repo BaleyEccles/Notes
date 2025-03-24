@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       4927e1fa-2358-448a-b1bc-d8ca5b93a508
+:END:
+#+title: Electromagnetic Wave Boundry Conditions
+#+date: [2025-03-24 Mon 09:17]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Electromagnetic Wave Boundry Conditions
+ - [[id:e6de8110-daa6-4ccf-b02e-557d1c570e9b][Snell's Law]]
+ - [[id:4b4c57f7-00f4-4e83-8c62-736ca7202183][Wave Reflection and Transmission at Oblique Angles]]
+ - Reflection Coefficient
+   - \[\Gamma = \frac{\eta_2-\eta_1}{\eta_2+\eta_1}\]
+ - Transmission Coefficient
+   - \[\tau = 1 + \Gamma = \frac{2\eta_2}{\eta_2+\eta_1} \]
+
+** Power Density In perfect media
+ - In medium 1
+   - \[S^i_{avg}(z) = \hat{z}\frac{|E_0^i|^2}{2\eta_1}\]
+   - \[S^r_{avg}(z) = -\hat{z}\frac{|E_0^i|^2}{2\eta_1}|\Gamma|^2\]
+ - In medium 2
+   - \[S_{avg}^2(z) = \hat{z}|\tau|^2\frac{|E_0^i|^2}{2\eta_2}\]
+ - Which means
+   - \[S_{avg}_1 = S_{avg}_2\]
+   - That is the boundary is continuous
+** Lossy Media
+ - \[\tilde{E}_1(z) = \hat{x}(E_0^ie^{-\gamma_1z} + E_0^re^{\gamma_1z}) =
+   \hat{x}(E_0^ie^{-\gamma_1z} + \Gamma E_0^ie^{\gamma_1z})\]
+ - \[\tilde{H}_1(z) = \hat{y}\frac{1}{\eta_{c_1}}(E_0^ie^{-\gamma_1z} + E_0^re^{\gamma_1z}) =
+   \hat{y}\frac{1}{\eta_{c_1}}(E_0^ie^{-\gamma_1z} + \Gamma E_0^ie^{\gamma_1z})\]
+ - \[\tilde{E}_2(z) = \tilde{E}_2^t = \hat{x} \tau E_0^ie^{-\gamma_2z}\]
+ - \[\tilde{H}_2(z) = \tilde{H}_2^t = \hat{y} \tau\frac{E_0^i}{\eta_{c_2}}\tau e^{-j\gamma_2z}\]
+*** :TODO: Example
+
+

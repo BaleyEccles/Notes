@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       698b0db2-8242-4c59-b2e0-d783e67bd3b2
+:END:
+#+title: Brewster Angle
+#+date: [2025-03-24 Mon 10:48]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Brewster Angle ($\theta_b$)
+The angle at which none of the wave is reflected
+ - When Fresnel reflection coefficient $\Gamma = 0$
+ - Found when $\Gamma_{\perp} = 0$
+ - $\Gamma_{b\perp}$ does not exist for nonmagnetic materials
+ - \[\sin(\theta_{b||}) = \sin(\theta_{i}) = \sqrt{\frac{1 - \frac{\mu_2\epsilon_1}{\mu_1\epsilon_2}}{1}}\]

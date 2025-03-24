@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       e6de8110-daa6-4ccf-b02e-557d1c570e9b
+:END:
+#+title: Snell's Law
+#+date: [2025-03-24 Mon 09:44]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Snell's Law
+ - If the reflection is not normal to the media
+ - Refraction Index
+   - \[n = \frac{c}{u_p} = \sqrt{\mu_r\epsilon_r}\]
+** Snell’s Law for Reflection
+- \[\theta_i = \theta_r\]
+** Snell’s Law for Refraction
+ - \[\frac{\sin(\theta_i)}{\sin(\theta_i)} = \frac{u_{p2}}{u_{p1}} = \sqrt{\frac{\mu_1\epsilon_1}{\mu_2\epsilon_2}}\]
+** Total Internal Reflection
+ - If $\theta_i > \theat_c$
+ - None of the wave will be transmitted into the media
+ - \[\sin(\theat_i) = \frac{n_2}{n_1}\]

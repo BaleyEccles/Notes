@@ -24,10 +24,11 @@
  - Two weeks after final lab
 ** Mid-term test
  - 20% of mark
- - ~week 8, maybe before
+ - Week 7, 7th of April
    - 2hr
  - Allowed 1 page (one sided) of personal notes
    - And given formular sheet
+ - Content till end of week 5
 ** Exam
  - 40% of mark
  - Allowed 1 page (double sided) of personal notes

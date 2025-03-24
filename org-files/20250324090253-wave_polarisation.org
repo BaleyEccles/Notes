@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       13c5aad5-685f-4cff-a402-138f0cee7e3b
+:END:
+#+title: Wave Polarisation
+#+date: [2025-03-24 Mon 09:02]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Wave Polarisation
+ - [[id:97a0e6e7-0a41-4597-9897-df6785384d70][Electromagnetic Wave Equations]]
+ - Three types
+   - Linear
+   - Circular
+   - Elliptical
+ - \[|E(x,t) = (E_{x0}^2(z,t) + E_{y0}^2(z,t)^{1/2}|\]
+ - \[\Psi(z,t) = \tan^{-1}\frac{E_y(z,t)}{E_x(z,t)}\]
+
+     
+** Linear Polarisation
+$E$ Trances in a straight line
+[[file:Linear_polarization_schematic.png]]
+
+** Circular Polarisation
+ - Phase shift
+   - \[\delta = \pm \frac{\pi}{2}\]
+ - Left hand polarised if
+   - \[\delta = +\frac{\pi}{2}\]
+  - Right hand polarised if
+   - \[\delta = -\frac{\pi}{2}\]
+[[file:Circular.Polarization.Circularly.Polarized.Light_Left.Hand.Animation.305x190.255Colors.gif]]
+
+** Elliptically Polarisation
+ - All waves are technically Elliptically Polarised
+   - As their phase shifts are never truly exact
+
