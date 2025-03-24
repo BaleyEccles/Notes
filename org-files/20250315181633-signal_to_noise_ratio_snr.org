@@ -16,4 +16,3 @@
    - \[X_0(t)\]
      - with a power $P_R$
  - \[\frac{S}{N} = \frac{E[X_0^2(t)]}{E[n_0^2(t)} = \frac{P_R}{N_0W}\]
-

@@ -33,7 +33,7 @@
  - \[B_w = 2(\beta + 1) f_m\]
 ** Effect of [[id:cfec5fb5-467e-4a16-a78c-32ebbdd4fb9a][Noise]]
  - [[file:Screenshot 2025-03-22 at 15-32-10 Recordings for Week 4 - ENG308 ENG743 Communication Systems 1 and Communication Systems.png]]
- - \[\begin{cases}
+ - \[u(t) = \begin{cases}
    A_c\cos(2\pi f_ct + k_pm(t)) & PM \\
    A_c\cos(2\pi f_ct + 2\pi k_f\int_{-\infty}^tm(\tau)d\tau) & FM 
    \end{cases}\]
