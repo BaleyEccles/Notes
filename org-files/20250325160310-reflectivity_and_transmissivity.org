@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       a8f62eb2-1483-431d-955e-347bb3b0f64e
+:END:
+#+title: Reflectivity and Transmissivity
+#+date: [2025-03-25 Tue 16:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Reflectivity and Transmissivity
+
+** Reflectivity
+The ratio of the reflected to incident power
+ - \[R_{\perp} =\frac{P_{\perp}^r}{P_{\perp}^i} =
+   \frac{\frac{|E_{\perp 0}^r|^2}{2\eta_1}A\cos(\theta_r)}{\frac{|E_{\perp 0}^i|^2}{2\eta_1}A\cos(\theta_i)} =
+   \left|\frac{E_{\perp 0}^r}{E_{\perp 0}^i}\right|^2 = |\Gamma_{\perp}|^2\]
+ - \[R_{\|} =
+    \frac{P_{\|}^r}{P_{\|}^i} = |\Gamma_{\|}|^2\] 
+
+** Transmissivity/Transmittance
+The ratio of transmitted to incident power
+ - \[R_{\perp} =\frac{P_{\perp}^t}{P_{\perp}^i} =
+   \frac{\frac{|E_{\perp 0}^t|^2}{2\eta_1}A\cos(\theta_t)}{\frac{|E_{\perp 0}^i|^2}{2\eta_1}A\cos(\theta_i)} = |\tau_{\perp}|^2\frac{\eta_1\cos(\theta_t)}{\eta_2\cos(\theta_i)}\]
+ - \[T_{\|} =\frac{P_{\|}^t}{P_{\|}^i} =
+   \frac{\frac{|E_{\| 0}^t|^2}{2\eta_1}A\cos(\theta_t)}{\frac{|E_{\| 0}^i|^2}{2\eta_1}A\cos(\theta_i)} = |\tau_{\|}|^2\frac{\eta_1\cos(\theta_t)}{\eta_2\cos(\theta_i)}\]

@@ -12,7 +12,7 @@
    - Linear
    - Circular
    - Elliptical
- - \[|E(x,t) = (E_{x0}^2(z,t) + E_{y0}^2(z,t)^{1/2}|\]
+ - \[|E(x,t)| = (E_{x0}^2(z,t) + E_{y0}^2(z,t)^{1/2})\]
  - \[\Psi(z,t) = \tan^{-1}\frac{E_y(z,t)}{E_x(z,t)}\]
 
      

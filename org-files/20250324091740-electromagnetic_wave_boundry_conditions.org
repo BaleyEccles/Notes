@@ -11,8 +11,10 @@
  - [[id:4b4c57f7-00f4-4e83-8c62-736ca7202183][Wave Reflection and Transmission at Oblique Angles]]
  - Reflection Coefficient
    - \[\Gamma = \frac{\eta_2-\eta_1}{\eta_2+\eta_1}\]
+   - The amount of wave that is reflected
  - Transmission Coefficient
    - \[\tau = 1 + \Gamma = \frac{2\eta_2}{\eta_2+\eta_1} \]
+   - The amount of wave that is transmitted
 
 ** Power Density In perfect media
  - In medium 1

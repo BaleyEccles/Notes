@@ -7,6 +7,7 @@
 #+STARTUP: latexpreview
 
 * Brewster Angle ($\theta_b$)
+Also known as the [[id:13c5aad5-685f-4cff-a402-138f0cee7e3b][polarising]] angle
 The angle at which none of the wave is reflected
  - When Fresnel reflection coefficient $\Gamma = 0$
  - Found when $\Gamma_{\perp} = 0$

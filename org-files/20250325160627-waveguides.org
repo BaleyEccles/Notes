@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       a4ec2f93-bf78-4ad6-a253-6f8c8e521c9d
+:END:
+#+title: Waveguides
+#+date: [2025-03-25 Tue 16:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Waveguides
+ - Used to guide a [[id:97a0e6e7-0a41-4597-9897-df6785384d70][Electromagnetic Wave]] between two locations
+ - if $k < k_c$ the wave will not be transmitted through the waveguide
+ - Two types   
+   - Transverse magnetic (TM)
+     - When some of the wave is propagating in $\hat{k}$
+   - Transverse electric (TE)
+     - When none of the wave is propagating in $\hat{k}$
+** Solving
+Using $\tilde{E}_x(x,y,z) = \tilde{e}_x(x,y)e^{-j\beta z}$ and similar equations for the others.
+*** TM
+ - \[\tilde{E}_x = \frac{j\omega\epsilon\frac{\partial \tilde{e}_z}{\partial y } - j\beta\frac{\partial \tilde{h}_z}{\partial x}}
+   {\omega^2\mu\epsilon - \beta^2} =
+   \frac{-j}{k_c^2}\left(\beta\frac{\partial \tilde{E}_z}{\partial x} + \omega\mu \frac{\partial \tilde{H}_z}{\partial y}\right)\]
+ - \[\tilde{E}_y = \frac{-j\beta\frac{\partial \tilde{e}_z}{\partial y } + j\omega\mu\frac{\partial \tilde{h}_z}{\partial x}}
+   {\omega^2\mu\epsilon - \beta^2} =
+   \frac{j}{k_c^2}\left(-\beta\frac{\partial \tilde{E}_z}{\partial y} + \omega\mu \frac{\partial \tilde{H}_z}{\partial x}\right)\]
+ - \[\tilde{H}_x = \frac{j\omega\epsilon\frac{\partial \tilde{e}_z}{\partial y } - \beta\frac{\partial \tilde{h}_z}{\partial x}}
+   {\omega^2\mu\epsilon - \beta^2} =
+   \frac{j}{k_c^2}\left(\omega\epsilon\frac{\partial \tilde{E}_z}{\partial y} - \beta\frac{\partial \tilde{H}_z}{\partial x}\right)\]
+ - \[\tilde{H}_y = \frac{-j\beta\frac{\partial \tilde{e}_z}{\partial y } + j\omega\mu\frac{\partial \tilde{h}_z}{\partial x}}
+   {\omega^2\mu\epsilon - \beta^2} =
+   -\frac{j}{k_c^2}\left(\omega\epsilon\frac{\partial \tilde{E}_z}{\partial x} + \beta\frac{\partial \tilde{H}_z}{\partial y}\right)\]
+ - Now to find $\beta$
+   - \[\beta = \sqrt{k^2-k_c^2} = \sqrt{\omega^2\mu\epsilon - \left(\frac{m\pi}{a}\right)^2 - \left(\frac{n\pi}{b}\right)^2}\]
+*** TODO TE
+** Waveguide Cutoff Frequency
+By setting $\beta = 0$ we can find
+ - \[f_{mn} = \frac{1}{2\sqrt{\mu\epsilon}}\sqrt{\left(\frac{m}{a}\right)^2 - \left(\frac{n}{b}\right)^2}\]
+** Dominant Modes
+The mode at which the waveguide has the lowest cutoff frequency
+** Waveguide Phase Velocity
+These are valid for both TM and TE
+ - \[\beta = \omega\sqrt{\mu\epsilon} \sqrt{1 - \left(\frac{f_{mn}}{f}\right)^2} = \frac{\omega}{u_{p0}}\sqrt{1 - \left(\frac{f_{mn}}{f}\right)^2}\]
+ - \[u_p = \frac{\omega}{\beta} = \frac{u_{p0}}{\sqrt{1 - \left(\frac{f_{mn}}{f}\right)^2}}\]
+** Waveguide Impedance
+*** TM
+ - \[Z_{TM}=\frac{\beta}{\omega\epsilon}=\frac{\beta\eta}{k} = \eta\sqrt{1-\left(\frac{f_{mn}}{f}\right)^2}\]
+*** TE
+ - \[Z_{TE}= \frac{\omega\mu}{\beta} = \frac{\eta}{\sqrt{1-\left(\frac{f_{mn}}{f}\right)^2}}\]
+  - Where $\eta$ is the intrinsic impedance of the guide dielectric
+    - \[\eta = \sqrt{\frac{\mu}{\epsilon}}\]
