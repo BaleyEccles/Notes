@@ -1,0 +1,87 @@
+:PROPERTIES:
+:ID:       9582f5c7-7ba7-4081-a559-4d2becc091fb
+:END:
+#+title: ENG308 - Communication Systems 1 - Lab 2
+#+date: [2025-03-26 Wed 08:48]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2025:
+
+* ENG308 - Communication Systems 1 - Lab 2
+** Q3
+*** 1
+f0 = round(500*sin(2*pi*tdata));
+f1 = round(250*sin(2*pi*tdata));
+f2 = round(500*cos(2*pi*tdata));
+f3 = round(250*cos(2*pi*tdata));
+int _f0[] = {0, 294, 476, 476, 294, 0, -294, -476, -476, -294};
+int _f1[] = {0, 147, 238, 238, 147, 0, -147, -238, -238, -147};
+int _f2[] = {500, 405, 155, -155, -405, -500, -405, -155, 155, 405};
+int _f3[] = {250, 202, 77, -77, -202, -250, -202, -77, 77, 202};
+0.2 and 1.9% error
+*** 2
+f0 = round(-250*sin(2*pi*tdata));
+f1 = round(250*sin(2*pi*tdata));
+f2 = round(-250*cos(2*pi*tdata));
+f3 = round(250*cos(2*pi*tdata));
+
+
+int _f0[] = {0, -147, -238, -238, -147, 0, 147, 238, 238, 147};
+int _f1[] = {0, 147, 238, 238, 147, 0, -147, -238, -238, -147};
+int _f2[] = {-250, -202, -77, 77, 202, 250, 202, 77, -77, -202};
+int _f3[] = {250, 202, 77, -77, -202, -250, -202, -77, 77, 202};
+0.2 and 12.0% error
+*** 3
+f0 = round(100*sin(2*pi*tdata));
+f1 = round(250*sin(2*pi*tdata));
+f2 = round(300*cos(2*pi*tdata));
+f3 = round(500*cos(2*pi*tdata));
+
+int _f0[] = {0, 59, 95, 95, 59, 0, -59, -95, -95, -59};
+int _f1[] = {0, 147, 238, 238, 147, 0, -147, -238, -238, -147};
+int _f2[] = {300, 243, 93, -93, -243, -300, -243, -93, 93, 243};
+int _f3[] = {500, 405, 155, -155, -405, -500, -405, -155, 155, 405};
+
+0.2 and 3.6% error
+*** 4
+f0 = round(250*sin(2*pi*tdata));
+f1 = round(125*sin(2*pi*tdata));
+f2 = round(250*cos(2*pi*tdata));
+f3 = round(125*cos(2*pi*tdata));
+
+int _f0[] = {0, 147, 238, 238, 147, 0, -147, -238, -238, -147};
+int _f1[] = {0, 73, 119, 119, 73, 0, -73, -119, -119, -73};
+int _f2[] = {250, 202, 77, -77, -202, -250, -202, -77, 77, 202};
+int _f3[] = {125, 101, 39, -39, -101, -125, -101, -39, 39, 101};
+0.2 and 0.1% error
+** 0.2V Noise
+f0 = round(250*sin(2*pi*tdata));
+f1 = round(125*sin(2*pi*tdata));
+f2 = round(250*cos(2*pi*tdata));
+f3 = round(125*cos(2*pi*tdata));
+0.2 and 2.8%
+
+f0 = round(500*sin(2*pi*tdata));
+f1 = round(125*sin(2*pi*tdata));
+f2 = round(-125*cos(2*pi*tdata));
+f3 = round(-500*cos(2*pi*tdata));
+0.25, 4.6%
+
+f0 = round(500*sin(2*pi*tdata));
+f1 = round(125*sin(2*pi*tdata));
+f2 = round(-125*cos(2*pi*tdata));
+f3 = round(-500*cos(2*pi*tdata));
+0.22, 1.39%
+** 0.3V Noise
+f0 = round(250*sin(2*pi*tdata));
+f1 = round(125*sin(2*pi*tdata));
+f2 = round(250*cos(2*pi*tdata));
+f3 = round(125*cos(2*pi*tdata));
+0.2 and 3.5%
+
+
+f0 = round(500*sin(2*pi*tdata));
+f1 = round(125*sin(2*pi*tdata));
+f2 = round(-125*cos(2*pi*tdata));
+f3 = round(-500*cos(2*pi*tdata));
+0.22, 2.5% error
