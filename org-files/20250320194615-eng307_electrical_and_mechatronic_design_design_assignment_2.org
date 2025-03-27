@@ -4,86 +4,61 @@
 #+title: ENG307 - Electrical and Mechatronic Design - Design Assignment 2
 #+date: [2025-03-20 Thu 19:46]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
-#+FILETAGS: :UTAS:2025:
+#+LATEX_HEADER: \usepackage[a4paper, margin=2.54cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
 
 * ENG307 - Electrical and Mechatronic Design - Design Assignment 2
 ** Rationale
 Wien Bridge Oscillator for an audio synthesizer, it must output a clean 440Hz sine wave. The design is expected to produce a low noise sine wave with little variation in frequency. From (https://www.electronics-tutorials.ws/oscillator/wien_bridge.html) we can see that the equation to find the oscillator frequency is:
 \[f = \frac{1}{2\pi RC}\]
-To make a consistent 440Hz sine wave the correct resistor and capacitor values must be chosen. On top of that, the values must be accurate, otherwise the frequency will no be accurate. A small deviation in component values will not be a major concern, this can be seen using the frequency calculation of the Wien Bridge Oscillator, which can be seen at. The following table show that a small deviation in component values will could be catastrophic for our oscillator.
-|------------------------+------------------+----------------|
-| Resistance (k$\Omega$) | Capacitance (nF) | Frequency (Hz) |
-|------------------------+------------------+----------------|
-| 3.62                   | 100              | 439.6          |
-| 3.62                   | 101              | 435.3          |
-| 3.65                   | 100              | 436.0          |
-| 3.65                   | 99               | 440.4          |
-| 3.70                   | 100              | 430.1          |
-|------------------------+------------------+----------------|
 
-#+BEGIN_SRC octave :exports none :results output :session ALL :eval no-export
+A Wien Bridge oscillator was chosen because it is able to produce stable and consistent oscillations (https://www.geeksforgeeks.org/wien-bridge-oscillator/), this will ensure that there is no extra noise present.
+** Summary
+
+
+** Analysis
+To make a consistent 440Hz sine wave the correct resistor and capacitor values have been chosen. The values of these must be accurate, otherwise the frequency will not be accurate. A small deviation in component values could be a major concern, this can be seen using the frequency calculation of the Wien Bridge Oscillator. *figure* *TODO* shows that for a small change in capacitance or resistance we would deviate from the required frequency an unacceptable amount. It was chosen that the frequency of the oscillator must be within half a Hertz of 440Hz.
+
+#+ATTER_LATEX: :width 1\textwidth
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Region where capcitor and resistor values would be acceptable
+[[./Cap_Res_plot.png]]
+
+#+BEGIN_SRC octave :exports none :results output :session Cap_Res_plot :eval no-export
 clc;
 clear all;
 close all;
-C_v = linspace(97e-9, 103e-9, 100);
-R_v = linspace(3.5e3, 3.7e3, 100);
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
+
+C_v = linspace(90e-9, 110e-9, 1000);
+R_v = linspace(3.5e3, 3.7e3, 1000);
 
 [C, R] = meshgrid(C_v, R_v);
-f = 1./(2.*pi.*C.*R);
 
-f_thresh_low = 439;
-f_thresh_high = 441;
+df = 0.5;
 
-
+f = double(abs(1./(2.*pi.*C.*R) - 440) < df);
 
 figure;
-hSurface = surf(C, R, f);
-xlabel('Capacitance, C (F)')
-ylabel('Resistance, R (Ohm)')
-zlabel('Frequency, f (Hz)')
-title('Surface (2D Projection) of f = 1/(2\pi C R) with Threshold Highlights')
-colorbar
-shading interp
-grid on
-
-% Set custom x and y limits
-xlim([9.5e-8, 1.05e-7])
-ylim([3.5e3, 3.7e3])
-
-% Change view to top-down so it appears as a 2D map (retain colors and grid)
-view(2)
-
 hold on;
-
-% Identify the grid points meeting the threshold
-threshold_idx = (f >= f_thresh_low) & (f <= f_thresh_high);
-
-% Extract corresponding points
-C_thresh = C(threshold_idx);
-R_thresh = R(threshold_idx);
-f_thresh = f(threshold_idx);
-
-% Using a small z-offset to lift markers above the surface
-zOffset = max(f(:))*0.001;
-f_thresh_offset = f_thresh + zOffset;
-
-% Plot the threshold points
-hThresh = scatter3(C_thresh, R_thresh, f_thresh_offset, 50, 'r', 'filled');
-
-% Bring the markers to the front.
-% One way is to reassign the children order of gca so that hThresh comes last.
-children = get(gca, 'Children');
-set(gca, 'Children', [hThresh; children(children~=hThresh)]);
-
-% Alternatively, you can set the marker's 'MarkerEdgeColor' and 'MarkerFaceColor'
-% so they stand out against the surface.
-
+imagesc(C_v.*1e9, R_v.*1e-3, f);
+xlabel('Capacitance (micro Farads)');
+ylabel('Resistance (kilo Ohms)');
+title('Region where capcitor and resistor values would be acceptable');
+axis([min(C_v).*1e9, max(C_v).*1e9, min(R_v).*1e-3, max(R_v).*1e-3]);
 hold off;
+print -dpng 'Cap_Res_plot.png'
 #+END_SRC
 
 #+RESULTS:
 
-A Wien Bridge oscillator was chosen because it is able to produce stable and consistent oscillations (https://www.geeksforgeeks.org/wien-bridge-oscillator/), this will ensure that there is no extra noise present.
-** Summary
-** Analysis
