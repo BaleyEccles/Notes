@@ -14,3 +14,4 @@
  - run ~xelatex *NAME*~
  - run ~biber *NAME*~
  - run ~xelatex *NAME*~ twice
+ - 'ENG307 - Electrical and Mechatronic Design - Design Assignment 2' is a good example

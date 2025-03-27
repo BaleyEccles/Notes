@@ -6,32 +6,111 @@
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
-#+LATEX_HEADER: \usepackage[a4paper, margin=2.54cm]{geometry}
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}
 #+LATEX_HEADER_EXTRA: \usepackage{fontspec}
 #+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
 #+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER: \usepackage[style=apa, backend=biber]{biblatex}
+#+LATEX_HEADER: \addbibresource{ENG307-Ass2-Ref.bib}
+#+LATEX_HEADER: \DeclareLanguageMapping{english}{english-apa}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
+
 
 * ENG307 - Electrical and Mechatronic Design - Design Assignment 2
 ** Rationale
-Wien Bridge Oscillator for an audio synthesizer, it must output a clean 440Hz sine wave. The design is expected to produce a low noise sine wave with little variation in frequency. From (https://www.electronics-tutorials.ws/oscillator/wien_bridge.html) we can see that the equation to find the oscillator frequency is:
+Wien Bridge Oscillator for an audio synthesizer, it must output a clean 440Hz sine wave. The design is expected to produce a low noise sine wave with little variation in frequency. From () we can see that the equation to find the oscillator frequency is:
 \[f = \frac{1}{2\pi RC}\]
-
-A Wien Bridge oscillator was chosen because it is able to produce stable and consistent oscillations (https://www.geeksforgeeks.org/wien-bridge-oscillator/), this will ensure that there is no extra noise present.
+A Wien Bridge oscillator was chosen because it is able to produce stable and consistent oscillations (\cite{elec_wien}), this will ensure that there is no extra noise present. Noise being present in an audio application will hinder the usefulness of the device (\cite{sound_spec_noise}), so it is crucial that we introduce minimal noise into the system.
+The exact output voltage is not particular important, as it is expected to be amplified and filtered prior to being used by devices further into the system.
 ** Summary
+The design uses a Wien Bridge Oscillator. The values can be seen in the bill of materials, which are in [[id:ENG307AppendixA][Appendix A]], and their placement can be seen in [[id:ENG307AppendixB][Appendix B]], Figure \ref{fig:circ}. Each component has a link to a website where the component can be brought. The decision on which exact component to choose was decided because we need to use components with high tolerances, each components tolerance fits within the range defined by Figure \ref{fig:cap_res}.
+Using the Wien Bridge Oscillator equation we can find:
+\begin{align*}
+f &= \frac{1}{2\pi RC} \\
+f &= \frac{1}{2\pi\cdot 3.61\cdot 10^3\cdot 100\cdot 10^{-9}} \\
+f &= 440Hz
+\end{align*}
+The operational amplifier that was chosen is the LT1806, this is a low noise precision operational amplifier. It was chosen because it will introduce very little noise into the system, as mentioned this would possibly make the oscillator unusable.
 
 
 ** Analysis
-To make a consistent 440Hz sine wave the correct resistor and capacitor values have been chosen. The values of these must be accurate, otherwise the frequency will not be accurate. A small deviation in component values could be a major concern, this can be seen using the frequency calculation of the Wien Bridge Oscillator. *figure* *TODO* shows that for a small change in capacitance or resistance we would deviate from the required frequency an unacceptable amount. It was chosen that the frequency of the oscillator must be within half a Hertz of 440Hz.
+The oscillator was simulated in LTSpice, it produced a clean sine wave at 440Hz with a voltage of about 1.2V. The plot of the simulation can be seen in Figure \ref{fig:LTSpice}, this output is expected and will do good at meeting the expectations. One problem with the simulation is that the output does not have the same magnitude about and below the time axis, that is the minimum voltage is -1.2V and the maximum voltage is 1.1V. This is due to the choice of the operational amplifier, more specifically the output voltage swing, the data sheet states a low swing voltage between 4-425mV and a high swing voltage between 30-700mV (\cite{LT1806DSheet}). 
 
-#+ATTER_LATEX: :width 1\textwidth
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Region where capcitor and resistor values would be acceptable
+#+CAPTION: Oscillator Simulated In LTSpice \label{fig:LTSpice}
+[[./ENG307Assignment1LTSpice.png]]
+
+#+BEGIN_SRC octave :exports none :results output :session LTSpice :eval no-export
+clc;
+clear all;
+close all;
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
+data = dlmread('/home/baley/UTAS/org-roam/org-files/ENG307Assignment1LTSpice.data', '\t');
+
+t = data(:, 1);
+u = data(:, 2);
+figure;
+plot(t, u, 'LineWidth', 2);
+xlabel('Time (s)');
+ylabel('Voltage (V)');
+grid on;
+print -dpng 'ENG307Assignment1LTSpice.png'
+#+END_SRC
+
+#+RESULTS:
+
+To make a consistent 440Hz sine wave the correct resistor and capacitor values have been chosen. The values of these must be accurate, otherwise the frequency will not be accurate. A small deviation in component values could be a major concern, this can be seen using the frequency calculation of the Wien Bridge Oscillator. Figure \ref{fig:cap_res} shows that for a small change in capacitance or resistance we would deviate from the required frequency an unacceptable amount, the code that produced this plot can be seen in [[id:ENG307AppendixC][Appendix C]]. It was chosen that the frequency of the oscillator must be within 3Hz of 440Hz.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Region where capcitor and resistor values would be acceptable \label{fig:cap_res}
 [[./Cap_Res_plot.png]]
 
-#+BEGIN_SRC octave :exports none :results output :session Cap_Res_plot :eval no-export
+
+\newpage
+** Appendix A - Bill of Materials
+:PROPERTIES:
+:CUSTOM_ID: ENG307AppendixA
+:END:
+#+ATTR_LATEX: :placement [H] :align |c|c|c|c|
+#+CAPTION: Bill of Materials
+|----------------+-----------------+---------+--------------|
+| Component Name | Component Value | Units   | Link         |
+|----------------+-----------------+---------+--------------|
+| R_A            |              10 | k\Omega | [[https://www.digikey.com.au/en/products/detail/stackpole-electronics-inc/RNCF0603TKY10K0/2269698][Digikey Link]] |
+|----------------+-----------------+---------+--------------|
+| R_B            |              10 | k\Omega | [[https://www.digikey.com.au/en/products/detail/stackpole-electronics-inc/RNCF0603TKY10K0/2269698][Digikey Link]] |
+|----------------+-----------------+---------+--------------|
+| R_1            |            3.61 | k\Omega | [[https://www.digikey.com.au/en/products/detail/vishay-dale-thin-film/PLT0603Z3611LBTS/2553844][Digikey Link]] |
+|----------------+-----------------+---------+--------------|
+| R_2            |            3.61 | k\Omega | [[https://www.digikey.com.au/en/products/detail/vishay-dale-thin-film/PLT0603Z3611LBTS/2553844][Digikey Link]] |
+|----------------+-----------------+---------+--------------|
+| C_1            |             100 | nF      | [[https://www.digikey.com.au/en/products/detail/vishay-roederstein/MKP1837410161G/5393054][Digikey Link]] |
+|----------------+-----------------+---------+--------------|
+| C_2            |             100 | nF      | [[https://www.digikey.com.au/en/products/detail/vishay-roederstein/MKP1837410161G/5393054][Digikey Link]] |
+|----------------+-----------------+---------+--------------|
+| U1             |          LT1806 |         | [[https://www.digikey.com.au/en/products/detail/analog-devices-inc/LT1806CS6-TRMPBF/1115887][Digikey Link]] |
+|----------------+-----------------+---------+--------------|
+\newpage
+** Appendix B - Circuit
+:PROPERTIES:
+:CUSTOM_ID: ENG307AppendixB
+:END:
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Oscillator Circuit Diagram \label{fig:circ}
+[[./ENG307Assignment2Circuit.png]]
+
+\newpage
+** Appendix C - Valid Component Plot Code
+:PROPERTIES:
+:CUSTOM_ID: ENG307AppendixC
+:END:
+
+#+BEGIN_SRC octave :exports code :results output :session Cap_Res_plot :eval no-export
 clc;
 clear all;
 close all;
@@ -45,8 +124,7 @@ R_v = linspace(3.5e3, 3.7e3, 1000);
 
 [C, R] = meshgrid(C_v, R_v);
 
-df = 0.5;
-
+df = 3;
 f = double(abs(1./(2.*pi.*C.*R) - 440) < df);
 
 figure;
@@ -54,11 +132,13 @@ hold on;
 imagesc(C_v.*1e9, R_v.*1e-3, f);
 xlabel('Capacitance (micro Farads)');
 ylabel('Resistance (kilo Ohms)');
-title('Region where capcitor and resistor values would be acceptable');
 axis([min(C_v).*1e9, max(C_v).*1e9, min(R_v).*1e-3, max(R_v).*1e-3]);
 hold off;
 print -dpng 'Cap_Res_plot.png'
 #+END_SRC
 
 #+RESULTS:
+* References
+\newpage
+\printbibliography
 
