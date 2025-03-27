@@ -4,6 +4,7 @@
 #+title: ENG308 - Communication Systems 1 - Assignment 1 - Question 2
 #+date: [2025-03-23 Sun 13:28]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
 
 * Part a

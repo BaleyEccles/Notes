@@ -4,7 +4,7 @@
 #+title: KIT107 - Programming - Assignment 0
 #+date: [2025-02-26 Wed 15:45]
 #+AUTHOR: Baley Eccles - 652137
-#+FILETAGS: :UTAS:2025:
+#+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
 
 * KIT107 - Programming - Assignment 0
