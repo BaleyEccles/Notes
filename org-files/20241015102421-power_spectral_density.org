@@ -18,3 +18,5 @@
  - \[S_{XX}(-\omega)=S_{XX}(\omega)\]
    - It is an even function
  - \[\frac{1}{2\pi}\int_{-\infty}^{\infty}S_{XX}(\omega)d\omega=R_{XX}(0)=E[X^2(t)\]
+** Power
+- \[P_X = \frac{1}{2\pi}\int_{-\infty}^{\infty}S_{XX}(\omega)d\omega\]

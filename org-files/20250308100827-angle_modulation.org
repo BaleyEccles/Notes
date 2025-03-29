@@ -17,7 +17,7 @@
  - [[id:43a759ee-3cad-411c-a23f-4db60e9342e1][Bandpass]] modulated signal:
    - \[u(t)=A_c\cos(2\pi f_ct + \phi(t))\]
    - Instantaneous Frequency:
-     - \[f_i(t) = f_c + \frac{1}{2\pi}\frac{d\theta(t)}{dt}\]
+     - \[f_i(t) = f_c + \frac{1}{2\pi}\frac{d\phi(t)}{dt}\]
    - \[\phi(t)=\begin{cases}   k_pm(t) & , PM \\
      2\pi k_f\int_{-\infty}^tm(\tau)d\tau & , FM   \end{cases}\]
    - \[\frac{d \phi (t)}{dt} = \begin{cases} k_p\frac{dm(t)}{dt} & , PM \\ 2\pi k_fm(t) & , FM   \end{cases}\]
@@ -26,6 +26,9 @@
    - For higher frequencies $f_c\pm nf_m$, the amplitude generally attenuates
      - Hence we can define an effective bandwidth
    - $\beta$ is the [[id:93cc7a76-b114-4b58-8116-200294578267][modulation index]]
+
+** Power
+ - \[P = \frac{A_c^2}{2}\]
 
 ** Bandwidth
  - [[id:193ec810-72b5-4a36-be12-8feee43e711a][Angle Modulation]] requires more bandwidth than [[id:c9b76a54-da68-4891-9ed1-3d64a182d026][Amplitude Modulation]]
