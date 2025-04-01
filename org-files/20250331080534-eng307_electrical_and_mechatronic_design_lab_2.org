@@ -1,0 +1,181 @@
+:PROPERTIES:
+:ID:       afa8876a-42ca-469c-8adf-1ba127276d06
+:END:
+#+title: ENG307 - Electrical and Mechatronic Design - Lab 2
+#+date: [2025-03-31 Mon 08:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:
+
+* ENG307 - Electrical and Mechatronic Design - Lab 2
+Two filters in series
+
+From [[https://en.wikipedia.org/wiki/Sallen%E2%80%93Key_topology][wikipedia]]
+
+#+BEGIN_SRC octave :exports none :results output :session LowFilter :eval no-export
+clear all;
+close all;
+pkg load control;
+
+Q = 7.5;
+f_center = 150;
+attenuation = 12; %In dB
+f_high = 250;
+f_low = 90;
+w_high = f_high*2*pi;
+w_low = f_low*2*pi;
+
+% f = 1/(2*pi*R*C)
+C = 1e-6;
+R = 1/(f_high*2*pi*C)
+
+%Q = m*n/(m^2 + 1)
+n = 1;
+m = n+sqrt(n^2-4*Q^2)/(2*Q)
+
+s = tf ('s');
+H = 1/(1 + R*C*(m + 1/m)/(n)*s + R^2*C^2*s*s)
+
+R1 = m*R
+R2 = R/m
+C1 = n*C
+C2 = C/n
+
+s = tf ('s');
+k = R1/(R1 + R2);
+
+Z = ((s/w_low)^2 + + (s/w_low)/Q + 1)/((s/w_low)^2 + (s/w_low)*k/Q)
+% Must be greater than 200kOhms
+Z_min = R1 * sqrt(1/(Q^2 + k^2 + 0.34))
+
+figure;
+bode(H);
+figure;
+bode(Z);
+
+fprintf("values:\n");
+fprintf("R1 = %.3e\n", R1);
+fprintf("R2 = %.3e\n", R2);
+fprintf("C1 = %.3e\n", C1);
+fprintf("C2 = %.3e\n", C2);
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+R = 636.62
+m =  1.0000 + 0.9978i
+error: tf: numerator 'num' must be a real-valued, non-empty vector or a cell of such vectors
+error: called from
+    __adjust_tf_data__ at line 75 column 5
+    tf at line 223 column 27
+    __numeric_to_lti__ at line 36 column 16
+    __sys_group__ at line 30 column 16
+    mtimes at line 60 column 7
+R1 =  636.62 + 635.20i
+R2 =  319.02 - 318.31i
+C1 = 1.0000e-06
+C2 = 1.0000e-06
+error: tf: numerator 'num' must be a real-valued, non-empty vector or a cell of such vectors
+error: called from
+    __adjust_tf_data__ at line 75 column 5
+    tf at line 223 column 27
+    __numeric_to_lti__ at line 36 column 16
+    __sys_group__ at line 30 column 16
+    mtimes at line 60 column 7
+Z_min =  84.739 + 83.609i
+error: 'H' undefined near line 1, column 6
+error: 'Z' undefined near line 1, column 6
+values:
+R1 = 6.366e+02
+R2 = 3.190e+02
+C1 = 1.000e-06
+C2 = 1.000e-06
+#+end_example
+
+
+#+BEGIN_SRC octave :exports none :results output :session HighFilter :eval no-export
+clear all;
+close all;
+pkg load control;
+
+Q = 7.5;
+f_center = 150;
+attenuation = 12; %In dB
+f_high = 250;
+f_low = 90;
+w_high = f_high*2*pi;
+w_low = f_low*2*pi;
+
+% f = 1/(2*pi*R*C)
+C = 1e-6;
+R = 1/(f_low*2*pi*C)
+
+%Q = m*n/(m^2 + 1)
+n = 100;
+m = n+sqrt(n^2-4*Q^2)/(2*Q)
+
+s = tf ('s');
+H = 1/(1 + R*C*(m + 1/m)/(n)*s + R^2*C^2*s*s)
+
+R1 = m*R
+R2 = R/m
+C1 = n*C
+C2 = C/n
+
+s = tf ('s');
+k = R1/(R1 + R2);
+
+Z = ((s/w_low)^2 + + (s/w_low)/Q + 1)/((s/w_low)^2 + (s/w_low)*k/Q)
+% Must be greater than 200kOhms
+Z_min = R1 * sqrt(1/(Q^2 + k^2 + 0.34))
+
+figure;
+bode(H);
+figure;
+bode(Z);
+
+fprintf("values:\n");
+fprintf("R1 = %.3e\n", R1);
+fprintf("R2 = %.3e\n", R2);
+fprintf("C1 = %.3e\n", C1);
+fprintf("C2 = %.3e\n", C2);
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+R = 1768.4
+m = 106.59
+Transfer function 'H' from input 'u1' to output ...
+
+                    1               
+ y1:  ------------------------------
+      3.127e-06 s^2 + 0.001885 s + 1
+
+Continuous-time model.
+R1 = 1.8849e+05
+R2 = 16.590
+C1 = 1.0000e-04
+C2 = 1.0000e-08
+Transfer function 'Z' from input 'u1' to output ...
+
+      3.127e-06 s^2 + 0.0002358 s + 1
+ y1:  -------------------------------
+        3.127e-06 s^2 + 0.0002358 s  
+
+Continuous-time model.
+Z_min = 2.4839e+04
+values:
+R1 = 1.885e+05
+R2 = 1.659e+01
+C1 = 1.000e-04
+C2 = 1.000e-08
+#+end_example
+
+220nF
+220nF
+100uF
+10nF
+10k
+10k
+5.97
+68.8k
