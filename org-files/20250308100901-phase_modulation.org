@@ -10,4 +10,4 @@
  - By modulating $\phi_c$ the carrier signal: $c(t) = A_c\cos(2\pi f_c + \phi_c)$
 
 ** [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][Signal To Noise Ratio (SNR)]]
- - \[\frac{k_p^2A_c^2}{2}\frac{P_m}{N_0w}\]
+ - \[\left(\frac{S}{N}\right)_o = \beta_p^2P_{M_n}\left(\frac{S}{N}\right_b\]

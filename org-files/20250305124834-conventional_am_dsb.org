@@ -9,7 +9,8 @@
 * Conventional AM/DSB
  - Compared to [[id:7feece04-ef5b-4375-96be-9f0feeddc2ad][DSB-SC AM]] Conventional AM has a frequency at the carrier frequency
    - That is it is not suppresed-carrier
- - \[u(t) = A_c(1+m(t))\cos(2\pi f_ct + \phi_c)\]
+ - \[u(t) = A_c(1+am(t))\cos(2\pi f_ct + \phi_c)\]
+    - $a$ is the [[id:93cc7a76-b114-4b58-8116-200294578267][Modulation Index]]
 
 ** Fourier Transform
  - Using the [[id:93cc7a76-b114-4b58-8116-200294578267][Modulation Index]] we can find the transform of the signal
