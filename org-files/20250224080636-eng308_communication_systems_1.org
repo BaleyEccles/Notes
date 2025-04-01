@@ -28,6 +28,7 @@
 [[id:9b6e1221-e8ea-415c-863e-04f70de190b2][Phase-locked Loop]]
 [[id:57d1b4a5-6dfd-46d6-b9c4-a4c4226df7a2][Sampling a Random Process]]
 [[id:36d505ca-5581-478e-9c72-acaa883d4404][Gaussian Process]]
+[[id:0687ce8d-e70e-4507-be78-b8adbab4db02][Line Coding]]
 * Assessment
 ** Test 1
  - Week 6
