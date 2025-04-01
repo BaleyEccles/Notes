@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       6af733cd-5562-4d42-a360-45271082b3c0
+:END:
+#+title: Transmission Line Theory
+#+date: [2025-03-31 Mon 09:01]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Transmission Line Theory
+We should use Transmission Line Theory if
+ - \[\frac{l}{\lambda} > 0.01\]
+   - $l$ is the length of the wire
+   - $\lambda$ is the wavelength
+   - This is known as the electrical length
+** Transverse Electric Magnetic
+1. There must be at least two conductors
+2. The fields must be contained in a homogeneous and uniform dielectric field
+
+** Transmission Line Parameters
+ - The voltage and current varies across the line, so we need to describe things in per length
+ - \[R'\]
+   - [[id:0bab4eaa-a87f-4711-a3ab-945f94adcfa4][Resistance]] per unit length ($\Omega/m$)
+ - \[L'\]
+   - [[id:bcc570ef-ee97-4bb9-9aca-1a81bd4a4ced][Inductance]] per unit length ($H/m$)
+ - \[G'\]
+   - [[id:0bab4eaa-a87f-4711-a3ab-945f94adcfa4][Conductance]] per unit length ($s/m$)
+ - \[C'\]
+   - [[id:605fa252-6718-4527-bad5-7fc2f8d29bca][Capacitance]] per unit length ($F/m$)
+ - The equations for these depend on the TEM line
+ - All TEM lines share
+   - \[L'C' = \mu \epsilon\]
+   - \[\frac{G'}{C'} = \frac{\sigma}{\epsilon}\]
+** Equations
+*** Telegrapher Equations
+ - \[\frac{\partial v(z,t)}{\partial z} = -R'i(z,t) - L' \frac{\partial i(z,t)}{\partial t}\]
+ - \[\frac{\partial i(z,t)}{\partial z} = -G'v(z,t) - C' \frac{\partial v(z,t)}{\partial t}\]
+ - In [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasor]] domain
+ - \[\frac{d\tilde{V}(z)}{dz} = -\tilde{I}(z)(R' + L'j\omega)\]
+ - \[\frac{d\tilde{I}(z)}{dz} = -\tilde{V}(z)(G' + C'j\omega)\]
+*** Wave Equation for $\tilde{V}(z)$
+ - \[\frac{d^2\tilde{V}(z)}{dz^2} -\tilde{V}(z)\gamma^2 = 0\]
+   - \[\gamma = \sqrt{(G' + C'j\omega)(R' + L'j\omega)} = \alpha + j\beta\]
+ - In [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasor]] domain
+   - \[\tilde{V}(z) = V_0^+e^{-\gamma z} + V_0^-e^{\gamma z}}\]
+ - \[V(z,t) = |V_0^+|e^{-\alpha z}\cos(\omega t-\beta z + \phi_+) + |V_0^-|e^{-\alpha z}\cos(\omega t+\beta z + \phi_-)\]
+*** Wave Equation for $\tilde{I}(z)$
+ - \[\frac{d^2\tidle{I}(z)}{dz^2} -\tilde{I}(z)\gamma^2 = 0\]
+ - In [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasor]] domain
+   - \[\tilde{I}(z) = \frac{V_0^+}{Z_0}e^{-\gamma z} - \frac{V_0^-}{Z_0}e^{\gamma z}}\]
+ - \[I(z,t) = \frac{|V_0^+|}{|Z_0|}}e^{-\alpha z}\cos(\omega t-\beta z + \phi_+ - \phi_z) + \frac{|V_0^-|}{|Z_0|}}e^{-\alpha z}\cos(\omega t+\beta z + \phi_- - \phi_z)\]
+*** Characteristic Impedance
+ - \[Z_0 = \frac{R'+L'j\omega}{\gamma} = \frac{R'+L'j\omega}{\sqrt{(R' + L' j\omega) + (G' +C'j\omega)}} = \sqrt{\frac{R' + L'j\omega}{G' + C'j\omega}}\]
+ - Relates the forward propagating voltage to the forward propagating current
+   - *NOT* The total voltage to total current on the transmission line
+*** The Lossless Transmission Line
+ - $R' = 0$ and $G' = 0$
+ - \[\gamma = \alpha + j\beta = j\omega\sqrt{L'C'}\]
+   - \[\alpha = 0\]
+ - \[Z_0 = \sqrt{\frac{L'}{C'}}\]
