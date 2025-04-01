@@ -55,21 +55,44 @@ dataCap = dlmread('/home/baley/UTAS/org-roam/org-files/DataCap.csv', ',');
 tC = dataCap(:, 1);
 dC = dataCap(:, 2);
 
-figure;
-plot(tN, dN)
 
-figure;
-plot(tC, dC)
 
-[corrN_c, corrNLag] = xcorr(dN);
-[corrC_c, corrCLag] = xcorr(dC);
+%figure;
+%plot(tN, dN)
 
-figure;
-stem(corrNLag, corrN_c)
-figure;
-stem(corrCLag, corrC_c)
+%figure;
+%plot(tC, dC)
 
+
+%[corrC_c, corrCLag] = xcorr(dC);
+
+%figure;
+%stem(corrNLag, corrN_c)
+%figure;
+%stem(corrCLag, corrC_c)
+
+[autocorr_signal, lags] = xcorr(dN);
+lag_zero_index = find(lags==0);
+signal_power = autocorr_signal(lag_zero_index);
+
+exclusion_window = 10;
+noise_indices = [1:lag_zero_index-exclusion_window, lag_zero_index+exclusion_window:length(autocorr_signal)];
+noise_power = mean(abs(autocorr_signal(noise_indices)));
+SNR_before = 10*log10(signal_power/noise_power);
+fprintf('Predicted SNR before additional capacitor: %.2f dB\n', SNR_before);
+
+[autocorr_signal, lags] = xcorr(dC);
+lag_zero_index = find(lags==0);
+signal_power = autocorr_signal(lag_zero_index);
+
+exclusion_window = 10;
+noise_indices = [1:lag_zero_index-exclusion_window, lag_zero_index+exclusion_window:length(autocorr_signal)];
+noise_power = mean(abs(autocorr_signal(noise_indices)));
+SNR_before = 10*log10(signal_power/noise_power);
+fprintf('Predicted SNR before additional capacitor: %.2f dB\n', SNR_before);
 #+END_SRC
 
 #+RESULTS:
+: Predicted SNR before additional capacitor: 5.93 dB
+: Predicted SNR before additional capacitor: 5.62 dB
 

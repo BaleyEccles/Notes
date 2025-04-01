@@ -5,7 +5,7 @@
 #+date: [2025-03-11 Tue 12:03]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
-#+FILETAGS: :UTAS:2025:
+#+FILETAGS: :Assignment:UTAS:2025:
 
 * ENG307 - Electrical and Mechatronic Design - Lab 1
 Using TL071CN
