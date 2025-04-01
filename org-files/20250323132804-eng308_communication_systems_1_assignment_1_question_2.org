@@ -112,3 +112,17 @@ fprintf("The modulation index for PM is %.6f\n", bp);
 #+RESULTS:
 : The modulation index for FM is 0.000019
 : The modulation index for PM is 0.017820
+
+
+#+BEGIN_SRC octave :exports none :results output :session PLL :eval no-export
+clear all;
+close all;
+pkg load control;
+
+z = tf ('z^-1', 0.001);
+a = 10;
+H = a/(a + z);
+bode(H);
+#+END_SRC
+
+#+RESULTS:
