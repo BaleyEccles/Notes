@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       2750d46e-0d6c-491c-9103-432b09cd0064
 :END:
-#+title: ENG307 - Electrical and Mechatronic Design - Design Assignment 2
+#+title: 440Hz Oscillator
 #+date: [2025-03-20 Thu 19:46]
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :Assignment:UTAS:2025:
@@ -16,62 +16,107 @@
 #+LATEX_HEADER: \addbibresource{ENG307-Ass2-Ref.bib}
 #+LATEX_HEADER: \DeclareLanguageMapping{english}{english-apa}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
+#+OPTIONS: toc:nil
 
 
-* ENG307 - Electrical and Mechatronic Design - Design Assignment 2
-** Rationale
-Wien Bridge Oscillator for an audio synthesizer, it must output a clean 440Hz sine wave. The design is expected to produce a low noise sine wave with little variation in frequency. From () we can see that the equation to find the oscillator frequency is:
+* Rationale
+Wien Bridge Oscillator for an audio synthesizer, it must output a clean 440Hz sine wave. The design is expected to produce a low noise sine wave with little variation in frequency. The equation to find the oscillator frequency is:
 \[f = \frac{1}{2\pi RC}\]
-A Wien Bridge oscillator was chosen because it is able to produce stable and consistent oscillations (\cite{elec_wien}), this will ensure that there is no extra noise present. Noise being present in an audio application will hinder the usefulness of the device (\cite{sound_spec_noise}), so it is crucial that we introduce minimal noise into the system.
-The exact output voltage is not particular important, as it is expected to be amplified and filtered prior to being used by devices further into the system.
-** Summary
-The design uses a Wien Bridge Oscillator. The values can be seen in the bill of materials, which are in [[id:ENG307AppendixA][Appendix A]], and their placement can be seen in [[id:ENG307AppendixB][Appendix B]], Figure \ref{fig:circ}. Each component has a link to a website where the component can be brought. The decision on which exact component to choose was decided because we need to use components with high tolerances, each components tolerance fits within the range defined by Figure \ref{fig:cap_res}.
+A Wien Bridge oscillator was chosen because it is able to produce stable and consistent oscillations (\cite{elec_wien}), this will ensure that there is no extra noise present. Noise being present in an audio application will hinder the usefulness of the device (\cite{sound_spec_noise}), so it is crucial that we introduce minimal noise into the system. \\
+
+The exact output voltage is not particularly important, as it is expected to be amplified and filtered prior to being used by devices further into the system. This allows us to ignore the output voltage and focus on obtaining an accurate frequency, this will effect the components that are used. 
+* Summary
+The design uses a Wien Bridge Oscillator. The values can be seen in the bill of materials, which are in [[id:ENG307AppendixA][Appendix A]], and their placement can be seen in [[id:ENG307AppendixB][Appendix B]], Figure \ref{fig:circ}. Each component has a link to a website where the component can be bought. \\
+
+The decision on which exact component to choose was decided because we need to use components with high tolerances, each components tolerance fits within the range defined by Figure \ref{fig:cap_res}.
 Using the Wien Bridge Oscillator equation we can find:
 \begin{align*}
 f &= \frac{1}{2\pi RC} \\
 f &= \frac{1}{2\pi\cdot 3.61\cdot 10^3\cdot 100\cdot 10^{-9}} \\
 f &= 440Hz
 \end{align*}
-The operational amplifier that was chosen is the LT1806, this is a low noise precision operational amplifier. It was chosen because it will introduce very little noise into the system, as mentioned this would possibly make the oscillator unusable.
+The operational amplifier that was chosen is the LT1806, this is a low noise precision operational amplifier. It was chosen because it will introduce very little noise into the system, as mentioned this would possibly make the oscillator unusable. \\
 
+Optional buffers can be used to obtain a better input and output impedance. It is typically ideal to have high input impedance and low output impedance, however there are cases where it is better to have the opposite. So, it is up to the user to add buffers to manage the impedance. \\
 
-** Analysis
-The oscillator was simulated in LTSpice, it produced a clean sine wave at 440Hz with a voltage of about 1.2V. The plot of the simulation can be seen in Figure \ref{fig:LTSpice}, this output is expected and will do good at meeting the expectations. One problem with the simulation is that the output does not have the same magnitude about and below the time axis, that is the minimum voltage is -1.2V and the maximum voltage is 1.1V. This is due to the choice of the operational amplifier, more specifically the output voltage swing, the data sheet states a low swing voltage between 4-425mV and a high swing voltage between 30-700mV (\cite{LT1806DSheet}). 
+It is expected that the user adheres to the LT1806 specifications when powering the oscillator, which is less than 12.6 volts between $V_+$ and $V_-$. There must be greater than $\pm 1.5$ volts applied to the positive and negative rails to ensure consistent oscillations. With less or more than the range of voltages defined the LT1806 will enter an undefined region, in such region the behaviour of the oscillator is undefined and not guaranteed. \\
+
+The oscillator takes 1.2 micro-seconds until consistent oscillations occur, this was found by simulating in LTSpice. The user is expected to wait 1.2 micro-seconds before using the oscillator, as the oscillations prior to 1.2 micro-seconds are deemed too inconsistent and unpredictable.
+
+* Analysis
+The oscillator was simulated in LTSpice, it produced a clean sine wave at 440Hz with a voltage of about 1.2V. The plot of the simulation can be seen in Figure \ref{fig:LTSpice}, this output is expected and will do good at meeting the expectations.\\
+
+One problem with the simulation is that the output does not have the same magnitude above and below the time axis, that is the minimum voltage is -1.2V and the maximum voltage is 1.1V. This is due to the choice of the operational amplifier, more specifically the output voltage swing. The data sheet states a low swing voltage between 4-425mV and a high swing voltage between 30-700mV (\cite{LT1806DSheet}), this level of voltage swing has been deemed acceptable.
 
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Oscillator Simulated In LTSpice \label{fig:LTSpice}
-[[./ENG307Assignment1LTSpice.png]]
+#+CAPTION: Oscillator simulated in LTSpice \label{fig:LTSpice}
+[[./ENG307Assignment2LTSpice1.png]]
 
-#+BEGIN_SRC octave :exports none :results output :session LTSpice :eval no-export
+#+BEGIN_SRC octave :exports none :results output :session LTSpice1 :eval no-export
 clc;
 clear all;
 close all;
 if exist('OCTAVE_VERSION', 'builtin')
   set(0, "DefaultAxesFontSize", 25);
 end
-data = dlmread('/home/baley/UTAS/org-roam/org-files/ENG307Assignment1LTSpice.data', '\t');
+data = dlmread('/home/baley/UTAS/org-roam/org-files/ENG307Assignment2LTSpice.data', '\t');
 
 t = data(:, 1);
+t = t.*1e6;
 u = data(:, 2);
 figure;
 plot(t, u, 'LineWidth', 2);
-xlabel('Time (s)');
-ylabel('Voltage (V)');
+xlabel('Time (micro seconds)');
+ylabel('Voltage (Volts)');
+xlim([6, 6.6])
 grid on;
-print -dpng 'ENG307Assignment1LTSpice.png'
+print -dpng 'ENG307Assignment2LTSpice1.png'
 #+END_SRC
 
 #+RESULTS:
 
-To make a consistent 440Hz sine wave the correct resistor and capacitor values have been chosen. The values of these must be accurate, otherwise the frequency will not be accurate. A small deviation in component values could be a major concern, this can be seen using the frequency calculation of the Wien Bridge Oscillator. Figure \ref{fig:cap_res} shows that for a small change in capacitance or resistance we would deviate from the required frequency an unacceptable amount, the code that produced this plot can be seen in [[id:ENG307AppendixC][Appendix C]]. It was chosen that the frequency of the oscillator must be within 3Hz of 440Hz.
+During startup the output voltage never goes above 1.2 volts in the positive or negative direction. This means that the oscillator will not output any voltage that the rest of the circuit is not designed for and hence will not cause any harm during startup. This is ideal in sensitive applications, as the circuit further on in the system may not be able to take in more than 1.2 volts. However, this could also be mitigated by not providing more than necessary voltage to the operational amplifiers $V_+$ and $V_-$ inputs. \\
+
+To make a consistent 440Hz sine wave the correct resistor and capacitor values have been chosen. The values of these must be accurate, otherwise the frequency will not be accurate. A small deviation in component values could be a major concern, this can be seen using the frequency calculation of the Wien Bridge Oscillator. \\
+
+Figure \ref{fig:cap_res} shows that for a small change in capacitance or resistance we would deviate from the required frequency an unacceptable amount, the code that produced this plot can be seen in [[id:ENG307AppendixC][Appendix C]]. It was chosen that the frequency of the oscillator must be within 3Hz of 440Hz, this allows for error in the component values without being overly precise in obtaining components.
 
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Region where capcitor and resistor values would be acceptable \label{fig:cap_res}
+#+CAPTION: Region where capacitor and resistor values would be acceptable \label{fig:cap_res}
 [[./Cap_Res_plot.png]]
 
+The oscillator takes 1.2 micro-seconds to start oscillating consistently, this can be seen in Figure \ref{fig:LTSpice2}. As can be seen the magnitude does not exceed the oscillating frequency, which ensures consistent and safe start up of the oscillator. There is unpredictable oscillations during the 1.2 micro-second startup, which do not effect anything later on, so they can be safety ignored.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Oscillator startup, simulated in LTSpice \label{fig:LTSpice2}
+[[./ENG307Assignment2LTSpice2.png]]
+
+
+#+BEGIN_SRC octave :exports none :results output :session LTSpice2 :eval no-export
+clc;
+clear all;
+close all;
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
+data = dlmread('/home/baley/UTAS/org-roam/org-files/ENG307Assignment2LTSpice.data', '\t');
+
+t = data(:, 1);
+t = t.*1e6;
+u = data(:, 2);
+figure;
+plot(t, u, 'LineWidth', 2);
+xlabel('Time (micro seconds)');
+ylabel('Voltage (Volts)');
+xlim([0, 2])
+grid on;
+print -dpng 'ENG307Assignment2LTSpice2.png'
+#+END_SRC
+
+#+RESULTS:
 
 \newpage
-** Appendix A - Bill of Materials
+* Appendix A - Bill of Materials
 :PROPERTIES:
 :CUSTOM_ID: ENG307AppendixA
 :END:
@@ -95,7 +140,7 @@ To make a consistent 440Hz sine wave the correct resistor and capacitor values h
 | U1             |          LT1806 |         | [[https://www.digikey.com.au/en/products/detail/analog-devices-inc/LT1806CS6-TRMPBF/1115887][Digikey Link]] |
 |----------------+-----------------+---------+--------------|
 \newpage
-** Appendix B - Circuit
+* Appendix B - Circuit
 :PROPERTIES:
 :CUSTOM_ID: ENG307AppendixB
 :END:
@@ -105,7 +150,7 @@ To make a consistent 440Hz sine wave the correct resistor and capacitor values h
 [[./ENG307Assignment2Circuit.png]]
 
 \newpage
-** Appendix C - Valid Component Plot Code
+* Appendix C - Valid Component Plot Code
 :PROPERTIES:
 :CUSTOM_ID: ENG307AppendixC
 :END:
@@ -138,7 +183,8 @@ print -dpng 'Cap_Res_plot.png'
 #+END_SRC
 
 #+RESULTS:
-* References
 \newpage
+* References
+
 \printbibliography
 
