@@ -149,7 +149,7 @@ plot(t, sin, 'r', 'LineWidth', 1.5);
 xlabel('time');
 ylabel('voltage');
 title('constant phase difference in steady state');
-legend('input', 'vco');
+legend('vco', 'input');
 hold off;
 print -dpng 'PLL_Const_Phase.png'
 #+END_SRC
@@ -190,7 +190,7 @@ plot(t, sin, 'r', 'LineWidth', 1.5);
 xlabel('time');
 ylabel('voltage');
 title('Breaking PLL Locking');
-legend('input', 'vco');
+legend('vco', 'input');
 ylim([0.95, 1.05]);
 hold off;
 print -dpng 'PLL_No_Lock_On.png'
@@ -224,7 +224,7 @@ plot(t, sin, 'r', 'LineWidth', 1.5);
 xlabel('time');
 ylabel('voltage');
 title('Change in frequency');
-legend('input', 'vco');
+legend('vco', 'input');
 xlim([0.095, 0.13]);
 hold off;
 print -dpng 'PLL_Freq_Diff.png'
@@ -284,3 +284,133 @@ print -dpng 'PLL_Large_Freq_Diff.png'
 #+END_SRC
 
 #+RESULTS:
+
+* Part d
+If we change the filter from a first order filter to a second order butterworth filter a few things happen. But first we must linearise the system:
+For small changes in the input and output angle the system can be described as:
+\[\frac{\Delta\Theta_o(f)}{\Delta\Theta_i(f)} = H(f) = \frac{A_cK_{PD}K_{vco}G(f)}{j2\pi f+A_cK_{PD}K_{vco}G(f)}\]
+Where $G(f)$ is the filter. Substituting in the values we can find:
+\[H(f) = \frac{2\pi100 G(f)}{j2\pi f+2\pi100G(f)}\]
+The first order filter that was used is:
+\[G_1(s) = \frac{1}{1 + \frac{s}{2\pi200}}\]
+Using the ~butter~ function in Matlab, the second order butterworth filter is:
+\[G_2(s) = \frac{2.112\cdot 10^6}{s^2 + 2058 s + 2.112\cdot10^6}\]
+Substituting these into $H(f)$, and with $s = j2\pi f$, we can get the two transfer functions:
+\[H_1(f) = \frac{20k}{20k - f^2 + j200f}\]
+\[H_2(f) = \frac{2\pi100\cdot2.112\cdot10^6}{2\pi100\cdot2.112\cdot10^6-2058\cdot4\pi^2f^2 -j4\pi^2f^3 + j2.112\cdot10^62\pi f}}\]
+These were plotted in Matlab:
+#+BEGIN_SRC octave :exports none :results output :session bode1 :eval no-export
+clear all;
+close all;
+pkg load control
+pkg load signal
+
+f = logspace(0, 5, 2000);
+
+H1 = 20000 ./ (20000 - f.^2 + 1i*200.*f);
+
+magH1_dB   = 20*log10(abs(H1));
+phaseH1_deg = angle(H1) * (180/pi);
+
+figure; 
+subplot(2,1,1);
+semilogx(f, magH1_dB, 'LineWidth', 1.2);
+grid on; 
+xlabel('Frequency (Hz)');
+ylabel('Magnitude (dB)');
+title('Bode Plot of H_1(f)');
+
+subplot(2,1,2);
+semilogx(f, phaseH1_deg, 'LineWidth', 1.2);
+grid on; 
+xlabel('Frequency (Hz)');
+ylabel('Phase (degrees)');
+print -dpng 'Bode_H1.png'
+
+numH2 = (2*pi*100) * 2.112e6; 
+denH2 = numH2 ...
+        - 2058*(4*pi^2)*(f.^2) ...
+        - 1i*(4*pi^2)*(f.^3) ...
+        + 1i*(2.112e6).*(2*pi*f);
+
+H2 = numH2 ./ denH2;
+
+magH2_dB    = 20*log10(abs(H2));
+phaseH2_deg = angle(H2) * (180/pi);
+
+figure;
+subplot(2,1,1);
+semilogx(f, magH2_dB, 'LineWidth', 1.2);
+grid on;
+xlabel('Frequency (Hz)');
+ylabel('Magnitude (dB)');
+title('Bode Plot of H_2(f)');
+
+subplot(2,1,2);
+semilogx(f, phaseH2_deg, 'LineWidth', 1.2);
+grid on;
+xlabel('Frequency (Hz)');
+ylabel('Phase (degrees)');
+print -dpng 'Bode_H2.png'
+
+#+END_SRC
+
+#+RESULTS:
+When using the first order filter the locking time was about 0.1 seconds, whereas using the second order filter this increased to 0.8 seconds, this is due to the extra pole in the filter.
+The phase delay of the signal is smaller when using the second order filter, this is probably because the filter is more effectivity able to filter out the high frequencies. Which will lead to better tracking and hence a smaller phase delay.
+
+* Part e
+
+* Part f
+The PLL was able to demodulate the FM and PM signals. Both of them did not do a perfect job at demodulating the signals. Due to the design of the PLL there is a very large phase shift for each of the signals, when working with the pure sine wave this shift was not present, because the sine wave repeated much quicker than the two modulated signals.
+
+#+BEGIN_SRC octave :exports none :results output :session FM_tracking :eval no-export
+clear all;
+close all;
+pkg load io
+
+data = xlsread("PLL_Data_11.xlsx");
+t = data(:,1);
+sin = data(:,11);
+vco = data(:,13);
+
+hold on;
+plot(t, vco, 'b', 'LineWidth', 1.5);
+plot(t, sin, 'r', 'LineWidth', 1.5);
+
+xlabel('time');
+ylabel('voltage');
+title('FM demodulated using PLL');
+legend('vco', 'input');
+xlim([0.05, 0.1])
+hold off;
+print -dpng 'PLL_FM.png'
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports none :results output :session PM_tracking :eval no-export
+clear all;
+close all;
+pkg load io
+
+data = xlsread("PLL_Data_12.xlsx");
+t = data(:,1);
+sin = data(:,14);
+vco = data(:,13);
+
+hold on;
+plot(t, vco, 'b', 'LineWidth', 1.5);
+plot(t, sin, 'r', 'LineWidth', 1.5);
+
+xlabel('time');
+ylabel('voltage');
+title('PM modulated tracking');
+legend('vco', 'input');
+xlim([0.1 - 0.06, 0.1])
+hold off;
+print -dpng 'PLL_PM.png'
+#+END_SRC
+
+#+RESULTS:
+
