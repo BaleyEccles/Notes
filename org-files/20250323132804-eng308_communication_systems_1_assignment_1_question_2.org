@@ -6,6 +6,16 @@
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER: \usepackage[style=apa, backend=biber]{biblatex}
+#+LATEX_HEADER: \addbibresource{ENG307-Ass2-Ref.bib}
+#+LATEX_HEADER: \DeclareLanguageMapping{english}{english-apa}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
 
 * Part a
 If we integrate the message signal and then do phase modulation on it we will get the frequency modulated signal. Likewise, if we differentiate the message and then do frequency modulation on it we will get the phase modulated signal
@@ -13,7 +23,7 @@ Where:
 \[u_{PM}(t) = A_c\cos(2\pi f_ct + k_pm(t))\]
 \[u_{FM}(t) = A_c\cos(2\pi f_ct + 2\pi k_f\int_{-\infty}^tm(\tau)d\tau)\]
 taking $k_p = 2\cdotpi\cdot0.0001$ and $k_f = 0.0001$. $k_p$ must be a factor of $2\pi$ larger than $k_f$ to produce the desired results, as in the FM equation there is an extra $2\pi$ on $k_f$.
-#+BEGIN_SRC octave :exports none :results output :session ALL :eval no-export
+#+BEGIN_SRC octave :exports none :results output :session ALL 
 %% Part A
 clear all;
 close all;
@@ -46,12 +56,15 @@ phi1 = pi/2;
 phi2 = pi;
 phi3 = pi/3;
 
-m = A1 * cos(w * f1 * t + phi1) + A2 * cos(w * f2 * t + phi2) + A3 * cos(w * f3 * t + phi3);
+
 #+END_SRC
 
 #+RESULTS:
 
-#+BEGIN_SRC octave :exports none :results output :session ALL :eval no-export
+The following Matlab code can do this. 
+#+BEGIN_SRC octave :exports code :results output :session ALL 
+m = A1 * cos(w * f1 * t + phi1) + A2 * cos(w * f2 * t + phi2) + A3 * cos(w * f3 * t + phi3);
+
 im = cumtrapz(m);
 iu_PM = Ac*cos(2*pi*fc*t + kp*im);
 u_FM = Ac*cos(2*pi*fc*t + 2*pi*kf*cumtrapz(m));
@@ -59,8 +72,12 @@ u_FM = Ac*cos(2*pi*fc*t + 2*pi*kf*cumtrapz(m));
 dm = diff(m);
 du_FM = Ac*cos(2*pi*fc*t(2:end) + 2*pi*kf*cumtrapz(dm(1:end)));
 u_PM = Ac*cos(2*pi*fc*t + kp*m);
+#+END_SRC
 
-
+#+BEGIN_SRC octave :exports none :results output :session ALL 
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
 figure;
 subplot(2,1,1);
 plot(t(1:end), iu_PM, 'linewidth', 2)
@@ -95,12 +112,17 @@ print -dpng 'Derivative_then_frequency_modulated.png'
 
 #+RESULTS:
 
+[[./Integral_then_phase_modulated.png]]
+[[./Derivative_then_frequency_modulated.png]]
+
 The modulation index can be calculated using:
+For FM:
 \[\beta_f = \frac{k_f A_m}{\max(f_m)}\]
-For FM, and
+\\
+For PM:
 \[\beta_p = k_pA_m\]
-For PM.
-#+BEGIN_SRC octave :exports none :results output :session ALL :eval no-export
+Which was done using the following Matlab code.
+#+BEGIN_SRC octave :exports both :results output :session ALL 
 Am = max(abs(m));
 
 bf = kf*Am/max([f1, f2, f3]);
@@ -115,13 +137,18 @@ fprintf("The modulation index for PM is %.6f\n", bp);
 
 
 * Part b
+*_NOTE_*: All of code to plot the plots in this part was excluded, as it was just importing the data that was exported from Simulink.\\
+
+The PLL for the following parts can be seen in the following figure:
+[[./PLL.png]]
+
 Need to show:
 1. There is some small constant phase error in steady-state
-2. Changing $K_f$, $A_c$, $K_o$ and $K_{PD}$ can break the locking via the equation
-   - \[|\omega_c-\omega_f| \leq \frac{\pi}{2} K_fA_cK_oK_{PD}\]
+2. Changing $K_f$, $A_c$, $K_o$ and $K_{PD}$ can break the locking via the equation below
+\[|\omega_c-\omega_f| \leq \frac{\pi}{2} K_fA_cK_oK_{PD}\]
 3. Transient analysis
 
-Using $f_c = 200Hz$ and $f_f = 200Hz$.
+Using the carrier frequency as, $f_c = 200Hz$ and the VCO free running frequency as, $f_f = 200Hz$.
 It was chosen that $K_{PD} = 1$, $K_f = 1$ and $K_{vco} = 2\pi\cdot100$.
 
 ** 1
@@ -130,12 +157,16 @@ using:
 \[K_f = 1\]
 \[K_{PD} = 1\]
 \[K_{vco} = 2\pi\cdot100\]
+It can be seen, in the following figure, that the PLL takes a small amount of time to lock on to the sine wave. But once it has locked on it maintains a consistent phase difference, relative to the input wave, this is when it is at steady state.
+[[./PLL_Const_Phase.png]]
 
-#+BEGIN_SRC octave :exports none :results output :session PLL1 :eval no-export
+#+BEGIN_SRC octave :exports none :results output :session PLL1 
 clear all;
 close all;
 pkg load io
-
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
 data = xlsread("PLL_Data_5.xlsx");
 
 t = data(:,1);
@@ -149,6 +180,7 @@ plot(t, sin, 'r', 'LineWidth', 1.5);
 xlabel('time');
 ylabel('voltage');
 title('constant phase difference in steady state');
+xlim([0, 0.04]);
 legend('vco', 'input');
 hold off;
 print -dpng 'PLL_Const_Phase.png'
@@ -157,7 +189,7 @@ print -dpng 'PLL_Const_Phase.png'
 #+RESULTS:
 
 ** 2
-using:
+We can use similar values before, however we can change $K_f$ to a lower value to make the locking range smaller.
 \[A_c = 1\]
 \[K_f = 0.001\]
 \[K_{PD} = 1\]
@@ -168,15 +200,17 @@ Which means the frequency difference must be:
 \lvert\omega_c-\omega_f\rvert &\leq \frac{\pi}{2} 1\cdot0.001\cdot1\cdot2\pi\cdot100 \\
 \lvert\omega_c-\omega_f\rvert &\leq 1\ rad/s
 \end{align*}
-So, if we set a frequency difference of greater than 1 rad/s we will expect the PLL to fail. \\
+So, if we set a frequency difference of greater than 1 rad/s we will expect the PLL to fail. Setting $f_c = 205Hz$, $5Hz$ larger than $f_f$ we can see that PLL never locks on to the signal.
 
-Setting $f_c = 205Hz$, $5Hz$ larger than $f_f$ we can see that PLL never locks on to the signal.
-
-#+BEGIN_SRC octave :exports none :results output :session PLL2 :eval no-export
+[[./PLL_No_Lock_On.png]]
+As can be seen in the figure above, the PLL is unable to lock onto this frequency. There is no consistent phase difference between the peaks of the input or VCO signals.
+#+BEGIN_SRC octave :exports none :results output :session PLL2 
 clear all;
 close all;
 pkg load io
-
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
 data = xlsread("PLL_Data_6.xlsx");
 
 t = data(:,1);
@@ -205,12 +239,14 @@ Setting the values back to the ones before:
 \[K_{PD} = 1\]
 \[K_{vco} = 2\pi\cdot100\]
 Introduce a frequency shift, from $f_c = 200Hz$ to $f_{c} = 150Hz$, at $t = 0.1$. From the notes: "If a frequency error occurs, the phase is tracked with a constant offset", which can be seen. That is, there is a constant phase offset after changing the frequency.
-
-#+BEGIN_SRC octave :exports none :results output :session PLL3 :eval no-export
+[[./PLL_Freq_Diff.png]]
+#+BEGIN_SRC octave :exports none :results output :session PLL3 
 clear all;
 close all;
 pkg load io
-
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
 data = xlsread("PLL_Data_7.xlsx");
 
 t = data(:,1);
@@ -234,15 +270,17 @@ print -dpng 'PLL_Freq_Diff.png'
 
 
 * Part c
-At the moment the small angle approximation is not a good approximation. The phase error is so large ($e(t) \approx 0.5$), that it is not reasonable to assume that $\sin(x) \approx x$. If we change $K_PD$ from $1$ to $0.1$ the approximation becomes much more reasonable. \\
+At the moment the small angle approximation is not a great approximation. The phase error is too large ($|e(t)| \approx 0.5$), $\sin(0.5) = 0.479$. It is not reasonable to assume that $\sin(x) \approx x$. If we change $K_{PD}$ from $1$ to $0.1$ the approximation becomes much more reasonable. \\
 
-With $K_{PD} = 0.1$ we can apply a phase step to the input of $55^o$ and see the phase error. The phase step was applied at $t = 0.1$, it can be seen that the phase error never goes above $0.1$, which means the approximation is valid
-
-#+BEGIN_SRC octave :exports none :results output :session PLL4 :eval no-export
+With $K_{PD} = 0.1$ we can apply a phase step to the input of $55^o$ and see the phase error. The phase step was applied at $t = 0.1$, it can be seen that the phase error never goes above $0.1$, which means the approximation is valid.
+[[./PLL_Phase_Diff.png]]
+#+BEGIN_SRC octave :exports none :results output :session PLL4 
 clear all;
 close all;
 pkg load io
-
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
 data = xlsread("PLL_Data_9.xlsx");
 
 t = data(:,1);
@@ -262,11 +300,14 @@ print -dpng 'PLL_Phase_Diff.png'
 #+RESULTS:
 
 Even if we apply a frequency step from $200Hz$ to $1kHz$ the approximation still holds. Even though the PLL fails to lock on it is still valid to assume that $\sin(x)\approx x$.
-#+BEGIN_SRC octave :exports none :results output :session PLL4 :eval no-export
+[[./PLL_Large_Freq_Diff.png]]
+#+BEGIN_SRC octave :exports none :results output :session PLL4 
 clear all;
 close all;
 pkg load io
-
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
 data = xlsread("PLL_Data_10.xlsx");
 
 t = data(:,1);
@@ -286,7 +327,8 @@ print -dpng 'PLL_Large_Freq_Diff.png'
 #+RESULTS:
 
 * Part d
-If we change the filter from a first order filter to a second order butterworth filter a few things happen. But first we must linearise the system:
+If we change the filter from a first order filter to a second order butterworth filter a few things happen. But first we must linearise the system. \\
+
 For small changes in the input and output angle the system can be described as:
 \[\frac{\Delta\Theta_o(f)}{\Delta\Theta_i(f)} = H(f) = \frac{A_cK_{PD}K_{vco}G(f)}{j2\pi f+A_cK_{PD}K_{vco}G(f)}\]
 Where $G(f)$ is the filter. Substituting in the values we can find:
@@ -295,15 +337,20 @@ The first order filter that was used is:
 \[G_1(s) = \frac{1}{1 + \frac{s}{2\pi200}}\]
 Using the ~butter~ function in Matlab, the second order butterworth filter is:
 \[G_2(s) = \frac{2.112\cdot 10^6}{s^2 + 2058 s + 2.112\cdot10^6}\]
-Substituting these into $H(f)$, and with $s = j2\pi f$, we can get the two transfer functions:
+Substituting these into $H(f)$, with $s = j2\pi f$, we can get the two transfer functions:
 \[H_1(f) = \frac{20k}{20k - f^2 + j200f}\]
 \[H_2(f) = \frac{2\pi100\cdot2.112\cdot10^6}{2\pi100\cdot2.112\cdot10^6-2058\cdot4\pi^2f^2 -j4\pi^2f^3 + j2.112\cdot10^62\pi f}}\]
 These were plotted in Matlab:
-#+BEGIN_SRC octave :exports none :results output :session bode1 :eval no-export
+[[./Bode_H1.png]]
+[[./Bode_H2.png]]
+#+BEGIN_SRC octave :exports none :results output :session bode1 
 clear all;
 close all;
 pkg load control
 pkg load signal
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
 
 f = logspace(0, 5, 2000);
 
@@ -356,18 +403,27 @@ print -dpng 'Bode_H2.png'
 #+END_SRC
 
 #+RESULTS:
-When using the first order filter the locking time was about 0.1 seconds, whereas using the second order filter this increased to 0.8 seconds, this is due to the extra pole in the filter.
-The phase delay of the signal is smaller when using the second order filter, this is probably because the filter is more effectivity able to filter out the high frequencies. Which will lead to better tracking and hence a smaller phase delay.
+When using the first order filter the locking time was about 0.1 seconds, whereas using the second order filter this increased to 0.8 seconds, this is due to the extra pole in the filter. The phase delay of the signal is smaller when using the second order filter, this is probably because the filter is more effectivity able to filter out the high frequencies. Which will lead to better tracking and hence a smaller phase delay.
 
 * Part e
+The locking range can be found using:
+\begin{align*}
+\lvert\omega_c-\omega_f\rvert &\leq \frac{\pi}{2} K_fA_cK_oK_{PD} \\
+\lvert\omega_c-\omega_f\rvert &\leq \frac{\pi}{2} 1\cdot1\cdot1\cdot2\pi\cdot100 \\
+\lvert\omega_c-\omega_f\rvert &\leq 987\ rad/s = 1550 Hz
+\end{align*}
 
 * Part f
-The PLL was able to demodulate the FM and PM signals. Both of them did not do a perfect job at demodulating the signals. Due to the design of the PLL there is a very large phase shift for each of the signals, when working with the pure sine wave this shift was not present, because the sine wave repeated much quicker than the two modulated signals.
-
-#+BEGIN_SRC octave :exports none :results output :session FM_tracking :eval no-export
+The PLL was able to demodulate the FM and PM signals, both did not do a perfect job at demodulating the signals. Due to the design of the PLL there is a very large phase shift for each of the signals, when working with the pure sine wave this shift was not visibly present, because the sine wave repeated much quicker than the two modulated signals.
+[[./PLL_FM.png]]
+[[./PLL_PM.png]]
+#+BEGIN_SRC octave :exports none :results output :session FM_tracking 
 clear all;
 close all;
 pkg load io
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
 
 data = xlsread("PLL_Data_11.xlsx");
 t = data(:,1);
@@ -389,10 +445,13 @@ print -dpng 'PLL_FM.png'
 
 #+RESULTS:
 
-#+BEGIN_SRC octave :exports none :results output :session PM_tracking :eval no-export
+#+BEGIN_SRC octave :exports none :results output :session PM_tracking 
 clear all;
 close all;
 pkg load io
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
 
 data = xlsread("PLL_Data_12.xlsx");
 t = data(:,1);
