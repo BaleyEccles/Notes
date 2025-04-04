@@ -114,15 +114,173 @@ fprintf("The modulation index for PM is %.6f\n", bp);
 : The modulation index for PM is 0.017820
 
 
-#+BEGIN_SRC octave :exports none :results output :session PLL :eval no-export
+* Part b
+Need to show:
+1. There is some small constant phase error in steady-state
+2. Changing $K_f$, $A_c$, $K_o$ and $K_{PD}$ can break the locking via the equation
+   - \[|\omega_c-\omega_f| \leq \frac{\pi}{2} K_fA_cK_oK_{PD}\]
+3. Transient analysis
+
+Using $f_c = 200Hz$ and $f_f = 200Hz$.
+It was chosen that $K_{PD} = 1$, $K_f = 1$ and $K_{vco} = 2\pi\cdot100$.
+
+** 1
+using:
+\[A_c = 1\]
+\[K_f = 1\]
+\[K_{PD} = 1\]
+\[K_{vco} = 2\pi\cdot100\]
+
+#+BEGIN_SRC octave :exports none :results output :session PLL1 :eval no-export
 clear all;
 close all;
-pkg load control;
+pkg load io
 
-z = tf ('z^-1', 0.001);
-a = 10;
-H = a/(a + z);
-bode(H);
+data = xlsread("PLL_Data_5.xlsx");
+
+t = data(:,1);
+sin = data(:,4);
+vco = data(:,5);
+
+hold on;
+plot(t, vco, 'b', 'LineWidth', 1.5);
+plot(t, sin, 'r', 'LineWidth', 1.5);
+
+xlabel('time');
+ylabel('voltage');
+title('constant phase difference in steady state');
+legend('input', 'vco');
+hold off;
+print -dpng 'PLL_Const_Phase.png'
+#+END_SRC
+
+#+RESULTS:
+
+** 2
+using:
+\[A_c = 1\]
+\[K_f = 0.001\]
+\[K_{PD} = 1\]
+\[K_PD = 2\pi\cdot100\]
+Which means the frequency difference must be:
+\begin{align*}
+\lvert\omega_c-\omega_f\rvert &\leq \frac{\pi}{2} K_fA_cK_oK_{PD} \\
+\lvert\omega_c-\omega_f\rvert &\leq \frac{\pi}{2} 1\cdot0.001\cdot1\cdot2\pi\cdot100 \\
+\lvert\omega_c-\omega_f\rvert &\leq 1\ rad/s
+\end{align*}
+So, if we set a frequency difference of greater than 1 rad/s we will expect the PLL to fail. \\
+
+Setting $f_c = 205Hz$, $5Hz$ larger than $f_f$ we can see that PLL never locks on to the signal.
+
+#+BEGIN_SRC octave :exports none :results output :session PLL2 :eval no-export
+clear all;
+close all;
+pkg load io
+
+data = xlsread("PLL_Data_6.xlsx");
+
+t = data(:,1);
+sin = data(:,4);
+vco = data(:,5);
+
+hold on;
+plot(t, vco, 'b', 'LineWidth', 1.5);
+plot(t, sin, 'r', 'LineWidth', 1.5);
+
+xlabel('time');
+ylabel('voltage');
+title('Breaking PLL Locking');
+legend('input', 'vco');
+ylim([0.95, 1.05]);
+hold off;
+print -dpng 'PLL_No_Lock_On.png'
+#+END_SRC
+
+#+RESULTS:
+
+** 3
+Setting the values back to the ones before:
+\[A_c = 1\]
+\[K_f = 1\]
+\[K_{PD} = 1\]
+\[K_{vco} = 2\pi\cdot100\]
+Introduce a frequency shift, from $f_c = 200Hz$ to $f_{c} = 150Hz$, at $t = 0.1$. From the notes: "If a frequency error occurs, the phase is tracked with a constant offset", which can be seen. That is, there is a constant phase offset after changing the frequency.
+
+#+BEGIN_SRC octave :exports none :results output :session PLL3 :eval no-export
+clear all;
+close all;
+pkg load io
+
+data = xlsread("PLL_Data_7.xlsx");
+
+t = data(:,1);
+sin = data(:,7);
+vco = data(:,8);
+
+hold on;
+plot(t, vco, 'b', 'LineWidth', 1.5);
+plot(t, sin, 'r', 'LineWidth', 1.5);
+
+xlabel('time');
+ylabel('voltage');
+title('Change in frequency');
+legend('input', 'vco');
+xlim([0.095, 0.13]);
+hold off;
+print -dpng 'PLL_Freq_Diff.png'
+#+END_SRC
+
+#+RESULTS:
+
+
+* Part c
+At the moment the small angle approximation is not a good approximation. The phase error is so large ($e(t) \approx 0.5$), that it is not reasonable to assume that $\sin(x) \approx x$. If we change $K_PD$ from $1$ to $0.1$ the approximation becomes much more reasonable. \\
+
+With $K_{PD} = 0.1$ we can apply a phase step to the input of $55^o$ and see the phase error. The phase step was applied at $t = 0.1$, it can be seen that the phase error never goes above $0.1$, which means the approximation is valid
+
+#+BEGIN_SRC octave :exports none :results output :session PLL4 :eval no-export
+clear all;
+close all;
+pkg load io
+
+data = xlsread("PLL_Data_9.xlsx");
+
+t = data(:,1);
+phase = data(:,2);
+
+hold on;
+plot(t, phase, 'r', 'LineWidth', 1.5);
+
+xlabel('time');
+ylabel('voltage');
+title('Change in phase');
+xlim([0.095, 0.13]);
+hold off;
+print -dpng 'PLL_Phase_Diff.png'
+#+END_SRC
+
+#+RESULTS:
+
+Even if we apply a frequency step from $200Hz$ to $1kHz$ the approximation still holds. Even though the PLL fails to lock on it is still valid to assume that $\sin(x)\approx x$.
+#+BEGIN_SRC octave :exports none :results output :session PLL4 :eval no-export
+clear all;
+close all;
+pkg load io
+
+data = xlsread("PLL_Data_10.xlsx");
+
+t = data(:,1);
+phase = data(:,2);
+
+hold on;
+plot(t, phase, 'r', 'LineWidth', 1.5);
+
+xlabel('time');
+ylabel('voltage');
+title('Change in phase');
+xlim([0.095, 0.13]);
+hold off;
+print -dpng 'PLL_Large_Freq_Diff.png'
 #+END_SRC
 
 #+RESULTS:
