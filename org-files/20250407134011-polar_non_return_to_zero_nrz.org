@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       c3720710-157d-4793-bd6d-443e02c0e25e
+:END:
+#+title: Polar Non-Return-to-Zero (NRZ)
+#+date: [2025-04-07 Mon 13:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Polar Non-Return-to-Zero (NRZ)
+ - 1: +A for $T_s$ seconds
+ - 0: -A for $T_s$ seconds
+   
+** [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]
+ - \[S_{zz}(f) = \frac{A^2T_s\sin^2(\pi fT_s)}{(\pi fT_s)^2}\]
+   
+** Pulse Shape
+ - Square wave
+   - \[p(t) = \begin{cases}
+     1 & |t| < \frac{T_s}{2}\\
+     0 & \textrm{else}
+     \end{cases}\times\begin{cases}
+      A & a_n \\
+     -A & a_n
+     \end{cases} \]
+ - \[P(f) = T_s\frac{\sin(\pi fT_s)}{\pi fT_s}\]
+
+** Advantages
+ - Good error detection probability
+ - Low [[id:a647872e-240f-4ef0-8304-b713e15505ea][bandwidth]]
+ - Greatly reduced DC component
+   - Is zero if source coding is perfect.
+
+** Disadvantages
+ - No error detection is not possible
+ - Long strings of '0' or '1'
+   - Leads to loss if synchronisation
+ - Need +A and -A
+
+     

@@ -7,4 +7,4 @@
 #+STARTUP: latexpreview
 
 * Nyquist–Shannon Sampling Theorem
-The signal will repeat after $f_s/2$Hz
+The signal will repeat after $\frac{f_s}{2}$ Hz

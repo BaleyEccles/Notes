@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       1e74c832-675b-4964-8e5c-030d1b831cb3
+:END:
+#+title: Bipolar Non-Return-to-Zero (NRZ)
+#+date: [2025-04-07 Mon 13:54]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bipolar Non-Return-to-Zero (NRZ)
+ - Successive '1's have alternating voltage polarity
+ - '0's have 0 volts
+   
+** [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]
+ - \[S_{zz}\left(f\right) = A^2T_s\frac{\sin^2(\pi fT_s)}{(\pi f T_s)^2}\sin^2(\pi fT_s)\]
+   
+** Pulse Shape
+ - Square wave
+   - \[p(t) = \begin{cases}
+     1 & |t| < \frac{T_s}{2}\\
+     0 & \textrm{else}
+     \end{cases}\times\begin{cases}
+      \pm A & a_n \textrm{ is a '1'} \\
+      0 & a_n \textrm{ is a '0'} \\
+     \end{cases} \]
+** Advantages
+ - Low DC component
+ - Timing signals possible
+ - Bandwidth $R = \frac{1}{T_{s}}$
+ - Error detection possible
+   
+** Disadvantages
+ - Error performance is worse
+ - long strings of '0': loss of sync
+ - +A and -A required
+
+     

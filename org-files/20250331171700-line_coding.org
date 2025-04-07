@@ -7,6 +7,32 @@
 #+STARTUP: latexpreview
 
 * Line Coding
+ - Encoding data into a form that can be sent through a channel
+ - \[z(t) = \sum_{n = -\infty}^{\infty}a_np(t - nT_s)\]
+   - $p$ is the pulse shape
+   - $a_n$ is the random data
+     
+** [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]
+ - It is [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][WSC]]
+ - $\lambda = t - nT_s$
+ - \[S_{zz}(f) = \mathcal{F}\{R_{zz}(\tau)\} = \frac{1}{T_s} \sum_{k=-\infty}^{\infty} R_a[k]|P(f)|^2 e^{-j2\pi kT_sf}\]
+
+** Types
+ - All of these could be [[id:a6aefce5-2695-4f3b-aeaa-d5c1a3bd01a1][Return-to-Zero]] variants
+[[id:b625a7f7-2e36-47ce-9cab-6573693ab470][Unipolar Non-Return-to-Zero (NRZ)]]
+[[id:c3720710-157d-4793-bd6d-443e02c0e25e][Polar Non-Return-to-Zero (NRZ)]]
+[[id:b8ab263b-c149-43f5-8bb6-bd83f6b10bee][Manchester]]
+[[id:1e74c832-675b-4964-8e5c-030d1b831cb3][Bipolar Non-Return-to-Zero (NRZ)]]
 
 
 
+** Terms
+ - Unipolar
+   - Either using a positive voltage or zero volts
+   - Never negative
+ - Polar
+   - Use both +A and -A
+   - May or may not use zero
+ - Bipolar
+   - +A and -A volts are used sequentially for the same data symbol
+   - The other symbol may be zero volts
