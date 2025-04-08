@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       2750d46e-0d6c-491c-9103-432b09cd0064
 :END:
-#+title: 440Hz Oscillator
+#+title: [[id:2750d46e-0d6c-491c-9103-432b09cd0064][ENG307 - Electrical and Mechatronic Design - Design Assignment 2]] / 440Hz Oscillator
 #+date: [2025-03-20 Thu 19:46]
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :Assignment:UTAS:2025:
@@ -50,7 +50,7 @@ One problem with the simulation is that the output does not have the same magnit
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Oscillator simulated in LTSpice \label{fig:LTSpice}
-[[./ENG307Assignment2LTSpice1.png]]
+[[./ENG307Assignment2LTSpice1.png]
 
 #+BEGIN_SRC octave :exports none :results output :session LTSpice1 :eval no-export
 clc;

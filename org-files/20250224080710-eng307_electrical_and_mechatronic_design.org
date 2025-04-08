@@ -20,7 +20,8 @@
  - Specific way in which the system/component may fail to meet the specifications
 *** Effect Analysis
  - Consequences of the failure
-** Stuff
+** Week 6
+
 
 * Assessment
 ** Project Report

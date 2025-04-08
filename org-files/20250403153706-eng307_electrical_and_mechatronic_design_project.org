@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       091d3056-df3b-466d-8d5a-3d309e5a07f0
+:END:
+#+title: ENG307 Electrical and Mechatronic Design - Project
+#+date: [2025-04-03 Thu 15:37]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Project Report 1
+
+** Components
+ - User Input Circuit
+   - Buttons
+   - Capacitors and resistors
+ - Arduino Interface
+   - Connects everything together.
+ - Power Management
+   - voltage regulator
+     - L7805
+   - PMOS transistor and Zener diode
+     - For voltage control.
+ - Water Level and Environmental Sensors
+   - Pressure sensor
+     - instrumentation amplifiers
+     - Decide between a INA350AB or a INA350CD
+       - Two gain options each
+       - INA350ABS: 10 or 20
+       - INA350CDS: 30 or 50
+
+   - Temperature Sensor
+     - $47k\Omega$ NTC thermistor
+ - Motor Control
+   - MCP601 Op-Amp
+     - input and feedback resistors to set the gain.
+   - Motor Driver
+     - choose resistors and capacitors
+     - Current Sensing Resistor:
+       - Default value of $0.1\Omega$
+ - Pinch Valve Control
+   - servo motor
+ - I2C LCD Interface
+ - Mounting and Test Points
+
+
+
+*** INA350AB vs INA350CD
+[[https://www.ti.com/lit/ds/symlink/ina350.pdf?ts=1743655709799&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FINA350]]
+Table 6.1: Pin Functions
+Gain select – logic low (G = 10 for INA350ABS and G = 30 for INA350CDS)
+Gain select – logic high (G = 20 for INA350ABS and G = 50 for INA350CDS)
+Gain select – no connect (G = 20 for INA350ABS and G = 50 for INA350CDS)
+
+7.5 Electrical Characteristics (continued)
+| Logic low threshold voltage (Gain Select)  | G = 10 for INA350ABS, G = 30 for INA350CDS |
+| Logic high threshold voltage (Gain Select) | G = 20 for INA350ABS, G = 50 for INA350CDS |
+
+8.1 Overview
+INA350ABS has two gain options of 10 and 20. INA350CDS has two other gain options of 30 and 50
