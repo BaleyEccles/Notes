@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       8c79d3ee-766a-4f72-a070-7a44d0f85ac1
+:END:
+#+title: Fading
+#+date: [2025-04-08 Tue 10:46]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Fading
+Two types:
+
+** Non-Dispersive Fading
+Scattering of the transmitted signal causes very small path delays compared to the signal period.
+
+** Multipath Fading
+There can be several scatters in the channel that results in copies of the signal being received at various time delays.

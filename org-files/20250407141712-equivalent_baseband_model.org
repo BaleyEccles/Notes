@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       67259b4a-7fd8-4d7b-afaf-42c443f305a6
+:END:
+#+title: Equivalent Baseband Model
+#+date: [2025-04-07 Mon 14:17]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+TAGS: :TODO:
+
+* Equivalent Baseband Model
+A method for converting baseband signals to the passband
+ - \[m(t) = I(t)\cos(\omega_ct) - Q(t)\sin(\omega_ct)\]
+ - \[m(t) = \Re\{z(t) e^{j\omega_ct}\}\]
+   - Shifts $z(t)$ to be centred at $\omega_c$
+ - \[z(t) = I(t) + jQ(t)\]
+ - [[file:Screenshot 2025-04-08 at 10-31-04 Set 7.1 - Baseband Equivalent - ENG308 ENG743 Communication Systems 1 and Communication Systems.png]]
+ - $m(t)$ is the passband model
+ - $z(t)$ is the equivalent baseband model
+   
+** Small-Scale Channel Models
+ - [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]]
+ - [[id:abae31a2-cc7c-4a2d-b1cf-ed322480482e][Dispersive Fading Channel/Multipath Fading Channel]]
+ - [[id:788c38cf-cc37-463b-84d6-a40be1715904][Non-Dispersive Fading Channel]]
+
+** Discrete Channel Stuff
+ - \[r[i] = \sum_{k=0}^{M}h[k]a[i-k] + n_s[i]\]
+   - $h[n]$ channel impulse response
+     - Unknown
+   - $n_s[n]$ noise sample
+   - $a[n]$ transmitted sample
+   - $r[n]$ received sample
+ - [[id:533199e6-1d41-4223-a95e-b4ee0de5f926][Pilot Symbols]]
+ - [[id:d535e784-50d7-4f0c-9188-5f42e3aad514][Intersymbol Interference (ISI)]]
+

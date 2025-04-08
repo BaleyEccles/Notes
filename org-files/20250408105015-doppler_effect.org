@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       02463fc8-1fc6-427f-acd1-03542a688e16
+:END:
+#+title: Doppler Effect
+#+date: [2025-04-08 Tue 10:50]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Doppler Effect
+ - The frequency changes depending on how the receiver and transmitter are moving
+ - \[f_c + f_d \]
+   - \[f_d = \frac{v}{c}f_c\]
+ - Increases bandwidth
+   - \[B_{Doppler} = B_{static} + 2|f_{d,\max}|\]

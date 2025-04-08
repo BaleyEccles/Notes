@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       d535e784-50d7-4f0c-9188-5f42e3aad514
+:END:
+#+title: Intersymbol Interference (ISI)
+#+date: [2025-04-08 Tue 15:43]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Intersymbol Interference (ISI)
+
+ - \[z(t) = \sum_{n = -\infty}^{\infty}a_np(t - nT_s)\]
+The channel $h(t)$ is not often distortionless. The channel may have a impulse response that is band-limited, $H(f)$. $P(f)\cdot H(f)$, this makes the signal band-limited. This causes the signal to be spread out.
+Sending future signals will Intersymbol Interfere (ISI) with each other.
+We can make $p(t)$ not a square to combat this. This will be done by filtering
+ - \[H(f) = H_t(f)H_c(f)H_r(f)\]
+   - at $t = nT_s$
+** The Niquist zero-ISI Criterion
+ - \[R(t) \neq 0, \ t = 0\]
+ - \[R(t) =    0, \ t \in \{\pm T_s, \pm 2T_s, \pm 3T_s, \hdots\}\]
+   - \[= h_t(t)*h_r(t)\]
+ - \[R(t) = g(t)*g^H(-t)\]
+ - Can be met if we use the Niquist Pulse
+   - \[R(t) = \textrm{sinc}(t)\]
+     - For $T_s = 1$
+ - A more common choice
+  - TODO

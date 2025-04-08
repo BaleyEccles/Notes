@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       f5e91bf8-bad0-4234-8be8-f792b5970d17
+:END:
+#+title: Small-Scale Channel Models
+#+date: [2025-04-08 Tue 10:36]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Small-Scale Channel Models
+
+- [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]]
+- [[id:788c38cf-cc37-463b-84d6-a40be1715904][Non-Dispersive Fading Channel]]

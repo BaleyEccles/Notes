@@ -1,0 +1,40 @@
+:PROPERTIES:
+:ID:       533199e6-1d41-4223-a95e-b4ee0de5f926
+:END:
+#+title: Pilot Symbols
+#+date: [2025-04-08 Tue 15:43]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Pilot Symbols
+
+We can send some known set of symbols to find $h[n]$
+ - \[r = \{r[0], r[1], \hdots , r[N]\}\]
+ - \[\begin{bmatrix}
+   r[M] \\
+   r[M + 1] \\
+   \vdots \\
+   r[N]
+   \end{bmatrix} =
+   \begin{bmatrix}
+   a[M] & a[M-1] & \hdots & a[0] \\
+   a[M+1] & a[M] & \hdots & a[1] \\
+   \vdots \\
+   a[N] & a[N-1] & \hdots & a[N-M] \\
+   \end{bmatrix}\begin{bmatrix}
+   h[0] \\
+   h[1] \\
+   \vdots \\
+   h[M]
+   \end{bmatrix} + \begin{bmatrix}
+   n_s[M] \\
+   n_s[M+1] \\
+   \vdots \\
+   n_s[N]
+   \end{bmatrix}\]
+   - $\underline{a}$ are the pilot symbols
+   - \[\underline{r} = \underline{A}\underline{h} + \underline{n}\]
+   - $\underline{A}$ must be full ranked
+ - Best estimate of the channel impulse response
+   - \[\underline{\tilde{h}} = (\underline{A}^H\underline{A})^{-1}\underline{A}^H\underline{r}\]
+

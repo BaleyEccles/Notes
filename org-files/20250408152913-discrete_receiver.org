@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       0cfc0c4f-2408-42e6-944f-e37acc4116f1
+:END:
+#+title: Discrete Receiver
+#+date: [2025-04-08 Tue 15:29]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Discrete Receiver
+Using a [[id:e5b0d8e1-bef3-4b52-af41-355047228d01][Matched Filter]]
+ - [[file:Screenshot 2025-04-08 at 15-29-34 Set 7.2 - Small-scale models - ENG308 ENG743 Communication Systems 1 and Communication Systems.png]]
+
+ - \[\gamma = \epsilon + n\]
+   - $\epsilon$ is the energy in $g(t)$
+   - $n$ is the [[id:0a3093d2-6df1-49f4-b00a-f506505c424d][Complex Gaussian]] distributed random variable.
+

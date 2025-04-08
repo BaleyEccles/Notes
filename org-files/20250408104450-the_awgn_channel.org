@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       f043ac02-9b06-42f2-b9cd-ad32801de2ed
+:END:
+#+title: The AWGN Channel
+#+date: [2025-04-08 Tue 10:44]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* The AWGN Channel
+ - Complex additive Gaussian noise
+ - \[n_s = u + jv\]
+   - $u$ and $v$ are [[id:0a3093d2-6df1-49f4-b00a-f506505c424d][additive white Gaussian noise]] (AWGN)
+
+ - \[y_i(t) = \lambda z_i(t) + n_s(t)\]
+ - [[file:Screenshot 2025-04-08 at 10-41-05 Set 7.2 - Small-scale models - ENG308 ENG743 Communication Systems 1 and Communication Systems.png]]
+
+** Bit Error Rate
+The lower bound of BER:
+ - \[BER = \frac{n^{\underline{o}}\textrm{errors}}{\textrm{total }n^{\underline{o}}\textrm{ bits}}\]
+
+** Received
+ - Using a [[id:0cfc0c4f-2408-42e6-944f-e37acc4116f1][Discrete Receiver]]
+ - \[r[i] = a_j\int_{-\infty}^{\infty}g(\tau)g^H(\tau - T_s)d\tau + \int_{-\infty}^{\infty}n_s(\tau)g^H(\tau - T_s)d\tau\]
+   - The first integral is the energy in $g(t)$
+   - The second integral is a random variable from [[id:0a3093d2-6df1-49f4-b00a-f506505c424d][Gaussian Noise]]

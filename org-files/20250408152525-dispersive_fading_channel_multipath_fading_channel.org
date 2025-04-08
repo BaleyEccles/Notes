@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       abae31a2-cc7c-4a2d-b1cf-ed322480482e
+:END:
+#+title: Dispersive Fading Channel/Multipath Fading Channel
+#+date: [2025-04-08 Tue 15:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Dispersive [[id:8c79d3ee-766a-4f72-a070-7a44d0f85ac1][Fading]] Channel/Multipath Fading Channel
+If $\Delta T>T_s$
+ - \[y_i(t) = \lambda_iz_i(t) + \sum_{m=1}^{M} \sum_{u=1}^{U} \lambda_{i-m}^uz_{i-m}(t - \delta_u^{i-m}) + n_s(t)\]
+
+** TODO Received Signal
+Using a [[id:0cfc0c4f-2408-42e6-944f-e37acc4116f1][Discrete Receiver]]
+ - SOME LONG EQUATION :TODO:

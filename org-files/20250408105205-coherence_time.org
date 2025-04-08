@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       b46c0234-ae60-47ca-b311-c89820a62fd4
+:END:
+#+title: Coherence Time
+#+date: [2025-04-08 Tue 10:52]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Coherence Time
+ - The amount of time that the channel remains the 'same'.
+The [[id:cfec5fb5-467e-4a16-a78c-32ebbdd4fb9a][channel]] is expected to change over time. If at $t_1$ we have the [[id:8c187cae-c6ec-4298-85ef-12448f78b5e6][impulse response]] $h(t_1,t)$ and at $t_2$ we have the impulse response $h(t_2,t)$. The channel will have changed by $h(t_2,t)-h(t_2,t)$. If this is large the channel has undergone decoherence, Coherence Time is the measure of this time.
+
+** Cases
+1. \[\Delta T > T_s\]
+   - The channel does not change significantly during symbol transmission.
+2. \[\Delta T < T_s\]
+   - The channel does change significantly during symbol transmission.
+** Notation
+Denoted
+ - \[\Delta T\]
+
+

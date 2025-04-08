@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       e5b0d8e1-bef3-4b52-af41-355047228d01
+:END:
+#+title: The Matched Filter
+#+date: [2025-04-08 Tue 15:29]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* The Matched Filter
+Maximises the [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][SNR]] 
+ - \[c(t) = g^H(-t)\]

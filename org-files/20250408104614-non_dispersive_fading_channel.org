@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       788c38cf-cc37-463b-84d6-a40be1715904
+:END:
+#+title: Non-Dispersive Fading Channel
+#+date: [2025-04-08 Tue 10:46]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+[[id:8c79d3ee-766a-4f72-a070-7a44d0f85ac1][Fading]]
+* Non-Dispersive [[id:8c79d3ee-766a-4f72-a070-7a44d0f85ac1][Fading]] Channel
+ - One thing that causes this is the [[id:02463fc8-1fc6-427f-acd1-03542a688e16][Doppler Effect]]
+ - Increases bandwidth
+   - \[B_{Doppler} = B_{static} + 2|f_{d,\max}|\]
+** [[id:b46c0234-ae60-47ca-b311-c89820a62fd4][Coherence Time]]
+The Coherence Time and Doppler Effect are inversely proportional
+ - \[\Delta T \propto \frac{1}{f_{d}}\]
+ At large Doppler Effects the Coherence Time is small and the channel is changing quickly.
+ Rule of thumb:
+  - \[\Delta T = \sqrt{\frac{9}{16\pi f_{d,\max}^2}}\]
+
+Based on the coherence time we get two sub cases:
+*** Fast-Fading
+Each symbol gets a new attenuation:
+\[y_i(t) = \lambda_iz_i(t) + n_s(t)\]
+
+*** Slow Fading
+Blocks of symbols get a attenuation
+| Symbol                                 | Frame    | Attenuation |
+| $1, 2,\hdots N$                              | 1        | $\lambda_1$          |
+| $N+1, N+2,\hdots 2N$                   | 2        | $\lambda_2$          |
+| $\vdots$                                      | $\vdots$        | $\vdots$             |
+| $(M-1)N+1, (M-1)N+2,\hdots MN$  | M        | $\lambda_M$          |
+*** Deep Fading
+If $\lambda \approx 0$ the entire frame can be lost. There are methods to combat this.
+** Received Signal
+Using a [[id:0cfc0c4f-2408-42e6-944f-e37acc4116f1][Discrete Receiver]]
+ - \[r[i] = \lambda_ia_j\epsilon + n_s[i]\]

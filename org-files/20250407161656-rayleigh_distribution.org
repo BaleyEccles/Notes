@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       2f39c6c4-53d7-4281-b06b-41ec371e5ca2
+:END:
+#+title: Rayleigh Distribution
+#+date: [2025-04-07 Mon 16:16]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Rayleigh Distribution
+ - \[f(\lambda;\sigma) = f() = \frac{\lambda}{\sigma}e^{\frac{-\lambda^2}{2\sigma^2}}\]
+ - \[F(\lambda;\sigma) = 1 - e^{\frac{\lambda^2}{2\sigma^2}}\]
+ - [[file:ReighlyDist.png]]
+
+** [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]
+\[S(f-f_c) = \frac{1}{\pi f_d\sqrt{1 - (\frac{f-f_c}{f_d})^2}\]
