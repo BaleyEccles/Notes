@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       b33bc66e-a3b5-49b5-adf2-a416c00ea997
+:END:
+#+title: Terminated Lossless Transmission Lines
+#+date: [2025-04-10 Thu 12:31]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Terminated Lossless Transmission Lines
+Has the properties of a [[id:edebf41f-5b67-41c6-8996-7da80196e3a3][Lossless Transmission Line]]. But the line is terminated by some impedance.
+
+\[V(z) = V_0^+e^{-j\beta z} + V_0^-e^{j\beta z}\]
+\[I(z) = I_0^+e^{-j\beta z} + I_0^-e^{j\beta z} = \frac{V_0^{+}}{Z_0}e^{-j\beta z} - \frac{V_0^{-}}{Z_0}e^{j\beta z}\]
+Using The Voltage Reflection Coefficient
+ - \[V(z) = V_0^+(e^{-j\beta z} + \Gamma e^{j\beta z})\]
+ - \[V(z) = \frac{V_0^+}{Z_0}(e^{-j\beta z} - \Gamma e^{j\beta z})\]
+   
+** Standing Waves
+If $Z_L\neq Z_0$ a [[id:c32a1e4d-5f55-4266-a585-a89185bcb39a][Standing Wave]] is created.
+\[|V(z)| = |V_0^+|\sqrt{1+|\Gamma|^2+2|\Gamma|\cos(2\beta z + \theta_r)}\]
+\[|I(z)| = \frac{|V_0^+|}{Z_0}\sqrt{1+|\Gamma|^2+2|\Gamma|\cos(2\beta z + \theta_r)}\]
+We can define $d = -z$:
+\[|V(d)| = |V_0^+|\sqrt{1+|\Gamma|^2+2|\Gamma|\cos(2\beta d - \theta_r)}\]
+\[|I(d)| = \frac{|V_0^+|}{Z_0}\sqrt{1+|\Gamma|^2-2|\Gamma|\cos(2\beta d - \theta_r)}\]
+*** Peak Value
+Occurs when $2\beta d +\theta_r = 2n\pi$
+ - \[d_{\max} = \frac{n\lambda}{2} + \frac{\theta_r\lambda}{4\pi}\]
+   - \[\begin{cases}
+     n = 1,2,\dots & \textrm{if}\ \theta_r<0 \\
+     n = 0,1,2,\dots & \textrm{if}\ \theta_r\geq 0
+     \end{cases}\]
+*** Standing Wave Ratio (SWR)
+\[SWR = VSWR = \frac{V_{\max}}{V_{\min}} = \frac{1 + |\Gamma|}{1 - |\Gamma|}\]
+ - If $VSWR = 1$ the load is perfectly matched
+ - If $VSWR = \infty$ the load is completely mismatched
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Standing-Wave Ratio.xopp]]
+** Power
+\[P_{avg} = \frac{V_0^+}{2 Z_0}(1-|\Gamma|^2)\]
+** Voltage Reflection Coefficient
+\[\Gamma = \frac{V_0^+}{V_0^-} = \frac{Z_L - Z_0}{Z_L + Z_0}\]
+$\Gamma$ may be complex
+\[\Gamma = |\Gamma| e^{j\theta_r}\]
+ - $|\Gamma| < 1$ in passive circuits
+ - $\theta_r$ is the angle of reflection
+
+** Current Reflection Coefficient
+\[\Gamma_i = -\Gamma = \frac{I_0^-}{I_0^+} = \frac{Z_0 - Z_L}{Z_0 + Z_L}\]
+
+** Wave Impedance of a Lossless Transmission Line
+The wave impedance is $Z(d)$
+\[Z(d) = \left[\frac{1+\Gamma e^{-2j\beta d}}{1-\Gamma e^{-2j\beta d}}\right]Z_0\]
+ - The magnitude of $Z(d)$ is constant, but it may have a changing phase shift
+
+** Input Impedance
+$z(d)\vert_{d = l}$ is the Input Impedance at the input end of the transmission line
+\[Z_{in} = Z_{0}\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)}\]
+\[V_{in} = I_{in}Z_{in} = \frac{V_gV_{in}}{Z_g + Z_{in}}\]
+
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Reflection Coefficient of an RC Series Load.xopp]]

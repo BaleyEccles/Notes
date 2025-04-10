@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       b752bcbf-be29-41e5-9cee-53e1d091a42e
+:END:
+#+title: Telegrapher Equations
+#+date: [2025-04-10 Thu 12:28]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Telegrapher Equations
+Used to describe the voltage and current in a [[id:6af733cd-5562-4d42-a360-45271082b3c0][Transmission Line]]
+ - \[\frac{\partial v(z,t)}{\partial z} = -R'i(z,t) - L' \frac{\partial i(z,t)}{\partial t}\]
+ - \[\frac{\partial i(z,t)}{\partial z} = -G'v(z,t) - C' \frac{\partial v(z,t)}{\partial t}\]
+** In [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasor]] form
+ - \[\frac{d\tilde{V}(z)}{dz} = -\tilde{I}(z)(R' + L'j\omega)\]
+ - \[\frac{d\tilde{I}(z)}{dz} = -\tilde{V}(z)(G' + C'j\omega)\]
+** Wave Equation for $\tilde{V}(z)$
+ - \[\frac{d^2\tilde{V}(z)}{dz^2} -\tilde{V}(z)\gamma^2 = 0\]
+   - \[\gamma = \sqrt{(G' + C'j\omega)(R' + L'j\omega)} = \alpha + j\beta\]
+ - In [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasor]] domain
+   - \[\tilde{V}(z) = V_0^+e^{-\gamma z} + V_0^-e^{\gamma z}}\]
+ - \[V(z,t) = |V_0^+|e^{-\alpha z}\cos(\omega t-\beta z + \phi_+) + |V_0^-|e^{-\alpha z}\cos(\omega t+\beta z + \phi_-)\]
+** Wave Equation for $\tilde{I}(z)$
+ - \[\frac{d^2\tidle{I}(z)}{dz^2} -\tilde{I}(z)\gamma^2 = 0\]
+ - In [[id:749ce925-bf65-474e-af6f-62d75d94a1fd][Phasor]] domain
+   - \[\tilde{I}(z) = \frac{V_0^+}{Z_0}e^{-\gamma z} - \frac{V_0^-}{Z_0}e^{\gamma z}}\]
+ - \[I(z,t) = \frac{|V_0^+|}{|Z_0|}}e^{-\alpha z}\cos(\omega t-\beta z + \phi_+ - \phi_z) + \frac{|V_0^-|}{|Z_0|}}e^{-\alpha z}\cos(\omega t+\beta z + \phi_- - \phi_z)\]

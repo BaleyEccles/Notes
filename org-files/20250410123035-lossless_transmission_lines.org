@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       edebf41f-5b67-41c6-8996-7da80196e3a3
+:END:
+#+title: Lossless Transmission Lines
+#+date: [2025-04-10 Thu 12:30]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Lossless Transmission Lines
+A lossless [[id:6af733cd-5562-4d42-a360-45271082b3c0][Transmission Line]] has the properties:
+ - $R' = 0$ and $G' = 0$
+ - \[\gamma = \alpha + j\beta = j\omega\sqrt{L'C'}\]
+   - \[\alpha = 0\]
+ - \[Z_0 = \sqrt{\frac{L'}{C'}}\]
+** Wave Impedance of a Lossless Transmission Line
+The wave impedance is $Z(d)$
+\[Z(d) = \left[\frac{1+\Gamma e^{-2j\beta d}}{1-\Gamma e^{-2j\beta d}}\right]Z_0\]
+ - The magnitude of $Z(d)$ is constant, but it may have a changing phase shift
+
+** Input Impedance
+$z(d)\vert_{d = l}$ is the Input Impedance at the input end of the transmission line
+\[Z_{in} = Z_{0}\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)}\]
+\[V_{in} = I_{in}Z_{in} = \frac{V_gV_{in}}{Z_g + Z_{in}}\]
+
