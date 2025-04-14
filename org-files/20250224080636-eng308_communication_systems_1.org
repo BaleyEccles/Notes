@@ -42,10 +42,13 @@
 ** Practical laboratory
  - 20% of mark
  - Weeks 4, 5, 6
+ - [[id:a23a8aba-4910-4b08-a2bb-077accce5685][ENG308 - Communication Systems 1 - Lab 1]]
+ - [[id:9582f5c7-7ba7-4081-a559-4d2becc091fb][ENG308 - Communication Systems 1 - Lab 2]]
 ** Simulation project
  - 25% of mark
  - Two parts
    - Analog and digital
  - [[id:4e1476b3-c09e-4372-81de-a54b491d8a1d][ENG308 - Communication Systems 1 - Assignment 1]]
+ - [[id:358ec344-ce1e-4d60-be9f-b0b6529d4649][ENG308 - Communication Systems 1 - Assignment 1 - Question 2]]
 ** Final exam
  - 40% of mark

@@ -27,6 +27,7 @@
 ** Project Report
  - Week 13
  - 40% of mark
+ - [[id:091d3056-df3b-466d-8d5a-3d309e5a07f0][ENG307 Electrical and Mechatronic Design - Project]]
 *** Notes
  - Water pump system
  - Two tanks
@@ -41,6 +42,7 @@
  - 10% of mark
 ** Laboratory Demonstration
  - [[id:aa89e0a2-e7a6-4527-ac8b-6d40955aed96][ENG307 - Electrical and Mechatronic Design - Lab 1]]
+ - [[id:afa8876a-42ca-469c-8adf-1ba127276d06][ENG307 - Electrical and Mechatronic Design - Lab 2]]
  - 20% - 10% of mark?
 *** Lab 2
 Design a band pass filter
