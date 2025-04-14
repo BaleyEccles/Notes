@@ -5,6 +5,7 @@
 #+date: [2025-04-03 Thu 15:37]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:
 
 * Project Report 1
 
