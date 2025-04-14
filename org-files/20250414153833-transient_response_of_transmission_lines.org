@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       7d2faf30-558d-49c5-b3c4-c01535727f08
+:END:
+#+title: Transient Response of Transmission Lines
+#+date: [2025-04-14 Mon 15:38]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Transient Response of Transmission Lines
+We can use the Transient Response to find the steady state characteristics
+
+** Steady State Characteristics
+We can put in a [[id:df314ae5-1b35-49a3-be34-8d0aeb720ff3][unit step function]] ($u(t)$)
+The steady state voltage:
+ - \[V_{\infty} = V_1^+(1+\Gamma_L) \frac{1}{1-\Gamma_L\Gamma_g} = \frac{V_gR_L}{R_g + R_L}\]
+The steady state current:
+ - \[I_{\infty} = \frac{V_{\infty}}{R_L} = \frac{V_g}{R_g + R_L}\]
+We can use [[id:7e2063ad-659c-4a1b-9f86-8818305dd9bc][Bounce Diagrams]] to visualise this

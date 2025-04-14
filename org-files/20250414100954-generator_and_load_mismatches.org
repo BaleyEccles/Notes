@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       a286ab7e-7804-48b0-8d15-837d9dc6ca61
+:END:
+#+title: Generator and Load Mismatches
+#+date: [2025-04-14 Mon 10:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Generator and Load Mismatches
+** Generator Reflection Coefficient
+\[\Gamma_g = \frac{Z_g-Z_0}{Z_g+Z_0}\]
+Tells us how much of the wave reflected from the load we expect to be re-reflected at the generator.
+If $Z_g = Z_0$ there will be no secondary reflection

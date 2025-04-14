@@ -40,4 +40,8 @@ We should use Transmission Line Theory if
 ** Types
 [[id:edebf41f-5b67-41c6-8996-7da80196e3a3][Lossless Transmission Lines]]
 [[id:b33bc66e-a3b5-49b5-adf2-a416c00ea997][Terminated Lossless Transmission Lines]]
+[[id:d27c946f-04a7-4c79-adff-dae28a2faaf4][Matched Transmission Line]]
+[[id:a286ab7e-7804-48b0-8d15-837d9dc6ca61][Generator and Load Mismatches]]
 
+** Transient Response of Transmission Lines
+ - [[id:7d2faf30-558d-49c5-b3c4-c01535727f08][Transient Response of Transmission Lines]]

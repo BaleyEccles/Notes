@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       b9657e2e-2b4a-4013-ab28-1f71d10530f5
+:END:
+#+title: Open Circuit Short Circuit Technique
+#+date: [2025-04-14 Mon 15:43]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Open Circuit Short Circuit Technique
+We can use the [[id:b9657e2e-2b4a-4013-ab28-1f71d10530f5][Open Circuit Short Circuit Technique]] to find the impedance of the [[id:6af733cd-5562-4d42-a360-45271082b3c0][Transmission Line]]
+\[Z_0 = \sqrt{Z_{in}^{OC}Z_{in}^{SC}}\]
+\[\sqrt{-\frac{Z_{in}^{SC}}{Z_{in}^{OC}}} = \tan(\beta l)\]
+*** TODO Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Measuring-Z0-and-beta.xopp]]

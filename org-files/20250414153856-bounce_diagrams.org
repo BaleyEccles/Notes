@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       7e2063ad-659c-4a1b-9f86-8818305dd9bc
+:END:
+#+title: Bounce Diagrams
+#+date: [2025-04-14 Mon 15:38]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bounce Diagrams
+Represents how the signal bounces inside a [[id:6af733cd-5562-4d42-a360-45271082b3c0][Transmission Line]]
+Example:
+ - [[file:Screenshot 2025-04-14 at 10-33-13 ENG305 Week 8 Lecture Slides.pdf.png]]

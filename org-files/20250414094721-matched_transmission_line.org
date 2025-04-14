@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       d27c946f-04a7-4c79-adff-dae28a2faaf4
+:END:
+#+title: Matched Transmission Line
+#+date: [2025-04-14 Mon 09:47]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Matched Transmission Line
+This is the perfect case, as none of the voltage will be reflected in the [[id:6af733cd-5562-4d42-a360-45271082b3c0][Transmission Line]]
+When $Z_L = Z_0$
+:TODO: More to come when we cover impedance matching and smith charts
