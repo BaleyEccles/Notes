@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       65406d24-1416-4538-a316-638a2cf912eb
+:END:
+#+title: Differential Phase shift keying (DPSK)
+#+date: [2025-04-14 Mon 15:20]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Differential Phase shift keying (DPSK)
+We can prevent $180^o$ ambiguity using this
+ - If the bit is a '0' dont invert the current signal
+ - If the bit is a '1' invert the current signal
+** Advantages
+ - Lower bandwidth requirements
+ - Can be decoded without absolute signal output
+ - Receivers inexpensive
+** Disadvantages
+ - Modulation errors are multiplicative

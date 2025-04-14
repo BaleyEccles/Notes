@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       44e2b236-fe48-411c-9dec-a4a46674f379
+:END:
+#+title: Quadrature Amplitude Modulation (QAM)
+#+date: [2025-04-14 Mon 13:36]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Quadrature Amplitude Modulation (QAM)
+Includes both phase and amplitude change:
+\[z(t) = I(t) + jQ(t)\]
+
+** [[id:96e16018-80aa-4fde-af31-70105649a40c][IQ-Graph]]
+4-QAM example:
+ - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/IQ-Graph-QAM.xopp]]
+16-QAM example:
+ - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/IQ-Graph-QAM-16.xopp]]
+
+** Advantages
+ - Efficient use of bandwidth
+   - High number of bits per carrier waveform
+ - Compared to [[id:d272c047-df78-4f69-8f3e-b682c8f53a99][PSK]], less susceptible to errors
+ - 
+** Disadvantages
+ - Require very high [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][SNR]]
+   - At high constellation levels
+   - Difficult to achieve in practice
+ - Tx require a more robust linear power amplifier
+ - Compared to other modulation schemes, QAM is more susceptible to errors

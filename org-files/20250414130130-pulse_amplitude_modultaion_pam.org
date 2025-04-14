@@ -1,0 +1,11 @@
+:PROPERTIES:
+ :ID:       a424999e-1f28-437b-92f3-ba2f21cf8138
+:END:
+#+title: Pulse Amplitude Modultaion (PAM)
+#+date: [2025-04-14 Mon 13:01]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Pulse Amplitude Modultaion (PAM)
+\[z(t) = I(t)\]
+The quadrature component is zero ($Q(t) = 0$)

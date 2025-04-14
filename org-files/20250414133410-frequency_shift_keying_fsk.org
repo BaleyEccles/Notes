@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       b36203ff-c777-465d-bf78-b6fac862f519
+:END:
+#+title: Frequency shift keying (FSK)
+#+date: [2025-04-14 Mon 13:34]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Frequency shift keying (FSK)
+Cannot use a [[id:96e16018-80aa-4fde-af31-70105649a40c][IQ-Graph]] for this
+Change the frequency of the signal to transmit bits
+
+** Advantages
+ - High data rates
+ - Low error probability
+ - Less noise susceptibility
+ - High [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][Signal To Noise Ratio (SNR)]]
+
+** Disadvantages
+ - Very high bandwidth requirements
+ - Limitation for low-speed modems
+ - BER is worse than [[id:d272c047-df78-4f69-8f3e-b682c8f53a99][PSK]] in [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][AWGN Channel]]
+

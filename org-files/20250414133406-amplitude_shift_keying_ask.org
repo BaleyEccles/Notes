@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       39aeef01-165d-47ad-ada9-6de586e1e52c
+:END:
+#+title: Amplitude shift keying (ASK)
+#+date: [2025-04-14 Mon 13:34]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Amplitude shift keying (ASK)
+Special case of [[id:a424999e-1f28-437b-92f3-ba2f21cf8138][(PAM)]]
+
+** [[id:96e16018-80aa-4fde-af31-70105649a40c][IQ-Graph]]
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/IQ-Graph-ASK.xopp]]
+
+** Advantages
+ - Simple tx & rx
+ - Easy data transfer
+ - No signal processing
+   
+** Disadvantages
+ - Susceptible to noise
+ - Large bandwidth requirement
+ - Lower transmission efficiency

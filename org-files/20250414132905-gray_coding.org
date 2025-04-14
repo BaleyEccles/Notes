@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       ad9c0e92-adb3-4bc9-85cc-ac3e76267d56
+:END:
+#+title: Gray Coding
+#+date: [2025-04-14 Mon 13:29]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Gray Coding
+A method to ensure that only one bit is different that their neighbours.
+There is no reason to not use Gray Coding, that is, it should always be used.
+
+** Generate Gray Codes
+1. Start with the Gray code of n-1 bits
+2. Generate the second list by reflecting the first list
+3. Prefix every entry in the old list with a '0'
+4. Prefix every entry in the new list with a '1'
+5. Concatenate the two lists

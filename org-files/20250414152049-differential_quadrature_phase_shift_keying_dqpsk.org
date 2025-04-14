@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       e699150a-7d97-4f5d-b505-abff0dade347
+:END:
+#+title: Differential Quadrature Phase shift keying (DQPSK)
+#+date: [2025-04-14 Mon 15:20]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Differential Quadrature Phase shift keying (DQPSK)
+ - '00' -> no phase change
+ - '01' -> $+90^o$ phase change
+ - '11' -> $+180^o$ phase change
+ - '10' -> $+270^o$ phase change
+** Advantages
+ - Lower bandwidth requirements
+ - Can be decoded without absolute signal output
+ - Receivers inexpensive
+** Disadvantages
+ - Modulation errors are multiplicative
