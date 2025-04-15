@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       7c91149e-2c44-495c-8f22-24725f4329a3
+:END:
+#+title: Lossy Transmission Lines
+#+date: [2025-04-15 Tue 16:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Lossy Transmission Lines
+A transmission where the voltage and current reduces over distance.
+\[\tilde{V}(z) = V_0^+(e^{-\gamma z} + \Gamma e^{\gamma z})\]
+\[\tilde{I}(z) = \frac{V_0^+}{Z_0}(e^{-\gamma z} + \Gamma e^{\gamma z})\]
+
+\[Z_{in}^{lossy}(-l) = \frac{\tilde{V}(-l)}{\tilde{I}(-l)} = Z_0\frac{Z_L + Z_0\tanh(\gamma l)}{Z_0 + Z_L\tanh(\gamma l)}\]
+   
+** Power
+\[P_{in}^{lossy} = \frac{|V_0^+|^2}{2Z_0} (1-|\Gamma|^2)e^{-2\alpha l}\]
+\[P_{loss} = P_{in}^{lossy}-P_{L}^{lossy} = \frac{|V_0^+|^2}{2Z_0}\left[\left(e^{2\alpha l}-1\right) + |\Gamma|^2\left(1-e^{2\alpha l}\right)\right]\]
+
+** The Heaviside Condition / [[id:ebf72bf3-96a1-465d-bce5-2ed9df5de23b][Distortionless Transmission Line]]
+A special case of a [[id:7c91149e-2c44-495c-8f22-24725f4329a3][Lossy Transmission Line]]
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/Line-Parameters-of-a-Distortionless-Transmission-Line.xopp]]

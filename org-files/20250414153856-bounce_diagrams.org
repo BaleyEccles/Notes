@@ -10,3 +10,6 @@
 Represents how the signal bounces inside a [[id:6af733cd-5562-4d42-a360-45271082b3c0][Transmission Line]]
 Example:
  - [[file:Screenshot 2025-04-14 at 10-33-13 ENG305 Week 8 Lecture Slides.pdf.png]]
+
+** TODO Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Pulse-Propagation-Example.xopp]]

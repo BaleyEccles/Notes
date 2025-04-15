@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       7ea297c6-78cb-4a6b-b4a5-b0af9176122e
+:END:
+#+title: Dispersion
+#+date: [2025-04-15 Tue 16:28]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Dispersion
+When different frequencies travel at different speeds.

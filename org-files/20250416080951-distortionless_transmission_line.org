@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       ebf72bf3-96a1-465d-bce5-2ed9df5de23b
+:END:
+#+title: Distortionless Transmission Line
+#+date: [2025-04-16 Wed 08:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Distortionless Transmission Line
+A line that contains no [[id:7ea297c6-78cb-4a6b-b4a5-b0af9176122e][Dispersion]] or distortion.
+A transmission line is distortionless if it satisfies the Heaviside Condition:
+
+** Heaviside Condition
+\[\frac{R'}{L'} = \frac{G'}{C'}\]
+Then:
+\[\gamma = \alpha + j\beta = \sqrt{(R + j\omega L)(G+j \omega C)}\]
