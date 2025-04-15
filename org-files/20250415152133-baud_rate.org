@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       5dccdd63-9461-4871-a188-ac014808fd56
+:END:
+#+title: Baud Rate
+#+date: [2025-04-15 Tue 15:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Baud Rate
+The rate at which we send symbols
+

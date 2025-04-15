@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       e6136e1b-5463-4667-8f0a-af94fee2ede2
+:END:
+#+title: Bit Rate
+#+date: [2025-04-15 Tue 15:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bit Rate
+The rate at which we send bits

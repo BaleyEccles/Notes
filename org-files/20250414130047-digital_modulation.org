@@ -7,6 +7,7 @@
 #+STARTUP: latexpreview
 
 * Digital Modulation
+[[id:ec03d04f-b7f9-4f2a-89ad-aa8dd3a2bbb2][Bit Rate vs Baud Rate]]
 [[id:96e16018-80aa-4fde-af31-70105649a40c][IQ-Graph/Constellation]]
 ** Discrete Memory-less Modulation
  - [[id:96e16018-80aa-4fde-af31-70105649a40c][IQ-Graph/Constellation]]
@@ -25,12 +26,11 @@ Modulation:
  - [[id:d272c047-df78-4f69-8f3e-b682c8f53a99][Phase shift keying (PSK)]]
  - [[id:44e2b236-fe48-411c-9dec-a4a46674f379][Quadrature Amplitude Modulation (QAM)]]
  - [[id:a424999e-1f28-437b-92f3-ba2f21cf8138][Pulse Amplitude Modultaion (PAM)]]
-
      
 ** Differential coding methods
 method of coding that contains memory
 *** Types
  - [[id:65406d24-1416-4538-a316-638a2cf912eb][Differential Phase shift keying (DPSK)]]
  - [[id:e699150a-7d97-4f5d-b505-abff0dade347][Differential Quadrature Phase shift keying (DQPSK)]]
-
-
+** Analogue to Digital
+[[id:4653c294-ae9d-4f2e-af63-67ef940f74eb][Pulse-Code Modulation]]

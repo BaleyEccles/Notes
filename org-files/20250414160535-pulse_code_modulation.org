@@ -1,0 +1,53 @@
+:PROPERTIES:
+:ID:       4653c294-ae9d-4f2e-af63-67ef940f74eb
+:END:
+#+title: Pulse-Code Modulation
+#+date: [2025-04-14 Mon 16:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Pulse-Code Modulation
+Used to represent analogue data in a digital format
+A signal can be modulated by making it discrete:
+ - [[file:Screenshot 2025-04-14 at 16-08-49 Gnuplot.png]]
+ - \[\Delta = \frac{m_{peak}}{2^{n-1}}\]
+   - Where $m_{peak}$ is the max value from 0 (excluding DC offset)
+   - $\Delta$ is the change in height
+   - $n$ is the number of height values
+** Linear Pulse-Code Modulation (LPCM)
+The time change ($T_s$) and the height change ($\Delta$) is constant
+** Quantisation Error
+ - \[q,\ \frac{-\Delta}{2}\leq q \leq \frac{\Delta}{2}\]
+ - \[\Pr(q) = \begin{cases}
+   \frac{1}{\Delta}, & \frac{-\Delta}{2}\leq q \leq \frac{\Delta}{2} \\
+   0, & \textrm{else}
+   \end{cases}\]
+
+** Mean Square Error (MSE)
+ - \[MSE = E\{q^2\} = \int_{-\infty}^{\infty}q^2\Pr(q)dq = \frac{\Delta^2}{12}\]
+
+** [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][Signal To Noise Ratio (SNR)]]
+ - \[SNR = \frac{P}{MSE} = \frac{3 P}{m_{peak}^2}2^{2n} = 6.02n + 10\log_{10}\left(\frac{3P}{m_{peak}^2}\right)} [dB]\]
+   - Where $P$ is the power of the message signal
+If the signal is band limited to $B$ Hz and sampled at $2B$ Hz. We must transmit $2nB$ bits per second. So the minimum bandwidth is:
+\[B_T = nB\]
+so,
+\[n = \frac{B_T}{B}\]
+\[SNR = \frac{3P}{m_{peak}^2}2^{\frac{2B_T}{B}}\]
+Small increases in the bit depth $n$, or small increases in the transmission bandwidth $B_T$ lead to large gains in the $SNR$.
+
+** Companding
+We can choose $\Delta$ to be non-uniform
+
+*** For Audio
+Or data that has large and uncommon peaks
+\[y = \textrm{sgn}(x) = \begin{cases}
+\frac{A|x|}{1 + \ln(A)}, & |x| < \frac{1}{A} \\
+\frac{1 + \ln(A|x|)}{1 + \ln(A)}, & \frac{1}{A} \leq |x| < 1
+\end{cases}\]
+\[x = \textrm{sgn}(y) = \begin{cases}
+\frac{|y|(1+\ln(A)}{A}, & |y| < \frac{1}{1+\ln(A)} \\
+\frac{e^{|y|(1+\ln|A|) - 1}}{A}, & \textrm{else}
+\end{cases}\]
+The standard in Europe is $A = 87.6$
+

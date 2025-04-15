@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       ec03d04f-b7f9-4f2a-89ad-aa8dd3a2bbb2
+:END:
+#+title: Bit Rate vs Baud Rate
+#+date: [2025-04-14 Mon 16:42]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* [[id:e6136e1b-5463-4667-8f0a-af94fee2ede2][Bit Rate]] vs [[id:5dccdd63-9461-4871-a188-ac014808fd56][Baud Rate]]
+\[\textrm{Baud rate} = \frac{\textrm{Bit Rate}}{\log_2(\textrm{Symbols})} = \frac{\textrm{Bit Rate}}{\textrm{Bits}}\]
+
+** Example
+We can send '0010' at 1 Baud, with a bit rate of 4.
+** Example 2
+Bit rate = 4800 bits/second
+With 64-QAM:
+\[\textrm{Baud rate} = \frac{4800}{\log_2(64)} = 800\ \textrm{baud}\]

@@ -7,8 +7,10 @@
 #+STARTUP: latexpreview
 
 * Nyquist-Shannon Capacity Theorem
- - $c = w\log_{2}\left( 1 + \frac{P}{wN_0}\right)$
+ - $c = w\log_{2}\left( 1 + SNR\right)$
    - $c$: max bits/second
    - $wN_0$: Noise power
    - $P$: Signal power
- - $\frac{P}{wN_0}$: Signal to noise ratio
+ - $SNR$: [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][Signal to noise ratio]]
+
+This constrains how much data we can send through a channel. It gives us an upper limit on the bits/second.
