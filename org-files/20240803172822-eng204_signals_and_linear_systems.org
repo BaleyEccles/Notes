@@ -9,7 +9,7 @@
  - [[id:14718dfe-c826-48a7-bc6c-b6ef37d0badc][Generalised Functions]]
  - [[id:b01c8577-794b-41fc-b88c-143b1711d726][Analogue And Digital Filter Design]]
  - [[id:0b4602d8-f569-4bb8-a8cf-1ba0fdec84d9][Stochastic Signals]]
-* Assesment
+* Assessment
 ** Assessment Task 1: Semester test 1
 - During Week 5
 - 15% of mark
@@ -27,7 +27,7 @@
 ** Assessment Task 4: Group project 2
 - Week 13
 - 20% of mark
-- [[id:7d1bb30c-084d-4895-9100-22b39a5c4f8c][ENG204 - Signals and Linear Systems - Assignment 2]]
+- [[id:a3d3cc8c-d626-4e38-93be-e6247722d6b4][ENG204 - Signals and Linear Systems - Assignment 2]]
 ** Assessment Task 5: Final Exam
 - Exam Period
 - 40% of mark
