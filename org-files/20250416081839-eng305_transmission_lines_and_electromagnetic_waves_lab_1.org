@@ -1,0 +1,166 @@
+:PROPERTIES:
+:ID:       85185dd2-56d6-4d56-842e-49486b768c85
+:END:
+#+title: ENG305 - Transmission Lines and Electromagnetic Waves - Lab 1
+#+date: [2025-04-16 Wed 08:18]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER: \usepackage[style=apa, backend=biber]{biblatex}
+#+LATEX_HEADER: \DeclareLanguageMapping{english}{english-apa}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+
+yingjink@utas.edu.au
+
+beccles@utas.edu.au
+
+* ENG305 - Transmission Lines and Electromagnetic Waves - Lab 1
+Using transmission line number: 11
+** Part 1: Measurement of Transmission Line Constants
+*** 1
+Calculations:
+
+| Parameter | Value    |
+| $L$       | 656uH    |
+| $D_s$     | 0.037    |
+| $C$       | 9.9nF    |
+| $D_p$     | 0.000244 |
+| $R$       | 157m     |
+| $G$       | 1/(64M)  |
+
+
+ESR = 157m
+EPR = 64M
+
+
+*** 2
+Calculations:
+\[Z_0 = \sqrt{\frac{R + j\omega L}{G + j\omega C}}\]
+\[\gamma = \sqrt{(R + j\omega L)(G + j\omega C)}\]
+| Parameter                  | Values       |
+| $Z_0$                      | 256.18       |
+| $\gamma = \alpha + j\beta$ | 0.000307 + 0.016j |
+*** 3
+OC: Not matched, reflections occur
+SC: \Gamma = -1
+*** 4
+| Parameter | Values       |
+| $R2_{OC}$ | 233 $\Omega$ |
+| $R2_{SC}$ | 250 $\Omega$ |
+
+*** 5
+
+| Parameter | Values |
+| $u_p$     | 392700 |
+\[u_p = \frac{\omega}{\beta}\]
+*** 6
+50us
+| Parameter | Values |
+| $l$       | 9.81m  |
+
+\[v = \frac{l}{t}\]
+\[l = 9.81\]
+*** 7
+| Parameter      | Values    |
+| $RL_{matched}$ | 272\Omega |
+We expect RLmatched to be the same as Z0, ROC and RSC
+
+*** TODO 8
+It stays matched when changing R2.
+
+*** TODO 9
+
+*** TODO 10
+\[Z_0 = \sqrt{\frac{L}{C}} = 257.4\]
+
+
+
+** Part 2: Steady State AC Measurements
+
+*** 1
+Using:
+\[u_p = \lambda f\]
+\[l = \lambda\]
+\[2l = \lambda\]
+We can get $f \in (20\ 000, 40\ 000)$ we chose $30kHz$
+
+Using note at end of sheet:
+OC:
+\[Z_{in,OC} = 75.3 - 649j\Omega\]
+
+\[V1 = 1.4e^{j 0^o}\]
+\[V2 = 1.26e^{j -20^o}\]
+\[R = 250\Omega\]
+
+SC:
+\[Z_{in,SC} = 6.62 - 93j\Omega\]
+
+\[V1 = 1.26e^{j 0^o}\]
+\[V2 = 0.433e^{j 66^o}\]
+\[R = 250\Omega\]
+
+Characteristic Impedance:
+\[Z_0 = \sqrt{Z_{in,OC}Z_{in,SC}} = 246.8 + 5.5j\Omega\]
+
+Discussion:
+The results are similar, which is what we expect.
+*** 2
+Using:
+\[u_p = \lambda f\]
+\[4l = \lambda\]
+\[\frac{4}{3}l = \lambda\]
+We can get $f \in (10\ 000, 30\ 000)$ we chose $20kHz$
+
+| Load      |     1 |     2 |     3 |     4 |     5 |     6 |     7 |     8 |   9 |    10 |    11 |    12 |    13 |
+| OC        |     1 |  1.16 |  1.23 | 1.167 | 0.967 |   0.7 | 0.333 | 0.133 | 0.5 | 0.833 |   1.1 | 1.233 | 1.233 |
+| SC        | 1.033 | 0.633 |   0.2 |   0.3 |   0.7 |   1.1 |  1.33 | 1.433 | 1.4 |   1.2 | 0.867 | 0.467 | 0.033 |
+| $Z_0=250$ |   0.8 | 0.933 | 0.967 |   0.9 | 0.767 | 0.600 |   0.4 | 0.367 | 0.5 |   0.7 | 0.867 | 0.933 | 0.933 |
+| ?         |   0.5 | 0.667 |   0.8 |   0.9 |   0.9 | 0.833 |   0.7 | 0.533 | 0.4 | 0.433 | 0.567 | 0.733 | 0.833 |
+#+BEGIN_SRC octave :exports none :results output :session Q1
+clc
+clear
+close all
+OC = [1,1.16,1.23,1.167,0.967,0.7,0.333,0.133,0.5,0.833,1.1,1.233,1.233];
+OC_VSWR = max(OC)/min(OC)
+SC = [1.033,0.633,0.2,0.3,0.7,1.1,1.33,1.433,1.4,1.2,0.867,0.467,0.033];
+SC_VSWR = max(SC)/min(SC)
+Z0 = [0.8,0.933,0.967,0.9,0.767,0.600,0.4,0.367,0.5,0.7,0.867,0.933,0.933];
+Z0_VSWR = max(Z0)/min(Z0)
+Mystery = [0.5,0.667,0.8,0.9,0.9,0.833,0.7,0.533,0.4,0.433,0.567,0.733,0.833];
+Mystery_VSWR = max(Mystery)/min(Mystery)
+t = 1:1:length(OC);
+figure;
+plot(t,OC)
+figure;
+plot(t,SC)
+figure;
+plot(t,Z0)
+figure;
+plot(t,Mystery)
+#+END_SRC
+
+#+RESULTS:
+: OC_VSWR = 9.2707
+: SC_VSWR = 43.424
+: Z0_VSWR = 2.6349
+: Mystery_VSWR = 2.2500
+^ Are wrong
+*** 3
+$Z_{??} = 115.699 + 86.6473j$
+** Part 3: Dispersion
+
+*** 1
+| Phase Shift ($^o$) | 90 | 270 | 450 | 630 | 810 | 990 | 1170 | 1350 | 1530 | 1710 | 1890 |
+| $f$                |    |     |     |     |     |     |      |      |      |      |      |
+
+*** 2
+
+*** 3
+
+*** 4
