@@ -14,12 +14,16 @@
 #+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+
 
 * ENG308 - Communication Systems 1 - Assignment 1 - Question 3
-I decided to use DSB-SC amplitude modulation and FM modulation.
+I decided to use DSB-SC amplitude modulation and frequency modulation.
 
 ** DSB-SC
-First lets look at DSB-SC with no noise present. Modulating and demodulating the signal we hear no audible difference in the music, which is obviously to be expected.
+*NOTE:* To reproduce the audio files in this section modify the respective values in ~DSB_SC.m~. \\
+
+First lets look at DSB-SC with no noise present (~music.wav~). Modulating and demodulating the signal we hear no audible difference in the music, which is obviously to be expected. \\
 
 The signal was modulated using:
 #+BEGIN_SRC octave :exports code :results output :session SSB
@@ -27,7 +31,6 @@ fc = 10 000;
 c = cos(2*pi * fc * t);
 u = m.*c;
 #+END_SRC
-
 
 And demodulated using:
 #+BEGIN_SRC octave :exports code :results output :session SSB
@@ -40,146 +43,79 @@ Wn = fc / (fs/2);
 
 yf = filtfilt(b, a, y);
 #+END_SRC
-When the music was imported, ~fs~ was 48000 Hz.
-From the plot below we can see that the choice for ~fc~ does not fully extract all of the signal. The modulated signal contains data that goes below 0Hz , the amount of the signal that reaches this is minimal, and given that this is audio data, it is fine to be ignored. We can determine a bandwidth for this signal, it is $\approx 24 kHz$, however as we will hear not all of this is needed to maintain the majority of our signal.
+When the music was imported, ~fs~ was 48000 Hz. \\
+
+From the plot in Figure \ref{fig:DSB_SC_MAG} we can see that the choice for ~fc~ does not fully extract all of the signal. The modulated signal contains data that goes below 0Hz , the amount of the signal that reaches this is minimal, and given that this is audio data, it is fine to be ignored. We can determine a bandwidth for this signal, it is about 24 kHz, however as we will see that not all of this is needed to maintain the majority of our signal.
 
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Magnitude plot of DSB-SC modulated signal
+#+CAPTION: Magnitude plot of DSB-SC modulated signal \label{fig:DSB_SC_MAG}
 [[./Music_DSB_SC_Mag.png]]
-
-
 
 Next lets add noise. Simply using the AWGN function in Matlab:
 #+BEGIN_SRC octave :exports code :results output :session SSB
 u = awgn(u, SNR);
 #+END_SRC
 
-The magnitude plot can be seen below with and SNR of 10:
+
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Magnitude plot of DSB-SC modulated signal with AWGN
+#+CAPTION: Magnitude plot of DSB-SC modulated signal with AWGN  \label{fig:DSB_SC_NOISE_MAG}
 [[./Music_DSB_SC_Noise_Mag.png]]
 
-When demodulated the output audio clearly has noise in it, although the song can still be heard. This can also clearly be seen in the magnitude plot, there is a noise floor at about 0.1. If the magnitude of the frequency is greater than 0.1 we expect to be able to differentiate it from the noise.
+The magnitude plot can be seen in Figure \ref{fig:DSB_SC_NOISE_MAG} with an SNR of 20. When demodulated the output audio (~music_DSB_SC_Noise.wav~) clearly has noise in it, although the song can still be heard. This can also clearly be seen in the magnitude plot, there is a noise floor at about 0.1. If the magnitude of the frequency is greater than 0.1 we expect to be able to differentiate it from the noise. \\
 
-Lets apply a bandpass filter around the carrier frequency to hear how well it removes the noise, and compare it to the original signal with no noise. This will be done using an ideal band-pass filter seen in the following code snippet:
-
+Lets apply a bandpass filter (~music_DSB_SC_Noise_BP.wav~) around the carrier frequency to hear how well it removes the noise, and compare it to the original signal with no noise. This will be done using a bandpass filter seen in the following code snippet:
 #+BEGIN_SRC octave :exports none :results output :session SSB
-f_low = 8000;
-f_high = 12000;
-Wn = [f_low f_high] / (fs/2)
-
+BW = 8e3;
+f_low = fc - BW/2;
+f_high = fc + BW/2;
+Wn = [f_low f_high] / (fs/2);
 [b, a] = butter(4, Wn, 'bandpass');
-
-y = filtfilt(b, a, y);
+u = filtfilt(b, a, u);
 #+END_SRC
 
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Magnitude plot of DSB-SC modulated signal with AWGN and filted using a bandpass filter
+#+CAPTION: Magnitude plot of DSB-SC modulated signal with AWGN and filted using a bandpass filter \label{fig:DSB_SC_NOISE_MAG_BP}
 [[./Music_DSB_SC_Noise_Mag_BP.png]]
 
-The bandpass filter was able to remove most of the noise, the only noise that is still present is the low frequency noise. This makes sense, as our filter was not trying to remove it. This can also clearly be heard in the output audio file, the high frequency noise is not present and the low frequency noise can clearly be heard.
+As seen in Figure \ref{fig:DSB_SC_NOISE_MAG_BP}, the bandpass filter was able to remove most of the noise, the only noise that is still present is the low frequency noise. This makes sense, as our filter was not trying to remove it. This can also clearly be heard in the output audio file, the high frequency noise is not present and the low frequency noise can clearly be heard. \\
 
-We can also clearly hear the music, although a bit distorted. For an audio particular use case where we have limited bandwidth it would be a good idea to just remove the frequencies as we have done here. As we would still be able to hear most of the audio while reducing our bandwidth a lot, the new bandwidth is $\approx 4 kHz$.
+We can also clearly hear the music, although a bit distorted. For an audio particular use case where we have limited bandwidth it would be a good idea to just remove the frequencies as we have done here. As we would still be able to hear most of the audio while reducing our bandwidth a lot, the new bandwidth is $\approx 4 kHz$. \\
 
-Lets see how far low our bandwidth can go.
+Lets see how low our bandwidth can go.
 1. $3 kHz$
    - The song was still able to be heard. I would even say that it would be reasonable to drop the our bandwidth to this if our bandwidth was so limited.
 2. $2 kHz$
    - Once again, the song was still able to be heard. However it is starting to lose quality at the higher frequencies
-3. $1 kHz$
-   - At this point a lot of the higher frequencies are not present at all. I think this is where we start losing a large majority of the critical data. In the song when it transitions from a lower to a higher frequency it can clearly be heard where the frequency cuts off.
+3. $1 kHz$ (~music_DSB_SC_Noise_BP_1k.wav~)
+   - At this point a lot of the higher frequencies are not present at all. This is where we start losing a large majority of the critical data. In the song when it transitions from a lower to a higher frequency it can clearly be heard where the frequency cuts off.
 4. $500 Hz$
-   - The song is barely audible at this point. The lower frequencies can still barely be heard, but not very well. 
+   - The song is barely audible at this point. The lower frequencies can still barely be heard, but not very well.
 Changing the bandwidth was done by changing ~f_low~ and ~f_high~ to values that gave an equal amount of frequencies at either end of the signal while achieving the specified bandwidth.
-   
+
+Now that we have developed a reasonable bandwidth (4kHz) for our signal, lets decrease the SNR to various values.
+1. $SNR = 20$
+   - There is clearly noise, but the music can be heard fine.
+2. $SNR = 15$
+   - The music is still audible but the noise is starting to take over.
+3. $SNR = 10$ (~music_DSB_SC_Noise_BP_4k_SNR_10.wav~)
+   - The music barely audible.
+4. $SNR = 5$
+   - The music is basically only noise now. The high frequencies are slightly peaking over the noise.
+These were made by changing the SNR value in the ~matlab~ script.
 #+BEGIN_SRC octave :exports none :results output :session SSB
-clc
-clear
-close all
-
-if exist('OCTAVE_VERSION', 'builtin')
-  pkg load signal
-  pkg load communications
-  set(0, "DefaultAxesFontSize", 25);
-end
-
-
-fc = 10000;
-[m, fs] = audioread("music.wav");
-
-t = 5.*(1:length(m))./(length(m));
-m = m(1:length(m));
-
-% Modulate Signal
-c = cos(2*pi * fc * t);
-u = m.*c;
-
-u = awgn(u, 20);
-
-N = length(t);
-f = (-N/2:N/2-1)*(fs/N);
-
-
-f_low = 9750;
-f_high = 10250;
-Wn = [f_low f_high] / (fs/2);
-
-[b, a] = butter(4, Wn, 'bandpass');
-
-u = filtfilt(b, a, u);
-
-U = fftshift(fft(u));
-mag = abs(U);
-angle = angle(U);
-
-
-% Demod signal
-osc = cos(2*pi*fc.*t);
-y = u.*osc;
-
-% Apply LPF
-Wn = fc / (fs/2);
-[b, a] = butter(4, Wn);
-
-yf = filtfilt(b, a, y);
-
-audiowrite("music_DSP_SC_Noise_BP_500.wav", y, fs);
-
-
-figure;
-grid on;
-plot(f, mag/max(mag), 'LineWidth', 2);
-title('Magnitude of DSB-SC Signal With Noise And Bandpassed');
-xlabel('Frequency (Hz)');
-ylabel('Magnitude');
-print -dpng 'Music_DSB_SC_Noise_Mag_BP_500.png'
-
-figure;
-grid on;
-plot(t, m, 'LineWidth', 2);
-title('Signal With No Noise');
-xlabel('Time (s)');
-ylabel('Magnitude');
-print -dpng 'Music_No_Noise_Time_BP_500.png'
-
-figure;
-grid on;
-plot(t, yf, 'LineWidth', 2);
-title('Signal Demodulated (DSB-SC) With Noise And Bandpassed');
-xlabel('Time (s)');
-ylabel('Magnitude');
-print -dpng 'Music_DSB_SC_Noise_Time_BP_500.png'
 
 
 #+END_SRC
 
 #+RESULTS:
-: fs = 48000
 
 
 
 ** FM
-When imported ~fs~ came to be 48kHz. And I chose ~fc~ to be 12kHz and ~freqDev~ to be 7.5kHz. These values were chosen because they were able to modulate and demodulate the music with no impairments.
+*NOTE:* To reproduce the audio files in this section modify the respective values in ~FM.m~\\
+
+When imported ~fs~ came to be 48kHz. And I chose ~fc~ to be 12kHz and ~freqDev~ to be 7.5kHz. These values were chosen because they were able to modulate and demodulate the music with no impairments. \\
+
 For the FM modulator and demodulator will be using the Matlab functions ~fmmod~ and ~fmdemod~. The usage of ~fmmod~ can be seen in the following snippet:
 #+BEGIN_SRC octave :exports none :results output :session FM
 u = fmmod(m, fc, fs, freqDev);
@@ -189,24 +125,25 @@ And ~fmdemod~ can be seen here:
 y = fmdemod(u, fc, fs, freqDev);
 #+END_SRC
 
-The time domain and frequency magnitude plot can be seen in the following figure:
+
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Frequency Magnitude and Time Domain Plot of FM Modulated Signal
+#+CAPTION: Frequency Magnitude and Time Domain Plot of FM Modulated Signal \label{fig:FM_NO_NOISE}
 [[./Music_FM_No_Noise.png]]
 
-The frequency plot shows that we have a bandwidth of about 11kHz. However not all of this is /needed/ to retain most of the music.
+The frequency plot, seen in Figure \ref{fig:FM_NO_NOISE}, shows that we have a bandwidth of about 11kHz. However not all of this is /needed/ to retain most of the music. \\
 
 Now lets see how adding AWGN changes the signal:
 #+BEGIN_SRC octave :exports code :results output :session FM
 u = awgn(u, SNR);
 #+END_SRC
-The time domain and frequency magnitude plot can be seen in the following figure:
+
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Frequency Magnitude and Time Domain Plot of FM Modulated Signal
+#+CAPTION: Frequency Magnitude and Time Domain Plot of FM Modulated Signal With Noise \label{fig:FM_NOISE}
 [[./Music_FM_Noise.png]]
 
-The ~.wav~ file that was produced clearly had noise, as expected. The music could still be heard and our next goal is to remove as much of it as possible without destroying the music.
-Comparing the no noise and with noise cases we can see little to no difference in the frequency magnitude plots. This is because we are specifying an SNR and our bandwidth is larger than before, so to achieve an equivalent SNR we must introduce less noise. In other words, there is more surface area for the noise to attack.
+The time domain and frequency magnitude plot with AWGN can be seen in Figure \ref{fig:FM_NOISE}. The file (~music_FM_Noise.wav~) that was produced clearly had noise, as expected. The music could still be heard and our next goal is to remove as much of it as possible without destroying the music. \\
+
+Comparing the no noise and with noise cases we can see little to no difference in the frequency magnitude plots. This is because we are specifying an SNR and our bandwidth is larger than before, so to achieve an equivalent SNR we must introduce less noise. In other words, there is more surface area for the noise to attack. \\
 
 Now lets try to remove the noise and reduce the bandwidth by applying a bandpass filter. Using the following code to apply a bandpass filter:
 #+BEGIN_SRC octave :exports code :results output :session FM
@@ -218,19 +155,19 @@ Wn = [f_low f_high] / (fs/2);
 u = filtfilt(b, a, u);
 #+END_SRC
 
-Initially choosing 8kHz for our new bandwidth we can see in the following plot that it did not have much of an effect on the signal. In the audio file there was still a lot of noise present, however it was able to remove a lot of the high frequency noise. This reduced the bandwidth of the signal a bit, from 11kHz to 8kHz.
+Initially choosing 8kHz for our new bandwidth we can see in Figure \ref{fig:FM_NOISE_BP_8k} that it did not have much of an effect on the signal. In the audio file (~music_FM_Noise_BP_8k.wav~) there is still a lot of noise present, however it was able to remove a lot of the high frequency noise. This reduced the bandwidth of the signal a bit, from 11kHz to 8kHz.
 
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Frequency Magnitude and Time Domain Plot of FM Modulated Signal
+#+CAPTION: Frequency Magnitude and Time Domain Plot of FM Modulated Signal \label{fig:FM_NOISE_BP_8k}
 [[./Music_FM_Noise_BP_8k.png]]
 
-Looking at the plot we can see that there is still low magnitude data that could possible be removed to reduce the bandwidth and noise further. So lets try with a 4kHz bandwidth.
+Looking at the plot in Figure \ref{fig:FM_NOISE_BP_8k} we can see that there is still low magnitude data that could possible be removed to reduce the bandwidth and noise further. So lets try with 4kHz bandwidth.
 
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Frequency Magnitude and Time Domain Plot of FM Modulated Signal
+#+CAPTION: Frequency Magnitude and Time Domain Plot of FM Modulated Signal \label{fig:FM_NOISE_BP_4k}
 [[./Music_FM_Noise_BP_4k.png]]
 
-Listening to the output we can hear pops, these are noticeable on the time domain plot as large spikes. This is because the quick change in frequency causes the FM demodulator to inter pate a large change in magnitude. At a cost of audio quality we were able to reduce the bandwidth, and reduce the audible noise. 
+Listening to the output (~music_FM_Noise_BP_4k.wav~), that came from Figure \ref{fig:FM_NOISE_BP_4k}, we can hear pops, these are noticeable on the time domain plot as large spikes, the negative one at $t \approx 1$ is very noticeable. This is because the quick change in frequency causes the FM demodulator to interoperate a large change in magnitude. At a cost of audio quality we were able to reduce the bandwidth, and reduce the audible noise. \\
 
 Now lets reduce the bandwidth evermore:
 1. 2kHz
@@ -239,4 +176,30 @@ Now lets reduce the bandwidth evermore:
    - The audio is mostly pops now, there is very little of the song left.
 3. 500Hz
    - The audio is only pops now, there is none of the song left.
+   
+Now lets investigate the effect of noise with various SNR and a bandwidth of 8kHz.
+1. $SNR = 20$
+   - The music can be heard fine, but there is clearly some noise.
+2. $SNR = 15$
+   - The noise is louder, but the music can still be heard fine.
+3. $SNR = 10$
+   - The noise is even louder, but the music can still be heard. There is starting to be some small pops present.
+4. $SNR = 5$ (~music_FM_Noise_BP_8k_SNR_5.wav~)
+   - The are a lot of loud pops and a lot noise, but the music can still be heard.
+
+
 ** Comparison
+There are two main metrics that I will talk about:
+1. Bandwidth
+2. Effect of noise
+
+Clearly the DSB-SC is better in terms of bandwidth, at a bandwidth of 2kHz the DSB-SC demodulated music was much better than the 2kHz FM demodulated music. Even at lower bandwidths the DS-SC music was still audible, whereas the FM music started to introduce pops when reducing the bandwidth. This made the FM music much worse to listen to than the DSB-SC music. There are many cases where we have access to a limited bandwidth, so it is preferable to maintain a reasonable signal quality by reducing the bandwidth. \\
+
+Frequency modulation is better at dealing with noise than DSB-SC. At low SNRs the DSB-SC music became inaudible, it was almost all noise. Whereas at the lowest SNR (5), the FM music was still clearly present, although there noise made it unpleasant to listen to. The reason that DSB-SC is worse than FM when it comes to noise is because the data is encoded in the frequency, not the magnitude. This means that more information is retained when adding noise. \\
+
+There are many methods that could be employed to improve both of these methods and their effect on noise and bandwidth. For example it may be better to use SSB to reduce the required bandwidth even more, however this may come at the cost of being less effective at combating noise. For FM it may be possible to remove the popping by applying a filter. For both DSB-SC and FM it may be a good idea to compress the data before sending to reduce the required bandwidth. \\
+
+Overall, deciding which one is better comes down to the specific use case. If you are required to use a small bandwidth it would be a good idea to use DSB-SC, or even better SSB. However, if you know that the channel is going to introduce a lot noise it may be a better idea to use FM. There are plenty of ways to improve these methods, as discussed, but the investigation done here has been able to successfully analyse each of the schemes and highlight their differences.
+
+
+
