@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       dd3627c5-e017-4b3f-a035-ec1804a4e862
+:END:
+#+title: Unified Modelling Language (UML)
+#+date: [2025-04-20 Sun 13:20]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Unified Modelling Language (UML)
+A language that is used to describe diagrams
+
+** Class Diagrams
+A diagram that describes a class
+
+** UML Org Babel Example
+#+BEGIN_SRC plantuml :file UMLExample.png
+Alice -> Bob: synchronous call
+Alice -> Bob: asynchronous call
+#+END_SRC
+
+#+RESULTS:
+[[file:UMLExample.png]]

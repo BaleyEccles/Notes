@@ -12,7 +12,8 @@
  - [[id:be75a0e7-8d18-443b-89b5-2edf70730763][Primitive Operators]]
  - [[id:76903efb-60eb-4b9b-8749-2b650f40a784][Varibles]]
  - [[id:b98a88d3-459b-40cd-a151-6c04c9fd7bfd][Control Structures]]
-* Assesmentp
+ - [[id:dd3627c5-e017-4b3f-a035-ec1804a4e862][Unified Modelling Language (UML)]]
+* Assessment
 ** Assignment 0
  - Week 3
  - 0% of mark
