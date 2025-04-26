@@ -1,0 +1,99 @@
+:PROPERTIES:
+:ID:       065728a1-fe78-4e29-9028-b9b30d1262de
+:END:
+#+title: ENG307 - Electrical and Mechatronic Design - Design Assignment 3
+#+date: [2025-04-25 Fri 15:50]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+OPTIONS: toc:nil
+
+
+* Design
+We want to map the input voltage ($0\rightarrow 5$ Volts) to a motor current to $0 \rightarrow 1$ Amps. This can be done by using a bipolar junction transistor in series with the motor, applying a voltage to the base of the transistor will pull more current through the motor, hence there will be relationship between the input voltage, at the base, and current through the motor. \\
+
+To map the voltage to current we will need to know the current through the motor, this can be achieved using a sense resistor. If we know the voltage drop across a resistor, and its resistance we can calculate the current flowing though the resistor, and since the sense resistor will be in series with the motor current through the motor will be the same. \\
+
+If we choose a sense resistor of $0.5\Omega$ a motor current of 1 amp will produce a voltage drop across the resistor of 0.5 Volts. This will be used for our current to voltage mapping.
+\[V = IR = 1\cdot 0.5 = 0.5 A\]
+
+Combining these two concepts we can deduce a circuit that is able to take in a voltage and proportionally manage a the current through the motor. To do this the error in current can be measured and then added/subtracted to the input voltage to arrive at a voltage that would map to the required current. \\
+For example, lets take $V_{in} = 2.5$ Volts, this corresponds to a current of $I_{wanted} = 0.5$ Amps. But lets say that the motor is currently pulling 0.1 Amps ($I_{motor}$), which means there will be a 0.05 Volt drop across the sense resistor ($V_{sense}$). If we scale the input voltage, $V_{in}$, to be in the same values of the sense resistor, $V_{in,scaled} = \frac{V_{in}}{10} = 0.25$ Volts. Next, an error calculation can be found:
+\[V_{error} = V_{in,scaled} - V_{sense} = 0.25 - 0.05 = 0.2V\]
+This means that our system will request an extra 0.2 Volts to be added to the base of the BJT. This will be done repetitively to consistently arrive at the corresponding current. To do this two operational amplifiers will be needed. One to compare the sense voltage to the input voltage, which will be the error, and another to add the error to the input. To scale the input voltage from $0 \rightarrow 5$ Volts to $0 \rightarrow 0.5$ Volts another operational amplifier will be used will be used as a buffer along with a voltage divider. \\
+
+Overall, the motor driver will use a BJT to manage current through the motor. A sense resistor to measure the current and two operational amplifiers to compare the expected current to the received current and to add the error to the input voltage. This can be seen in the schematic in Figure \ref{fig:Schematic}.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Motor Driver Schematic \label{fig:Schematic}
+[[./ENG307_Ass3_Schematic.png]]
+
+* Components
+Referring to Figure \ref{fig:Schematic}, each of the components were chosen as described in the following. \\
+
+** R1
+The sense resistor, labelled R1, was chosen because of the power requirements. If we choose a sense resistor of $0.5\Omega$ we will achieve a power of 0.5 Watts at 1 Amp:
+\[P = I^2R = 1^2\cdot 0.5 = 0.5W\]
+This means we should choose a sense resistor that is able to handle at least 0.5 Watts. In case the current goes above 1 Amp lets choose a sense resistor that can handle 1 Watt.
+
+
+** R2
+The resistor labelled R2 was chosen at random. It was recognised that the resistance of it must be relatively high, to ensure little of the current flows through the feedback circuitry. But small enough, such that the voltage can be measured across the sense resistor. \\
+
+Not much current will be flowing though this resistor, as it is a feedback resistor, so there is no specific required power requirements.
+
+** R3, R4 and R5
+The resistors R3, R4 and R5 come together in the adding stage of the feedback. The goal is to add the two voltages $V_{in,scaled}$ and $V_{error}$ without impairing each of the voltages. So, using the equation:
+\[V_{out} = \frac{R_f}{R_1}V_1 + \frac{R_f}{R_2}V_2\]
+We can deduce that $\frac{R_f}{R_1} = 1$ and $\frac{R_f}{R_2} = 1$. Which means that all the resistors must be the same value ($R_1=R_2=R_f$). So, choosing $R_1=R_2=R_f = 10k\Omega$ sill satisfy this. \\
+
+Not much current will be flowing though these resistors, as it is a part of the feedback circuit, so there is no specific required power requirements.
+
+** R6 and R7
+The resistors labelled R6 and R7 are used in the voltage divider configuration to scale the input voltage by a factor of 10. The following calculation can be used to find the ratio of these resistors:
+\begin{align*}
+V_{out} &= V_{in}\frac{R_2}{R_1+R_2} \\
+\frac{V_{out}}{V_{in}} &= 0.1 = \frac{R_2}{R_1+R_2} \\
+0.1 R_7 + 0.1 R_6 &= R_6 \\
+0.1 R_7 &= 0.9 R_6 \\
+R_7 &= 9 R_6 \\
+\end{align*}
+Hence, choosing the values of $R_6 = 1k\Omega$ and $R_7 = 9k\Omega$ will result in the desired mapping from $0\rightarrow 5$ Volts to $0\rightarrow 0.5$ Volts. \\
+
+Not much current will be flowing though these resistors, as it is a part of the feedback circuit, so there is no specific required power requirements.
+
+** Q1A
+The BJT, labelled Q1A, must be a power BJT, as it is in series with the motor and will have current flowing through it. Calculating the exact power requirements would depend on the specific transistor used, but we can get an upper bound on the power requirement by assuming all the voltage is across the BJT, which would mean $P = VI = 12\cdot 1 = 12$ Watts. \\
+
+Either an NPN or a PNP BJT could be used, for the sake of simulation and in the schematic a NPN transistor was used. Using a PNP trasnistor would require swapping the collector and emitter pins. 
+
+** U1, U2 and U3
+Each of the operational amplifiers have no specific requirement. They are apart of the feedback circuit, so minimal current will be flowing through them, and hence no power requirement is needed.
+
+** Bill of Materials
+#+ATTR_LATEX: :placement [H] :align |c|c|c|c|
+#+CAPTION: Bill of Materials
+|----------------+-----------------+---------------+---------------------------|
+| Component Name | Component Value | Units         | Power Requirement (Watts) |
+|----------------+-----------------+---------------+---------------------------|
+| R1             |             0.5 | \Omega        |                         1 |
+|----------------+-----------------+---------------+---------------------------|
+| R2, R3, R4, R5 |              10 | k\Omega       |                           |
+|----------------+-----------------+---------------+---------------------------|
+| R6             |               1 | k\Omega       |                           |
+|----------------+-----------------+---------------+---------------------------|
+| R7             |               9 | k\Omega       |                           |
+|----------------+-----------------+---------------+---------------------------|
+| U1, U2, U3     |          Op Amp | N/A           |                           |
+|----------------+-----------------+---------------+---------------------------|
+| Q1A            |             NPN | Junction Type |                        12 |
+|----------------+-----------------+---------------+---------------------------|
+
+
