@@ -57,3 +57,24 @@ Gain select – no connect (G = 20 for INA350ABS and G = 50 for INA350CDS)
 
 8.1 Overview
 INA350ABS has two gain options of 10 and 20. INA350CDS has two other gain options of 30 and 50
+
+* Project Report 2
+
+** Temperature Sensing
+#+BEGIN_SRC octave :exports code :results output :session TEMP
+Vin = 5;
+R_therm = 3e4:1:1.5e5;
+length(R_therm)
+R_therm(120000/2)
+R = 90e3
+Vout = Vin .* (R)./(R + R_therm);
+
+plot(R_therm, Vout);
+xlabel("R_therm");
+ylabel("Vout");
+#+END_SRC
+
+#+RESULTS:
+: ans = 120001
+: ans = 89999
+: R = 90000
