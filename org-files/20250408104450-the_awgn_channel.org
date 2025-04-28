@@ -5,6 +5,7 @@
 #+date: [2025-04-08 Tue 10:44]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+TAGS: TODO
 
 * The AWGN Channel
  - Complex additive Gaussian noise
@@ -20,6 +21,30 @@ The lower bound of BER:
 
 ** Received
  - Using a [[id:0cfc0c4f-2408-42e6-944f-e37acc4116f1][Discrete Receiver]]
- - \[r[i] = a_j\int_{-\infty}^{\infty}g(\tau)g^H(\tau - T_s)d\tau + \int_{-\infty}^{\infty}n_s(\tau)g^H(\tau - T_s)d\tau\]
+ - \[r[i] = A_j\int_{-\infty}^{\infty}g(\tau)g^H(\tau - T_s)d\tau + \int_{-\infty}^{\infty}n_s(\tau)g^H(\tau - T_s)d\tau\]
    - The first integral is the energy in $g(t)$
    - The second integral is a random variable from [[id:0a3093d2-6df1-49f4-b00a-f506505c424d][Gaussian Noise]]
+
+** Demodulation
+The impulse response only has one value
+ - \[\tilde{\underline{h}} = [h[0]]\]
+Our receiver knows:
+ - Modulation scheme
+ - Pulse-shaping
+ - [[id:5dccdd63-9461-4871-a188-ac014808fd56][Baud Rate]] or $T_s$
+When transmitted:
+ - \[z_i(t) = A_ig(t)\]
+   - $A_i$ is the [[id:96e16018-80aa-4fde-af31-70105649a40c][constellation]] point of symbol $i$
+For the AWGN channel $M = 0$, $h[0] = h$
+ - \[r[i] = h a[i] + n_s\]
+   - Our goal is to find $a[i]$
+Using TODO Hypothesis Testing TODO:
+ - $r[i]$ is our statistic
+ - \[\Pr(A_i|r[i])\]
+   
+Maximum Aposteriari Probability (MAP) // Maximum Likelihood (ML)
+
+When our constellation symbol is received it will be some distance away from the true constellation point. Our goal is to find which symbol the received symbol corresponds to. We can simply find the distance from the received symbol to each of the constellation points and choose the one with smallest distance.
+
+
+

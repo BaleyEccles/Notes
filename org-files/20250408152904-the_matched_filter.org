@@ -5,7 +5,15 @@
 #+date: [2025-04-08 Tue 15:29]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+TAGS: TODO
 
 * The Matched Filter
 Maximises the [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][SNR]] 
  - \[c(t) = g^H(-t)\]
+   - $g$ is the filter applied at the transmitter.
+   - $H$ is the complex-conjugate transpose 
+
+** ?TODO? For [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]]
+ 
+
+

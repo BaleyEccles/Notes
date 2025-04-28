@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       5234f870-7031-4a58-9d29-08e0c5d53c4d
+:END:
+#+title: Optimal Receivers
+#+date: [2025-04-28 Mon 13:43]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+TAGS: TODO
+
+* Optimal Receivers
+ - A receiver that makes the best estimate of $s_m(t)$ given a measurement of $r(t)$
+   - This minimises the probability of an error.
+The best choose for $m$
+\[\hat{m} = \under{\max}{1\leq m \leq M} \frac{\Pr(m)\Pr(\underline{r} | s_m)}{\Pr(\underline{r})}\]
+
+** Maximum Aposteriori Probability Detector (MAP)
+\[\hat{m} = \under{\max}{1\leq m \leq M} \Pr(m)\Pr(\underline{r} | s_m)\]
+When the probability of each symbol ($m$) is not equally likely.
+The decision boundary aren't easy to see.
+
+** Maximum Likelihood Detector (ML)
+\[\hat{m} = \under{\max}{1\leq m \leq M} \Pr(\underline{r} | s_m)\]
+ - ML = MAP if $\Pr(m)$are equiprobable
+ - ML is suboptimal otherwise
+ML is easier to implement
+     
+** Examples
+[[id:e5b0d8e1-bef3-4b52-af41-355047228d01][The Matched Filter]] is an example of a optimal receiver if $n(t)$ is [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]] and each $s_m(t)$ is equally-likely to be sent
+
+
+** Example: [[id:5234f870-7031-4a58-9d29-08e0c5d53c4d][Optimal Receiver]] (Binary [[id:a424999e-1f28-437b-92f3-ba2f21cf8138][PAM]])
+
+*** Maximum Aposteriori Probability Detector (MAP)
+\[r = \pm \sqrt{\epsilon_b} + y_n\]
+\[f(\underline{r}|s_1) = \frac{1}{\sqrt{2\pi}\sigma_n}e^{-\frac{(r-\sqrt{\epsilon_b})^2}{2\sigma_n^2}}\]
+\[f(\underline{r}|s_2) = \frac{1}{\sqrt{2\pi}\sigma_n}e^{-\frac{(r-\sqrt{\epsilon_b})^2}{2\sigma_n^2}}\]
+
