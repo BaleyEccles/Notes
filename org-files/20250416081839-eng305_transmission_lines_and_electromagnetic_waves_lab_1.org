@@ -26,17 +26,22 @@ Using transmission line number: 11
 *** 1
 Calculations:
 
-| Parameter | Value    |
-| $L$       | 656uH    |
-| $D_s$     | 0.037    |
-| $C$       | 9.9nF    |
-| $D_p$     | 0.000244 |
-| $R$       | 157m     |
-| $G$       | 1/(64M)  |
+| Parameter      | Value    |
+| $L$            | 656uH    |
+| $D_s$          | 0.037    |
+| $C$            | 9.9nF    |
+| $D_p$          | 0.000244 |
+| $R$ (Measured) | 157m     |
+| $G$ (Measured) | 1/(64M)  |
 
+Calculated:
+\[ESR = \omega LD_s\]
+\[ESR = 152m\Omega\]
 
-ESR = 157m
-EPR = 64M
+Calculated:
+\[EPR = \frac{1}{\omega CD_p}\]
+\[EPR = 65.2M\Omega\]
+
 
 
 *** 2
@@ -122,6 +127,7 @@ We can get $f \in (10\ 000, 30\ 000)$ we chose $20kHz$
 | SC        | 1.033 | 0.633 |   0.2 |   0.3 |   0.7 |   1.1 |  1.33 | 1.433 | 1.4 |   1.2 | 0.867 | 0.467 | 0.033 |
 | $Z_0=250$ |   0.8 | 0.933 | 0.967 |   0.9 | 0.767 | 0.600 |   0.4 | 0.367 | 0.5 |   0.7 | 0.867 | 0.933 | 0.933 |
 | ?         |   0.5 | 0.667 |   0.8 |   0.9 |   0.9 | 0.833 |   0.7 | 0.533 | 0.4 | 0.433 | 0.567 | 0.733 | 0.833 |
+
 #+BEGIN_SRC octave :exports none :results output :session Q1
 clc
 clear
@@ -156,11 +162,23 @@ $Z_{??} = 115.699 + 86.6473j$
 ** Part 3: Dispersion
 
 *** 1
-| Phase Shift ($^o$) | 90 | 270 | 450 | 630 | 810 | 990 | 1170 | 1350 | 1530 | 1710 | 1890 |
-| $f$                |    |     |     |     |     |     |      |      |      |      |      |
+| Phase Shift (${}^o$) |   90 | 270 | 450 | 630 |   810 | 990 |  1170 |   1350 | 1530 |   1710 | 
+| $f$ (Hz)             | 8.3k | 25k | 41k | 56k | 70.5k | 83k | 94.5k | 104.5k | 112k | 117.3k | 
 
 *** 2
+\[u_p = \frac{\omega}{\beta} = \frac{2\pi f}{\beta}\]
+#+BEGIN_SRC octave :exports none :results output :session Q2
+clc
+clear
+close all
+f = [8.3e3, 25e3, 41e3, 56e3, 70.5e3, 83e3, 94.5e3, 104.5e3, 112e3, 117.3e3];
+up = 2.*pi.*f./(0.016095);
+plot(f, up)
+#+END_SRC
+
+#+RESULTS:
 
 *** 3
-
+High frequencies travel faster. Low frequencies travel slower.
 *** 4
+After $\approx 130.0kHz$ dispersion is too high to measure anything. The output wave becomes zero.
