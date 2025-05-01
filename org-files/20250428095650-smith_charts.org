@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       dc9bc12d-e2bb-407d-b221-efd07e1bd3a1
+:END:
+#+title: Smith Charts
+#+date: [2025-04-28 Mon 09:56]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Smith Charts
+Works in terms of *normalised impedance*
+\[z_L = r_L + jx_L = \frac{Z_L}{Z_0} = \frac{1 + \Gamma}{1 - \Gamma}\]
+A point on a smith chart is a reflection coefficient for some $z_L$.
+
+** Image of Smith Chart
+[[file:Smith_chart_gen.svg]]
+
+** Constant VSW circle
+Circle of radius $r_l$
+
+** Location of Voltage Maxima/Minima
+Occurs when the VSW circle passes the real axis.
+Max distance: $d_{max} = 0.25\lambda - \angle\lambda$
+Min distance: $d_{max} = 0.5\lambda - \angle\lambda = d_{max} + 0.25\lambda$
+
+** [[id:0850f22d-b384-4606-a3be-d262e8980559][Admittance]]
+The [[id:0850f22d-b384-4606-a3be-d262e8980559][Admittance]] can be found by rotating by $\frac{\lambda}{4}$. Or $Y = \frac{1}{Z}$
+
+** Voltage Reflection Coefficient
+\[\Gamma = |\Gamma|e^{j\angle\Gamma}\]
+- Magnitude
+  - Measure and read from ruler
+- Angle
+  - Read from where the line intersects the outer circle
+    
+** Input Impedance
+Rotate the amount of the distance of the [[id:6af733cd-5562-4d42-a360-45271082b3c0][transmission line]] from the point and read the graph.
+
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Smith_charts.xopp]]
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Smith_charts_2.xopp]]
+
+
