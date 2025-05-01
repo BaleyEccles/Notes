@@ -166,19 +166,23 @@ $Z_{??} = 115.699 + 86.6473j$
 | $f$ (Hz)             | 8.3k | 25k | 41k | 56k | 70.5k | 83k | 94.5k | 104.5k | 112k | 117.3k | 
 
 *** 2
-\[u_p = \frac{\omega}{\beta} = \frac{2\pi f}{\beta}\]
+\[\phi = \frac{\omega l}{u_p}\]
+
 #+BEGIN_SRC octave :exports none :results output :session Q2
 clc
 clear
 close all
 f = [8.3e3, 25e3, 41e3, 56e3, 70.5e3, 83e3, 94.5e3, 104.5e3, 112e3, 117.3e3];
-up = 2.*pi.*f./(0.016095);
+angle = [90, 270, 450, 630, 810, 990,1170, 1350, 1530, 1710];
+l = 10.34;
+
+up = 2.*pi.*f.*l./(angle.*pi./180);
 plot(f, up)
 #+END_SRC
 
 #+RESULTS:
 
 *** 3
-High frequencies travel faster. Low frequencies travel slower.
+High frequencies travel slower. Low frequencies travel faster.
 *** 4
-After $\approx 130.0kHz$ dispersion is too high to measure anything. The output wave becomes zero.
+After $\approx 130.0kHz$ dispersion is too high to measure anything. The output wave becomes zero. This is because this is basically a low pass filter.
