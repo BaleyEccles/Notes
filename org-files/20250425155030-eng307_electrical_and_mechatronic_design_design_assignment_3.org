@@ -13,6 +13,7 @@
 #+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
 #+OPTIONS: toc:nil
 
 
@@ -34,6 +35,8 @@ Overall, the motor driver will use a BJT to manage current through the motor. A 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Motor Driver Schematic \label{fig:Schematic}
 [[./ENG307_Ass3_Schematic.png]]
+
+This design was simulated in LTSpice, and was able to linearly alter the current through the motor using the input current raving from 0 to 5 volts.
 
 * Components
 Referring to Figure \ref{fig:Schematic}, each of the components were chosen as described in the following. \\
@@ -76,6 +79,8 @@ Either an NPN or a PNP BJT could be used, for the sake of simulation and in the 
 
 ** U1, U2 and U3
 Each of the operational amplifiers have no specific requirement. They are apart of the feedback circuit, so minimal current will be flowing through them, and hence no power requirement is needed.
+** D1A
+A Schottky diode is added in parallel of the motor to mitigate inductive kickback from the motor. It is added as seen in Figure \ref{fig:Schematic}, as such that current is able to flow during normal operation, but when disconnected the current flows through the diode.
 
 ** Bill of Materials
 #+ATTR_LATEX: :placement [H] :align |c|c|c|c|

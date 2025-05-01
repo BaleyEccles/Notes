@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       371b1f33-4fb1-4f5d-a656-aa6769165625
+:END:
+#+title: ENG307 - Electrical and Mechatronic Design - Lab 3
+#+date: [2025-04-29 Tue 11:32]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG307 - Electrical and Mechatronic Design - Lab 3
+Blue and green is power of motor
+

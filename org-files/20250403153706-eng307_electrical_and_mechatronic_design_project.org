@@ -62,19 +62,59 @@ INA350ABS has two gain options of 10 and 20. INA350CDS has two other gain option
 
 ** Temperature Sensing
 #+BEGIN_SRC octave :exports code :results output :session TEMP
-Vin = 5;
-R_therm = 3e4:1:1.5e5;
-length(R_therm)
-R_therm(120000/2)
-R = 90e3
-Vout = Vin .* (R)./(R + R_therm);
+clc;
+clear;
+close all;
 
-plot(R_therm, Vout);
-xlabel("R_therm");
-ylabel("Vout");
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
+
+% Input Voltage
+Vin = 5;
+
+%      5   -> 30 degrees C
+%      30k -> 150k
+R_therm = 30e3:1:150e3;
+
+% Take the middle value
+R = 67e3;
+
+% Calculate the output voltage
+Vout = Vin .* (R)./(R + R_therm);
+maxV = max(Vout);
+minV = min(Vout);
+range = (maxV - minV)/Vin;
+
+figure;
+plot(R_therm, Vout, 'linewidth', 2)
+title("Voltage Divider Voltage Graph");
+xlabel("R_{therm}");
+ylabel("V_{out}");
+print -dpng 'ENG307_Thermistor_Plot.png'
+
+fprintf("The voltage range is from %.2f to %.2f\n", minV, maxV)
+fprintf("The percentage of the output voltage is %.3f%%\n", range)
 #+END_SRC
 
 #+RESULTS:
-: ans = 120001
-: ans = 89999
-: R = 90000
+: minV = 1.5438
+: The voltage range is from 1.54 to 3.45
+: The percentage of the output voltage is 0.382%
+
+\[V_{out} = V_{in} \frac{R2}{R1 + R2}\]
+
+\[\Delta V_{out} = V_{out}(R1 = 30 k\Omega) - V_{out}(R1 = 150 k\Omega)\]
+\[\Delta V_{out} = V_{in}\frac{R}{30k + R} - V_{in}\frac{R}{150k + R}\]
+\[\Delta V_{out} = V_{in}\left[\frac{R}{30k + R} - \frac{R}{150k + R}\right]\]
+\[\frac{\Delta V_{out}}{V_{in}} = V_{range} = \frac{R}{30k + R} - \frac{R}{150k + R}\]
+We want to find maximum of $V_{range}$. Using some basic calculus, we find $\max(V_{range}) = 38.2%$ and that occurs at $R = 67k\Omega$.
+
+** Button Denouncing
+\[\tau = RC\]
+If we assume that the button takes less than 5ms to bounce. We can find the resistor and capacitor values:
+\[\tau = 10k\cdot 100n\]
+\[4\tau = 0.004\ s = 4ms\]
+Where $4\tau$ is the amount of time for the charge to reach $98%%$ of the maximum voltage. 
+
+
