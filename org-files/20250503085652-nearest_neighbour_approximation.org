@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       11ee2a8f-a4a7-4ce5-bfda-80be2b360aa0
+:END:
+#+title: Nearest Neighbour Approximation
+#+date: [2025-05-03 Sat 08:56]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Nearest Neighbour Approximation
+ - $d_{min}$ - Min Euclidean distance between two points
+ - $N_{min}$ - Number of points separated by  the distance
+\[\Pr(\textrm{symbol error}) \approx \frac{N_{min}}{M} Q\left(\sqrt{\frac{d_{min}^2}{2N_0}}\right)\]
+

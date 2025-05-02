@@ -9,3 +9,4 @@
 * Baud Rate
 The rate at which we send symbols
 
+\[R_s = \frac{B}{1 + \alpha}\]

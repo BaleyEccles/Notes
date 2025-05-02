@@ -40,6 +40,9 @@
  - 1 Hr
 ** Test 2
  - 10% of mark
+ - Q3: "Fair game"
+   - A lot of constraints
+   - Choose a M-PAM scheme
 ** Practical laboratory
  - 20% of mark
  - Weeks 4, 5, 6

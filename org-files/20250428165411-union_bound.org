@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       3eb4dc51-a876-4615-9141-a2b81384919e
+:END:
+#+title: Union Bound
+#+date: [2025-04-28 Mon 16:54]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Union Bound
+For when we want to find the error rate of a larger [[id:96e16018-80aa-4fde-af31-70105649a40c][constellation]].
+We can get an upper limit on the error by considering all the combinations of two points. Even better, we can only consider the neighbours (only cross one decision boundary)
+\[\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \land B) \leq \Pr(A) + \Pr(B)\]
+\[\Pr(\underline{s}_j | \underline{s}_i)  = Q\left(\frac{d_{ij}/2}{\sqrt{N_0/2}}\right)\]
+ - Where $d_{ij}$ is the euclidean distance between the points $i$ and $j$
+ - $N_0/2$ is the noise power
+ - $\underline{s}_{i}$ and $\underline{s}_j$ are the two symbols
+Comparing all of the neighbours we can then use:
+\[\Pr\left[\bigcup_{i=1}^nE_i\right] \leq \sum_{i=1}^n\Pr(E_i)\]
+
+This ignores a lot of uncounted area, which would be double counted. We hope that the uncounted area is minimal, so can be ignored.
+
+In general:
+
+\[\Pr(\textrm{symbol error})  \leq \frac{1}{M} \sum_{i=0}^{M-1}\sum_{j\in N(i)}Q\left(\sqrt{\frac{d_{ij}^2}{2N_0}}\right)\]
+
+This can be written in terms of the average bit energy:
+\[E_b = \frac{E_s}{\log_2(M)} =\frac{1}{\log_2(M)} \frac{1}{M}\sum_{j=0}^{M-1}||\underline{s}_j||^2\]
+
+** Converting to Bit Error
+This assumes that we are using [[id:ad9c0e92-adb3-4bc9-85cc-ac3e76267d56][Gray Coding]], or something that is similar to [[id:ad9c0e92-adb3-4bc9-85cc-ac3e76267d56][Gray Coding]].
+\[\Pr(\textrm{bit error}) \leq \frac{1}{\log_2(M)}\Pr(\textrm{symbol error})\]
+ - _NOTE_: The $\leq$ is not technically correct. But can be assumed to be true for most systems.
+
+

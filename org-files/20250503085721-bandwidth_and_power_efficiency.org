@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       6dae5a04-3df1-48aa-a9d0-01ec02dbc57c
+:END:
+#+title: Bandwidth and Power Efficiency
+#+date: [2025-05-03 Sat 08:57]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* [[id:a647872e-240f-4ef0-8304-b713e15505ea][Bandwidth]] and Power Efficiency
+\[\frac{S}{N} = \frac{S}{N_0B} = \frac{E_b}{N_0}\frac{R_b}{B}\]
+
+ - This allows us to convert to [[id:5dccdd63-9461-4871-a188-ac014808fd56][Baud Rate]]
+
+   
+** Bandwidth Efficiency
+\[\eta_B = \frac{R_b}{B}\]
+
+** Power Efficiency
+\[\eta_P = \frac{E_b}{N_0}}\]
+
+** Bandwidth-Limited vs Power-Limited
+This can be seen using the [[id:b90da113-9aad-4168-93f6-da016a54f577][Nyquist-Shannon Capacity Theorem]]
+\[\eta_P = \frac{E_b}{N_0} > \frac{2^{\eta_B} - 1}{\eta_B}\]
+

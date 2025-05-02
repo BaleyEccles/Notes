@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       47371ed4-3504-4c6a-a390-1b5d3ef8c9b2
+:END:
+#+title: Carrier-to-Noise Ratio
+#+date: [2025-04-28 Mon 16:55]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Carrier-to-Noise Ratio
+When considering large scale effects of [[id:cfec5fb5-467e-4a16-a78c-32ebbdd4fb9a][Channel Noise]].
+_NOTE_: $c$ becomes the power
+The noise ($\frac{c}{N_0}$) is no longer unit less, it is measured in Hz.
+\[\frac{E_b}{N_0} = \frac{c}{N_0}T_b = \frac{c}{N_0}\frac{1}{R_b}\]
+
+

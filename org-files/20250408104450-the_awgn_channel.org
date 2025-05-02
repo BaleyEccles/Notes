@@ -38,12 +38,11 @@ When transmitted:
 For the AWGN channel $M = 0$, $h[0] = h$
  - \[r[i] = h a[i] + n_s\]
    - Our goal is to find $a[i]$
-Using TODO Hypothesis Testing TODO:
+Using Hypothesis Testing:
  - $r[i]$ is our statistic
  - \[\Pr(A_i|r[i])\]
    
-Maximum Aposteriari Probability (MAP) // Maximum Likelihood (ML)
-
+[[id:5234f870-7031-4a58-9d29-08e0c5d53c4d][Maximum Aposteriari Probability (MAP) // Maximum Likelihood (ML)]]
 When our constellation symbol is received it will be some distance away from the true constellation point. Our goal is to find which symbol the received symbol corresponds to. We can simply find the distance from the received symbol to each of the constellation points and choose the one with smallest distance.
 
 
