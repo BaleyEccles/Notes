@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       a6d5ed1b-f3aa-4ba6-9686-957267c27160
+:END:
+#+title: Symbol Energy
+#+date: [2025-05-04 Sun 13:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Symbol Energy
+\[E_s =\frac{1}{M}\sum_{j=0}^{M-1}||\underline{s}_j||^2\]

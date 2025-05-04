@@ -36,3 +36,5 @@
  - Bipolar
    - +A and -A volts are used sequentially for the same data symbol
    - The other symbol may be zero volts
+ - Differential
+   - 

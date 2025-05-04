@@ -7,12 +7,10 @@
 
 * Unit Pulse
 Denoted \[\Pi (t)\].
-Defined as d\begin{math}
-\Pi(t)=
-\begin{cases}
+Defined as:
+\[\Pi(t)= \begin{cases}
         1 & \lvert t\rvert < \frac{1}{2} \\
         0 & \lvert t\rvert > \frac{1}{2}
-\end{cases}
+\end{cases}\]
 
-\end{math},
 or in terms of the [[id:df314ae5-1b35-49a3-be34-8d0aeb720ff3][Unit Step]] as \[\Pi (t)=u(t+\frac{1}{2})-u(t-\frac{1}{2})\].

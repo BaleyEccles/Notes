@@ -23,7 +23,8 @@ In general:
 
 \[\Pr(\textrm{symbol error})  \leq \frac{1}{M} \sum_{i=0}^{M-1}\sum_{j\in N(i)}Q\left(\sqrt{\frac{d_{ij}^2}{2N_0}}\right)\]
 
-This can be written in terms of the average bit energy:
+This can be written in terms of the average [[id:ee15a700-1c6d-41f0-b05c-bcb13a73a06a][Bit Energy]] / [[id:a6d5ed1b-f3aa-4ba6-9686-957267c27160][Symbol Energy]]:
+
 \[E_b = \frac{E_s}{\log_2(M)} =\frac{1}{\log_2(M)} \frac{1}{M}\sum_{j=0}^{M-1}||\underline{s}_j||^2\]
 
 ** Converting to Bit Error

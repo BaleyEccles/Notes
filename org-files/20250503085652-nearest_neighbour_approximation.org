@@ -7,7 +7,7 @@
 #+STARTUP: latexpreview
 
 * Nearest Neighbour Approximation
+For when we want to find the error rate of a larger [[id:96e16018-80aa-4fde-af31-70105649a40c][constellation]].
  - $d_{min}$ - Min Euclidean distance between two points
  - $N_{min}$ - Number of points separated by  the distance
 \[\Pr(\textrm{symbol error}) \approx \frac{N_{min}}{M} Q\left(\sqrt{\frac{d_{min}^2}{2N_0}}\right)\]
-

@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       2b5bb5b6-3dcf-41df-8973-9ed0d856ad73
+:END:
+#+title: Log-Normal Shadowing
+#+date: [2025-05-03 Sat 11:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Log-Normal Shadowing
+Follows the [[id:3aad1707-ee50-4f86-acff-ca2ba634bab4][Log-normal Distribution]].
+Conversion to [[id:d041a889-d4af-4598-8434-866ecc7ce005][Decibels]] will result in a [[id:09b7922a-caa6-4eb4-b3d7-b56035ad4604][Normal Distribution]].
+
+[[id:5f52ce94-c82b-4d58-82a9-4fe4598fda29][Path Loss]] occur in [[id:97a0e6e7-0a41-4597-9897-df6785384d70][Electromagnetic Waves]] 
+
+* Fade Margin
+Distance from the average power to $\gamma$
+\[\Pr(\gamma < P_r) = Q\left(\frac{\gamma-P_r}{\sigma}\right) = X\%\]
+

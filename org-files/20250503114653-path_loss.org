@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       5f52ce94-c82b-4d58-82a9-4fe4598fda29
+:END:
+#+title: Path Loss
+#+date: [2025-05-03 Sat 11:46]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Path Loss
+\[PL[dB] = 10 \alpha \log_{10}\left(\frac{d}{d_0}\right)\]
+ - $\alpha$ is the path loss index

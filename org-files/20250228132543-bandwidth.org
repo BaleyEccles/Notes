@@ -11,3 +11,7 @@
  - Bandwidth is expensive
    - There is a limited amount of bandwidth avalible
      
+
+ \[B = \frac{1 + \alpha}{\log_2(M)}R_b\]
+  - $R_b$ is the data rate
+  - $\alpha$ is the roll off factor

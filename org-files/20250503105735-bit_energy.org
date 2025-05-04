@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       ee15a700-1c6d-41f0-b05c-bcb13a73a06a
+:END:
+#+title: Bit Energy
+#+date: [2025-05-03 Sat 10:57]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bit Energy
+\[E_b = \frac{E_s}{\log_2(M)}\]
+ - $E_s$ is the symbol energy
