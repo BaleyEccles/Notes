@@ -23,6 +23,7 @@
 ** Lab
  - 20% of mark
  - Two weeks after final lab
+ - [[id:85185dd2-56d6-4d56-842e-49486b768c85][ENG305 - Transmission Lines and Electromagnetic Waves - Lab 1]]
 ** Mid-term test
  - 20% of mark
  - Week 7, 7th of April

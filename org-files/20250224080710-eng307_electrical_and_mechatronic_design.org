@@ -43,6 +43,7 @@
 ** Laboratory Demonstration
  - [[id:aa89e0a2-e7a6-4527-ac8b-6d40955aed96][ENG307 - Electrical and Mechatronic Design - Lab 1]]
  - [[id:afa8876a-42ca-469c-8adf-1ba127276d06][ENG307 - Electrical and Mechatronic Design - Lab 2]]
+ - [[id:371b1f33-4fb1-4f5d-a656-aa6769165625][ENG307 - Electrical and Mechatronic Design - Lab 3]]
  - 20% - 10% of mark?
 *** Lab 2
 Design a band pass filter

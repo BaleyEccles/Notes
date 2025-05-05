@@ -25,6 +25,7 @@
 ** Assignment 2
  - Week 10
  - 24% of mark
+ - [[id:64e60aa6-00d4-4bc6-8854-1eadf19075a2][KIT107 - Programming - Assignment 2]]
 ** Assignment 3
  - Week 13
  - 24% of mark
