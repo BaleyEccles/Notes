@@ -4,31 +4,82 @@
 #+title: ENG308 - Communication Systems 1 - Assignment 2
 #+date: [2025-05-08 Thu 13:05]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+OPTIONS: toc:nil
 
-* ENG308 - Communication Systems 1 - Assignment 2
-** Question 1
-*** a
+* Question 1
+** a
 \[E_{4PAM} = E[|A_i|^2]\]
+
 \[A_i = \{-3, -1, 1, 3\}\]
+
 \[E_{4PAM} = \frac{1}{4}\left[(-3)^2 + (-1)^2 + (1)^2 + (3)^2\right]\]
+
 \[E_{4PAM} = 5\]
 
 \[E = |A_i|\sqrt{\frac{E_s}{E_{4PAM}}}}\]
+
 Hence, the energy in each constellation point is:
+
 \[E = \left\{-3\sqrt{\frac{E_s}{5}}, -\sqrt{\frac{E_s}{5}}, \sqrt{\frac{E_s}{5}}, 3\sqrt{\frac{E_s}{5}}\right\}\]
-*** b
-[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG308 - Communication Systems 1 - Assignment 2 - b.xopp]]
+** b
+[[file:ENG308_des_1.png]]
+
+_For $s_3$:_
+\[\Pr(\textrm{error} | s_3) = \frac{1}{\sigma\sqrt{2\pi}}\int_{-\infty}^xe^{\frac{-(y - \mu)^2}{2\sigma^2}}dy\]
+
+Where, $\mu = 3\sqrt{\frac{E_s}{5}}$ $\sigma^2 = \frac{N_0}{2}$ and $x = 2\sqrt{\frac{E_s}{5}}$. Which means:
+
+\[\Pr(\textrm{error} | s_3) = \frac{1}{\sqrt{N_0\pi}}\int_{-\infty}^{2\sqrt{\frac{E_s}{5}}} e^{\frac{-\left(y - 3\sqrt{\frac{E_s}{5}}\right)^2}{N_0}}dy\]
+
+Using a u-substitution it can be transformed into the form for the Q function:
+
 \[{\displaystyle Q(x)={\frac {1}{\sqrt {2\pi }}}\int _{x}^{\infty }\exp \left(-{\frac {u^{2}}{2}}\right)\,du}\]
-:TODO: LATEX
-*** c
+
+Which gives:
+
+\[\Pr(\textrm{error} | s_3) = Q\left(\sqrt{\frac{2E_s}{5N_0}}\right)\]
+
+The same answer can be achieved for $s_0$.
+
+_For $s_2$:_
+
+\[\Pr(\textrm{error} | s_2) = \frac{1}{\sigma\sqrt{2\pi}}\int_{-\infty}^xe^{\frac{-(y - \mu)^2}{2\sigma^2}}dy + \frac{1}{\sigma\sqrt{2\pi}}\int_{z}^{\infty}e^{\frac{-(y - \mu)^2}{2\sigma^2}}dy\]
+
+Where, $\mu = \sqrt{\frac{E_s}{5}}$ $\sigma^2 = \frac{N_0}{2}$, $x = 0$ and $z = 2\sqrt{\frac{E_s}{5}}$. Which means:
+
+\[\Pr(\textrm{error} | s_2) = \frac{1}{\sqrt{N_0\pi}}\int_{-\infty}^0e^{\frac{-\left(y - \sqrt{\frac{E_s}{5}}\right)^2}{N_0}}dy + \frac{1}{\sqrt{N_0\pi}}\int_{2\sqrt{\frac{E_s}{5}}}^{\infty}e^{\frac{-\left(y - \sqrt{\frac{E_s}{5}}\right)^2}{2\sigma^2}}dy\]
+
+Likewise, using a u-substitution it can be transformed into the form for the Q function:
+
+\[{\displaystyle Q(x)={\frac {1}{\sqrt {2\pi }}}\int _{x}^{\infty }\exp \left(-{\frac {u^{2}}{2}}\right)\,du}\]
+
+Which gives:
+
+\[\Pr(\textrm{error} | s_3) = 2Q\left(\sqrt{\frac{2E_s}{5N_0}}\right)\]
+
+The same answer can be achieved for $s_1$.
+
+\[\Pr(\textrm{sym error}) = \sum_{i\in M} \Pr(s_i)\cdot\Pr(\textrm{error}|s_i)\]
+
+\[\Pr(\textrm{sym error}) = \frac{1}{4}\left[1 + 2 + 2 + 1\right]Q\left(\sqrt{\frac{2E_s}{5N_0}}\right) = \frac{3}{2}Q\left(\sqrt{\frac{2E_s}{5N_0}}\right)\]
+
+** c
 Using $E_b = \frac{E_s}{2}$ will not give the exact probability because it is possible for more than one bit error to occur. If the constellations did not use Gray Coding, or the error makes the symbol move across more than one decision boundary, then two bits may have been changed.
 
-** Question 2
+* Question 2
+** Standard $4\times 4$ signal set
+*** a
 
-
-*** Standard $4\times 4$ signal set
-**** a
+#+ATTR_LATEX: :placement [H] :align |l|l|l|
 |----+----+---------------|
 |  x |  y | E = x^2 + y^2 |
 |----+----+---------------|
@@ -49,17 +100,18 @@ Using $E_b = \frac{E_s}{2}$ will not give the exact probability because it is po
 |  3 |  1 |            10 |
 |  3 |  3 |            18 |
 |----+----+---------------|
-\[\sum E = 160\]
-\[E_{avg} = \frac{160}{16} = 10\]
-**** b
-\[d_{min} = 2A\]
-**** c
+$\sum E = 160$ \\
+$E_{avg} = \frac{160}{16} = 10$
+*** b
+$d_{min} = 2A$
+*** c
 #+BEGIN_SRC octave :exports none :results output :session Des1
 clc
 clear
 close all
 
 if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
   set(0, "DefaultAxesFontSize", 25);
 end
 
@@ -75,51 +127,73 @@ title("Standard 4 x 4 signal set decision boundaries")
 print -dpng 'ENG308_Des1.png'
 #+END_SRC
 
-
 #+RESULTS:
-**** d
-***** Union Bound
+
+[[file:ENG308_Des1.png]]
+*** d
+**** Union Bound
 \[\Pr(\textrm{symbol error})  \leq \frac{1}{M} \sum_{i=0}^{M-1}\sum_{j\in N(i)}Q\left(\sqrt{\frac{d_{ij}^2}{2N_0}}\right)\]
 
-Corner Points:
+_Corner Points:_
+
 \[N = 4\]
+
 \[d_{ij} = 2A\]
+
 \[=2\cdot 4 Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+
 \[=8 Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
 
-Side Points:
+_Side Points:_
+
 \[N = 8\]
+
 \[d_{ij} = 2A\]
+
 \[=3\cdot 8 Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+
 \[=24 Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
 
-Inner Points:
+_Inner Points:_
+
 \[N = 4\]
+
 \[d_{ij} = 2A\]
+
 \[=4\cdot 4 Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+
 \[=16 Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
 
 \[\Pr(\textrm{symbol error}) \leq \frac{1}{16} \left[8 + 24 + 16\right] Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
+
 \[\Pr(\textrm{symbol error}) \leq 3 Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
 
-
 \[E_s = E\{|A_i|^2\}\]
+
 \[E_s = 160A^2\]
+
 \[A^2 = \frac{E_s}{160}\]
 
 \[\Pr(\textrm{symbol error}) \leq 3 Q\left(\sqrt{\frac{E_s}{80N_0}}\right)\]
 
-***** Nearest Neighbour Approximation
+**** Nearest Neighbour Approximation
 \[\Pr(\textrm{symbol error}) \approx \frac{N_{min}}{M} Q\left(\sqrt{\frac{d_{min}^2}{2N_0}}\right)\]
+
 \[M = 16\]
+
 \[d_{min} = 2A\]
+
 \[N_{min} = 48\]
+
 \[\Pr(\textrm{symbol error}) \approx \frac{48}{16} Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+
 \[\Pr(\textrm{symbol error}) \approx 3Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
+
 \[A^2 = \frac{E_s}{160}\]
+
 \[\Pr(\textrm{symbol error}) \approx 3Q\left(\sqrt{\frac{E_s}{80N_0}}\right)\]
 
-**** e
+*** e
 
 #+BEGIN_SRC octave :exports none :results output :session Gray1
 clc
@@ -127,7 +201,9 @@ clear
 close all
 
 if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
   set(0, "DefaultAxesFontSize", 25);
+  pkg load communications
 end
 
 x = [-3, -3, -3, -3, -1, -1, -1, -1,  1,  1,  1,  1,  3,  3,  3,  3];
@@ -136,8 +212,10 @@ g = [0b0000, 0b0001, 0b0011, 0b0010, ...
      0b0100, 0b0101, 0b0111, 0b0110,...
      0b1100, 0b1101, 0b1111, 0b1110, ...
      0b1000, 0b1001, 0b1011, 0b1010];
-c = [x', y', g'];
-plot (x, y, "or");
+h = convhull (x, y);
+figure;
+[vx, vy] = voronoi (x, y);
+plot (vx, vy, "-b", x, y, "or");
 grid on;
 xlim([min(x) - abs(min(x)/2), max(x) + abs(max(x)/2)]);
 ylim([min(y) - abs(min(y)/2), max(y) + abs(max(y)/2)]);
@@ -146,12 +224,23 @@ for i = 1:length(x)
 end
 title("Standard 4 x 4 signal set Gray Coding")
 print -dpng 'ENG308_Gray1.png'
+
+EsN0 = 0:0.1:200;
+pr = 3*qfunc(sqrt(EsN0/80))/4;
+figure;
+plot(EsN0, pr)
 #+END_SRC
 
 #+RESULTS:
 
-*** V.29 signal set
-**** a
+Applying the 4-bit Gray Codes:
+[[file:ENG308_Gray1.png]]
+
+
+** V.29 signal set
+*** a
+
+#+ATTR_LATEX: :placement [H] :align |l|l|l|
 |----+----+---------------|
 |  x |  y | E = x^2 + y^2 |
 |----+----+---------------|
@@ -173,17 +262,18 @@ print -dpng 'ENG308_Gray1.png'
 |  5 |  0 |            25 |
 |----+----+---------------|
 
-\[\sum E = 216\]
-\[E_{avg} = \frac{216}{16} = 13.5\]
-**** b
-\[d_{min} = 2A\]
-**** c
+$\sum E = 216$ \\
+$E_{avg} = \frac{216}{16} = 13.5$
+*** b
+$d_{min} = 2A$
+*** c
 #+BEGIN_SRC octave :exports none :results output :session Des2
 clc
 clear
 close all
 
 if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
   pkg load signal
   set(0, "DefaultAxesFontSize", 25);
 end
@@ -201,77 +291,124 @@ print -dpng 'ENG308_Des2.png'
 #+END_SRC
 
 #+RESULTS:
-**** d
-***** Union Bound
+
+
+[[file:ENG308_Des2.png]]
+*** d
+**** Union Bound
 \[\Pr(\textrm{symbol error})  \leq \frac{1}{M} \sum_{i=0}^{M-1}\sum_{j\in N(i)}Q\left(\sqrt{\frac{d_{ij}^2}{2N_0}}\right)\]
 
-Outer Points:
+_Outer Points:_
 \[N = 4\]
+
 \[d_{ij} = 2A\]
+
 \[=1\cdot 4 Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+
 \[=4 Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
 
-And:
+
+_And:_
+
 \[N = 4\]
+
 \[d_{ij} = \sqrt{2^2 + 3^2) = \sqrt{13}A\]
+
 \[=2\cdot 4 Q\left(\sqrt{\frac{(\sqrt{13}A)^2}{2N_0}}\right)\]
+
 \[=8 Q\left(\sqrt{\frac{13A^2}{2N_0}}\right)\]
 
-Points at $\{(-3,0), (3,0), (0,-3), (0,3)\}$:
+_Points at $\{(-3,0), (3,0), (0,-3), (0,3)\}$:_
+
 \[N = 4\]
+
 \[d_{ij} = 2A\]
+
 \[=1\cdot 4 Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+
 \[=4 Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
 
-And:
+_And:_
+
 \[N = 4\]
+
 \[d_{ij} = 3A\]
+
 \[=2\cdot 4 Q\left(\sqrt{\frac{(3A)^2}{2N_0}}\right)\]
+
 \[=8 Q\left(\sqrt{\frac{9A^2}{2N_0}}\right)\]
 
-And:
+_And:_
+
 \[N = 4\]
+
 \[d_{ij} = \sqrt{2^2 + 1^2} = \sqrt{5}A\]
+
 \[=2\cdot 4 Q\left(\sqrt{\frac{(\sqrt{5}A)^2}{2N_0}}\right)\]
+
 \[=8 Q\left(\sqrt{\frac{5A^2}{2N_0}}\right)\]
 
-Points at $\{(-3,-3), (-3,3), (3,-3), (3,3)\}$:
+_Points at $\{(-3,-3), (-3,3), (3,-3), (3,3)\}$:_
+
 \[N = 4\]
+
 \[d_{ij} = \sqrt{2^2 + 3^2} = \sqrt{13}A\]
+
 \[=2\cdot 4 Q\left(\sqrt{\frac{(\sqrt{13}A)^2}{2N_0}}\right)\]
+
 \[=8 Q\left(\sqrt{\frac{13A^2}{2N_0}}\right)\]
 
-And:
+_And:_
+
 \[N = 4\]
+
 \[d_{ij} = 3A\]
+
 \[=2\cdot 4 Q\left(\sqrt{\frac{(3A)^2}{2N_0}}\right)\]
+
 \[=8 Q\left(\sqrt{\frac{9A^2}{2N_0}}\right)\]
 
-And:
+_And:_
+
 \[N = 4\]
+
 \[d_{ij} = \sqrt{2^2 + 2^2} = \sqrt{8}A\]
+
 \[=1\cdot 4 Q\left(\sqrt{\frac{(\sqrt{8}A)^2}{2N_0}}\right)\]
+
 \[=4 Q\left(\sqrt{\frac{4A^2}{N_0}}\right)\]
 
-Points at $\{(-1,-1), (-1,1), (1,-1), (1,1)\}$:
+_Points at $\{(-1,-1), (-1,1), (1,-1), (1,1)\}$:_
+
 \[N = 4\]
+
 \[d_{ij} = \sqrt{2^2 + 2^2} = \sqrt{8}A\]
+
 \[=1\cdot 4 Q\left(\sqrt{\frac{(\sqrt{8}A)^2}{2N_0}}\right)\]
+
 \[=4 Q\left(\sqrt{\frac{4A^2}{N_0}}\right)\]
 
-And:
+_And:_
+
 \[N = 4\]
+
 \[d_{ij} = \sqrt{2^2 + 1^2} = \sqrt{5}A\]
+
 \[=2\cdot 4 Q\left(\sqrt{\frac{(\sqrt{5}A)^2}{2N_0}}\right)\]
+
 \[=8 Q\left(\sqrt{\frac{5A^2}{2N_0}}\right)\]
 
-And:
+_And:_
+
 \[N = 4\]
+
 \[d_{ij} = 2A\]
+
 \[=2\cdot 4 Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+
 \[=8 Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
 
-
+Which allows us to calculate the symbol error:
 \begin{align*}
 \Pr(\textrm{symbol error}) &\leq \frac{1}{16} \left[ 4 Q\left(\sqrt{\frac{2A^2}{N_0}}\right) \\
 &+ 8 Q\left(\sqrt{\frac{13A^2}{2N_0}}\right) + 4 Q\left(\sqrt{\frac{2A^2}{N_0}}\right) + 8 Q\left(\sqrt{\frac{9A^2}{2N_0}}\right) \\
@@ -281,43 +418,53 @@ And:
 
 \[\Pr(\textrm{symbol error}) \leq \frac{3}{4} Q\left(\sqrt{\frac{2A^2}{N_0}}\right) + Q\left(\sqrt{\frac{13A^2}{2N_0}}\right) \right.  + Q\left(\sqrt{\frac{9A^2}{2N_0}}\right) + Q\left(\sqrt{\frac{5A^2}{2N_0}}\right) + \left. \frac{1}{2} Q\left(\sqrt{\frac{4A^2}{N_0}}\right)\]
 
-
-
 \[E_s = E\{|A_i|^2\}\]
+
 \[E_s = 216A^2\]
+
 \[A^2 = \frac{E_s}{216}\]
 
-\[\Pr(\textrm{symbol error}) \leq \frac{3}{4} Q\left(\sqrt{\frac{2E_s}{216N_0}}\right) + Q\left(\sqrt{\frac{13E_s}{432N_0}}\right) + Q\left(\sqrt{\frac{9E_s}{432N_0}}\right) + Q\left(\sqrt{\frac{5E_s}{432N_0}}\right) + \frac{1}{2} Q\left(\sqrt{\frac{E_s}{54N_0}}\right)\]
+\[\Pr(\textrm{symbol error}) \leq \frac{3}{4} Q\left(\sqrt{\frac{E_s}{108N_0}}\right) + Q\left(\sqrt{\frac{13E_s}{432N_0}}\right) + Q\left(\sqrt{\frac{E_s}{48N_0}}\right) + Q\left(\sqrt{\frac{5E_s}{432N_0}}\right) + \frac{1}{2} Q\left(\sqrt{\frac{E_s}{54N_0}}\right)\]
 
-***** Nearest Neighbour Approximation
+**** Nearest Neighbour Approximation
 \[\Pr(\textrm{symbol error}) \approx \frac{N_{min}}{M} Q\left(\sqrt{\frac{d_{min}^2}{2N_0}}\right)\]
+
 \[M = 16\]
+
 \[d_{min} = 2A\]
+
 \[N_{min} = 2\cdot 4 + 2\cdot 4 = 16\]
+
 \[\Pr(\textrm{symbol error}) \approx \frac{16}{16} Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+
 \[\Pr(\textrm{symbol error}) \approx Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
+
 \[A^2 = \frac{E_s}{216}\]
+
 \[\Pr(\textrm{symbol error}) \approx Q\left(\sqrt{\frac{E_s}{108N_0}}\right)\]
 
-**** e
+*** e
 #+BEGIN_SRC octave :exports none :results output :session Gray2
 clc
 clear
 close all
 
 if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  pkg load communications
   set(0, "DefaultAxesFontSize", 25);
 end
 
 x = [-5, -3, -3, -3, -1, -1,  0,  0,  0,  0,  1,  1,  3,  3,  3,  5];
-y = [0, -3,  0,  3, -1,  1, -5, -3,  3,  5,  1, -1,  3,  0, -3,  0];
-g = [0b0000, 0b0001, 0b0011, 0b0010, ...
-     0b0100, 0b0101, 0b0111, 0b0110,...
-     0b1100, 0b1101, 0b1111, 0b1110, ...
-     0b1000, 0b1001, 0b1011, 0b1010];
+y = [0 , -3,  0,  3, -1,  1, -5, -3,  3,  5,  1, -1,  3,  0, -3,  0];
+g = [0b1111, 0b1110, 0b0111, 0b1011, ...
+     0b0110, 0b0011, 0b1100, 0b0100,...
+     0b0010, 0b1010, 0b0000, 0b0101, ...
+     0b1000, 0b0001, 0b1101, 0b1001];
 c = [x', y', g'];
 h = convhull (x, y);
 [vx, vy] = voronoi (x, y);
+figure;
 plot (vx, vy, "-b", x, y, "or");
 grid on;
 xlim([min(x) - abs(min(x)/2), max(x) + abs(max(x)/2)]);
@@ -325,31 +472,23 @@ ylim([min(y) - abs(min(y)/2), max(y) + abs(max(y)/2)]);
 for i = 1:length(x)
   text(x(i) + 0.1, y(i) - 0.1, dec2bin(g(i), 4), 'FontSize', 25, 'Color', 'blue');
 end
-title("Standard 4 x 4 signal set Gray Coding")
-print -dpng 'ENG308_Gray1.png'
+title("V.29 Gray Coding")
+print -dpng 'ENG308_Gray2.png'
+
+EsN0 = 0:0.1:200;
+pr = 3* qfunc(sqrt(EsN0/108))/4;
+figure;
+plot(EsN0, pr)
 #+END_SRC
 
 #+RESULTS:
-I	Q	Symbol	Gray Code
--3	+3	(-3,+3)	00 10
--3	+1	(-3,+1)	00 11
--3	-1	(-3,-1)	00 01
--3	-3	(-3,-3)	00 00
--1	+3	(-1,+3)	01 10
--1	+1	(-1,+1)	01 11
--1	-1	(-1,-1)	01 01
--1	-3	(-1,-3)	01 00
-+1	+3	(+1,+3)	11 10
-+1	+1	(+1,+1)	11 11
-+1	-1	(+1,-1)	11 01
-+1	-3	(+1,-3)	11 00
-+3	+3	(+3,+3)	10 10
-+3	+1	(+3,+1)	10 11
-+3	-1	(+3,-1)	10 01
-+3	-3	(+3,-3)	10 00
 
-*** Hexagonal signal set
-**** a
+
+** Hexagonal signal set
+*** a
+
+
+#+ATTR_LATEX: :placement [H] :align |l|l|l|
 |------+------------+---------------|
 |    x | y          | E = x^2 + y^2 |
 |------+------------+---------------|
@@ -372,18 +511,21 @@ I	Q	Symbol	Gray Code
 |  3.5 | 0          |         12.25 |
 |------+------------+---------------|
 
+$\sum E = 152.25$ \\
 
-\[\sum E = 152.25\]
-\[E_{avg} = \frac{152.25}{16} = 9.515\]
-**** b
-\[d_{min} = 2\]
-**** c
+$E_{avg} = \frac{152.25}{16} = 9.515$ \\
+
+This constellation is the most power efficient, as it has the smallest $E_{avg}$.
+*** b
+$d_{min} = 2$
+*** c
 #+BEGIN_SRC octave :exports none :results output :session Des3
 clc
 clear
 close all
 
 if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
   pkg load signal
   set(0, "DefaultAxesFontSize", 25);
 end
@@ -401,49 +543,64 @@ print -dpng 'ENG308_Des3.png'
 #+END_SRC
 
 #+RESULTS:
-**** d
-***** Union Bound
 
 
+[[file:ENG308_Des3.png]]
+*** d
+**** Union Bound
+
+Rather than going through a massive puddle of equations again, lets tabulate the required data. N is the number of points, count is the number of equal distances for that point, and $d_{ij}$ is the distance to the next corresponding point.
+#+ATTR_LATEX: :placement [H] :align |l|l|l|l|
 |-------------------------------------------+---+-------+------------|
 | Point(s)                                  | N | count | d_{ij}     |
 |-------------------------------------------+---+-------+------------|
-| \{(-3.5, -\sqrt{3}), (-3.5, \sqrt{3})\}   | 2 |     2 | 2\sqrt{3}A |
-| \{(-3.5, -\sqrt{3}), (-3.5, \sqrt{3})\}   | 2 |     2 | 2A         |
+| {(-3.5, -\sqrt{3}), (-3.5, \sqrt{3})}     | 2 |     2 | 2\sqrt{3}A |
+| {(-3.5, -\sqrt{3}), (-3.5, \sqrt{3})}     | 2 |     2 | 2A         |
 |-------------------------------------------+---+-------+------------|
-| \{(-2.5, 0)\}                             | 1 |     5 | 2A         |
+| {(-2.5, 0)}                               | 1 |     5 | 2A         |
 |-------------------------------------------+---+-------+------------|
-| \{(-1.5, -\sqrt{3}), (-1.5, \sqrt{3})\}   | 2 |     5 | 2A         |
+| {(-1.5, -\sqrt{3}), (-1.5, \sqrt{3})}     | 2 |     5 | 2A         |
 |-------------------------------------------+---+-------+------------|
-| \{(-0.5, -2\sqrt{3}), (-0.5, 2\sqrt{3})\} | 2 |     1 | 2\sqrt{3}A |
-| \{(-0.5, -2\sqrt{3}), (-0.5, 2\sqrt{3})\} | 2 |     3 | 2A         |
+| {(-0.5, -2\sqrt{3}), (-0.5, 2\sqrt{3})}   | 2 |     1 | 2\sqrt{3}A |
+| {(-0.5, -2\sqrt{3}), (-0.5, 2\sqrt{3})}   | 2 |     3 | 2A         |
 |-------------------------------------------+---+-------+------------|
-| \{(-0.5, 0)\}                             | 1 |     6 | 2A         |
+| {(-0.5, 0)}                               | 1 |     6 | 2A         |
 |-------------------------------------------+---+-------+------------|
-| \{(0.5, -\sqrt{3}), (0.5, \sqrt{3})\}     | 2 |     6 | 2A         |
+| {(0.5, -\sqrt{3}), (0.5, \sqrt{3})}       | 2 |     6 | 2A         |
 |-------------------------------------------+---+-------+------------|
-| \{(1.5, -2\sqrt{3}), (1.5, 2\sqrt{3})\}   | 2 |     3 | 2A         |
+| {(1.5, -2\sqrt{3}), (1.5, 2\sqrt{3})}     | 2 |     3 | 2A         |
 |-------------------------------------------+---+-------+------------|
-| \{(1.5, 0)\}                              | 1 |     6 | 2A         |
+| {(1.5, 0)}                                | 1 |     6 | 2A         |
 |-------------------------------------------+---+-------+------------|
-| \{(2.5, -\sqrt{3}), (2.5, \sqrt{3})\}     | 2 |     4 | 2A         |
+| {(2.5, -\sqrt{3}), (2.5, \sqrt{3})}       | 2 |     4 | 2A         |
 |-------------------------------------------+---+-------+------------|
-| \{(3.5, 0)\}                              | 1 |     3 | 2A         |
+| {(3.5, 0)}                                | 1 |     3 | 2A         |
 |-------------------------------------------+---+-------+------------|
 \[\Pr(\textrm{symbol error}) \leq \frac{1}{M} \sum_{i=0}^{M-1}\sum_{j\in N(i)}Q\left(\sqrt{\frac{d_{ij}^2}{2N_0}}\right)\]
-\[\Pr(\textrm{symbol error}) \leq \frac{1}{16}\left[\left[2\cdot2 + 1\cdot5 + 2\cdot5 + 2\cdot3 + 1\cdot6 + 2\cdot6 + 2\cdot3 + 1\cdot6 + 2\cdot4 + 1\cdot3\right]Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right) + \left[2\cdot2 + 2\cdot5\right]Q\left(\sqrt{\frac{(2\sqrt{3}A)^2}{2N_0}}\right)\right]\]
+
+\[\Pr(\textrm{symbol error}) \leq \frac{1}{16}\left[\left[2\cdot2 + 1\cdot5 + 2\cdot5 + 2\cdot3 + 1\cdot6 + 2\cdot6 + 2\cdot3 + 1\cdot6 + 2\cdot4 + 1\cdot3\right]Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+\[+\left[2\cdot2 + 2\cdot5\right]Q\left(\sqrt{\frac{(2\sqrt{3}A)^2}{2N_0}}\right)\right]\]
+
 \[\Pr(\textrm{symbol error}) \leq \frac{33}{8}Q\left(\sqrt{\frac{2A^2}{N_0}}\right) + \frac{7}{8}Q\left(\sqrt{\frac{6A^2}{N_0}}\right)\]
 
 \[A^2 = \frac{E_s}{152.25}\]
+
 \[\Pr(\textrm{symbol error}) \leq \frac{33}{8}Q\left(\sqrt{\frac{E_s}{76.125N_0}}\right) + \frac{7}{8}Q\left(\sqrt{\frac{E_s}{25.375N_0}}\right)\]
-***** Nearest Neighbour Approximation
+
+**** Nearest Neighbour Approximation
 \[\Pr(\textrm{symbol error}) \approx \frac{N_{min}}{M} Q\left(\sqrt{\frac{d_{min}^2}{2N_0}}\right)\]
+
 \[M = 16\]
+
 \[d_{min} = 2A\]
+
 \[N_{min} = 66\]
+
 \[\Pr(\textrm{symbol error}) \approx \frac{66}{16} Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+
 \[\Pr(\textrm{symbol error}) \approx \frac{33}{8} Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
 
 \[A^2 = \frac{E_s}{152.25}\]
+
 \[\Pr(\textrm{symbol error}) \approx \frac{33}{8} Q\left(\sqrt{\frac{E_s}{76.125N_0}}\right)\]
-**** e
+
