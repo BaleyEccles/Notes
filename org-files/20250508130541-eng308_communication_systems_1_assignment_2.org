@@ -52,7 +52,7 @@ Using $E_b = \frac{E_s}{2}$ will not give the exact probability because it is po
 \[\sum E = 160\]
 \[E_{avg} = \frac{160}{16} = 10\]
 **** b
-\[d_{min} = \sqrt{2}\]
+\[d_{min} = 2A\]
 **** c
 #+BEGIN_SRC octave :exports none :results output :session Des1
 clc
@@ -60,7 +60,6 @@ clear
 close all
 
 if exist('OCTAVE_VERSION', 'builtin')
-  pkg load signal
   set(0, "DefaultAxesFontSize", 25);
 end
 
@@ -120,6 +119,37 @@ Inner Points:
 \[A^2 = \frac{E_s}{160}\]
 \[\Pr(\textrm{symbol error}) \approx 3Q\left(\sqrt{\frac{E_s}{80N_0}}\right)\]
 
+**** e
+
+#+BEGIN_SRC octave :exports none :results output :session Gray1
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
+
+x = [-3, -3, -3, -3, -1, -1, -1, -1,  1,  1,  1,  1,  3,  3,  3,  3];
+y = [-3, -1,  1,  3, -3, -1,  1,  3, -3, -1,  1,  3, -3, -1,  1,  3];
+g = [0b0000, 0b0001, 0b0011, 0b0010, ...
+     0b0100, 0b0101, 0b0111, 0b0110,...
+     0b1100, 0b1101, 0b1111, 0b1110, ...
+     0b1000, 0b1001, 0b1011, 0b1010];
+c = [x', y', g'];
+plot (x, y, "or");
+grid on;
+xlim([min(x) - abs(min(x)/2), max(x) + abs(max(x)/2)]);
+ylim([min(y) - abs(min(y)/2), max(y) + abs(max(y)/2)]);
+for i = 1:length(x)
+  text(x(i) + 0.1, y(i) - 0.1, dec2bin(g(i), 4), 'FontSize', 25, 'Color', 'blue');
+end
+title("Standard 4 x 4 signal set Gray Coding")
+print -dpng 'ENG308_Gray1.png'
+#+END_SRC
+
+#+RESULTS:
+
 *** V.29 signal set
 **** a
 |----+----+---------------|
@@ -146,7 +176,7 @@ Inner Points:
 \[\sum E = 216\]
 \[E_{avg} = \frac{216}{16} = 13.5\]
 **** b
-\[d_{min} = \sqrt{2}\]
+\[d_{min} = 2A\]
 **** c
 #+BEGIN_SRC octave :exports none :results output :session Des2
 clc
@@ -158,8 +188,8 @@ if exist('OCTAVE_VERSION', 'builtin')
   set(0, "DefaultAxesFontSize", 25);
 end
 
-x =[-5, -3, -3, -3, -1, -1,  0,  0,  0,  0,  1,  1,  3,  3,  3,  5];
-y =[0, -3,  0,  3, -1,  1, -5, -3,  3,  5,  1, -1,  3,  0, -3,  0];
+x = [-5, -3, -3, -3, -1, -1,  0,  0,  0,  0,  1,  1,  3,  3,  3,  5];
+y = [0, -3,  0,  3, -1,  1, -5, -3,  3,  5,  1, -1,  3,  0, -3,  0];
 h = convhull (x, y);
 [vx, vy] = voronoi (x, y);
 plot (vx, vy, "-b", x, y, "or");
@@ -269,34 +299,84 @@ And:
 \[A^2 = \frac{E_s}{216}\]
 \[\Pr(\textrm{symbol error}) \approx Q\left(\sqrt{\frac{E_s}{108N_0}}\right)\]
 
+**** e
+#+BEGIN_SRC octave :exports none :results output :session Gray2
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultAxesFontSize", 25);
+end
+
+x = [-5, -3, -3, -3, -1, -1,  0,  0,  0,  0,  1,  1,  3,  3,  3,  5];
+y = [0, -3,  0,  3, -1,  1, -5, -3,  3,  5,  1, -1,  3,  0, -3,  0];
+g = [0b0000, 0b0001, 0b0011, 0b0010, ...
+     0b0100, 0b0101, 0b0111, 0b0110,...
+     0b1100, 0b1101, 0b1111, 0b1110, ...
+     0b1000, 0b1001, 0b1011, 0b1010];
+c = [x', y', g'];
+h = convhull (x, y);
+[vx, vy] = voronoi (x, y);
+plot (vx, vy, "-b", x, y, "or");
+grid on;
+xlim([min(x) - abs(min(x)/2), max(x) + abs(max(x)/2)]);
+ylim([min(y) - abs(min(y)/2), max(y) + abs(max(y)/2)]);
+for i = 1:length(x)
+  text(x(i) + 0.1, y(i) - 0.1, dec2bin(g(i), 4), 'FontSize', 25, 'Color', 'blue');
+end
+title("Standard 4 x 4 signal set Gray Coding")
+print -dpng 'ENG308_Gray1.png'
+#+END_SRC
+
+#+RESULTS:
+I	Q	Symbol	Gray Code
+-3	+3	(-3,+3)	00 10
+-3	+1	(-3,+1)	00 11
+-3	-1	(-3,-1)	00 01
+-3	-3	(-3,-3)	00 00
+-1	+3	(-1,+3)	01 10
+-1	+1	(-1,+1)	01 11
+-1	-1	(-1,-1)	01 01
+-1	-3	(-1,-3)	01 00
++1	+3	(+1,+3)	11 10
++1	+1	(+1,+1)	11 11
++1	-1	(+1,-1)	11 01
++1	-3	(+1,-3)	11 00
++3	+3	(+3,+3)	10 10
++3	+1	(+3,+1)	10 11
++3	-1	(+3,-1)	10 01
++3	-3	(+3,-3)	10 00
+
 *** Hexagonal signal set
 **** a
-|------+-----------+---------------|
-|    x | y         | E = x^2 + y^2 |
-|------+-----------+---------------|
-| -3.5 | -sqrt(3)  |         15.25 |
-| -3.5 | sqrt(3)   |         16.25 |
-| -2.5 | 0         |         10.25 |
-| -1.5 | -sqrt(3)  |          6.25 |
-| -1.5 | sqrt(3)   |          6.25 |
-| -0.5 | -2sqrt(3) |          4.25 |
-| -0.5 | -2sqrt(3) |          4.25 |
-| -0.5 | 0         |          4.25 |
-| -0.5 | 2sqrt(3)  |          4.25 |
-|  0.5 | -sqrt(3)  |          4.25 |
-|  0.5 | sqrt(3)   |          4.25 |
-|  1.5 | -2sqrt(3) |          6.25 |
-|  1.5 | 0         |          6.25 |
-|  1.5 | 2sqrt(3)  |          6.25 |
-|  2.5 | -sqrt(3)  |         10.25 |
-|  2.5 | sqrt(3)   |         10.25 |
-|  3.5 | 0         |         16.25 |
-|------+-----------+---------------|
+|------+------------+---------------|
+|    x | y          | E = x^2 + y^2 |
+|------+------------+---------------|
+| -3.5 | -\sqrt(3)  |         15.25 |
+| -3.5 | \sqrt(3)   |         15.25 |
+| -2.5 | 0          |          6.25 |
+| -1.5 | -\sqrt(3)  |          5.25 |
+| -1.5 | \sqrt(3)   |          5.25 |
+| -0.5 | -2\sqrt(3) |         12.25 |
+| -0.5 | -2\sqrt(3) |         12.25 |
+| -0.5 | 0          |          0.25 |
+| -0.5 | 2\sqrt(3)  |         12.25 |
+|  0.5 | -\sqrt(3)  |          3.25 |
+|  0.5 | \sqrt(3)   |          3.25 |
+|  1.5 | -2\sqrt(3) |         14.25 |
+|  1.5 | 0          |          2.25 |
+|  1.5 | 2\sqrt(3)  |         14.25 |
+|  2.5 | -\sqrt(3)  |          9.25 |
+|  2.5 | \sqrt(3)   |          9.25 |
+|  3.5 | 0          |         12.25 |
+|------+------------+---------------|
 
-\[\sum E = 135.25\]
-\[E_{avg} = \frac{135.25}{16} = 8.45\]
+
+\[\sum E = 152.25\]
+\[E_{avg} = \frac{152.25}{16} = 9.515\]
 **** b
-\[d_{min} = \sqrt{6.25}\]
+\[d_{min} = 2\]
 **** c
 #+BEGIN_SRC octave :exports none :results output :session Des3
 clc
@@ -310,8 +390,6 @@ end
 
 x = [-3.5, -3.5, -2.5, -1.5, -1.5, -0.5, -0.5, -0.5, -0.5,  0.5,  0.5,  1.5,  1.5,  1.5, 2.5,  2.5,  3.5];
 y = [-sqrt(3), sqrt(3), 0, -sqrt(3), sqrt(3), -2*sqrt(3), -2*sqrt(3), 0, 2*sqrt(3), -sqrt(3), sqrt(3), -2*sqrt(3), 0, 2*sqrt(3), -sqrt(3), sqrt(3), 0];
-length(x)
-length(y)
 h = convhull (x, y);
 [vx, vy] = voronoi (x, y);
 plot (vx, vy, "-b", x, y, "or");
@@ -323,20 +401,49 @@ print -dpng 'ENG308_Des3.png'
 #+END_SRC
 
 #+RESULTS:
-: ans = 17
-: ans = 17
 **** d
 ***** Union Bound
-#+BEGIN_SRC octave :exports none :results output :session UB3
-clc
-clear
-close all
 
-if exist('OCTAVE_VERSION', 'builtin')
-  pkg load signal
-  set(0, "DefaultAxesFontSize", 25);
-end
 
-#+END_SRC
+|-------------------------------------------+---+-------+------------|
+| Point(s)                                  | N | count | d_{ij}     |
+|-------------------------------------------+---+-------+------------|
+| \{(-3.5, -\sqrt{3}), (-3.5, \sqrt{3})\}   | 2 |     2 | 2\sqrt{3}A |
+| \{(-3.5, -\sqrt{3}), (-3.5, \sqrt{3})\}   | 2 |     2 | 2A         |
+|-------------------------------------------+---+-------+------------|
+| \{(-2.5, 0)\}                             | 1 |     5 | 2A         |
+|-------------------------------------------+---+-------+------------|
+| \{(-1.5, -\sqrt{3}), (-1.5, \sqrt{3})\}   | 2 |     5 | 2A         |
+|-------------------------------------------+---+-------+------------|
+| \{(-0.5, -2\sqrt{3}), (-0.5, 2\sqrt{3})\} | 2 |     1 | 2\sqrt{3}A |
+| \{(-0.5, -2\sqrt{3}), (-0.5, 2\sqrt{3})\} | 2 |     3 | 2A         |
+|-------------------------------------------+---+-------+------------|
+| \{(-0.5, 0)\}                             | 1 |     6 | 2A         |
+|-------------------------------------------+---+-------+------------|
+| \{(0.5, -\sqrt{3}), (0.5, \sqrt{3})\}     | 2 |     6 | 2A         |
+|-------------------------------------------+---+-------+------------|
+| \{(1.5, -2\sqrt{3}), (1.5, 2\sqrt{3})\}   | 2 |     3 | 2A         |
+|-------------------------------------------+---+-------+------------|
+| \{(1.5, 0)\}                              | 1 |     6 | 2A         |
+|-------------------------------------------+---+-------+------------|
+| \{(2.5, -\sqrt{3}), (2.5, \sqrt{3})\}     | 2 |     4 | 2A         |
+|-------------------------------------------+---+-------+------------|
+| \{(3.5, 0)\}                              | 1 |     3 | 2A         |
+|-------------------------------------------+---+-------+------------|
+\[\Pr(\textrm{symbol error}) \leq \frac{1}{M} \sum_{i=0}^{M-1}\sum_{j\in N(i)}Q\left(\sqrt{\frac{d_{ij}^2}{2N_0}}\right)\]
+\[\Pr(\textrm{symbol error}) \leq \frac{1}{16}\left[\left[2\cdot2 + 1\cdot5 + 2\cdot5 + 2\cdot3 + 1\cdot6 + 2\cdot6 + 2\cdot3 + 1\cdot6 + 2\cdot4 + 1\cdot3\right]Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right) + \left[2\cdot2 + 2\cdot5\right]Q\left(\sqrt{\frac{(2\sqrt{3}A)^2}{2N_0}}\right)\right]\]
+\[\Pr(\textrm{symbol error}) \leq \frac{33}{8}Q\left(\sqrt{\frac{2A^2}{N_0}}\right) + \frac{7}{8}Q\left(\sqrt{\frac{6A^2}{N_0}}\right)\]
+
+\[A^2 = \frac{E_s}{152.25}\]
+\[\Pr(\textrm{symbol error}) \leq \frac{33}{8}Q\left(\sqrt{\frac{E_s}{76.125N_0}}\right) + \frac{7}{8}Q\left(\sqrt{\frac{E_s}{25.375N_0}}\right)\]
 ***** Nearest Neighbour Approximation
+\[\Pr(\textrm{symbol error}) \approx \frac{N_{min}}{M} Q\left(\sqrt{\frac{d_{min}^2}{2N_0}}\right)\]
+\[M = 16\]
+\[d_{min} = 2A\]
+\[N_{min} = 66\]
+\[\Pr(\textrm{symbol error}) \approx \frac{66}{16} Q\left(\sqrt{\frac{(2A)^2}{2N_0}}\right)\]
+\[\Pr(\textrm{symbol error}) \approx \frac{33}{8} Q\left(\sqrt{\frac{2A^2}{N_0}}\right)\]
 
+\[A^2 = \frac{E_s}{152.25}\]
+\[\Pr(\textrm{symbol error}) \approx \frac{33}{8} Q\left(\sqrt{\frac{E_s}{76.125N_0}}\right)\]
+**** e
