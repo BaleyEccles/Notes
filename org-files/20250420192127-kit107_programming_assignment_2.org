@@ -9,17 +9,21 @@
 
 * KIT107 - Programming - Assignment 2
 [[file:~/UTAS/KIT107 - Programming/KIT107Assignment2/src/AssigTwo125.java]]
+[[https://github.com/BaleyEccles/KIT107Assignment2][Github repo]]
 
 ** a
-Sorted list.
-We can sort the eggs based on their data, such as the weight or the size. This will allow us to easily access the data.
+sorted list.
+Allows us to sort the eggs based on their volume. And will allow us to easily access the data.
+
 ** b
-Array.
-Given that we have all the eggs stored in a text there will be no need to add more. This will be more faster than using a linked-list, as we wont need to jump around in memory as much.
+Linked List.
+The eggs will be stored in order of volume, so using a linked list will allow us to dynamically adjust the data. If an array was used the memory would be constantly changing when adding eggs, which would be slow. Hence, using a linked list will allow us to add eggs without moving a lot memory many times.
+
 ** c
-List.
-We know that there will only be seven chocolatiers. This will provide simple sequential iteration over the data set.
+Dynamic Array.
+Allows us to add any amount of data without having to worry about managing it size. We don't know how many chocolatiers there are in total, we only know that there will be at least, and we will need to find the total of unused eggs.
+
 ** d
 Array.
-There are only seven chocolatiers, there is no need to add more. So the limitation of the array, of not being able to add more, will not effect us.
+The order of the chocolatiers don't matter, so we won't need to move any of the data. We can simply append the next chocolatier to the end of the array.
 
