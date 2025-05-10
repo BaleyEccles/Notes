@@ -29,3 +29,5 @@ There are two types
    - This is better cause the max jump is $\sqrt{2}A$
  - Where we rotate all the points by $45^o$
    - This is worse cause the max jump is $2A$
+** Bipolar PSK (BPSK)
+Two points on the real axis
