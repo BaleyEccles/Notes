@@ -23,58 +23,74 @@ beccles@utas.edu.au
 * ENG305 - Transmission Lines and Electromagnetic Waves - Lab 1
 Using transmission line number: 11
 ** Part 1: Measurement of Transmission Line Constants
-*** 1
+*** DONE 1
 Calculations:
 
-| Parameter      | Value    |
-| $L$            | 656uH    |
-| $D_s$          | 0.037    |
-| $C$            | 9.9nF    |
-| $D_p$          | 0.000244 |
-| $R$ (Measured) | 157m     |
-| $G$ (Measured) | 1/(64M)  |
+| Parameter | Value    |
+| $L$       | 656uH    |
+| $D_s$     | 0.037    |
+| $C$       | 9.9nF    |
+| $D_p$     | 0.000244 |
+| $R$       | 157m     |
+| $G$       | 1/(64M)  |
 
-Calculated:
-\[ESR = \omega LD_s\]
-\[ESR = 152m\Omega\]
+We can use the following equation to calculate the Equivalent Series Resistance:
+\begin{align*}
+ESR &= \omega LD_s \\
+\Rightarrow ESR &= 152m\Omega
+\end{align*}
+This give the same result as $R$ in the table above, which is expected.
 
-Calculated:
-\[EPR = \frac{1}{\omega CD_p}\]
-\[EPR = 65.2M\Omega\]
+And we can use the following equation to calculate the Equivalent Parallel Resistance:
+\begin{align*}
+EPR &= \frac{1}{\omega CD_p} \\
+\Rightarrow EPR &= 65.2M\Omega
+\end{align*}
+This give the same result as $1/G$ in the table above, which is expected.
 
 
+*** DONE 2
 
-*** 2
-Calculations:
+We can calculate the characteristic impedance using the following:
 \[Z_0 = \sqrt{\frac{R + j\omega L}{G + j\omega C}}\]
+
+We can calculate the propagation constant using the following:
 \[\gamma = \sqrt{(R + j\omega L)(G + j\omega C)}\]
-| Parameter                  | Values       |
-| $Z_0$                      | 256.18       |
-| $\gamma = \alpha + j\beta$ | 0.000307 + 0.016j |
-*** 3
+
+| Parameter                  | Values                     |
+| $Z_0$                      | 257.462 - 4.869j |
+| $\gamma = \alpha + j\beta$ | 0.000307 + 0.0160j         |
+*** TODO 3
 OC: Not matched, reflections occur
 SC: \Gamma = -1
-*** 4
+*** TODO 4
 | Parameter | Values       |
-| $R2_{OC}$ | 233 $\Omega$ |
-| $R2_{SC}$ | 250 $\Omega$ |
+| R2_{OC} | 233 \Omega  |
+| R2_{SC} | 250 \Omega  |
+Both of the values in the able are close to the calculated $Z_0$, which is expected.
 
-*** 5
+*** TODO 5
+
+Using:
+\[u_p = \frac{\omega}{\beta}\]
 
 | Parameter | Values |
 | $u_p$     | 392700 |
-\[u_p = \frac{\omega}{\beta}\]
-*** 6
-50us
-| Parameter | Values |
-| $l$       | 9.81m  |
 
-\[v = \frac{l}{t}\]
-\[l = 9.81\]
-*** 7
+*** DONE 6
+
+| Parameter | Values |
+| l         | 9.81m  |
+| t         | 50\mu s |
+
+\begin{align*}
+v &= \frac{l}{t} \\
+\Rightarrow l &= 9.81m
+\end{align*}
+*** TODO 7
 | Parameter      | Values    |
-| $RL_{matched}$ | 272\Omega |
-We expect RLmatched to be the same as Z0, ROC and RSC
+| RL_{matched}  | 272\Omega |
+We expect $RL_{matched}$ to be the same as Z0, ROC and RSC.
 
 *** TODO 8
 It stays matched when changing R2.
@@ -88,101 +104,172 @@ It stays matched when changing R2.
 
 ** Part 2: Steady State AC Measurements
 
-*** 1
+*** TODO 1
 Using:
-\[u_p = \lambda f\]
-\[l = \lambda\]
-\[2l = \lambda\]
-We can get $f \in (20\ 000, 40\ 000)$ we chose $30kHz$
+\begin{align*}
+u_p &= \lambda f \\
+l &= \lambda \\
+2l &= \lambda
+\end{align*}
+We can get $f \in (20\ 000, 40\ 000)$, we chose 30kHz.
 
-Using note at end of sheet:
-OC:
+_Open Circuit:_
 \[Z_{in,OC} = 75.3 - 649j\Omega\]
 
-\[V1 = 1.4e^{j 0^o}\]
-\[V2 = 1.26e^{j -20^o}\]
-\[R = 250\Omega\]
+\begin{align*}
+V1 &= 1.4e^{j 0^o} \\
+V2 &= 1.26e^{j -20^o} \\
+R &= 250\Omega
+\end{align*}
 
-SC:
+_Short Circuit:_
 \[Z_{in,SC} = 6.62 - 93j\Omega\]
 
-\[V1 = 1.26e^{j 0^o}\]
-\[V2 = 0.433e^{j 66^o}\]
-\[R = 250\Omega\]
+\begin{align*}
+V1 &= 1.26e^{j 0^o} \\
+V2 &= 0.433e^{j 66^o} \\
+R &= 250\Omega 
+\end{align*}
 
-Characteristic Impedance:
-\[Z_0 = \sqrt{Z_{in,OC}Z_{in,SC}} = 246.8 + 5.5j\Omega\]
+_Characteristic Impedance:_
+\begin{align*}
+Z_0 &= \sqrt{Z_{in,OC}Z_{in,SC}}\\
+&= 246.8 + 5.5j\Omega 
+\end{align*}
 
-Discussion:
+_Discussion:_
 The results are similar, which is what we expect.
-*** 2
+
+*** TODO 2
 Using:
-\[u_p = \lambda f\]
-\[4l = \lambda\]
-\[\frac{4}{3}l = \lambda\]
-We can get $f \in (10\ 000, 30\ 000)$ we chose $20kHz$
+\begin{align*}
+u_p &= \lambda f \\
+4l &= \lambda \\
+\frac{4}{3}l &= \lambda
+\end{align*}
 
-| Load      |     1 |     2 |     3 |     4 |     5 |     6 |     7 |     8 |   9 |    10 |    11 |    12 |    13 |
-| OC        |     1 |  1.16 |  1.23 | 1.167 | 0.967 |   0.7 | 0.333 | 0.133 | 0.5 | 0.833 |   1.1 | 1.233 | 1.233 |
-| SC        | 1.033 | 0.633 |   0.2 |   0.3 |   0.7 |   1.1 |  1.33 | 1.433 | 1.4 |   1.2 | 0.867 | 0.467 | 0.033 |
-| $Z_0=250$ |   0.8 | 0.933 | 0.967 |   0.9 | 0.767 | 0.600 |   0.4 | 0.367 | 0.5 |   0.7 | 0.867 | 0.933 | 0.933 |
-| ?         |   0.5 | 0.667 |   0.8 |   0.9 |   0.9 | 0.833 |   0.7 | 0.533 | 0.4 | 0.433 | 0.567 | 0.733 | 0.833 |
+We can get $f \in (10\ 000, 30\ 000)$, we chose 20kHz.
 
-#+BEGIN_SRC octave :exports none :results output :session Q1
+|---------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
+| Load    |     1 |     2 |     3 |     4 |     5 |     6 |     7 |     8 |   9 |    10 |    11 |    12 |    13 |
+|---------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
+| OC      |     1 |  1.16 |  1.23 | 1.167 | 0.967 |   0.7 | 0.333 | 0.133 | 0.5 | 0.833 |   1.1 | 1.233 | 1.233 |
+| SC      | 1.033 | 0.633 |   0.2 |   0.3 |   0.7 |   1.1 |  1.33 | 1.433 | 1.4 |   1.2 | 0.867 | 0.467 | 0.033 |
+| Z_0=250 |   0.8 | 0.933 | 0.967 |   0.9 | 0.767 | 0.600 |   0.4 | 0.367 | 0.5 |   0.7 | 0.867 | 0.933 | 0.933 |
+| ?       |   0.5 | 0.667 |   0.8 |   0.9 |   0.9 | 0.833 |   0.7 | 0.533 | 0.4 | 0.433 | 0.567 | 0.733 | 0.833 |
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
 clc
 clear
 close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+end
+
 OC = [1,1.16,1.23,1.167,0.967,0.7,0.333,0.133,0.5,0.833,1.1,1.233,1.233];
-OC_VSWR = max(OC)/min(OC)
+
 SC = [1.033,0.633,0.2,0.3,0.7,1.1,1.33,1.433,1.4,1.2,0.867,0.467,0.033];
-SC_VSWR = max(SC)/min(SC)
+
 Z0 = [0.8,0.933,0.967,0.9,0.767,0.600,0.4,0.367,0.5,0.7,0.867,0.933,0.933];
-Z0_VSWR = max(Z0)/min(Z0)
+
 Mystery = [0.5,0.667,0.8,0.9,0.9,0.833,0.7,0.533,0.4,0.433,0.567,0.733,0.833];
-Mystery_VSWR = max(Mystery)/min(Mystery)
+
 t = 1:1:length(OC);
+
 figure;
 plot(t,OC)
+title("Open Circuit")
+xlabel("Sample Location")
+ylabel("Voltage (V)")
+print -dpng 'ENG305_Lab_1_OC.png'
+
 figure;
 plot(t,SC)
+title("Short Circuit")
+xlabel("Sample Location")
+ylabel("Voltage (V)")
+print -dpng 'ENG305_Lab_1_SC.png'
+
 figure;
 plot(t,Z0)
+title("Z_0")
+xlabel("Sample Location")
+ylabel("Voltage (V)")
+print -dpng 'ENG305_Lab_1_Z_0.png'
+
 figure;
 plot(t,Mystery)
+title("Mystery")
+xlabel("Sample Location")
+ylabel("Voltage (V)")
+print -dpng 'ENG305_Lab_1_Mystery.png'
 #+END_SRC
 
 #+RESULTS:
-: OC_VSWR = 9.2707
-: SC_VSWR = 43.424
-: Z0_VSWR = 2.6349
-: Mystery_VSWR = 2.2500
-^ Are wrong
-*** 3
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Open Circuit \label{fig:OC}
+[[file:ENG305_Lab_1_OC.png]]
+
+Figure \ref{fig:OC}. 
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Short Circuit \label{fig:SC}
+[[file:ENG305_Lab_1_SC.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Z_0 \label{fig:Z0}
+[[file:ENG305_Lab_1_Z_0.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Mystery \label{fig:Mystery}
+[[file:ENG305_Lab_1_Mystery.png]]
+
+
+*** TODO 3
+
 $Z_{??} = 115.699 + 86.6473j$
+
 ** Part 3: Dispersion
 
 *** 1
-| Phase Shift (${}^o$) |   90 | 270 | 450 | 630 |   810 | 990 |  1170 |   1350 | 1530 |   1710 | 
-| $f$ (Hz)             | 8.3k | 25k | 41k | 56k | 70.5k | 83k | 94.5k | 104.5k | 112k | 117.3k | 
+| Phase Shift (Degrees) |   90 | 270 | 450 | 630 |   810 | 990 |  1170 |   1350 | 1530 |   1710 |
+| f (Hz)                | 8.3k | 25k | 41k | 56k | 70.5k | 83k | 94.5k | 104.5k | 112k | 117.3k |
 
 *** 2
+Using the following equation to find the phase velocity:
 \[\phi = \frac{\omega l}{u_p}\]
 
 #+BEGIN_SRC octave :exports none :results output :session Q2
 clc
 clear
 close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+end
+
 f = [8.3e3, 25e3, 41e3, 56e3, 70.5e3, 83e3, 94.5e3, 104.5e3, 112e3, 117.3e3];
 angle = [90, 270, 450, 630, 810, 990,1170, 1350, 1530, 1710];
 l = 10.34;
 
 up = 2.*pi.*f.*l./(angle.*pi./180);
+
+figure;
 plot(f, up)
+title("Phase Velocity VS Frequency")
+xlabel("Frequency (Hz)");
+ylabel("Phase Velocity (m/s)");
+print -dpng 'ENG305_Lab_1_Phase_Velocity_VS_Frequency.png'
 #+END_SRC
 
 #+RESULTS:
 
-*** 3
+*** TODO 3
 High frequencies travel slower. Low frequencies travel faster.
-*** 4
+*** TODO 4
 After $\approx 130.0kHz$ dispersion is too high to measure anything. The output wave becomes zero. This is because this is basically a low pass filter.
+
