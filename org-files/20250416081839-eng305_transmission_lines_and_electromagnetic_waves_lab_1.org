@@ -17,7 +17,6 @@
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 
 yingjink@utas.edu.au
-
 beccles@utas.edu.au
 
 * ENG305 - Transmission Lines and Electromagnetic Waves - Lab 1
@@ -61,94 +60,145 @@ We can calculate the propagation constant using the following:
 | $Z_0$                      | 257.462 - 4.869j |
 | $\gamma = \alpha + j\beta$ | 0.000307 + 0.0160j         |
 *** TODO 3
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Maximum $R_2$ with a 120Hz square wave and open circuited \label{fig:OC_with_MAX_R2}
+[[./OC_with_MAX_R2.jpg]]
+
 OC: Not matched, reflections occur
+:TODO: Discussion
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Maximum $R_2$ with a 120Hz square wave and short circuited \label{fig:SC_with_MAX_R2}
+[[./SC_with_MAX_R2.jpg]]
+
 SC: \Gamma = -1
+:TODO: Discussion
+
 *** TODO 4
-| Parameter | Values       |
-| R2_{OC} | 233 \Omega  |
-| R2_{SC} | 250 \Omega  |
+| Parameter | Values     |
+| R2_{OC}   | 233 \Omega |
+| R2_{SC}   | 250 \Omega |
 Both of the values in the able are close to the calculated $Z_0$, which is expected.
 
-*** TODO 5
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Matched with 120Hz square wave and open circuited \label{fig:Matched_OC}
+[[./Matched_OC.jpg]]
 
-Using:
-\[u_p = \frac{\omega}{\beta}\]
+:TODO: Discussion
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Matched with 120Hz square wave and short circuited \label{fig:Matched_SC}
+[[./Matched_SC.jpg]]
+
+:TODO: Discussion
+
+
+*** DONE 5
+We can calculate the phase velocity as the following: 
+\begin{align*}
+u_p &= \frac{1}{\sqrt{LC}} \\
+u_p &= \frac{1}{\sqrt{9.9\times10^{-9}\cdot656\times10^{-6}}} \\
+u_p &= 392401
+\end{align*}
 
 | Parameter | Values |
-| $u_p$     | 392700 |
+| $u_p$     | 392401 |
 
 *** DONE 6
 
 | Parameter | Values |
 | l         | 9.81m  |
 | t         | 50\mu s |
-
+The length of the transmission line can simply be calculated using:
 \begin{align*}
 v &= \frac{l}{t} \\
 \Rightarrow l &= 9.81m
 \end{align*}
+
 *** TODO 7
 | Parameter      | Values    |
 | RL_{matched}  | 272\Omega |
-We expect $RL_{matched}$ to be the same as Z0, ROC and RSC.
+
+
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: $R_L$ matched with 120Hz square wave \label{fig:Matched_Load_RL}
+[[./Matched_Load_RL.jpg]]
+
+:TODO: Discussion
+We expect $R_L_{matched}$ to be the same as $Z_0$, $R_{OC}$ and $R_{SC}$.
 
 *** TODO 8
-It stays matched when changing R2.
+:TODO: This does not feel right
+It stays matched when changing $R_2$.
 
 *** TODO 9
+:TODO: Discussion: Why use square wave
 
-*** TODO 10
-\[Z_0 = \sqrt{\frac{L}{C}} = 257.4\]
+*** DONE 10
+$Z_0$ can be calculated using the lossless assumptions using the following:
+\begin{align*}
+Z_0 &= \sqrt{\frac{L}{C}} \\
+Z_0 &= \sqrt{\frac{656\times10^{-6}}{9.9\times10^{-9}}} \\
+Z_0 &= 257.415\Omega 
+\end{align*}
 
-
+Both the lossless and lossy methods of calculations result in very similar answers, this means that it is reasonable to assume that the transmission line is close to lossless. The lossless assumption does not take into account reactive component of the transmission line, where as the lossy method does.
 
 ** Part 2: Steady State AC Measurements
 
 *** TODO 1
 Using:
-\begin{align*}
-u_p &= \lambda f \\
-l &= \lambda \\
-2l &= \lambda
-\end{align*}
-We can get $f \in (20\ 000, 40\ 000)$, we chose 30kHz.
+\[u_p &= \lambda f\]
+And knowing that the frequency must lay in the range governed by $l = \lambda$ and $2l = \lambda$. We can get $f \in (20\ 000, 40\ 000)$, we chose 30kHz.
 
 _Open Circuit:_
-\[Z_{in,OC} = 75.3 - 649j\Omega\]
-
+We measured:
 \begin{align*}
-V1 &= 1.4e^{j 0^o} \\
-V2 &= 1.26e^{j -20^o} \\
+V_1 &= 1.4e^{j 0^o} \\
+V_2 &= 1.26e^{j -20^o} \\
 R &= 250\Omega
 \end{align*}
 
-_Short Circuit:_
-\[Z_{in,SC} = 6.62 - 93j\Omega\]
+This allows us to calculate $Z_{in}^{OC}$ using the voltage divider equation:
 
+\begin{align*}
+Z_{in}^{OC} &= R\left(\frac{V_2}{V_1 - V_2}\right)\\
+Z_{in}^{OC} &= 250\left(\frac{1.26e^{j -20^o}}{1.4e^{j0^o} - 1.26e^{j -20^o}}\right)\\
+Z_{in}^{OC} &= -75.3 + 649j\Omega
+\end{align*}
+
+_Short Circuit:_
+For the short circuit case we measured:
 \begin{align*}
 V1 &= 1.26e^{j 0^o} \\
 V2 &= 0.433e^{j 66^o} \\
 R &= 250\Omega 
 \end{align*}
 
-_Characteristic Impedance:_
+Likewise, we can calculate $Z_{in}^{SC}$ using the voltage divider equation:
 \begin{align*}
-Z_0 &= \sqrt{Z_{in,OC}Z_{in,SC}}\\
+Z_{in}^{OC} &= R\left(\frac{V_2}{V_1 - V_2}\right)\\
+Z_{in}^{OC} &= 250\left(\frac{0.433e^{j 66^o}}{1.26e^{j0^o} - 0.433e^{j 66^o}}\right)\\
+Z_{in}^{SC} = -6.62 - 93j\Omega
+\end{align*}
+
+_Characteristic Impedance:_
+Using the short and open circuit impedance we can calculate the characteristic impedance:
+\begin{align*}
+Z_0 &= \sqrt{Z_{in}^{OC}Z_{in}^{SC}}\\
 &= 246.8 + 5.5j\Omega 
 \end{align*}
 
 _Discussion:_
+:TODO: Discussion
 The results are similar, which is what we expect.
 
 *** TODO 2
 Using:
-\begin{align*}
-u_p &= \lambda f \\
-4l &= \lambda \\
-\frac{4}{3}l &= \lambda
-\end{align*}
-
-We can get $f \in (10\ 000, 30\ 000)$, we chose 20kHz.
+\[u_p &= \lambda f\]
+And knowing that the frequency must lay in the range governed by $4l = \lambda$ and $\frac{4}{3}l = \lambda$. We can get $f \in (10\ 000, 30\ 000)$, we chose 20kHz.
 
 |---------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
 | Load    |     1 |     2 |     3 |     4 |     5 |     6 |     7 |     8 |   9 |    10 |    11 |    12 |    13 |
@@ -157,6 +207,8 @@ We can get $f \in (10\ 000, 30\ 000)$, we chose 20kHz.
 | SC      | 1.033 | 0.633 |   0.2 |   0.3 |   0.7 |   1.1 |  1.33 | 1.433 | 1.4 |   1.2 | 0.867 | 0.467 | 0.033 |
 | Z_0=250 |   0.8 | 0.933 | 0.967 |   0.9 | 0.767 | 0.600 |   0.4 | 0.367 | 0.5 |   0.7 | 0.867 | 0.933 | 0.933 |
 | ?       |   0.5 | 0.667 |   0.8 |   0.9 |   0.9 | 0.833 |   0.7 | 0.533 | 0.4 | 0.433 | 0.567 | 0.733 | 0.833 |
+|---------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
+
 
 #+BEGIN_SRC octave :exports code :results output :session Q1
 clc
@@ -168,39 +220,36 @@ if exist('OCTAVE_VERSION', 'builtin')
   set(0, "DefaultAxesFontSize", 25);
 end
 
-OC = [1,1.16,1.23,1.167,0.967,0.7,0.333,0.133,0.5,0.833,1.1,1.233,1.233];
-
-SC = [1.033,0.633,0.2,0.3,0.7,1.1,1.33,1.433,1.4,1.2,0.867,0.467,0.033];
-
-Z0 = [0.8,0.933,0.967,0.9,0.767,0.600,0.4,0.367,0.5,0.7,0.867,0.933,0.933];
-
-Mystery = [0.5,0.667,0.8,0.9,0.9,0.833,0.7,0.533,0.4,0.433,0.567,0.733,0.833];
+OC = [1, 1.16, 1.23, 1.167, 0.967, 0.7, 0.333, 0.133, 0.5, 0.833, 1.1, 1.233, 1.233];
+SC = [1.033, 0.633, 0.2, 0.3, 0.7, 1.1, 1.33, 1.433, 1.4, 1.2, 0.867, 0.467, 0.033];
+Z0 = [0.8, 0.933, 0.967, 0.9, 0.767, 0.600, 0.4, 0.367, 0.5, 0.7, 0.867, 0.933, 0.933];
+Mystery = [0.5, 0.667, 0.8, 0.9, 0.9, 0.833, 0.7, 0.533, 0.4, 0.433, 0.567, 0.733, 0.833];
 
 t = 1:1:length(OC);
 
 figure;
-plot(t,OC)
+plot(t, OC)
 title("Open Circuit")
 xlabel("Sample Location")
 ylabel("Voltage (V)")
 print -dpng 'ENG305_Lab_1_OC.png'
 
 figure;
-plot(t,SC)
+plot(t, SC)
 title("Short Circuit")
 xlabel("Sample Location")
 ylabel("Voltage (V)")
 print -dpng 'ENG305_Lab_1_SC.png'
 
 figure;
-plot(t,Z0)
+plot(t, Z0)
 title("Z_0")
 xlabel("Sample Location")
 ylabel("Voltage (V)")
 print -dpng 'ENG305_Lab_1_Z_0.png'
 
 figure;
-plot(t,Mystery)
+plot(t, Mystery)
 title("Mystery")
 xlabel("Sample Location")
 ylabel("Voltage (V)")
@@ -211,32 +260,44 @@ print -dpng 'ENG305_Lab_1_Mystery.png'
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Open Circuit \label{fig:OC}
-[[file:ENG305_Lab_1_OC.png]]
+[[./ENG305_Lab_1_OC.png]]
 
-Figure \ref{fig:OC}. 
+:TODO: Discussion
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Short Circuit \label{fig:SC}
-[[file:ENG305_Lab_1_SC.png]]
+[[./ENG305_Lab_1_SC.png]]
+
+:TODO: Discussion
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Z_0 \label{fig:Z0}
-[[file:ENG305_Lab_1_Z_0.png]]
+[[./ENG305_Lab_1_Z_0.png]]
+
+:TODO: Discussion
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Mystery \label{fig:Mystery}
-[[file:ENG305_Lab_1_Mystery.png]]
+[[./ENG305_Lab_1_Mystery.png]]
 
+:TODO: Discussion
 
 *** TODO 3
-
-$Z_{??} = 115.699 + 86.6473j$
+:TODO: I am confused.
+Using the quarter wave transformer we can find the mystery impedance:
+\begin{align*}
+Z_{??} &= 115.699 + 86.6473j
+\end{align*}
 
 ** Part 3: Dispersion
 
 *** 1
+|-----------------------+------+-----+-----+-----+-------+-----+-------+--------+------+--------|
 | Phase Shift (Degrees) |   90 | 270 | 450 | 630 |   810 | 990 |  1170 |   1350 | 1530 |   1710 |
+|-----------------------+------+-----+-----+-----+-------+-----+-------+--------+------+--------|
 | f (Hz)                | 8.3k | 25k | 41k | 56k | 70.5k | 83k | 94.5k | 104.5k | 112k | 117.3k |
+|-----------------------+------+-----+-----+-----+-------+-----+-------+--------+------+--------|
+
 
 *** 2
 Using the following equation to find the phase velocity:
@@ -268,8 +329,14 @@ print -dpng 'ENG305_Lab_1_Phase_Velocity_VS_Frequency.png'
 
 #+RESULTS:
 
-*** TODO 3
-High frequencies travel slower. Low frequencies travel faster.
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Phase velocity at different frequencies \label{fig:ENG305_Lab_1_Phase_Velocity_VS_Frequency}
+[[./ENG305_Lab_1_Phase_Velocity_VS_Frequency.png]]
+
+
+*** DONE 3
+From Figure \ref{fig:ENG305_Lab_1_Phase_Velocity_VS_Frequency} we can see that as the frequency increases the speed decreases. This means that higher frequencies travel slower and lower frequencies travel faster.
 *** TODO 4
 After $\approx 130.0kHz$ dispersion is too high to measure anything. The output wave becomes zero. This is because this is basically a low pass filter.
+
 
