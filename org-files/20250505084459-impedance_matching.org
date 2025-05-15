@@ -82,5 +82,42 @@ Same as in the Single Parallel Stub Impedance Matching / Single Parallel Lumped 
 Similar to above
  - \[R = \frac{G_L(1 + (\tan(\beta d))^2)}{G_L^2 + (B_L + Y_0\tan(\beta d))^2}\]
  - \[X = \frac{G_L^2\tan(\beta d) - (Y_0 - B_L\tan(\beta d))(B_L + Y_0\tan(\beta d))}{Y_0[G_L^2 + (B_L + Y_0\tan(\beta d))^2]}\]
-** When to each type
 
+** Advanced Matching Circuits
+ - Gives control over [[id:a647872e-240f-4ef0-8304-b713e15505ea][Bandwidth]] and placement on PCB/
+
+*** L Section Matching
+Has a series and parallel element
+[[file:Screenshot 2025-05-12 at 09-17-00 ENG305 Week 11 Lecture Slides.pdf.png]]
+ - Series first only works when $R_L > Z_0$
+ - Parallel first only works when $R_L < Z_0$
+Using dual [[id:dc9bc12d-e2bb-407d-b221-efd07e1bd3a1][Smith Chart]]:
+1. impedance on red, admittance on blue
+2. Normalise
+3. constant conductor contour
+   - inductors, move up
+   - capacitors, move down
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/L_Section_Matching_–_Smith_Chart_Approach.xopp]]
+
+
+** Pi and Tee Matching
+For when we want high bandwidth
+[[file:Screenshot 2025-05-12 at 10-15-38 ENG305 Week 11 Lecture Slides.pdf.png]]
+We need to specify the Q factor (measure of bandwidth).
+
+We create some fake resistance $R_x$. We match the left to $R_x$, and the right to $Z_L$, we use the Q factor to specify $R_x$.
+
+\[Q_{L1} = \sqrt{\frac{R_s}{R_x} - 1}\]
+\[Q_{L2} = \sqrt{\frac{R_L}{R_x} - 1}\]
+
+\[Q_{\pi} = \sqrt{\frac{\max(R_s, R_L)}{R_x} - 1}\]
+\[Q_T = \sqrt{\frac{R_x}{\max(R_s, R_L)} - 1}\]
+Use pi when $R_x < R_s$ and $R_x < R_L$
+Use T when $R_s < R_x$ and $R_L < R_X$
+
+** Double Stub Matching
+\[B_1 = -B_L + \frac{Y_0 \pm \sqrt{(1 + \tan^2(\beta d))G_LY_0 - G_L^2\tan^2(\beta d)}}{\tan(\beta d)}\]
+\[B_2 = \frac{ \pm Y_0 \sqrt{(1 + \tan^2(\beta d))G_LY_0 - G_L^2\tan^2(\beta d)} + G_LY_0}{\tan(\beta d)}\]
+\[\frac{l_{OC}}{\lambda} = \frac{1}{2\pi}\tan^{-1}\left(\frac{B}{Y_0}\right)\]
+\[\frac{l_{SC}}{\lambda} = -\frac{1}{2\pi}\tan^{-1}\left(\frac{Y_0}{B}\right)\]
+We can use either $B = B_1$ or $B = B_2$
