@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       dc653a1f-f3fd-4924-995c-36e2861609d7
+:END:
+#+title: Double Stub Matching
+#+date: [2025-05-15 Thu 12:54]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Double Stub Matching
+\[B_1 = -B_L + \frac{Y_0 \pm \sqrt{(1 + \tan^2(\beta d))G_LY_0 - G_L^2\tan^2(\beta d)}}{\tan(\beta d)}\]
+\[B_2 = \frac{ \pm Y_0 \sqrt{(1 + \tan^2(\beta d))G_LY_0 - G_L^2\tan^2(\beta d)} + G_LY_0}{\tan(\beta d)}\]
+\[\frac{l_{OC}}{\lambda} = \frac{1}{2\pi}\tan^{-1}\left(\frac{B}{Y_0}\right)\]
+\[\frac{l_{SC}}{\lambda} = -\frac{1}{2\pi}\tan^{-1}\left(\frac{Y_0}{B}\right)\]
+We can use either $B = B_1$ or $B = B_2$

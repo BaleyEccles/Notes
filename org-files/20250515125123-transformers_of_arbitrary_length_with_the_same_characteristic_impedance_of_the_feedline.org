@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       9fe8d9d9-e71f-44d5-9ddc-53517defd20c
+:END:
+#+title: Transformers of Arbitrary Length, with the Same Characteristic Impedance of the Feedline
+#+date: [2025-05-15 Thu 12:51]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Transformers of Arbitrary Length, with the Same Characteristic Impedance of the Feedline
+We can either:
+ - Add a piece of transmission line at the end
+ - Or, add it somewhere in between
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Quarter_Wave_Transformer_for_a_Complex_Load.xopp]]
+

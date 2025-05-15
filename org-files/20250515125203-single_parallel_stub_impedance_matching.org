@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       ed6b1110-473a-404f-8726-b168445076ee
+:END:
+#+title: Single Parallel Stub Impedance Matching
+#+date: [2025-05-15 Thu 12:52]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Single Parallel Stub Impedance Matching
+ - \[G = \frac{R_L(1 + (\tan(\beta d))^2)}{R_L^2 + (X_L + Z_0\tan(\beta d))^2}\]
+ - \[B = \frac{R_L^2\tan(\beta d) - (Z_0 - X_L\tan(\beta d))(X_L + Z_0\tan(\beta d))}{Z_0[R_L^2 + (X_L + Z_0\tan(\beta d))^2]}\]
+
+ - \[-jB = -\frac{j}{Z_0\tan(\beta l_{1_{SC}})}\]
+ - \[\frac{l_{1_{SC}}}{\lambda} = \frac{1}{2\pi}\tan^{-1}\left(\frac{Y_0}{B}\right)= \frac{1}{\pi}\tan^{-1}\left(\frac{1}{Z_0B}\right)\]
+Using a [[id:dc9bc12d-e2bb-407d-b221-efd07e1bd3a1][Smith Chart]]:
+1. Constant SWR circle
+2. Convert $z_L$ to $y_L$: $y_L = \frac{1}{z_L}$
+3. Length is the difference between the input resistance matches the characteristic impedance resistance and the unit circle intercepts.
+4. Rotate towards load to get length
+   - OC: Left x-intercept 
+   - SC: Right x-intercept 
+
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Shunt_Stub_Impedance_Matching.xopp]]

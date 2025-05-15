@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       0ee8d7fa-24f6-4577-9fb9-35c9189700c6
+:END:
+#+title: The Quarter Wave Transformer
+#+date: [2025-05-15 Thu 12:50]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* The Quarter Wave Transformer
+
+[[file:Screenshot 2025-05-05 at 08-50-39 ENG305 Week 10 Lecture Notes.pdf.png]]
+We want $\Gamma = 0$, which occurs when $Z_{in} = Z_0$
+\[Z_1 = \sqrt{Z_0Z_L}\]
+ - This holds for one and multiple reflections.
+ - The length of $Z_1$ is $\frac{\lambda}{4}$
+** Advantages
+ - Simple to design
+ - Easy to make
+** Disadvantages
+ - Narrow bandwidth
+ - Physical size constraint
+ - May require complete PCB reconfiguration
+   - As physical length of line is required to be added
+ - Can only be used to match real load impedance
+
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Design_of_a_Quarter_Wave_Transformer.xopp]]
+
+

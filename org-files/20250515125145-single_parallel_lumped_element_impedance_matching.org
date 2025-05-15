@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       37dbfa79-a941-4ab0-8aa0-a71c53d98cb5
+:END:
+#+title: Single Parallel Lumped Element Impedance Matching
+#+date: [2025-05-15 Thu 12:51]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Single Parallel Lumped Element Impedance Matching
+Add a [[id:605fa252-6718-4527-bad5-7fc2f8d29bca][Capacitor]] or a [[id:bcc570ef-ee97-4bb9-9aca-1a81bd4a4ced][Inductance]] in parallel with the line
+We need to find the distance $d$ and the value of $Y_s$
+We can find the [[id:0850f22d-b384-4606-a3be-d262e8980559][Admittance]] $Y = G + jB$
+ - \[G = \frac{R_L(1 + (\tan(\beta d))^2)}{R_L^2 + (X_L + Z_0\tan(\beta d))^2}\]
+ - \[B = \frac{R_L^2\tan(\beta d) - (Z_0 - X_L\tan(\beta d))(X_L + Z_0\tan(\beta d))}{Z_0[R_L^2 + (X_L + Z_0\tan(\beta d))^2]}\]
+We want to choose a length ($d$) such that $Y = G$, ie there is no imaginary component.
+
+On a [[id:dc9bc12d-e2bb-407d-b221-efd07e1bd3a1][Smith Chart]] we can:
+1. Constant SWR circle
+2. Convert to [[id:0850f22d-b384-4606-a3be-d262e8980559][Admittance]]: $y_L = \frac{1}{z_L}$
+3. Reactive element is placed at the point where the input resistance equals the characteristic impedance.
+4. Point at which the SWR circle intersects the unit circle

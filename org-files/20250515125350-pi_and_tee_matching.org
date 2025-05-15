@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       d61ae5c1-f062-4240-8db4-a6a24da446ab
+:END:
+#+title: Pi and Tee Matching
+#+date: [2025-05-15 Thu 12:53]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Pi and Tee Matching
+For when we want high bandwidth
+[[file:Screenshot 2025-05-12 at 10-15-38 ENG305 Week 11 Lecture Slides.pdf.png]]
+We need to specify the Q factor (measure of bandwidth).
+
+We create some fake resistance $R_x$. We match the left to $R_x$, and the right to $Z_L$, we use the Q factor to specify $R_x$.
+
+\[Q_{L1} = \sqrt{\frac{R_s}{R_x} - 1}\]
+\[Q_{L2} = \sqrt{\frac{R_L}{R_x} - 1}\]
+
+\[Q_{\pi} = \sqrt{\frac{\max(R_s, R_L)}{R_x} - 1}\]
+\[Q_T = \sqrt{\frac{R_x}{\max(R_s, R_L)} - 1}\]
+Use pi when $R_x < R_s$ and $R_x < R_L$
+Use T when $R_s < R_x$ and $R_L < R_X$

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       10c1bc22-00ef-4df4-8641-26a1b79f89cc
+:END:
+#+title: Stub Impedance Matching
+#+date: [2025-05-15 Thu 12:52]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Stub Impedance Matching
+Similar to [[id:d0e84431-acf2-4601-809e-e71472e486d5][Single Series Lumped Element]]
+ - \[R = \frac{G_L(1 + (\tan(\beta d))^2)}{G_L^2 + (B_L + Y_0\tan(\beta d))^2}\]
+ - \[X = \frac{G_L^2\tan(\beta d) - (Y_0 - B_L\tan(\beta d))(B_L + Y_0\tan(\beta d))}{Y_0[G_L^2 + (B_L + Y_0\tan(\beta d))^2]}\]

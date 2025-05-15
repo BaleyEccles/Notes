@@ -50,7 +50,7 @@ One problem with the simulation is that the output does not have the same magnit
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Oscillator simulated in LTSpice \label{fig:LTSpice}
-[[./ENG307Assignment2LTSpice1.png]
+[[./ENG307Assignment2LTSpice1.png]]
 
 #+BEGIN_SRC octave :exports none :results output :session LTSpice1 :eval no-export
 clc;
@@ -83,7 +83,7 @@ Figure \ref{fig:cap_res} shows that for a small change in capacitance or resista
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Region where capacitor and resistor values would be acceptable \label{fig:cap_res}
-[[./Cap_Res_plot.png]]
+[[./Cap_Res_plot.png]
 
 The oscillator takes 1.2 micro-seconds to start oscillating consistently, this can be seen in Figure \ref{fig:LTSpice2}. As can be seen the magnitude does not exceed the oscillating frequency, which ensures consistent and safe start up of the oscillator. There is unpredictable oscillations during the 1.2 micro-second startup, which do not effect anything later on, so they can be safety ignored.
 

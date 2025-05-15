@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       ef2ceb5e-641d-4471-ac6c-5afc559924f0
+:END:
+#+title: L Section Matching
+#+date: [2025-05-15 Thu 12:53]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* L Section Matching
+Has a series and parallel element
+[[file:Screenshot 2025-05-12 at 09-17-00 ENG305 Week 11 Lecture Slides.pdf.png]]
+ - Series first only works when $R_L > Z_0$
+ - Parallel first only works when $R_L < Z_0$
+Using dual [[id:dc9bc12d-e2bb-407d-b221-efd07e1bd3a1][Smith Chart]]:
+1. impedance on red, admittance on blue
+2. Normalise
+3. constant conductor contour
+   - inductors, move up
+   - capacitors, move down
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/L_Section_Matching_–_Smith_Chart_Approach.xopp]]
+

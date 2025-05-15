@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       d0e84431-acf2-4601-809e-e71472e486d5
+:END:
+#+title: Single Series Lumped Element
+#+date: [2025-05-15 Thu 12:52]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Single Series Lumped Element
+ - \[R = \frac{G_L(1 + (\tan(\beta d))^2)}{G_L^2 + (B_L + Y_0\tan(\beta d))^2}\]
+ - \[X = \frac{G_L^2\tan(\beta d) - (Y_0 - B_L\tan(\beta d))(B_L + Y_0\tan(\beta d))}{Y_0[G_L^2 + (B_L + Y_0\tan(\beta d))^2]}\]
+ - \[l_{SC} = -\frac{1}{2\pi}\tan^{-1}\left(\frac{X}{Z_0}\right)\]
+ - \[l_{OC} = \frac{1}{2\pi}\tan^{-1}\left(\frac{Z_0}{X}\right)\]
+
+Using  [[id:dc9bc12d-e2bb-407d-b221-efd07e1bd3a1][Smith Chart]]:
+Same as in the Single Parallel Stub Impedance Matching / Single Parallel Lumped Element Impedance Matching cases, but we don't need to use the [[id:0850f22d-b384-4606-a3be-d262e8980559][Admittance]], $y_L$, we use the impedance.
+ - SC: Left x-intercept 
+ - OC: Right x-intercept
+ - Rotate towards load to find the stub length $d_1$ or $d_2a$
