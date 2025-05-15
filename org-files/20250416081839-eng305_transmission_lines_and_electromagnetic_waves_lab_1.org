@@ -3,7 +3,7 @@
 :END:
 #+title: ENG305 - Transmission Lines and Electromagnetic Waves - Lab 1
 #+date: [2025-04-16 Wed 08:18]
-#+AUTHOR: Baley Eccles - 652137
+#+AUTHOR: Baley Eccles - 652137, Tyler Robards - 651790 and Yingjin Kong - :TODO: ADD STUDENT ID
 #+STARTUP: latexpreview
 #+FILETAGS: :Assignment:UTAS:2025:
 #+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
@@ -15,27 +15,28 @@
 #+LATEX_HEADER: \usepackage[style=apa, backend=biber]{biblatex}
 #+LATEX_HEADER: \DeclareLanguageMapping{english}{english-apa}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
-
-yingjink@utas.edu.au
-beccles@utas.edu.au
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
 
 * ENG305 - Transmission Lines and Electromagnetic Waves - Lab 1
 Using transmission line number: 11
 ** Part 1: Measurement of Transmission Line Constants
 *** DONE 1
-Calculations:
-
+|-----------+----------|
 | Parameter | Value    |
-| $L$       | 656uH    |
+|-----------+----------|
+| $L$       | 656\mu H    |
 | $D_s$     | 0.037    |
 | $C$       | 9.9nF    |
 | $D_p$     | 0.000244 |
 | $R$       | 157m     |
 | $G$       | 1/(64M)  |
+|-----------+----------|
+
 
 We can use the following equation to calculate the Equivalent Series Resistance:
 \begin{align*}
 ESR &= \omega LD_s \\
+ESR &= 2\pi 1000\cdot 656\times10^{-6}\cdot 0.037 \\
 \Rightarrow ESR &= 152m\Omega
 \end{align*}
 This give the same result as $R$ in the table above, which is expected.
@@ -43,6 +44,7 @@ This give the same result as $R$ in the table above, which is expected.
 And we can use the following equation to calculate the Equivalent Parallel Resistance:
 \begin{align*}
 EPR &= \frac{1}{\omega CD_p} \\
+EPR &= \frac{1}{2\pi 1000\cdot 9.9\times10^{-9}\cdot 0.000244} \\
 \Rightarrow EPR &= 65.2M\Omega
 \end{align*}
 This give the same result as $1/G$ in the table above, which is expected.
@@ -56,9 +58,13 @@ We can calculate the characteristic impedance using the following:
 We can calculate the propagation constant using the following:
 \[\gamma = \sqrt{(R + j\omega L)(G + j\omega C)}\]
 
-| Parameter                  | Values                     |
-| $Z_0$                      | 257.462 - 4.869j |
-| $\gamma = \alpha + j\beta$ | 0.000307 + 0.0160j         |
+|----------------------------+----------------------|
+| Parameter                  | Values               |
+|----------------------------+----------------------|
+| $Z_0$                      | $257.462 - 4.869j$   |
+| $\gamma = \alpha + j\beta$ | $0.000307 + 0.0160j$ |
+|----------------------------+----------------------|
+
 *** TODO 3
 
 #+ATTR_LATEX: :placement [H]
@@ -76,9 +82,13 @@ SC: \Gamma = -1
 :TODO: Discussion
 
 *** TODO 4
-| Parameter | Values     |
-| R2_{OC}   | 233 \Omega |
-| R2_{SC}   | 250 \Omega |
+|------------+--------------|
+| Parameter  | Values       |
+|------------+--------------|
+| $R_2_{OC}$ | $233 \Omega$ |
+| $R_2_{SC}$ | $250 \Omega$ |
+|------------+--------------|
+
 Both of the values in the able are close to the calculated $Z_0$, which is expected.
 
 #+ATTR_LATEX: :placement [H]
@@ -102,14 +112,22 @@ u_p &= \frac{1}{\sqrt{9.9\times10^{-9}\cdot656\times10^{-6}}} \\
 u_p &= 392401
 \end{align*}
 
-| Parameter | Values |
-| $u_p$     | 392401 |
+|-----------+----------|
+| Parameter | Values   |
+|-----------+----------|
+| $u_p$     | $392401$ |
+|-----------+----------|
+
 
 *** DONE 6
 
-| Parameter | Values |
-| l         | 9.81m  |
-| t         | 50\mu s |
+|-----------+-----------|
+| Parameter | Values    |
+|-----------+-----------|
+| $l$       | $9.81m$   |
+| $t$       | $50\mu s$ |
+|-----------+-----------|
+
 The length of the transmission line can simply be calculated using:
 \begin{align*}
 v &= \frac{l}{t} \\
@@ -117,9 +135,11 @@ v &= \frac{l}{t} \\
 \end{align*}
 
 *** TODO 7
-| Parameter      | Values    |
-| RL_{matched}  | 272\Omega |
-
+|-----------------+-------------|
+| Parameter       | Values      |
+|-----------------+-------------|
+| $R_L_{matched}$ | $272\Omega$ |
+|-----------------+-------------|
 
 
 #+ATTR_LATEX: :placement [H]
@@ -172,8 +192,8 @@ Z_{in}^{OC} &= -75.3 + 649j\Omega
 _Short Circuit:_
 For the short circuit case we measured:
 \begin{align*}
-V1 &= 1.26e^{j 0^o} \\
-V2 &= 0.433e^{j 66^o} \\
+V_1 &= 1.26e^{j 0^o} \\
+V_2 &= 0.433e^{j 66^o} \\
 R &= 250\Omega 
 \end{align*}
 
@@ -200,14 +220,14 @@ Using:
 \[u_p &= \lambda f\]
 And knowing that the frequency must lay in the range governed by $4l = \lambda$ and $\frac{4}{3}l = \lambda$. We can get $f \in (10\ 000, 30\ 000)$, we chose 20kHz.
 
-|---------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
-| Load    |     1 |     2 |     3 |     4 |     5 |     6 |     7 |     8 |   9 |    10 |    11 |    12 |    13 |
-|---------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
-| OC      |     1 |  1.16 |  1.23 | 1.167 | 0.967 |   0.7 | 0.333 | 0.133 | 0.5 | 0.833 |   1.1 | 1.233 | 1.233 |
-| SC      | 1.033 | 0.633 |   0.2 |   0.3 |   0.7 |   1.1 |  1.33 | 1.433 | 1.4 |   1.2 | 0.867 | 0.467 | 0.033 |
-| Z_0=250 |   0.8 | 0.933 | 0.967 |   0.9 | 0.767 | 0.600 |   0.4 | 0.367 | 0.5 |   0.7 | 0.867 | 0.933 | 0.933 |
-| ?       |   0.5 | 0.667 |   0.8 |   0.9 |   0.9 | 0.833 |   0.7 | 0.533 | 0.4 | 0.433 | 0.567 | 0.733 | 0.833 |
-|---------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
+|-----------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
+| Load      |     1 |     2 |     3 |     4 |     5 |     6 |     7 |     8 |   9 |    10 |    11 |    12 |    13 |
+|-----------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
+| OC        |     1 |  1.16 |  1.23 | 1.167 | 0.967 |   0.7 | 0.333 | 0.133 | 0.5 | 0.833 |   1.1 | 1.233 | 1.233 |
+| SC        | 1.033 | 0.633 |   0.2 |   0.3 |   0.7 |   1.1 |  1.33 | 1.433 | 1.4 |   1.2 | 0.867 | 0.467 | 0.033 |
+| $Z_0=250$ |   0.8 | 0.933 | 0.967 |   0.9 | 0.767 | 0.600 |   0.4 | 0.367 | 0.5 |   0.7 | 0.867 | 0.933 | 0.933 |
+| ?         |   0.5 | 0.667 |   0.8 |   0.9 |   0.9 | 0.833 |   0.7 | 0.533 | 0.4 | 0.433 | 0.567 | 0.733 | 0.833 |
+|-----------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
 
 
 #+BEGIN_SRC octave :exports code :results output :session Q1
@@ -295,11 +315,11 @@ Z_{??} &= 115.699 + 86.6473j
 |-----------------------+------+-----+-----+-----+-------+-----+-------+--------+------+--------|
 | Phase Shift (Degrees) |   90 | 270 | 450 | 630 |   810 | 990 |  1170 |   1350 | 1530 |   1710 |
 |-----------------------+------+-----+-----+-----+-------+-----+-------+--------+------+--------|
-| f (Hz)                | 8.3k | 25k | 41k | 56k | 70.5k | 83k | 94.5k | 104.5k | 112k | 117.3k |
+| $f$ (Hz)              | 8.3k | 25k | 41k | 56k | 70.5k | 83k | 94.5k | 104.5k | 112k | 117.3k |
 |-----------------------+------+-----+-----+-----+-------+-----+-------+--------+------+--------|
 
 
-*** 2
+*** TODO 2
 Using the following equation to find the phase velocity:
 \[\phi = \frac{\omega l}{u_p}\]
 
