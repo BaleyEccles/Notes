@@ -342,7 +342,7 @@ f &= \frac{392401}{9.81/2} \\
 f &= 80kHz \\
 \end{align*}
 
-Which means:
+Which can be measured to get:
 \[Z_{??} = 115.699 + 86.6473j\]
 
 * Part 3: Dispersion
