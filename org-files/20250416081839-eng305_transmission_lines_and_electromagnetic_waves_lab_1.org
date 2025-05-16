@@ -254,47 +254,51 @@ And knowing that the frequency must lay in the range governed by $4l = \lambda$ 
 | ?         |   0.5 | 0.667 |   0.8 |   0.9 |   0.9 | 0.833 |   0.7 | 0.533 | 0.4 | 0.433 | 0.567 | 0.733 | 0.833 |
 |-----------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
 
-
+We can use the following Octave/MATLAB code to create the plot in Figures \ref{fig:OC}, \ref{fig:SC}, \ref{fig:Z0} and \ref{fig:Mystery}.a
 #+BEGIN_SRC octave :exports code :results output :session Q1
 clc
 clear
 close all
 
+% Make octave plots look better
 if exist('OCTAVE_VERSION', 'builtin')
   set(0, "DefaultLineLineWidth", 2);
   set(0, "DefaultAxesFontSize", 25);
 end
 
+% Recorded Data
 OC = [1, 1.16, 1.23, 1.167, 0.967, 0.7, 0.333, 0.133, 0.5, 0.833, 1.1, 1.233, 1.233];
 SC = [1.033, 0.633, 0.2, 0.3, 0.7, 1.1, 1.33, 1.433, 1.4, 1.2, 0.867, 0.467, 0.033];
 Z0 = [0.8, 0.933, 0.967, 0.9, 0.767, 0.600, 0.4, 0.367, 0.5, 0.7, 0.867, 0.933, 0.933];
 Mystery = [0.5, 0.667, 0.8, 0.9, 0.9, 0.833, 0.7, 0.533, 0.4, 0.433, 0.567, 0.733, 0.833];
 
-t = 1:1:length(OC);
+% Number of place on transmission line
+point = 1:1:length(OC);
 
+% Plot the data
 figure;
-plot(t, OC)
+plot(point, OC)
 title("Open Circuit")
 xlabel("Sample Location")
 ylabel("Voltage (V)")
 print -dpng 'ENG305_Lab_1_OC.png'
 
 figure;
-plot(t, SC)
+plot(point, SC)
 title("Short Circuit")
 xlabel("Sample Location")
 ylabel("Voltage (V)")
 print -dpng 'ENG305_Lab_1_SC.png'
 
 figure;
-plot(t, Z0)
+plot(point, Z0)
 title("Z_0")
 xlabel("Sample Location")
 ylabel("Voltage (V)")
 print -dpng 'ENG305_Lab_1_Z_0.png'
 
 figure;
-plot(t, Mystery)
+plot(point, Mystery)
 title("Mystery")
 xlabel("Sample Location")
 ylabel("Voltage (V)")
@@ -349,29 +353,35 @@ Which means:
 |------------------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------|
 | $f$ (Hz)                     | 8.3k               | 25k                | 41k                | 56k                | 70.5k              | 83k                | 94.5k              | 104.5k             | 112k               | 117.3k             |
 |------------------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------|
-| Calculated $u_p$ ($ms^{-1}$) | $3.43\times10^{5}$ | $3.44\times10^{5}$ | $3.39\times10^{5}$ | $3.30\times10^{5}$ | $3.23\times10^{5}$ | $3.12\times10^{5}$ | $3.00\times10^{5}$ | $2.88\times10^{5}$ | $2.72\times10^{5}$ | $2.55\times10^{5}$ |
-|------------------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------|
 
 
 ** 2
 Using the following equation to find the phase velocity:
-\[\phi = \frac{\omega l}{u_p}\]
+\[u_p = \frac{\omega l}{\phi}\]
 
-#+BEGIN_SRC octave :exports none :results output :session Q2
+We can use the following Octave/MATLAB code to create the plot in Figure \ref{fig:ENG305_Lab_1_Phase_Velocity_VS_Frequency}.
+#+BEGIN_SRC octave :exports code :results output :session Q2
 clc
 clear
 close all
 
+% Make octave plots look better
 if exist('OCTAVE_VERSION', 'builtin')
   set(0, "DefaultLineLineWidth", 2);
   set(0, "DefaultAxesFontSize", 25);
 end
 
+% Recorded Data
 f = [8.3e3, 25e3, 41e3, 56e3, 70.5e3, 83e3, 94.5e3, 104.5e3, 112e3, 117.3e3];
-angle = [90, 270, 450, 630, 810, 990,1170, 1350, 1530, 1710];
-l = 10.34;
+angle_degrees = [90, 270, 450, 630, 810, 990,1170, 1350, 1530, 1710];
 
-up = 2.*pi.*f.*l./(angle.*pi./180);
+% Convert to radians
+angle_radians = angle_degrees.*pi./180;
+
+length = 9.81;
+
+% Use the equation to find phi
+up = 2.*pi.*f.*length./(angle_radians);
 
 figure;
 plot(f, up)
@@ -381,16 +391,34 @@ ylabel("Phase Velocity (m/s)");
 print -dpng 'ENG305_Lab_1_Phase_Velocity_VS_Frequency.png'
 #+END_SRC
 
+#+RESULTS:
+
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Phase velocity at different frequencies \label{fig:ENG305_Lab_1_Phase_Velocity_VS_Frequency}
 [[./ENG305_Lab_1_Phase_Velocity_VS_Frequency.png]]
 
+The phase velocity for each pase shift can be seen in the following table.
+|-------------------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------|
+| Phase Shift (Degrees)         |                 90 |                270 |                450 |                630 |                810 |                990 |               1170 |               1350 |               1530 |               1710 |
+|-------------------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------|
+| Calculated $u_p$ ($ms^{-1}$)  | $3.43\times10^{5}$ | $3.44\times10^{5}$ | $3.39\times10^{5}$ | $3.30\times10^{5}$ | $3.23\times10^{5}$ | $3.12\times10^{5}$ | $3.00\times10^{5}$ | $2.88\times10^{5}$ | $2.72\times10^{5}$ | $2.55\times10^{5}$ |
+|-------------------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------|
+
 
 ** 3
-From Figure \ref{fig:ENG305_Lab_1_Phase_Velocity_VS_Frequency} we can see that as the frequency increases the speed decreases. This means that higher frequencies travel slower and lower frequencies travel faster.
+From Figure \ref{fig:ENG305_Lab_1_Phase_Velocity_VS_Frequency} we can see that as the frequency increases the speed decreases. This means that higher frequencies travel slower and lower frequencies travel faster and is known as dispersion. The amount of dispersion does not linearly change with frequency. After $\approx 130.0kHz$ the dispersion is too high to measure anything, the output wave becomes zero. This is because this is basically a low pass filter.
 
 ** 4
-After $\approx 130.0kHz$ dispersion is too high to measure anything, the output wave becomes zero. This is because this is basically a low pass filter.
+The simulated transmission line is constructed from discrete lumped LC elements that approximate a distributed line. This approximation is reasonable only when the spacing between elements is significantly smaller than the signal’s wavelength. In such conditions, voltage and current waveforms vary gradually across sections, and the circuit behavior mimics that of a continuous transmission line
 
+\[\lambda =\frac{u_p}{f}\]
+However, our phase velocity plot clearly demonstrates a frequency-dependent phase velocity - a hallmark of dispersion. At lower frequencies (e.g., below 40 kHz), the phase velocity remains relatively constant, implying that the lumped approximation holds well. For instance, at 20 kHz, the phase velocity is approximately 3.45 × 10⁵ m/s. Given our line segment length of 1.02 m, this corresponds to a wavelength of about 17.25 m, which is vastly larger than the physical segment size - ensuring good modeling fidelity. \\
 
+As frequency increases, the phase velocity begins to decline significantly. Around 100 kHz, the phase velocity drops to below 2.8 × 10⁵ m/s, resulting in wavelengths approaching 2.5 m. Since this is now comparable to only 2–3 times the size of a single lumped segment, the assumption of “small segment spacing” no longer holds. This introduces significant modeling error, and the line begins to exhibit the behavior of a low-pass LC ladder filter, as each section effectively acts like a discrete resonator. Signal integrity suffers, and standing wave formation becomes prominent. \\
+
+This behavior introduces a key limitation: we cannot use high-frequency signals in such a model if the goal is to emulate a true transmission line. Signals with wavelengths approaching the segment size (around 2–4× segment length) will suffer from distortion, dispersion, and reflection artifacts not present in continuous lines. \\
+
+To mitigate this, either more segments must be used (reducing the relative spacing) or the model must be restricted to lower frequencies. This trade-off mirrors constraints in other electronic systems with similar topologies - such as ladder filters or artificial delay lines in signal processing - where discretization introduces bandwidth limitations. 
+
+ 
