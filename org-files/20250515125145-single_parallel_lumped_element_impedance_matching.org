@@ -16,6 +16,9 @@ We want to choose a length ($d$) such that $Y = G$, ie there is no imaginary com
 
 On a [[id:dc9bc12d-e2bb-407d-b221-efd07e1bd3a1][Smith Chart]] we can:
 1. Constant SWR circle
-2. Convert to [[id:0850f22d-b384-4606-a3be-d262e8980559][Admittance]]: $y_L = \frac{1}{z_L}$
-3. Reactive element is placed at the point where the input resistance equals the characteristic impedance.
-4. Point at which the SWR circle intersects the unit circle
+2. Convert $z_L$ to $y_L$: $y_L = \frac{1}{z_L}$
+3. The distance to place the stub is the distance from $y_L$ to the unit circle intercept (rotate towards generator), gives two solution
+4. find $y_s$, the magnitude needed is the negative of the reactance at unit circle intercept
+   - If $y_s < 0$, use inductor
+   - If $y_s > 0$, use capacitor
+   - \[Y_s = \frac{y_s}{Z_0} = \frac{1}{j\omega L} = j\omega C\]
