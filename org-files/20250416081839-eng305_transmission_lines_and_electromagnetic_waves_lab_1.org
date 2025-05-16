@@ -254,7 +254,7 @@ And knowing that the frequency must lay in the range governed by $4l = \lambda$ 
 | ?         |   0.5 | 0.667 |   0.8 |   0.9 |   0.9 | 0.833 |   0.7 | 0.533 | 0.4 | 0.433 | 0.567 | 0.733 | 0.833 |
 |-----------+-------+-------+-------+-------+-------+-------+-------+-------+-----+-------+-------+-------+-------|
 
-We can use the following Octave/MATLAB code to create the plot in Figures \ref{fig:OC}, \ref{fig:SC}, \ref{fig:Z0} and \ref{fig:Mystery}.a
+We can use the following Octave/MATLAB code to create the plot in Figures \ref{fig:OC}, \ref{fig:SC}, \ref{fig:Z0} and \ref{fig:Mystery}.
 #+BEGIN_SRC octave :exports code :results output :session Q1
 clc
 clear
@@ -407,18 +407,9 @@ The phase velocity for each pase shift can be seen in the following table.
 
 
 ** 3
-From Figure \ref{fig:ENG305_Lab_1_Phase_Velocity_VS_Frequency} we can see that as the frequency increases the speed decreases. This means that higher frequencies travel slower and lower frequencies travel faster and is known as dispersion. The amount of dispersion does not linearly change with frequency. After $\approx 130.0kHz$ the dispersion is too high to measure anything, the output wave becomes zero. This is because this is basically a low pass filter.
+From Figure \ref{fig:ENG305_Lab_1_Phase_Velocity_VS_Frequency} we can see that as the frequency increases the speed decreases. This means that higher frequencies travel slower and lower frequencies travel faster and is known as dispersion. The amount of dispersion does not linearly change with frequency. After 130kHz the dispersion is too high to measure anything, the output wave becomes zero. This is because this is basically a low pass filter.
 
 ** 4
-The simulated transmission line is constructed from discrete lumped LC elements that approximate a distributed line. This approximation is reasonable only when the spacing between elements is significantly smaller than the signal’s wavelength. In such conditions, voltage and current waveforms vary gradually across sections, and the circuit behavior mimics that of a continuous transmission line
+When we increase the frequency to about 130kHz the phase velocity below $2.8\times10^5$ ms^{-1}, which means the wavelength is about 2.5m. Which is about 2-3 times the size of a single lumped segment and will mean that dealing with only the lumped elements become unreasonable. \\
 
-\[\lambda =\frac{u_p}{f}\]
-However, our phase velocity plot clearly demonstrates a frequency-dependent phase velocity - a hallmark of dispersion. At lower frequencies (e.g., below 40 kHz), the phase velocity remains relatively constant, implying that the lumped approximation holds well. For instance, at 20 kHz, the phase velocity is approximately 3.45 × 10⁵ m/s. Given our line segment length of 1.02 m, this corresponds to a wavelength of about 17.25 m, which is vastly larger than the physical segment size - ensuring good modeling fidelity. \\
-
-As frequency increases, the phase velocity begins to decline significantly. Around 100 kHz, the phase velocity drops to below 2.8 × 10⁵ m/s, resulting in wavelengths approaching 2.5 m. Since this is now comparable to only 2–3 times the size of a single lumped segment, the assumption of “small segment spacing” no longer holds. This introduces significant modeling error, and the line begins to exhibit the behavior of a low-pass LC ladder filter, as each section effectively acts like a discrete resonator. Signal integrity suffers, and standing wave formation becomes prominent. \\
-
-This behavior introduces a key limitation: we cannot use high-frequency signals in such a model if the goal is to emulate a true transmission line. Signals with wavelengths approaching the segment size (around 2–4× segment length) will suffer from distortion, dispersion, and reflection artifacts not present in continuous lines. \\
-
-To mitigate this, either more segments must be used (reducing the relative spacing) or the model must be restricted to lower frequencies. This trade-off mirrors constraints in other electronic systems with similar topologies - such as ladder filters or artificial delay lines in signal processing - where discretization introduces bandwidth limitations. 
-
- 
+This gives us a limitation on what can be sent through the transmission line, the input frequency must be less than 130kHz. This is because it acts as a low pass filter, if we look at the schematic of the transmission line we can see that it has the same form of a low pass filter.
