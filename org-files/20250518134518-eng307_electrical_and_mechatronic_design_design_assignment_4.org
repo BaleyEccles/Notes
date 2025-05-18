@@ -1,0 +1,249 @@
+:PROPERTIES:
+:ID:       be0056e5-656e-4261-88d3-410216e0c957
+:END:
+#+title: ENG307 - Electrical and Mechatronic Design - Design Assignment 4
+#+date: [2025-05-18 Sun 13:45]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+
+
+
+* Summary
+The software can be broken down into a few segments that will come together to meet the overall requirements
+1. Reading/Converting Temperature
+   - Read in the voltage
+   - Convert to temperature
+   - Ensure it is within the required range
+2. Data Manipulation
+   - Ensure that the change in temperature is less than $5^oC/s$
+3. Seven-Segment Displays
+   - Convert the temperature to a binary output for the multiplexer
+   - Rapidly change between each binary output
+   - Rapidly change between each display
+     
+* Reading/Converting Temperature
+It is required to map 1-3 Volts to 0-50 $C^o$. We can simply do some linear interpolation to achieve this.
+
+\begin{align*}
+T(V) &= \frac{(V - V_{min})(T_{max}-T_{min})}{V_{max} - V_{min}} \\
+T(V) &= 25V - 25
+\end{align*}
+
+This function will be put into the code to convert the voltage to temperature. To handle the temperature being out of the desired range a simple if statement can be used. All of this can be seen in the following pseudo code.
+
+#+BEGIN_SRC C :exports code :results output :session temp_range :eval no-export
+if (voltage < 1 || voltage > 3) {
+    out_of_range = true;
+ } else {
+    out_of_range = false;
+ }
+temperature = 25*voltage - 25;
+#+END_SRC
+
+The ~out_of_range~ variable would then be used in displaying the temperature.
+
+* Data Manipulation
+To ensure $0.1^oC$ of precision with $5^oC/s$ the display must be updated at least 50 times per second. To achieve this we can use timers to determine when to read new data and update the display. This can be seen in the following pseudo code.
+
+#+BEGIN_SRC C :exports code :results output :session timer :eval no-export
+while (true) {
+  if (timer_has_reset()) {
+    temperature = get_new_temperature();
+    reset_timer();
+  }
+  display_temperature(temperature);
+ }
+#+END_SRC
+
+The ~timer_has_reset~ function will call to some timer built into the specific board being used, it will be setup such that it resets at least 50 times per second. In most cases this would probably be setup using an interrupt, the line ~temperature = get_new_temperature();~ would be called inside of it. This will only work if the microcontroller is able to read and display in less than 0.02 seconds, which for most microcontrollers is reasonable.
+
+* Seven-Segment Displays
+First we need to convert the incoming temperature reading to three single digit numbers for each seven-segment display. To do this we can divide by 10, 1 or 0.1 and then take the floor of the value to convert it to an integer and then take away the upper digits. This can be seen in the following pseudo code.
+
+#+BEGIN_SRC C :exports code :results output :session convert_to_int :eval no-export
+first_digit = floor(temperature / 10);
+
+second_digit = floor(temperature) - 10*first_digit;
+
+third_digit = floor(temperature * 10) - 100*first_digit - 10*second_digit;
+#+END_SRC
+
+An example of the above code can be described as follows. \\
+
+The ~first_digit~ is the digit in the tens place, which can be divided by ten and then floored. For example, 12.3 is divided by 10 to get 1.23 and then floored to get 1. \\
+
+The ~second_digit~ is floored and then the number in the tens place is taken away. For example, 12.3 is floored to get 12, then the amount in the tens place is taken away to get $12 - 10 = 2$. \\
+
+The ~third_digit~ times by 10 then floored, then the number in the tens and hundreds place is taken away. For example, 12.3 is times by 10 and floored to get 123, then the number in the hundreds place is taken away, to get $123 - 100 = 23$, lastly the number in the tens place is taken away, to get $23 - 20 = 3$. \\
+
+This gives the desired numbers in the variables ~first_digit~, ~second_digit~ and ~third_digit~. In the example above that would be $1$, $2$ and $3$. \\
+
+Next we need to send this data to the multiplexers. To do this we need to send three bits of data corresponding to the binary of the digit we want displayed, lets call these S0, S1 and S2. These will determine the number on the multiplexer input to connect to the output, the three data bits will map to the out put through binary. For example, if we input S0 as 0, S1 as 1 and S2 0, this corresponds to ~0b010~ which is 2, hence the second input would be connected.
+
+#+ATTR_LATEX: :placement [H] :width 0.25\textwidth
+#+CAPTION: Seven-Segment Display Diagram \label{fig:seg}
+[[./7-Seg.png]]
+
+Looking at Figure \ref{fig:seg}, we assume that A-G maps to 0-7 on the multiplexer, as seen in the following table.
+|----------------+-----+-----+-----+-----+-----+-----+-----|
+| Decimal        |   0 |   1 |   2 |   3 |   4 |   5 |   6 |
+|----------------+-----+-----+-----+-----+-----+-----+-----|
+| Display Letter |   A |   B |   C |   D |   E |   F |   G |
+|----------------+-----+-----+-----+-----+-----+-----+-----|
+| Binary         | 000 | 001 | 010 | 011 | 100 | 101 | 110 |
+|----------------+-----+-----+-----+-----+-----+-----+-----|
+
+The mapping can be applied, as seen in the following pseudo code.
+
+#+BEGIN_SRC C :exports code :results output :session mux_mapping :eval no-export
+int segment_mapping[11][7] {
+// A  B  C  D  E  F  G
+  {1, 1, 1, 1, 1, 1, 0} // 0
+  {0, 1, 1, 0, 0, 0, 0} // 1
+  {1, 1, 0, 1, 1, 0, 1} // 2
+  {1, 1, 1, 1, 0, 0, 1} // 3
+  {0, 1, 1, 0, 0, 1, 1} // 4
+  {1, 0, 1, 1, 0, 1, 1} // 5
+  {1, 0, 1, 1, 1, 1, 1} // 6
+  {1, 1, 1, 0, 0, 0, 0} // 7
+  {1, 1, 1, 1, 1, 1, 1} // 8
+  {1, 1, 1, 1, 0, 1, 1} // 9
+  {0, 0, 0, 0, 0, 0, 1} // - 
+};
+
+void set_mux_input(int binary_input) {
+  int S0 = (binary_input & 0b100) >> 2;
+  int S1 = (binary_input & 0b010) >> 1;
+  int S3 = (binary_input & 0b001) >> 0;
+
+  set_pin(PIN_S0, S0);
+  set_pin(PIN_S1, S1);
+  set_pin(PIN_S2, S2);
+}
+
+// Note that if digit = 10 we display -
+void display_digit(int digit) {
+  int digit_map = segment_mapping[digit];
+  for (int i = 0; i < 8; i++) {
+    if (digit_map[i] == 1) {
+      set_mux_input(i);
+    }
+  }
+}
+#+END_SRC
+
+This code maps the input digit to a binary number for S0, S1 and S2 to be set either high or low. Lets work through and example to see how it works, if we wanted to display the number 1, this would correspond to lighting up the segments B and C. In the ~segment_mapping~ array we can see that on the right there is the number 1 and numbers in the B and C columns are set to 1. The ~display_digit~ function takes in the number 1 and finds it in the mapping, then sends the numbers 1 and 2, corresponding to segments B and C to ~set_mux_input~. The numbers 1 and 2 are then decomposed to get the values for S0, S1 and S2, in this case this corresponds to the binary number ~0b001~ or 1 and then ~0b010~ or 2. Hence S0 is 0, S1 is 0 and S2 is 1 and then S0 is 0, S1 is 1 and S2 is 0. This would correspond to displaying the number 1.
+
+* TODO Flow-Chart
+
+
+* Full Pseudo Code
+In c-style pseudo code the design could be achieved using the following.
+#+BEGIN_SRC C :exports code :results output :session full :eval no-export
+static bool out_of_range = false;
+
+double get_temperature() {
+  int voltage = read_pin(TEMPERATURE_PIN);
+  
+  if (voltage < 1 || voltage > 3) {
+    out_of_range = true;
+  } else {
+    out_of_range = false;
+  }
+  
+  return 25*voltage - 25;
+}
+
+int segment_mapping[11][7] {
+  // A  B  C  D  E  F  G
+  {1, 1, 1, 1, 1, 1, 0} // 0
+  {0, 1, 1, 0, 0, 0, 0} // 1
+  {1, 1, 0, 1, 1, 0, 1} // 2
+  {1, 1, 1, 1, 0, 0, 1} // 3
+  {0, 1, 1, 0, 0, 1, 1} // 4
+  {1, 0, 1, 1, 0, 1, 1} // 5
+  {1, 0, 1, 1, 1, 1, 1} // 6
+  {1, 1, 1, 0, 0, 0, 0} // 7
+  {1, 1, 1, 1, 1, 1, 1} // 8
+  {1, 1, 1, 1, 0, 1, 1} // 9
+  {0, 0, 0, 0, 0, 0, 1} // - 
+};
+
+void set_mux_input(int binary_input, int mux_number) {
+  int S0 = (binary_input & 0b100) >> 2;
+  int S1 = (binary_input & 0b010) >> 1;
+  int S3 = (binary_input & 0b001) >> 0;
+
+  // Needed to display for three displays
+  if (mux_number == 0) {
+    set_pin(PIN_MUX_0_S0, S0);
+    set_pin(PIN_MUX_0_S1, S1);
+    set_pin(PIN_MUX_0_S2, S2);
+  }
+  if (mux_number == 1) {
+    set_pin(PIN_MUX_1_S0, S0);
+    set_pin(PIN_MUX_1_S1, S1);
+    set_pin(PIN_MUX_1_S2, S2);
+  }
+  if (mux_number == 2) {
+    set_pin(PIN_MUX_2_S0, S0);
+    set_pin(PIN_MUX_2_S1, S1);
+    set_pin(PIN_MUX_2_S2, S2);
+  }
+}
+
+// Note that if digit = 10 we display -
+void display_digit(int digit, int mux_number) {
+  int digit_map = segment_mapping[digit];
+  for (int i = 0; i < 8; i++) {
+    if (digit_map[i] == 1) {
+      set_mux_input(i);
+    }
+  }
+}
+
+void display_temperature(double temperature) {
+  first_digit = floor(temperature / 10);
+  second_digit = floor(temperature) - 10*first_digit;
+  third_digit = floor(temperature * 10) - 100*first_digit - 10*second_digit;
+  
+  if (out_of_range) {
+    display_digit(10, 0);
+    display_digit(10, 1);
+    display_digit(10, 2);
+  } else {
+    display_digit(first_digit, 0);
+    display_digit(second_digit, 1);
+    display_digit(third_digit, 2);
+  }
+}
+
+int main() {
+  init_pins();
+  start_timer();
+  
+  while (true) {
+    if (timer_has_reset()) {
+      temperature = get_new_temperature();
+      reset_timer();
+    }
+    
+    display_temperature(temperature);
+  }
+  
+  return 0;
+}
+#+END_SRC
+
+
+
+
