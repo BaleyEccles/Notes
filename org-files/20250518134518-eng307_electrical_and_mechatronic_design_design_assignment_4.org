@@ -19,7 +19,7 @@
 
 * Summary
 The software can be broken down into a few segments that will come together to meet the overall requirements
-1. Reading/Converting Temperature
+1. Reading/Converting Temperature.
    - Read in the voltage
    - Convert to temperature
    - Ensure it is within the required range
@@ -31,7 +31,7 @@ The software can be broken down into a few segments that will come together to m
    - Rapidly change between each display
      
 * Reading/Converting Temperature
-It is required to map 1-3 Volts to 0-50 $C^o$. We can simply do some linear interpolation to achieve this.
+It is required to map 1-3 Volts to 0-50 ${}^oC$. We can simply do some linear interpolation to achieve this.
 
 \begin{align*}
 T(V) &= \frac{(V - V_{min})(T_{max}-T_{min})}{V_{max} - V_{min}} \\
@@ -57,14 +57,14 @@ To ensure $0.1^oC$ of precision with $5^oC/s$ the display must be updated at lea
 #+BEGIN_SRC C :exports code :results output :session timer :eval no-export
 while (true) {
   if (timer_has_reset()) {
-    temperature = get_new_temperature();
+    temperature = get_temperature();
     reset_timer();
   }
   display_temperature(temperature);
  }
 #+END_SRC
 
-The ~timer_has_reset~ function will call to some timer built into the specific board being used, it will be setup such that it resets at least 50 times per second. In most cases this would probably be setup using an interrupt, the line ~temperature = get_new_temperature();~ would be called inside of it. This will only work if the microcontroller is able to read and display in less than 0.02 seconds, which for most microcontrollers is reasonable.
+The ~timer_has_reset~ function will call to some timer built into the specific board being used, it will be setup such that it resets at least 50 times per second. In most cases this would probably be setup using an interrupt, the line ~temperature = get_temperature();~ would be called inside of it. This will only work if the microcontroller is able to read and display in less than 0.02 seconds, which for most microcontrollers is reasonable.
 
 * Seven-Segment Displays
 First we need to convert the incoming temperature reading to three single digit numbers for each seven-segment display. To do this we can divide by 10, 1 or 0.1 and then take the floor of the value to convert it to an integer and then take away the upper digits. This can be seen in the following pseudo code.
@@ -143,13 +143,36 @@ void display_digit(int digit) {
 
 This code maps the input digit to a binary number for S0, S1 and S2 to be set either high or low. Lets work through and example to see how it works, if we wanted to display the number 1, this would correspond to lighting up the segments B and C. In the ~segment_mapping~ array we can see that on the right there is the number 1 and numbers in the B and C columns are set to 1. The ~display_digit~ function takes in the number 1 and finds it in the mapping, then sends the numbers 1 and 2, corresponding to segments B and C to ~set_mux_input~. The numbers 1 and 2 are then decomposed to get the values for S0, S1 and S2, in this case this corresponds to the binary number ~0b001~ or 1 and then ~0b010~ or 2. Hence S0 is 0, S1 is 0 and S2 is 1 and then S0 is 0, S1 is 1 and S2 is 0. This would correspond to displaying the number 1.
 
-* TODO Flow-Chart
+* Function/Variable Descriptions
 
+** Functions
+Each function in the pseudo code/flow-chart (Figure \ref{fig:flow_chart}) can be described as in the following. \\
+
+_\text{get\_temperature}:_ \\ 
+Reads the voltage from the pin that contains the temperate measurement device and converts it to a temperature and returns it. \\
+
+_\text{set\_mux\_input}:_ \\
+Sets the multiplexers input to the required binary number. It takes in two numbers, the binary number to be outputted to the digital pins and the number of the multiplexer to be used. The ~binary_input~ variable is expected to be between 0 and 10, each number from 0 to 9 corresponds to displaying that number and 10 displaying a '-'. The ~mux_number~ input variable is expected to be between 0 and 2, signifying the multiplexer/seven-segment display to be used. \\
+
+_\text{display\_digit}:_ \\
+Iterates through each segment on the display and turns it on based on the inputs and ~segment_mapping~ variable. The ~digit~ variable signifies the place in the ~segment_mapping~ to be displayed. The ~mux_number~ variable determines the multiplexer/seven-segment display to be used. \\
+
+_\text{display\_temperature}:_ \\
+This function displays the temperature to the seven-segment display, based on the input ~temperature~ variable. It converts the input ~temperature~ variable to one that can easily be used in the required functions, it then calls those functions with a valid input.
+
+** Variables
+Likewise, each of the variables present have an intention and can be described as followed. \\
+
+_\text{segment\_mapping}:_ \\
+An array of arrays that contain boolean values to describe the relation to multiplexer input to seven-segment display pins. It relates all of the required characters to be displayed to a number to be outputted to the multiplexer. \\
+
+_\text{out\_of\_range}:_ \\
+A boolean value that lets the ~display_temperature~ function know if it should display ~--.-~ or a temperature. It is changed in the ~get_temperature~ function, and is set to ~true~ if it is out of range and ~false~ if it is not.
 
 * Full Pseudo Code
 In c-style pseudo code the design could be achieved using the following.
 #+BEGIN_SRC C :exports code :results output :session full :eval no-export
-static bool out_of_range = false;
+static bool out_of_range = true;
 
 double get_temperature() {
   int voltage = read_pin(TEMPERATURE_PIN);
@@ -164,7 +187,7 @@ double get_temperature() {
 }
 
 int segment_mapping[11][7] {
-  // A  B  C  D  E  F  G
+// A  B  C  D  E  F  G
   {1, 1, 1, 1, 1, 1, 0} // 0
   {0, 1, 1, 0, 0, 0, 0} // 1
   {1, 1, 0, 1, 1, 0, 1} // 2
@@ -206,7 +229,7 @@ void display_digit(int digit, int mux_number) {
   int digit_map = segment_mapping[digit];
   for (int i = 0; i < 8; i++) {
     if (digit_map[i] == 1) {
-      set_mux_input(i);
+      set_mux_input(i, mux_number);
     }
   }
 }
@@ -233,7 +256,7 @@ int main() {
   
   while (true) {
     if (timer_has_reset()) {
-      temperature = get_new_temperature();
+      temperature = get_temperature();
       reset_timer();
     }
     
@@ -245,5 +268,9 @@ int main() {
 #+END_SRC
 
 
+* Flow-Chart
 
+#+ATTR_LATEX: :placement [H] :width 0.75\textwidth
+#+CAPTION: Flow Chart \label{fig:flow_chart}
+[[./Flow-Chart.drawio.png]]
 
