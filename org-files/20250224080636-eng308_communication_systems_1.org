@@ -19,7 +19,7 @@
    - Dispersion
 ** Reciver (Rx)
  - Reverse the mapping
-   - Demodualtion
+   - Demodulation
  - Detect
 * Topics
 [[id:ff5d8c46-b6a5-4993-94fb-a233769b10bf][Analogue Modulation]]

@@ -1,0 +1,64 @@
+:PROPERTIES:
+:ID:       67718838-873a-404b-b276-3c8132f40b84
+:END:
+#+title: Antennas
+#+date: [2025-05-19 Mon 09:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Antennas
+ - Transmits/receives [[id:97a0e6e7-0a41-4597-9897-df6785384d70][Electromagnetic Waves]]
+ - Receiving and transmitting properties are typically the same
+[[./Antenna_types.png]]
+
+
+
+** The Hertzian Dipole
+The length is small compared to the wavelength.
+\[\tilde{E}_{\theta} = \frac{jI_0lk\eta_0}{4\pi}\left[\frac{e^{-jkR}}{R}\right]\sin(\theta)\]
+\[\tilde{H}_{\phi} = \frac{jI_0lk\eta_0}{4\pi}\left[\frac{e^{-jkR}}{R}\right]\sin(\theta) = \frac{\tilde{E}_{\theta}}{\eta_0}\]
+
+*** Power Density
+\[S_{av} = \hat{R}\left(\frac{\eta_0k^2I_0^2l^2}{32\pi^2R^2}\right)\sin^2(\theta)\]
+
+** Radiation Characteristics
+Strength of the signal at a constant radius away from the source, typically in [[id:3011b35b-9466-4303-8707-8f740ea5cb80][spherical coordinates]].
+
+\[P_{rad} = R^2\int_{\phi=0}^{2\pi}\int_{\theta=0}^{\pi}S(R,\theta,\phi)\sin(\theta)d\theta d\phi\]
+\[P_{rad} = R^2S_{max}\int\int_{4\pi}F(\theta, \phi)d\Omega\]
+
+*** Beamwidth
+ - half power beamwidth (HPBW, $\beta$)
+ - First null beamwidth ($\beta_null$)
+   
+*** Directivity
+Normalised radiation intensity
+\[D = \frac{4\pi R^2S_{max}}{P_{rad}} = \frac{S_{max}}{S_{av}}\]
+
+*** Radiation Efficiency
+\[\xi = \frac{P_{rad}}{P_t}\]
+
+*** Gain
+\[G = \frac{4\pi R^2S_{max}}{P_t}\]
+\[G = \xi D\]
+
+*** Radiation Resistance
+\[P_{rad} = \frac{1}{2}I_0^2R_{rad}\]
+
+** Half Wave Dipoles Antennas
+The antenna has a length of half a wavelength
+\[\tilde{E}_{\theta} = j60I_0\left[\frac{\cos\left(\frac{\pi}{2}\cos(\theta)\right)}{\sin(\theta)}\right] \left(\frac{e^{jkR}}{R}\right)\]
+\[\tilde{H}_{\theta}(z) = \frac{\tilde{E}_{\theta}}{\eta_0}\]
+
+*** Power Density
+\[S(R,\theta) = \frac{|\tilde{E}_{\theta}|^2}{2\eta_0} = \frac{15I_0^2}{\pi R^2}\left[\frac{\cos^2\left(\frac{\pi}{2}\cos(\theta)\right)}{\sin^2(\theta)}\right]\]
+\[F(\theta) = \frac{S(R, \theta)}{S_0} = \left[\frac{\cos^2\left(\frac{\pi}{2}\cos(\theta)\right)}{\sin^2(\theta)}\right]^2\]
+
+*** Directivity
+\[D = 1.64 = 2.15dB\]
+
+*** Radiation Resistance
+\[R_{rad} = 73\Omega\]
+
+
+
