@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       5384b6eb-4c00-4b1b-b4f7-bb2d70ee80c9
 :END:
-#+title: ENG308 - Communication Systems 1 - Assignment 2
+#+title: ENG308 - Communication Systems 1 - Assignment 2 - Question 1 & 2
 #+date: [2025-05-08 Thu 13:05]
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :Assignment:UTAS:2025:

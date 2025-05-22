@@ -55,6 +55,7 @@
  - [[id:4e1476b3-c09e-4372-81de-a54b491d8a1d][ENG308 - Communication Systems 1 - Assignment 1]]
  - [[id:358ec344-ce1e-4d60-be9f-b0b6529d4649][ENG308 - Communication Systems 1 - Assignment 1 - Question 2]]
  - [[id:1a4f7ae9-25f2-4b33-b271-b1ad67ae5019][ENG308 - Communication Systems 1 - Assignment 1 - Question 3]]
- - [[id:5384b6eb-4c00-4b1b-b4f7-bb2d70ee80c9][ENG308 - Communication Systems 1 - Assignment 2]]
+ - [[id:5384b6eb-4c00-4b1b-b4f7-bb2d70ee80c9][ENG308 - Communication Systems 1 - Assignment 2 - Question 1 & 2]]
+ - [[id:d536e12c-b200-401a-a67c-1bf94978c6f6][ENG308 - Communication Systems 1 - Assignment 2 - Question 3, 4 & 5]]
 ** Final exam
  - 40% of mark

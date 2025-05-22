@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       d536e12c-b200-401a-a67c-1bf94978c6f6
+:END:
+#+title: ENG308 - Communication Systems 1 - Assignment 2 - Question 3, 4 & 5
+#+date: [2025-05-22 Thu 13:32]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Question 3
+
+* Question 4
+
+* Question 5
+
