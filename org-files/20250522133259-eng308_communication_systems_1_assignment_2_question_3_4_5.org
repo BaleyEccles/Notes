@@ -8,7 +8,171 @@
 
 * Question 3
 
+** a
+Bandwidth of the RCF filter is given by:
+\[\frac{\alpha + 1}{T_s}\]
+
+** b
+#+BEGIN_SRC octave :exports none :results output :session Q3
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  pkg load signal
+  pkg load communications
+end
+size = 1000;
+sps = 8;
+span = 4;
+L = span*sps;
+n = -L:L;
+Ts = 1;
+Fs = sps/Ts;
+tau = n / Fs; 
+fc = 1/Ts;
+
+rand_bits = round(rand(1, size));
+symbols = 2 * rand_bits - 1;
+
+x_impulse = zeros(1, size*sps);
+x_impulse(1:sps:end) = symbols;
+#+END_SRC
+
+#+RESULTS:
+
+** c
+#+BEGIN_SRC octave :exports none :results output :session Q3
+close all;
+%% i - Ideal pulse
+g_sq = ones(1, sps);
+x1 = conv(x_impulse, g_sq, 'same');
+c1 = awgn(x1, 10, 'measured');
+r1 = conv(c1, fliplr(g_sq), 'same');
+eyediagram(r1,2*sps)
+title('Eye diagram – Ideal Pulse');
+
+Nfft = 2^nextpow2(length(x1));
+Xf = fftshift(fft(x1, Nfft))/length(x1);
+faxis = (-Nfft/2:Nfft/2-1)*(Fs/Nfft);
+
+figure
+plot(faxis, 20*log10(abs(Xf))+eps); grid on
+xlabel("Frequency (Hz)"); ylabel("dB");
+title("Bandwidth - Ideal Pulse");
+
+
+%% ii - Butterworth
+h_lpf = exp(-abs(tau)*2*pi*fc);
+g_sq_lp = conv(h_lpf, g_sq, 'same');
+g_sq_lp = g_sq_lp / sum(g_sq_lp);
+
+x2 = conv(x_impulse, g_sq_lp, 'same');
+c2 = awgn(x2, 10, 'measured');
+r2 = conv(c2, fliplr(g_sq_lp), 'same');
+eyediagram(r2,2*sps)
+title('Eye diagram – Butterworth');
+
+Nfft = 2^nextpow2(length(x2));
+Xf = fftshift(fft(x2, Nfft))/length(x2);
+faxis = (-Nfft/2:Nfft/2-1)*(Fs/Nfft);
+
+figure
+plot(faxis, 20*log10(abs(Xf))+eps); grid on
+xlabel("Frequency (Hz)"); ylabel("dB");
+title("Bandwidth - Butterworth");
+
+
+%% iii - SRRC
+alpha = 0.4;
+g_srrc = rcosfir(alpha, span, sps, 1, 'sqrt');
+x3 = conv(x_impulse, g_srrc, 'same');
+c3 = awgn(x3, 10, 'measured');
+r3 = conv(c3, fliplr(g_srrc), 'same');
+eyediagram(r3,2*sps)
+title('Eye diagram – SRRC');
+
+Nfft = 2^nextpow2(length(x3));
+Xf = fftshift(fft(x3, Nfft))/length(x3);
+faxis = (-Nfft/2:Nfft/2-1)*(Fs/Nfft);
+
+figure
+plot(faxis, 20*log10(abs(Xf))+eps); grid on
+xlabel("Frequency (Hz)"); ylabel("dB");
+title("Bandwidth - SRRC");
+
+%% iv - RCF
+g_rcf = rcosfir(alpha, span, sps, 1, 'normal');
+x4 = conv(x_impulse, g_rcf, 'same');
+c4 = awgn(x4, 10, 'measured');
+r4 = conv(c4, fliplr(g_rcf), 'same');
+eyediagram(r4,2*sps)
+title('Eye diagram – RCF');
+
+Nfft = 2^nextpow2(length(x4));
+Xf = fftshift(fft(x4, Nfft))/length(x4);
+faxis = (-Nfft/2:Nfft/2-1)*(Fs/Nfft);
+
+figure
+plot(faxis, 20*log10(abs(Xf))+eps); grid on
+xlabel("Frequency (Hz)"); ylabel("dB");
+title("Bandwidth - RCF");
+
+#+END_SRC
+
+#+RESULTS:
+
+** d
+
+** e
+
 * Question 4
+** a
+The received signal is given by:
+\[r(t) = s(t) + n(t)\]
+And the output of the matched filter is:
+\[h(t) &= s^H (-t)\]
+
+\[y = \int_{-\infty}^{\infty}r(t)h(t)dt\]
+\[y = \int_{-\infty}^{\infty}s(t)h(t)dt + \int_{-\infty}^{\infty}n(t)h(t)dt\]
+
+The energy in the signal portion is $E_s = |y_s|^2$:
+\[E_s = \lvert\int_{-\infty}^{\infty}s(t)h(t)dt\rvert^2\]
+\[ \leq \int_{-\infty}^{\infty}|s(t)|^2dt \cdot \int_{-\infty}^{\infty}|h(t)|^2dt\]
+let $\epsilon = \int_{-\infty}^{\infty}|s(t)|^2dt$ and $E_h$ be the other integral
+
+The energy in the noise is $E_n = |y_n|^2$
+\[E_s = |\int_{-\infty}^{\infty}n(t)h(t)dt|^2\]
+Using the power spectral density given $\frac{N_0}{2}$
+\[ = \frac{N_0}{2}\int_{-\infty}^{\infty}|h(t)|^2dt = \frac{N_0}{2}E_h\]
+
+Now the $SNR$ can be found
+\[SNR = \frac{E_s}{E_n} \leq \frac{\epsilon E_h}{\frac{N_0}{2} E_h} = \frac{2\epsilon}{N_0}\]
+Hence the max $SNR$ is:
+\[SNR_{\max} = \frac{2\epsilon}{N_0}\]
+** b
+Using the matched filter definition:
+\[h(t) = \being{cases}
+A & -T_s < t < 0 \\
+0 & \textrm{else}
+\end{cases}\]
+
+And:
+\[s(t) = \being{cases}
+A & 0 < t < T_s \\
+0 & \textrm{else}
+\end{cases}\]
+
+Using:
+\[y = \int_{-\infty}^{\infty}s(t)h(t)dt + \int_{-\infty}^{\infty}n(t)h(t)dt\]
+Which gives:
+\[\int_{-\infty}^{\infty}s(t)h(t)dt = \int_0^{T_s}A\cdot Adt = A^2T_s\]
+And:
+\[\int_{-\infty}^{\infty}n(t)h(t)dt = \]
 
 * Question 5
+
+
 
