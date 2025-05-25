@@ -187,7 +187,11 @@ if exist('OCTAVE_VERSION', 'builtin')
   pkg load signal
   pkg load communications
 end
-size = 16;
+
+
+
+%% Constants
+size = 10000;
 sps = 8;
 span = 4;
 L = span*sps;
@@ -197,7 +201,7 @@ Fs = sps/Ts;
 tau = n / Fs; 
 fc = 1/Ts;
 
-%% 16-PSK
+%% 16-PAM
 PAM.sym = [ 0, 0, 0, 0, ...
             0, 0, 0, 1, ...
             0, 0, 1, 1, ...
@@ -215,16 +219,20 @@ PAM.sym = [ 0, 0, 0, 0, ...
             1, 0, 0, 1, ...
             1, 0, 0, 0];
 
-PAM.loc = [-15, -13, -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13, 15];
+d = 2;
+idx = -7:1:8;
+PAM.loc = d.*idx - 1;
+
+PAM_power = mean(PAM.loc.^2);
 
 %% 16-PSK
 PSK.sym = PAM.sym;
-mag = 1;
+mag = sqrt(PAM_power);
 theta = (0:16-1) * (2 * pi / 16);
-PSK.loc = exp(mag*j * theta);
+PSK.loc = mag * exp(1j * theta);
 
 %% Square 16-QAM
-a = 1;
+a = sqrt(PAM_power/10);
 QAM.sym = PAM.sym;
 QAM.loc = [-3*a + -3*a*i, ...
            -3*a + -1*a*i, ...
@@ -243,14 +251,10 @@ QAM.loc = [-3*a + -3*a*i, ...
            +3*a + -1*a*i, ...
            +3*a + -3*a*i];
 
+
+%% Generate values
 rand_bits = round(rand(1, size));
-symbols = 2 * rand_bits - 1;
-
-PAM.val = gen_vals(PAM.sym, PAM.loc, rand_bits);
-PSK.val = gen_vals(PSK.sym, PSK.loc, rand_bits);
-QAM.val = gen_vals(QAM.sym, QAM.loc, rand_bits);
-
-
+%rand_bits = [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0];
 function val = gen_vals(sym, loc, bits)
   for i = 0:(length(bits)/4 - 1)
     b1 = bits(4*i + 1);
@@ -266,6 +270,76 @@ function val = gen_vals(sym, loc, bits)
 end
 
 
+PAM.val = gen_vals(PAM.sym, PAM.loc, rand_bits);
+PSK.val = gen_vals(PSK.sym, PSK.loc, rand_bits);
+QAM.val = gen_vals(QAM.sym, QAM.loc, rand_bits);
+
+
+
+snr_db = 1:1:15;
+
+for idx = 0:(length(snr_db) - 1)
+  snr = snr_db(idx + 1);
+  
+  snr_linear = 10.^(snr / 10);
+  signal_power = mean(abs(PAM.val).^2);
+  noise_power = signal_power / snr_linear;
+  noise = sqrt(noise_power/2) * (randn(1, length(PAM.val)) + 1j * randn(1, length(PAM.val)));
+  received_pam = PAM.val + noise;
+
+  snr_linear = 10.^(snr / 10);
+  signal_power = mean(abs(PSK.val).^2);
+  noise_power = signal_power / snr_linear;
+  noise = sqrt(noise_power/2) * (randn(1, length(PSK.val)) + 1j * randn(1, length(PSK.val)));
+  received_psk = PSK.val + noise;
+  
+  snr_linear = 10.^(snr / 10);
+  signal_power = mean(abs(QAM.val).^2);
+  noise_power = signal_power / snr_linear;
+  noise = sqrt(noise_power/2) * (randn(1, length(QAM.val)) + 1j * randn(1, length(QAM.val)));
+  received_qam = QAM.val + noise;
+
+  for i = 0:(length(received_pam) - 1)
+    [~, bit_idx] = min(abs(received_pam(i + 1) - PAM.loc));
+    abs(received_pam(i + 1) - PAM.loc);
+    detected_pam(4*i + 1) = PAM.sym(4*(bit_idx - 1) + 1);
+    detected_pam(4*i + 2) = PAM.sym(4*(bit_idx - 1) + 2);
+    detected_pam(4*i + 3) = PAM.sym(4*(bit_idx - 1) + 3);
+    detected_pam(4*i + 4) = PAM.sym(4*(bit_idx - 1) + 4);
+  end
+  ber_pam(idx + 1) = sum(rand_bits ~= detected_pam) / length(rand_bits);
+
+  for i = 0:(length(received_psk) - 1)
+    [~, bit_idx] = min(abs(received_psk(i + 1) - PSK.loc));
+    abs(received_psk(i + 1) - PSK.loc);
+    detected_psk(4*i + 1) = PSK.sym(4*(bit_idx - 1) + 1);
+    detected_psk(4*i + 2) = PSK.sym(4*(bit_idx - 1) + 2);
+    detected_psk(4*i + 3) = PSK.sym(4*(bit_idx - 1) + 3);
+    detected_psk(4*i + 4) = PSK.sym(4*(bit_idx - 1) + 4);
+  end
+  ber_psk(idx + 1) = sum(rand_bits ~= detected_psk) / length(rand_bits);
+
+  for i = 0:(length(received_qam) - 1)
+    [~, bit_idx] = min(abs(received_qam(i + 1) - QAM.loc));
+    abs(received_qam(i + 1) - QAM.loc);
+    detected_qam(4*i + 1) = QAM.sym(4*(bit_idx - 1) + 1);
+    detected_qam(4*i + 2) = QAM.sym(4*(bit_idx - 1) + 2);
+    detected_qam(4*i + 3) = QAM.sym(4*(bit_idx - 1) + 3);
+    detected_qam(4*i + 4) = QAM.sym(4*(bit_idx - 1) + 4);
+  end
+  ber_qam(idx + 1) = sum(rand_bits ~= detected_qam) / length(rand_bits);
+  
+end
+
+figure;
+semilogy(snr_db, ber_pam, 'o--', snr_db, ber_psk, 'o--', snr_db, ber_qam, 'o--');
+xlabel('SNR (dB)');
+ylabel('Bit Error Rate (BER)');
+title('BER vs SNR in AWGN channel');
+legend('PAM', 'PSK', 'QAM');
+grid on;
+
 #+END_SRC
 
 #+RESULTS:
+
