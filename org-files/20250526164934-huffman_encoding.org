@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       94f61db7-0e95-4dc2-a4f6-72b84d3eceff
+:END:
+#+title: Huffman Encoding
+#+date: [2025-05-26 Mon 16:49]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Huffman Encoding
+Steps
+1. List all entries and frequencies as leaves in a binary tree
+2. Choose two leaves with the smallest frequencies and create sub tree with these symbols and sum of frequencies as leaves
+3. Remove all used symbols from alphabet and give the new tree a placeholder name
+4. Repeat steps 2 and 3 until the alphabet is has only one symbol left
+
+Guarantees
+ - \[H(x) \leq R \leq H(x) + 1\]
+   - $R$ is the average bits per symbol
+** Example
+| Symbol | Frequency |
+| A      |       15% |
+| B      |       20% |
+| C      |       10% |
+| D      |       15% |
+| E      |       40% |
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Huffman-Encoding.xopp]]

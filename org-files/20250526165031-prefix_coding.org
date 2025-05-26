@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       ff044f11-d8e3-4450-a51d-da3197bb9c80
+:END:
+#+title: Prefix Coding
+#+date: [2025-05-26 Mon 16:50]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Prefix Coding
+The prefix of each code is not in another entry.
+Example - [[id:94f61db7-0e95-4dc2-a4f6-72b84d3eceff][Huffman Encoding]]:
+| $\alpha$ | $\beta$ | $\gamma$ | $\delta$ |
+|        0 |      10 |      110 |      111 |
+ - [[id:3289ef2b-00e6-4c7e-9f60-75a13038a0b7][Lempel–Ziv–Welch Codes]]

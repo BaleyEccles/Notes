@@ -30,6 +30,7 @@
 [[id:36d505ca-5581-478e-9c72-acaa883d4404][Gaussian Process]]
 [[id:0687ce8d-e70e-4507-be78-b8adbab4db02][Line Coding]]
 [[id:ec03d04f-b7f9-4f2a-89ad-aa8dd3a2bbb2][Bit Rate vs Baud Rate]]
+[[id:3ed36bb9-baec-4595-96ce-00302247fefb][Information Theory]]
 * Assessment
 ** Test 1
  - Week 6
@@ -59,3 +60,4 @@
  - [[id:d536e12c-b200-401a-a67c-1bf94978c6f6][ENG308 - Communication Systems 1 - Assignment 2 - Question 3, 4 & 5]]
 ** Final exam
  - 40% of mark
+ - [[id:3ed36bb9-baec-4595-96ce-00302247fefb][Information Theory]] may be on exam

@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       3ed36bb9-baec-4595-96ce-00302247fefb
+:END:
+#+title: Information Theory
+#+date: [2025-05-26 Mon 16:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Information Theory
+ - \[I(x) = -\log_2(\Pr(x))\]
+Entropy:
+ - \[H(x) = E\left[I(x)\right] = \sum\Pr(x)\cdot I(x)\]
+Allows us to determine how compressible a piece of information is   
+ - [[id:ff044f11-d8e3-4450-a51d-da3197bb9c80][Prefix Coding]]
+
+
+
+
+** Examples
+*** Mutual information
+ - \[I(x,y) = \log_2\left(\frac{\Pr(x|y)}{\Pr(x)}\right)\]   
+*** Alphabet
+Given some alphabet $\{\alpha, \beta, \gamma, \delta\}$
+1. $H(x)$ if each character is equally likely
+\begin{align*}
+\Pr(\alpha) &= \Pr(\beta) ... \\ 
+I(\alpha) &= -\log_2(0.25) = 2 \textrm{ bits} \\ 
+H(x) &= \sum \Pr(x)\cdot I(x) = 2\textrm{ bits/symbol} 
+\end{align*}
+
+2. $H(x)$ if $\alpha - 60\%$, $\beta - 20\%$, $\gamma -10\%$, $\delta-10\%$
+\begin{align*}
+\Pr(\alpha) &= 60\% \\
+I(\alpha) &= -\log_2(0.6) = 0.737 \textrm{ bits} \\ 
+H(x) &= \sum \Pr(x)\cdot I(x) = 1.57 \textrm{ bits/symbol} 
+\end{align*}
+this means that it is possible to send 1.57 bits per symbol, which is better than 2 bits per symbol.
+

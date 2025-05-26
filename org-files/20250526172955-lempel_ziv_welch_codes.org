@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       3289ef2b-00e6-4c7e-9f60-75a13038a0b7
+:END:
+#+title: Lempel–Ziv–Welch Codes
+#+date: [2025-05-26 Mon 17:29]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Lempel–Ziv–Welch Codes
+Steps
+1. Initial dictionary defined
+2. Find the longest string of input characters matched to a dictionary entry
+3. Encode this string and remove the string from the input
+4. Create a new dictionary entry with these characters and the next input character as the entry.
+5. Repeat steps 2-5 until stop value
+
+** Example
+Message: "ABAA BCBA CBBA BACB"
+Initial dictionary: "ABC."
+|----+-----+---|
+| A  |  00 | 0 |
+| B  |  01 | 1 |
+| C  |  10 | 2 |
+| .  |  11 | 3 |
+|----+-----+---|
+
+|------------------+----------------+------------+------+-------------------------|
+| Current Sequence | Next Character | Code index | Bits | Extended Dictionary     |
+|------------------+----------------+------------+------+-------------------------|
+| -                | A              |            |      |                         |
+| A                | B              |          0 |   00 | 4 : AB  : 100  - 3 bits |
+| B                | A              |          1 |  001 | 5 : BA  : 101  - 3 bits |
+| A                | A              |          0 |  000 | 6 : AA  : 110  - 3 bits |
+| AB               | C              |          4 |  100 | 7 : ABC : 111  - 3 bits |
+| C                | B              |          2 |  010 | 8 : CB  : 1000 - 4 bits |
+| BA               | C              |          5 | 0101 | 9 : BAC : 1001 - 4 bits |
+| CB               | B              |          8 | 1000 | 10: CBB : 1010 - 4 bits |
+| BA               | B              |          5 | 0101 | 11: BAB : 1011 - 4 bits |
+| BAC              | B              |          9 | 1001 | 12: BACB: 1100 - 4 bits |
+| B                | .              |          1 | 0001 | 13: B.  : 1101 - 4 bits |
+|------------------+----------------+------------+------+-------------------------|
+
