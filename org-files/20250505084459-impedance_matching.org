@@ -17,8 +17,7 @@
  - [[id:10c1bc22-00ef-4df4-8641-26a1b79f89cc][Stub Impedance Matching]]
 
 ** Advanced Matching Circuits
- - Gives control over [[id:a647872e-240f-4ef0-8304-b713e15505ea][Bandwidth]] and placement on PCB/
-
+ - Gives control over [[id:a647872e-240f-4ef0-8304-b713e15505ea][Bandwidth]] and placement on PCB
  - [[id:ef2ceb5e-641d-4471-ac6c-5afc559924f0][L Section Matching]]
  - [[id:d61ae5c1-f062-4240-8db4-a6a24da446ab][Pi and Tee Matching]]
  - [[id:dc653a1f-f3fd-4924-995c-36e2861609d7][Double Stub Matching]]

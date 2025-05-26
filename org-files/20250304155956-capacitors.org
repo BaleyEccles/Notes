@@ -7,7 +7,7 @@
 #+STARTUP: latexpreview
 
 * Capacitors
-When any two [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][conductors]] are sperated by a [[id:e5f19fd2-0970-4021-83ac-1dc4266acba9][dielectric]] they become a capacitor. A charge of $+Q$ and $-Q$ will form on the positive and negative side.
+When any two [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][conductors]] are separated by a [[id:e5f19fd2-0970-4021-83ac-1dc4266acba9][dielectric]] they become a capacitor. A charge of $+Q$ and $-Q$ will form on the positive and negative side.
  - \[C = \frac{Q}{F}\]
  - I a [[id:e5f19fd2-0970-4021-83ac-1dc4266acba9][dielectric]] is imperfect a [[id:0bab4eaa-a87f-4711-a3ab-945f94adcfa4][resistance]] will form between the [[id:470e50aa-5154-4107-9a2f-3a838f5b4fd6][conductors]]
    - \[R &= \frac{-\int_lE\cdot dl}{\int_s\sigma E\cdot ds}\]

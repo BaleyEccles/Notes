@@ -12,7 +12,7 @@
 ** Cylindrical Coil / Solenoid
 - \[L=\mu \frac{N^2A}{l}\]
 ** Toroidal Coil
-- \[L=\mu \frac{N^2h}{2\pi}\ln(\frac{b}{a})\]
+- \[L=\mu \frac{N^2h}{2\pi}\ln\left(\frac{b}{a}\right)\]
   - where \[\mu\] is the permeability of the material, \[N\] is the number of turns, \[h\] is the height of the coil, and \[a\] and \[b\] are the inner and outer radius respectively.
 ** Other Conductors
  - \[L = \int_sB\cdot ds\]

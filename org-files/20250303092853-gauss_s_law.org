@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       645bf86b-4946-4952-9b90-0c4c4e867a6d
 :END:
-#+title: Gauss's Law
+#+title: Gauss's Law For Electrostatics
 #+date: [2025-03-03 Mon 09:28]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview

@@ -15,6 +15,6 @@
 ** Snell’s Law for Refraction
  - \[\frac{\sin(\theta_i)}{\sin(\theta_i)} = \frac{u_{p2}}{u_{p1}} = \sqrt{\frac{\mu_1\epsilon_1}{\mu_2\epsilon_2}}\]
 ** Total Internal Reflection
- - If $\theta_i > \theat_c$
+ - If $\theta_i > \theta_c$
  - None of the wave will be transmitted into the media
- - \[\sin(\theat_i) = \frac{n_2}{n_1}\]
+ - \[\sin(\theta_i) = \frac{n_2}{n_1}\]

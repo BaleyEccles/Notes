@@ -8,6 +8,6 @@
 
 * Retarded Potentials
 ** Retarded Scalar Potentials
- - \[V(R, t) = \frac{1}{4\pi\epsilon}\int_{v'}\frac{\rho_v(R_i,t-R'/u_p}{R'}dv'\]
+ - \[V(R, t) = \frac{1}{4\pi\epsilon}\int_{v'}\frac{\rho_v(R_i,t-R'/u_p)}{R'}dv'\]
 ** Retarded Vector Potentials
- - \[A(R, t) = \frac{\mu}{4\pi}\int_{v'}\frac{J(R_i,t-R'/u_p}{R'}dv'\]
+ - \[A(R, t) = \frac{\mu}{4\pi}\int_{v'}\frac{J(R_i,t-R'/u_p)}{R'}dv'\]

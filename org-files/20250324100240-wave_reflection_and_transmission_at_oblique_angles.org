@@ -10,6 +10,7 @@
  - [[id:a8f62eb2-1483-431d-955e-347bb3b0f64e][Reflectivity and Transmissivity]]
 We can use [[id:e6de8110-daa6-4ccf-b02e-557d1c570e9b][Snell's Law]] law to find the angles, but we must use the following to find the actual waves. Using stuff from [[id:4b4c57f7-00f4-4e83-8c62-736ca7202183][Wave Reflection and Transmission at Oblique Angles]]
 ** Perpendicular
+ - When the magnetic field is purely tangential to the reflective object
  - \[\Gamma_{\perp} = \frac{E_{\perp 0}^r}{E_{\perp 0}^i} = \frac{\eta_2\cos(\theta_i)-\eta_1\cos(\theta_t)}{\eta_2\cos(\theta_i)+\eta_1\cos(\theta_t)}\]
  - \[\tau_{\perp} = \frac{E_{\perp 0}^t}{E_{\perp 0}^i} = \frac{2\eta_2\cos(\theta_i)}{\eta_2\cos(\theta_i)+\eta_1\cos(\theta_t)}\]
    - \[\tau_{\perp} = 1 + \Gamma_{\perp}\]
@@ -17,6 +18,7 @@ We can use [[id:e6de8110-daa6-4ccf-b02e-557d1c570e9b][Snell's Law]] law to find 
  - Phase matching condition
    - \[k_1\sin(\theta_i) = k_1\sin(\theta_r) = k_2\sin(\theta_t)\]
 ** Parallel
+ - When the magnetic field is normal to the reflective object 
  - \[\Gamma_{\|} = \frac{E_{\| 0}^r}{E_{\| 0}^i} = \frac{\eta_2\cos(\theta_i)-\eta_1\cos(\theta_t)}{\eta_2\cos(\theta_i)+\eta_1\cos(\theta_t)}\]
  - \[\tau_{\|} = \frac{E_{\| 0}^t}{E_{\| 0}^i} = \frac{2\eta_2\cos(\theta_i)}{\eta_2\cos(\theta_i)+\eta_1\cos(\theta_t)}\]
    - \[\tau_{\|} = (1 + \Gamma_{\|})\frac{\cos(\theta_i)}{\cos(\theta_t)}\]
