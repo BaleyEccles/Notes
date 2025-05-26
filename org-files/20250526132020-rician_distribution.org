@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       781fb64b-2931-4b73-b490-bc2170dbdfb6
+:END:
+#+title: Rician Distribution
+#+date: [2025-05-26 Mon 13:20]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Rician Distribution
+\[\Pr(A|B) \begin{cases}
+\frac{A}{\sigma^2}e^{-\frac{A^2 + \mu^2}{2\sigma^2}}I_0(\frac{\mu A}{\sigma^2}), & 0\leq y \leq \infty \\
+0, & \textrm{else}
+\end{cases}\]
+\[I_0(x) = \frac{1}{2\pi}\int_{0}^{2\pi}e^{x\cos(\theta)}d\theta\]
+
+
+** Rician SNR
+As $K$ increases the distribution moves to the right.
+ - \[K = \frac{\mu}{\sigma}\]
+ - \[K[dB] = 10\log_{10}(K)\]
+

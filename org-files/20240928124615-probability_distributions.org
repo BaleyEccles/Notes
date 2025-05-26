@@ -17,6 +17,7 @@
  - [[id:a0c530a2-8890-481c-a65e-e4fdfb3dede4][Gamma Distribution]]
  - [[id:de37e6d3-8c56-4113-bcd1-429d63d7e3e8][Weibull Distribution]]
  - [[id:3aad1707-ee50-4f86-acff-ca2ba634bab4][Log-normal Distribution]]
+ - [[id:781fb64b-2931-4b73-b490-bc2170dbdfb6][Rician Distribution]]
  - [[id:8662b281-ddd2-482c-b278-1a466e8a85a5][Central Limit Theorem]]
 ** Discrete
 

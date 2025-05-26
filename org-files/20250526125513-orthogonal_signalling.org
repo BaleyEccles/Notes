@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       6c4de48a-7f76-476c-907b-663d7d7bb596
+:END:
+#+title: Orthogonal Signalling
+#+date: [2025-05-26 Mon 12:55]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Orthogonal Signalling
+for:
+ - \[1 \leq m \leq M,\ s_m(t)\]
+ - \[1 \leq n \leq M,\ s_n(t)\]
+We have  the orthogonal definition:
+- \[<s_m(t), s_n(t)> = \int_{-\infty}^{\infty}s_m(t)s_n^{*}(t)dt = 0,\ m \neq n\]
+- \[<s_m(t), s_n(t)> = \begin{cases} \epsilon_s, & m = n \\ 0, & m \neq n \\ \end{cases}\]
+
+These can be represented as a vector:
+\[s_1 = \begin{bmatrix}
+\sqrt{\epsilon_s} \\
+0 \\
+0 \\
+\vdots \\
+0 \\
+\end{bmatrix},\ s_2 = \begin{bmatrix}
+0 \\
+\sqrt{\epsilon_s} \\
+0 \\
+\vdots \\
+0 \\
+\end{bmatrix},\ \hdots,\ s_M = \begin{bmatrix}
+0 \\
+0 \\
+0 \\
+\vdots \\
+\sqrt{\epsilon_s} \\
+\end{bmatrix}\]
+Every point is the nearest neighbour of every other point
+ - \[\epsilon_b = \frac{\epsilon_s}{\log_2(M)}\]
+ - \[d_{min} = \sqrt{2\epsilon_b\log_2(M)}\]
+
+
+ 

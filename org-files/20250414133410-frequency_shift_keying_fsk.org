@@ -7,9 +7,21 @@
 #+STARTUP: latexpreview
 
 * Frequency shift keying (FSK)
-Cannot use a [[id:96e16018-80aa-4fde-af31-70105649a40c][IQ-Graph]] for this
-Change the frequency of the signal to transmit bits
-
+ - Cannot use a [[id:96e16018-80aa-4fde-af31-70105649a40c][IQ-Graph]] for this
+ - Cannot use [[id:ad9c0e92-adb3-4bc9-85cc-ac3e76267d56][Gray Coding]]
+ - Bit error goes down as we increase $M$, hence high data rates.
+   - But, [[id:a647872e-240f-4ef0-8304-b713e15505ea][Bandwidth]] requirement increases.
+ - Change the frequency of the signal to transmit bits
+ - A special case of [[id:6c4de48a-7f76-476c-907b-663d7d7bb596][Orthogonal Signalling]]:
+   - \[s_m(t) = \Re\{s_{ml}(t)e^{j2\pi f_ct}\}\]
+     - \[1 \leq m \leq M\]
+     - \[0 \leq t \leq T_s\]
+     - \[s_{ml}(t) = \sqrt{\frac{2\epsilon_s}{T_s}} e^{j2\pi\Delta ft}\]
+       - M signals separated by $\Delta f$ in the baseband
+   - Modulated signals
+     - \[V_m(t) = \sqrt{\frac{2\epsilon_s}{T_s}}\cos(2\pi(f_c + m\Delta f)t),\ 0 \leq t \leq T_s\]
+     - Orthogonal when
+       - \[\Delta f = \frac{k}{2T_s},\ k\in \mathbf{Z}\]
 ** Advantages
  - High data rates
  - Low error probability
@@ -20,4 +32,28 @@ Change the frequency of the signal to transmit bits
  - Very high bandwidth requirements
  - Limitation for low-speed modems
  - BER is worse than [[id:d272c047-df78-4f69-8f3e-b682c8f53a99][PSK]] in [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][AWGN Channel]]
+   
+** Coherent Detection
+The estimated phase $\hat{\phi}_m$ can be used in the following image:
+[[./Cohe-Det-FSK.png]]
+
+Using the [[id:3eb4dc51-a876-4615-9141-a2b81384919e][Union Bound]]:
+ - \[\Pr(\textrm{sym error}) \leq (M-1)Q\left(\sqrt{\frac{2E_b\log_2(M)}{2N_0}}\right)\]
+Using the [[id:4a014306-8822-4a35-ab74-65b1a0d134d6][Binomial Distribution]] we can find:
+ - \[\Pr(\textrm{bit error}) \leq \frac{M}{2}Q\left(\sqrt{\frac{2E_b\log_2(M)}{2N_0}}\right)\]
+
+** Noncoherent Detection
+ - This is worse than coherent detection, but simpler
+Using the following image:
+[[./Noncohe-Det-FSK.png]]
+for the first frequency:
+ - \[r_{c1}(t) = \epsilon_s\cos(\phi_1) + n_c(t)\]
+ - \[r_{s1}(t) = \epsilon_s\sin(\phi_1) + n_s(t)\]
+   - The others will only be [[id:0a3093d2-6df1-49f4-b00a-f506505c424d][noise]] ($n_s(t)$ or $n_c(t)$
+ - \[y_1 = \epsilon_s^2  + n^2(t)\]
+   - The others will only be noise that is [[id:2f39c6c4-53d7-4281-b06b-41ec371e5ca2][Rayleigh Distributed]] ($n^2(t)$)
+   - $y_1$ is [[id:781fb64b-2931-4b73-b490-bc2170dbdfb6][Rician Distributed]] with mean $\mu = \sqrt{\frac{2E_b}{T_s}}$
+ - \[\Pr(\textrm{sym error}) = \sum_{n=1}^{M-1}(-1)^{n+1} {{M-1} \choose {n}}\frac{1}{n+1} e^{-\log_2(M) \frac{n}{n+1}\frac{E_b}{N_0}}\]
+ - \[\Pr(\textrm{bit error}) = \frac{M}{2(M-1)}\sum_{n=1}^{M-1}(-1)^{n+1} {{M-1} \choose {n}}\frac{1}{n+1} e^{-\log_2(M) \frac{n}{n+1}\frac{E_b}{N_0}}\]
+
 
