@@ -423,17 +423,6 @@ ylabel("Bit Error Rate (BER)");
 title(["BER vs SNR in AWGN channel and Flat Fading with ", num2str(number_of_pilot_bits), " pilot bits and ", num2str(frames), " frames"]);
 legend('PAM', 'PSK', 'QAM');
 grid on;
-
-%% eta_b = R_b/B = SNR
-%% B = R_b (1 + alpha)
-%% eta_b = 1/(1 + alpha)
-alpha = 0.4;
-eta_b = 1/(1 + alpha);
-
-%% eta_p = E_b/N_0 = SNR
-eta_p = SNR;
-
-
 #+END_SRC
 
 #+RESULTS:
@@ -502,9 +491,65 @@ warning: called from
     legend>update_legend_position at line 1602 column 10
     legend>update_layout_cb at line 942 column 7
     legend>@<anonymous> at line 326 column 32
-error: parse error:
-
-  syntax error
-            ^
-error: 'SNR' undefined near line 1, column 9
 #+end_example
+
+#+BEGIN_SRC octave :exports none :results output :session Q5
+
+%% eta_b = R_b/B = SNR
+alpha = 0.4;
+%% B_pam = R_b (1 + alpha)/2
+pam_eta_b = 2/(1 + alpha);
+%% B_psk = R_b (1 + alpha)
+psk_eta_b = 1/(1 + alpha);
+%% B_qam = R_b (1 + alpha)
+qam_eta_b = 1/(1 + alpha);
+
+%% eta_p = E_b/N_0 = SNR
+index = ber_pam < 10e-3;
+eta_p_pam_filtered = snr_db(index);
+eta_b_pam_filtered = pam_eta_b*ones(1, length(eta_p_pam_filtered));
+
+index = ber_psk < 10e-3;
+eta_p_psk_filtered = snr_db(index);
+eta_b_psk_filtered = psk_eta_b*ones(1, length(eta_p_psk_filtered));
+
+index = ber_qam < 10e-3;
+eta_p_qam_filtered = snr_db(index);
+eta_b_qam_filtered = qam_eta_b*ones(1, length(eta_p_qam_filtered));
+
+index = ber_ray_pam < 10e-3;
+eta_p_pam_ray_filtered = snr_db(index);
+eta_b_pam_ray_filtered = pam_eta_b*ones(1, length(eta_p_pam_ray_filtered));
+
+index = ber_ray_psk < 10e-3;
+eta_p_psk_ray_filtered = snr_db(index);
+eta_b_psk_ray_filtered = psk_eta_b*ones(1, length(eta_p_psk_ray_filtered));
+
+index = ber_ray_qam < 10e-3;
+eta_p_qam_ray_filtered = snr_db(index);
+eta_b_qam_ray_filtered = qam_eta_b*ones(1, length(eta_p_qam_ray_filtered));
+
+eta_B_y = 0.01:0.001:10;
+eta_P_x = 10*log10((2.^eta_B_y - 1) ./ eta_B_y);
+
+figure;
+hold on;
+semilogy(eta_P_x, eta_B_y, 'b-');
+plot(eta_p_pam_filtered, eta_b_pam_filtered, 'o');
+plot(eta_p_psk_filtered, eta_b_psk_filtered, 'o');
+plot(eta_p_qam_filtered, eta_b_qam_filtered, 'o');
+
+plot(eta_p_pam_ray_filtered, eta_b_pam_ray_filtered, 'o');
+plot(eta_p_psk_ray_filtered, eta_b_psk_ray_filtered, 'o');
+plot(eta_p_qam_ray_filtered, eta_b_qam_ray_filtered, 'o');
+
+xlabel('Bandwidth Efficiency (\eta_P) [dB]');
+ylabel('Shannon Capacity Limit (\eta_B)');
+title('Shannon Capacity Limit vs Bandwidth Efficiency');
+%%xlim([0, 20])
+grid on;
+
+#+END_SRC
+
+#+RESULTS:
+
