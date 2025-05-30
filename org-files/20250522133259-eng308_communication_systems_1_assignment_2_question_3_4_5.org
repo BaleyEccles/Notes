@@ -33,6 +33,7 @@ Ts = 1;
 Fs = sps/Ts;
 tau = n / Fs; 
 fc = 1/Ts;
+snr = 5;
 
 rand_bits = round(rand(1, size));
 symbols = 2 * rand_bits - 1;
@@ -49,7 +50,7 @@ close all;
 %% i - Ideal pulse
 g_sq = ones(1, sps);
 x1 = conv(x_impulse, g_sq, 'same');
-c1 = awgn(x1, 10, 'measured');
+c1 = awgn(x1, snr, 'measured');
 r1 = conv(c1, fliplr(g_sq), 'same');
 eyediagram(r1,2*sps)
 title('Eye diagram – Ideal Pulse');
@@ -70,7 +71,7 @@ g_sq_lp = conv(h_lpf, g_sq, 'same');
 g_sq_lp = g_sq_lp / sum(g_sq_lp);
 
 x2 = conv(x_impulse, g_sq_lp, 'same');
-c2 = awgn(x2, 10, 'measured');
+c2 = awgn(x2, snr, 'measured');
 r2 = conv(c2, fliplr(g_sq_lp), 'same');
 eyediagram(r2,2*sps)
 title('Eye diagram – Butterworth');
@@ -89,7 +90,7 @@ title("Bandwidth - Butterworth");
 alpha = 0.4;
 g_srrc = rcosfir(alpha, span, sps, 1, 'sqrt');
 x3 = conv(x_impulse, g_srrc, 'same');
-c3 = awgn(x3, 10, 'measured');
+c3 = awgn(x3, snr, 'measured');
 r3 = conv(c3, fliplr(g_srrc), 'same');
 eyediagram(r3,2*sps)
 title('Eye diagram – SRRC');
@@ -106,7 +107,7 @@ title("Bandwidth - SRRC");
 %% iv - RCF
 g_rcf = rcosfir(alpha, span, sps, 1, 'normal');
 x4 = conv(x_impulse, g_rcf, 'same');
-c4 = awgn(x4, 10, 'measured');
+c4 = awgn(x4, snr, 'measured');
 r4 = conv(c4, fliplr(g_rcf), 'same');
 eyediagram(r4,2*sps)
 title('Eye diagram – RCF');
@@ -174,8 +175,6 @@ And:
 
 * Question 5
 
-
-
 #+BEGIN_SRC octave :exports none :results output :session Q5
 clc
 clear
@@ -186,12 +185,11 @@ if exist('OCTAVE_VERSION', 'builtin')
   set(0, "DefaultAxesFontSize", 25);
   pkg load signal
   pkg load communications
+  pkg load statistics
 end
 
-
-
 %% Constants
-size = 10000;
+size = 2000;
 sps = 8;
 span = 4;
 L = span*sps;
@@ -276,57 +274,46 @@ QAM.val = gen_vals(QAM.sym, QAM.loc, rand_bits);
 
 
 
-snr_db = 1:1:15;
+function detected = detect(received, sym, loc)
+  for i = 0:(length(received) - 1)
+    [~, bit_idx] = min(abs(received(i + 1) - loc));
+    abs(received(i + 1) - loc);
+    detected(4*i + 1) = sym(4*(bit_idx - 1) + 1);
+    detected(4*i + 2) = sym(4*(bit_idx - 1) + 2);
+    detected(4*i + 3) = sym(4*(bit_idx - 1) + 3);
+    detected(4*i + 4) = sym(4*(bit_idx - 1) + 4);
+  end
+end
+
+snr_db = 1:1:30;
 
 for idx = 0:(length(snr_db) - 1)
   snr = snr_db(idx + 1);
-  
   snr_linear = 10.^(snr / 10);
+  
   signal_power = mean(abs(PAM.val).^2);
   noise_power = signal_power / snr_linear;
   noise = sqrt(noise_power/2) * (randn(1, length(PAM.val)) + 1j * randn(1, length(PAM.val)));
   received_pam = PAM.val + noise;
 
-  snr_linear = 10.^(snr / 10);
+
   signal_power = mean(abs(PSK.val).^2);
   noise_power = signal_power / snr_linear;
   noise = sqrt(noise_power/2) * (randn(1, length(PSK.val)) + 1j * randn(1, length(PSK.val)));
   received_psk = PSK.val + noise;
   
-  snr_linear = 10.^(snr / 10);
   signal_power = mean(abs(QAM.val).^2);
   noise_power = signal_power / snr_linear;
   noise = sqrt(noise_power/2) * (randn(1, length(QAM.val)) + 1j * randn(1, length(QAM.val)));
   received_qam = QAM.val + noise;
 
-  for i = 0:(length(received_pam) - 1)
-    [~, bit_idx] = min(abs(received_pam(i + 1) - PAM.loc));
-    abs(received_pam(i + 1) - PAM.loc);
-    detected_pam(4*i + 1) = PAM.sym(4*(bit_idx - 1) + 1);
-    detected_pam(4*i + 2) = PAM.sym(4*(bit_idx - 1) + 2);
-    detected_pam(4*i + 3) = PAM.sym(4*(bit_idx - 1) + 3);
-    detected_pam(4*i + 4) = PAM.sym(4*(bit_idx - 1) + 4);
-  end
+  detected_pam = detect(received_pam, PAM.sym, PAM.loc);
   ber_pam(idx + 1) = sum(rand_bits ~= detected_pam) / length(rand_bits);
 
-  for i = 0:(length(received_psk) - 1)
-    [~, bit_idx] = min(abs(received_psk(i + 1) - PSK.loc));
-    abs(received_psk(i + 1) - PSK.loc);
-    detected_psk(4*i + 1) = PSK.sym(4*(bit_idx - 1) + 1);
-    detected_psk(4*i + 2) = PSK.sym(4*(bit_idx - 1) + 2);
-    detected_psk(4*i + 3) = PSK.sym(4*(bit_idx - 1) + 3);
-    detected_psk(4*i + 4) = PSK.sym(4*(bit_idx - 1) + 4);
-  end
+  detected_psk = detect(received_psk, PSK.sym, PSK.loc);
   ber_psk(idx + 1) = sum(rand_bits ~= detected_psk) / length(rand_bits);
 
-  for i = 0:(length(received_qam) - 1)
-    [~, bit_idx] = min(abs(received_qam(i + 1) - QAM.loc));
-    abs(received_qam(i + 1) - QAM.loc);
-    detected_qam(4*i + 1) = QAM.sym(4*(bit_idx - 1) + 1);
-    detected_qam(4*i + 2) = QAM.sym(4*(bit_idx - 1) + 2);
-    detected_qam(4*i + 3) = QAM.sym(4*(bit_idx - 1) + 3);
-    detected_qam(4*i + 4) = QAM.sym(4*(bit_idx - 1) + 4);
-  end
+  detected_qam = detect(received_qam, QAM.sym, QAM.loc);
   ber_qam(idx + 1) = sum(rand_bits ~= detected_qam) / length(rand_bits);
   
 end
@@ -339,7 +326,185 @@ title('BER vs SNR in AWGN channel');
 legend('PAM', 'PSK', 'QAM');
 grid on;
 
+                                % Rayleigh Stuff
+
+sigma = 10000;
+frames = 50;
+frameSize = size/frames/4
+number_of_pilot_bits = 100;
+
+%% lambda(j) = ray_vals(floor(j/block_size))
+
+
+for idx = 0:(length(snr_db) - 1)
+  snr = snr_db(idx + 1);
+  snr_linear = 10.^(snr / 10);
+
+  ber_ray_pam(idx + 1) = 0;
+  ber_ray_psk(idx + 1) = 0;
+  ber_ray_qam(idx + 1) = 0;
+  for f = 0:(frames - 1)
+
+    
+    
+    h = (randn+1j*randn)/sqrt(2);
+
+    %% Pilot estimation
+    %% h = (A^H A)^-1 A^H r
+
+    %% A
+    pilot_bits = ones(number_of_pilot_bits,1);
+    
+    signal_power = mean(abs(PAM.val).^2);
+    noise_power = signal_power / snr_linear;
+    noise = sqrt(noise_power/2) * (randn(1, length(pilot_bits)) + 1j * randn(1, length(pilot_bits))); % n
+    received_pam = h.*pilot_bits + noise; % r
+    
+    pam_h_est = mean(pinv((pilot_bits')*(pilot_bits))*(pilot_bits')*(received_pam));
+    
+    
+    signal_power = mean(abs(PSK.val).^2);
+    noise_power = signal_power / snr_linear;
+    noise = sqrt(noise_power/2) * (randn(1, length(pilot_bits)) + 1j * randn(1, length(pilot_bits))); % n
+    received_psk = h.*pilot_bits + noise; % r
+    psk_h_est = mean(pinv((pilot_bits')*(pilot_bits))*(pilot_bits')*(received_psk));
+
+    signal_power = mean(abs(QAM.val).^2);
+    noise_power = signal_power / snr_linear;
+    noise = sqrt(noise_power/2) * (randn(1, length(pilot_bits)) + 1j * randn(1, length(pilot_bits))); % n
+    received_qam = h.*pilot_bits + noise; % r
+    qam_h_est = mean(pinv((pilot_bits')*(pilot_bits))*(pilot_bits')*(received_qam));
+
+    
+    %% Mod
+    signal_power = mean(abs(PAM.val).^2);
+    noise_power = signal_power / snr_linear;
+    
+    frame_pam = PAM.val((frameSize*f + 1):(frameSize*(f + 1)));
+    noise = sqrt(noise_power/2) * (randn(1, length(frame_pam)) + 1j * randn(1, length(frame_pam)));
+
+    received_pam = h.*frame_pam + noise;
+
+    
+    signal_power = mean(abs(PSK.val).^2);
+    noise_power = signal_power / snr_linear;
+    
+    frame_psk = PSK.val((frameSize*f + 1):(frameSize*(f + 1)));
+    noise = sqrt(noise_power/2) * (randn(1, length(frame_psk)) + 1j * randn(1, length(frame_psk)));
+    received_psk = h.*frame_psk + noise;
+
+    
+    signal_power = mean(abs(QAM.val).^2);
+    noise_power = signal_power / snr_linear;
+    
+    frame_qam = QAM.val((frameSize*f + 1):(frameSize*(f + 1)));
+    noise = sqrt(noise_power/2) * (randn(1, length(frame_qam)) + 1j * randn(1, length(frame_qam)));
+    received_qam = h.*frame_qam + noise;
+
+
+    %% Demod
+    frame_rand_bits = rand_bits((4*frameSize*f + 1):(4*frameSize*(f + 1)));
+
+    detected_ray_pam = detect(received_pam./pam_h_est, PAM.sym, PAM.loc);
+    ber_ray_pam(idx + 1) += sum(frame_rand_bits ~= detected_ray_pam) / length(frame_rand_bits);
+
+    detected_ray_psk = detect(received_psk./psk_h_est, PSK.sym, PSK.loc);
+    ber_ray_psk(idx + 1) += sum(frame_rand_bits ~= detected_ray_psk) / length(frame_rand_bits);
+
+    detected_ray_qam = detect(received_qam./qam_h_est, QAM.sym, QAM.loc);
+    ber_ray_qam(idx + 1) += sum(frame_rand_bits ~= detected_ray_qam) / length(frame_rand_bits);
+  end
+end
+
+figure;
+semilogy(snr_db, ber_ray_pam, 'o--', snr_db, ber_ray_psk, 'o--', snr_db, ber_ray_qam, 'o--');
+xlabel("SNR (dB)");
+ylabel("Bit Error Rate (BER)");
+title(["BER vs SNR in AWGN channel and Flat Fading with ", num2str(number_of_pilot_bits), " pilot bits and ", num2str(frames), " frames"]);
+legend('PAM', 'PSK', 'QAM');
+grid on;
+
+%% eta_b = R_b/B = SNR
+%% B = R_b (1 + alpha)
+%% eta_b = 1/(1 + alpha)
+alpha = 0.4;
+eta_b = 1/(1 + alpha);
+
+%% eta_p = E_b/N_0 = SNR
+eta_p = SNR;
+
+
 #+END_SRC
 
 #+RESULTS:
+#+begin_example
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    __plt__>__plt2vv__ at line 502 column 10
+    __plt__>__plt2__ at line 248 column 14
+    __plt__ at line 115 column 16
+    semilogy at line 65 column 10
 
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    __plt__>__plt2vv__ at line 502 column 10
+    __plt__>__plt2__ at line 248 column 14
+    __plt__ at line 115 column 16
+    semilogy at line 65 column 10
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    __plt__>__plt2vv__ at line 502 column 10
+    __plt__>__plt2__ at line 248 column 14
+    __plt__ at line 115 column 16
+    semilogy at line 65 column 10
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    __plt__>__plt2vv__ at line 502 column 10
+    __plt__>__plt2__ at line 248 column 14
+    __plt__ at line 115 column 16
+    semilogy at line 65 column 10
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    __plt__>__plt2vv__ at line 502 column 10
+    __plt__>__plt2__ at line 248 column 14
+    __plt__ at line 115 column 16
+    semilogy at line 65 column 10
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend at line 312 column 8
+frameSize = 10
+warning: axis: omitting non-positive data in log plot
+warning: axis: omitting non-positive data in log plot
+warning: axis: omitting non-positive data in log plot
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+error: parse error:
+
+  syntax error
+            ^
+error: 'SNR' undefined near line 1, column 9
+#+end_example
