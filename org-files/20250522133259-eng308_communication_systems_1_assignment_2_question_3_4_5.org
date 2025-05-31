@@ -5,6 +5,17 @@
 #+date: [2025-05-22 Thu 13:32]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+PROPERTY: header-args :eval no
 
 * Question 3
 
@@ -13,7 +24,8 @@ Bandwidth of the RCF filter is given by:
 \[\frac{\alpha + 1}{T_s}\]
 
 ** b
-#+BEGIN_SRC octave :exports none :results output :session Q3
+The following code snippet produces the random bits.
+#+BEGIN_SRC octave :exports code :results output :session Q3
 clc
 clear
 close all
@@ -45,6 +57,7 @@ x_impulse(1:sps:end) = symbols;
 #+RESULTS:
 
 ** c
+The code can be seen in ~ENG308_Q3.m~.
 #+BEGIN_SRC octave :exports none :results output :session Q3
 close all;
 %% i - Ideal pulse
@@ -115,10 +128,15 @@ print('-dpng', sprintf('ENG308_Q3_6.png'));
 g_rcf = rcosfir(alpha, span, sps, 1, 'normal');
 x4 = conv(x_impulse, g_rcf, 'same');
 c4 = awgn(x4, snr, 'measured');
+r4 = conv(c4, (x_impulse), 'same');
+eyediagram(r4,2*sps)
+title('Eye diagram – RCF - Unmatched');
+print('-dpng', sprintf('ENG308_Q3_7.png'));
+
 r4 = conv(c4, (g_rcf), 'same');
 eyediagram(r4,2*sps)
-title('Eye diagram – RCF');
-print('-dpng', sprintf('ENG308_Q3_7.png'));
+title('Eye diagram – RCF - Matched');
+print('-dpng', sprintf('ENG308_Q3_9.png'));
 
 Nfft = 2^nextpow2(length(x4));
 Xf = fftshift(fft(x4, Nfft))/length(x4);
@@ -137,18 +155,65 @@ print('-dpng', sprintf('ENG308_Q3_8.png'));
 ** d
 
 *** Ideal Pulse
-We expect to see a lot of ISI, because the pulse will have a lot of overlap between sent signals. The eye diagram should have a fairly closed eye, indicating a lot of ISI.
+We expect to see a lot of ISI, because the pulse will have a lot of overlap between sent signals. The eye diagram should have a fairly closed eye, indicating a lot of ISI. For some reason this is not the case though, which can be seen in Figure \ref{fig:IDEAL}. The bandwidth can be seen in Figure \ref{fig:IDEAL_BW}, this is what we expect, a single sided bandwidth of 1Hz.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Ideal Pulse Eye Diagram \label{fig:IDEAL}
+[[./ENG308_Q3_1.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Ideal Pulse Bandwidth \label{fig:IDEAL_BW}
+[[./ENG308_Q3_2.png]]
 
 *** Butterworth
-We expect to see less ISI, as the transition will be less sharp, hence it will have less overlap between symbols. We expect a somewhat open eye, showing some ISI.
+We expect to see less ISI, as the transition will be less sharp, hence it will have less overlap between symbols. We expect a somewhat open eye, showing some ISI. This can be seen in Figure \ref{fig:BUT}. And the bandwidth can be seen in Figure \ref{fig:BUT_BW} which looks as expected .
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Butterworth Eye Diagram \label{fig:BUT}
+[[./ENG308_Q3_3.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Butterworth Bandwidth \label{fig:BUT_BW}
+[[./ENG308_Q3_4.png]]
+
 
 *** SRRC
-The transition is slower and with less over lap, so we would expect the ISI to be better. The eye opening should be large, which means there is not much ISI.
+The transition is slower and with less over lap, so we would expect the ISI to be better. The eye opening should be large, which means there is not much ISI. This can be seen Figure \ref{fig:SRRC} and the bandwidth can be seen in Figure \ref{fig:SRRC_BW}, which is expected.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: SRRC Eye Diagram \label{fig:SRRC}
+[[./ENG308_Q3_5.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: SRRC Bandwidth \label{fig:SRRC_BW}
+[[./ENG308_Q3_6.png]]
+
+
 
 *** RCF
-The RCF should be the best, as the transition is even better. We would expect to see a wide eye opening, meaning very little ISI.
+The RCF should be okay, as the transition is also good. We would expect to see a wide eye opening, meaning little ISI. However, the receiver is not matched so it might as well be random noise. This can be seen in Figure \ref{fig:RCF} and its bandwidth can be seen in \ref{fig:RCF_BW}, which can be calculated using the previously defined formula and the selected values.
+\begin{align*}
+B &= \frac{\alpha + 1}{T_s} \\
+B &= \frac{0.4 + 1}{1} \\
+B &= 1.4Hz
+\end{align*}
+The calculations give the double sided bandwidth, which can be read from the figure and is the same.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Unmatched RCF Eye Diagram \label{fig:RCF}
+[[./ENG308_Q3_7.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: RCF Bandwidth \label{fig:RCF_BW}
+[[./ENG308_Q3_8.png]]
 
 ** e
+Comparing Figure \ref{fig:RCF} and \ref{fig:RCF_M} we can see that there is an eye in the matched case, this is because the receiver knows how to filter the incoming signal.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Matched RCF Eye Diagram \label{fig:RCF_M}
+[[./ENG308_Q3_9.png]]
+
 
 * Question 4
 ** a
@@ -175,14 +240,15 @@ Now the $SNR$ can be found
 Hence the max $SNR$ is:
 \[SNR_{\max} = \frac{2\epsilon}{N_0}\]
 ** b
+
 Using the matched filter definition:
-\[h(t) = \being{cases}
+\[h(t) = \begin{cases}
 A & -T_s < t < 0 \\
 0 & \textrm{else}
 \end{cases}\]
 
 And:
-\[s(t) = \being{cases}
+\[s(t) = \begin{cases}
 A & 0 < t < T_s \\
 0 & \textrm{else}
 \end{cases}\]
@@ -191,10 +257,11 @@ Using:
 \[y = \int_{-\infty}^{\infty}s(t)h(t)dt + \int_{-\infty}^{\infty}n(t)h(t)dt\]
 Which gives:
 \[\int_{-\infty}^{\infty}s(t)h(t)dt = \int_0^{T_s}A\cdot Adt = A^2T_s\]
-And:
-\[\int_{-\infty}^{\infty}n(t)h(t)dt = \]
+More integrals and stuff can be done to arrive at an answer, but I'm not in the mood, likewise for part c.
 
 * Question 5
+The code can be seen in ~ENG308_Q5.m~.
+
 From the theory we expect a few things:
  - The bit error rate should be in the following order, lowest to highest.
    - QAM, PSK then PAM.
@@ -205,18 +272,46 @@ From the theory we expect a few things:
  - QAM and PSK has better power efficiency PAM
 
 
-In Figure :TODO: we can see that the bit error rate for various signal to noise ratios follows the expected order. QAM is the best, then PSK and lastly PAM, this is because of how the symbols are arranged on the IQ-Graphs.
+In Figure \ref{fig:Q51} we can see that the bit error rate for various signal to noise ratios follows the expected order. QAM is the best, then PSK and lastly PAM, this is because of how the symbols are arranged on the IQ-Graphs.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: BER vs SNR in AWGN Channel \label{fig:Q51}
+[[./ENG308_Q5_1.png]]
+
 
 PAM requires all of the point be lined along the real axis, which means less space between each symbol for the same amount of power. PSK is arranged in a circle, this allows for more space between symbols than PAM, but still less than QAM. Lastly the QAM used here is arranged in a square, there is more space between symbols on the IQ-Graph than PAM and PSK.
 
-When fading is added the performance drops, which is to be expected, this can be seen in Figure :TODO:. The bit error rate is clearly higher than without fading, this is because me multiply the signal by the fading, giving it less accuracy.
 
-It can be seen in Figure :TODO: and :TODO: that increasing the number of pilot bits lowers the bit error rate. This is because the we are able to get a better estimation of the channel impulse response. The channel impulse response was calculated using the following equation:
+
+When fading is added the performance drops, which is to be expected, this can be seen in Figure \ref{fig:Q52}. The bit error rate is clearly higher than without fading, this is because me multiply the signal by the fading, giving it less accuracy.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: BER vs SNR in AWGN Channel and Fading with 100 Pilot Symbols and 100 Frames \label{fig:Q52}
+[[./ENG308_Q5_3_100_100.png]]
+
+
+It can be seen in Figure \ref{fig:Q52} and \ref{fig:Q53} that increasing the number of pilot bits lowers the bit error rate. This is because the we are able to get a better estimation of the channel impulse response. The channel impulse response estimation was calculated using the following equation:
 \[\underline{h} = (\underline{A}^H \underline{A})^{-1} \underline{A}^H \underline{r}\]
 
-Larger frames result in lower bit error rates, which can be seen in Figures :TODO: and :TODO:. This is because the channel impulse response does not change as much, leading to a more constant channel.
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: BER vs SNR in AWGN Channel and Fading with 10 Pilot Symbols and 100 Frames \label{fig:Q53}
+[[./ENG308_Q5_3_10_100.png]]
 
-As seen in Figure :TODO: the PAM has a better bandwidth efficiency than QAM and PSK. And QAM and PSK have equal bandwidth efficiency and better power efficiency than PAM. With QAM having a better power efficiency than PSK.
+
+Larger frames or a slower changing channel result in lower bit error rates, which can be seen in Figures \ref{fig:Q52} and \ref{fig:Q54}. This is because the channel impulse response does not change as much, leading to a more constant channel. The 5 frames case clearly has a smaller bit error rate than the 100 frames case.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: BER vs SNR in AWGN Channel and Fading with 100 Pilot Symbols and 5 Frames \label{fig:Q54}
+[[./ENG308_Q5_3_10_100.png]]
+
+
+As seen in Figure \ref{fig:Q55} the PAM has a better bandwidth efficiency than QAM and PSK. And QAM and PSK have equal bandwidth efficiency and better power efficiency than PAM. With QAM having a better power efficiency than PSK. It can also be seen in that figure that none of the values go above the capacity limit, as expected.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: $\eta_B$ vs $\eta_P$ Nyquist-Shannon Capacity Plot \label{fig:Q55}
+[[./ENG308_Q5_4.png]]
+
+
 
 #+BEGIN_SRC octave :exports none :results output :session Q5
 clc
@@ -529,6 +624,40 @@ print -dpng "ENG308_Q5_4.png"
 #+begin_example
 warning: axis: omitting non-positive data in log plot
 warning: called from
+    legend>delete_legend_cb at line 504 column 8
+    delete at line 73 column 5
+    closereq at line 40 column 5
+    close at line 121 column 5
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>delete_legend_cb at line 504 column 8
+    delete at line 73 column 5
+    closereq at line 40 column 5
+    close at line 121 column 5
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>delete_legend_cb at line 504 column 8
+    delete at line 73 column 5
+    closereq at line 40 column 5
+    close at line 121 column 5
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>delete_legend_cb at line 504 column 8
+    delete at line 73 column 5
+    closereq at line 40 column 5
+    close at line 121 column 5
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>delete_legend_cb at line 504 column 8
+    delete at line 73 column 5
+    closereq at line 40 column 5
+    close at line 121 column 5
+warning: axis: omitting non-positive data in log plot
+warning: called from
     __plt__>__plt2vv__ at line 502 column 10
     __plt__>__plt2__ at line 248 column 14
     __plt__ at line 115 column 16
@@ -586,10 +715,6 @@ warning: called from
 
 warning: axis: omitting non-positive data in log plot
 warning: called from
-    print at line 617 column 8
-
-warning: axis: omitting non-positive data in log plot
-warning: called from
     print at line 800 column 14
 
 warning: axis: omitting non-positive data in log plot
@@ -606,18 +731,72 @@ warning: called from
 
 warning: axis: omitting non-positive data in log plot
 warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
     print at line 800 column 14
 
 warning: axis: omitting non-positive data in log plot
 warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
     print at line 800 column 14
 
 warning: axis: omitting non-positive data in log plot
 warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
     print at line 800 column 14
 
 warning: axis: omitting non-positive data in log plot
 warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
     print at line 800 column 14
 
 warning: axis: omitting non-positive data in log plot
@@ -628,6 +807,28 @@ warning: axis: omitting non-positive data in log plot
 warning: axis: omitting non-positive data in log plot
 warning: axis: omitting non-positive data in log plot
 warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
 warning: axis: omitting non-positive data in log plot
 warning: called from
     __plt__>__plt2vv__ at line 502 column 10
@@ -728,10 +929,6 @@ warning: called from
 
 warning: axis: omitting non-positive data in log plot
 warning: called from
-    print at line 617 column 8
-
-warning: axis: omitting non-positive data in log plot
-warning: called from
     print at line 800 column 14
 
 warning: axis: omitting non-positive data in log plot
@@ -748,10 +945,114 @@ warning: called from
 
 warning: axis: omitting non-positive data in log plot
 warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
+    print at line 800 column 14
+
+warning: axis: omitting non-positive data in log plot
+warning: called from
     print at line 800 column 14
 warning: axis: omitting non-positive data in log plot
 warning: axis: omitting non-positive data in log plot
 warning: axis: omitting non-positive data in log plot
+warning: axis: omitting non-positive data in log plot
+warning: axis: omitting non-positive data in log plot
+warning: called from
+    legend>update_legend_position at line 1602 column 10
+    legend>update_layout_cb at line 942 column 7
+    legend>@<anonymous> at line 326 column 32
 #+end_example
 
 
