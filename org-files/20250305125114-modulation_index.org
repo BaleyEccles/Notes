@@ -17,6 +17,9 @@
 ** In [[id:193ec810-72b5-4a36-be12-8feee43e711a][Angle Modulation]]
 *** [[id:c58a6aa3-c218-4d30-aa97-e7b227e2175f][Frequency Modulation]]
  - \[\beta_f = \frac{\Delta f}{f_m} = \frac{k_fA_m}{f_m}\]
-   - \[\Delta f= k_f A_m\]
+   - \[\Delta f = \beta_f f_m\]
+   - $f_m$ is also $w$
+
+
 *** [[id:c4ede74e-3112-4ed9-88ff-399472f8d73f][Phase Modulation]]
  - \[\beta_p = k_pA_m\]

@@ -7,14 +7,12 @@
 #+STARTUP: latexpreview
 
 * Information Theory
+Self-Information:
  - \[I(x) = -\log_2(\Pr(x))\]
 Entropy:
  - \[H(x) = E\left[I(x)\right] = \sum\Pr(x)\cdot I(x)\]
 Allows us to determine how compressible a piece of information is   
  - [[id:ff044f11-d8e3-4450-a51d-da3197bb9c80][Prefix Coding]]
-
-
-
 
 ** Examples
 *** Mutual information

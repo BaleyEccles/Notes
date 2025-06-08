@@ -10,7 +10,7 @@
  - $\nabla\cdot \mathbf{D} = \rho_{V}$
  - This can be used to validate [[id:1486a718-5212-4ac7-8abe-24fb69f500a6][Coulombs Law]]
 ** Integral form
- - \[\int_v\del\cdot Ddv = \int_v\rho_vdv = Q\]
+ - \[\int_v \nabla \cdot Ddv = \int_v\rho_vdv = Q\]
    - Where $Q$ is the total charge in the volume $v$
  - Using the [[id:9998aec3-aa06-4f68-9b8e-e314ce3b44e1][Divergence Theorem]]
    - \[Q = \oint_{v}D\cdot ds\]

@@ -9,8 +9,7 @@
 * Bandwidth
  - If there are two or more signals on a bandwidth we will encounter interferance
  - Bandwidth is expensive
-   - There is a limited amount of bandwidth avalible
-     
+   - There is a limited amount of bandwidth available
 
  \[B = \frac{1 + \alpha}{\log_2(M)}R_b\]
   - $R_b$ is the data rate

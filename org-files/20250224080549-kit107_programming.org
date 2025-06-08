@@ -34,4 +34,17 @@
  - 40% of mark
    
 
+#+begin_src java
+String s = "a";
 
+while (first != null)
+{
+    first = first.getNext();
+    s = s + first.getData();
+}
+
+
+
+#+end_src
+
+#+RESULTS:

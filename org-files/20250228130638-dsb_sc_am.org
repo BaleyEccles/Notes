@@ -34,7 +34,7 @@
  - [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]:
    - $S_u(f) = \frac{A_c^2}{4}\left[S_m(f-f_c) + S_m(f+f_c)\right]$
  - Total Power:
-   - $P_u=\frac{A^2}{2}P_m}$
+   - $P_u=\frac{A^2}{2}P_m$
      - Where $P_m$ is the power in the message signal
        
 ** Demodulation
