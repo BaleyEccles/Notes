@@ -61,3 +61,131 @@
 ** Final exam
  - 40% of mark
  - [[id:3ed36bb9-baec-4595-96ce-00302247fefb][Information Theory]] may be on exam
+   
+* Cheat Sheet
+** Misc
+ - \[\mathcal{F}\{\cos(2\pi f_0t)\} = \frac{1}{2}\left(\delta(f - f_0) + \delta(f + f_0)\right)\]
+ - \[\mathcal{F}(x(t))=X(\omega)=\int_{-\infty}^{\infty}x(t)e^{-j\omega t}dt\]
+ - \[P = \int_{-\infty}^{\infty}S_M(f)df\]
+
+** Amplitude Modulation
+*** DSB/Conventional AM
+ - \[u(t) = A_c(1+am(t))\cos(2\pi f_ct + \phi_c)\]
+ - \[a = |\min(m(t))|\]
+ - \[a = \frac{E_{max}- E_{min}}{E_{max}+E_{min}}\]
+ - \[P_R = \frac{A_c^2}{2}\left[1 + a^2P_{m_n}\right]\]
+ - Envelope Detector
+ - \[\left(\frac{S}{N}\right)_0 = \frac{P_R}{N_0w}\cdot\frac{a^2P_{m_n}}{1+a^2P_{m_n}}\]
+ - \[\left(\frac{S}{N}\right)_0 = \eta_{DSB}\left(\frac{S}{N}\right)_b\]
+*** DSB-SC
+ - $u(t) = m(t)\cdot A_c\cos(2\pi f_ct + \phi_c)$
+ - $P_u=\frac{A^2}{2}P_m$
+ - Demodulation
+   1. Times by local carrier
+   2. Apply LPF at $f_c$
+   3. $y_l(t) = \frac{1}{2}A_cm(t)\cos(\phi_c-\phi)$
+ - \[\left(\frac{S}{N}\right)_0 = \frac{P_0}{P_{N0}} = \frac{P_mA_c^2}{2}\cdot \frac{1}{N_0w}\]
+*** SSB
+ - \[\left(\frac{S}{N}\right)_0 = \frac{P_0}{P_{N0}} = \frac{P_mA_c^2}{N_0w}\]
+ - \[u(t) = A_cm(t)\cos(2\pi f_ct) \mp A_c\hat{m}(t)\sin(2\pi f_ct)\]
+
+** Angle Modulation
+ - \[\phi(t)=\begin{cases}   k_pm(t) & , PM \\  2\pi k_f\int_{-\infty}^tm(\tau)d\tau & , FM   \end{cases}\]
+ - \[u(t) = Re\left\{\sum_{n=-\infty}^{\infty}A_cJ_n(\beta)\cos(f_c+nf_m)t\right\}\]
+ - Carsons Rule
+   - \[B_w = 2(\beta + 1) f_m\]
+ - Demodulation
+   1. Times by local carrier
+   2. Apply LPF at $f_c$
+   3. Simplify
+*** Phase Modulation
+ - \[\left(\frac{S}{N}\right)_o = \beta_p^2P_{M_n}\left(\frac{S}{N}\right)_b\]
+ - Modulation Index
+   - \[\beta_p = k_pA_m\]
+*** Frequency Modulation
+ - \[\left(\frac{S}{N}\right)_o = \frac{3\beta_f^2P_{M_n}}{\max\{m(t)\}^2} \left(\frac{S}{N}\right)_b\]
+ - \[\left(\frac{S}{N}\right)_o = 60\beta^2(\beta + 1)P_{M_n}\]
+ - Modulation Index
+   - \[\beta_f = \frac{\Delta f}{f_m} = \frac{k_fA_m}{f_m}\]
+
+** Digital Modulation
+ - \[R_s = \frac{B}{1 + \alpha}\]
+ - \[B = \frac{1 + \alpha}{\log_2(M)}R_b\]
+ - \[E_s =  \frac{1}{M}\sum_{j=0}^{M-1}||\underline{s}_j||^2\]
+ - \[E_b = \frac{E_s}{\log_2(M)}\]
+ - \[\Pr(\textrm{bit error}) = \frac{\Pr(\textrm{sym error})}{\log_2(M)}\]
+   
+*** Line Coding
+ - Unipolar
+   - '1': +A
+   - '0': 0
+ - Polar
+   - '1': +A
+   - '0': -A
+ - Bipolar
+   - '0': 0
+   - '1': Successive '1's $\pm A$
+ - Manchester
+   - '1': Cross $\downarrow$
+   - '0': Cross $\uparrow$
+ - Advantages/Disadvantages
+   - Error detection
+   - Synchronisation
+   - Bandwidth
+   - DC component
+     - Droop
+     - Heating
+   - Positive and negative voltages
+     
+*** Gray Coding
+1. Start with the Gray code of n-1 bits
+2. Generate the second list by reflecting the first list
+3. Prefix every entry in the old list with a '0'
+4. Prefix every entry in the new list with a '1'
+5. Concatenate the two lists
+*** Pilot Estimation
+ - $A$ is pilot symbols
+ - \[\underline{r} = \underline{A}\underline{h} + \underline{n}\]
+ - \[\begin{bmatrix} r[M] \\ r[M + 1] \\ \vdots \\ r[N] \end{bmatrix} = \begin{bmatrix} a[M] & a[M-1] & \hdots & a[0] \\ a[M+1] & a[M] & \hdots & a[1] \\ \vdots \\ a[N] & a[N-1] & \hdots & a[N-M] \\ \end{bmatrix}\begin{bmatrix} h[0] \\ h[1] \\ \vdots \\ h[M] \end{bmatrix} + \begin{bmatrix} n_s[M] \\ n_s[M+1] \\ \vdots \\ n_s[N] \end{bmatrix}\]
+ - \[\underline{\tilde{h}} = (\underline{A}^H\underline{A})^{-1}\underline{A}^H\underline{r}\]
+*** Union Bound
+_NOTE_: times $A$ by the distance
+ - \[\Pr(\textrm{symbol error})  \leq \frac{1}{M} \sum_{i=0}^{M-1}\sum_{j\in N(i)}Q\left(\sqrt{\frac{d_{ij}^2}{2N_0}}\right)\]
+ - $N$: Number of neighbours
+ - $d_{ij}$: Distance to neighbour
+*** Nearest Neighbour Approximation
+ - \[\Pr(\textrm{symbol error}) \approx \frac{N_{min}}{M} Q\left(\sqrt{\frac{d_{min}^2}{2N_0}}\right)\]
+ - $d_{\min}$: Min distance
+ - $N_{\min}$: Number of points seperated by $d_{\min}$
+
+*** Efficiency
+ - \[\eta_B = \frac{R_b}{B}\]
+ - \[\eta_P = \frac{E_b}{N_0}}\]
+ - \[\frac{E_b}{N_0} = \frac{c}{N_0}T_b = \frac{c}{N_0}\frac{1}{R_b}\]
+   
+:TODO: ETA_B ETA_P PLOT: SEE TEST 2 CHEAT SHEET
+*** Fading
+ - \[\Pr(\gamma < \Pr) = Q\left(\frac{\gamma - \Pr}{\sigma}\right) = x\%\]
+ - \[Q(-x) = 1 - Q(x)\]
+ - \[PL[dB] = 10\alpha \log_{10}\left(\frac{d}{d_0}\right)\]
+
+** Information Theory
+ - \[I(x) = -\log_2(\Pr(x))\]
+ - \[H(x) = E\left[I(x)\right] = \sum\Pr(x)\cdot I(x)\]
+*** Huffman Encoding
+1. List all entries and frequencies as leaves in a binary tree
+2. Choose two leaves with the smallest frequencies and create sub tree with these symbols and sum of frequencies as leaves
+3. Remove all used symbols from alphabet and give the new tree a placeholder name
+4. Repeat steps 2 and 3 until the alphabet is has only one symbol left
+*** Lempel–Ziv–Welch Codes
+|------------------+----------------+------------+------+---------------------|
+| Current Sequence | Next Character | Code index | Bits | Extended Dictionary |
+|------------------+----------------+------------+------+---------------------|
+
+1. Initial dictionary defined
+2. Find the longest string of input characters matched to a dictionary entry
+3. Encode this string and remove the string from the input
+4. Create a new dictionary entry with these characters and the next input character as the entry.
+5. Repeat steps 2-5 until stop value
+** TODO FSK
+

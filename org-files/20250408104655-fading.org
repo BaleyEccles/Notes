@@ -10,8 +10,8 @@
 \[r = h*a\]
 Two types:
 
-** Non-Dispersive Fading
+** [[id:788c38cf-cc37-463b-84d6-a40be1715904][Non-Dispersive Fading]]
 Scattering of the transmitted signal causes very small path delays compared to the signal period.
 
-** Multipath Fading
+** [[id:abae31a2-cc7c-4a2d-b1cf-ed322480482e][Multipath Fading]]
 There can be several scatters in the channel that results in copies of the signal being received at various time delays.

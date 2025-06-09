@@ -22,6 +22,8 @@
      - \[V_m(t) = \sqrt{\frac{2\epsilon_s}{T_s}}\cos(2\pi(f_c + m\Delta f)t),\ 0 \leq t \leq T_s\]
      - Orthogonal when
        - \[\Delta f = \frac{k}{2T_s},\ k\in \mathbf{Z}\]
+   - Bandwidth
+     - \[B = M\Delta f + R_b(1 + \alpha)\]
 ** Advantages
  - High data rates
  - Low error probability
@@ -38,9 +40,9 @@ The estimated phase $\hat{\phi}_m$ can be used in the following image:
 [[./Cohe-Det-FSK.png]]
 
 Using the [[id:3eb4dc51-a876-4615-9141-a2b81384919e][Union Bound]]:
- - \[\Pr(\textrm{sym error}) \leq (M-1)Q\left(\sqrt{\frac{2E_b\log_2(M)}{2N_0}}\right)\]
+ - \[\Pr(\textrm{sym error}) \leq (M-1)Q\left(\sqrt{\frac{E_b\log_2(M)}{N_0}}\right)\]
 Using the [[id:4a014306-8822-4a35-ab74-65b1a0d134d6][Binomial Distribution]] we can find:
- - \[\Pr(\textrm{bit error}) \leq \frac{M}{2}Q\left(\sqrt{\frac{2E_b\log_2(M)}{2N_0}}\right)\]
+ - \[\Pr(\textrm{bit error}) \leq \frac{M}{2}Q\left(\sqrt{\frac{E_b\log_2(M)}{N_0}}\right)\]
 
 ** Noncoherent Detection
  - This is worse than coherent detection, but simpler

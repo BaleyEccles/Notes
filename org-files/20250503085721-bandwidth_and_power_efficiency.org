@@ -7,7 +7,7 @@
 #+STARTUP: latexpreview
 
 * [[id:a647872e-240f-4ef0-8304-b713e15505ea][Bandwidth]] and Power Efficiency
-\[\frac{S}{N} = \frac{S}{N_0B} = \frac{E_b}{N_0}\frac{R_b}{B}\]
+ - \[\frac{S}{N} = \frac{S}{N_0B} = \frac{E_b}{N_0}\frac{R_b}{B}\]
 
  - This allows us to convert to [[id:5dccdd63-9461-4871-a188-ac014808fd56][Baud Rate]]
 

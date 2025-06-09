@@ -24,8 +24,6 @@
 [[id:b8ab263b-c149-43f5-8bb6-bd83f6b10bee][Manchester]]
 [[id:1e74c832-675b-4964-8e5c-030d1b831cb3][Bipolar Non-Return-to-Zero (NRZ)]]
 
-
-
 ** Terms
  - Unipolar
    - Either using a positive voltage or zero volts
