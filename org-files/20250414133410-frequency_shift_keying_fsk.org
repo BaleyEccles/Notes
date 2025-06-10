@@ -21,7 +21,7 @@
    - Modulated signals
      - \[V_m(t) = \sqrt{\frac{2\epsilon_s}{T_s}}\cos(2\pi(f_c + m\Delta f)t),\ 0 \leq t \leq T_s\]
      - Orthogonal when
-       - \[\Delta f = \frac{k}{2T_s},\ k\in \mathbf{Z}\]
+       - \[\Delta f = \frac{k}{2T_s},\ k\in \mathbf{Z}^+\]
    - Bandwidth
      - \[B = M\Delta f + R_b(1 + \alpha)\]
 ** Advantages
