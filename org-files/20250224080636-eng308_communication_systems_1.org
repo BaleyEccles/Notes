@@ -6,6 +6,17 @@
 #+AUTHOR: Baley Eccles - 652137
 #+FILETAGS: :UTAS:2025:
 #+STARTUP: latexpreview
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+PROPERTY: header-args :eval no
+
 
 * Overview
 \[|\textrm{Infomation source}|\rightarrow |\textrm{Transmitter}| \rightarrow\ |\textrm{Channel}| \rightarrow |\textrm{Reciver}| \rightarrow \textrm{output}\]
@@ -90,9 +101,10 @@
  - \[u(t) = A_cm(t)\cos(2\pi f_ct) \mp A_c\hat{m}(t)\sin(2\pi f_ct)\]
 
 ** Angle Modulation
+ - \[u(t)=A_c\cos(2\pi f_ct + \phi(t))\]
  - \[\phi(t)=\begin{cases}   k_pm(t) & , PM \\  2\pi k_f\int_{-\infty}^tm(\tau)d\tau & , FM   \end{cases}\]
- - \[u(t) = Re\left\{\sum_{n=-\infty}^{\infty}A_cJ_n(\beta)\cos(f_c+nf_m)t\right\}\]
- - Carsons Rule
+ - \[u(t) = Re\left\{\sum_{n=-\infty}^{\infty}A_cJ_n(\beta)\cos(2\pi(f_c+nf_m)t)\right\}\]
+ - Carsons Rule/Bandwidth Constraint
    - \[B_w = 2(\beta + 1) f_m\]
  - Demodulation
    1. Times by local carrier
@@ -102,11 +114,14 @@
  - \[\left(\frac{S}{N}\right)_o = \beta_p^2P_{M_n}\left(\frac{S}{N}\right)_b\]
  - Modulation Index
    - \[\beta_p = k_pA_m\]
+ - Power Constraint
+   - \[\left(\frac{S}{N}\right)_o = 20\beta^2(\beta + 1)P_{M_n}\]
 *** Frequency Modulation
  - \[\left(\frac{S}{N}\right)_o = \frac{3\beta_f^2P_{M_n}}{\max\{m(t)\}^2} \left(\frac{S}{N}\right)_b\]
- - \[\left(\frac{S}{N}\right)_o = 60\beta^2(\beta + 1)P_{M_n}\]
  - Modulation Index
    - \[\beta_f = \frac{\Delta f}{f_m} = \frac{k_fA_m}{f_m}\]
+ - Power Constraint
+   - \[\left(\frac{S}{N}\right)_o = 60\beta^2(\beta + 1)P_{M_n}\]
 *** PLL
  - \[|\omega_c-\omega_f| < \frac{\pi}{2}\cdot K_vA_cK_oK_{PD}\]
  - \[\lim_{t\rightarrow \infty} \theta_e(t) = \frac{2\pi \Delta f}{A_cK_vK_oK_{PD}f_0}\]
@@ -146,7 +161,7 @@
 2. Generate the second list by reflecting the first list
 3. Prefix every entry in the old list with a '0'
 4. Prefix every entry in the new list with a '1'
-5. Concatenate the two lists
+5. Concatenate the two lists 10,11,01,00
 *** Pilot Estimation
  - $A$ is pilot symbols
  - \[\underline{r} = \underline{A}\underline{h} + \underline{n}\]
@@ -172,10 +187,19 @@ _NOTE_: times $A$ by the distance
  - \[\Pr(\gamma < \Pr) = Q\left(\frac{\gamma - \Pr}{\sigma}\right) = x\%\]
  - \[Q(-x) = 1 - Q(x)\]
  - \[PL[dB] = 10\alpha \log_{10}\left(\frac{d}{d_0}\right)\]
+*** FSK
+ - Coherent:
+   - \[\Pr(\textrm{bit error}) \leq \frac{M}{2}Q\left(\sqrt{\frac{E_b\log_2(M)}{N_0}}\right)\]
+ - Non-Coherent
+   - \[\Pr(\textrm{bit error}) = \frac{M}{2(M-1)}\sum_{n=1}^{M-1}(-1)^{n+1} {{M-1} \choose {n}}\frac{1}{n+1} e^{-\log_2(M) \frac{n}{n+1}\frac{E_b}{N_0}}\]
+ - Bandwidth
+   - \[B = M\Delta f + R_b(1 + \alpha)\]
+   - \[\Delta f = \frac{k}{2T_s},\ k\in \mathbf{Z}^+\]
 
 ** Information Theory
  - \[I(x) = -\log_2(\Pr(x))\]
  - \[H(x) = E\left[I(x)\right] = \sum\Pr(x)\cdot I(x)\]
+ - \[I(x,y) = \log_2\left(\frac{\Pr(x|y)}{\Pr(x)}\right)\]
 *** Huffman Encoding
 1. List all entries and frequencies as leaves in a binary tree
 2. Choose two leaves with the smallest frequencies and create sub tree with these symbols and sum of frequencies as leaves
@@ -191,11 +215,3 @@ _NOTE_: times $A$ by the distance
 3. Encode this string and remove the string from the input
 4. Create a new dictionary entry with these characters and the next input character as the entry.
 5. Repeat steps 2-5 until stop value
-** FSK
- - Coherent:
-   - \[\Pr(\textrm{bit error}) \leq \frac{M}{2}Q\left(\sqrt{\frac{E_b\log_2(M)}{N_0}}\right)\]
- - Non-Coherent
-   - \[\Pr(\textrm{bit error}) = \frac{M}{2(M-1)}\sum_{n=1}^{M-1}(-1)^{n+1} {{M-1} \choose {n}}\frac{1}{n+1} e^{-\log_2(M) \frac{n}{n+1}\frac{E_b}{N_0}}\]
- - Bandwidth
-   - \[B = M\Delta f + R_b(1 + \alpha)\]
-   - \[\Delta f = \frac{k}{2T_s},\ k\in \mathbf{Z}^+\]

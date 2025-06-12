@@ -11,3 +11,5 @@ Defined as:
  - \[\hat{x}(t) = x(t)*\frac{1}{\pi t}\]
 Introduces a $-\frac{\pi}{2}$ phase shift at positvie frequencies
 And a $+\frac{\pi}{2}$ phase shift at negative frequencies
+ - \[H\{\cos(\omega_0 t)\} = \sin(\omega_0 t)\]
+ - \[H\{\sin(\omega_0 t)\} = -\cos(\omega_0 t)\]

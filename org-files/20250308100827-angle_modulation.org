@@ -22,7 +22,7 @@
      2\pi k_f\int_{-\infty}^tm(\tau)d\tau & , FM   \end{cases}\]
    - \[\frac{d \phi (t)}{dt} = \begin{cases} k_p\frac{dm(t)}{dt} & , PM \\ 2\pi k_fm(t) & , FM   \end{cases}\]
  - By subsituting in a signal we can find a relation to the [[id:6aa137e2-5360-440a-adc0-ed6a8e29c957][Bessel Function]]
-   - \[u(t) = Re\left\{\sum_{n=-\infty}^{\infty}A_cJ_n(\beta)\cos(f_c+nf_m)t\right\}\]
+   - \[u(t) = Re\left\{\sum_{n=-\infty}^{\infty}A_cJ_n(\beta)\cos(2\pi(f_c+nf_m)t)\right\}\]
    - For higher frequencies $f_c\pm nf_m$, the amplitude generally attenuates
      - Hence we can define an effective bandwidth
    - $\beta$ is the [[id:93cc7a76-b114-4b58-8116-200294578267][modulation index]]
