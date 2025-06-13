@@ -179,7 +179,7 @@ _NOTE_: times $A$ by the distance
 
 *** Efficiency
  - \[\eta_B = \frac{R_b}{B}\]
- - \[\eta_P = \frac{E_b}{N_0}}\]
+ - \[\eta_P = \frac{E_b}{N_0}\]
  - \[\frac{E_b}{N_0} = \frac{c}{N_0}T_b = \frac{c}{N_0}\frac{1}{R_b}\]
    
 :TODO: ETA_B ETA_P PLOT: SEE TEST 2 CHEAT SHEET
@@ -215,3 +215,5 @@ _NOTE_: times $A$ by the distance
 3. Encode this string and remove the string from the input
 4. Create a new dictionary entry with these characters and the next input character as the entry.
 5. Repeat steps 2-5 until stop value
+
+
