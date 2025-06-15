@@ -13,7 +13,7 @@
  - \[l_{OC} = \frac{1}{2\pi}\tan^{-1}\left(\frac{Z_0}{X}\right)\]
 
 Using  [[id:dc9bc12d-e2bb-407d-b221-efd07e1bd3a1][Smith Chart]]:
-Same as in the Single Parallel Stub Impedance Matching / Single Parallel Lumped Element Impedance Matching cases, but we don't need to use the [[id:0850f22d-b384-4606-a3be-d262e8980559][Admittance]], $y_L$, we use the impedance.
+Same as in the [[id:ed6b1110-473a-404f-8726-b168445076ee][Single Parallel Stub Impedance Matching]] / [[id:37dbfa79-a941-4ab0-8aa0-a71c53d98cb5][Single Parallel Lumped Element Impedance]] Matching cases, but we don't need to use the [[id:0850f22d-b384-4606-a3be-d262e8980559][Admittance]], $y_L$, we use the impedance.
  - SC: Left x-intercept 
  - OC: Right x-intercept
- - Rotate towards load to find the stub length $d_1$ or $d_2a$
+ - Rotate towards load to find the stub length $d_1$ or $d_2$

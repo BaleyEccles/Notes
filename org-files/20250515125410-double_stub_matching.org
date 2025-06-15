@@ -18,7 +18,7 @@ Using [[id:dc9bc12d-e2bb-407d-b221-efd07e1bd3a1][Smith Chart]]:
 2. Place the point $y_L$
 3. Offset unit circle
 4. $A_1$ and $A_2$ is the intersection of offset unit circle and constant resistance of $y_l$
-5. Take the difference of reactive components of $A_1$/$A_2$ and $y_L$
+5. Take the difference of imaginary/reactive components of $A_1$/$A_2$ and $y_L$ and then the negative ($-(Im\{y_L\} - A_{(1,2)})$)
 6. Length of each stub is the rotation towards the load of the difference from step 5
    - Call these $l_1$ and $l_1^{\prime}$.
 7. Rotate from $A_1$ along a constant SWR circle to $B_1$/$B_2$ (towards generator), the intersection with unit circle.

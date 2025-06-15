@@ -17,8 +17,8 @@ Using a [[id:dc9bc12d-e2bb-407d-b221-efd07e1bd3a1][Smith Chart]]:
 2. Convert $z_L$ to $y_L$: $y_L = \frac{1}{z_L}$
 3. Location to place stub is $y_L$ to unit circle intercept (rotate towards generator), there will be two solutions
    - Call these $d_1$ and $d_2$
-4. Get reactances by going out from unit circle intercepts and take the negative of it
-5. Rotate towards load to get length (rotate towards load)
+4. Get reactances by going out from unit circle intercepts and take the negative of it ($z_1$ and $z_2$)
+5. Rotate towards load to get length (rotate towards load) from $z_1$ and $z_2$
    - OC: Left x-intercept 
    - SC: Right x-intercept 
 
