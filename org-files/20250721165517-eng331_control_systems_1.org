@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       3ba0230c-1885-4a6e-9e92-c82085f2f153
+:END:
+#+title: ENG331 - Control Systems 1
+#+date: [2025-07-21 Mon 16:55]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Notes
+
+
+* Assessment
+
+
+** Assessment Task 1: Assessed tutorials
+ - 20%
+ - Fortnightly
+
+** Assessment Task 2: Design report
+ - 20%
+ - Week 13
+   - Work on for the second half of unit
+ - 10 pages
+
+** Assessment Task 3: Practical laboratory
+ - 20%
+ - Assessed during lab and report
+ - Weeks 2 and 10
+
+** Assessment Task 4: Final exam
+ - 40%

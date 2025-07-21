@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       84763217-4e3e-4dbe-a1fb-a2657e025dc7
+:END:
+#+title: ENG306 - Power Electronics
+#+date: [2025-07-21 Mon 10:04]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Notes
+
+
+
+
+* Assessment
+** Assessment Task 1: Project
+ - 30%
+ - Week 13
+ - 20 A4 pages + 10 min presentation
+
+** Assessment Task 2: Quiz
+ - 10%
+ - 4 Online quizzes
+
+** Assessment Task 3: Labs
+ - 20%
+ - Weeks: 3, 6 & 9
+ - Report 1 week after lab
+   - 6 pages per report
+
+** Assessment Task 4: Examination
+ - 40%
