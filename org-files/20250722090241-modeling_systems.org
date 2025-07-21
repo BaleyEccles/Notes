@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       1f70134e-cf99-4909-aa3e-0352f2d0d6d9
+:END:
+#+title: Modeling Systems
+#+date: [2025-07-22 Tue 09:02]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Modeling Systems
+ - Any [[id:129878a7-2136-473b-ac33-74da80b12e67][Linear and Time Invarient Systems (LTI)]] can be modelled as a differential equation
+   - But this is nasty
+   - We can use [[id:d2083e8a-7a7a-48a8-89f4-9d13bba76b50][transform theory]] or [[id:5a63667f-a24c-4a46-99de-0997d54296b7][convolution]] to convert it into an easier form
+

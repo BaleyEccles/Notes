@@ -7,11 +7,8 @@
 
 * Unit Ramp
 Denoted \[r (t)\].
-Defined as d\begin{math}
-\r(t)=
-\begin{cases}
+Defined as \[\begin{math} r(t)= \begin{cases}
         t & t > 0 \\
-        0 & t < 0
-\end{cases}
-\end{math}
+        0 & t < 0 \end{cases}
+\end{math}\]
 Related to the [[id:df314ae5-1b35-49a3-be34-8d0aeb720ff3][Unit Step]] by \[r(t)=tu(t)=\int_{-infty}^{t}u(\lambda)d\lambda\]
