@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       4e62ca90-967b-4fcf-ad83-8f6d97caae79
+:END:
+#+title: Expert Systems
+#+date: [2025-07-23 Wed 16:53]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Expert Systems
+ - An AI that uses if-then based rules
+ - Is designed to mimic a human expert
+ - 
+

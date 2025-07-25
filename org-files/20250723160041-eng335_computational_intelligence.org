@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       c8a3a322-d7f6-43e7-98a4-fece17b67f36
+:END:
+#+title: ENG335 - Computational Intelligence
+#+date: [2025-07-23 Wed 16:00]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Content
+ - [[id:4e62ca90-967b-4fcf-ad83-8f6d97caae79][Expert Systems]]
+
+* Assessment
+
+** Assessment Task 1: Assignment 1
+ - 15%
+ - Matlab code and 10 page report
+ - Week 3
+
+** Assessment Task 2: Assignment 2
+ - 15%
+ - Matlab code and 10 page report
+ - Week 5
+
+** Assessment Task 3: Assignment 3
+ - 15%
+ - Matlab code and 10 page report
+ - Week 9
+
+** Assessment Task 4: Assignment 4
+ - 15%
+ - Matlab code and 10 page report
+ - Week 12
+
+** Assessment Task 5: Project based examination
+ - 40%
+ - Matlab code and 10 page report
+ - Due: Exam Period
