@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       87717bae-9be4-480c-a3e6-efd41eae25be
+:END:
+#+title: KIT213 - Operating Systems
+#+date: [2025-07-25 Fri 09:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Assessment
+
+** Assessment Task 1: Operating System Report
+ - 20%
+ - 2000 Words
+ - Week 8
+
+** Assessment Task 2: File system competency test
+ - 10%
+ - 50min
+ - Week 10
+
+** Assessment Task 3: UNIX Shell Scripting
+ - 30%
+ - Software Code
+ - Week 13
+
+** Assessment Task 4: Skills based quiz
+ - 10%
+ - Weekly Tutorials
+   
+** Assessment Task 5: Examination
+ - 30%
+ - Exam: Online
+ - 120min
+
