@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       356b1296-2188-4d04-9ccc-a4381bcc02b6
+:END:
+#+title: Taylor Series
+#+date: [2025-07-25 Fri 08:32]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* TODO Taylor Series

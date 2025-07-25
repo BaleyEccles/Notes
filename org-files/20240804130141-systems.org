@@ -7,10 +7,10 @@
 
 * Systems
 A transformation from one function into another.
-\begin{math}
+\[\begin{math}
 x(t) \rightarrow \framebox[1.1\width]{System} \rightarrow y(t)
-\end{math}
-A transformation from \[x(t)\] into \[y(t)\],
+\end{math}\]
+A transformation from $x(t)$ into $y(t)$,
 ** Properties
 A system can have many properties, such as
 - [[id:949eb0e5-3855-46f6-bc68-67f16c04c961][Time Invariance]]
