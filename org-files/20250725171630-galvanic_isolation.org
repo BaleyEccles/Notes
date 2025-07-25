@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       56a1f85f-b978-4063-ab5c-ed984632258e
+:END:
+#+title: Galvanic Isolation
+#+date: [2025-07-25 Fri 17:16]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Galvanic Isolation
+When two circuits do not electrically touch, example: [[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformers]]
+ - Used for
+   - Prevention of electric shock
+   - Grounding

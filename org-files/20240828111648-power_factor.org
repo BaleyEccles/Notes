@@ -8,4 +8,7 @@
 
 * Power Factor
 - The ratio of average power to apparent power
-- Power factor \[PF= \cos(\theta_v-\theta_i)=\cos(\phi)=\frac{P}{\lvert S \rvert}\]
+- Power factor \[PF= \cos(\theta_v-\theta_i)=\cos(\phi)=\frac{P}{\lvert S \rvert} = \frac{P}{V_{rms}I_{rms}}\]
+When there is a distortion:
+- \[PF = \cos(\theta_1 - \phi_1)DF\]
+  - Where DF is the [[id:e9b5b140-6f9f-4509-a13d-77de6da7f9e9][Distortion Factor]]

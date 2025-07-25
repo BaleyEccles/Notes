@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       43553b0f-4568-4589-8998-f52560165599
+:END:
+#+title: Direct Current (DC)
+#+date: [2025-07-25 Fri 17:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Direct Current (DC)
+** Form Factor (FF)
+Form factor can be used to describe the signal quality of DC waveforms
+ - \[FF = \frac{RMS}{Avg}\]
+ - Ideal when $FF = 1 \Rightarrow AVG = RMS$

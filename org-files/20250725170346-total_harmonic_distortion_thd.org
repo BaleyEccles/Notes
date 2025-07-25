@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       e88c31a8-d595-4e01-9630-78b9d54401ae
+:END:
+#+title: Total Harmonic Distortion (THD)
+#+date: [2025-07-25 Fri 17:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Total Harmonic Distortion (THD)
+ - The ratio of the rms value of al l the non-fundamental frequency terms to the rms value of the fundamental frequency term.
+ - \[THD = \sqrt{\frac{\sum_{n\neq 1}I_{n,rms}^2}{I_{1,rms}^2}}\]
+ - \[THD = \sqrt{\frac{I_{rms}^2 - I_{1,rms}^2}{I_{1,rms}^2}}\]
+   
+** [[id:8e4d8052-219e-4813-bcba-0bda30141d24][Power Factor]]
+This changes the power factor equation to:
+ - \[S = \sqrt{P^2 + Q^2 + D^2}\]
+ - \[D = V_{1,rms}\sqrt{\sum_{n\neq 1} I_{n,rms}^2} = \frac{V_1}{2}\sqrt{\sum_{n\neq 1}I_n}\]
+

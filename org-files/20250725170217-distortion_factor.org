@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       e9b5b140-6f9f-4509-a13d-77de6da7f9e9
+:END:
+#+title: Distortion Factor
+#+date: [2025-07-25 Fri 17:02]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Distortion Factor
+ - \[DF = \sqrt{\frac{1}{1 + (THD)^2}}\]
+ - Where THD is the [[id:e88c31a8-d595-4e01-9630-78b9d54401ae][Total harmonic distortion (THD)]]
+ 

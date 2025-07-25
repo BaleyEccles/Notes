@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       f15b6b50-5902-4077-ae47-b4ced487a3fd
+:END:
+#+title: Alternating Current (AC)
+#+date: [2025-07-25 Fri 16:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Alternating Current (AC)
+ - The average voltage must be zero
+   
+** RMS
+
+ - \[V_{rms} = \sqrt{\sum_{n=1}^{N}V_{n,rms}^2}\]
+ - \[I_{rms} = \sqrt{\sum_{n=1}^{N}I_{n,rms}^2}\]
+*** Sinusoidal Wave
+ - \[V_{rms} = \frac{V_{\max}}{2}\]
+*** Triangular Wave
+ - \[I_{rms} = \frac{I_{\max}}{\sqrt{3}}\]
+** Power
+ - [[id:8e4d8052-219e-4813-bcba-0bda30141d24][Power Factor]]
+*** Instantaneous Power
+ - \[p(t) = v(t)i(t)\]
+*** Average Power
+The integral of the instantaneous power
+ - \[P = \frac{1}{T}\int_0^Tp(t)dt\]
+*** Power Types
+ - \[S = P + jQ = V_{rms}I_{rms}\]
+ - \[Q = V_{rms}I_{rms}\sin(\theta - \phi)\]
