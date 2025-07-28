@@ -10,11 +10,12 @@
  - The average voltage must be zero
    
 ** RMS
-
+ - \[V_{rms} = \sqrt{\frac{1}{T}\int_0^Tv^2(t)dt}\]
+ - \[I_{rms} = \sqrt{\frac{1}{T}\int_0^Ti^2(t)dt}\]
  - \[V_{rms} = \sqrt{\sum_{n=1}^{N}V_{n,rms}^2}\]
  - \[I_{rms} = \sqrt{\sum_{n=1}^{N}I_{n,rms}^2}\]
 *** Sinusoidal Wave
- - \[V_{rms} = \frac{V_{\max}}{2}\]
+ - \[V_{rms} = \frac{V_{\max}}{\sqrt{2}}\]
 *** Triangular Wave
  - \[I_{rms} = \frac{I_{\max}}{\sqrt{3}}\]
 ** Power
