@@ -12,7 +12,7 @@ The choise of state is not unique, that is there can be many ways to represent t
 These systems can be represented as [[id:6f242323-5b6b-469d-b611-a3cdf4641299][Block Diagrams]].
 
 ** State Space-Single Undelayed Input
-- State equation:
+State equation:
 \[\begin{bmatrix}
 q_{1}[n+1] \\
 q_{2}[n+1] \\
@@ -37,8 +37,8 @@ q_{N}[n]
 0 \\
 b
 \end{bmatrix} x[n]\]
-- and the output equation:
-\[ y[n] = \begin{bmatrix}
+and the output equation:
+\[y[n] = \begin{bmatrix}
 -a_{N} & -a_{N-1} & -a_{N-2} & \hdots & -a_{1}
 \end{bmatrix} \begin{bmatrix}
 q_{1}[n] \\
@@ -49,29 +49,29 @@ q_{N}[n]
 b
 \end{bmatrix} x[n] \]
 Which becomes:
-- \[\underline{q}[n+1]=\underline{A}q[n]+\underline{b}x[n]\]
-  - Part one of the general form
-- \[y[n]=\underline{C}q[n]+dx[n]\]
-  - Part two of the general form
+ - \[\underline{q}[n+1]=\underline{A}q[n]+\underline{b}x[n]\]
+   - Part one of the general form
+ - \[y[n]=\underline{C}q[n]+dx[n]\]
+   - Part two of the general form
 These equations can be used to solve systems of the form:
-- \[y[n]+a_1y[n-1]+a_2y[n-2]+ \hdots a_Ny[n-N]=bx[n]\]
+ - \[y[n]+a_1y[n-1]+a_2y[n-2]+ \hdots a_Ny[n-N]=bx[n]\]
 
 ** Solutions to State Space Equations
-2\[y[n]= \underline{c} \underline{A}^n q[0] + \sum_{k=0}^{n-1}\underline{c}\underline{A}^{n-1-k}\underline{b}x[k]+dx[n]\] for \[n>0\]
+\[y[n]= \underline{c} \underline{A}^n q[0] + \sum_{k=0}^{n-1}\underline{c}\underline{A}^{n-1-k}\underline{b}x[k]+dx[n]\] for \[n>0\]
 - The part before the sum is the zero input response
 - The part after and includeing the sum is the zero state response
 \[y[n]= \underline{c} q[0]+dx[0]\] for \[n=0\]
 To solve this we need to know how to get [[id:e58c0264-f169-431a-a8ab-7d96365d9876][Matrix Powers]].
 *** For Circuit Diagrams
 Use the [[id:124ac03e-eb71-4731-a90c-55171f9edb80][Forward Difference]]
-- \[C \frac{dV_c}{dt}=i_c \Rightarrow C \frac{V_c[n+1]-V_c[n]}{T_s}=i_c[n]\]
-  - \[V_c[n]=q_1[n]\]
-- \[L \frac{di_L}{dt}=V_L \Rightarrow L \frac{i_L[n+1]-i_L[n]}{T_s}=V_L[n]\]
-  - \[i_L[n]=q_2[n]\]
+ - \[C \frac{dV_c}{dt}=i_c \Rightarrow C \frac{V_c[n+1]-V_c[n]}{T_s}=i_c[n]\]
+   - \[V_c[n]=q_1[n]\]
+ - \[L \frac{di_L}{dt}=V_L \Rightarrow L \frac{i_L[n+1]-i_L[n]}{T_s}=V_L[n]\]
+   - \[i_L[n]=q_2[n]\]
 Use KVL and KCL to solve for the general form of state space equations
 
 ** Stability
 The system remains [[id:847ec0e7-da66-447a-9835-cd512492d2e3][BIBO Stable]] if the the [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of \[\underline{A}^{n}\] are less then one
-- \[\lvert \lambda_{k} \rvert\ < 1 \forall k \in [1,N]\]
+ - \[\lvert \lambda_{k} \rvert\ < 1 \forall k \in [1,N]\]
 ** Block Diagrams
 We can form block diagrams by:
