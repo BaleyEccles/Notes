@@ -4,7 +4,18 @@
 #+title: ENG335 - Computational Intelligence
 #+date: [2025-07-23 Wed 16:00]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:2025:
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+PROPERTY: header-args :eval no
+
 
 * Content
  - [[id:4e62ca90-967b-4fcf-ad83-8f6d97caae79][Expert Systems]]

@@ -4,7 +4,17 @@
 #+title: ENG331 - Control Systems 1
 #+date: [2025-07-21 Mon 16:55]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:2025:
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+PROPERTY: header-args :eval no
 
 * Notes
  - [[id:1f70134e-cf99-4909-aa3e-0352f2d0d6d9][Modeling Systems]]

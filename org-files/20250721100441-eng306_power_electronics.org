@@ -4,7 +4,18 @@
 #+title: ENG306 - Power Electronics
 #+date: [2025-07-21 Mon 10:04]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:2025:
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+PROPERTY: header-args :eval no
+
 
 * Notes
  - [[id:f15b6b50-5902-4077-ae47-b4ced487a3fd][Alternating Current (AC)]]

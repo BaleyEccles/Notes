@@ -54,4 +54,5 @@ Design a band pass filter
    - [[id:e1a8a179-0487-4d1f-ad59-83ebeb8cad0c][ENG307 - Electrical and Mechatronic Design - Design Assignment 1]]
    - [[id:2750d46e-0d6c-491c-9103-432b09cd0064][ENG307 - Electrical and Mechatronic Design - Design Assignment 2]]
    - [[id:065728a1-fe78-4e29-9028-b9b30d1262de][ENG307 - Electrical and Mechatronic Design - Design Assignment 3]]
+   - [[id:be0056e5-656e-4261-88d3-410216e0c957][ENG307 - Electrical and Mechatronic Design - Design Assignment 4]]
 
