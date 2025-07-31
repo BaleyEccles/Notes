@@ -1,0 +1,68 @@
+:PROPERTIES:
+:ID:       117d1797-6d46-47e2-81d2-1360da07666b
+:END:
+#+title: Fuzzy Logic
+#+date: [2025-07-30 Wed 16:08]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Fuzzy Logic
+ - Based on the idea that everything can be represented as a value from a range
+   - We assign an number from 0 to 1 which represents how well a given data point fits the set
+
+ - Membership function
+   - \[\mu_A(x)\]
+   - A function that defines where the data point sits in the set of possible values
+ - Degree of membership
+   - The value which the data takes in the membership function
+ - Hedge
+   - A subset of a fuzzy set
+   - Some possible shapes that can define the subset
+     - A little, slightly, Very, Extremely
+     - Very very, more or less, somewhat, indeed
+     - Each of which has their mathematical representation as a modification on the membership function
+
+** Operations
+ - Compliment
+   - NOT
+   - \[1 - x\]
+ - Intersection
+   - AND
+   - \[\min(x, y)\]
+ - Union
+   - OR
+   - \[\max(x,y)\]
+
+** Fuzzy Rules
+#+begin_src pascal
+IF x is A
+AND y is B
+THEN z is C
+
+IF x is A
+OR y is B
+THEN z is C
+#+end_src
+
+#+begin_src matlab :results output
+clc;
+clear;
+close all;
+t = 0:0.01:10;
+y = sin(t);
+#+end_src
+
+** Mamdani Fuzzy Interface
+1. Fuzzification
+2. Rule evaluation
+3. Aggergation of rule
+4. Defuzzification
+
+** Sugeno Fuzzy Interface
+We apply rules in the following form:
+#+begin_src pascal
+IF x is A
+AND y is B
+THEN z is k
+#+end_src
+
