@@ -6,7 +6,6 @@
 #+STARTUP: latexpreview
 
 * State Space Representation
-([[id:9d44cc62-fd73-49f1-9bda-efa24d9e5538][Discrete Systems]] only)
 "For [[id:240aca67-b15c-4bea-ba1e-09f80a59ccd5][Causel Systems]], the state at a point in time (\[n_0\]) is defined as the minimal information that is sufficent to determine the state and output of the system at all times \[n\geq n_0\], when the input to the system is also known for all times \[n\geq n_0\]".
 The choise of state is not unique, that is there can be many ways to represent the same system.
 These systems can be represented as [[id:6f242323-5b6b-469d-b611-a3cdf4641299][Block Diagrams]].
@@ -75,3 +74,21 @@ The system remains [[id:847ec0e7-da66-447a-9835-cd512492d2e3][BIBO Stable]] if t
  - \[\lvert \lambda_{k} \rvert\ < 1 \forall k \in [1,N]\]
 ** Block Diagrams
 We can form block diagrams by:
+
+** Continuous Form
+The first equation is:
+ - \[\dot{\underline{x}} = A\underline{x} + B\underline{u}\]
+   - $A$ is the system matrix
+   - $B$ is the input matrix
+The second equation is:
+ - \[\underline{y} = C\underline{x} + D\underline{u}\]
+
+*** Laplace To State Space
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331-Sate-Space-Laplace-Example-1.xopp]]
+ - For $\dot{\underline{x}} = A\underline{x} + B\underline{u}$
+   - The last row of the matrix $A$ is $-a_0,-a_1,\hdots,a_{n-1}$ with an identity matrix above it
+   - $D$ is all zeros, but $b_0$ at the end
+ - For $\underline{y} = C\underline{x} + D\underline{u}$
+   - $C$ is 1 then all zeros
+   - $D$ is all zeros
+
