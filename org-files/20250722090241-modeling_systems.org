@@ -16,8 +16,6 @@
  - We can convert non-linear systems to linear ones
  - This can be done using a [[id:356b1296-2188-4d04-9ccc-a4381bcc02b6][Taylor Series]]
 
-
-
 ** Examples
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331-System-Example-1.xopp]]
 

@@ -84,11 +84,58 @@ The second equation is:
  - \[\underline{y} = C\underline{x} + D\underline{u}\]
 
 *** Laplace To State Space
+**** One Over Equation
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331-Sate-Space-Laplace-Example-1.xopp]]
+This will give a set of equations in phase-variable form
  - For $\dot{\underline{x}} = A\underline{x} + B\underline{u}$
    - The last row of the matrix $A$ is $-a_0,-a_1,\hdots,a_{n-1}$ with an identity matrix above it
    - $D$ is all zeros, but $b_0$ at the end
  - For $\underline{y} = C\underline{x} + D\underline{u}$
    - $C$ is 1 then all zeros
    - $D$ is all zeros
+
+**** Equation Over Equation
+Working:
+ - \[\frac{C(s)}{R(s)} = \frac{N(s)}{D(s)}= \frac{b_2s^2 + b_1s + b_0}{a_3s^3 + a_2s^2 + a_1s + a_0} = G(s)\]
+   - Order of $N(s)$ must be less than the order of $D(s)$
+ - \[\begin{math} R(s) \rightarrow \framebox[1.1\width]{N(s)/D(s)} \rightarrow G(s)(t) \end{math}\]
+ - \[\begin{math} R(s) \rightarrow \framebox[1.1\width]{1/D(s))} \rightarrow X(s) \rightarrow \framebox[1.1\width]{N(s)} \rightarrow G(s)(t) \end{math}\]
+ - \[ C(s) = (b_2s^2 + b_1s + b_0)X(s)\]
+ - \[\mathcal{L}^{-1}\{ C(s)\} = b_2\ddot{x}(t) + b_1\dot{x}(t) + b_0x(t)\]
+ - \[\frac{X(s)}{R(s)} = X(s)\left[a_3^3 + a_2s^2 + a_1s a_0\right] = R(s)\]
+ - \[\mathcal{L}^{-1}\{R(s)\} = a_3\dddot{x}(t) + a_2\ddot{x}(t) + a_1\dot{x}(t) a_0x(t)\right] = r(t)\]
+ - \[\dddot{x}(t) = \frac{1}{a_{3}r(t) - \frac{a_0}{a_3}x(t) - \frac{a_1}{a_3}\dot{x}(t) - \frac{a_2}{a_3}\ddot{x}(t)\]
+ - \[\underline{x} = \begin{bmatrix}x(t) \\ \dot{x}(t) \\ \ddot{x}(t)\end{bmatrix}\]
+ - \[\underline{\dot{x}} = \begin{bmatrix}\dot{x}(t) \\ \ddot{x}(t) \\ \dddot{x}(t)\end{bmatrix}\]
+ - \[\underline{u} = \begin{bmatrix}r(t)\end{bmatrix}\]
+ - \[\underline{y} = \begin{bmatrix}c(t)\end{bmatrix}\]
+ - \[\dot{x}(t) = \dot{x}(t)\]
+ - \[\ddot{x}(t) = \ddot{x}(t)\]
+
+Which means the equation:
+ - For $\dot{\underline{x}} = A\underline{x} + B\underline{u}$
+ - \[\begin{bmatrix} \dot{x}(t) \\ \ddot{x}(t) \\ \dddot{x}(t) \end{bmatrix} = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ \frac{-a_0}{a_3} & \frac{-a_1}{a_3} & \frac{-a_2}{a_3} \end{bmatrix} \begin{bmatrix} x(t) \\ \dot{x}(t) \\ \ddot{x}(t) \end{bmatrix} + \begin{bmatrix} 0 \\ 0 \\ \frac{1}{a_3} \end{bmatrix} r(t)\]
+And
+ - For $\underline{y} = C\underline{x} + D\underline{u}$
+ - \[c(t) = \begin{bmatrix} b_0 & b_1 & b_2 \end{bmatrix} \begin{bmatrix} x(t) \\ \dot{x}(t) \\ \ddot{x}(t) \end{bmatrix} + \underline{0} r(t)\]
+
+*** State Space To Laplace
+These two equations:
+ - \[\dot{\underline{x}} = A\underline{x} + B\underline{u}\]
+ - \[\underline{y} = C\underline{x} + D\underline{u}\]
+Become:
+ - \[T(s) = \frac{Y(s)}{U(s)} = C(sI - A)^{-1}B + D\]
+
+**** Example
+ - \[\underline{\dot{x}} = \begin{bmatrix} -4 & -1.5  \\ 4 & 0 \end{bmatrix} \underline{x} + \begin{bmatrix} 2 \\ 0 \end{bmatrix} r(t)\]
+ - \[\underline{y} = \begin{bmatrix} 1.5 & 0.625 \end{bmatrix} \underline{x} + 0 u(t)\]
+   
+ - \[(sI - A) = \begin{bmatrix} s + 4 & 1.5 \\ -4 & s\end{bmatrix}\]
+ - \[(sI - A)^{-1} = \frac{\textrm{adj}(sI-A)}{\det(sI-A)} = \frac{\begin{bmatrix} s & 4 \\ -1.5 & s + 4\end{bmatrix}}{(s+4)s - 1.5\cdot(-4)}\]
+ - \[= \frac{1}{s^2 + 4s + 6}\begin{bmatrix} s & 4 \\ -1.5 & s + 4\end{bmatrix}\]
+   
+ - \[C(sI - A)^{-1}B = \frac{1}{s^2 + 4s + 6}\begin{bmatrix}1.5 & 0.625\end{bmatrix}\begin{bmatrix} s & 4 \\ -1.5 & s + 4\end{bmatrix}\begin{bmatrix} 0 \\ 2\end{bmatrix}\]
+ - \[= \frac{3s + 5}{s^2 + 4s +6} = T(s)\]
+
+
 
