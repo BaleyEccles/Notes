@@ -1,0 +1,57 @@
+:PROPERTIES:
+:ID:       9e75c8a3-8958-4508-8652-9ce4c6f18115
+:END:
+#+title: ENG331 - Control Systems 1 - Assignment 1
+#+date: [2025-08-01 Fri 12:49]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+
+* ENG331 - Control Systems 1 - Assignment 1
+
+** Question 1
+\begin{align*}
+G(s) &= \frac{180 s + 900}{\left(s + 1\right) \left(2 s^{2} + 4 s + 20\right)} \\
+C(s) &= G(s)\cdot U(s)\\
+C(s) &= \frac{180 s + 900}{\left(s + 1\right) \left(2 s^{2} + 4 s + 20\right)} \cdot \frac{1}{s}\\
+&\textrm{Using calculator, or partial fractions} \\
+\Rightarrow G(s) &= -\frac{5 s}{s^{2} + 2 s + 10} - \frac{50}{s^{2} + 2 s + 10} - \frac{40}{s + 1} + \frac{45}{s} \\
+&\textrm{Inverse Laplace Transform} \\
+\mathcal{L}^{-1}\{G(s)\} &= 45 - 15 e^{- t} \sin{\left(3 t \right)} - 5 e^{- t} \cos{\left(3 t \right)} - 40 e^{- t}
+\end{align*}
+
+#+BEGIN_SRC octave :exports none :results output :session Q1
+clc;
+clear;
+close all;
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  pkg load symbolic
+end
+
+syms s;
+G = (180*(s + 5))/((s + 1)*(2*s^2 + 4*s + 20));
+C = (180*(s + 5))/(s*(s + 1)*(2*s^2 + 4*s + 20));
+latex(C)
+PF = expand(partfrac(C));
+latex(PF)
+IL = ilaplace(PF);
+latex(IL)
+#+END_SRC
+
+#+RESULTS:
+: \frac{180 s + 900}{s \left(s + 1\right) \left(2 s^{2} + 4 s + 20\right)}
+: - \frac{5 s}{s^{2} + 2 s + 10} - \frac{50}{s^{2} + 2 s + 10} - \frac{40}{s + 1} + \frac{45}{s}
+: 45 - 15 e^{- t} \sin{\left(3 t \right)} - 5 e^{- t} \cos{\left(3 t \right)} - 40 e^{- t}
