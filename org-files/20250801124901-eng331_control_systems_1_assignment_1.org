@@ -55,3 +55,177 @@ latex(IL)
 : \frac{180 s + 900}{s \left(s + 1\right) \left(2 s^{2} + 4 s + 20\right)}
 : - \frac{5 s}{s^{2} + 2 s + 10} - \frac{50}{s^{2} + 2 s + 10} - \frac{40}{s + 1} + \frac{45}{s}
 : 45 - 15 e^{- t} \sin{\left(3 t \right)} - 5 e^{- t} \cos{\left(3 t \right)} - 40 e^{- t}
+
+** Question 2
+*** a
+#+BEGIN_SRC octave :exports none :results output :session Q1
+clc;
+clear;
+close all;
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  pkg load symbolic
+end
+
+syms x1 dx1 x2 dx2 x3 dx3 f;
+
+eq1 = -dx1 + (dx2 - dx1) + 2*(x2 - x1) + (dx3 - dx1);
+eq2 = f - (dx2 - dx1) - 2*(x2 - x1) + (dx3 - dx2);
+eq3 = -dx3 - (dx3 - dx1) - (dx3 - dx2);
+
+latex(simplify(eq1))
+latex(simplify(eq2))
+latex(simplify(eq3))
+#+END_SRC
+
+#+RESULTS:
+: - 3 dx_{1} + dx_{2} + dx_{3} - 2 x_{1} + 2 x_{2}
+: dx_{1} - 2 dx_{2} + dx_{3} + f + 2 x_{1} - 2 x_{2}
+: dx_{1} + dx_{2} - 3 dx_{3}
+
+Using $\sum F = ma$ on each of the blocks.
+\begin{align*}
+M_1: 2\ddot{x}_1 &= -\dot{x}_1 + (\dot{x}_2 - \dot{x}_1) + 2(x_2 - x_1) + (\dot{x}_3 - \dot{x}_1) \\
+\Rightarrow 2\ddot{x}_1 &= -3 \dot{x}_{1} + \dot{x}_{2} + \dot{x}_{3} - 2 x_{1} + 2 x_{2} \\
+M_2: 1\ddot{x}_2 &= f(t) - (\dot{x}_2 - \dot{x}_1) - 2(x_2 - x_1) + (\dot{x}_3 - \dot{x}_2) \\
+\Rightarrow  \ddot{x}_2 &= \dot{x}_{1} - 2 \dot{x}_{2} + \dot{x}_{3} + 2 x_{1} - 2 x_{2} + f(t)\\
+M_3: 1\ddot{x}_3 &= -\dot{x}_3 - (\dot{x}_3 - \dot{x}_1) - (\dot{x}_3 - \dot{x}_2) \\
+\Rightarrow  \ddot{x}_3 &= \dot{x}_{1} + \dot{x}_{2} - 3 \dot{x}_{3} \\
+\end{align*}
+
+*** b
+We need to form the two equations:
+1. $\dot{\underline{x}} = A\underline{x} + B\underline{u}$
+2. $\underline{y} = C\underline{x} + D\underline{u}$
+So,
+\[\underline{x} = \begin{bmatrix}
+x_1 \\
+\dot{x}_1 \\
+x_2 \\
+\dot{x}_2 \\
+x_3 \\
+\dot{x}_3 \\
+\end{bmatrix}\]
+And
+\[\dot{\underline{x}} = \begin{bmatrix}
+\dot{x}_1 \\
+\ddot{x}_1 \\
+\dot{x}_2 \\
+\ddot{x}_2 \\
+\dot{x}_3 \\
+\ddot{x}_3 \\
+\end{bmatrix} = \begin{bmatrix}
+\dot{x}_1 \\
+-\frac{3}{2} \dot{x}_{1} + \frac{1}{2}\dot{x}_{2} + \frac{1}{2}\dot{x}_{3} - x_{1} + x_{2} \\
+\dot{x}_2 \\
+\dot{x}_{1} - 2 \dot{x}_{2} + \dot{x}_{3} + 2 x_{1} - 2 x_{2} + f(t)\\
+\dot{x}_3 \\
+\dot{x}_{1} + \dot{x}_{2} - 3 \dot{x}_{3} \\
+\end{bmatrix}\]
+And
+\[\underline{y} = \begin{bmatrix}x_1\end{bmatrix}\]
+And
+\[\underline{u} = \begin{bmatrix}f(t)\end{bmatrix}\]
+
+Which means the first equation $\dot{\underline{x}} = A\underline{x} + B\underline{u}$ is:
+\[\begin{bmatrix}
+\dot{x}_1 \\
+\ddot{x}_1 \\
+\dot{x}_2 \\
+\ddot{x}_2 \\
+\dot{x}_3 \\
+\ddot{x}_3 \\
+\end{bmatrix} = \begin{bmatrix}
+0 & 1 & 0 & 0 & 0 & 0 \\
+-1 & \frac{-3}{2} & 1 & \frac{1}{2} & 0 & \frac{1}{2} \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+2 & 1 & -2 & -2 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 1 & 0 & 1 & 0 & -3 \\
+\end{bmatrix}\begin{bmatrix}
+x_1 \\
+\dot{x}_1 \\
+x_2 \\
+\dot{x}_2 \\
+x_3 \\
+\dot{x}_3 \\
+\end{bmatrix} + \begin{bmatrix}
+0 \\
+0 \\
+0 \\
+1 \\
+0 \\
+0 \\
+\end{bmatrix}\begin{bmatrix}f(t)\end{bmatrix}\]
+
+And the second equation $\underline{y} = C\underline{x} + D\underline{u}$ is:
+\[\begin{bmatrix}
+x_1
+\end{bmatrix} = \begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0
+\end{bmatrix}\begin{bmatrix}
+x_1 \\
+\dot{x}_1 \\
+x_2 \\
+\dot{x}_2 \\
+x_3 \\
+\dot{x}_3 \\
+\end{bmatrix} + \begin{bmatrix}0\end{bmatrix}\begin{bmatrix}f(t)\end{bmatrix}\]
+
+** Question 3
+*** a
+Take the Laplace transform of the equation:
+\begin{align*}
+\mathcal{L}&\left\{
+\frac{d^3c(t)}{dt^3} + 5\frac{d^2c(t)}{dt^2} + 3\frac{dc(t)}{dt} + 15c(t) = 2\frac{d^2c(t)}{dt^2} + 7\frac{dr(t)}{dt} + 20r(t)
+\right\}\\
+&= s^3C(s) + 5s^2C(s) + 3sC(s) + 15C(s) = 2s^2R(s) + 7sR(s) + 20R(s) \\
+\Rightarrow G(s) &= \frac{C(s)}{R(s)} = \frac{2s^2 + 7s + 20}{s^3 + 5s^2 + 3s + 15}
+\end{align*}
+
+*** b
+Using the diagram in the assignment sheet we can do two separate transforms and then link them in the final state space equations.
+\begin{align*}
+C(s) &= (2s^2 + 7s + 20)X_1(s) \\
+\mathcal{L}^{-1}\{C(s)\} &= 2\ddot{x}(t) + 7\dot{x}(t) + 20x(t) = c(t)\\
+&\\
+R(s) &= X_1(s)\left[s^3 + 5s^2 + 3s + 15\right] \\
+\mathcal{L}^{-1}\{R(s)\} &= \dddot{x}(t) + 5\ddot{x}(t) + 3\dot{x}(t) + 15x(t) = r(t)\\
+\Rightarrow \dddot{x}(t) &= \frac{1}{r(t) - 15x(t) - 3\dot{x}(t) - 5\ddot{x}(t)}
+\end{align*}
+
+We can define the following matrices:
+\begin{align*}
+\underline{x} &= \begin{bmatrix}x(t) \\ \dot{x}(t) \\ \ddot{x}(t)\end{bmatrix} \\
+\underline{\dot{x}} &= \begin{bmatrix}\dot{x}(t) \\ \ddot{x}(t) \\ \dddot{x}(t)\end{bmatrix} \\
+\underline{u} &= \begin{bmatrix}r(t)\end{bmatrix} \\
+\underline{y} &= \begin{bmatrix}c(t)\end{bmatrix} 
+\end{align*}
+
+Which means the equation $\dot{\underline{x}} = A\underline{x} + B\underline{u}$ becomes:
+\[\begin{bmatrix}
+\dot{x}(t) \\
+\ddot{x}(t) \\
+\dddot{x}(t)
+\end{bmatrix} = \begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+-15 & -3 & -5
+\end{bmatrix} \begin{bmatrix}
+x(t) \\
+\dot{x}(t) \\
+\ddot{x}(t) \end{bmatrix} + \begin{bmatrix} 0 \\
+0 \\
+1 \end{bmatrix} r(t)\]
+And the equation $\underline{y} = C\underline{x} + D\underline{u}$ becomes:
+\[c(t) = \begin{bmatrix}
+20 & 7 & 2
+\end{bmatrix} \begin{bmatrix}
+x(t) \\
+\dot{x}(t) \\
+\ddot{x}(t)
+\end{bmatrix} + \underline{0} r(t)\]
+
+
