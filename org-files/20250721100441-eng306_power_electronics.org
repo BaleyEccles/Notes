@@ -21,7 +21,7 @@
  - [[id:f15b6b50-5902-4077-ae47-b4ced487a3fd][Alternating Current (AC)]]
  - [[id:43553b0f-4568-4589-8998-f52560165599][Direct Current (DC)]]
  - [[id:56a1f85f-b978-4063-ab5c-ed984632258e][Galvanic Isolation]]
-
+ - [[id:6d6c465f-78aa-49dd-8ac7-d13c6bb0302b][Power Semiconductors]]
 * Assessment
 ** Assessment Task 1: Project
  - 30%

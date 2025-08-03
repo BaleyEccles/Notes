@@ -1,11 +1,11 @@
 :PROPERTIES:
 :ID:       47517c75-582b-4948-a2a7-f88e883e7b65
 :END:
-#+title: Bipolar Junction Transistors
+#+title: Bipolar Junction Transistor (BJT)
 #+date: [2024-08-08 Thu 09:01]
 #+STARTUP: latexpreview
 
-* Bipolar Junction Transistors
+* Bipolar Junction Transistor (BJT)
 - A [[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductor]] component
 - [[id:4ca3dec8-db31-4287-aa7a-0c9ff27e727a][Transistor Characteristics]]
 - Two types

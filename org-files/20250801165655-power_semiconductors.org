@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       6d6c465f-78aa-49dd-8ac7-d13c6bb0302b
+:END:
+#+title: Power Semiconductors
+#+date: [2025-08-01 Fri 16:56]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Power [[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductors]]
+
+
+** [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]]
+ - Diodes fail when the reverse-biased voltage is higher than the breakdown voltage
+ - Current limiting is applied to reduce heat in the diode
+ - Shockley's Equation
+   - \[i_d = i_s\left[e^{\frac{qv_d}{kT_cA_n}} - 1\right]\]
+ - Power losses mainly come from the forward voltage drop
+
+** [[id:47517c75-582b-4948-a2a7-f88e883e7b65][Bipolar Junction Transistors (BJT)]]
+ - We want low $v_{CE}$, as this will reduce the amount of losses
+
+** [[id:f001a12d-1b96-40c9-b46f-636528af9451][Metal–Oxide–Semiconductor Field Effect Transistor (MOSFET)]]
+ - When $V_{GS} > V_{TH} \approx 8$ the drain current $i_{ds}$ has the lowest resistance
+ - Conduction Losses:
+   - \[i_{ds}^2R_{ds(on)}\]
+   - The current is rms
+   - Lower is better
