@@ -16,6 +16,35 @@
  - We can convert non-linear systems to linear ones
  - This can be done using a [[id:356b1296-2188-4d04-9ccc-a4381bcc02b6][Taylor Series]]
 
+** First Order Systems
+Rise Time:
+ - \[T_r = \frac{2.2}{a}\]
+Settling Time:
+ - \[T_s = \frac{4}{a}\]
+
+** Second Order Systems
+ - \[\zeta = \frac{1}{2\pi}\frac{\textrm{Natural period}}{\textrm{Exponential time constant}}\]
+ - \[G(s) = \frac{\omega_n^2}{s^2 + 2\zeta \omega_ns + \omega_n^2}\]
+ - There are 5 types:
+   1. Over damped
+   2. Critical damped
+   3. Undamped
+   4. Under damped
+   5. Unstable
+
+ - Rise Time $T_r$
+   - Time to rise 10%
+   - Use a table to find value
+ - Peak Time $T_p$
+   - Time when max value is reached
+   - \[T_p = \frac{\pi}{}\] :TODO:
+ - Percentage overshoot %OS
+   - Percentage which response rise above final value
+   - \[%OS = e^{-(\zeta \pi/}\] :TODO:
+ - Settling Time $T_s$
+   - \[T_s = \frac{4}{\zeta \omega_n}\]
+     
+
 ** Examples
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331-System-Example-1.xopp]]
 

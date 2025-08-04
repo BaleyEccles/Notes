@@ -72,7 +72,7 @@ Use KVL and KCL to solve for the general form of state space equations
 ** Stability
 The system remains [[id:847ec0e7-da66-447a-9835-cd512492d2e3][BIBO Stable]] if the the [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of \[\underline{A}^{n}\] are less then one
  - \[\lvert \lambda_{k} \rvert\ < 1 \forall k \in [1,N]\]
-** Block Diagrams
+** TODO Block Diagrams
 We can form block diagrams by:
 
 ** Continuous Form
