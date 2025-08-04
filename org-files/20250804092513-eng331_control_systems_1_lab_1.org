@@ -25,18 +25,50 @@
 *** TODO 1
  - Tank 1
 \[\dot{V}_1 = q_{1,i} - q_{1,o}\]
- - Tank 2
-\[\dot{V}_2 = q_{1,o} - q_{2,o}\]
- - Conservation of mass
-\[\sum M = 0\]
+
 \[V = \pi r^2h\]
- - Assuming that the water weighs 1kg/L
-\[M = \pi r^2h\]
-\[\Rightarrow \sum M = \pi \left(\frac{D_{t2}}{2}\right)^2h_1 + \pi \left(\frac{D_{t1}}{2}\right)^2h_2 = 0\]
+\[V_1 = \pi \left(\frac{D_1}{2}\right)^2h_1\]
+ - Using the relation
+\[\dot{V}_1 = A_1\dot{h}_1 = \pi \left(\frac{D_1}{2}\right)^2\dot{h}_1\]
 
+\[\pi \left(\frac{D_1}{2}\right)^2\dot{h}_1 = q_{1,i} - q_{1,o}\]
+\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(q_{1,i} - q_{1,o}\right)\]
 *** TODO 2
+\[P_1 + \frac{1}{2}\rho v_1^2 + \rho g h_1 = P_2 + \frac{1}{2}\rho v_2^2 + \rho g h_2\]
+\[\rho = 1000\ kg/m^3\]
+ - $P_1$ is the top of tank 1
+\[P_1 = 101,325\ Pa\]
+\[\rho g h_1 = 1000\cdot 9.81\cdot h_1 = 9810\cdot h_1\]
+\[\frac{1}{2}\rho v_1^2 = 0\]
+ - $P_2$ is the output of tank 1
+\[P_2 = 101,325\ Pa\]
+\[\rho g h_2 = 1000\cdot 9.81\cdot 0 = 0\]
+\[\frac{1}{2}\rho v_2^2 = 500\cdot v_2^2\]
 
+\[\Rightarrow 101,325 + 0 + 9810\cdot h_1 = 101,325 + 500\cdot v_2^2 + 0\]
+\[\Rightarrow 9810\cdot h_1 = 500\cdot v_2^2\]
+
+\[q_{1,o} = A v_2\]
+\[q_{1,o} = \frac{\pi D_{o1}^2}{4} v_2\]
+\[v_2 = \frac{4}{\pi D_{o1}^2} q_{1,o}\]
+
+\[\Rightarrow 9810\cdot h_1 = 500\cdot \left(\frac{4}{\pi D_{o1}^2} q_{1,o}\right)^2\]
+\[\Rightarrow h_1 = \frac{0.81545}{\pi^2 D_{o1}^4} q_{1,o}^2\]
 *** TODO 3
+
+
+\[v_{actual} = C_d\cdot v_2\]
+\[v_2 = \frac{4C_d}{\pi D_{o1}^2} q_{1,o}\]
+\[\Rightarrow h_1 = \frac{0.81545C_d^2}{\pi^2 D_{o1}^4} q_{1,o}^2\]
+\[\Rightarrow q_{1,o} = \sqrt{\frac{\pi^2 D_{o1}^4}{0.81545C_d^2} h_1}\]
+
+\[q_{1,i} = q_{pump} = V_p\cdot K_p\]
+
+\[\Rightarrow \dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p\cdot K_p - \sqrt{\frac{\pi^2 D_{o1}^4}{0.81545C_d^2} h_1}\right)\]
+
+\[\Rightarrow \dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p\cdot K_p - \sqrt{\frac{\pi^2 D_{o1}^4}{0.81545C_d^2} h_1}\right)\]
+
+\[\Rightarrow \dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p K_p - \frac{\pi D_{o1}^2 \sqrt{h_1}}{\sqrt{0.81545} C_d}\right)\]
 
 ** TODO Part 2 - Simulink Modelling
 
