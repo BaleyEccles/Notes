@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       117fdf69-0aae-4609-a72e-66a785874a5b
+:END:
+#+title: Thyristor - silicon controlled rectifier (SCR)
+#+date: [2025-08-04 Mon 10:32]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Thyristor - silicon controlled rectifier (SCR)
+ - Two [[id:47517c75-582b-4948-a2a7-f88e883e7b65][BJT]]s connected together
+ - A [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][diode]] that can be switched on or off based on the gate voltage
+ - Can be stacked in series to increase their voltage rating
+ - [[file:Thyristor.png]]

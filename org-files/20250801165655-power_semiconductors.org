@@ -7,8 +7,7 @@
 #+STARTUP: latexpreview
 
 * Power [[id:1a5a7101-2779-487c-9f19-9722a835f358][Semiconductors]]
-
-
+ - [[id:f6bc9557-6ab9-4a98-b456-707e23b8f0f3][Switching Losses]]
 ** [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diodes]]
  - Diodes fail when the reverse-biased voltage is higher than the breakdown voltage
  - Current limiting is applied to reduce heat in the diode
@@ -25,3 +24,15 @@
    - \[i_{ds}^2R_{ds(on)}\]
    - The current is rms
    - Lower is better
+ - Switching Losses:
+   - When MOSFETs switch on and off there are power losses
+
+** [[id:9be2c312-bd6d-40a0-9d41-9e2ccde93a1f][Insulated Gate Bipolar Transistor (IGBT)]]
+ - Conduction losses:
+   - \[V_{CE}\times I_{CE}\]
+   - When on
+     
+** [[id:117fdf69-0aae-4609-a72e-66a785874a5b][Thyristor - silicon controlled rectifier (SCR)]]
+ - Useful in high voltage applications
+
+ 

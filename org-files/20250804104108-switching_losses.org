@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       f6bc9557-6ab9-4a98-b456-707e23b8f0f3
+:END:
+#+title: Switching Losses
+#+date: [2025-08-04 Mon 10:41]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Switching Losses
+ - Proportional to
+   - Switching frequency
+   - Turn-on ($t_{c(on)}$) and turn-off ($t_{c(off)}$) times
+ - These are complicated
+
+** [[id:a07c8c29-2c60-4b1e-aad9-8e99801e0dc4][Diode]]
+ - [[file:Diode_SW_Loss.png]]
+ - \[W_{c(on)} = \frac{1}{2}V_d I_o t_{c(on}\]
+ - \[W_{c(off)} = \frac{1}{2}V_d I_o t_{c(off)}\]
+ - \[P_s = \frac{1}{2}V_d I_o f_s\left(t_{c(on)} + t_{c(off)}\right)\]

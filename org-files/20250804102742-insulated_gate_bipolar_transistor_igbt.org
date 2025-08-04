@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       9be2c312-bd6d-40a0-9d41-9e2ccde93a1f
+:END:
+#+title: Insulated Gate Bipolar Transistor (IGBT)
+#+date: [2025-08-04 Mon 10:27]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Insulated Gate Bipolar Transistor (IGBT)
+ - [[id:47517c75-582b-4948-a2a7-f88e883e7b65][BJT]] and [[id:f001a12d-1b96-40c9-b46f-636528af9451][MOSFET]] connected together
+ - On when $V_{GE} > V_{TH}$
+ - Off when $V_{GE} < V_{TH}$
+ - [[file:IGBT.png]]
+
