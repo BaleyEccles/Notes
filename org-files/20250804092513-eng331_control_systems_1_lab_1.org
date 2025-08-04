@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       5002187a-38b3-4906-9fd1-d4a3d83864b3
+:END:
+#+title: ENG331 - Control Systems 1 - Lab 1
+#+date: [2025-08-04 Mon 09:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+
+
+* ENG331 - Control Systems 1 - Lab 1
+
+** TODO Part 1 - Theoretical Analysis
+
+*** TODO 1
+ - Tank 1
+\[\dot{V}_1 = q_{1,i} - q_{1,o}\]
+ - Tank 2
+\[\dot{V}_2 = q_{1,o} - q_{2,o}\]
+ - Conservation of mass
+\[\sum M = 0\]
+\[V = \pi r^2h\]
+ - Assuming that the water weighs 1kg/L
+\[M = \pi r^2h\]
+\[\Rightarrow \sum M = \pi \left(\frac{D_{t2}}{2}\right)^2h_1 + \pi \left(\frac{D_{t1}}{2}\right)^2h_2 = 0\]
+
+*** TODO 2
+
+*** TODO 3
+
+** TODO Part 2 - Simulink Modelling
+
+*** TODO 4
+
+*** TODO 5
+
+*** TODO 6
+
+*** TODO 7
+
+** TODO Part 3 - Linearisation
+
+*** TODO 8
+
+*** TODO 9
+
+*** TODO 10
+
+*** TODO 11

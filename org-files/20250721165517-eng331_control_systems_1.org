@@ -25,6 +25,8 @@
 ** Assessment Task 1: Assessed tutorials
  - 20%
  - Fortnightly
+   
+ - [[id:9e75c8a3-8958-4508-8652-9ce4c6f18115][ENG331 - Control Systems 1 - Assignment 1]]
 
 ** Assessment Task 2: Design report
  - 20%
@@ -36,6 +38,8 @@
  - 20%
  - Assessed during lab and report
  - Weeks 2 and 10
+   
+ - [[id:5002187a-38b3-4906-9fd1-d4a3d83864b3][ENG331 - Control Systems 1 - Lab 1]]
 
 ** Assessment Task 4: Final exam
  - 40%
