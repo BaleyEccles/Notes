@@ -83,9 +83,44 @@
 ** TODO Part 3 - Linearisation
 
 *** TODO 8
+\[\dot{h}_1 = f(h_{1,0}, V_{p,0}) - \frac{2 D_{o1}^2}{\sqrt{0.81545} C_d D_1^2 \sqrt{h_{1,0}}} (h_1 - h_{1,0}) + \frac{4 K_p}{\pi D_1^2} (V_p - V_{p,0})\]
+Where
+\[f(h_{1,0}, V_{p,0}) = \frac{4}{\pi D_1^2}\left(V_{p,0} K_p - \frac{\pi D_{o1}^2 \sqrt{h_{1,0}}}{\sqrt{0.81545} C_d}\right)\]
 
 *** TODO 9
+\[G(s) = \frac{\frac{4 K_p}{\pi D_1^2}}{s + \frac{2 D_{o1}^2}{\sqrt{0.81545} C_d D_1^2 \sqrt{h_{1,0}}}}\]
+
+*** TODO 8
+\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p K_p - \frac{\pi D_{o1}^2 \sqrt{h_1}}{\sqrt{0.81545} C_d}\right)\]
+
+\[h_1 = h_{1,0} + \delta h_1\]
+\[V_p = V_{p,0} + \delta V_p\]
+
+Sub in:
+\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left((V_{p,0} + \delta V_p) K_p - \frac{\pi D_{o1}^2 \sqrt{h_{1,0} + \delta h_1}}{\sqrt{0.81545} C_d}\right)\]
+
+Taylor series expansion:
+\[\sqrt{h_{1,0} + \delta h_1} \approx \sqrt{h_{1,0}} + \frac{1}{2\sqrt{h_{1,0}}}\delta h_1\]
+
+
+\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left((V_{p,0} + \delta V_p) K_p - \frac{\pi D_{o1}^2 \left(\sqrt{h_{1,0}} + \frac{1}{2\sqrt{h_{1,0}}}\delta h_1\right)}{\sqrt{0.81545} C_d}\right)\]
+
+At equilibrium point: $(\delta V_p, \delta h_1) = (0, 0)$
+\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_{p,0} K_p - \frac{\pi D_{o1}^2 \sqrt{h_{1,0}}}{\sqrt{0.81545} C_d}\right)\]
+
+Linear terms: $\delta V_p$ and $\delta h_1$
+\[\dot{h}_1 \approx \dot{h}_{1,0} + \frac{4}{\pi D_1^2}\left(K_p \delta V_p - \frac{\pi D_{o1}^2}{\sqrt{0.81545} C_d} \cdot \frac{1}{2\sqrt{h_{1,0}}} \delta h_1\right)\]
+
+Expand:
+\[\dot{h}_1 \approx \dot{h}_{1,0} + \frac{4 K_p}{\pi D_1^2} \delta V_p - \frac{2 D_{o1}^2}{\pi \sqrt{0.81545} C_d \sqrt{h_{1,0}}} \delta h_1\]
+
+Rearrange:
+\[\dot{h}_1 -\dot{h}_{1,0} \approx \frac{4 K_p}{\pi D_1^2} \delta V_p - \frac{2 D_{o1}^2}{\pi \sqrt{0.81545} C_d \sqrt{h_{1,0}}} \delta h_1\]
+
+*** TODO 9
+\[G(s) = \frac{\frac{4K_p}{\pi D_1^2}}{s + \frac{2D_{o1}^2}{\pi\sqrt{0.81545} C_d\sqrt{h_{1,0}}}\]
 
 *** TODO 10
-
+:TODO: Add image
 *** TODO 11
+:TODO: Add image
