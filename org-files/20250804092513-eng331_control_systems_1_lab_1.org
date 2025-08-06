@@ -75,7 +75,21 @@
 *** TODO 4
 
 *** TODO 5
+Given that the pump feeds Tank 2 directly and it empties through orifice 2, the differential equation for the water height in Tank 2, \( h_2(t) \), is:
 
+\begin{equation}
+\frac{dh_2}{dt} = \frac{4}{\pi D_2^2} \left( K_{\text{pump}} V_p - \frac{\pi D_{o2}^2 \sqrt{h_2}}{\sqrt{0.81545 C_d}} \right)
+\label{eq:tank2}
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item \( D_2 = \SI{0.045}{m} \) is the diameter of Tank 2
+    \item \( D_{o2} = \SI{0.005}{m} \) is the diameter of the orifice
+    \item \( C_d = 0.8 \) is the discharge coefficient
+    \item \( K_{\text{pump}} = 5 \times 10^{-6}~\si{m^3.s^{-1}.V^{-1}} \) is the pump constant
+    \item \( V_p(t) \) is the voltage applied to the pump
+\end{itemize}
 *** TODO 6
 
 *** TODO 7
