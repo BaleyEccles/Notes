@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       405c4318-12e5-45f8-8f69-c074d41a1481
+:END:
+#+title: Second Order Systems
+#+date: [2025-08-05 Tue 09:28]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Second Order Systems
+
+ - \[\zeta = \frac{1}{2\pi}\frac{\textrm{Natural period}}{\textrm{Exponential time constant}}\]
+    - $\zeta$ - Damping ratio
+ - \[G(s) = \frac{K\omega_n^2}{s^2 + 2\zeta \omega_ns + \omega_n^2}\]
+   - $K$ - Gain
+     - We can assume that the gain is one, unless otherwise noted
+ - There are 5 types:
+   1. Over damped
+   2. Critical damped
+   3. Undamped
+   4. Under damped
+   5. Unstable
+
+ - $\omega_n$ - Natural frequency
+ - $\alpha$ - Exponential decay factor - $\sigma_d$
+ - $\zeta$ - Damping ratio
+ - \[\zeta = \frac{\alpha}{\omega_n}\]
+ - \[\omega_d = \sqrt{\omega_n^2 - \alpha^2} = \omega_n\sqrt{1 - \zeta^2}\]
+
+** [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][Pole]] Locations
+\[s_{1,2} = - \zeta\omega_n \pm \omega_n\sqrt{\zeta^2 - 1}\]
+\[s_{1,2} = -\sigma_d \pm j\omega_d\]
+
+** Notable Metrics
+ - Rise Time $T_r$
+   - Time to rise 10%
+   - Use a table to find value
+ - Peak Time $T_p$
+   - Time when max value is reached
+   - \[T_p = \frac{\pi}{\omega_d}\]
+ - Percentage overshoot %OS
+   - Percentage which response rise above final value
+   - \[%OS = e^{-(\zeta \pi/}\] \[\%OS = e^{-\zeta\pi/\sqrt{1 - \zeta^2}}\]
+ - Settling Time $T_s$
+   - \[T_s = \frac{4}{\zeta \omega_n}\]
+
+

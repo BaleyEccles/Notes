@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       698f46a5-c12f-462a-bc34-bcc6fc1d9cb3
+:END:
+#+title: First Order Systems
+#+date: [2025-08-05 Tue 09:28]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* First Order Systems
+Rise Time:
+ - \[T_r = \frac{2.2}{a}\]
+Settling Time:
+ - \[T_s = \frac{4}{a}\]

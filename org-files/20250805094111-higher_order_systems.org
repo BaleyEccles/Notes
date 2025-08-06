@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       b7db8941-7b2a-410a-a78e-ec8ae7b193c5
+:END:
+#+title: Higher Order Systems
+#+date: [2025-08-05 Tue 09:41]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Higher Order Systems
+[[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace]] Domain:
+ - \[C(s) = \frac{A}{s} + \frac{B(s + \zeta \omega_n) + C\omega_d}{(s + \zeta\omega_n)^2 + \omega_d} + \frac{D}{s + \alpha_r}\]
+Time Domain:
+ - \[c(t) = Au(t) + e^{-\zeta\omega_n t}\left(B\cos(\omega_dt) + C\sin(\omega_d t)\right) + De^{-\alpha_rt}\]
+
+ - The closer the poles are to the origin the more dominant they are
+   - The closes poles are called the dominant poles
+   - This is because they have more of an effect on the overall system
+
+
+** Third Order Systems
+ - The real pole should be at least 5 time further away from the other two poles
+   - This is when it will be considered significant

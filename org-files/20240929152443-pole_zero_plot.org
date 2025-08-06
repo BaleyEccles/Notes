@@ -8,7 +8,7 @@
 
 * Pole–Zero Plot
  - For a transfer function
-   - Pole when bottom is zero
+   - pole when bottom is zero
      - poles are 'x'
      - All poles must be on the left for [[id:847ec0e7-da66-447a-9835-cd512492d2e3][BIBO Stability]]
    - Zero when top is zero
