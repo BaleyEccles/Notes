@@ -1,0 +1,87 @@
+:PROPERTIES:
+:ID:       cd7bcf51-56d8-4864-9f3d-329bd62a73e1
+:END:
+#+title: ENG306 - Power Electronics - Lab 1
+#+date: [2025-08-07 Thu 15:19]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:TODO:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+
+* ENG306 - Power Electronics - Lab 1
+* Part A
+vertical mV
+horizontal uS
+
+Quick start board:
+Sin -1.86V to 1.85V
+us and mV/V
+90.2kHz
+p to p 3.7V
+
+AMP 3.7V
+RMS cycle 1.3V
+RMS Val 1.28V
+
+They change because they become less accurate
+
+$\Delta t = 2.47\mu s$
+
+
+FFT levels:
+| Hz (k) | level |
+|      1 |  0.98 |
+|      3 |  -8.5 |
+|      5 | -12.9 |
+|      7 | -15.9 |
+|      9 | -17.7 |
+|     11 | -19.3 |
+
+* Part B
+
+** 3.2
+
+| Diode current | Diode Voltage |
+|         0.058 |         0.686 |
+|         0.228 |         0.732 |
+|         0.374 |         0.755 |
+|         0.621 |         0.778 |
+|         0.800 |         0.788 |
+|             1 |         0.795 |
+
+
+| Diode current | Supply Voltage |
+| 0.5u          |              5 |
+| 1.0u          |             10 |
+| 1.5u          |             15 |
+| 2.0u          |             20 |
+| 2.5u          |             25 |
+
+*** Reverse Recovery Characteristics of Diode
+We used 10Vpp
+
+** 3.3
+On voltage = 5v
+Thyristor voltage = 1v
+0.7A
+When we reduce Voltage Current and voltage stays same
+
+When turned off
+V = 4V
+I = 20m
+
+** 2
+| current |   vol |
+|     0.5 |     1 |
+|    0.46 | 0.973 |
+| 0.      |       |
+
+
