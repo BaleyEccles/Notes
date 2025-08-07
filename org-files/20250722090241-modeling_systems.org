@@ -11,14 +11,32 @@
    - But this is nasty
    - We can use [[id:d2083e8a-7a7a-48a8-89f4-9d13bba76b50][transform theory]] or [[id:5a63667f-a24c-4a46-99de-0997d54296b7][convolution]] to convert it into an easier form
    - This can also be done using [[id:e1293290-fe17-4467-8083-142aa848421e][State Space Representation]]
+ - [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]]
+** Systems
  - [[id:698f46a5-c12f-462a-bc34-bcc6fc1d9cb3][First Order Systems]]
  - [[id:405c4318-12e5-45f8-8f69-c074d41a1481][Second Order Systems]]
  - [[id:b7db8941-7b2a-410a-a78e-ec8ae7b193c5][Higher Order Systems]]
+
+** Effects of [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][Zeros]]
+\[T(s) = \frac{(s + a)}{(s + b)(s + c)}\]
+ - If the zero is very far away, it can be taken as a amplification
+   - \[T(s) \approx \frac{a}{(s + b)(s + c)}\]
+
+ - If the zeroes are close to the origin we can have non-minimum-phase responses
    
 ** Linearization
  - We can convert non-linear systems to linear ones
  - This can be done using a [[id:356b1296-2188-4d04-9ccc-a4381bcc02b6][Taylor Series]]
 
+** Systems with a Time-Delay
+ - FOPD - First Order Plus Delay
+ - FODT - First Order with Dead Time
+ - [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Time_Delay_System.xopp]]
+   - $T_d$ is the dead time or time delay
+Using the time-shifting property of the [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace Transform]]
+ - \[G_1(s) = \frac{a}{s + a}\]
+ - \[G_2(s) = \frac{a}{s + a}e^{-sT_d}\]
 ** Examples
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331-System-Example-1.xopp]]
+
 

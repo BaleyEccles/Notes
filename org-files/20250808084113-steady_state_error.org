@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       5233f426-b528-4635-9487-e7047b781af2
+:END:
+#+title: Steady State Error
+#+date: [2025-08-08 Fri 08:41]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Steady State Error
+ - When the states of the systems is non-changing
+   - \[c(t\rightarrow \infty)\]
+ - For some target $\hat{c}(t)$ and an actual response $c(t)$ we can define the steady state error as the difference between the two.
+
+** Example
+ - If our target response is $r(t) = u(t)$
+ - Then the error is $e = r(t\rightarrow \infty) - c(t\rightarrow \infty)$

@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       4e024817-5a11-4519-a4af-ada17c08e3de
+:END:
+#+title: Final Value Theorem
+#+date: [2025-08-08 Fri 08:37]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Final Value Theorem
+ - \[c(t \rightarrow \infty) = \lim_{s\rightarrow 0} sC(s)\]

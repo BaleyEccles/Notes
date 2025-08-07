@@ -8,6 +8,7 @@
 
 * Laplace Transform
  - Uses [[id:d2083e8a-7a7a-48a8-89f4-9d13bba76b50][Transform Theory]] to convert signals into a frequency and magnitude representation.
+ - [[id:4e024817-5a11-4519-a4af-ada17c08e3de][Final Value Theorem]]
 
 ** Definition
  - \[F(s)=\int_{-\infty}^{\infty}f(t)e^{-st}dt\]
