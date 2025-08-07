@@ -20,63 +20,27 @@
 
 * ENG331 - Control Systems 1 - Lab 1
 
-** TODO Part 1 - Theoretical Analysis
+** DONE Part 1 - Theoretical Analysis
 
-*** TODO 1
- - Tank 1
-\[\dot{V}_1 = q_{1,i} - q_{1,o}\]
-
-\[V = \pi r^2h\]
-\[V_1 = \pi \left(\frac{D_1}{2}\right)^2h_1\]
- - Using the relation
-\[\dot{V}_1 = A_1\dot{h}_1 = \pi \left(\frac{D_1}{2}\right)^2\dot{h}_1\]
-
-\[\pi \left(\frac{D_1}{2}\right)^2\dot{h}_1 = q_{1,i} - q_{1,o}\]
+*** DONE 1
 \[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(q_{1,i} - q_{1,o}\right)\]
-*** TODO 2
-\[P_1 + \frac{1}{2}\rho v_1^2 + \rho g h_1 = P_2 + \frac{1}{2}\rho v_2^2 + \rho g h_2\]
-\[\rho = 1000\ kg/m^3\]
- - $P_1$ is the top of tank 1
-\[P_1 = 101,325\ Pa\]
-\[\rho g h_1 = 1000\cdot 9.81\cdot h_1 = 9810\cdot h_1\]
-\[\frac{1}{2}\rho v_1^2 = 0\]
- - $P_2$ is the output of tank 1
-\[P_2 = 101,325\ Pa\]
-\[\rho g h_2 = 1000\cdot 9.81\cdot 0 = 0\]
-\[\frac{1}{2}\rho v_2^2 = 500\cdot v_2^2\]
+*** DONE 2
+\[h_1 = \frac{0.81545}{\pi^2 D_{o1}^4} q_{1,o}^2\]
+*** DONE 3
+\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p K_p - \frac{\pi D_{o1}^2 \sqrt{h_1}}{\sqrt{0.81545} C_d}\right)\]
 
-\[\Rightarrow 101,325 + 0 + 9810\cdot h_1 = 101,325 + 500\cdot v_2^2 + 0\]
-\[\Rightarrow 9810\cdot h_1 = 500\cdot v_2^2\]
+** DONE Part 2 - Simulink Modelling
 
-\[q_{1,o} = A v_2\]
-\[q_{1,o} = \frac{\pi D_{o1}^2}{4} v_2\]
-\[v_2 = \frac{4}{\pi D_{o1}^2} q_{1,o}\]
+*** DONE 4
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Tank 1 Simulink Model \label{fig:Q2-4-1}
+[[./eng331_lab1_q4_sim.png]]
 
-\[\Rightarrow 9810\cdot h_1 = 500\cdot \left(\frac{4}{\pi D_{o1}^2} q_{1,o}\right)^2\]
-\[\Rightarrow h_1 = \frac{0.81545}{\pi^2 D_{o1}^4} q_{1,o}^2\]
-*** TODO 3
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Tank 1 $h_1(t)$ \label{fig:Q2-4-2}
+[[./eng331_lab1_q4_plot.png]]
 
-
-\[v_{actual} = C_d\cdot v_2\]
-\[v_2 = \frac{4C_d}{\pi D_{o1}^2} q_{1,o}\]
-\[\Rightarrow h_1 = \frac{0.81545C_d^2}{\pi^2 D_{o1}^4} q_{1,o}^2\]
-\[\Rightarrow q_{1,o} = \sqrt{\frac{\pi^2 D_{o1}^4}{0.81545C_d^2} h_1}\]
-
-\[q_{1,i} = q_{pump} = V_p\cdot K_p\]
-
-\[\Rightarrow \dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p\cdot K_p - \sqrt{\frac{\pi^2 D_{o1}^4}{0.81545C_d^2} h_1}\right)\]
-
-\[\Rightarrow \dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p\cdot K_p - \sqrt{\frac{\pi^2 D_{o1}^4}{0.81545C_d^2} h_1}\right)\]
-
-\[\Rightarrow \dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p K_p - \frac{\pi D_{o1}^2 \sqrt{h_1}}{\sqrt{0.81545} C_d}\right)\]
-
-** TODO Part 2 - Simulink Modelling
-
-*** TODO 4
-[[file:eng331_lab1_q4_sim.png]]
-[[file:eng331_lab1_q4_plot.png]]
-
-*** TODO 5
+*** DONE 5
 Given that the pump feeds Tank 2 directly and it empties through orifice 2, the differential equation for the water height in Tank 2, $h_2(t)$, is:
 
 \[\frac{dh_2}{dt} = \frac{4}{\pi D_2^2} \left( K_{\text{pump}} V_p - \frac{\pi D_{o2}^2 \sqrt{h_2}}{\sqrt{0.81545 C_d}} \right)\]
@@ -88,13 +52,23 @@ Where:
  - $K_{\text{pump}} = 5 \times 10^{-6}~\si{m^3.s^{-1}.V^{-1}}$ is the pump constant
  - $V_p(t)$ is the voltage applied to the pump
 
-*** TODO 6
+*** DONE 6
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Tank 1 Simulink Model as Subsystem \label{fig:Q2-6-1}
 [[file:eng331_lab1_q6.png]]
-*** TODO 7
+*** DONE 7
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Tank 1 Simulink Model as Subsystem \label{fig:Q2-7-1}
 [[file:eng331_lab1_q7.png]]
 
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Tank 1 in Configuration 1 $h_1(t)$ \label{fig:Q2-7-2}
 [[file:eng331_lab1_q7_h1.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Tank 2 in Configuration 1 $h_2(t)$ \label{fig:Q2-7-3}
 [[file:eng331_lab1_q7_h2.png]]
+
 ** TODO Part 3 - Linearisation
 
 *** TODO 8
@@ -124,13 +98,15 @@ At equilibrium point: $(\delta V_p, \delta h_1) = (0, 0)$
 \[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_{p,0} K_p - \frac{\pi D_{o1}^2 \sqrt{h_{1,0}}}{\sqrt{0.81545} C_d}\right)\]
 
 Linear terms: $\delta V_p$ and $\delta h_1$
-\[\dot{h}_1 \approx \dot{h}_{1,0} + \frac{4}{\pi D_1^2}\left(K_p \delta V_p - \frac{\pi D_{o1}^2}{\sqrt{0.81545} C_d} \cdot \frac{1}{2\sqrt{h_{1,0}}} \delta h_1\right)\]
+\[\dot{h}_1 \approx h_{1,0} + \frac{4}{\pi D_1^2}\left(K_p \delta V_p - \frac{\pi D_{o1}^2}{\sqrt{0.81545} C_d} \cdot \frac{1}{2\sqrt{h_{1,0}}} \delta h_1\right)\]
 
 Expand:
-\[\dot{h}_1 \approx \dot{h}_{1,0} + \frac{4 K_p}{\pi D_1^2} \delta V_p - \frac{2 D_{o1}^2}{\pi \sqrt{0.81545} C_d \sqrt{h_{1,0}}} \delta h_1\]
+\[\dot{h}_1 \approx h_{1,0} + \frac{4 K_p}{\pi D_1^2} \delta V_p - \frac{2 D_{o1}^2}{\pi \sqrt{0.81545} C_d \sqrt{h_{1,0}}} \delta h_1\]
 
-Rearrange:
-\[\dot{h}_1 -\dot{h}_{1,0} \approx \frac{4 K_p}{\pi D_1^2} \delta V_p - \frac{2 D_{o1}^2}{\pi \sqrt{0.81545} C_d \sqrt{h_{1,0}}} \delta h_1\]
+\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left((V_{p,0} + \delta V_p) K_p - \frac{\pi D_{o1}^2 \left(\sqrt{h_{1,0}} + \frac{1}{2\sqrt{h_{1,0}}}\delta h_1\right)}{\sqrt{0.81545} C_d}\right)\]
+
+\[h_{1,0} = \left(\frac{V_{p,0} K_p \sqrt{0.81545} C_d}{\pi D_{o1}^2}\right)^2\]
+
 
 *** TODO 9
 \[G(s) = \frac{\frac{4K_p}{\pi D_1^2}}{s + \frac{2D_{o1}^2}{\pi\sqrt{0.81545} C_d\sqrt{h_{1,0}}}\]
@@ -139,28 +115,3 @@ Rearrange:
 :TODO: Add image
 *** TODO 11
 :TODO: Add image
-*** TODO 8
-\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p K_p - \frac{\pi D_{o1}^2 \sqrt{h_1}}{\sqrt{0.81545} C_d}\right)\]
-
-\[h_1 = \delta h_1 + h_{1,0}\]
-\[V_P = \delta V_P + V_{P,0}\]
-
-\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left((\delta V_P + V_{P,0}) K_p - \frac{\pi D_{o1}^2 \sqrt{\delta h_1 + h_{1,0}}}{\sqrt{0.81545} C_d}\right)\]
-
-When things = 0
-\[0 = \frac{4}{\pi D_1^2}\left((0 + V_{P,0}) K_p - \frac{\pi D_{o1}^2 \sqrt{0 + h_{1,0}}}{\sqrt{0.81545} C_d}\right)\]
-
-
-For the linearisation, you should end up with a differential equation in terms of \delta h , \delta V_P and h_{1,0} (the operating point) alone. Where h_1 = \delta h_1 +  h_{1,0} and V_P = \delta V_P + V_{P,0}.
-You may need to consider the equilibrium point where \dot{h}_1 = 0, \delta h = 0 , and \delta V_P = 0 
-
-
-
-\frac{\partial f}{\partial h_1}\big|_{(h_{1,0}, V_{P,0})}
-\frac{\partial f}{\partial V_P}\big|_{(h_{1,0}, V_{P,0})}
-of \[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p K_p - \frac{\pi D_{o1}^2 \sqrt{h_1}}{\sqrt{0.81545} C_d}\right)\]
-
-
-1. \(\frac{\partial f}{\partial h_1} \big|_{(h_{1,0}, V_{P,0})} = -\frac{2 D_{o1}^2}{D_1^2 \sqrt{0.81545 h_{1,0}} C_d}\)
-
-2. \(\frac{\partial f}{\partial V_P} \big|_{(h_{1,0}, V_{P,0})} = \frac{4}{\pi D_1^2} K_P\)
