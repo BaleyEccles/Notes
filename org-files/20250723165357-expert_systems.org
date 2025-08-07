@@ -7,7 +7,111 @@
 #+STARTUP: latexpreview
 
 * Expert Systems
+ - [[file:Expert_System.png]]
+   
  - An AI that uses if-then based rules
+ - Rules and facts are kept separately
  - Is designed to mimic a human expert
- - 
+** How They Work
+ - Applies *Heuristics* to guide reasoning and reduce the search area for a solution
+ - *Explanation capability* allows the system to review its own work and devise a better solution
+ - Uses *symbolic reasoning*. Each piece of information, fact, rule or concept is a symbol.
+   
+** Example
+#+BEGIN_SRC pascal
+// Rule 1:
+   IF Y is true
+   AND D is true
+   THEN Z is true
+      
+// Rule 2:
+   IF X is true
+   AND B is true
+   AND E is true
+   THEN Y is true
+   
+// Rule 3:
+   IF A is true
+   THEN X is true
+#+END_SRC
 
+Which is:
+ - [[file:Expert_System_Example.png]]
+
+** Forward Chaining
+ - Data-driven reasoning
+ - The system can modify its data base
+   - by executing the first rule and modifying the data base
+ - [[file:Expert_System_Forward_Chaning.png]]
+
+** Backward Chaining
+ - Goal-driven reasoning
+ - Searches the data base for a relevant rule, then executes it
+ - [[file:Expert_System_Backward_Chaining.png]]
+
+** Conflict Resolution
+
+
+*** Example
+#+BEGIN_SRC pascal
+// Rule 1:
+   IF the ‘traffic light’ is green
+   THEN the action is go
+      
+// Rule 2:
+   IF the ‘traffic light’ is red
+   THEN the action is stop
+      
+// Rule 3:
+   IF the ‘traffic light’ is red
+   THEN the action is go
+#+END_SRC
+
+ - With forward chaining the action is go when the light is red
+
+*** Highest Priority
+Each of the rules are assigned a priority value and the one with the largest priority is ran
+
+*** Most Specific Rule
+Executes the rule that is the longest
+
+*** Data Most Recently Entered
+Executes the most recently added rule
+
+** Uncertainty Management In Expert Systems
+
+*** Bayesian reasoning
+If each of the rules also have an assigned probability
+#+BEGIN_SRC pascal
+IF E is true
+THEN H is true {with probability p}
+#+END_SRC
+\[\Pr(H|E) = \frac{\Pr(E|H)\times \Pr(H)}{\Pr(E|H)\times \Pr(H) + \Pr(E|\neg H)\times \Pr(\neg H)}\]
+
+ - $\Pr(H)$ is the prior probability of hypothesis H being true
+ - $\Pr(E|H)$ is the probability that hypothesis H being true will result in evidence E
+ - $\Pr(\neg H)$ is the prior probability of hypothesis H being false
+ - $\Pr(E|\neg H)$ is the probability of finding evidence E even when hypothesis H is false
+
+With $n$ rules, it follows that:
+\[\Pr(H_i | E_1E_2\hdots E_n) = \frac{\Pr(E_1 | H_i)\times \Pr(E_2 | H_i)\times \hdots \times \Pr(E_n | H_i)\times \Pr(H_i)}{\sum_{k=1}^m\Pr(E_1 | H_k) \times \Pr(E_2 | H_k)\times \hdots \times \Pr(E_n | H_k) \times \Pr(H_k)}\]
+
+*** Certainty factors
+|----------------------+------------------|
+| Term                 | Certainty factor |
+|----------------------+------------------|
+| Definitely not       |             -1.0 |
+| Almost certainly not |             −0.8 |
+| Probably not         |             −0.6 |
+| Maybe not            |             −0.4 |
+| Unknown −0.2 to      |             +0.2 |
+| Maybe                |             +0.4 |
+| Probably             |             +0.6 |
+| Almost certainly     |             +0.8 |
+| Definitely           |             +1.0 |
+|----------------------+------------------|
+
+#+BEGIN_SRC pascal
+IF <evidence>
+THEN <hypothesis> {cf}
+#+END_SRC
