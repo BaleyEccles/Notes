@@ -73,6 +73,8 @@
 ** TODO Part 2 - Simulink Modelling
 
 *** TODO 4
+[[file:eng331_lab1_q4_sim.png]]
+[[file:eng331_lab1_q4_plot.png]]
 
 *** TODO 5
 Given that the pump feeds Tank 2 directly and it empties through orifice 2, the differential equation for the water height in Tank 2, $h_2(t)$, is:
@@ -87,9 +89,12 @@ Where:
  - $V_p(t)$ is the voltage applied to the pump
 
 *** TODO 6
-
+[[file:eng331_lab1_q6.png]]
 *** TODO 7
+[[file:eng331_lab1_q7.png]]
 
+[[file:eng331_lab1_q7_h1.png]]
+[[file:eng331_lab1_q7_h2.png]]
 ** TODO Part 3 - Linearisation
 
 *** TODO 8
