@@ -43,13 +43,13 @@
 *** DONE 5
 Given that the pump feeds Tank 2 directly and it empties through orifice 2, the differential equation for the water height in Tank 2, $h_2(t)$, is:
 
-\[\frac{dh_2}{dt} = \frac{4}{\pi D_2^2} \left( K_{\text{pump}} V_p - \frac{\pi D_{o2}^2 \sqrt{h_2}}{\sqrt{0.81545 C_d}} \right)\]
+\[\frac{dh_2}{dt} = \frac{4}{\pi D_2^2} \left( K_{\textrm{pump}} V_p - \frac{\pi D_{o2}^2 \sqrt{h_2}}{\sqrt{0.81545 C_d}} \right)\]
 
 Where:
- - $D_2 = \SI{0.045}{m}$ is the diameter of Tank 2
- - $D_{o2} = \SI{0.005}{m}$ is the diameter of the orifice
+ - $D_2 = 0.045m$ is the diameter of Tank 2
+ - $D_{o2} = 0.005m$ is the diameter of the orifice
  - $C_d = 0.8$ is the discharge coefficient
- - $K_{\text{pump}} = 5 \times 10^{-6}~\si{m^3.s^{-1}.V^{-1}}$ is the pump constant
+ - $K_{\textrm{pump}} = 5 \times 10^{-6}m^3.s^{-1}.V^{-1}$ is the pump constant
  - $V_p(t)$ is the voltage applied to the pump
 
 *** DONE 6
@@ -109,7 +109,7 @@ Expand:
 
 
 *** TODO 9
-\[G(s) = \frac{\frac{4K_p}{\pi D_1^2}}{s + \frac{2D_{o1}^2}{\pi\sqrt{0.81545} C_d\sqrt{h_{1,0}}}\]
+\[G(s) = \frac{\frac{4K_p}{\pi D_1^2}}{s + \frac{2D_{o1}^2}{\pi \sqrt{0.81545} C_d \sqrt{h_{1,0}}}}\]
 
 *** TODO 10
 :TODO: Add image
