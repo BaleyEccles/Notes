@@ -22,6 +22,7 @@
  - [[id:43553b0f-4568-4589-8998-f52560165599][Direct Current (DC)]]
  - [[id:56a1f85f-b978-4063-ab5c-ed984632258e][Galvanic Isolation]]
  - [[id:6d6c465f-78aa-49dd-8ac7-d13c6bb0302b][Power Semiconductors]]
+   
 * Assessment
 ** Assessment Task 1: Project
  - 30%
@@ -37,6 +38,9 @@
  - Weeks: 3, 6 & 9
  - Report 1 week after lab
    - 6 pages per report
+     
+ - [[id:cd7bcf51-56d8-4864-9f3d-329bd62a73e1][ENG306 - Power Electronics - Lab 1]]
 
 ** Assessment Task 4: Examination
  - 40%
+ 
