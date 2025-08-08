@@ -3,7 +3,7 @@
 :END:
 #+title: ENG331 - Control Systems 1 - Lab 1
 #+date: [2025-08-04 Mon 09:25]
-#+AUTHOR: Baley Eccles - 652137
+#+AUTHOR: Baley Eccles - 652137 - Matthew Hocking - 659747 - Tyler Robards – 651790
 #+STARTUP: latexpreview
 #+STARTUP: latexpreview
 #+FILETAGS: :Assignment:UTAS:2025:
@@ -20,18 +20,21 @@
 
 * ENG331 - Control Systems 1 - Lab 1
 
-** DONE Part 1 - Theoretical Analysis
+** Part 1 - Theoretical Analysis
 
-*** DONE 1
+*** 1
+Tank 1 differential equation, using conservation of mass:
 \[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(q_{1,i} - q_{1,o}\right)\]
-*** DONE 2
+*** 2
+Tank 1 differential equation, using Bernoulli’s equation:
 \[h_1 = \frac{0.81545}{\pi^2 D_{o1}^4} q_{1,o}^2\]
-*** DONE 3
+*** 3
+Tank 1 differential equation:
 \[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p K_p - \frac{\pi D_{o1}^2 \sqrt{h_1}}{\sqrt{0.81545} C_d}\right)\]
 
-** DONE Part 2 - Simulink Modelling
+** Part 2 - Simulink Modelling
 
-*** DONE 4
+*** 4
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Tank 1 Simulink Model \label{fig:Q2-4-1}
 [[./eng331_lab1_q4_sim.png]]
@@ -40,78 +43,42 @@
 #+CAPTION: Tank 1 $h_1(t)$ \label{fig:Q2-4-2}
 [[./eng331_lab1_q4_plot.png]]
 
-*** DONE 5
-Given that the pump feeds Tank 2 directly and it empties through orifice 2, the differential equation for the water height in Tank 2, $h_2(t)$, is:
-
+*** 5
+Tank 2 ODE:
 \[\frac{dh_2}{dt} = \frac{4}{\pi D_2^2} \left( K_{\textrm{pump}} V_p - \frac{\pi D_{o2}^2 \sqrt{h_2}}{\sqrt{0.81545 C_d}} \right)\]
 
-Where:
- - $D_2 = 0.045m$ is the diameter of Tank 2
- - $D_{o2} = 0.005m$ is the diameter of the orifice
- - $C_d = 0.8$ is the discharge coefficient
- - $K_{\textrm{pump}} = 5 \times 10^{-6}m^3.s^{-1}.V^{-1}$ is the pump constant
- - $V_p(t)$ is the voltage applied to the pump
-
-*** DONE 6
+*** 6
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Tank 1 Simulink Model as Subsystem \label{fig:Q2-6-1}
-[[file:eng331_lab1_q6.png]]
-*** DONE 7
+[[./eng331_lab1_q6.png]]
+*** 7
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Tank 1 Simulink Model as Subsystem \label{fig:Q2-7-1}
-[[file:eng331_lab1_q7.png]]
+[[./eng331_lab1_q7.png]]
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Tank 1 in Configuration 1 $h_1(t)$ \label{fig:Q2-7-2}
-[[file:eng331_lab1_q7_h1.png]]
+[[./eng331_lab1_q7_h1.png]]
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Tank 2 in Configuration 1 $h_2(t)$ \label{fig:Q2-7-3}
-[[file:eng331_lab1_q7_h2.png]]
+[[./eng331_lab1_q7_h2.png]]
 
-** TODO Part 3 - Linearisation
+** Part 3 - Linearisation
 
-*** TODO 8
-\[\dot{h}_1 = f(h_{1,0}, V_{p,0}) - \frac{2 D_{o1}^2}{\sqrt{0.81545} C_d D_1^2 \sqrt{h_{1,0}}} (h_1 - h_{1,0}) + \frac{4 K_p}{\pi D_1^2} (V_p - V_{p,0})\]
-Where
-\[f(h_{1,0}, V_{p,0}) = \frac{4}{\pi D_1^2}\left(V_{p,0} K_p - \frac{\pi D_{o1}^2 \sqrt{h_{1,0}}}{\sqrt{0.81545} C_d}\right)\]
+*** 8
+Linearised differential equation:
+\[\dot{h}_1 \approx \frac{4}{\pi D_1^2}\left(V_{p,0} K_p - \frac{\pi D_{o1}^2 \sqrt{h_{1,0}}}{\sqrt{0.81545} C_d}\right) + \frac{4 K_p}{\pi D_1^2} \delta V_p - \frac{2 D_{o1}^2}{D_1^2 \sqrt{0.81545} C_d \sqrt{h_{1,0}}} \delta h_1\]
 
-*** TODO 9
-\[G(s) = \frac{\frac{4 K_p}{\pi D_1^2}}{s + \frac{2 D_{o1}^2}{\sqrt{0.81545} C_d D_1^2 \sqrt{h_{1,0}}}}\]
+*** 9
+Transfer function:
+\[G(s) = \frac{\frac{4K_p}{\pi D_1^2}}{s + \frac{2D_{o1}^2}{D_1^2 \sqrt{0.81545} C_d \sqrt{h_{1,0}}}}\]
 
-*** TODO 8
-\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_p K_p - \frac{\pi D_{o1}^2 \sqrt{h_1}}{\sqrt{0.81545} C_d}\right)\]
-
-\[h_1 = h_{1,0} + \delta h_1\]
-\[V_p = V_{p,0} + \delta V_p\]
-
-Sub in:
-\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left((V_{p,0} + \delta V_p) K_p - \frac{\pi D_{o1}^2 \sqrt{h_{1,0} + \delta h_1}}{\sqrt{0.81545} C_d}\right)\]
-
-Taylor series expansion:
-\[\sqrt{h_{1,0} + \delta h_1} \approx \sqrt{h_{1,0}} + \frac{1}{2\sqrt{h_{1,0}}}\delta h_1\]
-
-
-\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left((V_{p,0} + \delta V_p) K_p - \frac{\pi D_{o1}^2 \left(\sqrt{h_{1,0}} + \frac{1}{2\sqrt{h_{1,0}}}\delta h_1\right)}{\sqrt{0.81545} C_d}\right)\]
-
-At equilibrium point: $(\delta V_p, \delta h_1) = (0, 0)$
-\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left(V_{p,0} K_p - \frac{\pi D_{o1}^2 \sqrt{h_{1,0}}}{\sqrt{0.81545} C_d}\right)\]
-
-Linear terms: $\delta V_p$ and $\delta h_1$
-\[\dot{h}_1 \approx h_{1,0} + \frac{4}{\pi D_1^2}\left(K_p \delta V_p - \frac{\pi D_{o1}^2}{\sqrt{0.81545} C_d} \cdot \frac{1}{2\sqrt{h_{1,0}}} \delta h_1\right)\]
-
-Expand:
-\[\dot{h}_1 \approx h_{1,0} + \frac{4 K_p}{\pi D_1^2} \delta V_p - \frac{2 D_{o1}^2}{\pi \sqrt{0.81545} C_d \sqrt{h_{1,0}}} \delta h_1\]
-
-\[\dot{h}_1 = \frac{4}{\pi D_1^2}\left((V_{p,0} + \delta V_p) K_p - \frac{\pi D_{o1}^2 \left(\sqrt{h_{1,0}} + \frac{1}{2\sqrt{h_{1,0}}}\delta h_1\right)}{\sqrt{0.81545} C_d}\right)\]
-
-\[h_{1,0} = \left(\frac{V_{p,0} K_p \sqrt{0.81545} C_d}{\pi D_{o1}^2}\right)^2\]
-
-
-*** TODO 9
-\[G(s) = \frac{\frac{4K_p}{\pi D_1^2}}{s + \frac{2D_{o1}^2}{\pi \sqrt{0.81545} C_d \sqrt{h_{1,0}}}}\]
-
-*** TODO 10
-:TODO: Add image
-*** TODO 11
-:TODO: Add image
+*** 10
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Tank 1 Simulink Model As Transfer Function \label{fig:Q3-10-1}
+[[./eng331_lab1_q10_h2.png]]
+*** 11
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Tank 1 in Configuration 1 $h_1(t)$ Using Transfer Function \label{fig:Q3-11-1}
+[[./eng331_lab1_q11_h2.png]]
