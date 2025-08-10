@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       8ece3825-c04d-4b97-9426-ffd253f3e4ec
+:END:
+#+title: ENG335 - Computational Intelligence - Assignment 1
+#+date: [2025-08-09 Sat 15:02]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+
+* ENG335 - Computational Intelligence - Assignment 1
