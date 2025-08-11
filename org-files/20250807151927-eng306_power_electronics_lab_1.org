@@ -22,10 +22,12 @@
 **** 5
 /Using oscilloscope cursors in time domain, measure and calculate the phase difference between the two waveforms. Compare with the Lissajous pattern you have plotted with recognised patterns published elsewhere. Save waveforms and include in your lab report./
 
-:TODO: ADD FIGURE STUFF
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Phase Difference Plot \label{fig:Phase_Diff}
 [[./ENG306_Lab1_PartA_2.1_Phase_Diff.png]]
 
-:TODO: ADD FIGURE STUFF
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Lissajous Plot \label{fig:Lissajous}
 [[./ENG306_Lab1_PartA_2.1_Lissajous.png]]
 
 The phase difference was measured to be $\Delta t = 2.47\mu s$.
@@ -33,10 +35,12 @@ The phase difference was measured to be $\Delta t = 2.47\mu s$.
 **** 6
 /Record an image of a single pulse (or a train of pulses), showing clearly the shape of the rising and falling edges./
 
-:TODO: ADD FIGURE STUFF
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Entire Impulse Plot \label{fig:Impulse_Full}
 [[./ENG306_Lab1_PartA_2.1_Impulse_Full.png]]
 
-:TODO: ADD FIGURE STUFF
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Impulse Edge Plot \label{fig:Impulse_Edge}
 [[./ENG306_Lab1_PartA_2.1_Impulse_Edge.png]]
 
 
@@ -44,19 +48,29 @@ The phase difference was measured to be $\Delta t = 2.47\mu s$.
 **** 7
 /Record the measured Fourier spectrum. Using cursors measure and record the magnitude of the fundamental and the first 5 major harmonics. Calculate the RMS value of each of these harmonic components (noting that 1 V = 20 dB), tabulate and compare with theoretical values which you can obtain by using Fourier analysis of this waveform./
 
-:TODO: ADD FIGURE STUFF
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Fourier Plot \label{fig:Fourier}
 [[./ENG306_Lab1_PartA_2.1_Fourier.png]]
 
 
-:TODO: ADD TABLE STUFF
-Recorded Levels
+
+#+ATTR_LATEX: :placement [H] :align |c|c|
+#+CAPTION: Recorded Fourier Levels
+|-----------------+--------------------------------|
 | Frequency (kHz) | Level dB (:TODO: or maybe dBm) |
+|-----------------+--------------------------------|
 |               1 |                           0.98 |
+|-----------------+--------------------------------|
 |               3 |                           -8.5 |
+|-----------------+--------------------------------|
 |               5 |                          -12.9 |
+|-----------------+--------------------------------|
 |               7 |                          -15.9 |
+|-----------------+--------------------------------|
 |               9 |                          -17.7 |
+|-----------------+--------------------------------|
 |              11 |                          -19.3 |
+|-----------------+--------------------------------|
 
 ** Part B
 
@@ -64,14 +78,23 @@ Recorded Levels
 **** Forward biased diode characteristics
 /Present your IV data in table form and also plot a measured IV curve for your diode/
 
-:TODO: ADD TABLE STUFF
+#+ATTR_LATEX: :placement [H] :align |c|c|
+#+CAPTION: Forward Diode IV Curve Data
+|--------------------------+--------------------------|
 | Diode current, $I_d$ (A) | Diode Voltage, $V_d$ (V) |
+|--------------------------+--------------------------|
 |                    0.058 |                    0.686 |
+|--------------------------+--------------------------|
 |                    0.228 |                    0.732 |
+|--------------------------+--------------------------|
 |                    0.374 |                    0.755 |
+|--------------------------+--------------------------|
 |                    0.621 |                    0.778 |
+|--------------------------+--------------------------|
 |                    0.800 |                    0.788 |
+|--------------------------+--------------------------|
 |                    1.000 |                    0.795 |
+|--------------------------+--------------------------|
 
 /Using the diode IV function (in lecture slides) try to fit a theoretical curve to your measured data (find a reverse saturation current Is and emission factor n that works)./
 Using:
@@ -129,13 +152,21 @@ print(f'Fitted emission factor (n): {n_fitted:.2f}')
 **** Reverse biased diode characteristics
 /Present your IV data in table form and also plot a measured IV curve for your diode/
 
-:TODO: ADD TABLE STUFF
-| Diode current, $I_d$ ($\mu$ A) | Supply Voltage Vdc (V) |
-| 0.5                            |                      5 |
-| 1.0                            |                     10 |
-| 1.5                            |                     15 |
-| 2.0                            |                     20 |
-| 2.5                            |                     25 |
+#+ATTR_LATEX: :placement [H] :align |c|c|
+#+CAPTION: Reverse Diode IV Curve Data
+|--------------------------------+------------------------|
+| Diode current, $I_d$ ($\mu$ A) | Supply Voltage $V_{dc}$ (V) |
+|--------------------------------+------------------------|
+|                            0.5 |                      5 |
+|--------------------------------+------------------------|
+|                            1.0 |                     10 |
+|--------------------------------+------------------------|
+|                            1.5 |                     15 |
+|--------------------------------+------------------------|
+|                            2.0 |                     20 |
+|--------------------------------+------------------------|
+|                            2.5 |                     25 |
+|--------------------------------+------------------------|
 
 #+begin_src python :exports code :results output :session Part_B_2
 import matplotlib.pyplot as plt
@@ -173,10 +204,12 @@ plt.show()
 /Include in your report the current waveform (and diode voltage) at switch on and switch off. Note how it differs at turn off from what you may have expected under ideal conditions./
 :TODO:
 
-:TODO: ADD FIGURE STUFF
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Diode Voltage \label{fig:Diode_Voltage}
 [[./ENG306_Lab1_PartA_3.2_Diode_Voltage.png]]
 
-:TODO: ADD FIGURE STUFF
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Diode Voltage \label{fig:Diode_Current}
 [[./ENG306_Lab1_PartA_3.2_Diode_Current.png]]
 
 /Discuss your observations when the diode turns off. What do you think is happening immediately after the source changes from positive to negative? What do you think might happen if the load was much lower?/
@@ -199,17 +232,31 @@ plt.show()
 **** Forward Biased Thyristor Characteristics
 /Present your IV data in table form and plot a measured IV curve for your thyristor/
 :TODO:
+#+ATTR_LATEX: :placement [H] :align |c|c|
+#+CAPTION: Thyristor IV Curve Data
+|--------------------------+------------------------------+------------------------------|
 | Source Voltage $V_s$ (V) | Thyristor Voltage, $V_T$ (V) | Thyristor current, $I_T$ (A) |
+|--------------------------+------------------------------+------------------------------|
 |                        5 |                        1.031 |                        0.628 |
+|--------------------------+------------------------------+------------------------------|
 |                      4.5 |                        0.997 |                       0.5366 |
+|--------------------------+------------------------------+------------------------------|
 |                        4 |                        0.970 |                        0.466 |
+|--------------------------+------------------------------+------------------------------|
 |                      3.5 |                        0.902 |                        0.350 |
+|--------------------------+------------------------------+------------------------------|
 |                        3 |                        0.885 |                        0.282 |
+|--------------------------+------------------------------+------------------------------|
 |                      2.5 |                        0.875 |                        0.223 |
+|--------------------------+------------------------------+------------------------------|
 |                        2 |                        0.852 |                        0.169 |
+|--------------------------+------------------------------+------------------------------|
 |                      1.5 |                        0.847 |                        0.106 |
+|--------------------------+------------------------------+------------------------------|
 |                        1 |                         1.03 |                        0.000 |
+|--------------------------+------------------------------+------------------------------|
 |                      0.5 |                          0.5 |                        0.000 |
+|--------------------------+------------------------------+------------------------------|
 
 
 
