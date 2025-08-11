@@ -13,7 +13,7 @@
 ** Unit Delay
 - Represented as a square with a T inside
 - Delays the input by one
-** Multiplyer
+** Multiplier
 - Represented by a triangle with a number inside
 - Multiplies the input by the number
 ** Solving
