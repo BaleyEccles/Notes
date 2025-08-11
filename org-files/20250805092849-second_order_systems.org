@@ -27,8 +27,8 @@
  - \[\omega_d = \sqrt{\omega_n^2 - \alpha^2} = \omega_n\sqrt{1 - \zeta^2}\]
 
 ** [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][Pole]] Locations
-\[s_{1,2} = - \zeta\omega_n \pm \omega_n\sqrt{\zeta^2 - 1}\]
-\[s_{1,2} = -\sigma_d \pm j\omega_d\]
+ - \[s_{1,2} = - \zeta\omega_n \pm \omega_n\sqrt{\zeta^2 - 1}\]
+ - \[s_{1,2} = -\sigma_d \pm j\omega_d\]
 
 ** Notable Metrics
  - Rise Time $T_r$
@@ -41,6 +41,6 @@
    - Percentage which response rise above final value
    - \[%OS = e^{-(\zeta \pi/}\] \[\%OS = e^{-\zeta\pi/\sqrt{1 - \zeta^2}}\]
  - Settling Time $T_s$
-   - \[T_s = \frac{4}{\zeta \omega_n}\]
+   - \[T_s \approx \frac{4}{\zeta \omega_n}\]
 
 
