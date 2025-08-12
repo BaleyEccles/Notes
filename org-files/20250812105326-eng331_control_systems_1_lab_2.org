@@ -1,0 +1,84 @@
+:PROPERTIES:
+:ID:       536ba461-384b-4879-9b5e-8155ff6cae59
+:END:
+#+title: ENG331 - Control Systems 1 - Lab 2
+#+date: [2025-08-12 Tue 10:53]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Task 2 - Plant Construction
+** Part 1 - System Familiarisation and Calibration
+:TODO: /Measured Tank Heights:/
+| Actual Tank 1 Height $h_{1,i}$ | Uncalibrated value $v_{1,i}$ | Actual tank 2 height $h_{2,i}$ | Uncalibrated value $v_{2,i}$ |
+|                                |                              |                                |                              |
+|                                |                              |                                |                              |
+:TODO: /Calculated Scale and Offset/
+
+:TODO: /Record tank diameter, nozzle size for each tank:/
+
+** Part 2 - System Identification
+
+:TODO: /Record the approximate pump gain:/
+
+:TODO: /How well does our assumption of a linear relationship between output flow and pump voltage hold in this case?/
+
+:TODO: /Will this have a significant effect on the accuracy of our theoretical model? Why/why not?/
+
+:TODO: /Record the estimated Cd for each tank:/
+*** Tank Model
+:TODO: Experimental:
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+|                         |              |                                                |                                                                                               |                  |
+
+:TODO: Non Linear Model:
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+|                         |              |                                                |                                                                                               |                  |
+
+:TODO: Linearised Model:
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+|                         |              |                                                |                                                                                               |                  |
+
+:TODO: /Comment on differences between the non-linear and linearised model estimates and the observed response:/
+:TODO: /a) Did you observe a difference in response for positive or negative input perturbations? Can you explain this?/
+:TODO: /b) Explain any differences between nonlinear model and experimental?/
+:TODO: /c) Would you expect the linearised model to fit the data worse if the step size was increased?/
+
+*** Coupled Tank Model
+:TODO: Experimental:
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+|                         |              |                                                |                                                                                               |                  |
+
+:TODO: Non Linear Model:
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+|                         |              |                                                |                                                                                               |                  |
+
+:TODO: Linearised Model:
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+|                         |              |                                                |                                                                                               |                  |
+
+:TODO: /Comment on differences between the non-linear and linearised model estimates and the observed response:/
+:TODO: /a) Did you observe a difference in response for positive or negative input perturbations? Can you explain this?/
+:TODO: /b) Explain any differences between nonlinear model and experimental?/
+:TODO: /c) Would you expect the linearised model to fit the data worse if the step size was increased?/
+:TODO: /d) Is it possible for this system to exhibit overshoot?/
+
+** Part 3 – Model Estimation
+*** 1. From the empirical data in configuration #3 (previous table), estimate a 2nd order Laplace domain model for the plant at one of the operating points.
+Using measured step response metrics
+:TODO: /Selected operating point initial and final value for $V_P(t)$:/
+:TODO: /Estimated gain $K$, damping factor $\zeta$, and natural frequency $\omega_n$:/
+:TODO: /Estimated prototype second order transfer function:/
+
+Using MATLAB’s Control Systems Toolbox system identification app
+:TODO: /Selected operating point initial and final value for $V_P(t)$:/
+:TODO: /Estimated gain $K$, damping factor $\zeta$, and natural frequency $\omega_n$:/
+:TODO: /Estimated prototype second order transfer function:/
+
+:TODO: /Comment on the differences between the empirical models, how well this fit the data, and any differences between the empirical estimation and that developed from theory./
+*** 2. Use you empirical models to calculate the expected step response metrics (gain, settling time, rise time) at one of your other operating points for the same step size as applied in your Part 2 testing (as in previous table).
+
+:TODO: /Selected operating point initial and final value for $V_p(t)$:/
+:TODO: /Predicted step response metrics (gain, rise time, settling time) for each model at the selected operating point:/
+:TODO: /How well do your empirical models generalise to different operating points or initial conditions?/
+
+
