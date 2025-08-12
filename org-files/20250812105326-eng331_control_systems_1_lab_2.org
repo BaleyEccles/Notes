@@ -7,35 +7,139 @@
 #+STARTUP: latexpreview
 
 * Task 2 - Plant Construction
+
+s
 ** Part 1 - System Familiarisation and Calibration
 :TODO: /Measured Tank Heights:/
 | Actual Tank 1 Height $h_{1,i}$ | Uncalibrated value $v_{1,i}$ | Actual tank 2 height $h_{2,i}$ | Uncalibrated value $v_{2,i}$ |
-|                                |                              |                                |                              |
-|                                |                              |                                |                              |
+|                              4 |                           80 |                            8.5 |                          130 |
+|                           11.5 |                          220 |                             22 |                          540 |
+
+
 :TODO: /Calculated Scale and Offset/
+Tank 1:
+Scale 0.05357
+Offset -0.2857
+
+Tank 2:
+Scale 0.03293
+Offset 4.22
 
 :TODO: /Record tank diameter, nozzle size for each tank:/
+Bottom nozzle diameter: 4mm
+Top nozzle diameter: 5mm
+
+Bottom tank diameter: 4.5cm
+Top tank diameter: 4.5cm
 
 ** Part 2 - System Identification
 
 :TODO: /Record the approximate pump gain:/
+V = 10V
+t = 11s
+$Vol = \pi r^2 h$
+$Vol = \pi (4.5/2)^2 20$
+$Vol = 0.000318 m^3$
+
+$q_0 = \frac{Vol}{t}$
+$q_0 = \frac{0.000318}{11}$
+$q_0 = 0.000029 m^3/s$
+
+$Pump Gain = \frac{q_0}{V_p}$
+$Pump Gain = \frac{0.000029}{10}$
+$Pump Gain = 0.000003$
+
+V = 5V
+t = 17.41s
+$Vol = \pi r^2 h$
+$Vol = \pi (4.5/2)^2 20$
+$Vol = 0.000318 m^3$
+
+$q_0 = \frac{Vol}{t}$
+$q_0 = \frac{0.000318}{17.41s}$
+$q_0 = 0.000018 m^3/s$
+
+$Pump Gain = \frac{q_0}{V_p}$
+$Pump Gain = \frac{0.000018}{5}$
+$Pump Gain = 0.000004$
 
 :TODO: /How well does our assumption of a linear relationship between output flow and pump voltage hold in this case?/
 
 :TODO: /Will this have a significant effect on the accuracy of our theoretical model? Why/why not?/
 
 :TODO: /Record the estimated Cd for each tank:/
+Tank 1:
+From 10->25
+t = 10s
+$Vol = \pi (4.5/2)^2 (25 - 10)$
+$Vol = 0.000239m^3$
+$q_1 = \frac{Vol}{t}$
+$q_1 = 0.000024$
+
+$C_{d,1} = \frac{q_1}{q_{1,ideal}}$
+
+Tank 2:
+from 4->26.5
+$h_1 = 11cm$
+t = 15.44s
+
+Something went wrong :(
+
+
+
+*** IGNORE
+From 4->25
+t = 14.5s
+$Vol = \pi (4.5/2)^2 (25 - 4)$
+$Vol = 0.000334m^3$
+$q_2 = \frac{Vol}{t}$
+$q_2 = 0.000023$
+
+$C_{d,2} = \frac{q_2}{q_{2,ideal}}$
+
+\[q_{out} = \frac{\pi}{4} D^2 C_d\sqrt{2gh_1}\]
+\[q_{out} = \frac{\Delta Vol}{t}\]
+
+
+** WRONG
+Tank 1:
+t = 15s
+$Vol = \pi (4.5/2)^2 25$
+$Vol = 0.000498m^3$
+
+$q_{out,1} = 0.000498/15$
+$q_{out,1} = 0.000027$
+
+$C_d = $
+
+Tank 2:
+t = 20s
+$Vol = \pi (4.5/2)^2 25$
+$Vol = 0.000498m^3$
+
+$q_{out,1} = 0.000498/20$
+$q_{out,1} = 0.00002$
+
 *** Tank Model
+Using:
+Amplitude = 1
+Period = 0.5
+Duty% = 50
+Offset = 5
 :TODO: Experimental:
-| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
-|                         |              |                                                |                                                                                               |                  |
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
+| , 3    THIS ONE WAS BAD | \pm 1V       |                                                |                                                                                               |                            |
+| , 5                     | \pm 1V       |                                                |                                                                                               |                            |
+| , 7                     | \pm 1V       |                                                |                                                                                               |                            |
+| , 9                     | \pm 1V       |                                                |                                                                                               |                            |
+
 
 :TODO: Non Linear Model:
-| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
 |                         |              |                                                |                                                                                               |                  |
 
 :TODO: Linearised Model:
-| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
 |                         |              |                                                |                                                                                               |                  |
 
 :TODO: /Comment on differences between the non-linear and linearised model estimates and the observed response:/
@@ -45,15 +149,15 @@
 
 *** Coupled Tank Model
 :TODO: Experimental:
-| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
 |                         |              |                                                |                                                                                               |                  |
 
 :TODO: Non Linear Model:
-| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
 |                         |              |                                                |                                                                                               |                  |
 
 :TODO: Linearised Model:
-| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time |
+| Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
 |                         |              |                                                |                                                                                               |                  |
 
 :TODO: /Comment on differences between the non-linear and linearised model estimates and the observed response:/
