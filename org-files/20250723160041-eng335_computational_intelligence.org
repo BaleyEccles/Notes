@@ -20,6 +20,7 @@
 * Content
  - [[id:4e62ca90-967b-4fcf-ad83-8f6d97caae79][Expert Systems]]
  - [[id:117d1797-6d46-47e2-81d2-1360da07666b][Fuzzy Logic]]
+ - [[id:abb2b339-9529-4473-b485-2cbd3aa9831d][Artificial Neural Networks]]
 * Assessment
 
 ** Assessment Task 1: Assignment 1

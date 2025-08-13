@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       14faa362-08d3-40a2-b799-9541733824bf
+:END:
+#+title: Preceptron
+#+date: [2025-08-13 Wed 17:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Preceptron
+
+[[./Preceptron.png]]
+ - The aim is to classify the inputs, $X_1,X_2,\hdots,X_n$, as one of two classes $A_1$ and $A_2$.
+ - \[\sum_{i=1}^nX_iw_i - \theta = 0\]
+ - The preceptron learns by making changes in the weights to its inputs
+ - \[e(p) = Y_d(p) - Y(p)\]
+   - $Y_d(p)$ is the desired output
+   - $Y(p)$ is the output
+   - $p$ is the iteration we are on
+
+
+
+** Perceptron’s Training Algorithm
+1. Initialisation
+   Set initial weights and threshold to random numbers in the range $[-0.5, 0.5]$
+2. Activation
+   Activate the preceptron by applying the inputs and the desired output
+   Calculate the actual output at iteration $p=1$
+   \[Y(p) = \textrm{step}\left[\sum_{i=1}^nX_i(p)w_i(p) - \theta\right]\]
+3. Weight Training
+   Update the weights of the preceptron
+   \[w_i(p + 1) = w_i(p) + \Delta w_i(p)\]
+   $\Delta w_i(p)$ is the weight correction at iteration p
+   \[\Delta w_i(p) = \alpha X_i(p) e(p)\]
+   $\alpha$ is the *learning rate*, a number in the range $(0,1)$
+4. Iteration
+   Increate $p$ by one and go to step 2 until the it converges
+
+** Example
+Make a preceptron that does logical AND
+| $X_1$ | $X_3$ | $Y_d$ |
+|     0 |     0 |     0 |
+|     0 |     1 |     0 |
+|     1 |     0 |     0 |
+|     1 |     1 |     1 |
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/AND_Preceptron_Plot.xopp]]
+Our goal is to separate the $o$'s and $x$'s by making a line
+$\theta = 0.2$
+$\alpha = 0.1$
+
+| p | $X_1$ | $X_3$ | $Y_d$ | $w_1$ | $w_1$ | $Y(p)$ | $e(p)$ | $w_1\prime$ | $w_2\prime$ |
+| 1 |     0 |     0 |     0 |   0.3 |  -0.3 |      0 |      0 |         0.3 |        -0.1 |
+| 1 |     0 |     1 |     0 |   0.3 |  -0.3 |      0 |      0 |         0.3 |        -0.1 |
+| 1 |     1 |     0 |     0 |   0.3 |  -0.3 |      1 |     -1 |         0.2 |        -0.1 |
+| 1 |     1 |     1 |     1 |   0.3 |  -0.3 |      1 |     -1 |         0.3 |         0.0 |
+This can be continued until the desired result is accomplished
+
+
+
+

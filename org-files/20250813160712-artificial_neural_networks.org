@@ -1,0 +1,40 @@
+:PROPERTIES:
+:ID:       abb2b339-9529-4473-b485-2cbd3aa9831d
+:END:
+#+title: Artificial Neural Networks
+#+date: [2025-08-13 Wed 16:07]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Artificial Neural Networks
+Uses 'neurons', which are similar to ones in the brain.
+ - They are connected by weighting links, which can pass signals to a another neuron
+ - [[./Neural_Network_Example.png]]
+ - [[id:14faa362-08d3-40a2-b799-9541733824bf][Preceptron]]
+ - [[id:1fcff955-72ee-4878-8c1a-6078bb2c73e6][Multilayer Neural Networks]]
+
+** Supervised Learning
+When we know what the output should be. For example images of animals, we know which animal is what, the AI is expected to give us are already known value.
+
+** Activation Functions
+A function that relates the inputs and weights to the output.
+Different activation functions can change how fast the network arrives at an answer
+*** Step Function
+\[ Y^{\textrm{step}} = \begin{cases}
+1, & \textrm{if } X\geq 0\\
+0, & \textrm{if } X < 0\\
+\end{cases}\]
+
+*** Sign Function
+\[ Y^{\textrm{sign}} = \begin{cases}
++1, & \textrm{if } X\geq 0\\
+-1, & \textrm{if } X < 0\\
+\end{cases}\]
+
+*** Sigmoid Function
+\[ Y^{\textrm{sigmoid}} = \frac{1}{1 + e^{-X}}\]
+
+*** Linear Function
+\[ Y^{\textrm{linear}} = X\]
+
+

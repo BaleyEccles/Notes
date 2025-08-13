@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       1fcff955-72ee-4878-8c1a-6078bb2c73e6
+:END:
+#+title: Multilayer Neural Networks
+#+date: [2025-08-13 Wed 17:34]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Multilayer Neural Networks
+ - The network now has hidden layers between the input and output layers
+ - [[./Multilayer_Neural_Network_Example.png]]
+
+** Training
+Compared to a [[id:14faa362-08d3-40a2-b799-9541733824bf][Preceptron]], we must now back propagate the errors through the hidden layers
+1. Initialisation
+   Set all the weights and threshold levels to values in the range $\left(-\frac{2.4}{F_i}, +\frac{2.4}{F_i}\right)$
+   $F_i$ is the total number of inputs of the neuron $i$
+2. Activation
+   Apply inputs ($X_1(p), X_2(p), \hdots, X_n(p)$) and desired outputs ($Y_{d,1}(p), Y_{d,2}(p), \hdots, Y_{d,n}(p)$) to the network
+   1. Calculate the actual outputs of the hidden layers
+      \[y_j(p) = \sigmoid\left[\sum_{i=1}^nX_i(p)\cdot w_{ij}(p) - \theta_j\right]\]
+      $n$ is the number of inputs of the neuron $j$ in the hidden layer
+   2. Calculate the actual outputs of the output layers
+      \[y_k(p) = \sigmoid\left[\sum_{j=1}^mX_{jk}(p)\cdot w_{jk}(p) - \theta_k\right]\]
+      $m$ is the number of inputs of the neuron $k$ in the output layer
+3. Weight Training
+   1. Calculate the error gradient for the neurons in the output layer
+      Calculate weight gradient
+      \[\delta_k(p) = y_k(p) [1-y_k(p)]e_k(p)\]
+      \[e_k(p) = y_{d,k}(p) - y_k(p)\]
+      Weight corrections:
+      \[\Delta w_{jk}(p) = \alpha y_j(p) \delta_k(p)\]
+      Update the weights at the output neurons
+      \[w_{jk}(p + 1) = w_{jk}(p) + \Delta w_{jk}(p)\]
+   2. Calculate the error gradient for the neurons in the hidden layer
+      \[\delta_j(p) = y_j(p)[1 - y_j(p)] \sum_{k=1}^l\delta_k(p)w_{jk}(p)\]
+      Weight corrections
+      \[\Delta w_{ij}(p) = \alpha x_i(p) \delta_j(p)\]
+      Update weights in hidden neurons
+      \[w_{ij}(p + 1) = w_{ij}(p) + \Delta w_{ij}(p)\]
+4. Iteration
+   Increase $p$ by one and go back to step 2
+   Repeat until desired result is achieved
