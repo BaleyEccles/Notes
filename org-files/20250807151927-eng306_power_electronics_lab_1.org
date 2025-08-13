@@ -30,6 +30,7 @@
 #+CAPTION: Lissajous Plot \label{fig:Lissajous}
 [[./ENG306_Lab1_PartA_2.1_Lissajous.png]]
 
+:TODO: 
 The phase difference was measured to be $\Delta t = 2.47\mu s$.
 
 **** 6
@@ -56,22 +57,44 @@ The phase difference was measured to be $\Delta t = 2.47\mu s$.
 
 #+ATTR_LATEX: :placement [H] :align |c|c|
 #+CAPTION: Recorded Fourier Levels
-|-----------------+--------------------------------|
-| Frequency (kHz) | Level dB (:TODO: or maybe dBm) |
-|-----------------+--------------------------------|
-|               1 |                           0.98 |
-|-----------------+--------------------------------|
-|               3 |                           -8.5 |
-|-----------------+--------------------------------|
-|               5 |                          -12.9 |
-|-----------------+--------------------------------|
-|               7 |                          -15.9 |
-|-----------------+--------------------------------|
-|               9 |                          -17.7 |
-|-----------------+--------------------------------|
-|              11 |                          -19.3 |
-|-----------------+--------------------------------|
+|-----------------+---------------+-------------+-------------|
+| Frequency (kHz) | Voltage (dBV) | Voltage (V) | RMS Voltage (V) |
+|-----------------+---------------+-------------+-------------|
+|               1 |          0.98 |      1.1194 |    0.791562 |
+|-----------------+---------------+-------------+-------------|
+|               3 |          -8.5 |      0.3758 |    0.265757 |
+|-----------------+---------------+-------------+-------------|
+|               5 |         -12.9 |      0.2265 |    0.160135 |
+|-----------------+---------------+-------------+-------------|
+|               7 |         -15.9 |      0.1603 |    0.113367 |
+|-----------------+---------------+-------------+-------------|
+|               9 |         -17.7 |      0.1303 |    0.092148 |
+|-----------------+---------------+-------------+-------------|
+|              11 |         -19.3 |      0.1084 |    0.076645 |
+|-----------------+---------------+-------------+-------------|
 
+
+#+BEGIN_SRC octave :exports none :results output :session Q7
+clc
+clear
+close all
+
+V_dBV = [0.98, -8.5, -12.9, -15.9, -17.7, -19.3];
+V = 10.^(V_dBV./20)
+V_rms = V./sqrt(2)
+
+#+END_SRC
+
+#+RESULTS:
+: V =
+: 
+:    1.1194   0.3758   0.2265   0.1603   0.1303   0.1084
+: V_rms =
+: 
+:    0.791562   0.265757   0.160135   0.113367   0.092148   0.076645
+
+
+:TODO: Compare with theoretical results
 ** Part B
 
 *** 3.2
@@ -96,9 +119,6 @@ The phase difference was measured to be $\Delta t = 2.47\mu s$.
 |                    1.000 |                    0.795 |
 |--------------------------+--------------------------|
 
-/Using the diode IV function (in lecture slides) try to fit a theoretical curve to your measured data (find a reverse saturation current Is and emission factor n that works)./
-Using:
-\[I = I_s \left( e^{\frac{qV}{n k T}} - 1 \right)\]
 #+begin_src python :exports code :results output :session Part_B_1
 import numpy as np
 import matplotlib.pyplot as plt
@@ -139,16 +159,6 @@ print(f'Fitted reverse saturation current (I_s): {Is_fitted:.2e} A')
 print(f'Fitted emission factor (n): {n_fitted:.2f}')
 #+end_src
 
-
-/Comment on the shape of the curve and on its particular features. What deviations, if any, do you observe, compared to your fitted curve?/
-:TODO:
-
-/Look up the specifications / datasheet for your diode and comment on how they relate to your experiment and observations./
-:TODO:
-
-/If this diode were used in a rectifier circuit where it was in its ON state 50% of the time (with a constant current of 0.7 A), what would the diode losses be (assume zero off-state losses)?/
-:TODO:
-
 **** Reverse biased diode characteristics
 /Present your IV data in table form and also plot a measured IV curve for your diode/
 
@@ -169,26 +179,50 @@ print(f'Fitted emission factor (n): {n_fitted:.2f}')
 |--------------------------------+------------------------|
 
 #+begin_src python :exports code :results output :session Part_B_2
+import numpy as np
 import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
 
-# Data
-I_d = [0.5, 1.0, 1.5, 2.0, 2.5]  # in microamperes
-V_dc = [5, 10, 15, 20, 25]        # in volts
+# Diode IV equation
+def diode_current(V, I_s, n):
+    V_T = 25.85e-3  # thermal voltage in volts
+    return I_s * (np.exp(V / (n * V_T)) - 1)
+
+# Measured Data
+I_d = np.array([0.5, 1.0, 1.5, 2.0, 2.5]) * 1e-6  # convert to A
+V_dc = np.array([5, 10, 15, 20, 25])  # in volts
+
+# Curve fitting
+popt, pcov = curve_fit(diode_current, V_dc, I_d, p0=(1e-12, 1))  # initial guesses for I_s and n
+I_s_fit, n_fit = popt
+
+# Generate theoretical curve
+V_fit = np.linspace(0, 30, 500)
+I_fit = diode_current(V_fit, I_s_fit, n_fit)
 
 # Plotting
 plt.figure(figsize=(8, 5))
-plt.plot(V_dc, I_d, marker='o')
-plt.title('Measured IV Curve for Diode')
+plt.plot(V_dc, I_d * 1e6, 'o', label='Measured Data')
+plt.plot(V_fit, I_fit * 1e6, '-', label=f'Theoretical Fit\n$I_s$={I_s_fit:.2e}, $n$={n_fit:.2f}')
+plt.title('Measured IV Curve for Diode with Theoretical Fit')
 plt.xlabel('Supply Voltage Vdc (V)')
 plt.ylabel('Diode Current, $I_d$ ($\mu$ A)')
 plt.grid(True)
 plt.xlim(0, 30)
 plt.ylim(0, 3)
+plt.legend()
 plt.show()
 #+end_src
 
+#+RESULTS:
+: /tmp/babel-a3Hh3F/python-Eno4o6:28: SyntaxWarning: invalid escape sequence '\m'
+:   plt.ylabel('Diode Current, $I_d$ ($\mu$ A)')
+
 /Using the diode IV function (in lecture slides) try to fit a theoretical curve to your measured data (find a reverse saturation current Is and emission factor n that works)./
 :TODO:
+Using:
+\[I_d = I_s \left( e^{\frac{V_{dc}}{n V_T}} - 1 \right)\]
+
 
 /Comment on the shape of the curve and on its particular features. What deviations, if any, do you observe, compared to your fitted curve?/
 :TODO:
