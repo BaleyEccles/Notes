@@ -15,7 +15,6 @@
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
-#+PROPERTY: header-args :eval no
 
 * ENG306 - Power Electronics - Lab 1
 ** Part A
@@ -31,8 +30,12 @@
 #+CAPTION: Lissajous Plot \label{fig:Lissajous}
 [[./ENG306_Lab1_PartA_2.1_Lissajous.png]]
 
-:TODO: 
-The phase difference was measured to be $\Delta t = 2.47\mu s$.
+The time delay between the channels was measured as 
+$Δt=2.47\micro\text{s}$ at 
+$f=90.2kHz$, giving a phase offset 
+$ϕ=360^∘ f\Delta t≈80.2^∘$
+The Lissajous ellipse corresponds to a constant phase difference and, using the intercept method, is consistent with 
+$∼80^∘$ within cursor resolution.
 
 **** 6
 /Record an image of a single pulse (or a train of pulses), showing clearly the shape of the rising and falling edges./
@@ -56,24 +59,30 @@ The phase difference was measured to be $\Delta t = 2.47\mu s$.
 
 
 
-#+ATTR_LATEX: :placement [H] :align |c|c|c|c|
-#+CAPTION: Recorded Fourier Levels \label{tab:Table_1}
-|-----------------+---------------+-------------+-----------------|
+#+ATTR_LATEX: :placement [H] :align |c|c|
+#+CAPTION: Recorded Fourier Levels
+|-----------------+---------------+-------------+-------------|
 | Frequency (kHz) | Voltage (dBV) | Voltage (V) | RMS Voltage (V) |
-|-----------------+---------------+-------------+-----------------|
-|               1 |          0.98 |      1.1194 |        0.791562 |
-|-----------------+---------------+-------------+-----------------|
-|               3 |          -8.5 |      0.3758 |        0.265757 |
-|-----------------+---------------+-------------+-----------------|
-|               5 |         -12.9 |      0.2265 |        0.160135 |
-|-----------------+---------------+-------------+-----------------|
-|               7 |         -15.9 |      0.1603 |        0.113367 |
-|-----------------+---------------+-------------+-----------------|
-|               9 |         -17.7 |      0.1303 |        0.092148 |
-|-----------------+---------------+-------------+-----------------|
-|              11 |         -19.3 |      0.1084 |        0.076645 |
-|-----------------+---------------+-------------+-----------------|
+|-----------------+---------------+-------------+-------------|
+|               1 |          0.98 |      1.1194 |    0.791562 |
+|-----------------+---------------+-------------+-------------|
+|               3 |          -8.5 |      0.3758 |    0.265757 |
+|-----------------+---------------+-------------+-------------|
+|               5 |         -12.9 |      0.2265 |    0.160135 |
+|-----------------+---------------+-------------+-------------|
+|               7 |         -15.9 |      0.1603 |    0.113367 |
+|-----------------+---------------+-------------+-------------|
+|               9 |         -17.7 |      0.1303 |    0.092148 |
+|-----------------+---------------+-------------+-------------|
+|              11 |         -19.3 |      0.1084 |    0.076645 |
+|-----------------+---------------+-------------+-------------|
 
+Assuming a 50%-duty square wave, the theoretical odd-harmonic amplitudes are 
+$V_n=\frac{4V_{pk}}{(n\pi)}$.
+Using the measured fundamental 
+$V1=1.119V$ gives 
+$Vpk≈0.878V$. Predicted amplitudes follow the 
+1/n law and closely match the measured 3rd–11th components, with higher-order components slightly lower due to finite edge speed and the analyser noise floor.
 
 #+BEGIN_SRC octave :exports none :results output :session Q7
 clc
@@ -94,30 +103,8 @@ V_rms = V./sqrt(2)
 : 
 :    0.791562   0.265757   0.160135   0.113367   0.092148   0.076645
 
-A square wave is given by the equation:
-\[f(t) = \frac{4A}{\pi}\sum_{n=1,3,5\hdots}^{\infty}\frac{\sin\left(\frac{2\pi n t}{T}\right)}{n}\]
-By increasing $n$ by one we increase the harmonic by one and divide its magnitude by $n$.
-To check if this holds for our gathered data we must divide our voltage by the harmonic number and compare it with the recorded one.
-#+ATTR_LATEX: :placement [H] :align |c|c|c|
-#+CAPTION: Calculated And Recorded Fourier Levels Compared \label{tab:Table_2}
-|-----------------+------------------+--------------------|
-| Harmonic Number | Recorded Voltage | Calculated Voltage |
-|-----------------+------------------+--------------------|
-|               1 |           1.1194 |             1.1194 |
-|-----------------+------------------+--------------------|
-|               3 |           0.3758 |             0.3731 |
-|-----------------+------------------+--------------------|
-|               5 |           0.2265 |             0.2238 |
-|-----------------+------------------+--------------------|
-|               7 |           0.1603 |             0.1599 |
-|-----------------+------------------+--------------------|
-|               9 |           0.1303 |             0.1244 |
-|-----------------+------------------+--------------------|
-|              11 |           0.1084 |             0.1017 |
-|-----------------+------------------+--------------------|
 
-As seen in Table \ref{tab:Table_2} the recorded and calculated voltages differ very little. So, it would be safe to say that using Fourier analysis to analyse this is valid.
-
+:TODO: Compare with theoretical results
 ** Part B
 
 *** 3.2
@@ -125,7 +112,7 @@ As seen in Table \ref{tab:Table_2} the recorded and calculated voltages differ v
 /Present your IV data in table form and also plot a measured IV curve for your diode/
 
 #+ATTR_LATEX: :placement [H] :align |c|c|
-#+CAPTION: Forward Diode IV Curve Data \label{tab:Table_3}
+#+CAPTION: Forward Diode IV Curve Data
 |--------------------------+--------------------------|
 | Diode current, $I_d$ (A) | Diode Voltage, $V_d$ (V) |
 |--------------------------+--------------------------|
@@ -182,7 +169,7 @@ print -dpng 'ENG306_Lab_1_Diode_Forward_IV.png'
 /Present your IV data in table form and also plot a measured IV curve for your diode/
 
 #+ATTR_LATEX: :placement [H] :align |c|c|
-#+CAPTION: Reverse Diode IV Curve Data \label{tab:Table_4}
+#+CAPTION: Reverse Diode IV Curve Data
 |--------------------------------+------------------------|
 | Diode current, $I_d$ ($\mu$ A) | Supply Voltage $V_{dc}$ (V) |
 |--------------------------------+------------------------|
@@ -197,62 +184,45 @@ print -dpng 'ENG306_Lab_1_Diode_Forward_IV.png'
 |                            2.5 |                     25 |
 |--------------------------------+------------------------|
 
+#+begin_src python :exports code :results output :session Part_B_2
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
 
-#+begin_src octave :exports none :results output :session Part_B_2
-clc
-clear
-close all
+# Diode IV equation
+def diode_current(V, I_s, n):
+    V_T = 25.85e-3  # thermal voltage in volts
+    return I_s * (np.exp(V / (n * V_T)) - 1)
 
-if exist('OCTAVE_VERSION', 'builtin')
-  set(0, "DefaultLineLineWidth", 2);
-  set(0, "DefaultAxesFontSize", 25);
-end
+# Measured Data
+I_d = np.array([0.5, 1.0, 1.5, 2.0, 2.5]) * 1e-6  # convert to A
+V_dc = np.array([5, 10, 15, 20, 25])  # in volts
 
-% Diode IV equation
-function I = diode_current(V, I_s, n)
-    V_T = 25.85e-3;  % thermal voltage in volts
-    I = I_s * (exp(V / (n * V_T)) - 1);
-end
+# Curve fitting
+popt, pcov = curve_fit(diode_current, V_dc, I_d, p0=(1e-12, 1))  # initial guesses for I_s and n
+I_s_fit, n_fit = popt
 
-% Measured Data
-I_d = [0.5, 1.0, 1.5, 2.0, 2.5] * 1e-6;  % convert to A
-V_dc = [5, 10, 15, 20, 25];  % in volts
+# Generate theoretical curve
+V_fit = np.linspace(0, 30, 500)
+I_fit = diode_current(V_fit, I_s_fit, n_fit)
 
-% Curve fitting
-initialGuess = [1e-12, 1];  % initial guesses for I_s and n
-options = optimset('Display','off');  % suppress output
-[popt, ~] = fminunc(@(p) sum((diode_current(V_dc, p(1), p(2)) - I_d).^2), initialGuess, options);
-
-I_s_fit = popt(1);
-n_fit = popt(2);
-
-% Generate theoretical curve
-V_fit = linspace(0, 30, 1000);
-%I_fit = diode_current(V_fit, I_s_fit, n_fit);
-I_fit = diode_current(V_fit, 4.0282e-01,  0.3323);
-
-% Plotting
-figure;
-plot(V_dc, I_d * 1e6, 'o', 'DisplayName', 'Measured Data');  % convert to μA for plotting
-hold on;
-plot(V_fit, I_fit * 1e6, '-', 'DisplayName', sprintf('Theoretical Fit\nI_s=%.2e, n=%.2f', I_s_fit, n_fit));
-title('Measured IV Curve for Diode with Theoretical Fit');
-xlabel('Supply Voltage Vdc (V)');
-ylabel('Diode Current, I_d (μA)');
-grid on;
-xlim([0, 30]);
-ylim([0, 3]);
-legend show;
-hold off;
+# Plotting
+plt.figure(figsize=(8, 5))
+plt.plot(V_dc, I_d * 1e6, 'o', label='Measured Data')
+plt.plot(V_fit, I_fit * 1e6, '-', label=f'Theoretical Fit\n$I_s$={I_s_fit:.2e}, $n$={n_fit:.2f}')
+plt.title('Measured IV Curve for Diode with Theoretical Fit')
+plt.xlabel('Supply Voltage Vdc (V)')
+plt.ylabel('Diode Current, $I_d$ ($\mu$ A)')
+plt.grid(True)
+plt.xlim(0, 30)
+plt.ylim(0, 3)
+plt.legend()
+plt.show()
 #+end_src
 
 #+RESULTS:
-: warning: opengl_renderer: data values greater than float capacity.  (1) Scale data, or (2) Use gnuplot
-: warning: opengl_renderer: data values greater than float capacity.  (1) Scale data, or (2) Use gnuplot
-: warning: opengl_renderer: data values greater than float capacity.  (1) Scale data, or (2) Use gnuplot
-: warning: opengl_renderer: data values greater than float capacity.  (1) Scale data, or (2) Use gnuplot
-: warning: opengl_renderer: data values greater than float capacity.  (1) Scale data, or (2) Use gnuplot
-: warning: opengl_renderer: data values greater than float capacity.  (1) Scale data, or (2) Use gnuplot
+: /tmp/babel-a3Hh3F/python-Eno4o6:28: SyntaxWarning: invalid escape sequence '\m'
+:   plt.ylabel('Diode Current, $I_d$ ($\mu$ A)')
 
 /Using the diode IV function (in lecture slides) try to fit a theoretical curve to your measured data (find a reverse saturation current Is and emission factor n that works)./
 :TODO:
@@ -261,11 +231,9 @@ Using:
 
 
 /Comment on the shape of the curve and on its particular features. What deviations, if any, do you observe, compared to your fitted curve?/
-Our data does not fit the expected exponential form, in fact it is perfectly linear, this is due to inaccuracies in the setup. We are attempting to measure micro amps, which was barely possible using the given ammeter.
-:TODO: MORE
+:TODO:
 
 /Look up the specifications / datasheet for your diode and comment on how they relate to your experiment and observations./
-
 :TODO:
 
 /If this diode were used in a rectifier circuit where it was in its ON state 50% of the time (with a constant current of 0.7 A), what would the diode losses be (assume zero off-state losses)?/
@@ -274,6 +242,7 @@ Our data does not fit the expected exponential form, in fact it is perfectly lin
 
 **** Reverse Recovery Characteristics of Diode
 /Include in your report the current waveform (and diode voltage) at switch on and switch off. Note how it differs at turn off from what you may have expected under ideal conditions./
+:TODO:
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Diode Voltage \label{fig:Diode_Voltage}
@@ -283,83 +252,56 @@ Our data does not fit the expected exponential form, in fact it is perfectly lin
 #+CAPTION: Diode Voltage \label{fig:Diode_Current}
 [[./ENG306_Lab1_PartA_3.2_Diode_Current.png]]
 
-Under ideal conditions we would expect the diode to instantaneously turn on/off. In Figure \ref{fig:Diode_Current} we can see that this is not true, it takes time for the diode to reach steady state.
-
 /Discuss your observations when the diode turns off. What do you think is happening immediately after the source changes from positive to negative? What do you think might happen if the load was much lower?/
-When the diode turns off there is still some energy stored in the silicon in the P-N junction, it takes time for this energy to dissipate. As we see the energy does not instantaneously exit the junction. If the load was lower we would expect less energy to be present in the junction, leading to a quicker dissipation of it.
+:TODO:
 
 /Estimate the turn off time for your diode./
-From Figure \ref{fig:Diode_Current} we estimate the turnoff time to be about $15\mu s$.
+:TODO:
 
 *** 3.3
 **** Thyristor Characteristics
 /Report and comment on the gate supply voltage required to turn on the thyristor, and on the thyristor voltage observed after turn on./
-The voltage required to turn the thyristor on was about $5V$, and once turned on the voltage across the thyristor was approximately $1V$.
+:TODO:
 
 /Explain your observations when gate voltage is reduced to zero subsequent to the thyristor being turned on?/
-When the gate current was reduced to zero the thyristors current and voltage remained the same.
+:TODO:
 
-/What thyristor voltage and current did you measure just prior to thyristor turn off? What is this current value referred to as?/
-When the thyristors voltage at turn off was approximately $4V$ and its current was about $20mA$
+/What thyristor voltage and current did you measure just prior to thyristor turn off? What is this current value referred to as?
+:TODO:
 
 **** Forward Biased Thyristor Characteristics
 /Present your IV data in table form and plot a measured IV curve for your thyristor/
-
-#+ATTR_LATEX: :placement [H] :align |c|c|c|
-#+CAPTION: Thyristor IV Curve Data \label{tab:Table_5}
+:TODO:
+#+ATTR_LATEX: :placement [H] :align |c|c|
+#+CAPTION: Thyristor IV Curve Data
 |--------------------------+------------------------------+------------------------------|
 | Source Voltage $V_s$ (V) | Thyristor Voltage, $V_T$ (V) | Thyristor current, $I_T$ (A) |
 |--------------------------+------------------------------+------------------------------|
-|                      5.0 |                        1.031 |                        0.628 |
+|                        5 |                        1.031 |                        0.628 |
 |--------------------------+------------------------------+------------------------------|
-|                      4.5 |                        0.997 |                        0.537 |
+|                      4.5 |                        0.997 |                       0.5366 |
 |--------------------------+------------------------------+------------------------------|
-|                      4.0 |                        0.970 |                        0.466 |
+|                        4 |                        0.970 |                        0.466 |
 |--------------------------+------------------------------+------------------------------|
 |                      3.5 |                        0.902 |                        0.350 |
 |--------------------------+------------------------------+------------------------------|
-|                      3.0 |                        0.885 |                        0.282 |
+|                        3 |                        0.885 |                        0.282 |
 |--------------------------+------------------------------+------------------------------|
 |                      2.5 |                        0.875 |                        0.223 |
 |--------------------------+------------------------------+------------------------------|
-|                      2.0 |                        0.852 |                        0.169 |
+|                        2 |                        0.852 |                        0.169 |
 |--------------------------+------------------------------+------------------------------|
 |                      1.5 |                        0.847 |                        0.106 |
 |--------------------------+------------------------------+------------------------------|
-|                      1.0 |                        1.030 |                        0.000 |
+|                        1 |                         1.03 |                        0.000 |
 |--------------------------+------------------------------+------------------------------|
-|                      0.5 |                        0.500 |                        0.000 |
+|                      0.5 |                          0.5 |                        0.000 |
 |--------------------------+------------------------------+------------------------------|
 
 
-#+begin_src octave :exports none :results output :session Part_3_2
-clc
-clear
-close all
-
-if exist('OCTAVE_VERSION', 'builtin')
-  set(0, "DefaultLineLineWidth", 2);
-  set(0, "DefaultAxesFontSize", 25);
-end
-
-% Data
-V_s = [5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1, 0.5];
-V_T = [1.031, 0.997, 0.970, 0.902, 0.885, 0.875, 0.852, 0.847, 1.03, 0.5];
-I_T = [0.628, 0.5366, 0.466, 0.350, 0.282, 0.223, 0.169, 0.106, 0, 0];
-
-
-figure;
-plot(V_T, I_T, 'o-');
-title('Thyristor Voltage vs Source Voltage');
-xlabel('Thyristor Voltage $V_T$ (V)', 'Interpreter', 'latex');
-ylabel('Thyristor Current $I_T$ (V)', 'Interpreter', 'latex');
-grid on;
-#+end_src
-
-#+RESULTS:
 
 /Comment on the observed IV characteristics, relating it to theoretical expectations./
-The IV plot represents how the voltage and current changes in the thyristor when it is transitioning from an on state to an off state. As the source voltage decreased the thyristor voltage and current decreased. Up until a point when the source voltage is not large enough to keep the thyristor on, then the entire source voltage is across the thyristor, leading to a positive jump in voltage across the thyristor, and zero current through the thyristor.
+:TODO:
 
 /Reflect on how this lab session has contributed to your learning experience. How has the lab session influenced your understanding of switching devices used in power electronics?/
 :TODO:
