@@ -142,45 +142,41 @@ As seen in Table \ref{tab:Table_2} the recorded and calculated voltages differ v
 |                    1.000 |                    0.795 |
 |--------------------------+--------------------------|
 
-#+begin_src python :exports code :results output :session Part_B_1
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
+#+begin_src octave :exports none :results output :session Part_B_1
+clc
+clear
+close all
 
-# Measured Data
-V_measured = np.array([0.686, 0.732, 0.755, 0.778, 0.788, 0.795])
-I_measured = np.array([0.058, 0.228, 0.374, 0.621, 0.800, 1.000])
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+end
 
-# Diode equation function
-def diode_eq(V, Is, n):
-    q = 1.602e-19  # Charge of an electron
-    k = 1.38e-23   # Boltzmann's constant
-    T = 300        # Temperature in Kelvin
-    return Is * (np.exp(q * V / (n * k * T)) - 1)
+% Measured Data
+V = [0.686, 0.732, 0.755, 0.778, 0.788, 0.795];
+I = [0.058, 0.228, 0.374, 0.621, 0.800, 1.000];
 
-# Fit the data
-initial_guess = [1e-12, 1.0]  # Initial guess for Is and n
-params, _ = curve_fit(diode_eq, V_measured, I_measured, p0=initial_guess)
-Is_fitted, n_fitted = params
 
-# Theoretical data for plotting
-V_fitted = np.linspace(min(V_measured), max(V_measured), 100)
-I_fitted = diode_eq(V_fitted, Is_fitted, n_fitted)
-
-# Plotting
-plt.figure()
-plt.plot(V_measured, I_measured, 'ro', label='Measured Data')
-plt.plot(V_fitted, I_fitted, 'b-', label='Fitted Curve')
-plt.xlabel('Diode Voltage (V)')
-plt.ylabel('Diode Current (A)')
-plt.title('Measured and Fitted Diode IV Curve')
-plt.legend()
-plt.grid()
-plt.show()
-
-print(f'Fitted reverse saturation current (I_s): {Is_fitted:.2e} A')
-print(f'Fitted emission factor (n): {n_fitted:.2f}')
+% Plotting
+figure;
+plot(V, I, '-o');
+hold on;
+xlabel('Forward Diode Voltage (V)');
+ylabel('Forward Diode Current (A)');
+title('Diode IV Curve');
+legend;
+grid on;
+hold off;
+print -dpng 'ENG306_Lab_1_Diode_Forward_IV.png'
 #+end_src
+
+#+RESULTS:
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Forward Diode IV Plot \label{fig:Diode_Forward_IV}
+[[./ENG306_Lab_1_Diode_Forward_IV.png]]
+
+
 
 **** Reverse biased diode characteristics
 /Present your IV data in table form and also plot a measured IV curve for your diode/
