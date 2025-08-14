@@ -30,12 +30,9 @@
 #+CAPTION: Lissajous Plot \label{fig:Lissajous}
 [[./ENG306_Lab1_PartA_2.1_Lissajous.png]]
 
-The time delay between the channels was measured as 
-$Δt=2.47\micro\text{s}$ at 
-$f=90.2kHz$, giving a phase offset 
-$ϕ=360^∘ f\Delta t≈80.2^∘$
+The time delay between the channels was measured as $\Delta t=2.47\mu s$ at $f=90.2kHz$, giving a phase offset $\phi = 360^o f\Delta t\approx 80.2^o$
 The Lissajous ellipse corresponds to a constant phase difference and, using the intercept method, is consistent with 
-$∼80^∘$ within cursor resolution.
+$\approx80^o$ within cursor resolution.
 
 **** 6
 /Record an image of a single pulse (or a train of pulses), showing clearly the shape of the rising and falling edges./
