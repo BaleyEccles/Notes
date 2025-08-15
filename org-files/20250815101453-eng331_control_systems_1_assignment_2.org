@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       96e084e6-aded-49b7-9522-3bdd9dd97344
+:END:
+#+title: ENG331 - Control Systems 1 - Assignment 2
+#+date: [2025-08-15 Fri 10:14]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Question 1
+** a
+\begin{align*}
+f(t) &= \frac{d^2i_L(t)}{dt^2} + \frac{1}{RC}\frac{di_L(t)}{dt} + \frac{1}{LC}i_L(t) \\
+\mathcal{L}\{\hdots\} &: F(s) = s^2I_L(s) + \frac{1}{RC}sI_L(t) + \frac{1}{LC}I_L(s) \\
+F(s) &= I_L(s)\left(s^2 + \frac{1}{RC}s + \frac{1}{LC}\right) \\
+\frac{I_L(s)}{F(s)} &= \frac{1}{s^2 + \frac{1}{RC}s + \frac{1}{LC}}
+\end{align*}
+** b
+From the second order prototype form:
+\[G(s) = \frac{K\omega_n^2}{s^2 + 2\zeta \omega_ns + \omega_n^2}\]
+We can get the system of equations:
+\[\begin{cases}
+K\omega_n^2 &= 1 \\
+2\zeta \omega_n &= \frac{1}{RC} \\
+\omega_n^2 &= \frac{1}{LC}
+\end{cases}\]
+Which means:
+\begin{align*}
+K &= LC \\
+\omega_n &= \frac{1}{\sqrt{LC}} \\
+\zeta &= \frac{\sqrt{L}}{2R\sqrt{C}} \\
+\end{align*}
+** c
+Using the following equations:
+\begin{align*}
+\%OS &= e^{-\zeta\pi/\sqrt{1 - \zeta^2}}\\
+T_s &\approx \frac{4}{\zeta \omega_n} \\
+\end{align*}
+A system of equations can be formed:
+\begin{cases}
+0.1 &= e^{-\frac{\sqrt{L}}{2R\sqrt{0.1}}\pi/\sqrt{1 - \left(\frac{\sqrt{L}}{2R\sqrt{0.1}}\right)^2}}\\
+5 &\approx \frac{4}{\frac{\sqrt{L}}{2R\sqrt{0.1}} \frac{1}{\sqrt{0.1L}}} \\
+\end{cases}
+Solving using a calculator:
+\begin{align*}
+R &= 6.25\Omega \\
+L &= 5.46H
+\end{align*}
+
+* Question 2
+

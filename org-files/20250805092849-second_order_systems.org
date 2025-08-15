@@ -34,12 +34,15 @@
  - Rise Time $T_r$
    - Time to rise 10%
    - Use a table to find value
+     - [[./Rise_Time_Table.png]]
+   - If it is normalised
+     - \[T_r = \frac{T_{r,\textrm{normalised}}}{\omega_n}\]
  - Peak Time $T_p$
    - Time when max value is reached
    - \[T_p = \frac{\pi}{\omega_d}\]
  - Percentage overshoot %OS
    - Percentage which response rise above final value
-   - \[%OS = e^{-(\zeta \pi/}\] \[\%OS = e^{-\zeta\pi/\sqrt{1 - \zeta^2}}\]
+   - \[\%OS = e^{-\zeta\pi/\sqrt{1 - \zeta^2}}\]
  - Settling Time $T_s$
    - \[T_s \approx \frac{4}{\zeta \omega_n}\]
 
