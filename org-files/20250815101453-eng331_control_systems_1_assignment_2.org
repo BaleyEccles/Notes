@@ -134,10 +134,23 @@ ylabel('Im(s)');
 #+END_SRC
 
 #+RESULTS:
-: poles =
-: 
-:   -0.1250 - 2.2326i
-:   -0.1250 + 2.2326i
+#+begin_example
+Symbolic pkg v3.2.1: Python communication link active, SymPy v1.14.0.
+poles =
+
+  -0.1250 - 2.2326i
+  -0.1250 + 2.2326i
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 11
+    mtimes at line 54 column 3
+
+poles =
+
+  -0.1250 - 2.2326i
+  -0.1250 + 2.2326i
+#+end_example
 
 To find the other stuff we must convert the system into the second order prototype form:
 \begin{align*}
@@ -152,8 +165,28 @@ K\omega_n^2 &= 5 \\
 2\zeta\omega_n &= 0.25 \\
 \omega_n^2 &= 5
 \end{cases}
-:TODO: $\zeta$ is wrong :(, redo all the maths
-Which means, $\omega_n = \sqrt{5} \approx 2.236\ rad/s$, $\zeta = 0.025$ and $K = 1$. Next we can calculate $\omega_d$, $\sigma_d$ and $\theta$.
+#+BEGIN_SRC octave :exports none :results output :session Q2_d_2
+clc
+clear
+close all
+
+omega_n = sqrt(5)
+zeta = 0.25/2/omega_n
+
+omega_d = omega_n*sqrt(1 - zeta^2)
+sigma_d = 0.1250
+theta = acos(zeta)
+
+#+END_SRC
+
+#+RESULTS:
+: omega_n = 2.2361
+: zeta = 0.055902
+: omega_d = 2.2326
+: sigma_d = 0.1250
+: theta = 1.5149
+
+Which means, $\omega_n = \sqrt{5} \approx 2.236\ rad/s$, $\zeta = 0.0559$ and $K = 1$. Next we can calculate $\omega_d$, $\sigma_d$ and $\theta$.
 \[\omega_d = \omega_n\sqrt{1 - \zeta^2} = 2.23\]
 \[\sigma_d = - \Re\{\textrm{root}\} = 0.1250\] :TODO: This might be wrong
 \[\theta = \cos^{-1}(\zeta) = \cos^{-1}(0.025) = 1.546\]
@@ -176,10 +209,21 @@ The DC gain is
 \end{align*}
 
 ** f
+#+BEGIN_SRC octave :exports none :results output :session Q2_d_2
+OS = exp(-zeta*pi/sqrt(1 - zeta^2))*100
+T_p = pi/omega_d
+T_s = 4/(zeta*omega_n)
+#+END_SRC
+
+#+RESULTS:
+: OS = 83.871
+: T_p = 1.4072
+: T_s = 32
+
 \begin{align*}
 \%OS &= e^{-\zeta\pi/\sqrt{1 - \zeta^2}} \\
-\%OS &= e^{-0.025\pi/\sqrt{1 - 0.025^2}} \\
-\%OS &= 0.924
+\%OS &= e^{-0.0559\pi/\sqrt{1 - 0.0559^2}} \\
+\%OS &= 83.871%
 \end{align*}
 
 \begin{align*}
@@ -190,11 +234,14 @@ T_p &= 1.408\ s
 
 \begin{align*}
 T_s &\approx \frac{4}{\zeta \omega_n} \\
-T_s &\approx \frac{4}{0.025\cdot 2.236} \\
-T_s &\approx 71.56\ s
+T_s &\approx \frac{4}{0.0559\cdot 2.236} \\
+T_s &\approx 32\ s
 \end{align*}
 
 We need to use a table for the rise time:
 [[./Rise_Time_Table.png]]
-\[T_{r,\textrm{normalised}} = \]
+
+\begin{align*}
+T_{r,\textrm{normalised}} = 
+\end{align*}
 * Question 3
