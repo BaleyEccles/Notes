@@ -6,7 +6,14 @@
 #+STARTUP: latexpreview
 
 * BIBO Stability
+** Continuous Systems
+ - The natural response of the system fits within some bound
+ - All of the poles must be on the left of the $j\omega$ axis on the [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][Pole–Zero Plot]]
+
+** Discrete Systems
 A [[id:e8b3e3c8-1012-4b36-8aa5-81ebf472052f][System]] is BIBO stable if
 \[\lvert x[n] \rvert < B_x<\infty \rightarrow \lvert y[n] \rvert < B_y<\infty\]
 Which occurs when \[\sum_{k=-\infty}^{\infty}\lvert h[k]\rvert <\infty\] (absolutely summable).
 Basically determine if the [[id:e8b3e3c8-1012-4b36-8aa5-81ebf472052f][System]] ever goes to infinity or its [[id:8c187cae-c6ec-4298-85ef-12448f78b5e6][Impulse Response]], if not then it is BIBO stable.
+
+

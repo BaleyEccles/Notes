@@ -13,49 +13,8 @@
    - This can also be done using [[id:e1293290-fe17-4467-8083-142aa848421e][State Space Representation]]
  - [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]]
  - [[id:6f242323-5b6b-469d-b611-a3cdf4641299][Block Diagrams]]
-   
-** Signal Flow Graphs
-As apposed to [[id:6f242323-5b6b-469d-b611-a3cdf4641299][Block Diagrams]] we make signals nodes and systems arrows
- - [[./Signal_Flow_Graphs.png]]
-Feedback Form:
- - [[./Feedback_Form_Signal_Flow_Graph.png]]
+ - [[id:d6d06e75-adca-435d-8e0f-80ce765a4189][Signal Flow Graphs]]
 
- - We can convert [[id:e1293290-fe17-4467-8083-142aa848421e][State Space Representation]] to a Signal Flow Graph by considering each of the equations
- - We can convert [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace]] Representation to a Signal Flow Graph by converting to [[id:6f242323-5b6b-469d-b611-a3cdf4641299][Block Diagram]] and the converting to a Signal Flow Graph
- 
-*** Masons Rule
-\[G(s) = \frac{C(s)}{R(s)} = \frac{\sum_kT_k \Delta_k}{\Delta}\]
- - $k$ - Number of forward paths
- - $T_k$ - The kth forward-path gain
- - $\Delta$ - $1-\Sigma$ loop gains + $\Sigma$ nontouching-loop gians taken two at a time - $\Sigma$ nontouching-loop gains taken three at a time + $\Sigma$ nontouching-loop gains - ...
- - :TODO: $\Delta_k$ - $\Delta - \Sigma$ loop gain terms in $\Delta$
-Steps
-1. Forward Path Gains
-2. Loop Gains
-3. Non Touching Loops
-
-
-**** Example
-[[./Masons_Rule.png]]
-1. Forward Path Gains
-   \[G_1(s)G_2(s)G_3(s)G_4(s)G_5(s)\]
-2. Loop Gains
-   \[G_2(s)H_1(s)\]
-   \[G_4(s)H_2(s)\]
-   \[G_7(s)H_4(s)\]
-   \[G_2(s)G_3(s)G_4(s)G_5(s)G_6(s)G_7(s)G_8(s)\]
-3. Non Touching Loops
-Loop 1:
-\[G_2(s)H_1(s)\]
-Loop 2:
-\[G_4(s)H_2(s)\]
-Loop 3:
-\[G_7(s)H_4(s)\]
-Loop 4:
-\[G_2(s)G_3(s)G_4(s)G_5(s)G_6(s)G_7(s)G_8(s)\]
-
-Plug into:
-\[G(s) = \frac{C(s)}{R(s)} = \frac{\sum_kT_k \Delta_k}{\Delta}\]
 ** Systems
  - [[id:698f46a5-c12f-462a-bc34-bcc6fc1d9cb3][First Order Systems]]
  - [[id:405c4318-12e5-45f8-8f69-c074d41a1481][Second Order Systems]]
@@ -88,5 +47,35 @@ A Block Diagram of the Feedback Form
  - [[./Feedback_Form.png]]
 Works by calculating an error signal and feeding it back into the controller
 \[G_e(s) = \frac{G(s)}{1 \pm G(s)H(s)}\]
+
+** Stability
+[[id:847ec0e7-da66-447a-9835-cd512492d2e3][Stability]] exists when the all of the real component of the poles are less than or equal to zero.
+
+*** Marginal Stability
+When the natural response does not decay to zero, but does not grow either.
+Exists when poles are on the $j\omega$ axis
+
+** Routh–Hurwitz Stability Criterion
+For a polynomial: 
+\[P(s) = a_is^i + a_{i-1}s^{i-1} \hdots + a_1s + a_0\]
+1. All coefficients must be greater than zero
+   \[a_i > 0\ \forall\ i\]
+2. And
+\[\begin{matrix}
+a_{n  } & a_{n-2} & a_{n-4} & \hdots \\
+a_{n-1} & a_{n-3} & a_{n-5} & \hdots \\
+b_1 & b_2 & b_3 & \hdots \\
+c_1 & c_2 & c_3 & \hdots \\
+\vdots & \vdots & \vdots & \vdots
+\end{matrix}\]
+Where:
+\[b_i = \frac{a_{n-1}a_{n-2i} - a_na_{n - (2i + 1)}}{a_{n-1}}\]
+\[c_i = \frac{b_1a_{n-(2i + 1)} - a_{n-1}b_{i + 1}}{b_1}\]
+Then number of sign changes in the first column will be the number of positive poles
+   
+*** Special Case
+This case will be unstable either way.
+
+If we encounter a zero in the first column we replace it with $\epsilon$ and continue. Then we replace the $\epsilon$ twice, first with some small positive value, then some small negative value, and check the sign changes.
 
 

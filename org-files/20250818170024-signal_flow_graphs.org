@@ -1,0 +1,70 @@
+:PROPERTIES:
+:ID:       d6d06e75-adca-435d-8e0f-80ce765a4189
+:END:
+#+title: Signal Flow Graphs
+#+date: [2025-08-18 Mon 17:00]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Signal Flow Graphs
+As apposed to [[id:6f242323-5b6b-469d-b611-a3cdf4641299][Block Diagrams]] we make signals nodes and systems arrows
+ - [[./Signal_Flow_Graphs.png]]
+Feedback Form:
+ - [[./Feedback_Form_Signal_Flow_Graph.png]]
+
+ - We can convert [[id:e1293290-fe17-4467-8083-142aa848421e][State Space Representation]] to a Signal Flow Graph by considering each of the equations
+ - We can convert [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace]] Representation to a Signal Flow Graph by converting to [[id:6f242323-5b6b-469d-b611-a3cdf4641299][Block Diagram]] and the converting to a Signal Flow Graph
+ 
+** Masons Rule
+\[G(s) = \frac{C(s)}{R(s)} = \frac{\sum_kT_k \Delta_k}{\Delta}\]
+ - $k$ - Number of forward paths
+ - $T_k$ - The kth forward-path gain
+ - $\Delta$ - $1-\Sigma$ loop gains + $\Sigma$ nontouching-loop gians taken two at a time - $\Sigma$ nontouching-loop gains taken three at a time + $\Sigma$ nontouching-loop gains - ...
+ - :TODO: $\Delta_k$ - $\Delta - \Sigma$ loop gain terms in $\Delta$
+Steps
+1. Forward Path Gains
+2. Loop Gains
+3. Non Touching Loops
+
+
+*** Example
+[[./Masons_Rule.png]]
+1. Forward Path Gains
+   \[G_1(s)G_2(s)G_3(s)G_4(s)G_5(s)\]
+2. Loop Gains
+   \[G_2(s)H_1(s)\]
+   \[G_4(s)H_2(s)\]
+   \[G_7(s)H_4(s)\]
+   \[G_2(s)G_3(s)G_4(s)G_5(s)G_6(s)G_7(s)G_8(s)\]
+3. Non Touching Loops
+Loop 1:
+\[G_2(s)H_1(s)\]
+Loop 2:
+\[G_4(s)H_2(s)\]
+Loop 3:
+\[G_7(s)H_4(s)\]
+Loop 4:
+\[G_2(s)G_3(s)G_4(s)G_5(s)G_6(s)G_7(s)G_8(s)\]
+
+Plug into:
+\[G(s) = \frac{C(s)}{R(s)} = \frac{\sum_kT_k \Delta_k}{\Delta}\]
+
+** Forms
+
+*** Phase Variable
+[[./Phase_Varible_Form.png]]
+*** Parallel
+[[./Parallel_Form.png]]
+*** Cascade
+[[./Cascade_Form.png]]
+*** Controller Canonical
+[[./Controller_Canonical_Form.png]]
+*** Observer Canonical
+[[./Observer_Canonical_Form.png]]
+
+*** Transformation Between Forms
+ - A linear transformation exists for conversion between each of the forms
+Given the [[id:e1293290-fe17-4467-8083-142aa848421e][State Space Representation]] there exists:
+\[z = P^{-1}APz + P^{-1}Bu\]
+\[y = CPz + Du\]
+
