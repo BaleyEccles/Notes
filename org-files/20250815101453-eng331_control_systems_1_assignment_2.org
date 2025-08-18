@@ -46,5 +46,155 @@ R &= 6.25\Omega \\
 L &= 5.46H
 \end{align*}
 
-* Question 2
+* TODO Question 2
+** a
+First we must get the transfer function:
+\begin{align*}
+10r(t) &= 8\frac{d^2c(t)}{dt^2} + 2\frac{dc(t)}{dt} + 40c(t) \\
+\mathcal{L}\{\hdots\} &: 10R(s) = 8s^2C(s) + 2sC(t) + 40C(s) \\
+40R(s) &= C(s)\left(8s^2 + 2s + 40\right) \\
+\frac{C(s)}{R(s)} &= G(s) = \frac{40}{8s^2 + 2s + 40}
+\end{align*}
 
+Next we can apply a step response ($U(s) = \frac{1}{s}$) to the system
+\[\frac{1}{s}G(s) &= \frac{1}{s}\frac{40}{8s^2 + 2s + 40}\]
+
+
+#+BEGIN_SRC octave :exports none :results output :session Des1
+clc
+clear
+close all
+pkg load symbolic
+
+syms s
+G = (1/s)*(40/(8*s^2 + 2*s + 40))
+latex(ilaplace(G))
+partfrac(G)
+latex(partfrac(G))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Symbolic pkg v3.2.1: Python communication link active, SymPy v1.14.0.
+H = (sym)
+
+          40         
+  ───────────────────
+    ⎛   2           ⎞
+  s⋅⎝8⋅s  + 2⋅s + 40⎠
+1 - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319} - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}
+ans = (sym)
+
+       4⋅s + 1      1
+  - ───────────── + ─
+       2            s
+    4⋅s  + s + 20
+- \frac{4 s + 1}{4 s^{2} + s + 20} + \frac{1}{s}
+#+end_example
+
+Now we must do the inverse Laplace transform, to do this we must do partial fractions expansion
+\[-\frac{4 s + 1}{4 s^{2} + s + 20} + \frac{1}{s}\]
+:TODO: Show working rather than using matlab
+\[u(t) - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319}u(t) - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}u(t)\]
+** b
+The forced response is:
+\[u(t)\]
+** c
+The natural/transient response is:
+\[- \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319}u(t) - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}u(t)\]
+** d
+\[G(s) &= \frac{40}{8s^2 + 2s + 40}\]
+
+Poles are at $-0.1250 - 2.2326i$ and $-0.1250 + 2.2326i$
+
+
+#+BEGIN_SRC octave :exports none :results output :session Q2_d
+clc
+clear
+close all
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  pkg load symbolic
+end
+
+syms s
+poles = eval(solve(8*s^2 + 2*s + 40 == 0, s))
+
+hold on;
+plot(real(poles(1)), imag(poles(1)), 'bx');
+plot(real(poles(2)), imag(poles(2)), 'bx');
+axis([-3 3 -3 3]);
+axis equal;
+grid on;
+set (gca, "xaxislocation", "origin");
+set (gca, "yaxislocation", "origin");
+xlabel('Re(s)');
+ylabel('Im(s)');
+#+END_SRC
+
+#+RESULTS:
+: poles =
+: 
+:   -0.1250 - 2.2326i
+:   -0.1250 + 2.2326i
+
+To find the other stuff we must convert the system into the second order prototype form:
+\begin{align*}
+G(s) &= \frac{K\omega_n^2}{s^2 + 2\zeta \omega_ns + \omega_n^2} \\
+G(s) &= \frac{\frac{40}{8}}{s^2 + \frac{2}{8}s + \frac{40}{8}} \\
+G(s) &= \frac{5}{s^2 + 0.25s + 5}
+\end{align*}
+
+This allows us to create the system of equations:
+\begin{cases}
+K\omega_n^2 &= 5 \\
+2\zeta\omega_n &= 0.25 \\
+\omega_n^2 &= 5
+\end{cases}
+:TODO: $\zeta$ is wrong :(, redo all the maths
+Which means, $\omega_n = \sqrt{5} \approx 2.236\ rad/s$, $\zeta = 0.025$ and $K = 1$. Next we can calculate $\omega_d$, $\sigma_d$ and $\theta$.
+\[\omega_d = \omega_n\sqrt{1 - \zeta^2} = 2.23\]
+\[\sigma_d = - \Re\{\textrm{root}\} = 0.1250\] :TODO: This might be wrong
+\[\theta = \cos^{-1}(\zeta) = \cos^{-1}(0.025) = 1.546\]
+** e
+$\zeta < 1$, therefore the system is underdamped
+
+** f
+We can use the final value theorem:
+\begin{align*}
+c(t \rightarrow \infty) &= \lim_{s\rightarrow 0} sC(s) \\
+c(t \rightarrow \infty) &= \lim_{s\rightarrow 0} \frac{1}{s}\frac{5s}{s^2 + 0.25s + 5} \\
+c(t \rightarrow \infty) &= 1
+\end{align*}
+
+** g
+The DC gain is
+\begin{align*}
+\lim_{s\rightarrow 0} G(s) &= \frac{5}{s^2 + 0.25s + 5} \\
+\lim_{s\rightarrow 0} G(s) &= 1
+\end{align*}
+
+** f
+\begin{align*}
+\%OS &= e^{-\zeta\pi/\sqrt{1 - \zeta^2}} \\
+\%OS &= e^{-0.025\pi/\sqrt{1 - 0.025^2}} \\
+\%OS &= 0.924
+\end{align*}
+
+\begin{align*}
+T_p &= \frac{\pi}{\omega_d} \\
+T_p &= \frac{\pi}{2.23} \\
+T_p &= 1.408\ s
+\end{align*}
+
+\begin{align*}
+T_s &\approx \frac{4}{\zeta \omega_n} \\
+T_s &\approx \frac{4}{0.025\cdot 2.236} \\
+T_s &\approx 71.56\ s
+\end{align*}
+
+We need to use a table for the rise time:
+[[./Rise_Time_Table.png]]
+\[T_{r,\textrm{normalised}} = \]
+* Question 3
