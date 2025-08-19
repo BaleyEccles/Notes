@@ -5,6 +5,16 @@
 #+date: [2025-08-12 Tue 10:53]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
 
 * Task 2 - Plant Construction
 

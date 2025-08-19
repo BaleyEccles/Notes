@@ -5,6 +5,16 @@
 #+date: [2025-08-15 Fri 10:14]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
 
 * Question 1
 ** a
@@ -242,6 +252,154 @@ We need to use a table for the rise time:
 [[./Rise_Time_Table.png]]
 
 \begin{align*}
-T_{r,\textrm{normalised}} = 
+T_{r,\textrm{normalised}} &= 1 \\
+T_r &= \frac{T_{r,\textrm{normalised}}}{\omega_n} \\
+T_r &= \frac{1.05}{2.236} \\
+T_r &= 0.445s
 \end{align*}
+
 * Question 3
+
+** a
+Just move the $1$ to the second spot:
+\[\mathbf{y} = \begin{bmatrix}0 & 1 & 0 & 0 & 0 & 0\end{bmatrix} \mathbf{x} + 0 \mathbf{u}\]
+
+** b
+We need to use the following equation:
+\[T(s) = \frac{Y(s)}{U(s)} = C(sI - A)^{-1}B + D\]
+#+BEGIN_SRC matlab :exports none :results output
+clc
+clear
+close all
+
+syms s K M_1 M_2 M_3 f_v1 f_v2 f_v3 f_v4 f_v5;
+
+A = [
+    0, 1, 0, 0, 0, 0; ...
+    -K/M_1, -(f_v1 + f_v2 + f_v4)/M_2, K/M_1, f_v2/M_1, 0, f_v4/M_1; ...
+    0, 0, 0, 1, 0, 0; ...
+    K/M_2, f_v2/M_2, -K/M_2, -(f_v2 + f_v5)/M_2, 0, f_v5/M_2; ...
+    0, 0, 0, 0, 0, 1; ...
+    0, f_v4/M_3, 0, f_v5/M_3, 0, -(f_v3 + f_v4 + f_v5)/M_3
+    ];
+%latex(A)
+
+B = [0; 0; 0; 1/M_2; 0; 0];
+%latex(B)
+
+C = [0, 1, 0, 0, 0, 0];
+D = [0];
+
+I = eye(6);
+%latex(I)
+
+sI_A = s*I - A;
+latex(sI_A)
+
+T = simplify(C*inv(sI_A)*B + D);
+%latex(simplify(T))
+[n, d] = numden(T);
+latex(simplify(n))
+latex(simplify(d))
+#+END_SRC
+
+** c
+*** i
+We can use the peak time and point to find the required values using the following equations:
+\begin{align*}
+T_p &= \frac{\pi}{\omega_d} \\
+\omega_d &= \omega_n\sqrt{1 - \zeta^2} \\
+\textrm{Peak Value} &= \frac{K}{\sqrt{1-\zeta^2}} \\
+G(s) &= \frac{K\omega_n^2}{s^2 + 2\zeta \omega_ns + \omega_n^2}
+\end{align*}
+
+To do this we find $\zeta$ and $\omega_d$ and then $\omega_n$.
+\[\omega_d = \frac{\pi}{T_p} = \frac{\pi}{1.6} = 1.963\]
+\[\textrm{Peak Value} = \frac{K}{\sqrt{1-\zeta^2}} = 0.012572\]
+
+\[\zeta = 0.404\]
+\[\omega_n = 2.116\]
+
+Which means the second order approximation is
+\[G(s) = \frac{0.}{s^2 + 0.884s + 0.455}\]
+
+#+BEGIN_SRC matlab :exports none :results output
+close all
+T_p = 1.6;
+y_p = 0.012572;
+
+omega_d = T_p/pi
+
+syms z
+
+%zeta = vpa(solve(exp(-z*pi/sqrt(1 - z^2)) == OS,z))
+%omega_n = omega_d/sqrt(1 - zeta(1).^2)
+
+omega_n = 2.116;
+zeta = 0.404;
+K = 0.0115;
+
+H = tf(double([K*omega_n^2]), double([1, 2*zeta(1)*omega_n, omega_n^2]))
+figure;
+stepplot(H)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+omega_d =
+
+    0.5093
+
+H =
+ 
+        0.05149
+  --------------------
+  s^2 + 1.71 s + 4.477
+ 
+Continuous-time transfer function.
+stepplot(H) %-<org-eval>-
+#+end_example
+*** ii
+
+From the figure.
+\[\textrm{DC Gain} = K = 0.0115\]
+The damped natural frequency ($\omega_d$) can be calculated using the time between peaks ($T$):
+\[\omega_n = 3.7 - 1.6 = 2.1\]
+
+And the decay rate has the following relationship to natural frequency and damping ratio
+\[\textrm{Decay Rate} = -\zeta\omega_n\]
+
+Next we can calculate $\zeta$ and $\omega_n$ to put them into the second order prototype form
+\begin{cases}
+0.01229 &= -\zeta\omega_n \\
+3 &= \omega_n\sqrt{1 - \zeta^2}
+\end{cases}
+Which means $\zeta = 0.00409$ and $\omega_n = -3.007$
+
+Finally the transfer function is:
+\[G(s) = \frac{0.1}{s^2 - 0.02454s + 9}\]
+
+#+BEGIN_SRC matlab :exports none :results output
+clc
+clear
+close all
+
+data = load("ENG331_A2_Q3.mat")
+disp(data)
+figure;
+plot(data.t, data.y)
+
+%H = tf(0.1, [1, 0.02454, 9]);
+%stepplot(H)
+#+END_SRC
+
+#+RESULTS:
+: data = 
+: 
+:   struct with fields:
+: 
+:     t: [1201x1 double]
+:     y: [1201x1 double]
+:     t: [1201x1 double]
+:     y: [1201x1 double]
+: %stepplot(H) %-<org-eval>-
