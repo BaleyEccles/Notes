@@ -17,3 +17,27 @@
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
 
 * ENG335 - Computational Intelligence - Assignment 1
+
+** Problem Description
+The goal of this fuzzy expert system is to determine the score at which a customer has in terms of their marketing effectiveness. The customers have three important criteria that are evaluated. First the personal data, this is defined by their age, marital status and number of children. Their financial background encompasses their fixed income and real estate mortgage. Lastly, their social status is defined by their residences location. The system evaluates all of these factors and applies weights appropriately to determine a rating for the customer.
+
+** Fuzzy Toolbox Overview
+The fuzzy system toolbox is used to design fuzzy expert systems, it can design Mamdani and Sugeno types of fuzzy systems. The toolbox has tools that allow the designer to change the systems inputs and outputs. Each input and output has a list of membership functions that can be modified in the Membership Function Editor, changing the membership function changes how the system will respond to the modified input. Rules can be added to specify how the system will respond to the specific memberships, this can be done in the Rule Editor.
+
+There are various tools available to verify the system. A control surface can be made in the Control Surface tab, this shows what the system will output given two of the selected inputs. The Rule Interference tab allows the designer to understand how rules interact with each other and see the output.
+
+** Designed System
+The system that was designed cascades three different fuzzy systems into one another. The /personal/ fuzzy system takes in three inputs and feeds into the /mailing/ fuzzy system. The /financial/ fuzzy system takes in two inputs and also feeds into the /mailing/ fuzzy system. The /mailing/ fuzzy systems takes in the two inputs from the /personal/ and /financial/ fuzzy systems and the social status of the customer.
+
+The /personal/ fuzzy system three inputs are the customers age, number of children and marital status. The customers age range is expected to be between 0 and 100, the number of children the customer has should be between 0 and 10, their marital status is either single, indicated in the system by a 0, or married, indicated in the system by a 1. The age has one membership function called 'young', this indicates how young the customer is. The number of children has three membership functions 'zero', 'few' and 'many', each of which indicate how much the customer belongs to the respective group. The marital status has two membership functions, 'single' and 'married', indicating if the user is married or not. The marital status membership function uses two squares, because either the customer is married or not, it is a boolean value. The output has two membership functions, 'low' and high'
+
+The /financial/ fuzzy system two inputs are the customers fixed expenses and their real estate mortgage. Their (yearly) fixed expenses is expected to be between $0 and 100 000. Their real estate mortgage is expected to be between $0 and $10 000 000. The fixed expenses has three membership functions, each triangles equally separated, they are 'low', 'medium' and 'high'. The real estate mortgage has also has the three membership functions 'low', 'medium' and 'high'. The output has three membership functions, 'low', 'medium' and 'high'.
+
+The /mailing/ fuzzy system three inputs are the outputs of the /personal/ and /financial/ fuzzy systems and the customers social status all of which are between 0 and 1. The personal input to this fuzzy system has two membership functions, 'low' and 'high'. The financial input has three membership functions 'low', 'medium' and 'high'. And the social input has four membership functions, which are 'bad', 'fair', 'good' and 'excellent'. The output has five membership functions, 'very low', 'low', 'medium', 'high' and 'very high'.
+
+In between each system there is a gain that normalises the output from 0 to 1. The output of the overall system is between 0 and 1, and then multiplied by 10 to get a score from 0 to 10.
+
+** User Guide
+
+** Conclusion
+
