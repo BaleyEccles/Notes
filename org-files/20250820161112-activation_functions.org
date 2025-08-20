@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       0ca6750e-ae40-476f-a9cd-9008ba0b9cc7
+:END:
+#+title: Activation Functions
+#+date: [2025-08-20 Wed 16:11]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Activation Functions
+A function that relates the inputs and weights to the output.
+Different activation functions can change how fast the network arrives at an answer
+** Step Function
+\[ Y^{\textrm{step}} = \begin{cases}
+1, & \textrm{if } X\geq 0\\
+0, & \textrm{if } X < 0\\
+\end{cases}\]
+
+** Sign Function
+\[ Y^{\textrm{sign}} = \begin{cases}
++1, & \textrm{if } X\geq 0\\
+-1, & \textrm{if } X < 0\\
+\end{cases}\]
+
+** Sigmoid Function
+\[ Y^{\textrm{sigmoid}} = \frac{1}{1 + e^{-X}}\]
+
+** Linear Function
+\[ Y^{\textrm{linear}} = X\]
+
+

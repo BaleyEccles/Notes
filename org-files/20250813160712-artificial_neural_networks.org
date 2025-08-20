@@ -12,29 +12,9 @@ Uses 'neurons', which are similar to ones in the brain.
  - [[./Neural_Network_Example.png]]
  - [[id:14faa362-08d3-40a2-b799-9541733824bf][Preceptron]]
  - [[id:1fcff955-72ee-4878-8c1a-6078bb2c73e6][Multilayer Neural Networks]]
+ - [[id:0ca6750e-ae40-476f-a9cd-9008ba0b9cc7][Activation Functions]]
 
 ** Supervised Learning
 When we know what the output should be. For example images of animals, we know which animal is what, the AI is expected to give us are already known value.
 
-** Activation Functions
-A function that relates the inputs and weights to the output.
-Different activation functions can change how fast the network arrives at an answer
-*** Step Function
-\[ Y^{\textrm{step}} = \begin{cases}
-1, & \textrm{if } X\geq 0\\
-0, & \textrm{if } X < 0\\
-\end{cases}\]
-
-*** Sign Function
-\[ Y^{\textrm{sign}} = \begin{cases}
-+1, & \textrm{if } X\geq 0\\
--1, & \textrm{if } X < 0\\
-\end{cases}\]
-
-*** Sigmoid Function
-\[ Y^{\textrm{sigmoid}} = \frac{1}{1 + e^{-X}}\]
-
-*** Linear Function
-\[ Y^{\textrm{linear}} = X\]
-
-
+** Unsupervised Learning
