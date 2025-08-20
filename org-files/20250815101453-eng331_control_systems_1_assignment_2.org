@@ -15,6 +15,7 @@
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
 * Question 1
 ** a
@@ -56,7 +57,7 @@ R &= 6.25\Omega \\
 L &= 5.46H
 \end{align*}
 
-* TODO Question 2
+* Question 2
 ** a
 First we must get the transfer function:
 \begin{align*}
@@ -69,43 +70,34 @@ First we must get the transfer function:
 Next we can apply a step response ($U(s) = \frac{1}{s}$) to the system
 \[\frac{1}{s}G(s) &= \frac{1}{s}\frac{40}{8s^2 + 2s + 40}\]
 
-
-#+BEGIN_SRC octave :exports none :results output :session Des1
+Using MATLAB to do the inverse Laplace transform, because it would be nasty otherwise:
+#+BEGIN_SRC octave :exports code :results output :session Des1
 clc
 clear
 close all
-pkg load symbolic
+
+if exist('OCTAVE_VERSION', 'builtin') % If youre using octave instead of matlab
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  pkg load symbolic
+end
 
 syms s
 G = (1/s)*(40/(8*s^2 + 2*s + 40))
 latex(ilaplace(G))
-partfrac(G)
-latex(partfrac(G))
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-Symbolic pkg v3.2.1: Python communication link active, SymPy v1.14.0.
-H = (sym)
+: G = (sym)
+: 
+:           40         
+:   ───────────────────
+:     ⎛   2           ⎞
+:   s⋅⎝8⋅s  + 2⋅s + 40⎠
+: 1 - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319} - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}
 
-          40         
-  ───────────────────
-    ⎛   2           ⎞
-  s⋅⎝8⋅s  + 2⋅s + 40⎠
-1 - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319} - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}
-ans = (sym)
-
-       4⋅s + 1      1
-  - ───────────── + ─
-       2            s
-    4⋅s  + s + 20
-- \frac{4 s + 1}{4 s^{2} + s + 20} + \frac{1}{s}
-#+end_example
-
-Now we must do the inverse Laplace transform, to do this we must do partial fractions expansion
-\[-\frac{4 s + 1}{4 s^{2} + s + 20} + \frac{1}{s}\]
-:TODO: Show working rather than using matlab
-\[u(t) - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319}u(t) - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}u(t)\]
+Which gives:
+\[c(t) = u(t) - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319}u(t) - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}u(t)\]
 ** b
 The forced response is:
 \[u(t)\]
@@ -115,14 +107,15 @@ The natural/transient response is:
 ** d
 \[G(s) &= \frac{40}{8s^2 + 2s + 40}\]
 
-Poles are at $-0.1250 - 2.2326i$ and $-0.1250 + 2.2326i$
 
 
-#+BEGIN_SRC octave :exports none :results output :session Q2_d
+Code to produce the plot in Figure \ref{fig:ENG331_Q2_d}:
+#+BEGIN_SRC octave :exports code :results output :session Q2_d
 clc
 clear
 close all
-if exist('OCTAVE_VERSION', 'builtin')
+
+if exist('OCTAVE_VERSION', 'builtin') % If youre using octave instead of matlab
   set(0, "DefaultLineLineWidth", 2);
   set(0, "DefaultAxesFontSize", 25);
   pkg load symbolic
@@ -141,26 +134,20 @@ set (gca, "xaxislocation", "origin");
 set (gca, "yaxislocation", "origin");
 xlabel('Re(s)');
 ylabel('Im(s)');
+print -dpng 'ENG331_Q2_d.png'
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-Symbolic pkg v3.2.1: Python communication link active, SymPy v1.14.0.
-poles =
+: poles =
+: 
+:   -0.1250 - 2.2326i
+:   -0.1250 + 2.2326i
 
-  -0.1250 - 2.2326i
-  -0.1250 + 2.2326i
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 11
-    mtimes at line 54 column 3
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Pole-zero plot of the sytem $G(s)$ \label{fig:ENG331_Q2_d}
+[[./ENG331_Q2_d.png]]
 
-poles =
-
-  -0.1250 - 2.2326i
-  -0.1250 + 2.2326i
-#+end_example
+The poles are at $-0.1250 - 2.2326i$ and $-0.1250 + 2.2326i$.
 
 To find the other stuff we must convert the system into the second order prototype form:
 \begin{align*}
@@ -198,10 +185,10 @@ theta = acos(zeta)
 
 Which means, $\omega_n = \sqrt{5} \approx 2.236\ rad/s$, $\zeta = 0.0559$ and $K = 1$. Next we can calculate $\omega_d$, $\sigma_d$ and $\theta$.
 \[\omega_d = \omega_n\sqrt{1 - \zeta^2} = 2.23\]
-\[\sigma_d = - \Re\{\textrm{root}\} = 0.1250\] :TODO: This might be wrong
+\[\sigma_d = - \Re\{\textrm{root}\} = 0.1250\]
 \[\theta = \cos^{-1}(\zeta) = \cos^{-1}(0.025) = 1.546\]
 ** e
-$\zeta < 1$, therefore the system is underdamped
+As $\zeta < 1$ the system is underdamped.
 
 ** f
 We can use the final value theorem:
@@ -212,7 +199,7 @@ c(t \rightarrow \infty) &= 1
 \end{align*}
 
 ** g
-The DC gain is
+The DC gain is:
 \begin{align*}
 \lim_{s\rightarrow 0} G(s) &= \frac{5}{s^2 + 0.25s + 5} \\
 \lim_{s\rightarrow 0} G(s) &= 1
@@ -248,11 +235,13 @@ T_s &\approx \frac{4}{0.0559\cdot 2.236} \\
 T_s &\approx 32\ s
 \end{align*}
 
-We need to use a table for the rise time:
+We need to use a table for the rise time, which can be seen in Figure \ref{fig:Rise_Time_Table}.
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Rise time table \label{fig:Rise_Time_Table}
 [[./Rise_Time_Table.png]]
 
 \begin{align*}
-T_{r,\textrm{normalised}} &= 1 \\
+T_{r,\textrm{normalised}} &\approx 1 \\
 T_r &= \frac{T_{r,\textrm{normalised}}}{\omega_n} \\
 T_r &= \frac{1.05}{2.236} \\
 T_r &= 0.445s
@@ -267,10 +256,17 @@ Just move the $1$ to the second spot:
 ** b
 We need to use the following equation:
 \[T(s) = \frac{Y(s)}{U(s)} = C(sI - A)^{-1}B + D\]
+Using MATLAB to do the matrix inverse and multiplications, as seen below:
 #+BEGIN_SRC matlab :exports none :results output
 clc
 clear
 close all
+
+if exist('OCTAVE_VERSION', 'builtin') % If youre using octave instead of matlab
+    set(0, "DefaultLineLineWidth", 2);
+    set(0, "DefaultAxesFontSize", 25);
+    pkg load symbolic
+end
 
 syms s K M_1 M_2 M_3 f_v1 f_v2 f_v3 f_v4 f_v5;
 
@@ -294,14 +290,21 @@ I = eye(6);
 %latex(I)
 
 sI_A = s*I - A;
-latex(sI_A)
+%latex(sI_A)
 
-T = simplify(C*inv(sI_A)*B + D);
-%latex(simplify(T))
+T = simplify(C*inv(sI_A)*B - D);
+latex(simplify(T))
 [n, d] = numden(T);
-latex(simplify(n))
-latex(simplify(d))
+%latex(simplify(n))
+%latex(factor(simplify(d)))
 #+END_SRC
+
+#+RESULTS:
+: ans =
+: 
+:     '\frac{M_{2}\,\left(K\,f_{\mathrm{v3}}+K\,f_{\mathrm{v4}}+K\,f_{\mathrm{v5}}+K\,M_{3}\,s+f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,s+f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,s+f_{\mathrm{v2}}\,f_{\mathrm{v5}}\,s+f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s+M_{3}\,f_{\mathrm{v2}}\,s^2\right)}{K\,M_{1}\,{f_{\mathrm{v4}}}^2-{M_{2}}^2\,{f_{\mathrm{v4}}}^2\,s^2-K\,M_{2}\,{f_{\mathrm{v4}}}^2+K\,{M_{2}}^2\,f_{\mathrm{v3}}\,s+K\,{M_{2}}^2\,f_{\mathrm{v4}}\,s+K\,{M_{2}}^2\,f_{\mathrm{v5}}\,s+M_{1}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v3}}\,s+M_{1}\,f_{\mathrm{v2}}\,{f_{\mathrm{v4}}}^2\,s+M_{1}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v4}}\,s-M_{2}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v3}}\,s+M_{1}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v5}}\,s-M_{2}\,f_{\mathrm{v2}}\,{f_{\mathrm{v4}}}^2\,s-M_{2}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v4}}\,s-M_{2}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v5}}\,s+M_{1}\,{f_{\mathrm{v4}}}^2\,f_{\mathrm{v5}}\,s-M_{2}\,{f_{\mathrm{v4}}}^2\,f_{\mathrm{v5}}\,s+K\,{M_{2}}^2\,M_{3}\,s^2+M_{1}\,{M_{2}}^2\,M_{3}\,s^4+M_{1}\,M_{3}\,{f_{\mathrm{v2}}}^2\,s^2+M_{1}\,M_{2}\,{f_{\mathrm{v4}}}^2\,s^2+M_{1}\,{M_{2}}^2\,f_{\mathrm{v3}}\,s^3-M_{2}\,M_{3}\,{f_{\mathrm{v2}}}^2\,s^2+M_{1}\,{M_{2}}^2\,f_{\mathrm{v4}}\,s^3+M_{1}\,{M_{2}}^2\,f_{\mathrm{v5}}\,s^3+K\,M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v3}}+K\,M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v4}}+K\,M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}+K\,M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v5}}+K\,M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}-K\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}+K\,M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}+K\,M_{1}\,f_{\mathrm{v3}}\,f_{\mathrm{v4}}-K\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}-K\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}+K\,M_{1}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}+K\,M_{2}\,f_{\mathrm{v3}}\,f_{\mathrm{v5}}-K\,M_{2}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}+K\,M_{1}\,M_{3}\,f_{\mathrm{v1}}\,s+K\,M_{1}\,M_{2}\,f_{\mathrm{v3}}\,s+K\,M_{1}\,M_{3}\,f_{\mathrm{v2}}\,s+K\,M_{1}\,M_{2}\,f_{\mathrm{v4}}\,s-K\,M_{2}\,M_{3}\,f_{\mathrm{v2}}\,s+K\,M_{1}\,M_{2}\,f_{\mathrm{v5}}\,s+K\,M_{1}\,M_{3}\,f_{\mathrm{v4}}\,s+K\,M_{2}\,M_{3}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v3}}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,f_{\mathrm{v4}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,f_{\mathrm{v5}}\,s+2\,M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v3}}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s-2\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s+K\,M_{1}\,M_{2}\,M_{3}\,s^2+M_{1}\,M_{2}\,M_{3}\,f_{\mathrm{v1}}\,s^3+2\,M_{1}\,M_{2}\,M_{3}\,f_{\mathrm{v2}}\,s^3+M_{1}\,M_{2}\,M_{3}\,f_{\mathrm{v4}}\,s^3+M_{1}\,M_{2}\,M_{3}\,f_{\mathrm{v5}}\,s^3+M_{1}\,M_{2}\,f_{\mathrm{v1}}\,f_{\mathrm{v3}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v1}}\,f_{\mathrm{v2}}\,s^2+M_{1}\,M_{2}\,f_{\mathrm{v1}}\,f_{\mathrm{v4}}\,s^2+2\,M_{1}\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,s^2+M_{1}\,M_{2}\,f_{\mathrm{v1}}\,f_{\mathrm{v5}}\,s^2+2\,M_{1}\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,s^2+2\,M_{1}\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}\,s^2+M_{1}\,M_{2}\,f_{\mathrm{v3}}\,f_{\mathrm{v4}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v1}}\,f_{\mathrm{v5}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,s^2+M_{1}\,M_{2}\,f_{\mathrm{v3}}\,f_{\mathrm{v5}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}\,s^2+2\,M_{1}\,M_{2}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s^2}'
+: %latex(factor(simplify(d))) %-<org-eval>-
+
 
 ** c
 *** i
