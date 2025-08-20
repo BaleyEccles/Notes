@@ -4,7 +4,6 @@
 #+title: ENG335 - Computational Intelligence - Assignment 1
 #+date: [2025-08-09 Sat 15:02]
 #+AUTHOR: Baley Eccles - 652137
-#+STARTUP: latexpreview
 #+FILETAGS: :UTAS:2025:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
@@ -16,28 +15,56 @@
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
 
-* ENG335 - Computational Intelligence - Assignment 1
+* Introduction
 
-** Problem Description
+
+* Problem Description
 The goal of this fuzzy expert system is to determine the score at which a customer has in terms of their marketing effectiveness. The customers have three important criteria that are evaluated. First the personal data, this is defined by their age, marital status and number of children. Their financial background encompasses their fixed income and real estate mortgage. Lastly, their social status is defined by their residences location. The system evaluates all of these factors and applies weights appropriately to determine a rating for the customer.
 
-** Fuzzy Toolbox Overview
+* Fuzzy Toolbox Overview
 The fuzzy system toolbox is used to design fuzzy expert systems, it can design Mamdani and Sugeno types of fuzzy systems. The toolbox has tools that allow the designer to change the systems inputs and outputs. Each input and output has a list of membership functions that can be modified in the Membership Function Editor, changing the membership function changes how the system will respond to the modified input. Rules can be added to specify how the system will respond to the specific memberships, this can be done in the Rule Editor.
 
 There are various tools available to verify the system. A control surface can be made in the Control Surface tab, this shows what the system will output given two of the selected inputs. The Rule Interference tab allows the designer to understand how rules interact with each other and see the output.
 
-** Designed System
+* Designed System
 The system that was designed cascades three different fuzzy systems into one another. The /personal/ fuzzy system takes in three inputs and feeds into the /mailing/ fuzzy system. The /financial/ fuzzy system takes in two inputs and also feeds into the /mailing/ fuzzy system. The /mailing/ fuzzy systems takes in the two inputs from the /personal/ and /financial/ fuzzy systems and the social status of the customer.
 
-The /personal/ fuzzy system three inputs are the customers age, number of children and marital status. The customers age range is expected to be between 0 and 100, the number of children the customer has should be between 0 and 10, their marital status is either single, indicated in the system by a 0, or married, indicated in the system by a 1. The age has one membership function called 'young', this indicates how young the customer is. The number of children has three membership functions 'zero', 'few' and 'many', each of which indicate how much the customer belongs to the respective group. The marital status has two membership functions, 'single' and 'married', indicating if the user is married or not. The marital status membership function uses two squares, because either the customer is married or not, it is a boolean value. The output has two membership functions, 'low' and high'
+The /personal/ fuzzy system three inputs are the customers age, number of children and marital status. The customers age range is expected to be between 0 and 100, the number of children the customer has should be between 0 and 10, their marital status is either single, indicated in the system by a 0, or married, indicated in the system by a 1. The age has one membership function called 'young', this indicates how young the customer is. The number of children has three membership functions 'zero', 'few' and 'many', each of which indicate how much the customer belongs to the respective group. The marital status has two membership functions, 'single' and 'married', indicating if the user is married or not. The marital status membership function uses two squares, because either the customer is married or not, it is a boolean value. The output has two membership functions, 'low' and high'.
+
+To check if the output of the /personal/ fuzzy system is correct we can look at some examples and compare them to the provided rules. If a customer has 'many' children and is 'single' we would expect the output of the system to be 'low', when a customer has 6 children ('many') and their marital status is 0 ('single') we get an output of 0.25 for every age, as expected. This can be repeated for each of the expected outputs and a system correctness can be gauged. Two of the control surfaces for this system can be seen in Figures \ref{fig:Age_Num_Married} and \ref{fig:Age_Num_Single}.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Age, number of children and married control surface \label{fig:Age_Num_Married}
+[[file:Age_Num_Married_Control_Surface.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Age, number of children and single control surface \label{fig:Age_Num_Single}
+[[file:Age_Num_Single_Control_Surface.png]]
 
 The /financial/ fuzzy system two inputs are the customers fixed expenses and their real estate mortgage. Their (yearly) fixed expenses is expected to be between $0 and 100 000. Their real estate mortgage is expected to be between $0 and $10 000 000. The fixed expenses has three membership functions, each triangles equally separated, they are 'low', 'medium' and 'high'. The real estate mortgage has also has the three membership functions 'low', 'medium' and 'high'. The output has three membership functions, 'low', 'medium' and 'high'.
 
+To verify the /financial/ fuzzy system various inputs must be put into the system and the output must be compared to an expected result. According to the rules if we have a 'medium' fixed expenses, 'medium' real estate mortgage then the output should be 'medium'. If fixed expenses is $50 000 and the mortgage is $1 000 000, then the output value is 0.4, which is considered medium. The control surface for this system can be seen in Figure \ref{fig:Fixed_Mortgage}.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Fixed expenses and real estate mortgage control surface \label{fig:Fixed_Mortgage}
+[[file:Fixed_Mortgage_Control_Surface.png]]
+
 The /mailing/ fuzzy system three inputs are the outputs of the /personal/ and /financial/ fuzzy systems and the customers social status all of which are between 0 and 1. The personal input to this fuzzy system has two membership functions, 'low' and 'high'. The financial input has three membership functions 'low', 'medium' and 'high'. And the social input has four membership functions, which are 'bad', 'fair', 'good' and 'excellent'. The output has five membership functions, 'very low', 'low', 'medium', 'high' and 'very high'.
+
+Finally to verify the output of the overall system inputs that map to rules must be applied, if 'high' personal, 'low' financial and 'excellent' social is inputted into the system 'medium' output is expected. To verify this values of 0.8, for personal, 0.2, for financial, and 0.85, for social, were put into the system, giving a value of 0.487 at the output, which is considered 'medium'. Two control surfaces can be seen in Figures \ref{fig:Fin_Pers} and \ref{fig:Soc_Pers}.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Financial and personal control surface \label{fig:Fin_Pers}
+[[file:Fin_Pers_Control_Surface.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Social and personal control surface \label{fig:Soc_Pers}
+[[file:Soc_Pers_Control_Surface.png]]
 
 In between each system there is a gain that normalises the output from 0 to 1. The output of the overall system is between 0 and 1, and then multiplied by 10 to get a score from 0 to 10.
 
-** User Guide
+* User Guide
+To run the program simply extract the files and run the ~main.m~ file, this will initialise the Simulink model and the UI. To get an output the user must input each of the data points into the UI and click 'Run' button, this will update the workspace with data that was inputted and then run the Simulink model. The output will be displayed as a score out of 10 in the field titled 'Mailing Rating'.
 
-** Conclusion
-
+* Conclusion
+The MATLAB fuzzy toolbox is a powerful tool that can be used to create fuzzy expert systems for various applications. Understanding how to use the toolbox will drastically improve the resulting system, being able to verify the designed system using the various tools provided is crucial in creating a robust system.
