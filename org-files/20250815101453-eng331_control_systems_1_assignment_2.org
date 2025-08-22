@@ -63,12 +63,12 @@ First we must get the transfer function:
 \begin{align*}
 10r(t) &= 8\frac{d^2c(t)}{dt^2} + 2\frac{dc(t)}{dt} + 40c(t) \\
 \mathcal{L}\{\hdots\} &: 10R(s) = 8s^2C(s) + 2sC(t) + 40C(s) \\
-40R(s) &= C(s)\left(8s^2 + 2s + 40\right) \\
-\frac{C(s)}{R(s)} &= G(s) = \frac{40}{8s^2 + 2s + 40}
+10R(s) &= C(s)\left(8s^2 + 2s + 40\right) \\
+\frac{C(s)}{R(s)} &= G(s) = \frac{10}{8s^2 + 2s + 40}
 \end{align*}
 
 Next we can apply a step response ($U(s) = \frac{1}{s}$) to the system
-\[\frac{1}{s}G(s) &= \frac{1}{s}\frac{40}{8s^2 + 2s + 40}\]
+\[\frac{1}{s}G(s) &= \frac{1}{s}\frac{10}{8s^2 + 2s + 40}\]
 
 Using MATLAB to do the inverse Laplace transform, because it would be nasty otherwise:
 #+BEGIN_SRC octave :exports code :results output :session Des1
@@ -83,31 +83,30 @@ if exist('OCTAVE_VERSION', 'builtin') % If youre using octave instead of matlab
 end
 
 syms s
-G = (1/s)*(40/(8*s^2 + 2*s + 40))
+G = (1/s)*(10/(8*s^2 + 2*s + 40))
 latex(ilaplace(G))
 #+END_SRC
 
 #+RESULTS:
 : G = (sym)
 : 
-:           40         
+:           10         
 :   ───────────────────
 :     ⎛   2           ⎞
 :   s⋅⎝8⋅s  + 2⋅s + 40⎠
-: 1 - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319} - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}
+: \frac{1}{4} - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{1276} - \frac{e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}}{4}
 
+\[c(t) = \frac{1}{4}u(t) - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8}u(t) \right)}}{1276} - \frac{e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}}{4}u(t)\]
 Which gives:
-\[c(t) = u(t) - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319}u(t) - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}u(t)\]
+
 ** b
 The forced response is:
-\[u(t)\]
+\[\frac{1}{4}u(t)\]
 ** c
 The natural/transient response is:
-\[- \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{319}u(t) - e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}u(t)\]
+\[-\frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8}u(t) \right)}}{1276} - \frac{e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}}{4}u(t)\]
 ** d
-\[G(s) &= \frac{40}{8s^2 + 2s + 40}\]
-
-
+\[G(s) &= \frac{10}{8s^2 + 2s + 40}\]
 
 Code to produce the plot in Figure \ref{fig:ENG331_Q2_d}:
 #+BEGIN_SRC octave :exports code :results output :session Q2_d
@@ -152,13 +151,13 @@ The poles are at $-0.1250 - 2.2326i$ and $-0.1250 + 2.2326i$.
 To find the other stuff we must convert the system into the second order prototype form:
 \begin{align*}
 G(s) &= \frac{K\omega_n^2}{s^2 + 2\zeta \omega_ns + \omega_n^2} \\
-G(s) &= \frac{\frac{40}{8}}{s^2 + \frac{2}{8}s + \frac{40}{8}} \\
-G(s) &= \frac{5}{s^2 + 0.25s + 5}
+G(s) &= \frac{\frac{10}{8}}{s^2 + \frac{2}{8}s + \frac{40}{8}} \\
+G(s) &= \frac{1.25}{s^2 + 0.25s + 5}
 \end{align*}
 
 This allows us to create the system of equations:
 \begin{cases}
-K\omega_n^2 &= 5 \\
+K\omega_n^2 &= 1.25 \\
 2\zeta\omega_n &= 0.25 \\
 \omega_n^2 &= 5
 \end{cases}
@@ -173,6 +172,7 @@ zeta = 0.25/2/omega_n
 omega_d = omega_n*sqrt(1 - zeta^2)
 sigma_d = 0.1250
 theta = acos(zeta)
+K = 1.25/(omega_n^2)
 
 #+END_SRC
 
@@ -182,15 +182,17 @@ theta = acos(zeta)
 : omega_d = 2.2326
 : sigma_d = 0.1250
 : theta = 1.5149
+: K = 0.2500
 
-Which means, $\omega_n = \sqrt{5} \approx 2.236\ rad/s$, $\zeta = 0.0559$ and $K = 1$. Next we can calculate $\omega_d$, $\sigma_d$ and $\theta$.
+Which means, $\omega_n = \sqrt{5} \approx 2.236\ rad/s$, $\zeta = 0.0559$ and $K = 0.25$. Next we can calculate $\omega_d$, $\sigma_d$ and $\theta$.
 \[\omega_d = \omega_n\sqrt{1 - \zeta^2} = 2.23\]
 \[\sigma_d = - \Re\{\textrm{root}\} = 0.1250\]
 \[\theta = \cos^{-1}(\zeta) = \cos^{-1}(0.025) = 1.546\]
 ** e
 As $\zeta < 1$ the system is underdamped.
 
-** f
+** TODO f
+:TODO: THE STUFF BELOW IS WRONG, K\nmega_n^2 IS WRONG
 We can use the final value theorem:
 \begin{align*}
 c(t \rightarrow \infty) &= \lim_{s\rightarrow 0} sC(s) \\
