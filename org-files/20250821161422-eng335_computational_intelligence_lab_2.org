@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       6087c044-d6f0-48a8-9929-60190229510b
+:END:
+#+title: ENG335 - Computational Intelligence - Lab 2
+#+date: [2025-08-21 Thu 16:14]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG335 - Computational Intelligence - Lab 2
+
+** Exercise 2
