@@ -1,0 +1,52 @@
+:PROPERTIES:
+:ID:       7b415c54-da2a-4194-a93a-a04488ca173d
+:END:
+#+title: Routh–Hurwitz Stability Criterion
+#+date: [2025-08-22 Fri 10:12]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Routh–Hurwitz Stability Criterion
+For a polynomial: 
+\[P(s) = a_is^i + a_{i-1}s^{i-1} \hdots + a_1s + a_0\]
+1. All coefficients must be greater than zero
+   \[a_i > 0\ \forall\ i\]
+2. And
+\[\begin{matrix}
+a_{n  } & a_{n-2} & a_{n-4} & \hdots \\
+a_{n-1} & a_{n-3} & a_{n-5} & \hdots \\
+b_1 & b_2 & b_3 & \hdots \\
+c_1 & c_2 & c_3 & \hdots \\
+\vdots & \vdots & \vdots & \vdots
+\end{matrix}\]
+Where:
+\[b_i = \frac{a_{n-1}a_{n-2i} - a_na_{n - (2i + 1)}}{a_{n-1}}\]
+\[c_i = \frac{b_1a_{n-(2i + 1)} - a_{n-1}b_{i + 1}}{b_1}\]
+Then number of sign changes in the first column will be the number of positive poles
+   
+** Special Case
+This case will be unstable either way.
+*** Epsilon Method
+If we encounter a zero in the first column we replace it with $\epsilon$ and continue. Then we replace the $\epsilon$ twice, first with some small positive value, then some small negative value, and check the sign changes.
+
+*** Reciprocal Method
+Just swap the coefficients of the polynomial
+ - $s^2 + 5s + 3$ becomes $3s^2 + 5s + 1$
+Then do the method
+We can then take the reciprocal to find the original values
+
+
+
+** Notable Things
+*** Table
+The following table can be used to make it easier
+[[./Routh_Hurwitz_Table.png]]
+*** All zeros
+If we encounter a row with all zeros it means the roots are symmetrical around the origin
+1. Roots are symmetrical and real
+2. Roots are symmetrical and imaginary
+3. Roots are quadrantal
+[[./All_Zeros_Routh_Hurwitz.png]]
+
+
+
