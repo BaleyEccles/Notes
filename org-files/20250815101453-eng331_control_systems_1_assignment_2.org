@@ -15,8 +15,9 @@
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
-#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{0.25em}
 
+\newpage
 * Question 1
 ** a
 \begin{align*}
@@ -29,11 +30,13 @@ F(s) &= I_L(s)\left(s^2 + \frac{1}{RC}s + \frac{1}{LC}\right) \\
 From the second order prototype form:
 \[G(s) = \frac{K\omega_n^2}{s^2 + 2\zeta \omega_ns + \omega_n^2}\]
 We can get the system of equations:
+
 \[\begin{cases}
 K\omega_n^2 &= 1 \\
 2\zeta \omega_n &= \frac{1}{RC} \\
 \omega_n^2 &= \frac{1}{LC}
 \end{cases}\]
+
 Which means:
 \begin{align*}
 K &= LC \\
@@ -46,11 +49,14 @@ Using the following equations:
 \%OS &= e^{-\zeta\pi/\sqrt{1 - \zeta^2}}\\
 T_s &\approx \frac{4}{\zeta \omega_n} \\
 \end{align*}
+
 A system of equations can be formed:
-\begin{cases}
+
+\[\begin{cases}
 0.1 &= e^{-\frac{\sqrt{L}}{2R\sqrt{0.1}}\pi/\sqrt{1 - \left(\frac{\sqrt{L}}{2R\sqrt{0.1}}\right)^2}}\\
 5 &\approx \frac{4}{\frac{\sqrt{L}}{2R\sqrt{0.1}} \frac{1}{\sqrt{0.1L}}} \\
-\end{cases}
+\end{cases}\]
+
 Solving using a calculator:
 \begin{align*}
 R &= 6.25\Omega \\
@@ -96,8 +102,9 @@ latex(ilaplace(G))
 :   s⋅⎝8⋅s  + 2⋅s + 40⎠
 : \frac{1}{4} - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8} \right)}}{1276} - \frac{e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}}{4}
 
-\[c(t) = \frac{1}{4}u(t) - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8}u(t) \right)}}{1276} - \frac{e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}}{4}u(t)\]
 Which gives:
+\[c(t) = \frac{1}{4}u(t) - \frac{\sqrt{319} e^{- \frac{t}{8}} \sin{\left(\frac{\sqrt{319} t}{8}u(t) \right)}}{1276} - \frac{e^{- \frac{t}{8}} \cos{\left(\frac{\sqrt{319} t}{8} \right)}}{4}u(t)\]
+
 
 ** b
 The forced response is:
@@ -133,7 +140,7 @@ set (gca, "xaxislocation", "origin");
 set (gca, "yaxislocation", "origin");
 xlabel('Re(s)');
 ylabel('Im(s)');
-print -dpng 'ENG331_Q2_d.png'
+%print -dpng 'ENG331_Q2_d.png'
 #+END_SRC
 
 #+RESULTS:
@@ -206,7 +213,7 @@ The DC gain is:
 \lim_{s\rightarrow 0} G(s) &= 0.25
 \end{align*}
 
-** f
+** h
 #+BEGIN_SRC octave :exports none :results output :session Q2_d_2
 OS = exp(-zeta*pi/sqrt(1 - zeta^2))*100
 T_p = pi/omega_d
@@ -237,7 +244,7 @@ T_s &\approx 32\ s
 \end{align*}
 
 We need to use a table for the rise time, which can be seen in Figure \ref{fig:Rise_Time_Table}.
-#+ATTR_LATEX: :placement [H]
+#+ATTR_LATEX: :placement [H] :width 0.25\textwidth
 #+CAPTION: Rise time table \label{fig:Rise_Time_Table}
 [[./Rise_Time_Table.png]]
 
@@ -289,26 +296,17 @@ A = [
     0, 0, 0, 0, 0, 1; ...
     0, f_v4/M_3, 0, f_v5/M_3, 0, -(f_v3 + f_v4 + f_v5)/M_3
     ];
-%latex(A)
-
 B = [0; 0; 0; 1/M_2; 0; 0];
-%latex(B)
-
 C = [0, 1, 0, 0, 0, 0];
 D = [0];
 
 syms s
 G = C*inv(s*eye(6) - A)*B + D;
 disp(G)
-%latex(G)
 #+END_SRC
 
 #+RESULTS:
 : (s^2 + 6*s + 6)/(2*s^4 + 16*s^3 + 44*s^2 + 53*s + 28)
-: 
-: ans =
-: 
-:     '\frac{s^2+6\,s+6}{2\,s^4+16\,s^3+44\,s^2+53\,s+28}'
 
 Which gives:
 \[G(s) = \frac{s^2 + 6s + 6}{2s^4 + 16s^3 + 44s^2 + 53s + 28}\]
@@ -323,13 +321,15 @@ G(s) &= \frac{K\omega_n^2}{s^2 + 2\zeta \omega_ns + \omega_n^2}
 \end{align*}
 
 Using $K = 0.01153$, $y_p = 0.012572$ and $T_p = 1.6$ we get the following system of equations:
-\begin{cases}
+
+\[\begin{cases}
 \omega_d &= \frac{\pi}{1.6} \\
 \omega_d &= \omega_n\sqrt{1 - \zeta^2} \\
 y_p &= \frac{0.01153}{\sqrt{1 - \zeta^2}}
-\end{cases}
+\end{cases}\]
+
 Which gives $\omega_n = 2.1409$ and $\zeta = 0.3986$ and the following transfer function in prototype form:
-\[G(s) = \frac{0.05285}{s^2 + 1.707 s + 4.584}\]
+\[H_i(s) = \frac{0.05285}{s^2 + 1.707 s + 4.584}\]
 
 #+BEGIN_SRC matlab :exports none :results output
 clc
@@ -397,45 +397,121 @@ step(H) %-<org-eval>-
 From the figure.
 \[\textrm{DC Gain} = K = 0.01153\]
 The damped natural frequency ($\omega_d$) can be calculated using the time between peaks ($T$):
-\[\omega_n = 3.7 - 1.6 = 2.1\]
+\[\omega_d = 2\pi f = \frac{2\pi}{T} = \frac{2\pi}{3.7 - 1.6} = 2.991\]
 
-And the decay rate has the following relationship to natural frequency and damping ratio:
+We can find the decay rate using the two peaks, at $(1.6, 0.012572)$ and $(3.7, 0.01225)$ and the following relationship:
 \[\textrm{Decay Rate} = -\zeta\omega_n\]
+The decay rate is given by:
+\[\lambda = \frac{\ln(y_1)t_2 - \ln(y_2)t_1}{t_1\cdot t_2} = -1.5454\]
 
-Next we can calculate $\zeta$ and $\omega_n$ to put them into the second order prototype form
-\begin{cases}
-0.01229 &= -\zeta\omega_n \\
-3 &= \omega_n\sqrt{1 - \zeta^2}
-\end{cases}
-Which means $\zeta = 0.00409$ and $\omega_n = -3.007$
+Same as before, we can create another system of equations to solve:
 
-Finally the transfer function is:
-\[G(s) = \frac{0.1}{s^2 - 0.02454s + 9}\]
-** d
+\[\begin{cases}
+-1.5454 &= -\zeta\omega_n \\
+2.991 &= \omega_n\sqrt{1 - \zeta^2}
+\end{cases}\]
+
+Which gives $\omega_n = 3.367$ and $\zeta = 0.459$ and the second order system in prototype form:
+\[H_{ii}(s) = \frac{0.1307}{s^2 + 3.091 s + 11.33}\]
 
 #+BEGIN_SRC matlab :exports none :results output
 clc
 clear
 close all
 
-data = load("ENG331_A2_Q3.mat")
-disp(data)
-figure;
-plot(data.t, data.y)
+K = 0.01153;
 
-%H = tf(0.1, [1, 0.02454, 9]);
-%stepplot(H)
+p1_t = 1.6;
+p1_y = 0.012572;
+p2_t = 3.7;
+p2_y = 0.01225;
+
+w_d = 2*pi/(p2_t - p1_t);
+
+l = (log(p1_y)*p2_t - log(p2_y)*p1_t)/(p1_t*p2_t);
+
+syms w_n z
+eq1 = -1.5454 == -w_n*z;
+eq2 = 2.991 == w_n*sqrt(1 - z^2);
+
+[w, zeta] = solve(eq1, eq2);
+
+H = tf([K*double(w)^2], [1, 2*double(zeta)*double(w), double(w)^2])
+step(H)
 #+END_SRC
 
 #+RESULTS:
-: data = 
-: 
-:   struct with fields:
-: 
-:     t: [1201x1 double]
+: H =
+:  
+:          0.1307
+:   ---------------------
+:   s^2 + 3.091 s + 11.33
+:  
+: Continuous-time transfer function.
+: step(H) %-<org-eval>-
+
+** d
+We can use the following code to produce the plot in Figure \ref{fig:ENG331_A2_Q3_d}.
+
+#+BEGIN_SRC matlab :exports code :results output
+clc;
+clear;
+close all;
+
+% Assuming that the name of the data is "ENG331_A2_Q3.mat"
+data = load("ENG331_A2_Q3.mat");
+t = data.t;
+y = data.y;
+disp(data);
+
+figure;
+hold on;
+plot(t, y);
+
+H_i  = tf([0 0 0.0528], [1 1.7068 4.5836]);
+H_ii = tf([0 0 0.1307], [1 3.0908 11.3343]);
+
+step(H_i, 'r');
+step(H_ii, 'k');
+legend('H', 'H_i', 'H_{ii}');
+hold off;
+#+END_SRC
+
+#+RESULTS:
+: t: [1201x1 double]
 :     y: [1201x1 double]
-:     t: [1201x1 double]
-:     y: [1201x1 double]
-: %stepplot(H) %-<org-eval>-
+: hold off; %-<org-eval>-
 
 
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Equivalent second order systems and full system \label{fig:ENG331_A2_Q3_d}
+[[./ENG331_A2_Q3_d.png]]
+
+** e
+Looking at Figure \ref{fig:ENG331_A2_Q3_d} we can notice a few things.
+1. $H_i$ has more accurate peak time than $H_{ii}$.
+   
+   This is because of the method that we used to find the approximate system used the peak time, whereas with $H_{ii}$ we didn't.
+   
+2. Neither of step responses closely match the higher order response
+
+   This must be because the poles are too close to one another, or the zeroes are doing weird things.
+   
+3. The decay rate of $H_i$ and $H_{ii}$ is much faster than $H$
+
+   This implies the damping ratio is not quite correct on the two second order approximations, this makes sense because we did not explicitly calculate it.
+   
+4. $H$ appears to undershoot more than it overshoots the settling position.
+
+   The possible cause of this is the higher order damping has more complicated effects. This is not possible with the second order systems, as there is only one damping ratio present, this dictates how fasts it decays.
+
+5. The natural of $H_i$ does not match the frequency of $H$ perfectly
+
+   $H_i$ appears to have a smaller natural frequency than $H$. Whereas the frequency of $H_{ii}$ appears to match the frequency of $H$ well, however it has a small phase shift.
+   
+
+#+BEGIN_SRC matlab :exports none :results output
+clc;
+clear;
+close all;
+#+END_SRC
