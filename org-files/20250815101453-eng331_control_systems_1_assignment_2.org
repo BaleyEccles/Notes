@@ -268,7 +268,18 @@ if exist('OCTAVE_VERSION', 'builtin') % If youre using octave instead of matlab
     pkg load symbolic
 end
 
-syms s K M_1 M_2 M_3 f_v1 f_v2 f_v3 f_v4 f_v5;
+%syms s K M_1 M_2 M_3 f_v1 f_v2 f_v3 f_v4 f_v5;
+M_1 = 2;
+M_2 = 1;
+M_3 = 1;
+
+f_v1 = 1;
+f_v2 = 1;
+f_v3 = 1;
+f_v4 = 1;
+f_v5 = 1;
+
+K = 2;
 
 A = [
     0, 1, 0, 0, 0, 0; ...
@@ -286,25 +297,30 @@ B = [0; 0; 0; 1/M_2; 0; 0];
 C = [0, 1, 0, 0, 0, 0];
 D = [0];
 
-I = eye(6);
-%latex(I)
+%s = tf('s');
+syms s
+G = C*inv(s*eye(6) - A)*B + D;
+disp(G)
+%step(s)
+latex(G)
 
-sI_A = s*I - A;
-%latex(sI_A)
+H = tf([1 6 6], [2 16 44 53 28]);
+step(H);
 
-T = simplify(C*inv(sI_A)*B - D);
-latex(simplify(T))
-[n, d] = numden(T);
-%latex(simplify(n))
-%latex(factor(simplify(d)))
+
+
 #+END_SRC
 
 #+RESULTS:
+: (s^2 + 6*s + 6)/(2*s^4 + 16*s^3 + 44*s^2 + 53*s + 28)
+: 
 : ans =
 : 
-:     '\frac{M_{2}\,\left(K\,f_{\mathrm{v3}}+K\,f_{\mathrm{v4}}+K\,f_{\mathrm{v5}}+K\,M_{3}\,s+f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,s+f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,s+f_{\mathrm{v2}}\,f_{\mathrm{v5}}\,s+f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s+M_{3}\,f_{\mathrm{v2}}\,s^2\right)}{K\,M_{1}\,{f_{\mathrm{v4}}}^2-{M_{2}}^2\,{f_{\mathrm{v4}}}^2\,s^2-K\,M_{2}\,{f_{\mathrm{v4}}}^2+K\,{M_{2}}^2\,f_{\mathrm{v3}}\,s+K\,{M_{2}}^2\,f_{\mathrm{v4}}\,s+K\,{M_{2}}^2\,f_{\mathrm{v5}}\,s+M_{1}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v3}}\,s+M_{1}\,f_{\mathrm{v2}}\,{f_{\mathrm{v4}}}^2\,s+M_{1}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v4}}\,s-M_{2}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v3}}\,s+M_{1}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v5}}\,s-M_{2}\,f_{\mathrm{v2}}\,{f_{\mathrm{v4}}}^2\,s-M_{2}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v4}}\,s-M_{2}\,{f_{\mathrm{v2}}}^2\,f_{\mathrm{v5}}\,s+M_{1}\,{f_{\mathrm{v4}}}^2\,f_{\mathrm{v5}}\,s-M_{2}\,{f_{\mathrm{v4}}}^2\,f_{\mathrm{v5}}\,s+K\,{M_{2}}^2\,M_{3}\,s^2+M_{1}\,{M_{2}}^2\,M_{3}\,s^4+M_{1}\,M_{3}\,{f_{\mathrm{v2}}}^2\,s^2+M_{1}\,M_{2}\,{f_{\mathrm{v4}}}^2\,s^2+M_{1}\,{M_{2}}^2\,f_{\mathrm{v3}}\,s^3-M_{2}\,M_{3}\,{f_{\mathrm{v2}}}^2\,s^2+M_{1}\,{M_{2}}^2\,f_{\mathrm{v4}}\,s^3+M_{1}\,{M_{2}}^2\,f_{\mathrm{v5}}\,s^3+K\,M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v3}}+K\,M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v4}}+K\,M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}+K\,M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v5}}+K\,M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}-K\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}+K\,M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}+K\,M_{1}\,f_{\mathrm{v3}}\,f_{\mathrm{v4}}-K\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}-K\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}+K\,M_{1}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}+K\,M_{2}\,f_{\mathrm{v3}}\,f_{\mathrm{v5}}-K\,M_{2}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}+K\,M_{1}\,M_{3}\,f_{\mathrm{v1}}\,s+K\,M_{1}\,M_{2}\,f_{\mathrm{v3}}\,s+K\,M_{1}\,M_{3}\,f_{\mathrm{v2}}\,s+K\,M_{1}\,M_{2}\,f_{\mathrm{v4}}\,s-K\,M_{2}\,M_{3}\,f_{\mathrm{v2}}\,s+K\,M_{1}\,M_{2}\,f_{\mathrm{v5}}\,s+K\,M_{1}\,M_{3}\,f_{\mathrm{v4}}\,s+K\,M_{2}\,M_{3}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v3}}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,f_{\mathrm{v4}}\,s+M_{1}\,f_{\mathrm{v1}}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,f_{\mathrm{v5}}\,s+2\,M_{1}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s+M_{1}\,f_{\mathrm{v3}}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s-2\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s+K\,M_{1}\,M_{2}\,M_{3}\,s^2+M_{1}\,M_{2}\,M_{3}\,f_{\mathrm{v1}}\,s^3+2\,M_{1}\,M_{2}\,M_{3}\,f_{\mathrm{v2}}\,s^3+M_{1}\,M_{2}\,M_{3}\,f_{\mathrm{v4}}\,s^3+M_{1}\,M_{2}\,M_{3}\,f_{\mathrm{v5}}\,s^3+M_{1}\,M_{2}\,f_{\mathrm{v1}}\,f_{\mathrm{v3}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v1}}\,f_{\mathrm{v2}}\,s^2+M_{1}\,M_{2}\,f_{\mathrm{v1}}\,f_{\mathrm{v4}}\,s^2+2\,M_{1}\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v3}}\,s^2+M_{1}\,M_{2}\,f_{\mathrm{v1}}\,f_{\mathrm{v5}}\,s^2+2\,M_{1}\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,s^2+2\,M_{1}\,M_{2}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}\,s^2+M_{1}\,M_{2}\,f_{\mathrm{v3}}\,f_{\mathrm{v4}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v1}}\,f_{\mathrm{v5}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v2}}\,f_{\mathrm{v4}}\,s^2+M_{1}\,M_{2}\,f_{\mathrm{v3}}\,f_{\mathrm{v5}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v2}}\,f_{\mathrm{v5}}\,s^2+2\,M_{1}\,M_{2}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s^2+M_{1}\,M_{3}\,f_{\mathrm{v4}}\,f_{\mathrm{v5}}\,s^2}'
-: %latex(factor(simplify(d))) %-<org-eval>-
+:     '\frac{s^2+6\,s+6}{2\,s^4+16\,s^3+44\,s^2+53\,s+28}'
+: %-<org-eval>-
 
+
+\[\frac{s^2+6\,s+6}{2\,s^4+16\,s^3+44\,s^2+53\,s+28}\]
 ** c
 *** i
 We can use the peak time and point to find the required values using the following equations:
