@@ -6,8 +6,9 @@
 #+STARTUP: latexpreview
 
 * BIBO Stability
+Bounded Input Bounded Output
 ** Continuous Systems
- - The natural response of the system fits within some bound
+ - The natural response of the system is bounded, it will decay away
  - All of the poles must be on the left of the $j\omega$ axis on the [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][Pole–Zero Plot]]
 
 ** Discrete Systems
