@@ -32,6 +32,8 @@
 ** Assessment Task 2: Quiz
  - 10%
  - 4 Online quizzes
+   - Second quiz:
+   - Tutorial 3 Stuff
 
 ** Assessment Task 3: Labs
  - 20%

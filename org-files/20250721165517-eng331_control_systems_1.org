@@ -14,7 +14,6 @@
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
-#+PROPERTY: header-args :eval no
 
 * Notes
  - [[id:1f70134e-cf99-4909-aa3e-0352f2d0d6d9][Modeling Systems]]
@@ -45,3 +44,48 @@
 
 ** Assessment Task 4: Final exam
  - 40%
+#+BEGIN_SRC octave :exports code :results output :session Des1
+clc
+clear
+close all
+
+pkg load symbolic
+
+
+syms s K
+
+G_1 = (10*s + 30)/((s+4)*(5*s +3));
+G_2 = (5*K*(s + 4))/(5*s^2 + 18*s + 9);
+H = (5*s + 15)/(5*s^2 + 23*s + 12);
+
+T = latex(simplify(G_1*G_2/(1 + G_2*H)))
+
+w_n = sqrt((9 + 25*K)/25)
+
+z = 30/(25*2*w_n)
+
+vpa(solve(0.4 == exp(-z*pi/sqrt(1 - z^2))))
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+T = \frac{50 K}{25 K + 25 s^{2} + 30 s + 9}
+w_n = (sym)
+
+    __________
+  ╲╱ K + 9/25
+z = (sym)
+
+        3       
+  ──────────────
+      __________
+  5⋅╲╱ K + 9/25
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 11
+    eq at line 93 column 3
+
+ans = (sym) 4.2319025516719106933673654428399
+#+end_example
