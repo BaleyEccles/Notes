@@ -18,66 +18,81 @@
 
 * Task 2 - Plant Construction
 
-s
 ** Part 1 - System Familiarisation and Calibration
-:TODO: /Measured Tank Heights:/
+*** Calibration
+:DONE: /Measured Tank Heights:/
 | Actual Tank 1 Height $h_{1,i}$ | Uncalibrated value $v_{1,i}$ | Actual tank 2 height $h_{2,i}$ | Uncalibrated value $v_{2,i}$ |
 |                              4 |                           80 |                            8.5 |                          130 |
 |                           11.5 |                          220 |                             22 |                          540 |
 
 
-:TODO: /Calculated Scale and Offset/
-Tank 1:
-Scale 0.05357
-Offset -0.2857
+:DONE: /Calculated Scale and Offset/
+Solving the following system of equations for Tank 1:
+\[\begin{cases}
+4  &= 80\cdot\textrm{scale} + \textrm{offset} \\
+11.5  &= 220\cdot\textrm{scale} + \textrm{offset}
+\end{cases}\]
+We get $\textrm{scale} = 0.05357$ and $\textrm{offset} = -0.2857$
 
-Tank 2:
-Scale 0.03293
-Offset 4.22
+Solving the following system of equations for Tank 2:
+\[\begin{cases}
+8.5  &= 130\cdot\textrm{scale} + \textrm{offset} \\
+22  &= 540\cdot\textrm{scale} + \textrm{offset}
+\end{cases}\]
+We get $\textrm{scale} = 0.03293$ and $\textrm{offset} = 4.22$
 
-:TODO: /Record tank diameter, nozzle size for each tank:/
-Bottom nozzle diameter: 4mm
-Top nozzle diameter: 5mm
+*** Tank Parameters
+:DONE: /Record tank diameter, nozzle size for each tank:/
+The bottom nozzle diameter (Tank 2) was recorded to be 4mm. Whereas the top nozzle diameter (Tank 1) was recorded to be 5mm.
 
-Bottom tank diameter: 4.5cm
-Top tank diameter: 4.5cm
+The diameter of Tank 2 was recorded to be 4.5cm, likewise the diameter of Tank 1 was also recorded to be 4.5cm.
 
 ** Part 2 - System Identification
 
-:TODO: /Record the approximate pump gain:/
-V = 10V
-t = 11s
-$Vol = \pi r^2 h$
-$Vol = \pi (4.5/2)^2 20$
-$Vol = 0.000318 m^3$
+*** Pump Gain
+:DONE: /Record the approximate pump gain:/
+If we set the pump voltage to $V_p = 10V$ it takes $t = 11s$ to fill the tank to $h = 20cm$. This data us to calculate the pump gain.
+\begin{align*}
+\textrm{Vol} &= \pi r^2 h \\
+\textrm{Vol} &= \pi (4.5/2)^2 \cdot 20 \\
+\textrm{Vol} &= 0.000318 m^3 \\
+\end{align*}
+\begin{align*}
+q_0 &= \frac{\textrm{Vol}}{t} \\
+q_0 &= \frac{0.000318}{11} \\
+q_0 &= 0.000029 m^3/s \\
+\end{align*}
+\begin{align*}
+\textrm{Pump Gain} &= \frac{q_0}{V_p} \\
+\textrm{Pump Gain} &= \frac{0.000029}{10} \\
+\textrm{Pump Gain} &= 0.000003 \\
+\end{align*}
 
-$q_0 = \frac{Vol}{t}$
-$q_0 = \frac{0.000318}{11}$
-$q_0 = 0.000029 m^3/s$
-
-$Pump Gain = \frac{q_0}{V_p}$
-$Pump Gain = \frac{0.000029}{10}$
-$Pump Gain = 0.000003$
-
-V = 5V
-t = 17.41s
-$Vol = \pi r^2 h$
-$Vol = \pi (4.5/2)^2 20$
-$Vol = 0.000318 m^3$
-
-$q_0 = \frac{Vol}{t}$
-$q_0 = \frac{0.000318}{17.41s}$
-$q_0 = 0.000018 m^3/s$
-
-$Pump Gain = \frac{q_0}{V_p}$
-$Pump Gain = \frac{0.000018}{5}$
-$Pump Gain = 0.000004$
+If we set the pump voltage to $V_p = 5V$ it takes $t = 17.41s$ to fill the tank to $h = 20cm$. Once again, this data us to calculate the pump gain.
+\begin{align*}
+\textrm{Vol} &= \pi r^2 h \\
+\textrm{Vol} &= \pi (4.5/2)^2\cdot 20 \\
+\textrm{Vol} &= 0.000318 m^3 \\
+\end{align*}
+\begin{align*}
+q_0 &= \frac{\textrm{Vol}}{t} \\
+q_0 &= \frac{0.000318}{17.41s} \\
+q_0 &= 0.000018 m^3/s \\
+\end{align*}
+\begin{align*}
+\textrm{Pump Gain} &= \frac{q_0}{V_p} \\
+\textrm{Pump Gain} &= \frac{0.000018}{5} \\
+\textrm{Pump Gain} &= 0.000004 \\
+\end{align*}
 
 :TODO: /How well does our assumption of a linear relationship between output flow and pump voltage hold in this case?/
 
 :TODO: /Will this have a significant effect on the accuracy of our theoretical model? Why/why not?/
 
-:TODO: /Record the estimated Cd for each tank:/
+*** Discharge Coefficient
+:TODO: /Record the estimated $C_d$ for each tank:/
+:NOTE: During the lab the we had Zeke attempt this too and he also could not calculate it. We were getting a value that was ?greater than one?, which is impossible and does not make sense.
+
 Tank 1:
 From 10->25
 t = 10s
@@ -97,7 +112,7 @@ Something went wrong :(
 
 
 
-*** IGNORE
+**** IGNORE
 From 4->25
 t = 14.5s
 $Vol = \pi (4.5/2)^2 (25 - 4)$
@@ -111,7 +126,7 @@ $C_{d,2} = \frac{q_2}{q_{2,ideal}}$
 \[q_{out} = \frac{\Delta Vol}{t}\]
 
 
-** WRONG
+**** WRONG
 Tank 1:
 t = 15s
 $Vol = \pi (4.5/2)^2 25$
