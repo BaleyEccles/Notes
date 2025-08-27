@@ -146,26 +146,27 @@ $q_{out,1} = 0.000498/20$
 $q_{out,1} = 0.00002$
 
 *** Tank Model
-Using:
-Amplitude = 1
-Period = 0.5
-Duty% = 50
-Offset = 5
 :TODO: Experimental:
+This table was filled in using the code seen in :TODO: Appendix X NOTE: Copy code from matlab into appendix, just the functions
 | Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
-| , 3    THIS ONE WAS BAD | \pm 1V       |                                                |                                                                                               |                            |
-| , 5                     | \pm 1V       |                                                |                                                                                               |                            |
-| , 7                     | \pm 1V       |                                                |                                                                                               |                            |
-| , 9                     | \pm 1V       |                                                |                                                                                               |                            |
+| 8.5, 5                  | $-1V$        |                                           7.68 |                                                                                          0.90 |                       10.2 |
+| 8.5, 5                  | $+1V$        |                                           9.53 |                                                                                          1.44 |                       23.0 |
+| 4.2, 7                  | $-1V$        |                                           2.21 |                                                                                          2.03 |                       15.1 |
+| 4.2, 7                  | $+1V$        |                                           6.12 |                                                                                          1.89 |                        8.9 |
+| 6.7, 9                  | $-1V$        |                                           5.71 |                                                                                          1.11 |                       11.1 |
+| 6.7, 9                  | $+1V$        |                                           7.76 |                                                                                          1.04 |                        8.9 |
 
 
 :TODO: Non Linear Model:
 | Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
-|                         |              |                                                |                                                                                               |                  |
-
+| 8.5, 5                  | $-1V$        |                                                |                                                                                               |                            |
+| 8.5, 5                  | $+1V$        |                                                |                                                                                               |                            |
+| 4.2, 7                  | $-1V$        |                                                |                                                                                               |                            |
+| 4.2, 7                  | $+1V$        |                                                |                                                                                               |                            |
+| 6.7, 9                  | $-1V$        |                                                |                                                                                               |                            |
+| 6.7, 9                  | $+1V$        |                                                |                                                                                               |                            |
 :TODO: Linearised Model:
 | Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
-|                         |              |                                                |                                                                                               |                  |
 
 :TODO: /Comment on differences between the non-linear and linearised model estimates and the observed response:/
 :TODO: /a) Did you observe a difference in response for positive or negative input perturbations? Can you explain this?/
@@ -175,7 +176,12 @@ Offset = 5
 *** Coupled Tank Model
 :TODO: Experimental:
 | Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
-|                         |              |                                                |                                                                                               |                  |
+| 19.5, 5                 | $-1V$        |                                        17.7358 |                                                                                        2.4684 |                    13.3000 |
+| 19.5, 5                 | $+1V$        |                                        21.3884 |                                                                                        1.4476 |                     1.9000 |
+| 9.0, 7                  | $-1V$        |                                         6.8791 |                                                                                        2.4121 |                    23.4000 |
+| 9.0, 7                  | $+1V$        |                                        11.2303 |                                                                                        1.8601 |                    25.4000 |
+| 14.5, 9                 | $-1V$        |                                        11.9198 |                                                                                        2.7390 |                    17.9000 |
+| 14.5, 9                 | $+1V$        |                                        16.6517 |                                                                                        2.3749 |                     2.6000 |
 
 :TODO: Non Linear Model:
 | Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
