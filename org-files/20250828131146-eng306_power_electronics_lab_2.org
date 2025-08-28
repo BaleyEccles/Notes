@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       696503b7-f5bf-493d-9fbc-e88ffd70b3c9
+:END:
+#+title: ENG306 - Power Electronics - Lab 2
+#+date: [2025-08-28 Thu 13:11]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG306 - Power Electronics - Lab 2
+** 2.2
+AFTER /Disconnect ALL of the probes/
+Ch1 is VD1
+Ch2 is -VD2
+
+** 2.3
+470u
+Vpp = 7V
+Idc = 470mA
+Vdc = 2.1V
+
+1000u
+Vpp = 4.5V
+Idc = 520mA
+Vdc = 1.2V
+
+2000u
+Vpp = 2.4V
+Idc = 532mA
+Vdc = 0.5V
+
+** 3.2
+:NOTE: out plots are inverted
+| \alpha |  V_0 | I_0 (mA) | V_0 (calculated) |
+|      0 |    0 |        0 |                  |
+|     20 |  0.8 |      0.8 |                  |
+|     45 |  3.4 |       20 |                  |
+|     60 |  5.6 |       63 |                  |
+|     90 |  9.7 |      159 |                  |
+|    100 | 10.2 |      184 |                  |
+|    120 | 10.9 |      247 |                  |
+|    140 | 10.6 |      285 |                  |
+|    160 |  9.5 |      317 |                  |
+|    180 |  8.8 |      333 |                  |
+
+/Detail the way you connected your oscilloscope probes and configured the oscilloscope to record simultaneously the source voltage, trigger signal, output voltage and current waveforms/
+We made our commoon point where the + v_out is. Ch1 is the secondary transformer output. Ch2 is at the bottom of v_out. Ch3 is between 1\Omega and 47\Omega. Ch4 is + trigger input.
+
+/Based on your observation, at what firing angle did you observe there to first be a boundary between continuous and discontinuous conduction (of current in the load). Compare to what you might expect from a theoretical view point?/
+$100^o$
+
+
