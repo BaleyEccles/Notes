@@ -158,52 +158,20 @@ This table was filled in using the code seen in :TODO: Appendix X NOTE: Copy cod
 
 :TODO: Non Linear Model:
 | Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
-| 8.5, 5                  | $-1V$        |                                                |                                                                                               |                            |
-| 8.5, 5                  | $+1V$        |                                                |                                                                                               |                            |
-| 4.2, 7                  | $-1V$        |                                                |                                                                                               |                            |
-| 4.2, 7                  | $+1V$        |                                                |                                                                                               |                            |
-| 6.7, 9                  | $-1V$        |                                                |                                                                                               |                            |
-| 6.7, 9                  | $+1V$        |                                                |                                                                                               |                            |
+|                       5 | $-1V$        |                                   1.951205e+00 |                                                                                  1.053408e+00 |                         22 |
+|                       5 | $1V$         |                                   4.258067e+00 |                                                                                  1.253454e+00 |                         24 |
+|                       7 | $-1V$        |                                   4.410621e+00 |                                                                                  1.478420e+00 |                         26 |
+|                       7 | $1V$         |                                   7.533171e+00 |                                                                                  1.644130e+00 |                         26 |
+|                       9 | $-1V$        |                                   7.876880e+00 |                                                                                  1.858066e+00 |                         28 |
+|                       9 | $1V$         |                                   1.173084e+01 |                                                                                  1.995890e+00 |                         28 |
 :TODO: Linearised Model:
-
-#+BEGIN_SRC matlab :exports none :results output
-clc
-clear
-close all
-D_1 = 4.5e-2;
-D_o1 = 5e-3;
-K_pump = 2e-5;
-C_d = 0.8;
-h_10 = 0.001;
-g = 9.81;
-
-num = [K_pump*4/pi];
-den = [(D_1^2), ((D_o1^2)*C_d*sqrt(2*g))/(2*sqrt(h_10))];
-
-sys = tf(num, den);
-
-t = 0:0.1:(100 - 0.1);
-s = size(t);
-u = [ones(1, s(2)/2)*9, ones(1, s(2)/2)*8];
-
-[y, t_out, x] = lsim(sys, u, t);
-plot(t_out, y);
-hold on;
-%plot(t, u);
-
-#+END_SRC
-
-#+RESULTS:
-: %plot(t, u); %-<org-eval>-
-
-
 | Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
-| 8.5, 9                  | $-1V$        |                                                |                                                                                               |                            |
-| 8.5, 9                  | $+1V$        |                                                |                                                                                               |                            |
-| 4.2, 5                  | $-1V$        |                                                |                                                                                               |                            |
-| 4.2, 5                  | $+1V$        |                                                |                                                                                               |                            |
-| 6.7, 7                  | $-1V$        |                                                |                                                                                               |                            |
-| 6.7, 7                  | $+1V$        |                                                |                                                                                               |                            |
+|                       5 | $-1V$        |                                   7.368103e+00 |                                                                                 -3.459669e+00 |               4.562306e+00 |
+|                       5 | $1V$         |                                   1.100080e+01 |                                                                                  7.092370e+00 |               4.786139e+00 |
+|                       7 | $-1V$        |                                   1.100269e+01 |                                                                                 -6.811670e+00 |               4.954227e+00 |
+|                       7 | $1V$         |                                   1.463658e+01 |                                                                                  1.044556e+01 |               5.369118e+00 |
+|                       9 | $-1V$        |                                   1.463439e+01 |                                                                                 -1.027377e+01 |               4.775442e+00 |
+|                       9 | $1V$         |                                   1.826770e+01 |                                                                                  1.390707e+01 |               5.039556e+00 |
 
 :TODO: /Comment on differences between the non-linear and linearised model estimates and the observed response:/
 :TODO: /a) Did you observe a difference in response for positive or negative input perturbations? Can you explain this?/
@@ -222,7 +190,12 @@ hold on;
 
 :TODO: Non Linear Model:
 | Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
-|                         |              |                                                |                                                                                               |                  |
+|                       5 | $-1V$        |                                   5.171287e+00 |                                                                                  2.164194e+00 |                         38 |
+|                       5 | $1V$         |                                   9.645496e+00 |                                                                                  2.310015e+00 |                         40 |
+|                       7 | $-1V$        |                                   1.182028e+01 |                                                                                  2.557262e+00 |                         40 |
+|                       7 | $1V$         |                                   1.694314e+01 |                                                                                  2.565595e+00 |                         40 |
+|                       9 | $-1V$        |                                   2.106993e+01 |                                                                                  2.697029e+00 |                         40 |
+|                       9 | $1V$         |                                   2.638299e+01 |                                                                                  2.616032e+00 |                         38 |
 
 :TODO: Linearised Model:
 | Operating point (cm, V) | Step (Volts) | Final Value ($h_1 (t\rightarrow \infty)$) (cm) | Gain ($\frac{h_1(t\rightarrow \infty) - h_{1,0}}{V_P(t\rightarrow \infty) - V_{P,0}}$) (cm/V) | 2% Settling Time (seconds) |
