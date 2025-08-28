@@ -58,3 +58,36 @@ When the natural response does not decay to zero, but does not grow either.
 Exists when poles are on the $j\omega$ axis
 
 
+** Steady State Error
+The steady state error is:
+\[e(\infty) = \lim_{s\rightarrow 0}\frac{sR(s)}{1 + G(s)}\]
+
+*** Disturbances
+Represented by another [[id:c7591f3a-c2d4-4591-b6af-b0db831a296c][Transfer Function]] being added to some part of the system
+With unity feedback we can get the error as:
+ - \[E(s) = \frac{1}{1 + G_1(s) G_2(s)}R(s) + \frac{G_2(s)}{1 + G_1(s) G_2(s)}D(s)\]
+   - $G_1(s)$ is the controller
+   - $G_2(s)$ is the plant
+Using the [[id:4e024817-5a11-4519-a4af-ada17c08e3de][Final Value Theorem]]:
+ - \[e(\infty) = \lim_{s\rightarrow 0}s E(s) = e_R(\infty) + e_d(\infty)\]
+Where 
+ - \[e_D(\infty) = \frac{1}{\lim_{s\rightarrow 0}\frac{1}{G_2(s)} + \lim_{s\rightarrow 0}G_1(s)}\]
+More error is present in the output when there are more integrators in $G_2$ than $G_1$
+
+To convert non-unity feedback to unity feedback
+\[G_e(s) = \frac{G(s)}{1 + G(s)H(s)- G(s)}\]
+ - $H(s)$ is the feedback
+
+** System Sensitivity
+Typically when we make a system faster we also make it easier to make unstable.
+Robustness is when we want to meet some requirement and allow for variation without making the system stable
+Sensitivity is defined as:
+\[S_{F: P} = \lim_{\Delta P\rightarrow 0}\frac{\textrm{Fractional change in } F}{\textrm{Fractional change in } P} = \frac{P}{F}\frac{\partial F}{\partial P}\]
+
+*** For A Second Order System
+Sensitivity of $a$ 
+\[T(s) = \frac{K}{s^2 + as + K\]
+\[P_{T:a} = \frac{a}{T} \frac{\partial T}{\partial a} = \frac{-as}{s^2 + as + K}\]
+
+
+
