@@ -20,6 +20,7 @@
 \newpage
 * System Familiarisation and Calibration
 ** Calibration
+#+ATTR_LATEX: :placement [H]
 #+ATTR_LATEX: :align |c|c|c|c|
 #+CAPTION: Measured Tank Heights \label{tab:T0}
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
@@ -92,7 +93,7 @@ This will not effect our theoretical models too much, the amount at which the pu
 During the lab there were complications in calculating $C_d$. For the Simulink models where it was required a value was chosen that fit the data well. 
 
 ** Tank Model
-
+#+ATTR_LATEX: :placement [H]
 #+ATTR_LATEX: :align |c|c|c|c|c|
 #+CAPTION: Experimental Configuration #1 Data \label{tab:T1}
 |-------------------------+--------------+------------------+-------------+----------------------------|
@@ -111,15 +112,19 @@ During the lab there were complications in calculating $C_d$. For the Simulink m
 | 8.5, 9                  | $+1V$        |             9.53 |        1.44 |                       23.0 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
 
+#+ATTR_LATEX: :placement [H]
 #+CAPTION: Operating Point 1 Experimental Plot \label{fig:F1}
 [[./ENG331_Lab_2_OP_1.png]]
 
+#+ATTR_LATEX: :placement [H]
 #+CAPTION: Operating Point 2 Experimental Plot \label{fig:F2}
 [[./ENG331_Lab_2_OP_2.png]]
 
+#+ATTR_LATEX: :placement [H]
 #+CAPTION: Operating Point 3 Experimental Plot \label{fig:F3}
 [[./ENG331_Lab_2_OP_3.png]]
 
+#+ATTR_LATEX: :placement [H]
 #+ATTR_LATEX: :align |c|c|c|c|c|
 #+CAPTION: Non-Linear Configuration #1 Data \label{tab:T2}
 |-------------------------+--------------+------------------+-------------+----------------------------|
@@ -138,6 +143,7 @@ During the lab there were complications in calculating $C_d$. For the Simulink m
 | (9.73, 9)               | $+1V$        |             11.2 |        1.99 |                         28 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
 
+#+ATTR_LATEX: :placement [H]
 #+ATTR_LATEX: :align |c|c|c|c|c|
 #+CAPTION: Linear Configuration #1 Data \label{tab:T3}
 |-------------------------+--------------+------------------+-------------+----------------------------|
@@ -171,6 +177,7 @@ There are a lot of differences between experimental and the non-linear model, th
 It is expected that the linearised model would perform worse with larger step sizes. This is because the linearised model works around a operating point, the further away from that point the less accurate the linear approximation becomes.
 
 ** Coupled Tank Model
+#+ATTR_LATEX: :placement [H]
 #+ATTR_LATEX: :align |c|c|c|c|c|
 #+CAPTION: Experimental Configuration #3 Data \label{tab:T4}
 |-------------------------+--------------+------------------+-------------+----------------------------|
@@ -189,7 +196,7 @@ It is expected that the linearised model would perform worse with larger step si
 | 19.5, 9                 | $+1V$        |          21.3884 |      1.4476 |                       15.2 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
 
-
+#+ATTR_LATEX: :placement [H]
 #+ATTR_LATEX: :align |c|c|c|c|c|
 #+CAPTION: Non-Linear Configuration #3 Data \label{tab:T5}
 |-------------------------+--------------+------------------+-------------+----------------------------|
@@ -208,7 +215,7 @@ It is expected that the linearised model would perform worse with larger step si
 | (23.7, 9)               | $+1V$        |            26.38 |        2.61 |                         38 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
 
-
+#+ATTR_LATEX: :placement [H]
 #+ATTR_LATEX: :align |c|c|c|c|c|
 #+CAPTION: Linear Configuration #3 Data \label{tab:T6}
 |-------------------------+--------------+------------------+-------------+----------------------------|
@@ -305,8 +312,10 @@ The 9V operating point was selected (operating point 3).
 
 /How well do your empirical models generalise to different operating points or initial conditions?/
 
+Referring to Figure \ref{fig:F5}, it can be seen that the general shape of both estimations fit to the different operating points well. The MATLAB estimations fits very well to this 9V operating point with no noticable offset present. The shape of the theoretical esitmation response matches the actual response well but there is a small DC offset present. This is likely due to the gain being slightly off.
+
+#+ATTR_LATEX: :placement [H]
 #+CAPTION: Second Order Estimations vs Operating Point 3 \label{fig:F5}
 [[./ENG331_Lab_2_Comparison_OP_3.png]]
 
-Referring to Figure \ref{fig:F5}, it can be seen that the general shape of both estimations fit to the different operating points well. The MATLAB estimations fits very well to this 9V operating point with no noticable offset present. The shape of the theoretical esitmation response matches the actual response well but there is a small DC offset present. This is likely due to the gain being slightly off.
 
