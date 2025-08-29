@@ -17,10 +17,9 @@
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
 #+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
-* Task 2 - Plant Construction
 
-** Part 1 - System Familiarisation and Calibration
-*** Calibration
+* Part 1 - System Familiarisation and Calibration
+** Calibration
 :DONE: /Measured Tank Heights:/
 | Actual Tank 1 Height $h_{1,i}$ | Uncalibrated value $v_{1,i}$ | Actual tank 2 height $h_{2,i}$ | Uncalibrated value $v_{2,i}$ |
 |                              4 |                           80 |                            8.5 |                          130 |
@@ -42,15 +41,15 @@ Solving the following system of equations for Tank 2:
 \end{cases}\]
 We get $\textrm{scale} = 0.03293$ and $\textrm{offset} = 4.22$
 
-*** Tank Parameters
+** Tank Parameters
 :DONE: /Record tank diameter, nozzle size for each tank:/
 The bottom nozzle diameter (Tank 2) was recorded to be 4mm. Whereas the top nozzle diameter (Tank 1) was recorded to be 5mm.
 
 The diameter of Tank 2 was recorded to be 4.5cm, likewise the diameter of Tank 1 was also recorded to be 4.5cm.
 
-** Part 2 - System Identification
+* Part 2 - System Identification
 
-*** Pump Gain
+** Pump Gain
 :DONE: /Record the approximate pump gain:/
 If we set the pump voltage to $V_p = 10V$ it takes $t = 11s$ to fill the tank to $h = 20cm$. This data allows us to calculate the pump gain.
 \begin{align*}
@@ -86,67 +85,17 @@ q_0 &= 0.000018 m^3/s \\
 \textrm{Pump Gain} &= 0.000004 \\
 \end{align*}
 
-:TODO: /How well does our assumption of a linear relationship between output flow and pump voltage hold in this case?/
+:DONE: /How well does our assumption of a linear relationship between output flow and pump voltage hold in this case?/
+At two different voltages the pump gain changes, this means that it is non-linear. With a double in voltage the pump gain changes by 25%, in the future analysis we will only be changing by one volt, so the linear approximation is valid.
 
-:TODO: /Will this have a significant effect on the accuracy of our theoretical model? Why/why not?/
+:DONE: /Will this have a significant effect on the accuracy of our theoretical model? Why/why not?/
+This will not effect our theoretical models too much, the amount at which the pump gain changes with voltage is minimal.
 
-*** Discharge Coefficient
-:TODO: /Record the estimated $C_d$ for each tank:/
-:NOTE: During the lab the we had Zeke attempt this too and he also could not calculate it. We were getting a value that was ?greater than one?, which is impossible and does not make sense.
+** Discharge Coefficient
+:DONE: /Record the estimated $C_d$ for each tank:/
+During the lab there were complications in calculating $C_d$. For the Simulink models where it was required a value was chosen that fit the data well. 
 
-Tank 1:
-From 10->25
-t = 10s
-$Vol = \pi (4.5/2)^2 (25 - 10)$
-$Vol = 0.000239m^3$
-$q_1 = \frac{Vol}{t}$
-$q_1 = 0.000024$
-
-$C_{d,1} = \frac{q_1}{q_{1,ideal}}$
-
-Tank 2:
-from 4->26.5
-$h_1 = 11cm$
-t = 15.44s
-
-Something went wrong :(
-
-
-
-**** IGNORE
-From 4->25
-t = 14.5s
-$Vol = \pi (4.5/2)^2 (25 - 4)$
-$Vol = 0.000334m^3$
-$q_2 = \frac{Vol}{t}$
-$q_2 = 0.000023$
-
-$C_{d,2} = \frac{q_2}{q_{2,ideal}}$
-
-\[q_{out} = \frac{\pi}{4} D^2 C_d\sqrt{2gh_1}\]
-\[q_{out} = \frac{\Delta Vol}{t}\]
-
-
-**** WRONG
-Tank 1:
-t = 15s
-$Vol = \pi (4.5/2)^2 25$
-$Vol = 0.000498m^3$
-
-$q_{out,1} = 0.000498/15$
-$q_{out,1} = 0.000027$
-
-$C_d = $
-
-Tank 2:
-t = 20s
-$Vol = \pi (4.5/2)^2 25$
-$Vol = 0.000498m^3$
-
-$q_{out,1} = 0.000498/20$
-$q_{out,1} = 0.00002$
-
-*** Tank Model
+** Tank Model
 
 #+ATTR_LATEX: :align |c|c|c|c|c|
 #+CAPTION: Experimental Configuration #1 Data \label{tab:T1}
@@ -159,7 +108,7 @@ $q_{out,1} = 0.00002$
 |-------------------------+--------------+------------------+-------------+----------------------------|
 | 6.7, 7                  | $-1V$        |             5.71 |        1.11 |                       11.1 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
-| 6.7, 7                  | $+1V$        |             7.76 |        1.04 |                        8.9 |
+| 6.7, 7                  | $+1V$        |             7.76 |        1.04 |                       10.9 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
 | 8.5, 9                  | $-1V$        |             7.68 |        0.90 |                       10.2 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
@@ -220,14 +169,14 @@ There were differences between inputting positive compared to negative steps. Th
 
 
 :DONE: /b) Explain any differences between nonlinear model and experimental?/
-There are a lot of differences between experimental and the non-linear model, this is mainly because of noise in the measurements. However some notable differences are the 2% settling time and the operating point height. The 2% settling time is consistently quicker in the real world system then the theoretical system. The operating point varies a fair bit from the theoretical data, the this is probably because of inaccuracies in measurement/calibration.
+There are a lot of differences between experimental and the non-linear model, this is mainly because of noise in the measurements. However some notable differences are the 2% settling time and the operating point height. The 2% settling time is consistently quicker in the real world system then the theoretical system, this could be because of various reasons, but it implies that the pump is stronger in reality than the simulation, this could be due to guessing $C_d$. The operating point varies a fair bit from the theoretical data, the this is probably because of inaccuracies in measurement/calibration.
 
 
 :DONE: /c) Would you expect the linearised model to fit the data worse if the step size was increased?/
 It is expected that the linearised model would perform worse with larger step sizes. This is because the linearised model works around a operating point, the further away from that point the less accurate the linear approximation becomes.
 
 
-*** Coupled Tank Model
+** Coupled Tank Model
 #+ATTR_LATEX: :align |c|c|c|c|c|
 #+CAPTION: Experimental Configuration #3 Data \label{tab:T4}
 |-------------------------+--------------+------------------+-------------+----------------------------|
@@ -239,7 +188,7 @@ It is expected that the linearised model would perform worse with larger step si
 |-------------------------+--------------+------------------+-------------+----------------------------|
 | 14.5, 7                 | $-1V$        |          11.9198 |      2.7390 |                       17.9 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
-| 14.5, 7                 | $+1V$        |          16.6517 |      2.3749 |                        2.6 |
+| 14.5, 7                 | $+1V$        |          16.6517 |      2.3749 |                       15.6 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
 | 19.5, 9                 | $-1V$        |          17.7358 |      2.4684 |                       13.3 |
 |-------------------------+--------------+------------------+-------------+----------------------------|
@@ -289,6 +238,7 @@ It is expected that the linearised model would perform worse with larger step si
 It is still expected that there would be differences in positive and negative step inputs. This is still because the system depends on its state, the outflow of the tank depends on the height in the tank. However, for Tank 2 it is harder to see than Tank 1 because Tank 1 is flowing into Tank 2, leading to a more consistent outflow from Tank 1. 
 
 :TODO: /b) Explain any differences between nonlinear model and experimental?/
+The 2% settling time is consistently quicker in the experimental model when compared with the non-linear model. This si
 
 :DONE: /c) Would you expect the linearised model to fit the data worse if the step size was increased?/
 Same as Tank 1, the linear approximation is dependent on the operating point. The further away from the operating point we go the less accurate the approximation will become.
@@ -297,23 +247,57 @@ Same as Tank 1, the linear approximation is dependent on the operating point. Th
 This system is first order, which only has one pole. This means that it is impossible to overshoot, however the real world system may exhibit inconsistencies with the theoretical system, making it a higher order system. So in the real world it may have small amounts of overshoot, but in theory it is not possible.
 
 
-** Part 3 – Model Estimation
-*** 1. From the empirical data in configuration #3 (previous table), estimate a 2nd order Laplace domain model for the plant at one of the operating points.
+* Part 3 – Model Estimation
+** 1. From the empirical data in configuration #3 (previous table), estimate a 2nd order Laplace domain model for the plant at one of the operating points.
 Using measured step response metrics
-:TODO: /Selected operating point initial and final value for $V_P(t)$:/
-:TODO: /Estimated gain $K$, damping factor $\zeta$, and natural frequency $\omega_n$:/
-:TODO: /Estimated prototype second order transfer function:/
+:DONE: /Selected operating point initial and final value for $V_P(t)$:/
+Using operating point 2 (7V).
 
-Using MATLAB’s Control Systems Toolbox system identification app
-:TODO: /Selected operating point initial and final value for $V_P(t)$:/
-:TODO: /Estimated gain $K$, damping factor $\zeta$, and natural frequency $\omega_n$:/
-:TODO: /Estimated prototype second order transfer function:/
+:DONE: /Estimated gain $K$, damping factor $\zeta$, and natural frequency $\omega_n$:/
+From visual inspection we can see there is no overshoot in the tank level so we can assume the system is overdamped($1<\zeta$).
+Use the prototype second order transfer function,
+\[T(s)=\dfrac{K\omega_n^2}{s^2+2\zeta\omega_ns+\omega_n^2}\]
+Start by estimating the gain using the change in tank 2 level after a unit step.
+\[K=\dfrac{\Delta y}{\Delta u}\]
+Where $\Delta u$ is the voltage step change and $\Delta y$ is the tank 2 output change,
+Check multiple step changes to confirm the gain estimation.
 
-:TODO: /Comment on the differences between the empirical models, how well this fit the data, and any differences between the empirical estimation and that developed from theory./
-*** 2. Use you empirical models to calculate the expected step response metrics (gain, settling time, rise time) at one of your other operating points for the same step size as applied in your Part 2 testing (as in previous table).
+\[K_1=\dfrac{11.43-14.89}{6-7}=3.46\]
+\[K_2=\dfrac{17.37-13.70}{8-7}=3.67\]
+The is some error in these calculations due to the noise in the output signl $h_2$. Using this estimate the gain to be $K=3.5$.
 
-:TODO: /Selected operating point initial and final value for $V_p(t)$:/
-:TODO: /Predicted step response metrics (gain, rise time, settling time) for each model at the selected operating point:/
-:TODO: /How well do your empirical models generalise to different operating points or initial conditions?/
+Using the results from the previous table (:TODO: add refrence to table if we want) aswell as via visual inspection from the plot we can estimate the 2% settling time to be 17s. 
+Using the settling time and the previosly estimated damping ratio we can find $\omega_n$. 
+\[\omega_n\approx\dfrac{4}{\zeta T_s}=0.196\:rad/s\]
+Plug all values into the prototype second order transfer function and plot it to compare with the emperical system,
 
+:TODO: Add the plot i added to the repo. Might not need to do this we can just have the one image in the comparison part.
+
+
+:DONE: /Estimated prototype second order transfer function:/
+\[T(s)=\dfrac{0.1344}{s^2+0.4704s+0.0384}\]
+
+/Using MATLAB’s Control Systems Toolbox system identification app/
+:DONE: /Selected operating point initial and final value for $V_P(t)$:/
+Using operating point 3 (9V).
+
+:DONE: /Estimated gain $K$, damping factor $\zeta$, and natural frequency $\omega_n$:/
+$K=0.1520$,$\zeta=0.87$,$\omega_n=0.0741\:rad/s$
+
+:DONE: /Estimated prototype second order transfer function:/
+\[$T(s)=\dfrac{0.01126}{s^2+0.129s+0.005497}\]
+
+:DONE: /Comment on the differences between the empirical models, how well this fit the data, and any differences between the empirical estimation and that developed from theory./
+:TODO: add image here of the comparison betwwen the two models.
+Both estimations fit the empirical data relativley well. Both estimations follow the shape of the actual response. The theoretical estimation appears to have a smaller rise time than the actual response aswell as a small DC offset, however it follows the same general shape. The MATLAB estimation rise time appears to be closer to that of the actual response. There is still some small DC offset noticeable but it is smaller than the theoretical estimation. 
+** 2. Use you empirical models to calculate the expected step response metrics (gain, settling time, rise time) at one of your other operating points for the same step size as applied in your Part 2 testing (as in previous table).
+
+:DONE: /Selected operating point initial and final value for $V_p(t)$:/
+The 9V operating point was selected.
+
+:DONE: /Predicted step response metrics (gain, rise time, settling time) for each model at the selected operating point:/
+:DONE: /How well do your empirical models generalise to different operating points or initial conditions?/
+
+:TODO: add op2 comparison plot
+The general shape of both estimations fit to the different operating points well. The MATLAB estimations fits very well to this 9V operating point with no noticable offset present. The shape of the theoretical esitmation response matches the actual response well but there is a small DC offset present. This is likely due to the gain being slightly off.
 
