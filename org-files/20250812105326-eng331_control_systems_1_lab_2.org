@@ -15,6 +15,7 @@
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
 * Task 2 - Plant Construction
 
@@ -146,73 +147,141 @@ $q_{out,1} = 0.000498/20$
 $q_{out,1} = 0.00002$
 
 *** Tank Model
-:DONE: Experimental:
-| Operating point (cm, V) | Step (Volts) | Final Value (cm) | Gain (cm/V) | 2% Settling Time (seconds) |
-| 4.2, 5                  | $-1V$        |             2.21 |        2.03 |                       15.1 |
-| 4.2, 5                  | $+1V$        |             6.12 |        1.89 |                        8.9 |
-| 6.7, 7                  | $-1V$        |             5.71 |        1.11 |                       11.1 |
-| 6.7, 7                  | $+1V$        |             7.76 |        1.04 |                        8.9 |
-| 8.5, 9                  | $-1V$        |             7.68 |        0.90 |                       10.2 |
-| 8.5, 9                  | $+1V$        |             9.53 |        1.44 |                       23.0 |
 
-:DONE: Non Linear Model:
+#+ATTR_LATEX: :align |c|c|c|c|c|
+#+CAPTION: Experimental Configuration #1 Data \label{tab:T1}
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | Operating point (cm, V) | Step (Volts) | Final Value (cm) | Gain (cm/V) | 2% Settling Time (seconds) |
+|-------------------------+--------------+------------------+-------------+----------------------------|
+| 4.2, 5                  | $-1V$        |             2.21 |        2.03 |                       15.1 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
+| 4.2, 5                  | $+1V$        |             6.12 |        1.89 |                       16.2 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
+| 6.7, 7                  | $-1V$        |             5.71 |        1.11 |                       11.1 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
+| 6.7, 7                  | $+1V$        |             7.76 |        1.04 |                        8.9 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
+| 8.5, 9                  | $-1V$        |             7.68 |        0.90 |                       10.2 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
+| 8.5, 9                  | $+1V$        |             9.53 |        1.44 |                       23.0 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
+
+#+CAPTION: Operating Point 1 Experimental Plot \label{fig:F1}
+[[./ENG331_Lab_2_OP_1.png]]
+
+#+CAPTION: Operating Point 2 Experimental Plot \label{fig:F2}
+[[./ENG331_Lab_2_OP_2.png]]
+
+#+CAPTION: Operating Point 3 Experimental Plot \label{fig:F3}
+[[./ENG331_Lab_2_OP_3.png]]
+
+#+ATTR_LATEX: :align |c|c|c|c|c|
+#+CAPTION: Non-Linear Configuration #1 Data \label{tab:T2}
+|-------------------------+--------------+------------------+-------------+----------------------------|
+| Operating point (cm, V) | Step (Volts) | Final Value (cm) | Gain (cm/V) | 2% Settling Time (seconds) |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (3.00, 5)               | $-1V$        |             1.95 |        1.05 |                         22 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (3.00, 5)               | $+1V$        |             4.25 |        1.25 |                         24 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (5.88, 7)               | $-1V$        |             4.41 |        1.47 |                         26 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (5.88, 7)               | $+1V$        |             7.53 |        1.64 |                         26 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (9.73, 9)               | $-1V$        |             7.87 |        1.85 |                         28 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (9.73, 9)               | $+1V$        |             11.2 |        1.99 |                         28 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 
 Because it was not possible to calculate $C_d$ it was assumed that $C_d = 0.3$, as it fits the data well.
-:TODO: Linearised Model:
+
+#+ATTR_LATEX: :align |c|c|c|c|c|
+#+CAPTION: Linear Configuration #1 Data \label{tab:T3}
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | Operating point (cm, V) | Step (Volts) | Final Value (cm) | Gain (cm/V) | 2% Settling Time (seconds) |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (4.94, 5)               | $-1V$        |             3.98 |       0.966 |                       12.0 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (4.94, 5)               | $+1V$        |             5.91 |       0.966 |                       12.0 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (6.88, 7)               | $-1V$        |             5.92 |       0.962 |                       7.89 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (6.88, 7)               | $+1V$        |             7.84 |       0.962 |                       7.94 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (8.82, 9)               | $-1V$        |             7.86 |       0.965 |                       9.24 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (8.82, 9)               | $+1V$        |             9.79 |       0.965 |                       9.31 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 
-:TODO: /Comment on differences between the non-linear and linearised model estimates and the observed response:/
+:DONE: /Comment on differences between the non-linear and linearised model estimates and the observed response:/
+
+:DONE: /a) Did you observe a difference in response for positive or negative input perturbations? Can you explain this?/
+There were differences between inputting positive compared to negative steps. This is because this system is dependent on the state of the system, the pressure in the tank will increase for positive steps and decrease for negative steps. Hence we would expect to see positive inputs to fill Tank 1 slower, this can be seen in Table \ref{tab:T1}, \ref{tab:T2} and \ref{tab:T3} each of the tables have data that have different settling time for positive compared to negative steps for the same operating point.
 
 
-:TODO: /a) Did you observe a difference in response for positive or negative input perturbations? Can you explain this?/
+:DONE: /b) Explain any differences between nonlinear model and experimental?/
+There are a lot of differences between experimental and the non-linear model, this is mainly because of noise in the measurements. However some notable differences are the 2% settling time and the operating point height. The 2% settling time is consistently quicker in the real world system then the theoretical system. The operating point varies a fair bit from the theoretical data, the this is probably because of inaccuracies in measurement/calibration.
 
-:TODO: /b) Explain any differences between nonlinear model and experimental?/
 
 :DONE: /c) Would you expect the linearised model to fit the data worse if the step size was increased?/
 It is expected that the linearised model would perform worse with larger step sizes. This is because the linearised model works around a operating point, the further away from that point the less accurate the linear approximation becomes.
 
 
 *** Coupled Tank Model
-:TODO: Experimental:
+#+ATTR_LATEX: :align |c|c|c|c|c|
+#+CAPTION: Experimental Configuration #3 Data \label{tab:T4}
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | Operating point (cm, V) | Step (Volts) | Final Value (cm) | Gain (cm/V) | 2% Settling Time (seconds) |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | 9.0, 5                  | $-1V$        |           6.8791 |      2.4121 |                       23.4 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | 9.0, 5                  | $+1V$        |          11.2303 |      1.8601 |                       25.4 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | 14.5, 7                 | $-1V$        |          11.9198 |      2.7390 |                       17.9 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | 14.5, 7                 | $+1V$        |          16.6517 |      2.3749 |                        2.6 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | 19.5, 9                 | $-1V$        |          17.7358 |      2.4684 |                       13.3 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | 19.5, 9                 | $+1V$        |          21.3884 |      1.4476 |                       15.2 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 
-:TODO: Non Linear Model:
+
+#+ATTR_LATEX: :align |c|c|c|c|c|
+#+CAPTION: Non-Linear Configuration #3 Data \label{tab:T5}
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | Operating point (cm, V) | Step (Volts) | Final Value (cm) | Gain (cm/V) | 2% Settling Time (seconds) |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (7.33, 5)               | $-1V$        |            5.171 |        2.16 |                         38 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (7.33, 5)               | $+1V$        |            9.645 |        2.31 |                         40 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (14.3, 7)               | $-1V$        |            11.82 |        2.55 |                         40 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (14.3, 7)               | $+1V$        |            16.94 |        2.56 |                         40 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (23.7, 9)               | $-1V$        |            21.06 |        2.69 |                         40 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 | (23.7, 9)               | $+1V$        |            26.38 |        2.61 |                         38 |
+|-------------------------+--------------+------------------+-------------+----------------------------|
 
 
-:TODO: Linearised Model:
+#+ATTR_LATEX: :align |c|c|c|c|c|
+#+CAPTION: Linear Configuration #3 Data \label{tab:T6}
 | Operating point (cm, V) | Step (Volts) | Final Value (cm) | Gain (cm/V) | 2% Settling Time (seconds) |
 
 :TODO: /Comment on differences between the non-linear and linearised model estimates and the observed response:/
-:TODO: /a) Did you observe a difference in response for positive or negative input perturbations? Can you explain this?/
+:DONE: /a) Did you observe a difference in response for positive or negative input perturbations? Can you explain this?/
+It is still expected that there would be differences in positive and negative step inputs. This is still because the system depends on its state, the outflow of the tank depends on the height in the tank. However, for Tank 2 it is harder to see than Tank 1 because Tank 1 is flowing into Tank 2, leading to a more consistent outflow from Tank 1. 
+
 :TODO: /b) Explain any differences between nonlinear model and experimental?/
-:TODO: /c) Would you expect the linearised model to fit the data worse if the step size was increased?/
-:TODO: /d) Is it possible for this system to exhibit overshoot?/
+
+:DONE: /c) Would you expect the linearised model to fit the data worse if the step size was increased?/
+Same as Tank 1, the linear approximation is dependent on the operating point. The further away from the operating point we go the less accurate the approximation will become.
+
+:DONE: /d) Is it possible for this system to exhibit overshoot?/
+This system is first order, which only has one pole. This means that it is impossible to overshoot, however the real world system may exhibit inconsistencies with the theoretical system, making it a higher order system. So in the real world it may have small amounts of overshoot, but in theory it is not possible.
+
 
 ** Part 3 – Model Estimation
 *** 1. From the empirical data in configuration #3 (previous table), estimate a 2nd order Laplace domain model for the plant at one of the operating points.
