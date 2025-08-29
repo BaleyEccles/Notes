@@ -28,6 +28,12 @@
 
  - If the zeroes are close to the origin we can have non-minimum-phase responses
    
+** Feedback Systems
+For negative feedback
+\[R(s) = \frac{G(s)}{1 + G(s)H(s)}\]
+ - $G(s)$ is the plant
+ - $H(s)$ is the feedback
+
 ** Linearization
  - We can convert non-linear systems to linear ones
  - This can be done using a [[id:356b1296-2188-4d04-9ccc-a4381bcc02b6][Taylor Series]]
