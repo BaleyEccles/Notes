@@ -85,8 +85,66 @@ disp(double(sol.z))
 * TODO Question 4
 
 ** TODO a
+Using the equations
+\begin{align*}
+\bar{A} &= P^{-1}AT \\
+\bar{B} &= P^{-1}B \\
+\bar{C} &= CP
+\end{align*}
+
+Using the following Matlab code we can find these matrices:
+#+BEGIN_SRC octave :exports code :results output :session Q4
+A = [-17, 8; 8, 12];
+B = [4; 7];
+C = [0.25, 0];
+
+P_inv = [0.25, 0; -3, 2];
+P = inv(P_inv);
+
+A_ = P_inv*A*P
+B_ = P_inv*B
+C_ = C*P
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+A_ =
+
+    -5     1
+   268     0
+B_ =
+
+   1
+   2
+C_ =
+
+   1   0
+#+end_example
+
+Which gives:
+\[\bar{A} = \begin{bmatrix}
+-5  & 1 \\
+268 & 0
+\end{bmatrix}\]
+\[\bar{B} = \begin{bmatrix}
+1 \\
+2
+\end{bmatrix}\]
+\[\bar{C} = \begin{bmatrix}
+1 & 0 \\
+\end{bmatrix}\]
+Hence the new state space system is:
+\[\dot{x} = \begin{bmatrix}
+-5 & 1 \\
+268 & 0
+\end{bmatrix}x + \begin{bmatrix}
+1 \\
+2
+\end{bmatrix} u(t)\]
+\[y(t) = \begin{bmatrix} 1 & 0 \end{bmatrix}x\]
 
 ** TODO b
+Controllable canonical form
 
 ** TODO c
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_3_Question_4.xopp]]
