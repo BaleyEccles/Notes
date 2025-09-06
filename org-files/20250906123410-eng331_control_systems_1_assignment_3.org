@@ -1,0 +1,95 @@
+:PROPERTIES:
+:ID:       862268d9-e7e1-4e3a-be45-5c027b31dd9b
+:END:
+#+title: ENG331 - Control Systems 1 - Assignment 3
+#+date: [2025-09-06 Sat 12:34]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+
+
+* TODO Question 1
+** TODO a
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_3_Question_1.xopp]]
+** TODO b
+
+* TODO Question 2
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_3_Question_2.xopp]]
+
+* TODO Question 3
+Using:
+\[R(s) = \frac{G(s)}{1 + G(s)H(s)}\]
+Where $H(s) = K$
+\begin{align*}
+R(s) &= \frac{\frac{6}{(s + 2)(s + 3)}}{1 + \frac{6}{(s + 2)(s + 3)}K} \\
+R(s) &= \frac{6}{s^{2} + 5 s + (6 + 6 K)}
+\end{align*}
+
+
+#+BEGIN_SRC octave :exports none :results output :session Q3
+clc
+clear
+close all
+pkg load symbolic
+syms s
+R = (6/((s+2)*(s+3)))/(1 + (K*6)/((s+2)*(s+3)))
+latex(expand(simplify(R)))
+#+END_SRC
+
+#+RESULTS:
+: R = (sym)
+: 
+:                     6                  
+:   ─────────────────────────────────────
+:                   ⎛      6⋅K          ⎞
+:   (s + 2)⋅(s + 3)⋅⎜─────────────── + 1⎟
+:                   ⎝(s + 2)⋅(s + 3)    ⎠
+: \frac{6}{6 K + s^{2} + 5 s + 6}
+
+Using the second order prototype form and the peak time equation ($T_p = \frac{\pi}{\omega_n\sqrt{1 - \zeta^2}}$) we can get the following system of equations:
+\begin{cases}
+6 &=  K_1\omega_n^2 \\
+5 &=  2\zeta\omega_n \\
+6 + 6K &=  \omega_n^2 \\
+0.576 &= \frac{\pi}{\omega_n\sqrt{1 - \zeta^2}}
+\end{cases}
+When solving we get $K = 5$
+
+#+BEGIN_SRC octave :exports none :results output :session Q3
+syms w_n K_1 K z;
+eq1 = 6 == K_1 * w_n^2;
+eq2 = 5 == 2 * z * w_n;
+eq3 = 6 + 6 * K == w_n^2;
+eq4 = 0.576 == pi / (w_n * sqrt(1 - z^2));
+
+
+sol = solve(eq1, eq2, eq2, eq3, eq4);
+disp(double(sol.w_n))
+disp(double(sol.K_1))
+disp(double(sol.K))
+disp(double(sol.z))
+#+END_SRC
+
+#+RESULTS:
+: warning: passing floating-point values to sym is dangerous, see "help sym"
+: warning: called from
+:     double_to_sym_heuristic at line 50 column 7
+:     sym at line 384 column 11
+:     eq at line 93 column 3
+: 5.9998
+: 0.1667
+: 4.9996
+: 0.4167
+
+
+* TODO Question 4
+
+** TODO a
+
+** TODO b
+
+** TODO c
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_3_Question_4.xopp]]
+
+* Question 5
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_3_Question_5.xopp]]
