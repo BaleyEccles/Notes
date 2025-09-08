@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       0d927ec6-5c0d-497c-b054-43d5d88f8300
+:END:
+#+title: Nyquist Criterion
+#+date: [2025-09-09 Tue 09:26]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Nyquist Criterion
+** For A Feedback System
+For a feedback system
+\[T(s) = \frac{G(s)}{1 + G(s)H(s)} = \frac{N_GD_H}{D_GD_H + N_GN_H}\]
+
+** Mapping
+For some complex point $Q$. If we apply some function $F(s)$ we get a mapping from one point ($Q\prime$) to another.
+Choose a set of points such that the set creates a loop on the $j\omega + \sigma$ plot. The mapping will also create a loop.
+ - Pole in the loop will subtract a $360^o$ phase shift
+ - Zeroes in the loop will add a $360^o$ phase shift   
+ - Poles and zeroes not in the loop we will genrate a small phse shift
+The output mapping will go around $N_{\textrm{clockwise}} = Z_{\textrm{in}} - P_{\textrm{in}}$ times in the clockwise
+The output mapping will go around $N_{\textrm{c-clockwise}} = P_{\textrm{in}} - Z_{\textrm{in}}$ times in the counter clockwise
+
+
+*** Useage
+If we know the mapping we can use it to find the location of the zeroes

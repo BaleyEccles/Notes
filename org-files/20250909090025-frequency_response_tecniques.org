@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       3759ca8f-4825-4407-a333-4aa30ec4136b
+:END:
+#+title: Frequency Response Tecniques
+#+date: [2025-09-09 Tue 09:00]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Frequency Response Tecniques
+For [[id:129878a7-2136-473b-ac33-74da80b12e67][Linear and Time Invarient Systems (LTI)]] the input frequency will always be the same as the output frequncy. The output may have a different phase and amplitude.
+
+ - \[G(\omega) = \frac{G(\omega)}{R(\omega)}\]
+ - \[|G(\omega)| = \frac{|G(\omega)|}{|R(\omega)|}\]
+ - \[\arg\{G(\omega)\} = \arg\{G(\omega)\} - \arg\{R(\omega)\}\]
+
+ - [[id:0d927ec6-5c0d-497c-b054-43d5d88f8300][Nyquist Criterion]]
+ 
+** From [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace Domain]]
+Simply subsitute $s = j\omega$
+
+** Analysis
+We can use [[id:79b422d5-ff34-41ab-8b86-67e6ecfc68ad][Bode Plots]] to analyse the transfer function.
+
+
+
+

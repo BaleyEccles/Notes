@@ -7,7 +7,7 @@
 #+STARTUP: latexpreview
 
 * Bode Plots
- - A way to reperesent [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace Transforms]]
+ - A way to reperesent [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace Transforms]] and [[id:e2fd0b83-635c-48b4-85c0-2067477a0e63][Fourier Transforms]]
  - Two types magnitude and phase
  - Creating the subsitute into the [[id:c7591f3a-c2d4-4591-b6af-b0db831a296c][Transfer Function]] $s=j\omega$
    - We can either take the magnitude or phase of it
@@ -15,3 +15,9 @@
      - We use [[id:d041a889-d4af-4598-8434-866ecc7ce005][Decibels]] to plot them
      - $+20dB/dec$ for [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][zeros]]
      - $-20dB/dec$ for [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][poles]]
+** Example Bode Plots
+*** Frequency
+[[./Bode_Freq.png]]
+*** Phase
+[[./Bode_Phase.png]]
+

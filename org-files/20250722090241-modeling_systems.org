@@ -115,3 +115,4 @@ Plotting these will give insight into how the system behaves
 The Gang Of Six can be simplified to the Gang Of Four if the feedforward term is set to 1 ($F = 1$):
 :TODO: Add the gang of four
 
+
