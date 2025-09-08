@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       dd9eeafa-3d34-473c-aafb-43261823e25f
+:END:
+#+title: Buck Converters
+#+date: [2025-09-08 Mon 17:49]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Buck Converters
+[[./Buck_conventions.svg]]
+Does DC-DC voltage convertion. It converts a higher voltage to a lower one, this also will increase current.
+ - The PWM determines how much of the voltage is converted.
+ - The frequcney of the PWM will change how the filter is designed
+
+** Pulse Width Modulation
+In digital application, the accuracy of the PWM is deterimed by the size of the timer used.
+ - A 8-bit timer gives divisions of $100/8 = 12.5\%$
+
+** Analysis
+[[./Buck_operating.svg]]
+When the PWM is on the on state the diode is reveres biased.
+When the PWM is off the diode is forward biased.
+
+In continuous conduction mode (current is positive):
+[[./Buck_chronogram.png]]
+
+If the off time is too long the buck convert will enter discontinuous conduction mode.
+In discontinuous conduction mode (current is not positive):
+[[./Buck_chronogram_discontinuous.png]]
+
+
