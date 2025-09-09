@@ -1,0 +1,78 @@
+:PROPERTIES:
+:ID:       d7232721-a1e8-461a-a47d-7ce7b11134f0
+:END:
+#+title: ENG331 - Control Systems 1 - Lab 3
+#+date: [2025-09-09 Tue 11:51]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Part 1 – System Familiarisation and Calibration [11 marks, ILO 1]
+
+** Calibration
+|--------------------------------+------------------------------+--------------------------------+------------------------------|
+| Actual Tank 1 Height $h_{1,i}$ | Uncalibrated value $v_{1,i}$ | Actual tank 2 height $h_{2,i}$ | Uncalibrated value $v_{2,i}$ |
+|--------------------------------+------------------------------+--------------------------------+------------------------------|
+|                              4 |                           80 |                            8.5 |                          130 |
+|--------------------------------+------------------------------+--------------------------------+------------------------------|
+|                           11.5 |                          220 |                             22 |                          540 |
+|--------------------------------+------------------------------+--------------------------------+------------------------------|
+
+
+** Tank Parameters
+The bottom nozzle diameter (Tank 2) was recorded to be 4mm. Whereas the top nozzle diameter (Tank 1) was recorded to be 5mm. The diameter of Tank 2 was recorded to be 4.5cm, likewise the diameter of Tank 1 was also recorded to be 4.5cm.
+
+** System Identification
+
+*** Pump Gain
+If we set the pump voltage to $V_p = 5V$ it takes $t = 16s$ to fill the tank to $h = 20cm$. This data allows us to calculate the pump gain.
+\[q_0 = 0.00002\]
+\[pump gain = 0.000004\]
+
+
+If we set the pump voltage to $V_p = 10V$ it takes $t = 9.2s$ to fill the tank to $h = 20cm$. This data allows us to calculate the pump gain.
+\[q_0 = 0.00002\]
+\[pump gain = 0.000003\]
+
+*** Discharge coefficient
+**** Diameter 1 (5mm) (top tank)
+steady state
+$h_1 = 4.5$
+$h_2 = 11 \rightarrow 25$
+
+$t_1 = 10.33$
+
+$Vol = pi (4.5/2)^2 (25 - 11)$
+$Vol = 0.000 00 222660379$
+
+$q = 0.00000222660379/10.33$
+$q = 0.000 000 215 547$
+
+$0.000 000 215 547$ = \frac{\pi}{4} (4.5*10^-2)^2 C_d\sqrt{2gh_1}$
+$0.000222660/10.33 = (pi/4)* (5*10^-3)^2 *x *sqrt(2*9.81*(25 - 11)*10^-2)$a
+
+$C_d = 0.4956706$
+
+**** Diameter 2 (4mm) (bottom tank)
+steady state
+$h_1 = 12$
+$h_2 = 4 \rightarrow 25$
+
+$Vol = pi (4.5×10^−2/2)^2 (25 − 4)×10^−2$
+$Vol = 0.0003339905690$
+$t_1 = 14.6$
+
+$0.0003339905690/14.6 = (pi/4)* (4*10^-3)^2 *x *sqrt(2*9.81*(25 - 4)*10^-2)$
+$C_d = 0.896 83$y
+
+
+
+
+* Part 2 – Controller Tuning [28 marks, ILO 1]
+
+** Theory
+
+** Tuning
+
+** Comment on the performance of your tuned controller:
+
+* Part 3 – Analysis [16 Marks, ILO 4]
