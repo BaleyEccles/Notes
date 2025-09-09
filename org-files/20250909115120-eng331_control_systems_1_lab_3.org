@@ -62,9 +62,7 @@ $Vol = 0.0003339905690$
 $t_1 = 14.6$
 
 $0.0003339905690/14.6 = (pi/4)* (4*10^-3)^2 *x *sqrt(2*9.81*(25 - 4)*10^-2)$
-$C_d = 0.896 83$y
-
-
+$C_d = 0.896 83$
 
 
 * Part 2 – Controller Tuning [28 marks, ILO 1]
@@ -72,7 +70,24 @@ $C_d = 0.896 83$y
 ** Theory
 
 ** Tuning
+Our system was very noisey, we decided to do step sizes of 5cm as our small step and 10cm as our large step.
+Kp = 1
+Ki = 0.04
+Kd = 0.25
+Tf = 10^4
 
-** Comment on the performance of your tuned controller:
-
+** Comment on the performance of your tuned controller
+:TODO: Use code from Lab 2
+|-----+------+-----------+-----+----+---------+---------|
+| OP  | Step | Final Val | %OS | Tp | Ts (2%) | e(t->0) |
+|-----+------+-----------+-----+----+---------+---------|
+| ,15 |    5 |           |     |    |         |         |
+| ,15 |   -5 |           |     |    |         |         |
+|-----+------+-----------+-----+----+---------+---------|
+| ,15 |    7 |           |     |    |         |         |
+| ,15 |   -7 |           |     |    |         |         |
+|-----+------+-----------+-----+----+---------+---------|
+| ,20 |    5 |           |     |    |         |         |
+| ,20  |   -5 |           |     |    |         |         |
+|-----+------+-----------+-----+----+---------+---------|
 * Part 3 – Analysis [16 Marks, ILO 4]
