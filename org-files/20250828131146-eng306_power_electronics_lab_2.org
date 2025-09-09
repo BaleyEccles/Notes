@@ -7,7 +7,103 @@
 #+STARTUP: latexpreview
 
 * ENG306 - Power Electronics - Lab 2
-** 2.2
+
+** Half-wave rectifier with resistive load
+/Plot (using data saved from the oscilloscope) or insert screenshots or sketch by hand, waveforms for v s, v o, io and v D using the same time-scale x axis (so that they can be easily compared – including diode voltage), and discuss your observations briefly./
+[[file:20250828_124935.jpg]]
+
+As expected this is a half wave rectifier. When the input voltage is positive the output voltage is positive, when the input voltage is negative the output voltage is zero. This is because the diode is blocking the negative voltages. This can also be applied to the current wave form.
+
+/From your waveform measurements using oscilloscope, compare the dc output current and voltage against digital multimeter measurements and also against values determined by applying theoretical relationships for this rectifier. Present the different measurements and calculated values in table form, commenting on your observations./
+
+The DC voltage can be calculated as seen in the following
+\begin{align*}
+V_{DC} &= \frac{V_m}{\pi} \\
+V_{DC} &= \frac{V_{rms}\cdot\sqrt{2}}{\pi} \\
+V_{DC} &= \frac{20\cdot\sqrt{2}}{\pi} \\
+V_{DC} &= 9.0V
+\end{align*}
+The DC current then can simply be calculated using Ohms Law:
+\[I_{DC} = \frac{V_{DC}}{R} = \frac{9}{48} = 0.188A\]
+
+|                 | Oscilloscope | Theory |
+| DC Voltage (V)  |          9.6 |    9.0 |
+| DC Current (mA) |          157 |    188 |
+
+
+
+** 2.2 Full-wave rectifier with resistive and inductive load
+/Why was it necessary to measure the rectifier supply voltage waveform using the oscilloscope probes on the second of the two secondary windings or using two probes and the maths function? Describe what you think would happen if probes were still placed across the first winding (i.e. between points 1 and 2 on the circuit)./
+
+To isolate the ground, the oscilloscope probes have common grounds. If the probes were still conected accros termrminals 1 and 2 and another probe was connected to the load, then the grounds shared between the probes would be located at different spots, creating a short between the input and the load. Hence connecting the probe accros terminals 3 and 4 allows us to create a new ground reference that is not effected by the rest of the circuit.
+
+/For the resistive load only set up, plot (using data saved from the oscilloscope) or insert screenshots or sketch by hand, waveforms for $V_s$, $V o$, $i_o$ using the same time-scale x axis, and discuss your observations./
+#+BEGIN_SRC octave :exports none :results output :session Des1
+clc;
+clear;
+close all;
+
+% Parameters
+f = 50; % Frequency in Hz
+t = 0:1e-5:20e-3; % Time vector from 0 to 20 ms with 10 µs steps
+V_p = 20 * sqrt(2); % Peak voltage for the source
+
+% Voltage source waveform
+V_s = V_p * sin(2 * pi * f * t);
+
+V_o = abs(V_s); % Output voltage after full-wave rectification
+
+R = 48; % Resistance in ohms
+i_o = V_o / R; % Output current using Ohm's law
+
+% Plotting
+figure;
+
+% Plot V_s
+subplot(3, 1, 1);
+plot(t, V_s, 'b', 'LineWidth', 1.5);
+title('Input Voltage V_s');
+xlabel('Time (s)');
+ylabel('Voltage (V)');
+grid on;
+
+% Plot V_o
+subplot(3, 1, 2);
+plot(t, V_o, 'r', 'LineWidth', 1.5);
+title('Output Voltage V_o (Full-Wave Rectified)');
+xlabel('Time (s)');
+ylabel('Voltage (V)');
+grid on;
+
+% Plot i_o
+subplot(3, 1, 3);
+plot(t, i_o, 'g', 'LineWidth', 1.5);
+title('Output Current i_o');
+xlabel('Time (s)');
+ylabel('Current (A)');
+grid on;
+
+% Adjust layout
+sgtitle('Waveforms for Full-Wave Rectifier');
+
+print('ENG306_Lab_2_Full_Wave_Rectifier.png', '-dpng');
+#+END_SRC
+
+:TODO: Include plot from code
+
+/Again for the resistive load only, from your waveform measurements using oscilloscope, compare the dc output current and voltage against digital multimeter measurements and also against values determined by applying theoretical relationships for this rectifier. Present the different measurements and calculated values in table form, commenting on your observations./
+:TODO: Add image and talk about it
+$$V_{dc(measured)}= 8.3V,\:I_{dc}= 338 mA$$
+
+/For the resistive and inductive load, plot (using data saved from the oscilloscope) or insert screenshots or sketch by hand, waveforms for v s, v o, i o and v D for the two diodes measured, using the same time-scale x axis (so that they can be easily compared – including diode voltage), and discuss your observations, including comparing against what was observed for resistive only load./
+:TODO: Add image and talk about it
+
+/Present your measured average (dc) and rms values of output voltage and current (for RL load). How do they compare to the values measured for the resistive load only and why?/
+:TODO: These can be seen in the image
+$$V_{dc(measured)}= 8.4V,\:I_{dc}= 332 mA$$
+
+/By considering losses in the four diodes, estimate your overall rectifier circuit efficiency. Note: there are a few approaches you can take here, some which may require you to think about and perform some more measurements in the lab./
+
 AFTER /Disconnect ALL of the probes/
 Ch1 is VD1
 Ch2 is -VD2
