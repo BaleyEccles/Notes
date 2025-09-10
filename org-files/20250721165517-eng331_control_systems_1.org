@@ -27,6 +27,7 @@
    
  - [[id:9e75c8a3-8958-4508-8652-9ce4c6f18115][ENG331 - Control Systems 1 - Assignment 1]]
  - [[id:96e084e6-aded-49b7-9522-3bdd9dd97344][ENG331 - Control Systems 1 - Assignment 2]]
+ - [[id:862268d9-e7e1-4e3a-be45-5c027b31dd9b][ENG331 - Control Systems 1 - Assignment 3]]
    
 ** Assessment Task 2: Design report
  - 20%
@@ -41,6 +42,7 @@
    
  - [[id:5002187a-38b3-4906-9fd1-d4a3d83864b3][ENG331 - Control Systems 1 - Lab 1]]
  - [[id:536ba461-384b-4879-9b5e-8155ff6cae59][ENG331 - Control Systems 1 - Lab 2]]
+ - [[id:d7232721-a1e8-461a-a47d-7ce7b11134f0][ENG331 - Control Systems 1 - Lab 3]]
 
 ** Assessment Task 4: Final exam
  - 40%
