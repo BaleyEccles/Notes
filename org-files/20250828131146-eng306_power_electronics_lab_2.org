@@ -153,9 +153,15 @@ Lastly the reverse recovery loss, which would be calculated using $P_{RR} = \fra
 Now we can calculate the efficency of the rectifier.
 \begin{align*}
 P_L &= 4\cdot P_F + 4\cdot P_R \\
-P_L &= 4\cdot 0.1577 + 4\cdot 1.1537 \\
-P_L &= 5.2456 \\
-P_T &= 
+P_L &= 4\cdot 0.16 + 4\cdot 1.15 \\
+P_L &= 5.25\ W \\
+&\\
+P_T &= P_L + P_{load} \\
+P_T &= 5.25 + \frac{11.4^2}{48} \\
+P_T &= 8.0\ W \\
+&\\
+\eta &= 5.25/8.0 \\
+\eta &= 65\%
 \end{align*}
 
 EQUATIONS: https://fscdn.rohm.com/en/products/databook/applinote/discrete/diodes/power_loss_and_thermal_design_of_diodes_an-e.pdf
