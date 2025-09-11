@@ -7,6 +7,7 @@
 #+STARTUP: latexpreview
 
 * Nyquist Criterion
+/Given a Nyquist contour ${\displaystyle \Gamma _{s}}$, let ${\displaystyle P}$ be the number of poles of ${\displaystyle G(s)}$ encircled by ${\displaystyle \Gamma _{s}}$, and ${\displaystyle Z}$ be the number of zeros of ${\displaystyle 1+G(s)}$ encircled by ${\displaystyle \Gamma _{s}}$. Alternatively, and more importantly, if ${\displaystyle Z}$ is the number of poles of the closed loop system in the right half plane, and ${\displaystyle P}$ is the number of poles of the open-loop transfer function ${\displaystyle G(s)}$ in the right half plane, the resultant contour in the ${\displaystyle G(s)}$-plane, ${\displaystyle \Gamma _{G(s)}}$ shall encircle (clockwise) the point ${\displaystyle (-1+j0)}$ ${\displaystyle N}$ times such that ${\displaystyle N=Z-P}$./
 ** For A Feedback System
 For a feedback system
 \[T(s) = \frac{G(s)}{1 + G(s)H(s)} = \frac{N_GD_H}{D_GD_H + N_GN_H}\]
@@ -20,6 +21,6 @@ Choose a set of points such that the set creates a loop on the $j\omega + \sigma
 The output mapping will go around $N_{\textrm{clockwise}} = Z_{\textrm{in}} - P_{\textrm{in}}$ times in the clockwise
 The output mapping will go around $N_{\textrm{c-clockwise}} = P_{\textrm{in}} - Z_{\textrm{in}}$ times in the counter clockwise
 
-
-*** Useage
+*** Usage
 If we know the mapping we can use it to find the location of the zeroes
+
