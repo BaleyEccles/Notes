@@ -4,15 +4,28 @@
 #+title: ENG306 - Power Electronics - Lab 2
 #+date: [2025-08-28 Thu 13:11]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:2025:
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
 * ENG306 - Power Electronics - Lab 2
 
 ** Half-wave rectifier with resistive load
 /Plot (using data saved from the oscilloscope) or insert screenshots or sketch by hand, waveforms for v s, v o, io and v D using the same time-scale x axis (so that they can be easily compared – including diode voltage), and discuss your observations briefly./
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: $V_s$ (yellow), $V_o$ (green) and $I_o$ (orange) for a half-wave rectifier with resistive load \label{fig:figure1}
 [[file:20250828_124935.jpg]]
 
-As expected this is a half wave rectifier. When the input voltage is positive the output voltage is positive, when the input voltage is negative the output voltage is zero. This is because the diode is blocking the negative voltages. This can also be applied to the current wave form.
+As expected this is a half wave rectifier. When the input voltage is positive the output voltage is positive, when the input voltage is negative the output voltage is zero. This is because the diode is blocking the negative voltages. This is also true for the current wave form.
 
 /From your waveform measurements using oscilloscope, compare the dc output current and voltage against digital multimeter measurements and also against values determined by applying theoretical relationships for this rectifier. Present the different measurements and calculated values in table form, commenting on your observations./
 
@@ -26,9 +39,16 @@ V_{DC} &= 9.0V
 The DC current then can simply be calculated using Ohms Law:
 \[I_{DC} = \frac{V_{DC}}{R} = \frac{9}{48} = 0.188A\]
 
+#+ATTR_LATEX: :placement [H] :align |c|c|c|
+#+CAPTION: Theory and measured DC voltage and current for half-wave rectifier \label{tab:table1}
+|-----------------+----------+--------|
 |                 | Measured | Theory |
+|-----------------+----------+--------|
 | DC Voltage (V)  |      9.6 |    9.0 |
+|-----------------+----------+--------|
 | DC Current (mA) |      157 |    188 |
+|-----------------+----------+--------|
+
 
 
 
@@ -93,6 +113,8 @@ print('ENG306_Lab_2_Full_Wave_Rectifier.png', '-dpng');
 
 #+RESULTS:
 
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: $V_s$, $V_o$ and $I_o$ for a full-wave rectifier with resistive load \label{fig:figure2}
 [[file:ENG306_Lab_2_Full_Wave_Rectifier.png]]
 
 /Again for the resistive load only, from your waveform measurements using oscilloscope, compare the dc output current and voltage against digital multimeter measurements and also against values determined by applying theoretical relationships for this rectifier. Present the different measurements and calculated values in table form, commenting on your observations./
@@ -106,29 +128,46 @@ V_{DC} &= 18.0V
 Then using Ohm's Law we can calculate the DC current
 \[I_{DC} = \frac{V_{DC}}{R} = \frac{18}{48} = 0.375A\]
 
+#+ATTR_LATEX: :placement [H] :align |c|c|c|
+#+CAPTION: Theory and measured DC voltage and current for full-wave rectifier with purely resistive load \label{tab:table2}
+|-----------------+----------+--------|
 |                 | Measured | Theory |
+|-----------------+----------+--------|
 | DC Voltage (V)  |     16.2 |   18.0 |
+|-----------------+----------+--------|
 | DC Current (mA) |      338 |    375 |
+|-----------------+----------+--------|
+
+The theoretical results are greater than the measured results, this is probably due to measurements and setup errors. However, it could also be due to not considering the losses in the diodes when calculating the voltage and current.
 
 /For the resistive and inductive load, plot (using data saved from the oscilloscope) or insert screenshots or sketch by hand, waveforms for v s, v o, i o and v D for the two diodes measured, using the same time-scale x axis (so that they can be easily compared – including diode voltage), and discuss your observations, including comparing against what was observed for resistive only load./
-Input/Output Voltage:
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: $V_s$, $V_o$ and $I_o$ for a full-wave rectifier with resistive and inductive load \label{fig:figure3}
 [[file:20250828_133520.jpg]]
 The voltage across the load is a DC voltage with ripple. This is because the inductor in the load stores energy (from current) and outputs current when the input current is negative. This results in the output voltage rising and reaching a steady state DC voltage with ripple.
 
 The DC ripple for the inductive case is much less than the DC ripple in the purely resistive case. As mentioned this is because the inductor stores energy and releases it when necacary, creating a DC voltage.
 
-Diode D3 and -D2 voltages:
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Voltage accross diodes $D_2$ and $D_3$. Note: $D_3$ is the negative voltage \label{fig:figure4}
 [[file:20250828_131136.jpg]]
 
 From the two diode voltages we can see how the rectifier works. When the source voltage is positive the voltage accross $D_3$ is zero and the voltage accross $D_2$ is the source voltage. And vice versa for negative voltages, this results in a full-wave rectified voltage at the output. If the voltage accross $D_1$ and $D_4$ were recorded we would expect that $D_1 = D_2$ and $D_3 = D_4$.
 
 /Present your measured average (dc) and rms values of output voltage and current (for RL load). How do they compare to the values measured for the resistive load only and why?/
-| $V_{DC}$ | $V_{rms}$ |   |
-|          |           |   |
-$$V_{dc(measured)}= 8.4V,\:I_{dc}= 332 mA$$
+
+#+ATTR_LATEX: :placement [H] :align |c|c|c|
+#+CAPTION: Measured DC and rms voltage and DC current for full-wave rectifier with resistive and inductive load \label{tab:table3}
+|-----------------+-----------------+-----------------|
+| DC Voltage (V)  | rms Voltage (V) | DC Current (mA) |
+|-----------------+-----------------+-----------------|
+| 11.4            |            15.1 |             332 |
+|-----------------+-----------------+-----------------|
+
+Comparing Table \ref{tab:table2} and \ref{tab:table3} it can be seen that the DC voltage is lower, and the DC current is the same, when there is an inductor in the load. This is because the inductor stores energy when the input voltage is high and releases it when it is low, reducing the output voltage. As for the equal current, this is because the inductor has no effect on the average current, as seen by the differential equation $v = L \frac{di}{dt}$, the voltage is dependent on the change in current.
 
 /By considering losses in the four diodes, estimate your overall rectifier circuit efficiency. Note: there are a few approaches you can take here, some which may require you to think about and perform some more measurements in the lab./
-
 
 Diodes experience three types of losses, forward power loss $P_F$, reverse power loss $P_R$ and reverse recovery loss $P_{RR}$. The losses are equal for each diode, so we only need to calculate the loss for one cycle and then multiply the result by four.
 
@@ -160,7 +199,7 @@ P_T &= P_L + P_{load} \\
 P_T &= 5.25 + \frac{11.4^2}{48} \\
 P_T &= 8.0\ W \\
 &\\
-\eta &= 5.25/8.0 \\
+\eta &= \frac{5.25}{8.0} \\
 \eta &= 65\%
 \end{align*}
 
