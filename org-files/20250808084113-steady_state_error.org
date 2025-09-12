@@ -13,4 +13,4 @@
 
 ** Example
  - If our target response is $r(t) = u(t)$
- - Then the error is $e = r(t\rightarrow \infty) - c(t\rightarrow \infty)$
+ - Then the error is $e(t\rightarrow \infty) = r(t\rightarrow \infty) - c(t\rightarrow \infty)$
