@@ -4,19 +4,63 @@
 #+title: ENG331 - Control Systems 1 - Assignment 3
 #+date: [2025-09-06 Sat 12:34]
 #+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
 
 
-* TODO Question 1
-** TODO a
+
+* Question 1
+** a
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_3_Question_1.xopp]]
-** TODO b
-
-* TODO Question 2
+** b
+\[T(s) = \frac{G_1(s)G_2(s)G_5(s)}{(1 + G_1(s)G_4(s))(1 - G_3(s))}\]
+* Question 2
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_3_Question_2.xopp]]
 
-* TODO Question 3
+\[T(s) = \frac{2s\left(\frac{1}{s} + 2\right)\left(\frac{1}{1-2s}\right)}{1 - \left(2s + 5\right)\left(\frac{1}{s} + 2\right)\left(\frac{1}{1-2s}\right)}\]
+Solving the denominator gives poles at $-1$ and $-\frac{5}{6}$.
+#+BEGIN_SRC octave :exports none :results output :session Q3
+pkg load symbolic
+
+syms s
+T = (2*s*(1/s + 2)*(1/(1-2*s)))/(1 - (2*s + 5)*(1/s + 2)*(1/(1-2*s)));
+T_s = simplify(T)
+[numerator, denominator] = numden(T_s)
+solve(denominator == 0, s)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+T_s = (sym)
+
+  2⋅s⋅(-2⋅s - 1) 
+  ───────────────
+     2           
+  6⋅s  + 11⋅s + 5
+numerator = (sym) 2⋅s⋅(-2⋅s - 1)
+denominator = (sym)
+
+     2           
+  6⋅s  + 11⋅s + 5
+ans = (sym 2×1 matrix)
+
+  ⎡ -1 ⎤
+  ⎢    ⎥
+  ⎣-5/6⎦
+#+end_example
+
+* Question 3
 Using:
 \[R(s) = \frac{G(s)}{1 + G(s)H(s)}\]
 Where $H(s) = K$
@@ -47,12 +91,13 @@ latex(expand(simplify(R)))
 : \frac{6}{6 K + s^{2} + 5 s + 6}
 
 Using the second order prototype form and the peak time equation ($T_p = \frac{\pi}{\omega_n\sqrt{1 - \zeta^2}}$) we can get the following system of equations:
-\begin{cases}
+
+\[\begin{cases}
 6 &=  K_1\omega_n^2 \\
 5 &=  2\zeta\omega_n \\
 6 + 6K &=  \omega_n^2 \\
 0.576 &= \frac{\pi}{\omega_n\sqrt{1 - \zeta^2}}
-\end{cases}
+\end{cases}\]
 When solving we get $K = 5$
 
 #+BEGIN_SRC octave :exports none :results output :session Q3
@@ -82,9 +127,9 @@ disp(double(sol.z))
 : 0.4167
 
 
-* TODO Question 4
+* Question 4
 
-** TODO a
+** a
 Using the equations
 \begin{align*}
 \bar{A} &= P^{-1}AT \\
@@ -143,11 +188,51 @@ Hence the new state space system is:
 \end{bmatrix} u(t)\]
 \[y(t) = \begin{bmatrix} 1 & 0 \end{bmatrix}x\]
 
-** TODO b
-Controllable canonical form
+** b
+Observer canonical form
 
-** TODO c
+** c
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_3_Question_4.xopp]]
 
 * Question 5
-[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_3_Question_5.xopp]]
+Using MATLAB we can find $P = \textrm{eigenvectors}\{A\}$.
+
+Which gives:
+\[P = \begin{bmatrix}-0.9923 & 0.9701\\
+0.1240 & -0.2425\end{bmatrix}\]
+
+Next we can use MATLAB to calculate $P^{-1}AP$, $P^{-1}B$ and $CP$.
+\[P^{-1}AP = \begin{bmatrix} -8 & 0 \\
+0 & -4\end{bmatrix}\]
+\[P^{-1}B = \begin{bmatrix} -10.08 \\
+-5.15\end{bmatrix}\]
+\[CP = \begin{bmatrix} -2.72 & 2.43\end{bmatrix}\]
+
+#+BEGIN_SRC octave :exports none :results output :session Q5
+% Define the original state-space matrices
+A = [-12 -32; 1 0];
+B = [5; 0];
+C = [3 2];
+D = 0;
+
+[eVec, eVal] = eig(A);
+
+P = eVec;
+
+% Step 4: Transform the state-space representation
+A_2 = inv(P)*A* P;
+B_2 = inv(P)*B;
+C_2 = C*P;
+
+% Display the transformed matrices
+disp(A_2);
+disp(B_2);
+disp(C_2);
+#+END_SRC
+
+#+RESULTS:
+: -8.0000e+00  -1.0003e-17
+:    1.0472e-15  -4.0000e+00
+: -10.0778
+:    -5.1539
+: -2.7288   2.4254
