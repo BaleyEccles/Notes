@@ -1,0 +1,61 @@
+:PROPERTIES:
+:ID:       b8494641-2621-4399-a5a5-cacb9bb5d2ad
+:END:
+#+title: ENG335 - Computational Intelligence - Assignment 2
+#+date: [2025-09-12 Fri 09:04]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+
+
+* Introduction
+More then ever neural networks are a powerful tool that can be used for various tasks, whether that's text generation, as seen in ChatGPT and other tools, or smaller networks used to do simpler tasks. Using neural networks to automate tasks that aren't so simple is a valid application for them, as will be seen by using a neural network to classify a species of plant. This application is not a complicated of a problem for modern computers with modern tools, being able to being able to apply neural networks with minimal effort will increase the adoption of them for many task.
+
+* Problem Description
+The goal of this problem is to categorise a set of given data by training neural networks. A group of 150 Iris plants were given and are categorised by its sepal length, sepal width, petal length and petal width, there are three species in the dataset that must be distinguished between. The problem entails training two neural networks on the given data and comparing and validating the results.
+
+* Neural Network Toolbox Overview
+The MATLAB Neural Network Toolbox is designed to help develop neural networks, it provides various functions to assist in doing so. A function that is used in designing neural networks is the ~feedforwardnet~ function, this function takes in a number that indicates how many hidden layers there should be and outputs a network that can be trained using the ~train~ function. Before training the network it is expected that some variables are set so the trainer knows what the user wants, such as the ~trainRatio~ and ~testRatio~. There are other functions that create other neural networks, such as ~competlayer~ and ~lvqnet~. \\
+
+Once a neural network has started training a window is shown that indicates its training state and some metrics, this can be seen in Figure \ref{fig:NN}. This window allows the user to see the network diagram, performance, error histogram, training state and other things. The table shows the training state, once it has finished training it will show how long it took, its performance and various other things. These tools are helpful in understanding what the neural network is doing and how well it has performed. These will be seen the comparison section of this report.
+
+#+ATTR_LATEX: :placement [H] :width 0.35\textwidth
+#+CAPTION: Nerual Network Training Window \label{fig:NN}
+[[file:NN_Window.png]]
+
+* Developed Systems
+
+The first developed system is a three-layer back-propagation neural network, it uses the ~feedforwardnet~ function to create a three-layer network. It was then trained using the ~train~ function and the provided dataset. This results in a neural network that has three-layers and can be seen in Figure \ref{fig:NB}.
+
+#+ATTR_LATEX: :placement [H] :width 0.35\textwidth
+#+CAPTION: Three-Layer Back-Propagation Neural Network Diagram \label{fig:NB}
+[[file:ENG335_Network_c.png]]
+
+The second system that was created is a single layer competitive network, this was created using the ~lvqnet~ function. Once again this was trained using the ~train~ function and the given dataset. This network can be seen in Figure \ref{fig:NC}.
+
+#+ATTR_LATEX: :placement [H] :width 0.35\textwidth
+#+CAPTION: Single Layer Competitive Network Diagram \label{fig:NC}
+[[file:ENG335_Network_c.png]]
+
+* User Guide
+To run the system simply run ~main.m~ this train the two neural networks and start the user interface, as seen in Figure \ref{fig:UI} . Inside the user interface there are four input fields, input the data for which you want to classify and then press the 'Evaluate' button. This will run the inputted data through the two networks and provide a prediction on the class of the provided plant. There is also a 'Test' button, this will test the network, in doing so it will provide a recognition error for each, which can be seen in the text box below.
+
+#+ATTR_LATEX: :placement [H] :width 0.35\textwidth
+#+CAPTION: Iris Plant Identification User Interface \label{fig:UI}
+[[file:ENG335_Ass_2_UI.png]]
+
+* Comparison
+The competitive network consistently performed worse than the three-layer back-propagation neural network. The three-layer network preformed better because it has three layers, where as the competitive network only has one. Having more layers allows the network to solve the non-linear problem with more accuracy, it is better at making non-linear decisions. The three-layer back-propagation neural network typically had a recognition error of approximately 5%, whereas the competitive network had a recognition error of 10%. 
+
+* Conclusion
+The implementation of both neural networks demonstrate how two neural networks can be used in classification of the Iris plant species. The three-layer back-propagation neural network outperformed the single-layer competitive network, giving light to the required understanding of how neural networks work. This problem provided a deeper understanding of the MATLAB Neural Network Toolbox and how to apply it to create accurate neural network models.
