@@ -24,6 +24,7 @@
  - 20%
  - 2000 Words
  - Week 8
+ - [[id:e2470675-06c4-49ab-91f5-02609875fac3][KIT213 - Operating Systems - Operating System Report]]
 
 ** Assessment Task 2: File system competency test
  - 10%

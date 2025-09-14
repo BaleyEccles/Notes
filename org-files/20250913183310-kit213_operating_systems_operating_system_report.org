@@ -1,0 +1,164 @@
+:PROPERTIES:
+:ID:       e2470675-06c4-49ab-91f5-02609875fac3
+:END:
+#+title: KIT213 - Operating Systems - Operating System Report
+#+date: [2025-09-13 Sat 18:33]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \usepackage{array}
+#+LATEX_HEADER_EXTRA: \usepackage{longtable}
+#+LATEX_HEADER_EXTRA: \usepackage{booktabs}
+
+
+* Introduction
+
+* Comparison Table
+#+BEGIN_LATEX
+\begin{longtable}{|l|c|c|c|c|}
+\hline
+\textbf{Service/Features} & \textbf{Linux} & \textbf{Windows} & \textbf{Server} & \textbf{OpenBSD} \\ 
+\hline
+\endfirsthead
+
+\hline
+\textbf{Service/Features} & \textbf{Linux} & \textbf{Windows} & \textbf{Server} & \textbf{OpenBSD} \\ 
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+\hline
+Media Service
+&
+&
+&
+&
+\\ 
+
+Application Service
+& 
+& 
+& 
+& 
+\\
+
+\hline
+Computing Service
+&
+&
+&
+&
+\\
+
+\hline
+Database Service
+&
+&
+&
+&
+\\
+
+\hline
+File Service
+&
+&
+&
+&
+\\ 
+\hline
+
+Game Service
+&
+&
+&
+&
+\\ 
+
+\hline
+Email Service
+&
+&
+&
+&
+\\ 
+
+\hline
+Print Service
+&
+&
+&
+&
+\\ 
+
+\hline
+Web Service
+&
+&
+&
+&
+\\
+
+\hline
+Stability
+&
+&
+&
+&
+\\
+
+\hline
+Security
+&
+&
+&
+&
+\\
+
+\hline
+Costs
+&
+&
+&
+&
+\\
+
+
+
+\hline
+\end{longtable}
+#+END_LATEX
+
+** Notes
+*** Web Service
+**** Linux
+Provides many web services, various distributions, such as Red Hat Enterprise Linux and SUSE Linux, provides a lot of web traffic. Lower-level distributions, such as Debian, are expected provide less web traffic.
+**** Windows Server
+Has capabilities to manage web services through IIS (https://www.iis.net). Microsoft provides robust and verbose documentation and support for their systems through their websites (https://learn.microsoft.com/en-us/iis/).
+**** OpenBSD
+OpenBSD has put security first in serving the web, it has a robust TCP/IP stack that can be used for many web serving needs (https://en.wikipedia.org/wiki/OpenBSD#Network_appliances). It has built in cryptography which allows it to quickly parse incoming web requests.
+
+*** Application Service
+**** Linux
+Has an open source implementation of the .NET Framework called Mono (https://www.mono-project.com/), this provides a goo application service experience. Other methods include Red Hat JBoss Enterprise Application Platform (https://www.redhat.com/en/technologies/jboss-middleware/application-platform) and the SUSE Application Collection (https://www.suse.com/products/rancher/application-collection), these provide a superior delivery for applications services.
+
+**** Windows Server
+Has the .NET Framework, which provides tools to facilitate running applications for a client to interact with. .NET Framework as excellent documentation and support provided by Microsoft, this provides a robust method for applications services (https://learn.microsoft.com/en-us/dotnet/framework/).
+
+**** OpenBSD
+Provides minimal application server capabilities, 
+* Conclusion
