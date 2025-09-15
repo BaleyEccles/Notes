@@ -21,6 +21,11 @@ Simply subsitute $s = j\omega$
 ** Analysis
 We can use [[id:79b422d5-ff34-41ab-8b86-67e6ecfc68ad][Bode Plots]] to analyse the transfer function.
 
-
+** Relationships
+*** Second Order Systems
+\[M_P = \frac{1}{2\zeta\sqrt{1 - \zeta^2}\]
+ - $M_P$ is the peak on the [[id:79b422d5-ff34-41ab-8b86-67e6ecfc68ad][Bode Plot]]
+\[\omega_P = \omega_n\sqrt{1 - 2\zeta^2}\]
+ - $\omega_P$ is the phase at which the peak occurs on the [[id:79b422d5-ff34-41ab-8b86-67e6ecfc68ad][Bode Plot]].
 
 

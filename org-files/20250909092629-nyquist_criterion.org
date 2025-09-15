@@ -24,3 +24,14 @@ The output mapping will go around $N_{\textrm{c-clockwise}} = P_{\textrm{in}} - 
 *** Usage
 If we know the mapping we can use it to find the location of the zeroes
 
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Nyquist-Criterion-Example.xopp]]
+
+** Gain Margin
+How much the gain in the system can be increase or decrease until it becomes unstable
+
+** Phase Margin
+How much the phase before the system becomes unstable
+ - We can change the phase by introducing a time delay
+   - \[G(s) = e^{-sT}G(s)\]
+   -  \[G(j\omega) = e^{-j\omega T}G(j\omega) = |G(j\omega)|\angle \{\omega T - G(j\omega)\}\]
