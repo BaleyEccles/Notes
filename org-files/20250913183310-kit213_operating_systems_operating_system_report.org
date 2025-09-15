@@ -24,141 +24,100 @@
 * Introduction
 
 * Comparison Table
-#+BEGIN_LATEX
-\begin{longtable}{|l|c|c|c|c|}
-\hline
-\textbf{Service/Features} & \textbf{Linux} & \textbf{Windows} & \textbf{Server} & \textbf{OpenBSD} \\ 
-\hline
-\endfirsthead
 
-\hline
-\textbf{Service/Features} & \textbf{Linux} & \textbf{Windows} & \textbf{Server} & \textbf{OpenBSD} \\ 
-\hline
-\endhead
-
-\hline
-\endfoot
-
-\hline
-\endlastfoot
-
-\hline
-Media Service
-&
-&
-&
-&
-\\ 
-
-Application Service
-& 
-& 
-& 
-& 
-\\
-
-\hline
-Computing Service
-&
-&
-&
-&
-\\
-
-\hline
-Database Service
-&
-&
-&
-&
-\\
-
-\hline
-File Service
-&
-&
-&
-&
-\\ 
-\hline
-
-Game Service
-&
-&
-&
-&
-\\ 
-
-\hline
-Email Service
-&
-&
-&
-&
-\\ 
-
-\hline
-Print Service
-&
-&
-&
-&
-\\ 
-
-\hline
-Web Service
-&
-&
-&
-&
-\\
-
-\hline
-Stability
-&
-&
-&
-&
-\\
-
-\hline
-Security
-&
-&
-&
-&
-\\
-
-\hline
-Costs
-&
-&
-&
-&
-\\
-
-
-
-\hline
-\end{longtable}
-#+END_LATEX
-
-** Notes
-*** Web Service
-**** Linux
-Provides many web services, various distributions, such as Red Hat Enterprise Linux and SUSE Linux, provides a lot of web traffic. Lower-level distributions, such as Debian, are expected provide less web traffic.
-**** Windows Server
+** Web Service
+*** Linux
+Provides many web services, various distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux, provides a lot of web traffic. Lower-level distributions, such as Debian, are expected provide less web traffic.
+*** Windows Server
 Has capabilities to manage web services through IIS (https://www.iis.net). Microsoft provides robust and verbose documentation and support for their systems through their websites (https://learn.microsoft.com/en-us/iis/).
-**** OpenBSD
+*** OpenBSD
 OpenBSD has put security first in serving the web, it has a robust TCP/IP stack that can be used for many web serving needs (https://en.wikipedia.org/wiki/OpenBSD#Network_appliances). It has built in cryptography which allows it to quickly parse incoming web requests.
 
-*** Application Service
-**** Linux
+** Application Service
+*** Linux
 Has an open source implementation of the .NET Framework called Mono (https://www.mono-project.com/), this provides a goo application service experience. Other methods include Red Hat JBoss Enterprise Application Platform (https://www.redhat.com/en/technologies/jboss-middleware/application-platform) and the SUSE Application Collection (https://www.suse.com/products/rancher/application-collection), these provide a superior delivery for applications services.
 
-**** Windows Server
+*** Windows Server
 Has the .NET Framework, which provides tools to facilitate running applications for a client to interact with. .NET Framework as excellent documentation and support provided by Microsoft, this provides a robust method for applications services (https://learn.microsoft.com/en-us/dotnet/framework/).
 
-**** OpenBSD
-Provides minimal application server capabilities, 
+*** OpenBSD
+Provides minimal application server capabilities. OpenBSD has inferior software support compared to Windows Server and Linux, meaning the required applications that might be required to be hosted externally will probably not be supported.
+
+** Media Service
+*** Linux
+Has various tools to distribute media through multiple mediums, such as Real-Time Streaming Protocol (RTSP) through Darwin Streaming Server (https://macosforge.github.io/dss/), these protocols  provide a method for delivery of media that is supported by various Linux distributions. It also supports many home media server software such as Plex and Kodi.
+
+*** Windows Server
+Has support for all the common media server software, it also supports software for home media servers. 
+
+*** TODO OpenBSD
+
+
+** Computing Service
+*** Linux
+Various distributions support computing services, such as RHEL (https://www.redhat.com/en/topics/high-performance-computing/what-is-high-performance-computing). Has driver support for all the major hardware distributors (https://docs.nvidia.com/ai-enterprise/5.1/product-support-matrix/index.html, https://github.com/intel/linux-npu-driver, https://www.phoronix.com/news/AMDXDNA-Linux-Driver-v2).
+
+*** Windows Server
+Has support for add-ons that incorporate computing services, these can be arranged in different configurations for various needs (https://learn.microsoft.com/en-us/powershell/high-performance-computing/overview?view=hpc19-ps). Official support from most major hardware distributors (https://docs.nvidia.com/vgpu/deployment/windows-server/latest/overview.html, https://www.amd.com/en/resources/support-articles/release-notes/RN-PRO-WIN-21-Q4.html).
+
+*** OpenBSD
+Has minimal support for the required hardware to facilitate computing services. Nvidia does not officially support OpenBSD, admins must use the inferior open source drivers (https://man.openbsd.org/nv.4).
+
+** Database Service
+*** Linux
+RHEL supports database services through MariaDB, MySQL and PostgreSQL (https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/using-databases), SUSE also supports making SQL databases (https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-suse?view=sql-server-ver17).
+
+*** Windows Server
+Windows has been in the lead for database servers compared to other platforms, as the major SQL database software was only available for Windows Server before 2017 (https://documentation.suse.com/en-us/sbp/third-party/html/SBP-SLES-SQL/index.html). As mentioned Windows Server supports SQL databases through the SQL Server Database Engine (https://learn.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server-database-engine?view=sql-server-ver17).
+
+*** OpenBSD
+Similarly to Linux, OpenBSD supports MariaDB (https://obsd.solutions/en/blog/2023/09/02/mariadb-109-on-openbsd-73-install/index.html), however there aren't any major companies that can facilitate the usage of OpenBSD as a database server.
+
+** File Service
+*** Linux
+Supports the File Transfer Protocol (FTP) through vsftpd (https://security.appspot.com/vsftpd.html), the Hypertext Transfer Protocol (HTTP) and the Server Message Block (SMB) protocol through Samba (https://www.samba.org/).
+
+*** Windows Server
+Windows Server supports being a file server through a native module that can be turned on. It also supports FTP, HTTP and SMB through various applications and modules (https://www.thewindowsclub.com/how-to-install-and-configure-file-server-on-windows-server).
+
+*** OpenBSD
+Has capabilities to do file serving through the Network File System (NFS) protocol (https://www.openbsdhandbook.com/nfs/), similarly to Linux it also support FTP (https://www.openbsdhandbook.com/ftp-services/), HTTP and SMB (https://www.openbsdhandbook.com/file-services/).
+
+** Game Service
+*** Linux
+Various applications exist to create game servers on linux, linuxgsm is one such application that supports many games, each game has a specific distribution requirement, most include Ubuntu 20.04 LTS, Debian 11 and RHEL 8.
+
+*** Windows Server
+Supports the Windows Gamer Server Manger, which supports over 40 games (https://github.com/WindowsGSM/WindowsGSM). Other applications can enable Windows Server to host a game service.
+
+*** OpenBSD
+Minimal game server support is available for OpenBSD, it is possible to get some games servers to run (https://dataswamp.org/~rjc/running_minecraft_server_on_openbsd.html), however the documentation is lacking and not officially supported.
+
+** Email Service
+*** Linux
+Both SUSE and RHEL supports both SMTP, POP and IMAP, allowing it to send and receive emails as a server (https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-mail_servers).
+
+*** Windows Server
+Windows server supports both SMTP, POP and IMAP, allowing a email server to be established (https://learn.microsoft.com/en-us/answers/questions/666705/configuring-an-smtp-server-for-sending-emails-from, https://learn.microsoft.com/en-us/exchange/clients/pop3-and-imap4/configure-pop3).
+
+*** OpenBSD
+OpenBSD can use OpenSMTPD to support SMTP and Dovecot for IMAP to create a fully functioning email server (https://docs.vultr.com/an-openbsd-e-mail-server-using-opensmtpd-dovecot-rspamd-and-rainloop).
+
+** Print Service
+*** Linux
+SMB can be used through Samba in addition to Common UNIX Printing System (CUPS) to create a viable printing server (https://www.samba.org/).
+
+*** Windows Server
+Supports creating a printing server 
+
+** Web Service
+
+** Stability
+
+** Security
+
+** Costs
+
+
+
 * Conclusion
