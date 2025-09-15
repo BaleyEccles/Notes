@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       bcab7053-f2ea-4117-a8c8-eeea97587087
+:END:
+#+title: Root Locus
+#+date: [2025-09-16 Tue 09:00]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Root Locus
+ - Used to determine stability of a closed loop system
+With $G(s) = \frac{N_G(s)}{D_G(s)}$ and $H(s) = \frac{N_H(s)}{D_H(s)}$:
+\[T(s) = \frac{KN_G(s)D_H(s)}{D_G(s)D_H(s) + KN_G(s) N_H(s) }\]
+
+\[M = \frac{\prod \textrm{zeros lengths}}{\prod \textrm{pole lengths}}\]
+\[\theta = \sum\textrm{zero angles} - \sum\textrm{pole angles}\]
+
+** Definition
+Assuming closed loop [[id:c7591f3a-c2d4-4591-b6af-b0db831a296c][Transfer Function]]:
+ - \[T(s) = \frac{KG(s)}{1 + KG(s)H(s)}\]
+A pole exists when:
+ - \[|KG(s)H(s) = 1|\]
+ - \[\angle KG(s)H(s) = (2k + 1)180^o\]
+Then:
+ - If angle of complex number is odd multiple of $180^o$ then $s$ is system pole for particular $K$
+ - \[K = \frac{1}{|G(s)||H(s)|}\]
+
+** Sketching
+Rules
+1. Number of branches
+   - The number of lines is equal to the number of poles
+2. Symmetry
+   - The root locus is symmetric about the real axis
+3. Real-axis segments
+   - Look the right, the number of poles and zeros must be odd for a segment to exist
+4. Starting and end points
+   - Starts at $K = 0$ and ends at $K = \infty$
+   - When $K = 0$ poles exist at the open loop transfer function ($G(s)H(s)$) poles
+   - 'Zeros attract the poles'
+5. Behaviour at infinity
+   - \[\sigma_a = \frac{\sum \textrm{finite poles} - \sum \textrm{finite zeroes}}{\# \textrm{finite poles} - \# \textrm{finite zeroes}}\]
+   - \[\theta_a = \frac{(2k + 1)\pi}{\textrm{finite poles} - \# \textrm{finite zeroes}}\]
+
+*** $j\omega$ crossing:
+ - Use [[id:7b415c54-da2a-4194-a93a-a04488ca173d][Routh–Hurwitz Stability Criterion]] or [[id:0d927ec6-5c0d-497c-b054-43d5d88f8300][Nyquist Criterion]]
+
+*** TODO Angle of departure and arrival
+
+** Sketching Example
+For a close loop system with:
+\[H(s) = \frac{K}{s^2 + 10s + K}\]
+ - Where $K = K_1K_2$
+Simulating for many values of $K$ we get
+[[./Root_Locus_Example.png]]
+We can see that
+1. At $K < 25$ system is overdamped
+2. At $K = 25$ system is critically damped
+3. At $K > 25$ system is underdamped
+   
+

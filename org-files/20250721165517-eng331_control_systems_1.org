@@ -18,6 +18,7 @@
 * Notes
  - [[id:1f70134e-cf99-4909-aa3e-0352f2d0d6d9][Modeling Systems]]
  - [[id:3759ca8f-4825-4407-a333-4aa30ec4136b][Frequency Response Tecniques]]
+ - [[id:bcab7053-f2ea-4117-a8c8-eeea97587087][Root Locus]]
 * Assessment
 
 
