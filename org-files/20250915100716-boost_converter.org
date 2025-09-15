@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       f75859dd-399f-4be4-a82c-c4d7fe6d4942
+:END:
+#+title: Boost Converter
+#+date: [2025-09-15 Mon 10:07]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Boost Converter
+A DC-DC step up converter
+ - [[file:Boost_Converter.png]]
+   - This can be seen as a swapped [[id:dd9eeafa-3d34-473c-aafb-43261823e25f][Buck Converter]]
+
+** Steady State Analysis
+ - We store energy in the inductor ($L$) when the switch in on and the capacitor ($C_0$) maintains the output voltage
+ - When the switch is off the diode conducts charging the capacitor ($C_0$) from the stored energy from the inductor ($L$).
+ - By increasing the energy stored in the inductor we increase the output power
+   - This is controlled by the duty cycle of the switch
+ - [[file:Boost_Converter_Analysis.png]]
+*** Current Ripple
+ - \[\Delta I_L = \frac{V_{in}}{L}T_{ON}\]
+ - \[-\Delta I_L = \frac{V_{in} - V_o}{L}T_{DOWN}\]
+*** Voltage Conversion Ratio in SS
+\[\frac{V_O}{V_{in}} = \frac{T_{ON} + T_{DOWN}}{T_{DOWN}}= 1 + \frac{T_{ON}}{T_{DOWN}}\geq 1\]
+** Continuous Conduction Mode
+\[\frac{V_O}{V_{in}} = \frac{1}{D_{OFF}}\]
+\[\frac{V_O}{V_{in}} = \frac{1}{1 - D_{ON}}\]
+If we have a duty cycle of one ($D_{ON} = 1$) the formula says that we should have infinite voltage, however this is not true in reality. This is because:
+ - There is not enough time to charge the capacitor
+ - The switching loss becomes large
+ - $D_{ON} = 0.8$ is the typical limit
+   
+** Discontinuous Conduction Mode
+The load determines if we are in DCM:
+\[R_{crit} = \frac{2V_0}{\Delta I_L(1 - D_{ON})} = \frac{2V_0^2}{\Delta I_L V_{in}}\]
+ - If $R_L > R_{crit}$: DCM
+ - If $R_L < R_{crit}$: CCM
+[[file:Boost_Converter_DCM.png]]
+\[\frac{V_0}{V_{in}} = \frac{T_{ON} + T_{DOWN}}{T_{DOWN}}\]
+ - However, $T_{DOWN}$ is unknown
+
+** Circuit specification and design of boost converter
+\[C_0\Delta V_0 = \frac{V_0}{R}T_{ON}\]
+
+
