@@ -27,7 +27,8 @@
 
 ** Web Service
 *** Linux
-Provides many web services, various distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux, provides a lot of web traffic. Lower-level distributions, such as Debian, are expected provide less web traffic.
+Every major Linux distribution supports being ran as a web server, they support various tools, such as Apache, caddy and lighttpd (https://wiki.debian.org/WebServers, https://ubuntu.com/tutorials/install-and-configure-apache, https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/setting-apache-http-server_deploying-different-types-of-servers). Each of these allow different amounts of required traffic, with Apache being the largest amount of through put.
+
 *** Windows Server
 Has capabilities to manage web services through IIS (https://www.iis.net). Microsoft provides robust and verbose documentation and support for their systems through their websites (https://learn.microsoft.com/en-us/iis/).
 *** OpenBSD
@@ -108,16 +109,39 @@ OpenBSD can use OpenSMTPD to support SMTP and Dovecot for IMAP to create a fully
 SMB can be used through Samba in addition to Common UNIX Printing System (CUPS) to create a viable printing server (https://www.samba.org/).
 
 *** Windows Server
-Supports creating a printing server 
+Windows Server supports creating a printing server, they have official documentation and support (https://learn.microsoft.com/en-us/troubleshoot/windows-server/printing/printing-overview). Their product will work on both large and small scales. 
 
-** Web Service
+*** OpenBSD
+It supports creating a basic printing server using lpd, and a more advanced server using CUPS (https://www.openbsdhandbook.com/printing/). The CUPS can be accessed through SMB, similarly to Linux.
 
 ** Stability
+*** Linux
+The distribution of choice determines the stability, Linux offers stable distributions like RHEL (https://www.redhat.com/en/blog/understanding-red-hat-enterprise-linux-rhel-lifecycle) and Debian (https://www.debian.org/releases/stable/), and unstable distribution like Arch and OpenSUSE.
+
+*** Windows Server
+Each release of Windows Server is typically supported for 10 years, 5 years of main support and 5 years of extended support, a new version is released every 2-3 years. (https://learn.microsoft.com/en-us/windows-server/get-started/servicing-channels-comparison). 
+
+*** OpenBSD
+Offers about 1 year of support for each release version, with a new version being release every 6 months (https://eol.support/openbsd). Various companies offer support for each version (https://www.openbsd.org/support.html).
 
 ** Security
+*** Linux
+Offers Security-Enhanced Linux (SELinux), a version of the Linux kernel that has patches that increase the security of the system (https://www.redhat.com/en/topics/linux/what-is-selinux), the original Linux kernel does not have these patches and could be considered less secure.
+
+*** Windows Server
+Has several layers of protection to increase security across the entire system (https://learn.microsoft.com/en-us/windows-server/security/security-and-assurance). Along with constant updates from Microsoft to ensure maximum level of security.
+
+*** OpenBSD
+OpenBSD claims to be the "NUMBER ONE" when it comes to security, they use various technologies to increase security in the system and they have a fully open auditing process ensuring their customers knows when and where there has been a security hole (https://www.openbsd.org/security.html).
 
 ** Costs
+*** Linux
+Offers free distributions like Debian and Arch along with paid solutions like RHEL and SUSE. RHEL and SUSE offer support for various server architectures, each costing different amounts (https://www.redhat.com/en/store/linux-platforms, https://www.suse.com/shop/).
 
+*** Windows Server
+Provides two editions, standard edition and datacenter edition, each costing different amounts with different benefits (https://www.microsoft.com/en-us/windows-server/pricing).
 
+*** OpenBSD
+The base operating system is free, however commercial support might be required which cost various amounts depending on the required service (https://www.openbsd.org/support.html).
 
 * Conclusion
