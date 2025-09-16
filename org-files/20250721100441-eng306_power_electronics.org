@@ -29,6 +29,7 @@
  - 30%
  - Week 13
  - 20 A4 pages + 10 min presentation
+ - [[id:e7306f88-f756-4210-87c5-e53bc24315bb][ENG306 - Power Electronics - Project]]
 
 ** Assessment Task 2: Quiz
  - 10%

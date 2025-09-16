@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       e7306f88-f756-4210-87c5-e53bc24315bb
+:END:
+#+title: ENG306 - Power Electronics - Project
+#+date: [2025-09-16 Tue 10:17]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG306 - Power Electronics - Project
+
+** Stage 1 - Full-Wave Rectifier
+ - Input of 32V (rms) gives 43.43V
+ - Input of 20V (rms) gives 26.46V
+
+   R= 43/5
+
+** Stage 2 - Synchronous Buck Controller
+\[L = \frac{V_{in} - V_O}{\Delta I_L f_{SW}}D_{ON}\]
+\[L = \frac{43.43 - 12}{0.1\times 100k}0.6\]
+

@@ -28,4 +28,4 @@ If the off time is too long the buck convert will enter discontinuous conduction
 In discontinuous conduction mode (current is not positive):
 [[./Buck_chronogram_discontinuous.png]]
 
-
+\[L = \frac{V_{in} - V_O}{\Delta I_L f_{SW}}D_{ON}\]
