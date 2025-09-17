@@ -125,14 +125,14 @@ The distribution of choice determines the stability, Linux offers stable distrib
 Each release of Windows Server is typically supported for 10 years, 5 years of main support and 5 years of extended support, a new version is released every 2-3 years. (https://learn.microsoft.com/en-us/windows-server/get-started/servicing-channels-comparison). 
 
 *** OpenBSD
-Offers about 1 year of support for each release version, with a new version being release every 6 months (https://eol.support/openbsd). Various companies offer support for each version (https://www.openbsd.org/support.html).
+Offers about 1 year of support for each release version, with a new version being release every 6 months (https://www.openbsd.org/faq/faq1.html). Various companies offer support for each version (https://www.openbsd.org/support.html).
 
 ** Security
 *** Linux
-Offers Security-Enhanced Linux (SELinux), a version of the Linux kernel that has patches that increase the security of the system (https://www.redhat.com/en/topics/linux/what-is-selinux), the original Linux kernel does not have these patches and could be considered less secure.
+Offers Security-Enhanced Linux (SELinux), a version of the Linux kernel that has patches that increase the security of the system (https://www.redhat.com/en/topics/linux/what-is-selinux), the original Linux kernel does not have these patches and could be considered less secure. The development of both SELinux and Linux are open-sourced, meaning all the bugs and security is done in the public.
 
 *** Windows Server
-Has several layers of protection to increase security across the entire system (https://learn.microsoft.com/en-us/windows-server/security/security-and-assurance). Along with constant updates from Microsoft to ensure maximum level of security.
+Has several layers of protection to increase security across the entire system (https://learn.microsoft.com/en-us/windows-server/security/security-and-assurance). Along with constant updates from Microsoft to ensure maximum level of security, these updates are close-sourced, meaning that any user cannot see what is in them.
 
 *** OpenBSD
 OpenBSD claims to be the "NUMBER ONE" when it comes to security, they use various technologies to increase security in the system and they have a fully open auditing process ensuring their customers knows when and where there has been a security hole (https://www.openbsd.org/security.html).
@@ -148,4 +148,19 @@ Provides two editions, standard edition and datacenter edition, each costing dif
 The base operating system is free, commercial support might be required which cost various amounts depending on the required service (https://www.openbsd.org/support.html).
 
 * Conclusion
+Looking at the table a few notable conclusions can be made, noting these will indicate which operating system will be chosen. Firstly OpenBSD is very powerful in some areas, but is unable to keep up in others. Linux is dominated by Red Hat Enterprise Linux and SUSE, which limit whats available. Windows Server is close-sourced and solely owned by Microsoft.
+
+OpenBSD has many benefits that can be seen, their entire philosophy is being the best when it comes to security. They have developed OpenSSH, the standard and very secure SSH tool, indicating their commitment to security, portability, standardisation and correctness (https://www.openbsd.org/). It is also open-source which can be a huge benefit for developers, as they will be able to fix and work on support by themselves.
+
+There are clearly some negatives to OpenBSD. It is not particularly popular in the server space, less than 0.1% of web servers use OpenBSD (https://w3techs.com/technologies/details/os-openbsd), this means that getting support and ensuring a good experience will be hard to do. The hardware support for OpenBSD is terrible, having to use unstable and unoptimised software will result in problems and reduce the capabilities of the surrounding systems.
+
+With that said, OpenBSD is still a great choice for a server operating system that must deal with internet traffic. They offer a super secure internet stack, providing easily to configure firewalls and a tested TCP/IP stack keeps it as a consideration.
+
+Linux would be a good choice for this use case, it offers all the required services and has excellent hardware support. On top of that it is open source and has SELinux, so security is a non-issue. The only compromise is the lack of companies that can offer Linux support, there is only Red Hat and SUSE. It is possible to do in house server support, which would be free, however this would require extra work force, negating it being free.
+
+Windows Server is a valid choice, they have support for all the required features. They offer frequent update to Windows Server with security updates, so security is a minimal issue. Their cost is a minimal issue, because no matter what a price has to be paid for a fully supported server.
+
+The problem with Windows Server is that it is solely owned by Microsoft, meaning that there is no alternative for support if Microsoft does a bad job. There may be some niche cases where Windows Server will not work, due to it being close-sourced, however this use case is not one of them.
+
+Overall, each of the operating systems has their benefits and disadvantages, so choosing one will be complicated. Based upon the conclusions above it is suggested that the servers in this case should run Linux, more specifically Red Hat Enterprise Linux or SUSE Linux as these will provide the best support. 
 
