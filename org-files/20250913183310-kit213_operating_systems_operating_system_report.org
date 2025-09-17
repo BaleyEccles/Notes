@@ -32,14 +32,14 @@ This report aims to evaluate three major operating systems in the context of bei
 Every major Linux distribution supports being ran as a web server, they support various tools, such as Apache, caddy and lighttpd (https://wiki.debian.org/WebServers, https://ubuntu.com/tutorials/install-and-configure-apache, https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/setting-apache-http-server_deploying-different-types-of-servers). Each of these allow different amounts of required traffic, with Apache being the largest amount of through put. Various distributors support their distribution being ran as a web server, serving various amounts of traffic, Red Hat Enterprise Linux supports a lot of traffic.
 
 *** Windows Server
-Has capabilities to manage web services through IIS (https://www.iis.net). It is able to support low and high amounts of traffic, dependent on how it is setup.
+Has capabilities to manage web services through IIS. It is able to support low and high amounts of traffic, dependent on how it is setup.
 
 *** OpenBSD
 OpenBSD has put security first in serving the web, it has a robust TCP/IP stack that can be used for many web serving needs (https://en.wikipedia.org/wiki/OpenBSD#Network_appliances). It has built in cryptography which allows it to quickly parse incoming web requests.
 
 ** Application Service
 *** Linux
-Has an open source implementation of the .NET Framework called Mono (https://www.mono-project.com/), this provides an okay application service experience. Other methods include Red Hat JBoss Enterprise Application Platform (https://www.redhat.com/en/technologies/jboss-middleware/application-platform) and the SUSE Application Collection (https://www.suse.com/products/rancher/application-collection), these provide a superior delivery for applications services.
+Has an open source implementation of the .NET Framework called Mono, this provides an okay application service experience. Other methods include Red Hat JBoss Enterprise Application Platform (https://www.redhat.com/en/technologies/jboss-middleware/application-platform) and the SUSE Application Collection (https://www.suse.com/products/rancher/application-collection), these provide a superior delivery for applications services.
 
 *** Windows Server
 Has the .NET Framework, which provides tools to facilitate running applications for a client to interact with. .NET Framework has excellent documentation and support provided by Microsoft, this provides a superior method for applications services (https://learn.microsoft.com/en-us/dotnet/framework/).
