@@ -5,6 +5,16 @@
 #+date: [2025-08-22 Fri 10:12]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
 * Routh–Hurwitz Stability Criterion
 For a polynomial:
@@ -50,6 +60,7 @@ If we encounter a row with all zeros it means the roots are symmetrical around t
 
 ** Example
 \[T(s) = \frac{20}{1s^8 + 1s^7 + 12s^6 + 22s^5 + 39s^4 + 59s^3 + 48s^2 + 38s + 20}\]
+#+ATTR_LATEX: :align |c|c|c|c|c|c|
 | $s^8$ | 1                                                                     | 22                                                                  |                                                                39 |                                                               48 | 20 |
 | $s^7$ | 1                                                                     | 22                                                                  |                                                                59 |                                                               38 |  0 |
 | $s^6$ | $\frac{-\begin{bmatrix}1  & 10 \\ 1 & 22\end{bmatrix}}{1} = -20 = -1$ | $\frac{-\begin{bmatrix}1 & 39\\ 1 & 59\end{bmatrix}}{1} = -22 = -2$ | $\frac{-\begin{bmatrix}1 & 48\\ 1 & 38\end{bmatrix}}{1} = 30 = 1$ | $\frac{-\begin{bmatrix}1 & 20\\ 1 & 0\end{bmatrix}}{1} = 20 = 2$ |    |

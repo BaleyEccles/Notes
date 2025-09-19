@@ -57,3 +57,7 @@ We can see that
 3. At $K > 25$ system is underdamped
    
 
+** Examples
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Root_Locus_Example_2.xopp]]
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Root_Locus_Example_3.xopp]]
+

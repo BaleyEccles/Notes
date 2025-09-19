@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       58f545f0-abf6-483d-8b44-046bad7f38a6
+:END:
+#+title: Feedback Systems
+#+date: [2025-09-19 Fri 09:24]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Feedback Systems
+[[./Feedback_System.png]]
+For negative feedback:
+\[T(s) = \frac{G(s)}{1 + G(s)H(s)}\]
+For positive feedback:
+\[T(s) = \frac{G(s)}{1 - G(s)H(s)}\]
