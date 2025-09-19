@@ -1,0 +1,139 @@
+:PROPERTIES:
+:ID:       3eb76f9d-5112-49a0-8b21-8976591d6fd6
+:END:
+#+title: ENG331 - Control Systems 1 - Assignment 4
+#+date: [2025-09-19 Fri 09:20]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+
+* Question 1
+** a
+Using $T(s) = \frac{G(s)}{1 + G(s)H(s)}$
+\begin{align*}
+G(s) &= \frac{K100(s+1)(s^2 - 4s + 104)}{(s+3)(100s^2 + 2475s - 3467)} \textrm{ and } H(s) = 1 \\
+T(s) &= \frac{\frac{K100(s+1)(s^2 - 4s + 104}{(s+3)(100s^2 + 2475s - 3467)}}{1 + \frac{K100(s+1)(s^2 - 4s + 104}{(s+3)(100s^2 + 2475s - 3467)}1} \\
+T(s) &= \frac{10400 K s^3 + 10000 K s^2 - 300 K s + 100 K}{s^3 \left(10400 K - 10401\right) + s^2 \left(10000 K + 3958\right) + s \left(2775 - 300 K\right) + (100 + 100K)}
+\end{align*}
+#+BEGIN_SRC octave :exports code :results output :session Q1
+clc
+clear
+close all
+
+pkg load symbolic
+
+syms s K;
+H = 1;
+G = (K*100*(s+1)*(s^2 - 4*s + 104))/((s+3)*(100*s^2 + 2475*s - 3467));
+
+T = G/(1 + G*H);
+% Simplify T
+T_simplified = simplify(T);
+
+% Get the numerator and denominator of T
+[num, den] = numden(T_simplified);
+
+% Convert the numerator and denominator to polynomial form
+num_poly = coeffs(num, s);
+den_poly = coeffs(den, s);
+
+% Print the numerator and denominator in the desired form
+latex(poly2sym(num_poly, s));
+latex(poly2sym(den_poly, s));
+
+#+END_SRC
+
+#+RESULTS:
+: 10400 K s^{3} + 10000 K s^{2} - 300 K s + 100 K
+: 100 K + s^{3} \left(10400 K - 10401\right) + s^{2} \left(10000 K + 3958\right) + s \left(2775 - 300 K\right) + 100
+
+** b
+\[100 K + s^{3} \left(10400 K - 10401\right) + s^{2} \left(10000 K + 3958\right) + s \left(2775 - 300 K\right) + 100\]
+Using Routh–Hurwitz table:
+#+ATTR_LATEX: :align |c|c|c|
+|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
+| $s^3$ | $10400 K - 10401$                                                                                                                                                                                  | $2775 - 300K$                                                                                       |
+|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
+| $s^2$ | $10000 K + 3958$                                                                                                                                                                                   | $100K + 100$                                                                                        |
+|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
+| $s^1$ | $\frac{-\begin{bmatrix}10400 K - 10401 & 2775 - 300 K \\ 10000 K + 3958 & 100K + 100\end{bmatrix}}{10000 K + 3958} = -\frac{25(80800K^2 - 531254K - 240471)}{5000K + 1979}$                        | $\frac{-\begin{bmatrix}10400 K - 10401 & 0 \\ 10000 K + 3958 & 0\end{bmatrix}}{10000 K + 3958} = 0$ |
+|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
+| $s^0$ | $\frac{-\begin{bmatrix}10000 K + 3958 & 100K + 100 \\ -\frac{25(80800K^2 - 531254K - 240471)}{5000K + 1979} & 0\end{bmatrix}}{-\frac{25(80800K^2 - 531254K - 240471)}{5000K + 1979}} = 100(K + 1)$ | $0$                                                                                                 |
+|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
+
+The system is unstable when the first column encounters a sign change, so we need to find when the following are greater than 0.
+\begin{align*}
+0 &< 10400 K - 10401 \\
+0 &< 10000 K + 3958 \\
+0 &< -\frac{25(80800K^2 - 531254K - 240471)}{5000K + 1979} \\
+0 &< 100(K + 1) 
+\end{align*}
+Which can be done with matlab:
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+syms K;
+
+eq1 = 10400*K - 10401 > 0;
+sol1 = solve(eq1, K);
+
+eq2 = 10000*K + 3958 > 0;
+sol2 = solve(eq2, K);
+
+eq3 = -25*(80800*K^2 - 531254*K - 240471)/(5000*K + 1979) > 0;
+sol3 = solve(eq3, K);
+
+eq4 = 100*(K + 1) > 0;
+sol4 = solve(eq4, K);
+
+sol5 = solve(eq1, eq2, eq3, eq4, K);
+
+latex(sol5)
+
+latex(sol1)
+latex(sol2)
+latex(sol3)
+latex(sol4)
+#+END_SRC
+
+#+RESULTS:
+: \left(\left(-\infty < K \wedge K < \frac{265627}{80800} - \frac{\sqrt{89987759929}}{80800}\right) \vee \left(- \frac{1979}{5000} < K \wedge K < \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}\right)\right) \wedge \frac{10401}{10400} < K \wedge K < \infty
+: \frac{10401}{10400} < K \wedge K < \infty
+: - \frac{1979}{5000} < K \wedge K < \infty
+: \left(-\infty < K \wedge K < \frac{265627}{80800} - \frac{\sqrt{89987759929}}{80800}\right) \vee \left(- \frac{1979}{5000} < K \wedge K < \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}\right)
+: -1 < K \wedge K < \infty
+
+y\[K > 1.0001\]
+\[K > -0.3958\]
+\[K < −0.425155930\]
+OR
+\[-0.3958 < K < 7.000081673\]
+\[K > -1\]
+
+\[\left(\left(-\infty < K \wedge K < \frac{265627}{80800} - \frac{\sqrt{89987759929}}{80800}\right) \vee \left(- \frac{1979}{5000} < K \wedge K < \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}\right)\right) \wedge \frac{10401}{10400} < K \wedge K < \infty\]
+
+** c
+
+* Question 2
+
+* Question 3
+
+** a
+
+** b
+
+** c
+
+** d
+
+** e
+
+** f
