@@ -21,6 +21,7 @@
  - [[id:117d1797-6d46-47e2-81d2-1360da07666b][Fuzzy Logic]]
  - [[id:abb2b339-9529-4473-b485-2cbd3aa9831d][Artificial Neural Networks]]
  - [[id:6087c044-d6f0-48a8-9929-60190229510b][ENG335 - Computational Intelligence - Lab 2]]
+ - [[id:715d4199-8c39-45e6-8fc4-8682e50c6fde][Genetic Algorithms]]
 * Assessment
 
 ** Assessment Task 1: Assignment 1

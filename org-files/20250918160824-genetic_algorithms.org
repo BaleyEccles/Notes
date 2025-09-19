@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       715d4199-8c39-45e6-8fc4-8682e50c6fde
+:END:
+#+title: Genetic Algorithms
+#+date: [2025-09-18 Thu 16:08]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Genetic Algorithms
+
