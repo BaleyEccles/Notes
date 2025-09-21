@@ -17,6 +17,7 @@
 |                           11.5 |                          220 |                             22 |                          540 |
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
 
+Given that we were using the same tank as Lab 2, we decided to use the same scales and offsets. Which were $\textrm{scale} = 0.05357$ and $\textrm{offset} = -0.2857$ for Tank 1, and $\textrm{scale} = 0.03293$ and $\textrm{offset} = 4.22$ for Tank 2.
 
 ** Tank Parameters
 The bottom nozzle diameter (Tank 2) was recorded to be 4mm. Whereas the top nozzle diameter (Tank 1) was recorded to be 5mm. The diameter of Tank 2 was recorded to be 4.5cm, likewise the diameter of Tank 1 was also recorded to be 4.5cm.
@@ -26,14 +27,15 @@ The bottom nozzle diameter (Tank 2) was recorded to be 4mm. Whereas the top nozz
 *** Pump Gain
 If we set the pump voltage to $V_p = 5V$ it takes $t = 16s$ to fill the tank to $h = 20cm$. This data allows us to calculate the pump gain.
 \[q_0 = 0.00002\]
-\[pump gain = 0.000004\]
+\[\textrm{pump gain} = 0.000004\]
 
 
 If we set the pump voltage to $V_p = 10V$ it takes $t = 9.2s$ to fill the tank to $h = 20cm$. This data allows us to calculate the pump gain.
 \[q_0 = 0.00002\]
-\[pump gain = 0.000003\]
+\[\textrm{pump gain} = 0.000003\]
 
 *** Discharge coefficient
+:TODO: Clean up the latex equations
 **** Diameter 1 (5mm) (top tank)
 steady state
 $h_1 = 4.5$
@@ -47,8 +49,8 @@ $Vol = 0.000 00 222660379$
 $q = 0.00000222660379/10.33$
 $q = 0.000 000 215 547$
 
-$0.000 000 215 547$ = \frac{\pi}{4} (4.5*10^-2)^2 C_d\sqrt{2gh_1}$
-$0.000222660/10.33 = (pi/4)* (5*10^-3)^2 *x *sqrt(2*9.81*(25 - 11)*10^-2)$a
+$0.000 000 215 547 = \frac{\pi}{4} (4.5*10^-2)^2 C_d\sqrt{2gh_1}$
+$0.000222660/10.33 = (pi/4)* (5*10^-3)^2 *x *sqrt(2*9.81*(25 - 11)*10^-2)$
 
 $C_d = 0.4956706$
 
@@ -68,26 +70,53 @@ $C_d = 0.896 83$
 * Part 2 – Controller Tuning [28 marks, ILO 1]
 
 ** Theory
-
+/What is the purpose of the derivative filter term $T_f$? Consider its effect in the time-domain as well as its effect on the controller transfer function in the Laplace domain. [2 marks]/
 ** Tuning
+/Tuned controller parameters ($K_p$, $K_i$, $K_d$, $T_f$):/
+$K_p = 1$
+$K_i = 0.04$
+$K_d = 0.25$
+$T_f = 10^4$
+
 Our system was very noisey, we decided to do step sizes of 5cm as our small step and 10cm as our large step.
-Kp = 1
-Ki = 0.04
-Kd = 0.25
-Tf = 10^4
+
+
+:TODO: Use code from Lab 2
+|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
+| OP (V, cm) | Step (cm) | Final Val (cm) | %OS | $T_p$ (s) | $T_s$ (2%) (s) | $e(t\rightarrow\infty)$ (cm) |
+|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
+| ,15        |         5 |                |     |           |                |                              |
+| ,15        |        -5 |                |     |           |                |                              |
+|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
+| ,15        |         7 |                |     |           |                |                              |
+| ,15        |        -7 |                |     |           |                |                              |
+|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
+| ,20        |         5 |                |     |           |                |                              |
+| ,20        |        -5 |                |     |           |                |                              |
+|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
 
 ** Comment on the performance of your tuned controller
-:TODO: Use code from Lab 2
-|-----+------+-----------+-----+----+---------+---------|
-| OP  | Step | Final Val | %OS | Tp | Ts (2%) | e(t->0) |
-|-----+------+-----------+-----+----+---------+---------|
-| ,15 |    5 |           |     |    |         |         |
-| ,15 |   -5 |           |     |    |         |         |
-|-----+------+-----------+-----+----+---------+---------|
-| ,15 |    7 |           |     |    |         |         |
-| ,15 |   -7 |           |     |    |         |         |
-|-----+------+-----------+-----+----+---------+---------|
-| ,20 |    5 |           |     |    |         |         |
-| ,20  |   -5 |           |     |    |         |         |
-|-----+------+-----------+-----+----+---------+---------|
+/a) Did you observe any ranges of the controller parameters that resulted in an unstable closed-loop response? For what controller parameters did you observe this (you don’t need to give a range of values, just some example values that you observed). [2 marks]/
+
+/b) Include a time domain plot of the unstable closed-loop step response you observed. Ensure the plot shows both the input and output signals [2 marks]/
+
+/c) How well did your closed loop controller achieve requirements at the original operating point for which it was tuned? [2 marks]/
+
+/d) Include a plot showing the closed-loop step response using your tuned controller for the operating point and step size in (step 5). Show both the input and output signal of the closed loop system. [2 marks]/
+
+/e) Was there a difference in the performance of the controller in achieving the desired closed loop performance about the original operating point (step 5) for positive and negative steps? [1 mark]/
+
+/f) How well did the controller perform for larger step sizes at the designed operating point (step 6) compared to small step sizes? Comment briefly on how this matches your expectations considering your observations at different step sizes in Lab Task 2. [4 marks]/
+
+/g) How well did the controller performance generalise to a significantly different operating point? Briefly comment on whether this behaviour is consistent with your theoretical knowledge of the system and closed loop control. [5 marks]/
+
 * Part 3 – Analysis [16 Marks, ILO 4]
+/a) Generate the pole-zero plot of the open-loop system consisting of the controller and the plant, but no feedback. Use your linearised model about your initial operating point (Part 2 step 5) for $G_2(s)$, and use your tuned controller parameters to find $G_1(s)$. Make sure to keep track of which poles/zeros come from the plant, and which come from the controller using different symbols or colours. [4 marks]/
+
+/b) Use MATLAB to find the closed-loop transfer function for the system using the open loop transfer function G_1(s)G_2(s) derived in a). [2 marks]/
+
+/c) Generate the pole-zero plot of the closed-loop system $T(s)$. [2 marks]/
+
+/d) Does the second order approximation apply to the closed loop system T_s(s) found in b) (will an appropriate second order transfer function give an approximately equal step response). [2 marks]/
+
+/e) Use the results from a) - d) to discuss why the parameters values you selected gave a step response that met the given performance metrics. Ie. why did the PID controller give a closed loop time domain response that met the desired performance metrics with those specific PID parameters. [6 marks]/
