@@ -80,7 +80,7 @@ The system is unstable when the first column encounters a sign change, so we nee
 Which can be done with matlab:
 
 #+BEGIN_SRC octave :exports code :results output :session Q1
-syms K;
+syms K real positive;
 
 eq1 = 10400*K - 10401 > 0;
 sol1 = solve(eq1, K);
@@ -96,44 +96,180 @@ sol4 = solve(eq4, K);
 
 sol5 = solve(eq1, eq2, eq3, eq4, K);
 
-latex(sol5)
+#latex(sol5)
 
 latex(sol1)
-latex(sol2)
+sol2
 latex(sol3)
-latex(sol4)
+sol4
 #+END_SRC
 
 #+RESULTS:
-: \left(\left(-\infty < K \wedge K < \frac{265627}{80800} - \frac{\sqrt{89987759929}}{80800}\right) \vee \left(- \frac{1979}{5000} < K \wedge K < \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}\right)\right) \wedge \frac{10401}{10400} < K \wedge K < \infty
-: \frac{10401}{10400} < K \wedge K < \infty
-: - \frac{1979}{5000} < K \wedge K < \infty
-: \left(-\infty < K \wedge K < \frac{265627}{80800} - \frac{\sqrt{89987759929}}{80800}\right) \vee \left(- \frac{1979}{5000} < K \wedge K < \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}\right)
-: -1 < K \wedge K < \infty
+: \frac{10401}{10400} < K
+: sol2 = {}(0x0)
+: K < \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}
+: sol4 = {}(0x0)
+Which gives the following inequalities
+\begin{align*}
+K &> \frac{10401}{10400} \\
+K &< \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}
+\end{align*}
 
-y\[K > 1.0001\]
-\[K > -0.3958\]
-\[K < −0.425155930\]
-OR
-\[-0.3958 < K < 7.000081673\]
-\[K > -1\]
-
-\[\left(\left(-\infty < K \wedge K < \frac{265627}{80800} - \frac{\sqrt{89987759929}}{80800}\right) \vee \left(- \frac{1979}{5000} < K \wedge K < \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}\right)\right) \wedge \frac{10401}{10400} < K \wedge K < \infty\]
+Which means $1 < K < 7$.
 
 ** c
+Taking $K = \frac{7-1}{2} = 3$
+\begin{align*}
+\lim_{t\rightarrow \infty}e(t) &= \lim_{s\rightarrow 0} sE(s)  \\
+&= \lim_{s\rightarrow 0} s\frac{R(s)}{1 + G(s)}\ \textrm{Where}\ R(s) = \frac{1}{s} \\
+&= \lim_{s\rightarrow 0} s\frac{\frac{1}{s}}{1 + \frac{300 \left(s + 1\right) \left(s^{2} - 4 s + 104\right)}{\left(s + 3\right) \left(100 s^{2} + 2475 s - 3467\right)}} \\
+&= \lim_{s\rightarrow 0} \frac{100 s^{3} + 2775 s^{2} + 3958 s - 10401}{400 s^{3} + 1875 s^{2} + 33958 s + 20799} \\
+&= -0.5
+\end{align*}
+
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+close all
+
+syms s K
+G = subs(G, K, 3);
+latex(G)
+l = 1/(1 + G);
+latex(simplify(l))
+double(subs(l, s, 0))
+#+END_SRC
+
+#+RESULTS:
+: \frac{300 \left(s + 1\right) \left(s^{2} - 4 s + 104\right)}{\left(s + 3\right) \left(100 s^{2} + 2475 s - 3467\right)}
+: \frac{100 s^{3} + 2775 s^{2} + 3958 s - 10401}{400 s^{3} + 1875 s^{2} + 33958 s + 20799}
+: ans = -0.5001
 
 * Question 2
 
 * Question 3
-
 ** a
+Using $\frac{G(s)}{1 + G(s)H(s)}$ and then multiplication:
+\begin{align*}
+\frac{\theta_0(s)}{\theta_c(s) - \theta_0(s)} &= \frac{s + 0.01}{s}\cdot\frac{1}{s}\cdot\frac{\frac{K_c}{s}\frac{1}{s}\frac{s + 0.01}{s}}{1 + \frac{K_c}{s}\frac{1}{s}\frac{s + 0.01}{s}} \\
+\frac{\theta_0(s)}{\theta_c(s) - \theta_0(s)} &= \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}
+\end{align*}
+
+
+#+BEGIN_SRC octave :exports code :results output :session Q3
+close all
+pkg load symbolic
+syms s K_c J
+
+equ = ((s + 0.01)/s)*(1/s)*((K_c/J)*(1/s)*((s + 0.01)/s)) / (1 + (K_c/J)*(1/s)*((s + 0.01)/s));
+latex(simplify(equ))
+
+latex(expand(K_c*(100*s + 1)^2))
+latex(expand(100*s^2*(K_c*(100*s + 1) + J*100*s^2)))
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    plus at line 53 column 5
+
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    plus at line 53 column 5
+
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 384 column 13
+    plus at line 53 column 5
+\frac{K_{c} \left(100 s + 1\right)^{2}}{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
+10000 K_{c} s^{2} + 200 K_{c} s + K_{c}
+10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}
+#+end_example
 
 ** b
+\begin{align*}
+\lim_{t\rightarrow \infty}e(t) &= \lim_{s\rightarrow 0} sE(s)  \\
+&= \lim_{s\rightarrow 0} s\frac{R(s)}{1 + G(s)}\ \textrm{Where}\ R(s) = \frac{1}{s} \\
+&= \lim_{s\rightarrow 0} s\frac{\frac{1}{s}}{1 + \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}} \\
+&= \lim_{s\rightarrow 0} \frac{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)} \\
+&= 0
+\end{align*}
+
+#+BEGIN_SRC octave :exports code :results output :session Q3
+e = 1/(1 + equ);
+latex(simplify(e))
+err = subs(simplify(e), s, 0)
+latex(err)
+#+END_SRC
+
+#+RESULTS:
+: \frac{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
+: err = (sym) 0
+: 0
 
 ** c
+\begin{align*}
+\lim_{t\rightarrow \infty}e(t)&= \lim_{s\rightarrow 0} s\frac{\frac{1}{s^2}}{1 + \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}} \\
+&= \lim_{s\rightarrow 0} \frac{100 s \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)} \\
+&= 0
+\end{align*}
+
+#+BEGIN_SRC octave :exports code :results output :session Q3
+e = s* ((1/s^2)/(1 + equ));
+latex(simplify(e))
+err = subs(simplify(e), s, 0)
+latex(err)
+#+END_SRC
+
+#+RESULTS:
+: \frac{100 s \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
+: err = (sym) 0
+: 0
 
 ** d
+\begin{align*}
+\lim_{t\rightarrow \infty}e(t)&= \lim_{s\rightarrow 0} s\frac{\frac{1}{s^3}}{1 + \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}} \\
+&= \lim_{s\rightarrow 0} \frac{100 \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)} \\
+&= 100
+\end{align*}
+
+#+BEGIN_SRC octave :exports code :results output :session Q3
+e = s* ((1/s^3)/(1 + equ));
+latex(simplify(e))
+err = subs(simplify(e), s, 0)
+latex(err)
+#+END_SRC
+
+#+RESULTS:
+: \frac{100 \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
+: err = (sym) 100
+: 100
 
 ** e
+Using $\frac{G(s)}{1 + G(s)}$:
+\begin{align*}
+\frac{\theta_0(s)}{\theta_c(s)} &= \frac{\frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}}{1 + \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}} \\
+&= \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{100 J s^{2} + 10000 K_{c} s^{3} + 10100 K_{c} s^{2} + 200 K_{c} s + K_{c}} \\
+&= \frac{10000 \frac{K_{c}}{J} s^{2} + 200 \frac{K_{c}}{J} s + \frac{K_{c}}{J}}{100 s^{2} + 10000 \frac{K_{c}}{J} s^{3} + 10100 \frac{K_{c}}{J}  s^{2} + 200 \frac{K_{c}}{J} s + \frac{K_{c}}{J}}
+\end{align*}
 
-** f
+#+BEGIN_SRC octave :exports code :results output :session Q3
+T = equ/(1 + equ);
+latex(simplify(T))
+latex(expand(K_c*(100*s + 1)^2))
+latex(expand(K_c*(100*s + 1)^2 + 100*s^2*(K_c*(100*s + 1)) + J*100*s^2))
+#+END_SRC
+
+#+RESULTS:
+: \frac{K_{c} \left(100 s + 1\right)^{2}}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
+: 10000 K_{c} s^{2} + 200 K_{c} s + K_{c}
+: 100 J s^{2} + 10000 K_{c} s^{3} + 10100 K_{c} s^{2} + 200 K_{c} s + K_{c}
+
+** TODO f
+
