@@ -18,6 +18,7 @@
 
 * Question 1
 ** a
+:TODO: THE NUMERATOR AND DENOMINATOR ARE WRONG, THE POWERS WERE SWAPPED. REDO ALL OF THIS
 Using $T(s) = \frac{G(s)}{1 + G(s)H(s)}$
 \begin{align*}
 G(s) &= \frac{K100(s+1)(s^2 - 4s + 104)}{(s+3)(100s^2 + 2475s - 3467)} \textrm{ and } H(s) = 1 \\
@@ -41,20 +42,14 @@ T_simplified = simplify(T);
 
 % Get the numerator and denominator of T
 [num, den] = numden(T_simplified);
-
-% Convert the numerator and denominator to polynomial form
-num_poly = coeffs(num, s);
-den_poly = coeffs(den, s);
-
-% Print the numerator and denominator in the desired form
-latex(poly2sym(num_poly, s));
-latex(poly2sym(den_poly, s));
+latex(expand(num))
+latex(expand(den))
 
 #+END_SRC
 
 #+RESULTS:
-: 10400 K s^{3} + 10000 K s^{2} - 300 K s + 100 K
-: 100 K + s^{3} \left(10400 K - 10401\right) + s^{2} \left(10000 K + 3958\right) + s \left(2775 - 300 K\right) + 100
+: 100 K s^{3} - 300 K s^{2} + 10000 K s + 10400 K
+: 100 K s^{3} - 300 K s^{2} + 10000 K s + 10400 K + 100 s^{3} + 2775 s^{2} + 3958 s - 10401
 
 ** b
 \[100 K + s^{3} \left(10400 K - 10401\right) + s^{2} \left(10000 K + 3958\right) + s \left(2775 - 300 K\right) + 100\]
