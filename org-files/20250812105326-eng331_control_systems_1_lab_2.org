@@ -4,7 +4,6 @@
 #+title: ENG331 - Control Systems 1 - Lab 2
 #+date: [2025-08-12 Tue 10:53]
 #+AUTHOR: Baley Eccles - 652137 - Matthew Hocking - 659747 - Tyler Robards – 651790
-#+STARTUP: latexpreview
 #+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}

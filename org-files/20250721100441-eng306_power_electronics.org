@@ -24,6 +24,7 @@
  - [[id:6d6c465f-78aa-49dd-8ac7-d13c6bb0302b][Power Semiconductors]]
  - [[id:dd9eeafa-3d34-473c-aafb-43261823e25f][Buck Converters]]
  - [[id:f75859dd-399f-4be4-a82c-c4d7fe6d4942][Boost Converter]]
+ - [[id:c6bd0cc7-48ea-4eab-8552-f7c25dec7c72][Buck-Boost Converter]]
 * Assessment
 ** Assessment Task 1: Project
  - 30%

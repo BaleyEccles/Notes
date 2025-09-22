@@ -4,7 +4,7 @@
 #+title: ENG306 - Power Electronics - Lab 2
 #+date: [2025-08-28 Thu 13:11]
 #+AUTHOR: Baley Eccles - 652137
-#+FILETAGS: :UTAS:2025:
+#+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}

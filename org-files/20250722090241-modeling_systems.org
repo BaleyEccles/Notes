@@ -20,6 +20,7 @@
  - [[id:698f46a5-c12f-462a-bc34-bcc6fc1d9cb3][First Order Systems]]
  - [[id:405c4318-12e5-45f8-8f69-c074d41a1481][Second Order Systems]]
  - [[id:b7db8941-7b2a-410a-a78e-ec8ae7b193c5][Higher Order Systems]]
+ - [[id:58f545f0-abf6-483d-8b44-046bad7f38a6][Feedback Systems]]
 
 ** Effects of [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][Zeros]]
 \[T(s) = \frac{(s + a)}{(s + b)(s + c)}\]
