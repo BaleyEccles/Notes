@@ -1,0 +1,41 @@
+:PROPERTIES:
+:ID:       c6bd0cc7-48ea-4eab-8552-f7c25dec7c72
+:END:
+#+title: Buck-Boost Converter
+#+date: [2025-09-22 Mon 10:13]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* [[id:dd9eeafa-3d34-473c-aafb-43261823e25f][Buck]]-[[id:f75859dd-399f-4be4-a82c-c4d7fe6d4942][Boost]] Converter
+Combines a [[id:dd9eeafa-3d34-473c-aafb-43261823e25f][Buck Converter]] and a [[id:f75859dd-399f-4be4-a82c-c4d7fe6d4942][Boost Converter]], this allows increasing and decreasing voltage in a single circuit.
+[[./Buck_Boost_Converter.png]] 
+** Analysis
+*** CCM
+\[\Delta I_L = \frac{V_{in}T_{ON}}{L}\]
+\[\Delta I_L = \frac{V_oT_{DOWN}}{L}\]
+**** Transfer Relation
+The input to output voltage can be found in terms of the on and off time:
+\[\frac{V_o}{V_{in}} = \frac{T_{ON}}{T_{DOWN}}\]
+Or using the duty cycle:
+\[D_{ON} = \frac{T_{ON}}{T_{SW}}\]
+\[V_o = \frac{V_{in}D_{ON}}{1 - D_{ON}}\]
+This gives three cases for the output voltage
+1. For $0 < D < 0.5$, then $V_o < V_{in}$
+2. For $D = 0.5$,     then $V_o= V_{in}$
+3. For $0.5 < D < 1$, then $V_o > V_{in}$
+** Equations
+$\Delta I_L$:
+ - \[\Delta I_L = \frac{V_{in}T_{ON}}{L}\]
+ - \[\Delta I_L = \frac{V_oT_{DOWN}}{L}\]
+ - \[\Delta I_L = \frac{V_o}{L}(1-D)T_s\]
+
+Input output relation:
+ - \[\frac{V_o}{V_{in}} = \frac{T_{ON}}{T_{DOWN}}\]
+ - \[V_o = \frac{V_{in}D_{ON}}{1 - D_{ON}}\]
+
+Component Values:
+ - \[L_{\min} = \frac{(1-D)^2R}{2f_s}\]
+ - \[\frac{\Delta V_o}{V_o} = \frac{DT_s}{RC} = \frac{D}{RCf_s}\]
+
+ - \[I_L = \frac{V_DD}{R(1-D)^2}\]
+

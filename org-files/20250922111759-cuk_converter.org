@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       7700dc5e-b4fd-4ce9-b42c-0e70eb09fa1f
+:END:
+#+title: Cuk Converter
+#+date: [2025-09-22 Mon 11:17]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Cuk Converter
+Works similar to a [[id:c6bd0cc7-48ea-4eab-8552-f7c25dec7c72][Buck-Boost Converter]] except the current is continuous.
+[[./Cuk_Converter.png]]
+
+** Equations
+\[V_o = \frac{V_{in}D}{1-D}\]
+
+\[L_{1,\min} = \frac{(1-D)^2R}{2Df_s}\]
+\[L_{2,\min} = \frac{(1-D)R}{2f_s}\]
+
+\[\Delta I_{L,1} = \frac{V_in D}{L_1f_s}\]
+\[\Delta I_{L,2} = \frac{V_in D}{L_2f_s}\]
+
+\[\Delta V_{C1} = \frac{V_oD}{RC_1f_s}\]
+\[\frac{\Delta V_o}{V_o} = \frac{D}{RC_2f_s}\]
+
+\[V_{C1} = V_{in} - V_o\]
+
+
