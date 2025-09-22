@@ -93,36 +93,85 @@ T_f &= 10^4
 
 Our system had a lot of noise, we decided to do step sizes of 5cm as our small step and 10cm as our large step.
 :TODO: Use code from Lab 2
-|---------+-----------+----------------+------+-----------+----------------+------------------------------|
-| OP (cm) | Step (cm) | Final Val (cm) |  %OS | $T_p$ (s) | $T_s$ (2%) (s) | $e(t\rightarrow\infty)$ (cm) |
-|---------+-----------+----------------+------+-----------+----------------+------------------------------|
-|      15 |         5 |             20 | 2.85 |        43 |           56.3 |                            0 |
-|      15 |        -5 |             10 | 17.5 |      12.8 |           65.4 |                            0 |
-|---------+-----------+----------------+------+-----------+----------------+------------------------------|
-|      15 |         7 |          22.13 | 10.9 |      41.9 |           91.8 |                            0 |
-|      15 |        -7 |     7.0 to 8.9 | 26.8 |      14.8 |            N/A |                          N/A |
-|---------+-----------+----------------+------+-----------+----------------+------------------------------|
-|      20 |         5 |             23 |  N/A |      37.5 |            N/A |                            2 |
-|      20 |        -5 |             15 |  1.8 |        26 |             36 |                            0 |
-|---------+-----------+----------------+------+-----------+----------------+------------------------------|
+|---------+-----------+----------------+------+------+-----------+----------------+------------------------------|
+| OP (cm) | Step (cm) | Final Val (cm) | Gain |  %OS | $T_p$ (s) | $T_s$ (2%) (s) | $e(t\rightarrow\infty)$ (cm) |
+|---------+-----------+----------------+------+------+-----------+----------------+------------------------------|
+|      15 |         5 |             20 |    1 | 2.85 |        43 |           56.3 |                            0 |
+|      15 |        -5 |             10 |    1 | 17.5 |      12.8 |           65.4 |                            0 |
+|---------+-----------+----------------+------+------+-----------+----------------+------------------------------|
+|      15 |         7 |          22.13 |    1 | 10.9 |      41.9 |           91.8 |                            0 |
+|      15 |        -7 |     7.0 to 8.9 |  N/A | 26.8 |      14.8 |            N/A |                          N/A |
+|---------+-----------+----------------+------+------+-----------+----------------+------------------------------|
+|      20 |         5 |             23 |  0.6 |  N/A |      37.5 |            N/A |                            2 |
+|      20 |        -5 |             15 |    1 |  1.8 |        26 |             36 |                            0 |
+|---------+-----------+----------------+------+------+-----------+----------------+------------------------------|
 
 ** Comment on the performance of your tuned controller
 /a) Did you observe any ranges of the controller parameters that resulted in an unstable closed-loop response? For what controller parameters did you observe this (you don’t need to give a range of values, just some example values that you observed). [2 marks]/
+:TODO:
 
 /b) Include a time domain plot of the unstable closed-loop step response you observed. Ensure the plot shows both the input and output signals [2 marks]/
+:TODO:
 
 /c) How well did your closed loop controller achieve requirements at the original operating point for which it was tuned? [2 marks]/
+[[./ENG331_Lab_3_OP_1.png]]
+:TODO:
 
 /d) Include a plot showing the closed-loop step response using your tuned controller for the operating point and step size in (step 5). Show both the input and output signal of the closed loop system. [2 marks]/
+[[./ENG331_Lab_3_OP_2.png]]
 
 /e) Was there a difference in the performance of the controller in achieving the desired closed loop performance about the original operating point (step 5) for positive and negative steps? [1 mark]/
+:TODO:
 
 /f) How well did the controller perform for larger step sizes at the designed operating point (step 6) compared to small step sizes? Comment briefly on how this matches your expectations considering your observations at different step sizes in Lab Task 2. [4 marks]/
+:TODO:
 
 /g) How well did the controller performance generalise to a significantly different operating point? Briefly comment on whether this behaviour is consistent with your theoretical knowledge of the system and closed loop control. [5 marks]/
+[[./ENG331_Lab_3_OP_3.png]]
+:TODO:
 
 * Part 3 – Analysis [16 Marks, ILO 4]
 /a) Generate the pole-zero plot of the open-loop system consisting of the controller and the plant, but no feedback. Use your linearised model about your initial operating point (Part 2 step 5) for $G_2(s)$, and use your tuned controller parameters to find $G_1(s)$. Make sure to keep track of which poles/zeros come from the plant, and which come from the controller using different symbols or colours. [4 marks]/
+
+Using: $G_1(s) = \frac{K_ds^2 + K_ps + K_i}{s}$
+
+#+BEGIN_SRC octave :exports code :results output :session Part_3
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  pkg load control
+end
+
+K_p = 1;
+K_i = 0.04;
+K_d = 0.25;
+T_f = 10e4;
+
+s = tf('s')
+G_1 = (K_d*s*s + K_p*s + K_i)/s
+pzmap(G_1, '-r')
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Transfer function 's' from input 'u1' to output ...
+
+ y1:  s
+
+Continuous-time model.
+Transfer function 'G_1' from input 'u1' to output ...
+
+      0.25 s^2 + s + 0.04
+ y1:  -------------------
+               s         
+
+Continuous-time model.
+#+end_example
 
 /b) Use MATLAB to find the closed-loop transfer function for the system using the open loop transfer function G_1(s)G_2(s) derived in a). [2 marks]/
 
