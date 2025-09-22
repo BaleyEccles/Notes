@@ -17,7 +17,7 @@
 #+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
 * Part 1 – System Familiarisation and Calibration [11 marks, ILO 1]
-
+:NOTE: This part is done, it just needs to be cleaned up
 ** Calibration
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
 | Actual Tank 1 Height $h_{1,i}$ | Uncalibrated value $v_{1,i}$ | Actual tank 2 height $h_{2,i}$ | Uncalibrated value $v_{2,i}$ |
@@ -79,31 +79,32 @@ $C_d = 0.896 83$
 
 * Part 2 – Controller Tuning [28 marks, ILO 1]
 
-** Theory
+** TODO Theory
 /What is the purpose of the derivative filter term $T_f$? Consider its effect in the time-domain as well as its effect on the controller transfer function in the Laplace domain. [2 marks]/
 ** Tuning
 /Tuned controller parameters ($K_p$, $K_i$, $K_d$, $T_f$):/
-$K_p = 1$
-$K_i = 0.04$
-$K_d = 0.25$
-$T_f = 10^4$
+\begin{align*}
+K_p &= 1 \\
+K_i &= 0.04 \\
+K_d &= 0.25 \\
+T_f &= 10^4
+\end{align*}
 
-Our system was very noisey, we decided to do step sizes of 5cm as our small step and 10cm as our large step.
 
-
+Our system had a lot of noise, we decided to do step sizes of 5cm as our small step and 10cm as our large step.
 :TODO: Use code from Lab 2
-|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
-| OP (V, cm) | Step (cm) | Final Val (cm) | %OS | $T_p$ (s) | $T_s$ (2%) (s) | $e(t\rightarrow\infty)$ (cm) |
-|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
-| ,15        |         5 |                |     |           |                |                              |
-| ,15        |        -5 |                |     |           |                |                              |
-|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
-| ,15        |         7 |                |     |           |                |                              |
-| ,15        |        -7 |                |     |           |                |                              |
-|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
-| ,20        |         5 |                |     |           |                |                              |
-| ,20        |        -5 |                |     |           |                |                              |
-|------------+-----------+----------------+-----+-----------+----------------+------------------------------|
+|---------+-----------+----------------+------+-----------+----------------+------------------------------|
+| OP (cm) | Step (cm) | Final Val (cm) |  %OS | $T_p$ (s) | $T_s$ (2%) (s) | $e(t\rightarrow\infty)$ (cm) |
+|---------+-----------+----------------+------+-----------+----------------+------------------------------|
+|      15 |         5 |             20 | 2.85 |        43 |           56.3 |                            0 |
+|      15 |        -5 |             10 | 17.5 |      12.8 |           65.4 |                            0 |
+|---------+-----------+----------------+------+-----------+----------------+------------------------------|
+|      15 |         7 |          22.13 | 10.9 |      41.9 |           91.8 |                            0 |
+|      15 |        -7 |     7.0 to 8.9 | 26.8 |      14.8 |            N/A |                          N/A |
+|---------+-----------+----------------+------+-----------+----------------+------------------------------|
+|      20 |         5 |             23 |  N/A |      37.5 |            N/A |                            2 |
+|      20 |        -5 |             15 |  1.8 |        26 |             36 |                            0 |
+|---------+-----------+----------------+------+-----------+----------------+------------------------------|
 
 ** Comment on the performance of your tuned controller
 /a) Did you observe any ranges of the controller parameters that resulted in an unstable closed-loop response? For what controller parameters did you observe this (you don’t need to give a range of values, just some example values that you observed). [2 marks]/
