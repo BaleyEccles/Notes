@@ -18,7 +18,7 @@ With $G(s) = \frac{N_G(s)}{D_G(s)}$ and $H(s) = \frac{N_H(s)}{D_H(s)}$:
 Assuming closed loop [[id:c7591f3a-c2d4-4591-b6af-b0db831a296c][Transfer Function]]:
  - \[T(s) = \frac{KG(s)}{1 + KG(s)H(s)}\]
 A pole exists when:
- - \[|KG(s)H(s) = 1|\]
+ - \[|KG(s)H(s)| = 1\]
  - \[\angle KG(s)H(s) = (2k + 1)180^o\]
 Then:
  - If angle of complex number is odd multiple of $180^o$ then $s$ is system pole for particular $K$

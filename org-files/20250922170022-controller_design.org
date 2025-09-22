@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       97dc3da9-c40a-4945-b4f9-bf7b7657b70c
+:END:
+#+title: Controller Design
+#+date: [2025-09-22 Mon 17:00]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Controller Design
+** Nomenclature
+Process Variable - The variable that is trying to be controlled (output of the system)
+Control Variable - The variable that is being actuated (output of the controller)
+Set Point - The input or reference value or slow changing variable
+
+** Classical Controller Approaches
+ - Bang-Bang Control
+ - Rule Based Control
+   - [[id:117d1797-6d46-47e2-81d2-1360da07666b][Fuzzy Logic]]
+     - Can be used along with a PID to create a more complicated system
+ - Time-Domain PID implementations
+
+** PID
+Standard Form   
+ - \[u(t) = K_p\left(e(t) + \frac{1}{T_i}\int e(\tau)d\tau + T_d\frac{de(t)}{dt}\right)\]
+Parallel Form
+ - \[u(t) = K_pe(t) + K_i\int e(\tau)d\tau + K_d\frac{de(t)}{dt}\]
+
+*** Tuning Approaches
+Ziegler–Nichols Tuning Method
+ - https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method
+Astrom-Hagglund Tuning Method
+
+** Design Via [[id:bcab7053-f2ea-4117-a8c8-eeea97587087][Root Locus]]
+1. Use the angle to find the point at which it is $180^o$
+2. Use the magnitude to find the gain
+
