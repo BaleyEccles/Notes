@@ -34,3 +34,12 @@ Astrom-Hagglund Tuning Method
 1. Use the angle to find the point at which it is $180^o$
 2. Use the magnitude to find the gain
 
+** Improving [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]] Using Cascade Compensations
+
+*** PI Controller
+This is done by adding an integrator and a zero close to the origin
+ - In series with $G(s)$ we have $\frac{K(s + a)}{s}$
+
+**** Passive Implementation
+It is not possible to build and ideal integrator with passive components
+ - Now we have $G_c(s) = \frac{s + z_c}{s + p_c}$
