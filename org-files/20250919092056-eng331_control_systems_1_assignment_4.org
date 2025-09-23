@@ -18,12 +18,11 @@
 
 * Question 1
 ** a
-:TODO: THE NUMERATOR AND DENOMINATOR ARE WRONG, THE POWERS WERE SWAPPED. REDO ALL OF THIS
 Using $T(s) = \frac{G(s)}{1 + G(s)H(s)}$
 \begin{align*}
 G(s) &= \frac{K100(s+1)(s^2 - 4s + 104)}{(s+3)(100s^2 + 2475s - 3467)} \textrm{ and } H(s) = 1 \\
 T(s) &= \frac{\frac{K100(s+1)(s^2 - 4s + 104}{(s+3)(100s^2 + 2475s - 3467)}}{1 + \frac{K100(s+1)(s^2 - 4s + 104}{(s+3)(100s^2 + 2475s - 3467)}1} \\
-T(s) &= \frac{10400 K s^3 + 10000 K s^2 - 300 K s + 100 K}{s^3 \left(10400 K - 10401\right) + s^2 \left(10000 K + 3958\right) + s \left(2775 - 300 K\right) + (100 + 100K)}
+T(s) &= \frac{100 K s^{3} - 300 K s^{2} + 10000 K s + 10400 K}{100 K s^{3}  + 100 s^{3} - 300 K s^{2} + 2775 s^{2} + 10000 K s + 3958 s - 10401  + 10400 K}
 \end{align*}
 #+BEGIN_SRC octave :exports code :results output :session Q1
 clc
@@ -48,66 +47,65 @@ latex(expand(den))
 #+END_SRC
 
 #+RESULTS:
+: Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
 : 100 K s^{3} - 300 K s^{2} + 10000 K s + 10400 K
 : 100 K s^{3} - 300 K s^{2} + 10000 K s + 10400 K + 100 s^{3} + 2775 s^{2} + 3958 s - 10401
 
 ** b
-\[100 K + s^{3} \left(10400 K - 10401\right) + s^{2} \left(10000 K + 3958\right) + s \left(2775 - 300 K\right) + 100\]
+\[100(K + 1) s^{3} +  (2775 - 300 K)s^{2} + (10000 K + 3958) s + (10400 K - 10401)\]
 Using Routh–Hurwitz table:
 #+ATTR_LATEX: :align |c|c|c|
-|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
-| $s^3$ | $10400 K - 10401$                                                                                                                                                                                  | $2775 - 300K$                                                                                       |
-|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
-| $s^2$ | $10000 K + 3958$                                                                                                                                                                                   | $100K + 100$                                                                                        |
-|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
-| $s^1$ | $\frac{-\begin{bmatrix}10400 K - 10401 & 2775 - 300 K \\ 10000 K + 3958 & 100K + 100\end{bmatrix}}{10000 K + 3958} = -\frac{25(80800K^2 - 531254K - 240471)}{5000K + 1979}$                        | $\frac{-\begin{bmatrix}10400 K - 10401 & 0 \\ 10000 K + 3958 & 0\end{bmatrix}}{10000 K + 3958} = 0$ |
-|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
-| $s^0$ | $\frac{-\begin{bmatrix}10000 K + 3958 & 100K + 100 \\ -\frac{25(80800K^2 - 531254K - 240471)}{5000K + 1979} & 0\end{bmatrix}}{-\frac{25(80800K^2 - 531254K - 240471)}{5000K + 1979}} = 100(K + 1)$ | $0$                                                                                                 |
-|-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------|
+|-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
+| $s^3$ | $100(K+1)$                                                                                                                                                                                  | $10000K + 3958$                                                                          |
+|-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
+| $s^2$ | $2775 - 300K$                                                                                                                                                                               | $10400K - 10401$                                                                         |
+|-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
+| $s^1$ | $\frac{-\begin{bmatrix}100(K + 1) & 10000 + 3958K \\ 2775 - 300K & 10400K - 10401\end{bmatrix}}{2775 - 300K} = \frac{2(-80800^2 + 531254K + 240471)}{3(4K-37)}$                             | $\frac{-\begin{bmatrix}100(K + 1) & 0 \\ 2775 - 300K & 0\end{bmatrix}}{2775 - 300K} = 0$ |
+|-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
+| $s^0$ | $\frac{-\begin{bmatrix}2775 - 300K & 10400K - 10401 \\ \frac{2(-80800^2 + 531254K + 240471)}{3(4K-37)} & 0\end{bmatrix}}{\frac{2(-80800^2 + 531254K + 240471)}{3(4K-37)}} = 10400K - 10401$ | $0$                                                                                      |
+|-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
 
-The system is unstable when the first column encounters a sign change, so we need to find when the following are greater than 0.
-\begin{align*}
-0 &< 10400 K - 10401 \\
-0 &< 10000 K + 3958 \\
-0 &< -\frac{25(80800K^2 - 531254K - 240471)}{5000K + 1979} \\
-0 &< 100(K + 1) 
-\end{align*}
-Which can be done with matlab:
-
+The system is unstable when the first column encounters a sign change, so we need to find when the following are greater than 0, which can be done with matlab:
 #+BEGIN_SRC octave :exports code :results output :session Q1
 syms K real positive;
 
-eq1 = 10400*K - 10401 > 0;
+eq1 = 100*(K+1) > 0;
 sol1 = solve(eq1, K);
 
-eq2 = 10000*K + 3958 > 0;
+eq2 = 2775 - 300*K > 0;
 sol2 = solve(eq2, K);
 
-eq3 = -25*(80800*K^2 - 531254*K - 240471)/(5000*K + 1979) > 0;
+eq3 = (2*(-80800*K^2 + 531254*K + 240471))/(3*(4*K-37)) > 0;
 sol3 = solve(eq3, K);
 
-eq4 = 100*(K + 1) > 0;
+eq4 = 10400*K - 10401 > 0;
 sol4 = solve(eq4, K);
 
 sol5 = solve(eq1, eq2, eq3, eq4, K);
 
 #latex(sol5)
 
-latex(sol1)
+sol1
 sol2
 latex(sol3)
 sol4
 #+END_SRC
 
 #+RESULTS:
-: \frac{10401}{10400} < K
-: sol2 = {}(0x0)
-: K < \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}
-: sol4 = {}(0x0)
+: sol1 = {}(0x0)
+: sol2 = (sym) K < 37/4
+: K < \frac{37}{4} \wedge \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800} < K
+: sol4 = (sym)
+: 
+:   10401    
+:   ───── < K
+:   10400
+:TODO: FROM HERE ON ITS WRONG, THE CODE ABOVE IS CORRECT THOUGH
 Which gives the following inequalities
 \begin{align*}
-K &> \frac{10401}{10400} \\
-K &< \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800}
+K &< 37/4 = 9.25\\
+K &< \frac{37}{4} \wedge \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800} \approx 7
+K &> \frac{10401}{10400} \approx 1
 \end{align*}
 
 Which means $1 < K < 7$.
@@ -115,28 +113,24 @@ Which means $1 < K < 7$.
 ** c
 Taking $K = \frac{7-1}{2} = 3$
 \begin{align*}
-\lim_{t\rightarrow \infty}e(t) &= \lim_{s\rightarrow 0} sE(s)  \\
-&= \lim_{s\rightarrow 0} s\frac{R(s)}{1 + G(s)}\ \textrm{Where}\ R(s) = \frac{1}{s} \\
-&= \lim_{s\rightarrow 0} s\frac{\frac{1}{s}}{1 + \frac{300 \left(s + 1\right) \left(s^{2} - 4 s + 104\right)}{\left(s + 3\right) \left(100 s^{2} + 2475 s - 3467\right)}} \\
-&= \lim_{s\rightarrow 0} \frac{100 s^{3} + 2775 s^{2} + 3958 s - 10401}{400 s^{3} + 1875 s^{2} + 33958 s + 20799} \\
-&= -0.5
+K_p &= \lim_{s\rightarrow 0}G(s) = \frac{300 \left(s + 1\right) \left(s^{2} - 4 s + 104\right)}{\left(s + 3\right) \left(100 s^{2} + 2475 s - 3467\right)} = -3 \\
+e_{step}(\infty) &= \frac{1}{1 + K_p} \\
+e_{step}(\infty) &= \frac{1}{1 - 3} = -0.5\\
 \end{align*}
 
 
 #+BEGIN_SRC octave :exports code :results output :session Q1
-close all
-
 syms s K
 G = subs(G, K, 3);
 latex(G)
-l = 1/(1 + G);
-latex(simplify(l))
-double(subs(l, s, 0))
+K_p = double(subs(G, s, 0))
+
+1/(1 + K_p)
 #+END_SRC
 
 #+RESULTS:
 : \frac{300 \left(s + 1\right) \left(s^{2} - 4 s + 104\right)}{\left(s + 3\right) \left(100 s^{2} + 2475 s - 3467\right)}
-: \frac{100 s^{3} + 2775 s^{2} + 3958 s - 10401}{400 s^{3} + 1875 s^{2} + 33958 s + 20799}
+: K_p = -2.9997
 : ans = -0.5001
 
 * Question 2
@@ -155,11 +149,15 @@ close all
 pkg load symbolic
 syms s K_c J
 
-equ = ((s + 0.01)/s)*(1/s)*((K_c/J)*(1/s)*((s + 0.01)/s)) / (1 + (K_c/J)*(1/s)*((s + 0.01)/s));
-latex(simplify(equ))
+G = ((s + 0.01)/s)*(1/s)*((K_c/J)*(1/s)*((s + 0.01)/s)) / (1 + (K_c/J)*(1/s)*((s + 0.01)/s));
+latex(simplify(G))
+G = simplify(G)
 
-latex(expand(K_c*(100*s + 1)^2))
-latex(expand(100*s^2*(K_c*(100*s + 1) + J*100*s^2)))
+[num, den] = numden(G);
+
+latex(expand(num))
+latex(expand(den))
+
 
 #+END_SRC
 
@@ -183,88 +181,166 @@ warning: called from
     sym at line 384 column 13
     plus at line 53 column 5
 \frac{K_{c} \left(100 s + 1\right)^{2}}{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
+G = (sym)
+
+                          2          
+           K_c⋅(100⋅s + 1)           
+  ───────────────────────────────────
+       2 ⎛       2                  ⎞
+  100⋅s ⋅⎝100⋅J⋅s  + K_c⋅(100⋅s + 1)⎠
 10000 K_{c} s^{2} + 200 K_{c} s + K_{c}
 10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}
+das = (sym)
+
+           3          2          4
+  10000⋅D⋅s  + 100⋅D⋅s  + 10000⋅s
+a = (sym 3×1 matrix)
+
+  ⎡          0           ⎤
+  ⎢                      ⎥
+  ⎢        ______________⎥
+  ⎢  D   ╲╱ D⋅(25⋅D - 1) ⎥
+  ⎢- ─ - ────────────────⎥
+  ⎢  2          10       ⎥
+  ⎢                      ⎥
+  ⎢        ______________⎥
+  ⎢  D   ╲╱ D⋅(25⋅D - 1) ⎥
+  ⎢- ─ + ────────────────⎥
+  ⎣  2          10       ⎦
+ans = (sym) 0
 #+end_example
 
 ** b
 \begin{align*}
-\lim_{t\rightarrow \infty}e(t) &= \lim_{s\rightarrow 0} sE(s)  \\
-&= \lim_{s\rightarrow 0} s\frac{R(s)}{1 + G(s)}\ \textrm{Where}\ R(s) = \frac{1}{s} \\
-&= \lim_{s\rightarrow 0} s\frac{\frac{1}{s}}{1 + \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}} \\
-&= \lim_{s\rightarrow 0} \frac{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)} \\
-&= 0
+K_p &= \lim_{s\rightarrow 0}G(s) = \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}} = \infty\\
+e_{step}(\infty) &= \frac{1}{1 + K_p} \\
+e_{step}(\infty) &= \frac{1}{1 - \infty} = 0\\
 \end{align*}
 
 #+BEGIN_SRC octave :exports code :results output :session Q3
-e = 1/(1 + equ);
-latex(simplify(e))
-err = subs(simplify(e), s, 0)
-latex(err)
+syms s K
+latex(G)
+K_p = double(subs(G, s, 0))
+
+1/(1 + K_p)
 #+END_SRC
 
 #+RESULTS:
-: \frac{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
-: err = (sym) 0
-: 0
+: \frac{K_{c} \left(100 s + 1\right)^{2}}{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
+: K_p =  Inf + Infi
+: ans = 0
 
 ** c
 \begin{align*}
-\lim_{t\rightarrow \infty}e(t)&= \lim_{s\rightarrow 0} s\frac{\frac{1}{s^2}}{1 + \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}} \\
-&= \lim_{s\rightarrow 0} \frac{100 s \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)} \\
-&= 0
+K_v &= \lim_{s\rightarrow 0}sG(s) = s\frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}} = \infty \\
+e_{ramp}(\infty) &= \frac{1}{K_v} \\
+e_{ramp}(\infty) &= \frac{1}{\infty} = 0\\
 \end{align*}
 
 #+BEGIN_SRC octave :exports code :results output :session Q3
-e = s* ((1/s^2)/(1 + equ));
-latex(simplify(e))
-err = subs(simplify(e), s, 0)
-latex(err)
+syms s K
+latex(G)
+K_v = double(subs(s*G, s, 0))
+
+1/(K_v)
 #+END_SRC
 
 #+RESULTS:
-: \frac{100 s \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
-: err = (sym) 0
-: 0
-
+: \frac{K_{c} \left(100 s + 1\right)^{2}}{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
+: K_v =  Inf + Infi
+: ans = 0
 ** d
 \begin{align*}
-\lim_{t\rightarrow \infty}e(t)&= \lim_{s\rightarrow 0} s\frac{\frac{1}{s^3}}{1 + \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}} \\
-&= \lim_{s\rightarrow 0} \frac{100 \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)} \\
-&= 100
+K_a &= \lim_{s\rightarrow 0}s^2G(s) = s^2\frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}} = 0.01\\
+e_{parabola}(\infty) &= \frac{1}{K_a} \\
+e_{parabola}(\infty) &= \frac{1}{0.01} = 100
 \end{align*}
 
 #+BEGIN_SRC octave :exports code :results output :session Q3
-e = s* ((1/s^3)/(1 + equ));
-latex(simplify(e))
-err = subs(simplify(e), s, 0)
-latex(err)
+syms s K
+latex(G)
+K_a = double(subs(s*s*G, s, 0))
+
+1/(K_a)
 #+END_SRC
 
 #+RESULTS:
-: \frac{100 \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
-: err = (sym) 100
-: 100
+: \frac{K_{c} \left(100 s + 1\right)^{2}}{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
+: K_a = 0.010000
+: ans = 100
 
 ** e
 Using $\frac{G(s)}{1 + G(s)}$:
 \begin{align*}
 \frac{\theta_0(s)}{\theta_c(s)} &= \frac{\frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}}{1 + \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}}} \\
 &= \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{100 J s^{2} + 10000 K_{c} s^{3} + 10100 K_{c} s^{2} + 200 K_{c} s + K_{c}} \\
-&= \frac{10000 \frac{K_{c}}{J} s^{2} + 200 \frac{K_{c}}{J} s + \frac{K_{c}}{J}}{100 s^{2} + 10000 \frac{K_{c}}{J} s^{3} + 10100 \frac{K_{c}}{J}  s^{2} + 200 \frac{K_{c}}{J} s + \frac{K_{c}}{J}}
+&= \frac{10000 \frac{K_{c}}{J} s^{2} + 200 \frac{K_{c}}{J} s + \frac{K_{c}}{J}}{10000 \frac{K_{c}}{J} s^{3} + 100 s^{2} + 10100 \frac{K_{c}}{J}  s^{2} + 200 \frac{K_{c}}{J} s + \frac{K_{c}}{J}}
 \end{align*}
 
 #+BEGIN_SRC octave :exports code :results output :session Q3
-T = equ/(1 + equ);
-latex(simplify(T))
-latex(expand(K_c*(100*s + 1)^2))
-latex(expand(K_c*(100*s + 1)^2 + 100*s^2*(K_c*(100*s + 1)) + J*100*s^2))
+T = G/(1 + G);
+T_s = simplify(T);
+latex(T_s)
+[num, den] = numden(T_s);
+latex(expand(num))
+latex(expand(den))
 #+END_SRC
 
 #+RESULTS:
 : \frac{K_{c} \left(100 s + 1\right)^{2}}{K_{c} \left(100 s + 1\right)^{2} + 100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
 : 10000 K_{c} s^{2} + 200 K_{c} s + K_{c}
-: 100 J s^{2} + 10000 K_{c} s^{3} + 10100 K_{c} s^{2} + 200 K_{c} s + K_{c}
+: 10000 J s^{4} + 10000 K_{c} s^{3} + 10100 K_{c} s^{2} + 200 K_{c} s + K_{c}
 
-** TODO f
+** f
+Letting $\frac{K_c}{J} = A$
+\[10000 A s^{3} + \left(100 + 10100 A\right) s^{2} + 200 A s + A\]
+|-----+---------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
+| s^3 | $10 000A$                                                                                                                             | $200A$                                                                                   |
+|-----+---------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
+| s^2 | $100 + 10 100A$                                                                                                                       | $A$                                                                                      |
+|-----+---------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
+| s^1 | $\frac{-\begin{bmatrix}10 000A & 200A \\ 10 + 10 100A & A\end{bmatrix}}{100 + 10 100A} = \frac{10A(2019A + 20)}{101A + 1}$            | $\frac{-\begin{bmatrix}10 000A & 0 \\ 10 + 10 100A & 0\end{bmatrix}}{100 + 10 100A} = 0$ |
+|-----+---------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
+| s^0 | $\frac{-\begin{bmatrix}100 + 10 100A & A \\ \frac{10A(2019A + 20)}{101A + 1} & 0\end{bmatrix}}{\frac{10A(2019A + 20)}{101A + 1}} = A$ | $0$                                                                                      |
+|-----+---------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
 
+For the system to be stable there must be no sign changes in the left column, this can be solved using the following MATLAB code:
+#+BEGIN_SRC octave :exports code :results output :session Q3
+syms A real;
+
+eq1 = 10000*A > 0;
+sol1 = solve(eq1, A);
+
+eq2 = 100 + 10100*A > 0;
+sol2 = solve(eq2, A);
+
+eq3 = (10*A*(2019*A + 20))/(101*A + 1) > 0;
+sol3 = solve(eq3, A);
+
+eq4 = A > 0;
+sol4 = solve(eq4, A);
+
+latex(solve(eq1, eq2, eq3, eq4, A))
+
+sol1
+sol2
+sol3
+sol4
+#+END_SRC
+
+#+RESULTS:
+: \left(\left(- \frac{20}{2019} < A \wedge A < - \frac{1}{101}\right) \vee 0 < A\right) \wedge 0 < A
+: sol1 = (sym) 0 < A
+: sol2 = (sym) -1/101 < A
+: sol3 = (sym)
+: 
+:   ⎛-20                  ⎞        
+:   ⎜──── < A ∧ A < -1/101⎟ ∨ 0 < A
+:   ⎝2019                 ⎠
+: sol4 = (sym) 0 < A
+
+Which means:
+\begin{align*}
+\frac{-20}{2019} < &\frac{K_c}{J} < \frac{-1}{101} \\
+-0.009906 < &\frac{K_c}{J} < -0.009901
+\end{align*}
