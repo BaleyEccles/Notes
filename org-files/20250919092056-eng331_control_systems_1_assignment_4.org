@@ -100,7 +100,7 @@ sol4
 :   10401    
 :   ───── < K
 :   10400
-:TODO: FROM HERE ON ITS WRONG, THE CODE ABOVE IS CORRECT THOUGH
+
 Which gives the following inequalities
 \begin{align*}
 K &< 37/4 = 9.25\\
@@ -134,6 +134,86 @@ K_p = double(subs(G, s, 0))
 : ans = -0.5001
 
 * Question 2
+first we must convert the state space representation to laplace, then use Routh-Hurwitz. This can be done using $G(s) = C(sI - A)^{-1}B + D$.
+\begin{align*}
+G(s) &= C(sI - A)^{-1}B + D \\
+G(s) &= \begin{bmatrix}
+1 & 0 & 1
+\end{bmatrix}
+\left(
+s
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 
+\end{bmatrix}
+-
+\begin{bmatrix}
+0  & 1  & 0 \\
+0  & 1  & 2 \\
+-5 & -4 & -3 \\
+\end{bmatrix}
+\right)^{-1}
+\begin{bmatrix}
+0 \\
+1 \\
+0
+\end{bmatrix}
++
+\begin{bmatrix}
+0
+\end{bmatrix}
+\end{align*}
+Using MATLAB to find solve this:
+#+BEGIN_SRC octave :exports code :results output :session Q2
+clc
+clear
+close all;
+pkg load symbolic
+syms s
+
+A = [0, 1, 0; 0, 1, 2; -5, -4, -3];
+B = [0; 1; 0];
+C = [1, 0, 1];
+G = factor(C*inv(s*eye(3,3) - A)*B)
+
+#+END_SRC
+
+#+RESULTS:
+: G = (sym)
+: 
+:     -(3⋅s + 2)    
+:   ────────────────
+:           ⎛ 2    ⎞
+:   (s + 2)⋅⎝s  + 5⎠
+
+Getting the closed-loop transfer function using $T = \frac{G(s)}{1 - G(s)H(s)}$
+\[T(s) = \frac{- 3 s - 2}{s^{3} + 2 s^{2} + 2 s + 8}\]
+#+BEGIN_SRC octave :exports code :results output :session Q2
+H = 1;
+T = simplify(G/(1 + G*H));
+
+[num, den] = numden(T);
+latex(expand(num))
+latex(expand(den))
+#+END_SRC
+
+#+RESULTS:
+: - 3 s - 2
+: s^{3} + 2 s^{2} + 2 s + 8
+
+
+Which gives $G(s) = \frac{- 3 s - 2}{s^{3} + 2 s^{2} + 5 s + 10}$. Using the denominator and Routh-Hurwitz:
+|-----+---------------------------------------------------------------+-------------------------------------------------------------|
+| s^3 |                                                             1 |                                                           2 |
+|-----+---------------------------------------------------------------+-------------------------------------------------------------|
+| s^2 |                                                             2 |                                                           8 |
+|-----+---------------------------------------------------------------+-------------------------------------------------------------|
+| s^1 |  $\frac{-\begin{bmatrix}1 & 2 \\ 2 & 8\end{bmatrix}}{2} = -2$ | $\frac{-\begin{bmatrix}1 & 9 \\ 2 & 0\end{bmatrix}}{2} = 0$ |
+|-----+---------------------------------------------------------------+-------------------------------------------------------------|
+| s^0 | $\frac{-\begin{bmatrix}2 & 8 \\ -2 & 0\end{bmatrix}}{-2} = 8$ |                                                           0 |
+|-----+---------------------------------------------------------------+-------------------------------------------------------------|
+There are sign changes in the first column of the table, so the system is unstable.
 
 * Question 3
 ** a
