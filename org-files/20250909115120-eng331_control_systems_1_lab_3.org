@@ -106,7 +106,7 @@ Our system had a lot of noise, we decided to do step sizes of 5cm as our small s
 |      20 |        -5 |             15 |    1 |  1.8 |        26 |             36 |                            0 |
 |---------+-----------+----------------+------+------+-----------+----------------+------------------------------|
 
-** Comment on the performance of your tuned controller
+** TODO Comment on the performance of your tuned controller
 /a) Did you observe any ranges of the controller parameters that resulted in an unstable closed-loop response? For what controller parameters did you observe this (you don’t need to give a range of values, just some example values that you observed). [2 marks]/
 :TODO:
 
@@ -114,27 +114,31 @@ Our system had a lot of noise, we decided to do step sizes of 5cm as our small s
 :TODO:
 
 /c) How well did your closed loop controller achieve requirements at the original operating point for which it was tuned? [2 marks]/
+Not very well, due to noise in the system it was very hard to tune the controller. The hardest parameters to tune were the peak time and settling time, this is because the noise made it hard to determine when the peak time was and how long it took to settle. We managed to get the percent overshoot to a reasonable value, it typically stayed under the required 20% threshold. Once again, due to the noise it is almost impossible to determine the steady state error, however if we pick an average value it appears that the steady state error is about zero.
+
+/d) Include a plot showing the closed-loop step response using your tuned controller for the operating point and step size in (step 4). Show both the input and output signal of the closed loop system. [2 marks]/
 [[./ENG331_Lab_3_OP_1.png]]
-:TODO:
 
-/d) Include a plot showing the closed-loop step response using your tuned controller for the operating point and step size in (step 5). Show both the input and output signal of the closed loop system. [2 marks]/
+/e) Was there a difference in the performance of the controller in achieving the desired closed loop performance about the original operating point (step 4) for positive and negative steps? [1 mark]/
+Yes, the percent overshoot for the negative step was much larger than the one with a positive step, this is probably because of noise. It is worth noting that the noise is much less for lower tank levels, this was not noticed when recording the data, the controller was tuned on a system with a lot of noise and then the noise was removed, so the system is expected to preform differently.
+
+/f) How well did the controller perform for larger step sizes at the designed operating point (step 5) compared to small step sizes? Comment briefly on how this matches your expectations considering your observations at different step sizes in Lab Task 2. [4 marks]/
 [[./ENG331_Lab_3_OP_2.png]]
-
-/e) Was there a difference in the performance of the controller in achieving the desired closed loop performance about the original operating point (step 5) for positive and negative steps? [1 mark]/
-:TODO:
-
-/f) How well did the controller perform for larger step sizes at the designed operating point (step 6) compared to small step sizes? Comment briefly on how this matches your expectations considering your observations at different step sizes in Lab Task 2. [4 marks]/
-:TODO:
+Terribly, for a larger positive step the system took a very long time to reach its peak and then did not settle for a significant period of time, there is an artifact due to noise during the rise that could have contributed to this. As for the negative large step it ended up reaching a marginally stable state where it would never settle, this is probably because of the lack of noise and the controller being tuned on a lot of noise.
+:TODO: Compare with lab 2
 
 /g) How well did the controller performance generalise to a significantly different operating point? Briefly comment on whether this behaviour is consistent with your theoretical knowledge of the system and closed loop control. [5 marks]/
 [[./ENG331_Lab_3_OP_3.png]]
-:TODO:
+The different operating point performed better than the larger step sizes, particularity the negative step. The positive step was too large which resulted in it having a massive steady state error, although the other characteristics of it were better. The negative step preformed similar, if not better, than the two steps at the first operating point. This aligns with the theory, the system is non-linear so a different operating point will have different characteristics and will require the controller to be tuned differently.
 
-* Part 3 – Analysis [16 Marks, ILO 4]
-/a) Generate the pole-zero plot of the open-loop system consisting of the controller and the plant, but no feedback. Use your linearised model about your initial operating point (Part 2 step 5) for $G_2(s)$, and use your tuned controller parameters to find $G_1(s)$. Make sure to keep track of which poles/zeros come from the plant, and which come from the controller using different symbols or colours. [4 marks]/
+* TODO Part 3 – Analysis [16 Marks, ILO 4]
+/a) Generate the pole-zero plot of the open-loop system consisting of the controller and the plant, but no feedback. Use your linearised model about your initial operating point (Part 2 step 4) for $G_2(s)$, and use your tuned controller parameters to find $G_1(s)$. Make sure to keep track of which poles/zeros come from the plant, and which come from the controller using different symbols or colours. [4 marks]/
 
-Using: $G_1(s) = \frac{K_ds^2 + K_ps + K_i}{s}$
+Using: $G_1(s) = \frac{K_ds^2 + K_ps + K_i}{s}$ and
 
+\begin{align*}
+G_2(s) &= \frac{K_{pump}}{A_1^2s + \frac{A_{o1}C_d \sqrt{2g}}{2\sqrt{h_{1,0}}}} \\
+\end{align*}
 #+BEGIN_SRC octave :exports code :results output :session Part_3
 clc
 clear
@@ -143,7 +147,9 @@ close all
 if exist('OCTAVE_VERSION', 'builtin')
   set(0, "DefaultLineLineWidth", 2);
   set(0, "DefaultAxesFontSize", 25);
+  warning('off');
   pkg load control
+  pkg load symbolic
 end
 
 K_p = 1;
@@ -151,31 +157,128 @@ K_i = 0.04;
 K_d = 0.25;
 T_f = 10e4;
 
-s = tf('s')
-G_1 = (K_d*s*s + K_p*s + K_i)/s
-pzmap(G_1, '-r')
+%s = tf('s')
+syms s
+G_1 = (K_d*s*s + K_p*s + K_i)/s;
 
+
+g = 9.81;
+C_d = 0.8907;
+D_o1 = 4e-3
+A_o1 = pi*(D_o1/2)^2;
+D_1 = 4.5e-2;
+A_1 = pi*(D_1/2)^2;
+K_pump = 0.0000035;
+h_1_0 = 15e-2;
+V_P_0 = 4;
+
+G_2C = ((V_P_0*K_pump)/((pi/4)*D_o1^2*sqrt(2*g)))^2;
+G_2 = (K_pump)/(A_1^2*s + (A_o1*C_d*sqrt(2*g))/(2*sqrt(h_1_0)));
+
+
+G = G_1*G_2
+[num, den] = numden(G);
+poles = double(vpa(solve(den, s)))
+zeros = double(vpa(solve(num, s)))
+
+figure;
+hold on;
+plot(real(poles(1)), imag(poles(1)), 'bx');
+plot(real(poles(2)), imag(poles(2)), 'rx');
+
+plot(real(zeros(1)), imag(zeros(1)), 'bo');
+plot(real(zeros(2)), imag(zeros(2)), 'bo');
+axis([-4.5, 0.1, -0.1, 0.1]);
+grid on;
+set (gca, "xaxislocation", "origin");
+set (gca, "yaxislocation", "origin");
+xlabel('Re(s)');
+ylabel('Im(s)');
+%print -dpng 'ENG331_Q2_d.png'
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-Transfer function 's' from input 'u1' to output ...
+D_o1 = 4.0000e-03
+G = (sym)
 
- y1:  s
+         ⎛ 2         ⎞      
+         ⎜s        1 ⎟      
+       π⋅⎜── + s + ──⎟      
+         ⎝4        25⎠      
+  ──────────────────────────
+           ⎛ 2⋅s       15  ⎞
+  897598⋅s⋅⎜────── + ──────⎟
+           ⎝790679   234356⎠
+poles =
 
-Continuous-time model.
-Transfer function 'G_1' from input 'u1' to output ...
+  -25.3038
+         0
+zeros =
 
-      0.25 s^2 + s + 0.04
- y1:  -------------------
-               s         
-
-Continuous-time model.
+  -3.959592
+  -0.040408
 #+end_example
 
 /b) Use MATLAB to find the closed-loop transfer function for the system using the open loop transfer function G_1(s)G_2(s) derived in a). [2 marks]/
+#+BEGIN_SRC octave :exports code :results output :session Part_3
+CL = vpa(simplify(G_1*G_2/(1 + G_1*G_2)))
+latex(CL)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+CL = (sym)
+
+                                                                                        ⎛      2        ↪
+                                                      133310531.15798850166851811708469⋅⎝25.0⋅s  + 100. ↪
+  ───────────────────────────────────────────────────────────────────────────────────────────────────── ↪
+                                     2             ⎛            2                         ⎞             ↪
+  3332763278.9497125417129529271171⋅s  + 59707.0⋅s⋅⎝19829000.0⋅s  + 2557941.0⋅s + 109000.0⎠ + 133310531 ↪
+  
+  ↪          ⎞                                                    
+  ↪ 0⋅s + 4.0⎠                                                    
+  ↪ ──────────────────────────────────────────────────────────────
+  ↪                                                               
+  ↪ 15.798850166851811708469⋅s + 533242124.63195400667407246833874
+\frac{133310531.15798850166851811708469 \left(25.0 s^{2} + 100.0 s + 4.0\right)}{3332763278.9497125417129529271171 s^{2} + 59707.0 s \left(19829000.0 s^{2} + 2557941.0 s + 109000.0\right) + 13331053115.798850166851811708469 s + 533242124.63195400667407246833874}
+#+end_example
+\[\frac{133310531 \left(25 s^{2} + 100 s + 4\right)}{3332763278 s^{2} + 59707 s \left(19829000 s^{2} + 2557941 s + 109000\right) + 13331053115 s + 533242124}\]
 
 /c) Generate the pole-zero plot of the closed-loop system $T(s)$. [2 marks]/
+
+#+BEGIN_SRC octave :exports code :results output :session Part_3
+[num_CL, den_CL] = numden(CL);
+poles_CL = double(vpa(solve(den_CL, s)))
+zeros_CL = double(vpa(solve(num_CL, s)))
+
+figure;
+hold on;
+plot(real(poles_CL(1)), imag(poles_CL(1)), 'bx');
+plot(real(poles_CL(2)), imag(poles_CL(2)), 'bx');
+plot(real(poles_CL(3)), imag(poles_CL(3)), 'bx');
+
+plot(real(zeros_CL(1)), imag(zeros_CL(1)), 'bo');
+plot(real(zeros_CL(2)), imag(zeros_CL(2)), 'bo');
+axis([-4.5, 0.2, -0.2, 0.2]);
+grid on;
+set (gca, "xaxislocation", "origin");
+set (gca, "yaxislocation", "origin");
+xlabel('Re(s)');
+ylabel('Im(s)');
+%print -dpng 'ENG331_Q2_d.png'
+#+END_SRC
+
+#+RESULTS:
+: poles_CL =
+: 
+:   -0.0334 +      0i
+:   -0.0492 - 0.1051i
+:   -0.0492 + 0.1051i
+: zeros_CL =
+: 
+:   -3.959592
+:   -0.040408
 
 /d) Does the second order approximation apply to the closed loop system T_s(s) found in b) (will an appropriate second order transfer function give an approximately equal step response). [2 marks]/
 
