@@ -225,70 +225,32 @@ Using $\frac{G(s)}{1 + G(s)H(s)}$ and then multiplication:
 
 
 #+BEGIN_SRC octave :exports code :results output :session Q3
+clc
+clear
 close all
 pkg load symbolic
 syms s K_c J
 
-G = ((s + 0.01)/s)*(1/s)*((K_c/J)*(1/s)*((s + 0.01)/s)) / (1 + (K_c/J)*(1/s)*((s + 0.01)/s));
-latex(simplify(G))
-G = simplify(G)
+G_1 = (s + 0.01)/s;
+G_2 = K_c/J;
+G_3 = 1/s;
+G_4 = (G_1*G_2*G_3)/(1 + G_1*G_2*G_3);
+G = simplify(G_1*G_4*G_3);
 
 [num, den] = numden(G);
 
 latex(expand(num))
 latex(expand(den))
-
-
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    plus at line 53 column 5
-
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    plus at line 53 column 5
-
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    plus at line 53 column 5
-\frac{K_{c} \left(100 s + 1\right)^{2}}{100 s^{2} \left(100 J s^{2} + K_{c} \left(100 s + 1\right)\right)}
-G = (sym)
-
-                          2          
-           K_c⋅(100⋅s + 1)           
-  ───────────────────────────────────
-       2 ⎛       2                  ⎞
-  100⋅s ⋅⎝100⋅J⋅s  + K_c⋅(100⋅s + 1)⎠
-10000 K_{c} s^{2} + 200 K_{c} s + K_{c}
-10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}
-das = (sym)
-
-           3          2          4
-  10000⋅D⋅s  + 100⋅D⋅s  + 10000⋅s
-a = (sym 3×1 matrix)
-
-  ⎡          0           ⎤
-  ⎢                      ⎥
-  ⎢        ______________⎥
-  ⎢  D   ╲╱ D⋅(25⋅D - 1) ⎥
-  ⎢- ─ - ────────────────⎥
-  ⎢  2          10       ⎥
-  ⎢                      ⎥
-  ⎢        ______________⎥
-  ⎢  D   ╲╱ D⋅(25⋅D - 1) ⎥
-  ⎢- ─ + ────────────────⎥
-  ⎣  2          10       ⎦
-ans = (sym) 0
-#+end_example
+: warning: passing floating-point values to sym is dangerous, see "help sym"
+: warning: called from
+:     double_to_sym_heuristic at line 50 column 7
+:     sym at line 384 column 13
+:     plus at line 53 column 5
+: 10000 K_{c} s^{2} + 200 K_{c} s + K_{c}
+: 10000 J s^{4} + 10000 K_{c} s^{3} + 100 K_{c} s^{2}
 
 ** b
 \begin{align*}
