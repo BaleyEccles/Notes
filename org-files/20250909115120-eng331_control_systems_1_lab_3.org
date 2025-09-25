@@ -19,6 +19,9 @@
 * Part 1 – System Familiarisation and Calibration [11 marks, ILO 1]
 :NOTE: This part is done, it just needs to be cleaned up
 ** Calibration
+#+ATTR_LATEX: :placement [H]
+#+ATTR_LATEX: :align |c|c|c|c|
+#+CAPTION: Calibration data \label{tab:T0}
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
 | Actual Tank 1 Height $h_{1,i}$ | Uncalibrated value $v_{1,i}$ | Actual tank 2 height $h_{2,i}$ | Uncalibrated value $v_{2,i}$ |
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
@@ -27,7 +30,7 @@
 |                           11.5 |                          220 |                             22 |                          540 |
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
 
-Given that we were using the same tank as Lab 2, we decided to use the same scales and offsets. Which were $\textrm{scale} = 0.05357$ and $\textrm{offset} = -0.2857$ for Tank 1, and $\textrm{scale} = 0.03293$ and $\textrm{offset} = 4.22$ for Tank 2.
+Given that we were using the same tank as Lab 2, we decided to use the same scales and offsets. Which were $\textrm{scale} = 0.05357$ and $\textrm{offset} = -0.2857$ for Tank 1, and $\textrm{scale} = 0.03293$ and $\textrm{offset} = 4.22$ for Tank 2. The data collected for this can be seen in Table \ref{tab:T0}. 
 
 ** Tank Parameters
 The bottom nozzle diameter (Tank 2) was recorded to be 4mm. Whereas the top nozzle diameter (Tank 1) was recorded to be 5mm. The diameter of Tank 2 was recorded to be 4.5cm, likewise the diameter of Tank 1 was also recorded to be 4.5cm.
@@ -35,52 +38,70 @@ The bottom nozzle diameter (Tank 2) was recorded to be 4mm. Whereas the top nozz
 ** System Identification
 
 *** Pump Gain
-If we set the pump voltage to $V_p = 5V$ it takes $t = 16s$ to fill the tank to $h = 20cm$. This data allows us to calculate the pump gain.
-\[q_0 = 0.00002\]
-\[\textrm{pump gain} = 0.000004\]
 
+If we set the pump voltage to $V_p = 5V$ it takes $t = 16s$ to fill the tank to $h = 20cm$. This data allows us to calculate the pump gain.
+\begin{align*}
+\textrm{Vol} &= \pi r^2 h \\
+\textrm{Vol} &= \pi \left(\frac{4.5\times10^{-2}}{2}\right)^2 \cdot 20\times10^{-2} \\
+\textrm{Vol} &= 0.000318 m^3 \\
+&\\
+q_0 &= \frac{\textrm{Vol}}{t} \\
+q_0 &= \frac{0.000318}{16} \\
+q_0 &= 0.00002 m^3/s \\
+&\\
+\textrm{Pump Gain} &= \frac{q_0}{V_p} \\
+\textrm{Pump Gain} &= \frac{0.00002}{5} \\
+\textrm{Pump Gain} &= 0.000 004
+\end{align*}
 
 If we set the pump voltage to $V_p = 10V$ it takes $t = 9.2s$ to fill the tank to $h = 20cm$. This data allows us to calculate the pump gain.
-\[q_0 = 0.00002\]
-\[\textrm{pump gain} = 0.000003\]
+\begin{align*}
+\textrm{Vol} &= \pi r^2 h \\
+\textrm{Vol} &= \pi \left(\frac{4.5\times10^{-2}}{2}\right)^2 \cdot 20\times10^{-2} \\
+\textrm{Vol} &= 0.000318 m^3 \\
+&\\
+q_0 &= \frac{\textrm{Vol}}{t} \\
+q_0 &= \frac{0.000318}{9.2} \\
+q_0 &= 0.000035 m^3/s \\
+&\\
+\textrm{Pump Gain} &= \frac{q_0}{V_p} \\
+\textrm{Pump Gain} &= \frac{0.000035}{10} \\
+\textrm{Pump Gain} &= 0.000 0035
+\end{align*}
+
 
 *** Discharge coefficient
-:TODO: Clean up the latex equations
 **** Diameter 1 (5mm) (top tank)
-steady state
-$h_1 = 4.5$
-$h_2 = 11 \rightarrow 25$
+If we let the tank fill from 11cm to 25cm we can measure that it takes 10.33s.
 
-$t_1 = 10.33$
-
-$Vol = pi (4.5/2)^2 (25 - 11)$
-$Vol = 0.000 00 222660379$
-
-$q = 0.00000222660379/10.33$
-$q = 0.000 000 215 547$
-
-$0.000 000 215 547 = \frac{\pi}{4} (4.5*10^-2)^2 C_d\sqrt{2gh_1}$
-$0.000222660/10.33 = (pi/4)* (5*10^-3)^2 *x *sqrt(2*9.81*(25 - 11)*10^-2)$
-
-$C_d = 0.4956706$
+\begin{align*}
+V &= \pi \left(\frac{4.5\times 10^{-2}}{2}\right)^2 (25 - 11)\times10^{-2} \\
+V &= 0.000 00 223 \\ 
+q &= \frac{V}{t} = \frac{0.000223}{10.3} = 0.000 022 \\
+q &= \frac{\pi}{4}(D_o)^2C_d\sqrt{2gh_1} \\
+0.000 022 &= \frac{\pi}{4}(5\times10^{-3})^2C_d\sqrt{2\times9.81\times(25-11)\times10^{-2}} \\
+C_d &= 0.662
+\end{align*}
 
 **** Diameter 2 (4mm) (bottom tank)
-steady state
-$h_1 = 12$
-$h_2 = 4 \rightarrow 25$
+Likewise for the second diameter, if we let the tank fill from 4cm to 25cm we can measure that it takes 14.6s.
 
-$Vol = pi (4.5×10^−2/2)^2 (25 − 4)×10^−2$
-$Vol = 0.0003339905690$
-$t_1 = 14.6$
-
-$0.0003339905690/14.6 = (pi/4)* (4*10^-3)^2 *x *sqrt(2*9.81*(25 - 4)*10^-2)$
-$C_d = 0.896 83$
+\begin{align*}
+V &= \pi \left(\frac{4.5\times 10^{-2}}{2}\right)^2 (25 - 4)\times10^{-2} \\
+V &= 0.000 334 \\
+q &= \frac{V}{t} = \frac{0.000 334}{14.6} = 0.000 023 \\
+q &= \frac{\pi}{4}(D_1)^2C_d\sqrt{2gh_1} \\
+0.000 023 &= \frac{\pi}{4}(4.5\times10^{-3})^2C_d\sqrt{2\times9.81\times(25-4)\times10^{-2}} \\
+C_d &= 0.708
+\end{align*}
 
 
 * Part 2 – Controller Tuning [28 marks, ILO 1]
 
 ** TODO Theory
 /What is the purpose of the derivative filter term $T_f$? Consider its effect in the time-domain as well as its effect on the controller transfer function in the Laplace domain. [2 marks]/
+$T_f$ is used to smooth the data for the controller, it takes the $n$ most recent data points and takes an average before inputting it to the controller. In the time domain this results in a smoother signal and in the Laplace domain it is the same as a low pass filter. Given that our signal has a lot of noise we decided to use a very large $T_f$.
+
 ** Tuning
 /Tuned controller parameters ($K_p$, $K_i$, $K_d$, $T_f$):/
 \begin{align*}
@@ -92,7 +113,9 @@ T_f &= 10^4
 
 
 Our system had a lot of noise, we decided to do step sizes of 5cm as our small step and 10cm as our large step.
-:TODO: Use code from Lab 2
+#+ATTR_LATEX: :placement [H]
+#+ATTR_LATEX: :align |c|c|c|c|c|c|c|c|
+#+CAPTION: Data collected for three operating points and steps \label{tab:T1}
 |---------+-----------+----------------+------+------+-----------+----------------+------------------------------|
 | OP (cm) | Step (cm) | Final Val (cm) | Gain |  %OS | $T_p$ (s) | $T_s$ (2%) (s) | $e(t\rightarrow\infty)$ (cm) |
 |---------+-----------+----------------+------+------+-----------+----------------+------------------------------|
@@ -108,37 +131,44 @@ Our system had a lot of noise, we decided to do step sizes of 5cm as our small s
 
 ** TODO Comment on the performance of your tuned controller
 /a) Did you observe any ranges of the controller parameters that resulted in an unstable closed-loop response? For what controller parameters did you observe this (you don’t need to give a range of values, just some example values that you observed). [2 marks]/
-:TODO:
+We encountered integral windup when having $K_i$ set too high, this would make the system unstable. This occurs because the $K_i$ parameter accumulates all the previous difference between the true value and requested value, this results in controller requesting a massive voltage for the pump. 
 
 /b) Include a time domain plot of the unstable closed-loop step response you observed. Ensure the plot shows both the input and output signals [2 marks]/
-:TODO:
+It was also noticed that our system is marginally stable for smaller amounts of noise, this can be seen in Figure \ref{fig:Marg_Stab}.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Marginally stable system using $K_p &= 1$, $K_i &= 0.04$, $K_d &= 0.25$ and $T_f &= 10^4$ \label{fig:Marg_Stab}
+[[./ENG331_Lab_3_Marginally_Stable.png]]
 
 /c) How well did your closed loop controller achieve requirements at the original operating point for which it was tuned? [2 marks]/
-Not very well, due to noise in the system it was very hard to tune the controller. The hardest parameters to tune were the peak time and settling time, this is because the noise made it hard to determine when the peak time was and how long it took to settle. We managed to get the percent overshoot to a reasonable value, it typically stayed under the required 20% threshold. Once again, due to the noise it is almost impossible to determine the steady state error, however if we pick an average value it appears that the steady state error is about zero.
+Not very well, due to noise in the system it was very hard to tune the controller. The hardest parameters to tune were the peak time and settling time, this is because the noise made it hard to determine when the peak time was and how long it took to settle. We managed to get the percent overshoot to a reasonable value, it typically stayed under the required 20% threshold. Once again, due to the noise it is almost impossible to determine the steady state error, however if we pick an average value it appears that the steady state error is about zero. All of this can be seen in Figure \ref{fig:OP1}.
 
 /d) Include a plot showing the closed-loop step response using your tuned controller for the operating point and step size in (step 4). Show both the input and output signal of the closed loop system. [2 marks]/
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: System operating at 15cm with step sizes of 5cm and -5cm \label{fig:OP1}
 [[./ENG331_Lab_3_OP_1.png]]
 
 /e) Was there a difference in the performance of the controller in achieving the desired closed loop performance about the original operating point (step 4) for positive and negative steps? [1 mark]/
 Yes, the percent overshoot for the negative step was much larger than the one with a positive step, this is probably because of noise. It is worth noting that the noise is much less for lower tank levels, this was not noticed when recording the data, the controller was tuned on a system with a lot of noise and then the noise was removed, so the system is expected to preform differently.
 
 /f) How well did the controller perform for larger step sizes at the designed operating point (step 5) compared to small step sizes? Comment briefly on how this matches your expectations considering your observations at different step sizes in Lab Task 2. [4 marks]/
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: System operating at 15cm with step sizes of 7cm and -7cm \label{fig:OP2}
 [[./ENG331_Lab_3_OP_2.png]]
-Terribly, for a larger positive step the system took a very long time to reach its peak and then did not settle for a significant period of time, there is an artifact due to noise during the rise that could have contributed to this. As for the negative large step it ended up reaching a marginally stable state where it would never settle, this is probably because of the lack of noise and the controller being tuned on a lot of noise.
+Terribly, looking at \ref{fig:OP2} it can be seen that for a larger positive step the system took a very long time to reach its peak and then did not settle for a significant period of time, there is an artifact due to noise during the rise that could have contributed to this. As for the negative large step it ended up reaching a marginally stable state where it would never settle, this is probably because of the lack of noise and the controller being tuned on a lot of noise.
 :TODO: Compare with lab 2
 
 /g) How well did the controller performance generalise to a significantly different operating point? Briefly comment on whether this behaviour is consistent with your theoretical knowledge of the system and closed loop control. [5 marks]/
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: System operating at 20cm with step sizes of 5cm and -5cm \label{fig:OP2}
 [[./ENG331_Lab_3_OP_3.png]]
 The different operating point performed better than the larger step sizes, particularity the negative step. The positive step was too large which resulted in it having a massive steady state error, although the other characteristics of it were better. The negative step preformed similar, if not better, than the two steps at the first operating point. This aligns with the theory, the system is non-linear so a different operating point will have different characteristics and will require the controller to be tuned differently.
 
 * TODO Part 3 – Analysis [16 Marks, ILO 4]
 /a) Generate the pole-zero plot of the open-loop system consisting of the controller and the plant, but no feedback. Use your linearised model about your initial operating point (Part 2 step 4) for $G_2(s)$, and use your tuned controller parameters to find $G_1(s)$. Make sure to keep track of which poles/zeros come from the plant, and which come from the controller using different symbols or colours. [4 marks]/
 
-Using: $G_1(s) = \frac{K_ds^2 + K_ps + K_i}{s}$ and
+Using: $G_1(s) = \frac{K_ds^2 + K_ps + K_i}{s}$ and $G_2(s) &= \frac{K_{pump}}{A_1s + \frac{A_{o1}C_d \sqrt{2g}}{2\sqrt{h_{1,0}}}}$
 
-\begin{align*}
-G_2(s) &= \frac{K_{pump}}{A_1^2s + \frac{A_{o1}C_d \sqrt{2g}}{2\sqrt{h_{1,0}}}} \\
-\end{align*}
 #+BEGIN_SRC octave :exports code :results output :session Part_3
 clc
 clear
@@ -163,62 +193,48 @@ G_1 = (K_d*s*s + K_p*s + K_i)/s;
 
 
 g = 9.81;
-C_d = 0.8907;
-D_o1 = 4e-3
+C_d = 0.708;
+D_o1 = 4e-3;
 A_o1 = pi*(D_o1/2)^2;
 D_1 = 4.5e-2;
 A_1 = pi*(D_1/2)^2;
 K_pump = 0.0000035;
 h_1_0 = 15e-2;
-V_P_0 = 4;
+V_P_0 = 5;
 
-G_2C = ((V_P_0*K_pump)/((pi/4)*D_o1^2*sqrt(2*g)))^2;
-G_2 = (K_pump)/(A_1^2*s + (A_o1*C_d*sqrt(2*g))/(2*sqrt(h_1_0)));
+G_2 = (K_pump)/(A_1*s + (A_o1*C_d*sqrt(2*g))/(2*sqrt(h_1_0)));
 
-
-G = G_1*G_2
+G = G_1*G_2;
 [num, den] = numden(G);
 poles = double(vpa(solve(den, s)))
 zeros = double(vpa(solve(num, s)))
 
 figure;
 hold on;
-plot(real(poles(1)), imag(poles(1)), 'bx');
-plot(real(poles(2)), imag(poles(2)), 'rx');
+plot(real(poles(1)), imag(poles(1)), 'bx', 'MarkerSize', 20);
+plot(real(poles(2)), imag(poles(2)), 'rx', 'MarkerSize', 20);
 
-plot(real(zeros(1)), imag(zeros(1)), 'bo');
-plot(real(zeros(2)), imag(zeros(2)), 'bo');
-axis([-4.5, 0.1, -0.1, 0.1]);
+plot(real(zeros(1)), imag(zeros(1)), 'bo', 'MarkerSize', 20);
+plot(real(zeros(2)), imag(zeros(2)), 'bo', 'MarkerSize', 20);
+axis([-5, 0.1, -20, 20]);
 grid on;
+legend("PID", "System");
 set (gca, "xaxislocation", "origin");
 set (gca, "yaxislocation", "origin");
 xlabel('Re(s)');
 ylabel('Im(s)');
-%print -dpng 'ENG331_Q2_d.png'
+print -dpng 'ENG331_P3_Pole_Zero_Open_Loop.png'
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-D_o1 = 4.0000e-03
-G = (sym)
-
-         ⎛ 2         ⎞      
-         ⎜s        1 ⎟      
-       π⋅⎜── + s + ──⎟      
-         ⎝4        25⎠      
-  ──────────────────────────
-           ⎛ 2⋅s       15  ⎞
-  897598⋅s⋅⎜────── + ──────⎟
-           ⎝790679   234356⎠
-poles =
-
-  -25.3038
-         0
-zeros =
-
-  -3.959592
-  -0.040408
-#+end_example
+: poles =
+: 
+:           0
+:   -0.031989
+: zeros =
+: 
+:   -3.959592
+:   -0.040408
 
 /b) Use MATLAB to find the closed-loop transfer function for the system using the open loop transfer function G_1(s)G_2(s) derived in a). [2 marks]/
 #+BEGIN_SRC octave :exports code :results output :session Part_3
@@ -230,20 +246,20 @@ latex(CL)
 #+begin_example
 CL = (sym)
 
-                                                                                        ⎛      2        ↪
-                                                      133310531.15798850166851811708469⋅⎝25.0⋅s  + 100. ↪
-  ───────────────────────────────────────────────────────────────────────────────────────────────────── ↪
-                                     2             ⎛            2                         ⎞             ↪
-  3332763278.9497125417129529271171⋅s  + 59707.0⋅s⋅⎝19829000.0⋅s  + 2557941.0⋅s + 109000.0⎠ + 133310531 ↪
+                                                             ⎛      2                ⎞                   ↪
+                           10672736174.579418030794760427657⋅⎝25.0⋅s  + 100.0⋅s + 4.0⎠                   ↪
+  ────────────────────────────────────────────────────────────────────────────────────────────────────── ↪
+                                     2                                                                   ↪
+  485245749789364.48545076986901069⋅s  + 16581306486197.260445527805834692⋅s + 42690944698.3176721231790 ↪
   
-  ↪          ⎞                                                    
-  ↪ 0⋅s + 4.0⎠                                                    
-  ↪ ──────────────────────────────────────────────────────────────
-  ↪                                                               
-  ↪ 15.798850166851811708469⋅s + 533242124.63195400667407246833874
-\frac{133310531.15798850166851811708469 \left(25.0 s^{2} + 100.0 s + 4.0\right)}{3332763278.9497125417129529271171 s^{2} + 59707.0 s \left(19829000.0 s^{2} + 2557941.0 s + 109000.0\right) + 13331053115.798850166851811708469 s + 533242124.63195400667407246833874}
+  ↪        
+  ↪        
+  ↪ ───────
+  ↪        
+  ↪ 4171063
+\frac{10672736174.579418030794760427657 \left(25.0 s^{2} + 100.0 s + 4.0\right)}{485245749789364.48545076986901069 s^{2} + 16581306486197.260445527805834692 s + 42690944698.31767212317904171063}
 #+end_example
-\[\frac{133310531 \left(25 s^{2} + 100 s + 4\right)}{3332763278 s^{2} + 59707 s \left(19829000 s^{2} + 2557941 s + 109000\right) + 13331053115 s + 533242124}\]
+\[\frac{10672736174 \left(25 s^{2} + 100 s + 4\right)}{485245749789364 s^{2} + 16581306486197 s + 42690944698}\]
 
 /c) Generate the pole-zero plot of the closed-loop system $T(s)$. [2 marks]/
 
@@ -254,27 +270,26 @@ zeros_CL = double(vpa(solve(num_CL, s)))
 
 figure;
 hold on;
-plot(real(poles_CL(1)), imag(poles_CL(1)), 'bx');
-plot(real(poles_CL(2)), imag(poles_CL(2)), 'bx');
-plot(real(poles_CL(3)), imag(poles_CL(3)), 'bx');
+plot(real(poles_CL(2)), imag(poles_CL(2)), 'bx', 'MarkerSize', 20);
+plot(real(poles_CL(1)), imag(poles_CL(1)), 'rx', 'MarkerSize', 20);
 
-plot(real(zeros_CL(1)), imag(zeros_CL(1)), 'bo');
-plot(real(zeros_CL(2)), imag(zeros_CL(2)), 'bo');
-axis([-4.5, 0.2, -0.2, 0.2]);
+plot(real(zeros_CL(1)), imag(zeros_CL(1)), 'bo', 'MarkerSize', 20);
+plot(real(zeros_CL(2)), imag(zeros_CL(2)), 'bo', 'MarkerSize', 20);
+axis([-20.5, 0.1, -20, 20]);
 grid on;
+legend("PID", "System");
 set (gca, "xaxislocation", "origin");
 set (gca, "yaxislocation", "origin");
 xlabel('Re(s)');
 ylabel('Im(s)');
-%print -dpng 'ENG331_Q2_d.png'
+print -dpng 'ENG331_P3_Pole_Zero_Closed_Loop.png'
 #+END_SRC
 
 #+RESULTS:
 : poles_CL =
 : 
-:   -0.0334 +      0i
-:   -0.0492 - 0.1051i
-:   -0.0492 + 0.1051i
+:   -3.1366e-02
+:   -2.8049e-03
 : zeros_CL =
 : 
 :   -3.959592
