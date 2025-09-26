@@ -24,7 +24,7 @@ G(s) &= \frac{K100(s+1)(s^2 - 4s + 104)}{(s+3)(100s^2 + 2475s - 3467)} \textrm{ 
 T(s) &= \frac{\frac{K100(s+1)(s^2 - 4s + 104}{(s+3)(100s^2 + 2475s - 3467)}}{1 + \frac{K100(s+1)(s^2 - 4s + 104}{(s+3)(100s^2 + 2475s - 3467)}1} \\
 T(s) &= \frac{100 K s^{3} - 300 K s^{2} + 10000 K s + 10400 K}{100 K s^{3}  + 100 s^{3} - 300 K s^{2} + 2775 s^{2} + 10000 K s + 3958 s - 10401  + 10400 K}
 \end{align*}
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 clc
 clear
 close all
@@ -65,7 +65,7 @@ Using Routh–Hurwitz table:
 | $s^0$ | $\frac{-\begin{bmatrix}2775 - 300K & 10400K - 10401 \\ \frac{2(-80800^2 + 531254K + 240471)}{3(4K-37)} & 0\end{bmatrix}}{\frac{2(-80800^2 + 531254K + 240471)}{3(4K-37)}} = 10400K - 10401$ | $0$                                                                                      |
 |-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------|
 
-The system is unstable when the first column encounters a sign change, so we need to find when the following are greater than 0, which can be done with matlab:
+The system is unstable when the first column encounters a sign change, so we need to find when the following are greater than 0, which can be done with MATLAB:
 #+BEGIN_SRC octave :exports code :results output :session Q1
 syms K real positive;
 
@@ -80,15 +80,6 @@ sol3 = solve(eq3, K);
 
 eq4 = 10400*K - 10401 > 0;
 sol4 = solve(eq4, K);
-
-sol5 = solve(eq1, eq2, eq3, eq4, K);
-
-#latex(sol5)
-
-sol1
-sol2
-latex(sol3)
-sol4
 #+END_SRC
 
 #+RESULTS:
@@ -104,7 +95,7 @@ sol4
 Which gives the following inequalities
 \begin{align*}
 K &< 37/4 = 9.25\\
-K &< \frac{37}{4} \wedge \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800} \approx 7
+K &< \frac{265627}{80800} + \frac{\sqrt{89987759929}}{80800} \approx 7 \\
 K &> \frac{10401}{10400} \approx 1
 \end{align*}
 
@@ -119,7 +110,7 @@ e_{step}(\infty) &= \frac{1}{1 - 3} = -0.5\\
 \end{align*}
 
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 syms s K
 G = subs(G, K, 3);
 latex(G)
@@ -134,7 +125,7 @@ K_p = double(subs(G, s, 0))
 : ans = -0.5001
 
 * Question 2
-first we must convert the state space representation to laplace, then use Routh-Hurwitz. This can be done using $G(s) = C(sI - A)^{-1}B + D$.
+First we must convert the state space representation to laplace, then use Routh-Hurwitz. This can be done using $G(s) = C(sI - A)^{-1}B + D$.
 \begin{align*}
 G(s) &= C(sI - A)^{-1}B + D \\
 G(s) &= \begin{bmatrix}
@@ -164,7 +155,7 @@ s
 0
 \end{bmatrix}
 \end{align*}
-Using MATLAB to find solve this:
+Using MATLAB to solve this:
 #+BEGIN_SRC octave :exports code :results output :session Q2
 clc
 clear
@@ -176,7 +167,6 @@ A = [0, 1, 0; 0, 1, 2; -5, -4, -3];
 B = [0; 1; 0];
 C = [1, 0, 1];
 G = factor(C*inv(s*eye(3,3) - A)*B)
-
 #+END_SRC
 
 #+RESULTS:
@@ -187,9 +177,9 @@ G = factor(C*inv(s*eye(3,3) - A)*B)
 :           ⎛ 2    ⎞
 :   (s + 2)⋅⎝s  + 5⎠
 
-Getting the closed-loop transfer function using $T = \frac{G(s)}{1 - G(s)H(s)}$
+Getting the closed-loop transfer function using $T(s) = \frac{G(s)}{1 - G(s)H(s)}$
 \[T(s) = \frac{- 3 s - 2}{s^{3} + 2 s^{2} + 2 s + 8}\]
-#+BEGIN_SRC octave :exports code :results output :session Q2
+#+BEGIN_SRC octave :exports none :results output :session Q2
 H = 1;
 T = simplify(G/(1 + G*H));
 
@@ -202,8 +192,8 @@ latex(expand(den))
 : - 3 s - 2
 : s^{3} + 2 s^{2} + 2 s + 8
 
-
-Which gives $G(s) = \frac{- 3 s - 2}{s^{3} + 2 s^{2} + 5 s + 10}$. Using the denominator and Routh-Hurwitz:
+Using the denominator and Routh-Hurwitz:
+#+ATTR_LATEX: :align |c|c|c|
 |-----+---------------------------------------------------------------+-------------------------------------------------------------|
 | s^3 |                                                             1 |                                                           2 |
 |-----+---------------------------------------------------------------+-------------------------------------------------------------|
@@ -224,7 +214,7 @@ Using $\frac{G(s)}{1 + G(s)H(s)}$ and then multiplication:
 \end{align*}
 
 
-#+BEGIN_SRC octave :exports code :results output :session Q3
+#+BEGIN_SRC octave :exports none :results output :session Q3
 clc
 clear
 close all
@@ -268,7 +258,7 @@ e_{step}(\infty) &= \frac{1}{1 + K_p} \\
 e_{step}(\infty) &= \frac{1}{1 - \infty} = 0\\
 \end{align*}
 
-#+BEGIN_SRC octave :exports code :results output :session Q3
+#+BEGIN_SRC octave :exports none :results output :session Q3
 syms s K
 latex(G)
 K_p = double(subs(G, s, 0))
@@ -288,7 +278,7 @@ e_{ramp}(\infty) &= \frac{1}{K_v} \\
 e_{ramp}(\infty) &= \frac{1}{\infty} = 0\\
 \end{align*}
 
-#+BEGIN_SRC octave :exports code :results output :session Q3
+#+BEGIN_SRC octave :exports none :results output :session Q3
 syms s K
 latex(G)
 K_v = double(subs(s*G, s, 0))
@@ -307,7 +297,7 @@ e_{parabola}(\infty) &= \frac{1}{K_a} \\
 e_{parabola}(\infty) &= \frac{1}{0.01} = 100
 \end{align*}
 
-#+BEGIN_SRC octave :exports code :results output :session Q3
+#+BEGIN_SRC octave :exports none :results output :session Q3
 syms s K
 latex(G)
 K_a = double(subs(s*s*G, s, 0))
@@ -327,7 +317,7 @@ Using $\frac{G(s)}{1 + G(s)}$:
 &= \frac{10000 K_{c} s^{2} + 200 K_{c} s + K_{c}}{10000 J s^{4} + 10000 K_{c} s^{3} + 10100 K_{c} s^{2} + 200 K_{c} s + K_{c}} \\
 \end{align*}
 
-#+BEGIN_SRC octave :exports code :results output :session Q3
+#+BEGIN_SRC octave :exports none :results output :session Q3
 T = G/(1 + G);
 T_s = simplify(T);
 latex(expand(T_s))
@@ -344,6 +334,7 @@ latex(expand(den))
 
 ** f
 Letting $\frac{K_c}{J} = A$, then the denominator becomes $10000 s^{4} + 10000 A s^{3} + 10100 A s^{2} + 200 A s + A$
+#+ATTR_LATEX: :align |c|c|c|c|
 |-----+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------|
 | s^4 | $10 000$                                                                                                                                                           | $10 100A$                                                                                  | $A$                                                                           |
 |-----+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------|
@@ -357,7 +348,7 @@ Letting $\frac{K_c}{J} = A$, then the denominator becomes $10000 s^{4} + 10000 A
 |-----+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------|
 
 
-#+BEGIN_SRC octave :exports code :results output :session Q3
+#+BEGIN_SRC octave :exports none :results output :session Q3
 syms A
 a = [10000, 10100*A; 10000*A, 200*A];
 b = -1*det(a)/(10000*A);
@@ -430,13 +421,6 @@ sol3 = solve(eq3, A);
 
 eq4 = A > 0;
 sol4 = solve(eq4, A);
-
-latex(solve(eq1, eq2, eq3, eq4, A))
-
-sol1
-sol2
-sol3
-sol4
 #+END_SRC
 
 #+RESULTS:
