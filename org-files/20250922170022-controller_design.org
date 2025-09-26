@@ -43,3 +43,30 @@ This is done by adding an integrator and a zero close to the origin
 **** Passive Implementation
 It is not possible to build and ideal integrator with passive components
  - Now we have $G_c(s) = \frac{s + z_c}{s + p_c}$
+
+
+#+BEGIN_SRC octave :exports code :results output :session Part_3
+pkg load control  % Load the control package if not already loaded
+
+% Define the zeros and poles
+zeros = [2, 3];  % Zeros of the system
+poles = [-4, -6, -2+2*i, -2-2*i, 0];  % Poles of the system
+
+% Create the transfer function from poles and zeros
+G = zpk(zeros, poles, 1);  % Create a zero-pole-gain model
+
+% Generate the root locus plot
+figure;  % Create a new figure
+rlocus(G);  % Plot the root locus
+title('Root Locus from Poles and Zeros');  % Add title
+xlabel('Real Axis');  % Label x-axis
+ylabel('Imaginary Axis');  % Label y-axis
+grid on;  % Add grid
+figure
+bode(G);  % Plot the root locus
+
+#+END_SRC
+
+#+RESULTS:
+
+
