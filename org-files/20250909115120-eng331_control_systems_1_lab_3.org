@@ -3,7 +3,7 @@
 :END:
 #+title: ENG331 - Control Systems 1 - Lab 3
 #+date: [2025-09-09 Tue 11:51]
-#+AUTHOR: Baley Eccles - 652137
+#+AUTHOR: Baley Eccles - 652137 - Matthew Hocking - 659747 - Tyler Robards – 651790
 #+FILETAGS: :Assignment:UTAS:2025:
 #+STARTUP: latexpreview
 #+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
@@ -17,7 +17,7 @@
 #+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
 * Part 1 – System Familiarisation and Calibration [11 marks, ILO 1]
-:NOTE: This part is done, it just needs to be cleaned up
+
 ** Calibration
 #+ATTR_LATEX: :placement [H]
 #+ATTR_LATEX: :align |c|c|c|c|
@@ -98,8 +98,9 @@ C_d &= 0.708
 
 * Part 2 – Controller Tuning [28 marks, ILO 1]
 
-** TODO Theory
+** Theory
 /What is the purpose of the derivative filter term $T_f$? Consider its effect in the time-domain as well as its effect on the controller transfer function in the Laplace domain. [2 marks]/
+
 $T_f$ is used to smooth the data for the controller, it takes the $n$ most recent data points and takes an average before inputting it to the controller. In the time domain this results in a smoother signal and in the Laplace domain it is the same as a low pass filter. Given that our signal has a lot of noise we decided to use a very large $T_f$.
 
 ** Tuning
@@ -129,11 +130,13 @@ Our system had a lot of noise, we decided to do step sizes of 5cm as our small s
 |      20 |        -5 |             15 |    1 |  1.8 |        26 |             36 |                            0 |
 |---------+-----------+----------------+------+------+-----------+----------------+------------------------------|
 
-** TODO Comment on the performance of your tuned controller
+** Comment on the performance of your tuned controller
 /a) Did you observe any ranges of the controller parameters that resulted in an unstable closed-loop response? For what controller parameters did you observe this (you don’t need to give a range of values, just some example values that you observed). [2 marks]/
+
 We encountered integral windup when having $K_i$ set too high, this would make the system unstable. This occurs because the $K_i$ parameter accumulates all the previous difference between the true value and requested value, this results in controller requesting a massive voltage for the pump. 
 
 /b) Include a time domain plot of the unstable closed-loop step response you observed. Ensure the plot shows both the input and output signals [2 marks]/
+
 It was also noticed that our system is marginally stable for smaller amounts of noise, this can be seen in Figure \ref{fig:Marg_Stab}.
 
 #+ATTR_LATEX: :placement [H]
@@ -141,34 +144,40 @@ It was also noticed that our system is marginally stable for smaller amounts of 
 [[./ENG331_Lab_3_Marginally_Stable.png]]
 
 /c) How well did your closed loop controller achieve requirements at the original operating point for which it was tuned? [2 marks]/
+
 Not very well, due to noise in the system it was very hard to tune the controller. The hardest parameters to tune were the peak time and settling time, this is because the noise made it hard to determine when the peak time was and how long it took to settle. We managed to get the percent overshoot to a reasonable value, it typically stayed under the required 20% threshold. Once again, due to the noise it is almost impossible to determine the steady state error, however if we pick an average value it appears that the steady state error is about zero. All of this can be seen in Figure \ref{fig:OP1}.
 
 /d) Include a plot showing the closed-loop step response using your tuned controller for the operating point and step size in (step 4). Show both the input and output signal of the closed loop system. [2 marks]/
+
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: System operating at 15cm with step sizes of 5cm and -5cm \label{fig:OP1}
 [[./ENG331_Lab_3_OP_1.png]]
 
 /e) Was there a difference in the performance of the controller in achieving the desired closed loop performance about the original operating point (step 4) for positive and negative steps? [1 mark]/
+
 Yes, the percent overshoot for the negative step was much larger than the one with a positive step, this is probably because of noise. It is worth noting that the noise is much less for lower tank levels, this was not noticed when recording the data, the controller was tuned on a system with a lot of noise and then the noise was removed, so the system is expected to preform differently.
 
 /f) How well did the controller perform for larger step sizes at the designed operating point (step 5) compared to small step sizes? Comment briefly on how this matches your expectations considering your observations at different step sizes in Lab Task 2. [4 marks]/
+
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: System operating at 15cm with step sizes of 7cm and -7cm \label{fig:OP2}
 [[./ENG331_Lab_3_OP_2.png]]
+
 Terribly, looking at \ref{fig:OP2} it can be seen that for a larger positive step the system took a very long time to reach its peak and then did not settle for a significant period of time, there is an artifact due to noise during the rise that could have contributed to this. As for the negative large step it ended up reaching a marginally stable state where it would never settle, this is probably because of the lack of noise and the controller being tuned on a lot of noise.
 :TODO: Compare with lab 2
 
 /g) How well did the controller performance generalise to a significantly different operating point? Briefly comment on whether this behaviour is consistent with your theoretical knowledge of the system and closed loop control. [5 marks]/
+
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: System operating at 20cm with step sizes of 5cm and -5cm \label{fig:OP2}
+#+CAPTION: System operating at 20cm with step sizes of 5cm and -5cm \label{fig:OP3}
 [[./ENG331_Lab_3_OP_3.png]]
+
 The different operating point performed better than the larger step sizes, particularity the negative step. The positive step was too large which resulted in it having a massive steady state error, although the other characteristics of it were better. The negative step preformed similar, if not better, than the two steps at the first operating point. This aligns with the theory, the system is non-linear so a different operating point will have different characteristics and will require the controller to be tuned differently.
 
-* TODO Part 3 – Analysis [16 Marks, ILO 4]
+* Part 3 – Analysis [16 Marks, ILO 4]
 /a) Generate the pole-zero plot of the open-loop system consisting of the controller and the plant, but no feedback. Use your linearised model about your initial operating point (Part 2 step 4) for $G_2(s)$, and use your tuned controller parameters to find $G_1(s)$. Make sure to keep track of which poles/zeros come from the plant, and which come from the controller using different symbols or colours. [4 marks]/
 
-Using: $G_1(s) = \frac{K_ds^2 + K_ps + K_i}{s}$ and $G_2(s) &= \frac{K_{pump}}{A_1s + \frac{A_{o1}C_d \sqrt{2g}}{2\sqrt{h_{1,0}}}}$
-
+Using: $G_1(s) = \frac{K_ds^2 + K_ps + K_i}{s}$, $G_2(s) &= \frac{K_{pump}}{A_1s + \frac{A_{o1}C_d \sqrt{2g}}{2\sqrt{h_{1,0}}}}$ and the following octave/MATLAB code we can produce the plot in Figure \ref{fig:OL}.
 #+BEGIN_SRC octave :exports code :results output :session Part_3
 clc
 clear
@@ -187,10 +196,8 @@ K_i = 0.04;
 K_d = 0.25;
 T_f = 10e4;
 
-%s = tf('s')
 syms s
 G_1 = (K_d*s*s + K_p*s + K_i)/s;
-
 
 g = 9.81;
 C_d = 0.708;
@@ -216,7 +223,7 @@ plot(real(poles(2)), imag(poles(2)), 'rx', 'MarkerSize', 20);
 
 plot(real(zeros(1)), imag(zeros(1)), 'bo', 'MarkerSize', 20);
 plot(real(zeros(2)), imag(zeros(2)), 'bo', 'MarkerSize', 20);
-axis([-5, 0.1, -20, 20]);
+axis([-5, 0.1, -5, 5]);
 grid on;
 legend("PID", "System");
 set (gca, "xaxislocation", "origin");
@@ -227,6 +234,7 @@ print -dpng 'ENG331_P3_Pole_Zero_Open_Loop.png'
 #+END_SRC
 
 #+RESULTS:
+: Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
 : poles =
 : 
 :           0
@@ -236,7 +244,13 @@ print -dpng 'ENG331_P3_Pole_Zero_Open_Loop.png'
 :   -3.959592
 :   -0.040408
 
-/b) Use MATLAB to find the closed-loop transfer function for the system using the open loop transfer function G_1(s)G_2(s) derived in a). [2 marks]/
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Open-loop pole-zero plot with poles at $\{0, -0.032\}$ and zeros at $\{-3.96, -0.0404\}$ \label{fig:OL}
+[[./ENG331_P3_Pole_Zero_Open_Loop.png]]
+
+/b) Use MATLAB to find the closed-loop transfer function for the system using the open loop transfer function $G_1(s)G_2(s)$ derived in a). [2 marks]/
+
+The following Octave/MATLAB code can be used to find the transfer function $T(s) = G_1(s)G_2(s)$.
 #+BEGIN_SRC octave :exports code :results output :session Part_3
 CL = vpa(simplify(G_1*G_2/(1 + G_1*G_2)))
 latex(CL)
@@ -259,10 +273,12 @@ CL = (sym)
   ↪ 4171063
 \frac{10672736174.579418030794760427657 \left(25.0 s^{2} + 100.0 s + 4.0\right)}{485245749789364.48545076986901069 s^{2} + 16581306486197.260445527805834692 s + 42690944698.31767212317904171063}
 #+end_example
-\[\frac{10672736174 \left(25 s^{2} + 100 s + 4\right)}{485245749789364 s^{2} + 16581306486197 s + 42690944698}\]
+
+\[T(s) = G_1(s)G_2(s) = \frac{10672736174 \left(25 s^{2} + 100 s + 4\right)}{485245749789364 s^{2} + 16581306486197 s + 42690944698}\]
 
 /c) Generate the pole-zero plot of the closed-loop system $T(s)$. [2 marks]/
 
+The following Octave/MATLAB code can be used to generate the pole-zero plot seen in Figure \ref{fig:CL}.
 #+BEGIN_SRC octave :exports code :results output :session Part_3
 [num_CL, den_CL] = numden(CL);
 poles_CL = double(vpa(solve(den_CL, s)))
@@ -270,14 +286,13 @@ zeros_CL = double(vpa(solve(num_CL, s)))
 
 figure;
 hold on;
+plot(real(poles_CL(1)), imag(poles_CL(1)), 'bx', 'MarkerSize', 20);
 plot(real(poles_CL(2)), imag(poles_CL(2)), 'bx', 'MarkerSize', 20);
-plot(real(poles_CL(1)), imag(poles_CL(1)), 'rx', 'MarkerSize', 20);
 
 plot(real(zeros_CL(1)), imag(zeros_CL(1)), 'bo', 'MarkerSize', 20);
 plot(real(zeros_CL(2)), imag(zeros_CL(2)), 'bo', 'MarkerSize', 20);
-axis([-20.5, 0.1, -20, 20]);
+axis([-4.5, 0.1, -5, 5]);
 grid on;
-legend("PID", "System");
 set (gca, "xaxislocation", "origin");
 set (gca, "yaxislocation", "origin");
 xlabel('Re(s)');
@@ -295,8 +310,60 @@ print -dpng 'ENG331_P3_Pole_Zero_Closed_Loop.png'
 :   -3.959592
 :   -0.040408
 
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Closed-loop pole-zero plot with poles at $\{-0.0314, -0.00280\}$ and zeros at $\{-3.96, -0.0404\}$ \label{fig:CL}
+[[./ENG331_P3_Pole_Zero_Closed_Loop.png]]
+
 /d) Does the second order approximation apply to the closed loop system T_s(s) found in b) (will an appropriate second order transfer function give an approximately equal step response). [2 marks]/
-The second-order approximation does not apply well to the closed-loop system. Although there is a dominant complex conjugate pair located at approximately -0.0492 with imaginary part ±0.1051 that produces the oscillatory transient, there is also a slower real pole at approximately -0.0334, which is closer to the imaginary axis and therefore dominates the long-term behaviour. Using the complex pair alone yields a natural frequency of approximately 0.1161 radians per second and a damping ratio of approximately 0.424, which predicts a roughly 23% overshoot and a settling time of approximately 81 seconds. However, the slow real pole has a time constant of roughly 29.9 seconds, so four time constants is about 120 seconds. Therefore, a second-order model based only on the complex pair underestimates the long tail in the step response and does not capture the true settling behaviour. In short, a second-order approximation can reproduce the initial oscillatory shape but fails to represent the slow decay imposed by the extra real pole, so it is only an approximation rather than an accurate model of the full closed-loop step response.
+
+The second-order approximation does not apply well to the closed-loop system. Although there is a pole at approximately -0.0314, there is a stronger pole at approximately -0.00280, which is closer to the imaginary axis and therefore dominates the long-term behaviour. Using these two poles yields a natural frequency of approximately 0.0314 radians per second and a damping ratio of 1, which predicts a 0% overshoot and a settling time of approximately 127 seconds. Therefore, a second-order model based only on the complex pair underestimates the long tail in the step response and does not capture the true settling behaviour. In short, a second-order approximation can reproduce the initial oscillatory shape but fails to represent the slow decay imposed by the extra real pole, so it is only an approximation rather than an accurate model of the full closed-loop step response.
 
 /e) Use the results from a) - d) to discuss why the parameters values you selected gave a step response that met the given performance metrics. Ie. why did the PID controller give a closed loop time domain response that met the desired performance metrics with those specific PID parameters. [6 marks]/
+
 The chosen PID parameters produce the observed time domain behaviour because each term shapes the loop in a complementary way. The proportional gain increases loop gain and bandwidth and moves poles to the left so the response is faster. The integral gain, kept small, guarantees zero steady state error while avoiding excessive low-frequency phase lag. The derivative gain adds phase lead and introduces two controller zeros that increase damping around the crossover frequency. Concretely, the controller creates zeros near -3.96 and -0.0404 together with an integrator pole at the origin; the far left zero helps with high frequency shaping while the near origin zero modifies the low frequency interaction between the integrator and the slow plant dynamics. The resulting closed-loop poles at approximately -0.0334 and  -0.0492 with imaginary part ±0.1051 give a moderately damped oscillatory transient with a damping ratio of about 0.424 and roughly 23% overshoot from the complex pair, while the slow real pole determines the long settling tail. Thus, the above choices of PID parameters achieve zero steady state error and a transient that meets the desired damping and overshoot objectives, with the longer settling time being the trade-off caused by using a modest integral gain to limit low-frequency phase degradation.
+
+#+BEGIN_SRC octave :exports none :results output :session Part_3
+function second_order_system(poles)
+    % Check if the input is a vector of length 2
+    if length(poles) ~= 2
+        error('Input must be a vector of two poles.');
+    end
+
+    % Extract real and imaginary parts of the poles
+    p1 = poles(1);
+    p2 = poles(2);
+    
+    % Calculate the damping ratio (zeta) and natural frequency (omega_n)
+    sigma = real(p1); % Real part
+    omega = imag(p1); % Imaginary part (assuming p1 and p2 are complex conjugates)
+
+    % Calculate natural frequency and damping ratio
+    omega_n = sqrt(sigma^2 + omega^2);
+    zeta = -sigma / omega_n;
+
+    % Display results
+    fprintf('Natural Frequency (ω_n): %.4f rad/s\n', omega_n);
+    fprintf('Damping Ratio (ζ): %.4f\n', zeta);
+    
+    % Construct the transfer function
+    K = 1; % Assuming gain K = 1 for simplicity
+    num = K * omega_n^2; % Numerator
+    den = [1, 2 * zeta * omega_n, omega_n^2]; % Denominator
+    exp(-zeta*pi/sqrt(1 - zeta^2))
+    4/(zeta*omega_n)
+    % Display the transfer function
+    fprintf('Transfer Function: H(s) = %.4f / (s^2 + %.4f s + %.4f)\n', num, den(2), den(3));
+end
+
+% Example usage:
+% Define the poles (e.g., -1 + j2 and -1 - j2)
+poles = [-3.1366e-02, -2.8049e-03];
+second_order_system(poles);
+#+END_SRC
+
+#+RESULTS:
+: Natural Frequency (ω_n): 0.0314 rad/s
+: Damping Ratio (ζ): 1.0000
+: ans = 0
+: ans = 127.53
+: Transfer Function: H(s) = 0.0010 / (s^2 + 0.0627 s + 0.0010)
