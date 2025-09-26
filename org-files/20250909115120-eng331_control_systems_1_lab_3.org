@@ -98,7 +98,6 @@ C_d &= 0.708
 
 
 * Part 2 – Controller Tuning [28 marks, ILO 1]
-
 ** Theory
 /What is the purpose of the derivative filter term $T_f$? Consider its effect in the time-domain as well as its effect on the controller transfer function in the Laplace domain. [2 marks]/
 
@@ -113,8 +112,6 @@ K_d &= 0.25 \\
 T_f &= 10^4
 \end{align*}
 
-
-Our system had a lot of noise, we decided to do step sizes of 5cm as our small step and 10cm as our large step.
 #+ATTR_LATEX: :placement [H]
 #+ATTR_LATEX: :align |c|c|c|c|c|c|c|c|
 #+CAPTION: Data collected for three operating points and steps \label{tab:T1}
@@ -164,9 +161,9 @@ Yes, the percent overshoot for the negative step was much larger than the one wi
 #+CAPTION: System operating at 15cm with step sizes of 7cm and -7cm \label{fig:OP2}
 [[./ENG331_Lab_3_OP_2.png]]
 
-Terribly, looking at \ref{fig:OP2} it can be seen that for a larger positive step the system took a very long time to reach its peak and then did not settle for a significant period of time, there is an artifact due to noise during the rise that could have contributed to this. As for the negative large step it ended up reaching a marginally stable state where it would never settle, this is probably because of the lack of noise and the controller being tuned on a lot of noise.
+The PID controller preformed terribly, looking at \ref{fig:OP2} it can be seen that for a larger positive step the system took a very long time to reach its peak and then did not settle for a significant period of time, there is an artifact due to noise during the rise that could have contributed to this. As for the negative large step it ended up reaching a marginally stable state where it would never settle, this is probably because of the lack of noise and the controller being tuned on a lot of noise.
 
-In lab to it was predicted that larger step sizes would have worse performance as it would go further way from the operating point. The data that we collected shows that this is true, increasing the step size brings the controller to a point at which it was not tuned making it struggle to predict the response.
+In lab 2 it was predicted that larger step sizes would have worse performance as it would go further away from the operating point. The data that we collected shows that this is true, increasing the step size brings the controller to a point at which it was not tuned making it struggle to predict the response.
 
 /g) How well did the controller performance generalise to a significantly different operating point? Briefly comment on whether this behaviour is consistent with your theoretical knowledge of the system and closed loop control. [5 marks]/
 
@@ -233,6 +230,7 @@ set (gca, "yaxislocation", "origin");
 xlabel('Re(s)');
 ylabel('Im(s)');
 box on;
+title("Open-Loop Pole-Zero Plot")
 print -dpng 'ENG331_P3_Pole_Zero_Open_Loop.png'
 #+END_SRC
 
@@ -301,6 +299,7 @@ set (gca, "yaxislocation", "origin");
 xlabel('Re(s)');
 ylabel('Im(s)');
 box on;
+title("Closed-Loop Pole-Zero Plot")
 print -dpng 'ENG331_P3_Pole_Zero_Closed_Loop.png'
 #+END_SRC
 
