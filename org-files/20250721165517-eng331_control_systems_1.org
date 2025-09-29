@@ -37,6 +37,7 @@
  - Week 13
    - Work on for the second half of unit
  - 10 pages
+ - [[id:30e0f262-edfa-442f-8e1c-7abf03e3ed19][ENG331 - Control Systems 1 - Design Task]]
 
 ** Assessment Task 3: Practical laboratory
  - 20%

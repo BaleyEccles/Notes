@@ -34,6 +34,7 @@
  - 15%
  - Matlab code and 10 page report
  - Week 5
+ - [[id:b8494641-2621-4399-a5a5-cacb9bb5d2ad][ENG335 - Computational Intelligence - Assignment 2]]
 
 ** Assessment Task 3: Assignment 3
  - 15%
