@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       15c20da9-b319-442e-83c7-57f580357349
+:END:
+#+title: Flyback Converter
+#+date: [2025-09-29 Mon 10:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Flyback Converter
+[[./Flyback_conventions.svg]]
+ - Provides galvanic isolation by using a [[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformer]]
+ - [[id:c6bd0cc7-48ea-4eab-8552-f7c25dec7c72][Buck-Boost Converter]] with the inductor being replaced by a [[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformer]]
+ 
+** Equations
+\[V_o = V_s\frac{D}{1-D}\frac{N_2}{N_1}\]
+\[\frac{\Delta V_o}{V_o} = \frac{D}{RCf_s}\]
+\[\Delta i_{Lm} = \frac{V_sD}{L_mf_s}\]
+\[L_{m,\min} = \frac{(1-D)^2R}{2f_s}\left(\frac{N_1}{N_2}\right)^2\]
+\[I_{L_m} = \frac{V_o^2}{V_sDR}\]

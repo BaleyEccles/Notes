@@ -25,6 +25,8 @@
  - [[id:dd9eeafa-3d34-473c-aafb-43261823e25f][Buck Converters]]
  - [[id:f75859dd-399f-4be4-a82c-c4d7fe6d4942][Boost Converter]]
  - [[id:c6bd0cc7-48ea-4eab-8552-f7c25dec7c72][Buck-Boost Converter]]
+ - [[id:15c20da9-b319-442e-83c7-57f580357349][Flyback Converter]]
+ - [[id:415adf30-f655-49d5-a16d-c5619f6c6213][Forward Converter]]
 * Assessment
 ** Assessment Task 1: Project
  - 30%
@@ -46,6 +48,7 @@
      
  - [[id:cd7bcf51-56d8-4864-9f3d-329bd62a73e1][ENG306 - Power Electronics - Lab 1]]
  - [[id:696503b7-f5bf-493d-9fbc-e88ffd70b3c9][ENG306 - Power Electronics - Lab 2]]
+ - [[id:54641828-b095-42a1-8aa9-e3d3e43c1067][ENG306 - Power Electronics - Lab 3]]
 
 ** Assessment Task 4: Examination
  - 40%

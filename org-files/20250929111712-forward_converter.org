@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       415adf30-f655-49d5-a16d-c5619f6c6213
+:END:
+#+title: Forward Converter
+#+date: [2025-09-29 Mon 11:17]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Forward Converter
+** Two-End-Switching Forward Converter
+[[id:dd9eeafa-3d34-473c-aafb-43261823e25f][Buck Converter]] with galvanic isolation using a [[id:89a05d8d-08a9-4ac8-81bc-78239de5bc5c][Transformer]]
+[[./Two-End-Switching-Converter.png]]
+** One-End-Switching Forward Converter
+[[./One-End-Switching-Converter.png]]
+** Equations
+\[V_o = V_sD\left(\frac{N_2}{N_1}\right)\]
+\[\frac{\Delta V_o}{V_o} = \frac{1 - D}{8L_xCf^2}\]
+\[\Delta i_{L_m} = \frac{V_sDT}{L_m}\]
+\[\Delta i_{Lx} = \frac{V_o}{L_x}(1 - D)T_s\]
+\[D\left(1 + \frac{N_3}{N_1}\right) < 1\]
+
