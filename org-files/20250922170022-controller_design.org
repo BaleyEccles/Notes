@@ -70,3 +70,5 @@ bode(G);  % Plot the root locus
 #+RESULTS:
 
 
+** Examples
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_Example.xopp]]
