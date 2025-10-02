@@ -45,7 +45,11 @@ It is not possible to build and ideal integrator with passive components
  - Now we have $G_c(s) = \frac{s + z_c}{s + p_c}$
 
 ** Examples
+*** PI Example
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_Example.xopp]]
 
 *** PD Example
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_PD_Example.xopp]]
+
+*** PID Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_PID_Example.xopp]]
