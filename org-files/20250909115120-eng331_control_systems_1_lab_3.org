@@ -67,7 +67,7 @@ q_0 &= 0.000035 m^3/s \\
 &\\
 \textrm{Pump Gain} &= \frac{q_0}{V_p} \\
 \textrm{Pump Gain} &= \frac{0.000035}{10} \\
-\textrm{Pump Gain} &= 0.000 0035
+\textrm{Pump Gain} &= 0.0 000 035
 \end{align*}
 
 

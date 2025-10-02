@@ -47,6 +47,7 @@
  - [[id:5002187a-38b3-4906-9fd1-d4a3d83864b3][ENG331 - Control Systems 1 - Lab 1]]
  - [[id:536ba461-384b-4879-9b5e-8155ff6cae59][ENG331 - Control Systems 1 - Lab 2]]
  - [[id:d7232721-a1e8-461a-a47d-7ce7b11134f0][ENG331 - Control Systems 1 - Lab 3]]
+ - [[id:a7ef608f-20d9-4205-965d-867c8709e8d6][ENG331 - Control Systems 1 - Lab 4]]
 
 ** Assessment Task 4: Final exam
  - 40%

@@ -23,3 +23,13 @@ Max Load = 12/5
 
 
 Kp = 0.01 and Ki = 10
+** Week 10 Workshop Stuff
+Added
+ - inductor L1 = 47uH
+ - three 3.3uF caps (C10, C11, C14)
+ - two 22uF caps (C16, C17)
+Recorded with any DC input voltage
+ - Output gives 10.5V
+
+Datasheet: https://www.ti.com/lit/ds/symlink/lm5117.pdf, might be good for inductor calculations
+

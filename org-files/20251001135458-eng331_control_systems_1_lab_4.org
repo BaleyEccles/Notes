@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       a7ef608f-20d9-4205-965d-867c8709e8d6
+:END:
+#+title: ENG331 - Control Systems 1 - Lab 4
+#+date: [2025-10-01 Wed 13:54]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2025:
+
+* Part 1
+** 
+* Part 2
+
