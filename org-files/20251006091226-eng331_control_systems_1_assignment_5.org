@@ -1,0 +1,75 @@
+:PROPERTIES:
+:ID:       4845e439-6804-4e2e-821c-ca470e9623e7
+:END:
+#+title: ENG331 - Control Systems 1 - Assignment 5
+#+date: [2025-10-06 Mon 09:12]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Question 1
+\begin{align*}
+T(s) &= \frac{G(s)}{1 + G(s)H(s)} \\
+T(s) &= \frac{\frac{K}{s(s + 2)(s + 5)}}{1 + \frac{K}{s(s + 2)(s + 5)}(s + a)} \\
+T(s) &= \frac{K}{K \left(a + s\right) + s \left(s + 2\right) \left(s + 5\right)} \\
+\\
+K_p &= \lim_{s\rightarrow0}T(s) \\
+K_p &= \lim_{s\rightarrow0}\frac{K}{K \left(a + s\right) + s \left(s + 2\right) \left(s + 5\right)} \\
+K_p &= \frac{1}{a} \\
+e_{step}(\infty) &= \frac{1}{1 + K_p} \\
+e_{step}(\infty) &= \frac{1}{1 + \frac{1}{a}} \\
+e_{step}(\infty) &= \frac{a}{a + 1} \\
+\\
+P_{e_{step}:a} &= \frac{a}{e_{step}(\infty)}\frac{\partial e_{step}(\infty)}{\partial a} \\
+P_{e_{step}:a} &= \frac{a}{\frac{a}{a + 1}} \frac{1}{\left(a + 1\right)^{2}} \\
+P_{e_{step}:a} &=\frac{1}{a + 1}
+\end{align*}
+:TODO: Add plot
+#+BEGIN_SRC octave :exports none :results output :session Q1
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+
+syms s K a
+
+T = ((K)/(s*(s + 2)*(s + 5)))/(1 + (K)/(s*(s + 2)*(s + 5))*(s + a));
+T = simplify(T);
+latex(T)
+
+K_p = subs(T, s, 0);
+latex(K_p)
+
+e_step = 1/(1 + K_p);
+latex(simplify(e_step))
+
+de_da = simplify(diff(e_step, a));
+latex(de_da)
+P = de_da*a/(a/(a + 1));
+latex(P)
+
+%t = -2.2:0.1:10;
+%
+%err = 1./(1 + 1./t);
+%figure;
+%plot(t, err);
+%xlabel('a');
+%xlabel('Steady state error');
+%grid on;
+%print -dpng 'ENG331_Assignment_5_Q1.png'
+#+END_SRC
+
+#+RESULTS:
+: \frac{K}{K \left(a + s\right) + s \left(s + 2\right) \left(s + 5\right)}
+: \frac{1}{a}
+: \frac{a}{a + 1}
+: \frac{1}{\left(a + 1\right)^{2}}
+: \frac{1}{a + 1}
+
+* Question 2
+
