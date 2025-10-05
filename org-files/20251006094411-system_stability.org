@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       fffef6ab-aeca-491e-8093-3f603c914a93
+:END:
+#+title: System Stability
+#+date: [2025-10-06 Mon 09:44]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* System Stability
+[[id:847ec0e7-da66-447a-9835-cd512492d2e3][Stability]] exists when the all of the real component of the poles are less than or equal to zero.
+We can use [[id:7b415c54-da2a-4194-a93a-a04488ca173d][Routh–Hurwitz Stability Criterion]] to find if a system is stable.
+   
+** Marginal Stability
+When the natural response does not decay to zero, but does not grow either.
+Exists when poles are on the $j\omega$ axis
+
+** Disturbances
+Represented by another [[id:c7591f3a-c2d4-4591-b6af-b0db831a296c][Transfer Function]] being added to some part of the system
+With unity feedback we can get the error as:
+ - \[E(s) = \frac{1}{1 + G_1(s) G_2(s)}R(s) + \frac{G_2(s)}{1 + G_1(s) G_2(s)}D(s)\]
+   - $G_1(s)$ is the controller
+   - $G_2(s)$ is the plant
+Using the [[id:4e024817-5a11-4519-a4af-ada17c08e3de][Final Value Theorem]]:
+ - \[e(\infty) = \lim_{s\rightarrow 0}s E(s) = e_R(\infty) + e_d(\infty)\]
+Where 
+ - \[e_D(\infty) = \frac{1}{\lim_{s\rightarrow 0}\frac{1}{G_2(s)} + \lim_{s\rightarrow 0}G_1(s)}\]
+More error is present in the output when there are more integrators in $G_2$ than $G_1$
+
+To convert non-unity feedback to unity feedback
+\[G_e(s) = \frac{G(s)}{1 + G(s)H(s)- G(s)}\]
+ - $H(s)$ is the feedback
+

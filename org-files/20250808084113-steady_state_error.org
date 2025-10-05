@@ -10,7 +10,17 @@
  - When the states of the systems is non-changing
    - \[c(t\rightarrow \infty)\]
  - For some target $\hat{c}(t)$ and an actual response $c(t)$ we can define the steady state error as the difference between the two.
-
+** Step
+\[K_p = \lim_{s\rightarrow0}G(s)\]
+\[e(\infty) = e_{step}(\infty) = \frac{1}{1 + K_p}\]
+** Ramp
+\[K_v = \lim_{s\rightarrow0}sG(s)\]
+\[e(\infty) = e_{ramp}(\infty) = \frac{1}{K_v}\]
+** Parabola
+\[K_a = \lim_{s\rightarrow0}s^2G(s)\]
+\[e(\infty) = e_{parabola}(\infty) = \frac{1}{K_a}\]
 ** Example
  - If our target response is $r(t) = u(t)$
  - Then the error is $e(t\rightarrow \infty) = r(t\rightarrow \infty) - c(t\rightarrow \infty)$
+
+
