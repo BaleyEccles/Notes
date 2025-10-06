@@ -27,6 +27,7 @@
  - [[id:c6bd0cc7-48ea-4eab-8552-f7c25dec7c72][Buck-Boost Converter]]
  - [[id:15c20da9-b319-442e-83c7-57f580357349][Flyback Converter]]
  - [[id:415adf30-f655-49d5-a16d-c5619f6c6213][Forward Converter]]
+ - [[id:4ff2e169-2461-4617-a16c-db51770f7b35][Inverters]]
 * Assessment
 ** Assessment Task 1: Project
  - 30%

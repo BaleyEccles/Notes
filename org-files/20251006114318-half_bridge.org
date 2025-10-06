@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       69c23434-1050-49d4-afc8-165e2f01c543
+:END:
+#+title: Half-Bridge
+#+date: [2025-10-06 Mon 11:43]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Half-Bridge
+[[,/Half-Bridge.png]]
+Everything from [[id:80455763-d8be-48f8-adb3-5546ea84593d][H-Bridge]] applies, except we half $V_{in}$
+\[v_{ab,rms} = \frac{V_{in}}{2}\]
+

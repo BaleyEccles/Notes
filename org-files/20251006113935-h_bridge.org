@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       80455763-d8be-48f8-adb3-5546ea84593d
+:END:
+#+title: H-Bridge
+#+date: [2025-10-06 Mon 11:39]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* H-Bridge
+Two legs A and B, each connected to either high (H) or low (L) side.
+[[file:H-Bridge.png]]
+
+** Square Wave
+Can easily create AC square wave by turning on $S_{AL}$ and $S_{BH}$ then $S_{AH}$ and $S_{BL}$.
+[[file:H-Bridge-Square.png]]
+
+** Sine Wave
+*** Phase Shifting
+By adding a phase shift ($\phi$) to multiple square waves we can create sine wave approximation
+[[file:H-Bridge-Phase-Shift.png]]
+\[v_{ab,rms} = V_{in} \sqrt{\frac{\phi}{\pi}}\]
+| $\phi$       | 0 | $\frac{pi}{4}$     | $\frac{pi}{3}$            | $\frac{pi}{2}$            | $pi$     |
+| $v_{ab,rms}$ | 0 | $\frac{V_{in}}{2}$ | $\frac{V_{in}}{\sqrt{3}}$ | $\frac{V_{in}}{\sqrt{2}}$ | $V_{in}$ |
+
+**** Fundamental Frequency
+[[file:H-Bridge-Phase-Shift-2.png]]
+\[\phi = 2\pi - 2\alpha\]
+\[V_1 = \frac{4}{\pi}V_{in}\cos(\alpha)\]
+\[V_{1,rms} = \frac{4V_{in}}{sqrt{2}\pi}\cos(\alpha)\]
+\[THD = \frac{\sqrt{v_{ab,rms}^2 - V_{1,rms}^2}}{V_{1,rms}}\]
+\[v_{ab} = \sum_{n,odd}V_n\sin(n \omega_0t)\]
+\[\frac{2}{\pi}\int_{\alpha}^{\pi-\alpha}V_{in}\sin(n\omega_0t)d(\omega_0t) = \frac{4}{n\pi}V_{in}\cos(n\alpha)\]
+
+*** PWM
+
+Amplitude modulation ratio:
+\[m_a = \frac{V_R}{V_C}\]
+ - $V_R$ is the modulating amplitude of the reference 
+ - $V_C$ is the carrier amplitude of the triangular signal of the carrier
+ - Controls the output rms value
+
+Frequency modulation ratio:
+\[m_f = \frac{f_c}{f_r}\]
+ - $f_c$ is the carrier frequency
+ - $f_r$ is the modulating frequency of the reference
+ - Controls the harmonic locations

@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       4ff2e169-2461-4617-a16c-db51770f7b35
+:END:
+#+title: Inverters
+#+date: [2025-10-06 Mon 10:08]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Inverters
+DC to Single-Phase AC Conversion
+** Single Phase
+[[id:80455763-d8be-48f8-adb3-5546ea84593d][H-Bridge]]
+[[id:69c23434-1050-49d4-afc8-165e2f01c543][Half-Bridge]]
