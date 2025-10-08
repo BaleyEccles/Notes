@@ -80,11 +80,13 @@ T(s) &= \frac{D(s) + 100}{D(s) s + D(s) + 110 s + 120} \\
 \\
 K_p &= \lim_{s\rightarrow0}T(s) \\
 K_p &= \lim_{s\rightarrow0}\frac{D(s) + 100}{D(s) s + D(s) + 110 s + 120} \\
-K_p &= \frac{D(s) + 100}{D(s) + 120} \\
+K_p &= \lim_{s\rightarrow0}\frac{K_{2} \left(K_{1} s + 1\right)}{K_{2} \left(s + 1\right) \left(K_{1} s + 1\right) + s \left(s + 2\right)} \\
+K_p &= \\
 e_{step}(\infty) &= \frac{1}{1 + K_p} \\
 e_{step}(\infty) &= \frac{1}{1 + \frac{D(s) + 100}{D(s) + 120}} \\
 e_{step}(\infty) &= \frac{D(s) + 120}{2D(s) + 220} \\
 \end{align*}
+
 #+BEGIN_SRC octave :exports none :results output :session Q2
 clc
 clear
@@ -106,8 +108,7 @@ T = G/(1 + G*H);
 T = simplify(T);
 latex(T)
 
-T = subs(T, K_1, 100);
-T = subs(T, K_2, 0.1);
+T = subs(T, D, 1/s);
 T = simplify(T);
 latex(T)
 
@@ -120,9 +121,9 @@ latex(e_step)
 
 #+RESULTS:
 : \frac{K_{2} \left(D + K_{1}\right)}{K_{2} \left(D + K_{1}\right) \left(s + 1\right) + s + 2}
-: \frac{D + 100}{D s + D + 110 s + 120}
-: \frac{D + 100}{D + 120}
-: \frac{D + 120}{2 \left(D + 110\right)}
+: \frac{K_{2} \left(K_{1} s + 1\right)}{K_{2} \left(s + 1\right) \left(K_{1} s + 1\right) + s \left(s + 2\right)}
+: 1
+: \frac{1}{2}
 
 * Question 3
 ** a
@@ -198,6 +199,7 @@ solve(0 == dK_ds, s)
 :   ⎡-4⎤
 :   ⎢  ⎥
 :   ⎣-1⎦
+:TODO: check second derivative, should be zero for -1 should be 0
 
 *** 2 - Asymptotes
 \begin{align*}
@@ -220,3 +222,58 @@ sum(poles)./length(poles)
 \end{align*}
 
 *** 3 - $j\omega$ Crossings
+Using Rougth-Hurwitz on $s^{4} + 8 s^{3} + 18 s^{2} + 16 s + 1 + K$.
+:TODO: Unsure if this is right
+|-------+------------+-------+-------|
+| $s^4$ |          1 |    18 | 1 + K |
+|-------+------------+-------+-------|
+| $s^3$ |          8 |    16 |     0 |
+|-------+------------+-------+-------|
+| $s^2$ |         16 | K + 1 |     0 |
+|-------+------------+-------+-------|
+| $s^1$ | 31/2 - K/2 |     0 |     0 |
+|-------+------------+-------+-------|
+| $s^0$ |      K + 1 |     0 |     0 |
+|-------+------------+-------+-------|
+
+For what value of $K$ does the first column encounter a zero?
+
+
+#+BEGIN_SRC octave :exports none :results output :session Q3
+pkg load symbolic
+syms K
+
+A = -(1*16 - 18*8)/8
+
+B = -(1*0 - (K + 1)*8)/8
+
+C = -(8*(K + 1) - 16*16)/16
+
+D = -(8*0 - 16*0)/16
+
+E = simplify(-(16*0 - (K+1)*(31/2 - K/2))/((31/2 - K/2)))
+
+F = -(A*0 - C*0)/C
+
+solve(C == 0, K)
+solve(E == 0, K)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+A = 16
+B = (sym) K + 1
+C = (sym)
+
+  31   K
+  ── - ─
+  2    2
+D = 0
+E = (sym) K + 1
+K + 1
+F = (sym) 0
+ans = (sym) 31
+ans = (sym) -1
+#+end_example
+
+
