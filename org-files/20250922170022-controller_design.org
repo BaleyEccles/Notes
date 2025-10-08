@@ -53,3 +53,12 @@ It is not possible to build and ideal integrator with passive components
 
 *** PID Example
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_PID_Example.xopp]]
+
+** Feedback Compensator
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Feedback_Compensator.xopp]]
+\[T(s) = \frac{G(s)}{1 + H(s)G(s)}\]
+\[T(s) = \frac{N_{G(s)D_H(s)}}{N_G(s)N_D(s) + D_G(s)D_H(s)}\]
+ - We can add a zero to $H(s)$ and it wont add a zero to the open loop
+
+
+
