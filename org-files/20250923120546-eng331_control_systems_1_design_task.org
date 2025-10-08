@@ -10,9 +10,9 @@
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
 | Actual Tank 1 Height $h_{1,i}$ | Uncalibrated value $v_{1,i}$ | Actual tank 2 height $h_{2,i}$ | Uncalibrated value $v_{2,i}$ |
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
-|                             15 |                           15 |                             18 |                           20 |
+|                             13 |                          255 |                           26.5 |                          548 |
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
-|                             25 |                           31 |                             28 |                           27 |
+|                            7.5 |                          135 |                           15.5 |                          306 |
 |--------------------------------+------------------------------+--------------------------------+------------------------------|
 #+BEGIN_SRC octave :exports code :results output :session Q1
 clc
@@ -22,27 +22,27 @@ close all
 pkg load symbolic
 
 syms s1 o1 s2 o2
-h_1_1 = 15;
-v_1_1 = 15;
-h_2_1 = 18;
-v_2_1 = 20;
+h_1_1 = 13;
+v_1_1 = 255;
+h_2_1 = 26.5;
+v_2_1 = 548;
 
-h_1_2 = 25;
-v_1_2 = 31;
-h_2_2 = 28;
-v_2_2 = 27;
+h_1_2 = 7.5;
+v_1_2 = 135;
+h_2_2 = 15.5;
+v_2_2 = 306;
 
 equ1 = h_1_1 == v_1_1*s1 + o1;
 equ2 = h_1_2 == v_1_2*s1 + o1;
 [o1, s1] = solve(equ1, equ2)
-double(o1)
-double(s1)
+offset1 = double(o1)
+scale1 = double(s1)
 
 equ3 = h_2_1 == v_2_1*s2 + o2;
 equ4 = h_2_2 == v_2_2*s2 + o2;
 [o2, s2] = solve(equ3, equ4);
-double(o2)
-double(s2)
+offset2 = double(o2)
+scale2 = double(s2)
 #+END_SRC
 
 #+RESULTS:
@@ -51,8 +51,20 @@ warning: passing floating-point values to sym is dangerous, see "help sym"
 warning: called from
     double_to_sym_heuristic at line 50 column 7
     sym at line 384 column 13
-    mtimes at line 54 column 5
+    eq at line 93 column 5
+o1 = (sym)
 
+  21
+  ──
+  16
+
+s1 = (sym)
+
+  11 
+  ───
+  240
+offset1 = 1.3125
+scale1 = 0.045833
 warning: passing floating-point values to sym is dangerous, see "help sym"
 warning: called from
     double_to_sym_heuristic at line 50 column 7
@@ -62,39 +74,40 @@ warning: passing floating-point values to sym is dangerous, see "help sym"
 warning: called from
     double_to_sym_heuristic at line 50 column 7
     sym at line 384 column 13
-    mtimes at line 54 column 5
-
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
     eq at line 93 column 5
-o1 = (sym) 9/1600
-s1 = (sym) 5/8
-ans = 5.6250e-03
-ans = 0.6250
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    mtimes at line 54 column 5
-
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    eq at line 93 column 5
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    mtimes at line 54 column 5
-
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    eq at line 93 column 5
-ans = -0.010571
-ans = 1.4286
+offset2 = 1.5909
+scale2 = 0.045455
 #+end_example
+
+* Feed Forward
+|  V |  h_1 | h_2 |
+|  5 |  5.5 |  11 |
+|  7 |    9 |  18 |
+| 10 | 14.5 |  28 |
+
+At 7 volts we get zero steady state error with a feed forward term of 0.3888, which gives a tank 2 height of 18cm.
+
+
+* Disturbance
+Tank 1 steady state = 7.5cm (h_1) : t = 12.19s, h = 20cm
+\[Vol = 0.000318\]
+\[q_1 = \frac{0.000318}{12.19} = 2.6086e-5\]
+
+Tank 1 + disturbance steady state (h_1') = 5cm : t = 5.93, h_2 = 11->20cm
+\[Vol = pi*(4.5e-2/2)^2 (20-11)*10^-2 = 0.000143138 \]
+\[q_2 = 0.000143138/t = 0.00002413808015\]
+
+\[q_{BYP} = q_1 - q_2\]
+\[q_{BYP} = 0.00000194791985\]
+
+\[q_{BYP} = C_dCA_o\sqrt{2gh_1^{'}}\]
+\[C_d\cdot A_o = \frac{q_{BYP}}{\sqrt{2gh_1^{'}}}\]
+\[C_d\cdot A_o = \frac{0.00000194791985}{\sqrt{2*9.81*5e-2}}\]
+\[\alpha_{BYP} = C_d\cdot A_o = 0.000\ 001\ 966\ 693\ 034\]
+\[q_{BYP} = \alpha_{BYP}\sqrt{2gh}\]
+
+* Noise
+|  V | h_1 (cm) | h_2 (cm) |
+|  5 |        5 |       10 |
+|  7 |        8 |       16 |
+| 10 |       13 |       26 |
