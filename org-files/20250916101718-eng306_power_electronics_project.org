@@ -33,3 +33,31 @@ Recorded with any DC input voltage
 
 Datasheet: https://www.ti.com/lit/ds/symlink/lm5117.pdf, might be good for inductor calculations
 
+** Design
+From Datasheet: https://www.ti.com/lit/ds/symlink/lm5117.pdf
+\[R_{b8} || 22k = \frac{5.2\times10^9}{f_{SW}} - 948\]
+if $R_{b8} = 0$ then $f_{SW} = 226\ 600\ Hz$
+\[L = 47\mu = \frac{V_{out}}{I_{\max}f_{SW}}\left(1 - \frac{V_{out}}{V_{in,\max}}\right)\]
+\[L = 47\mu = \frac{12}{5\times f_{SW}}\left(1 - \frac{12}{V_{in,\max}}\right)\]
+
+\[I_{\max} = \frac{V_{out}}{L f_{SW}}\left(1 - \frac{V_{out}}{V_{in}}\right)\]
+\[I_{\max} = \frac{12}{47\mu f_{SW}}\left(1 - \frac{12}{20}\right)\]
+
+
+\[V_{in,\max} = \frac{\Delta V_{rectifier,out}}{2} + V_{rectifier,out}\]
+\[V_{in,\max} = \frac{\Delta V_{rectifier,out}}{2} + 20\]
+
+-------------------------------------
+$V_{out} = 12$
+$I_{out} = 5$
+$V_{in,\min} = 20$
+$V_{in,\max} = 32$
+$f_{SW} = 230\ kHz$
+
+\[R_{T} = \frac{5.2\times 10^9}{230\times^10^3} - 948 = 21.7k \approx 22k\]
+\[L = \frac{V_{out}}{I_{\max}f_{SW}}\left(1 - \frac{V_{out}}{V_{in,\max}}\right)\]
+\[L = \frac{12}{9\cdot230\times10^3}\left(1 - \frac{12}{32}\right) = 6.522\mu\]
+
+\[I_{\max} = \frac{V_{out}}{L\cdot f_{SW}}\left(1 - \frac{V_{out}}{V_{in,\max}}\right)\]
+\[5 = \frac{12}{L\times 10^{-6}\cdot 230\times10^3}\left(1 - \frac{12}{32}\right)\]
+\[\Rightarrow L < 16\]
