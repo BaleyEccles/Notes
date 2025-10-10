@@ -19,7 +19,8 @@
 \[47\mu = \frac{43.43 - 12}{0.1\times 100k}D\]
 \[D = \frac{47\mu\times0.1\times 100k}{5 - 0.5}\]
 
-Max Load = 12/5
+Max Load = 12/5 = 2.4
+Min Load = 12/0.5 = 24
 
 
 Kp = 0.01 and Ki = 10
@@ -61,3 +62,119 @@ $f_{SW} = 230\ kHz$
 \[I_{\max} = \frac{V_{out}}{L\cdot f_{SW}}\left(1 - \frac{V_{out}}{V_{in,\max}}\right)\]
 \[5 = \frac{12}{L\times 10^{-6}\cdot 230\times10^3}\left(1 - \frac{12}{32}\right)\]
 \[\Rightarrow L < 16\]
+
+
+#+BEGIN_SRC octave :exports none :results output :session Q1
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+
+syms R_freq I_pp I_avg f_sw Delta_V_in C_in V_in real
+
+% Known Varibles
+L = 47e-6;
+R_T = 22e3;
+V_out = 12;
+
+
+I_max = 5;
+I_min = 0.5;
+Delta_V_out = 0.007*V_out;
+
+R_ESR = 300e-3; % This can be found in the data sheet for C_out. I dont know which datasheet to look at, I have assumed worst case
+C_15 = 470e-6;
+C_16 = 22e-6;
+C_17 = 22e-6;
+C_out = C_15 + C_16 + C_17;
+
+
+% Equations
+equ1 = 1/(1/R_T + 1/R_freq) == 5.2e9/f_sw - 948;
+equ1 = simplify(equ1);
+
+equ2 = I_max == V_out/(L*f_sw)*(1 - V_out/V_in);
+equ2 = simplify(equ2);
+
+equ3 = I_pp == V_out/(L*f_sw)*(1 - V_out/V_in);
+equ3 = simplify(equ3);
+
+equ4 = I_max == I_avg + I_pp/2;
+equ4 = simplify(equ4);
+
+equ5 = Delta_V_out == I_pp*sqrt(R_ESR^2 + (1/(8*f_sw*C_out))^2);
+equ5 = simplify(equ5);
+
+equ6 = Delta_V_in == I_max/(4*f_sw*C_in);
+equ6 = simplify(equ6);
+
+equ1
+equ2
+equ3
+equ4
+equ5
+equ6
+
+solutions = solve([equ1, equ2, equ3, equ4, equ5, equ6], [R_freq, I_pp, I_avg, f_sw, Delta_V_in, C_in, V_in])
+
+% Display the results
+%sol = solutions(1){1}
+sol = solutions;
+double(abs(sol.C_in))
+double(abs(sol.I_avg))
+double(abs(sol.I_pp))
+double(abs(sol.R_freq))
+double(abs(sol.f_sw))
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+equ1 = (sym)
+
+        5200000000         
+  948 - ────────── = -22000
+           f_sw
+equ2 = (sym)
+
+  1276596⋅(Vᵢₙ - 12)    
+  ────────────────── = 5
+      5⋅Vᵢₙ⋅f_sw
+equ3 = (sym)
+
+        1276596⋅(Vᵢₙ - 12)
+  Iₚₚ = ──────────────────
+            5⋅Vᵢₙ⋅f_sw
+equ4 = (sym) 2⋅I_avg + Iₚₚ = 10
+equ5 = (sym)
+
+         _______________________________      
+        ╱        2     2                      
+  Iₚₚ⋅╲╱  63504⋅π ⋅f_sw  + 411862315225    21 
+  ────────────────────────────────────── = ───
+               840⋅π⋅│f_sw│                250
+equ6 = (sym)
+
+               5     
+  Δ_V_in = ──────────
+           4⋅Cᵢₙ⋅f_sw
+solutions = {}(0x0)
+error: cell cannot be indexed with .
+error: cell cannot be indexed with .
+error: cell cannot be indexed with .
+error: cell cannot be indexed with .
+error: cell cannot be indexed with .
+#+end_example
+
+** Rectifier Output Filter
+Do as many LC stages with $470\mu F$ caps and $47\mu H$ inductors as possible.
+
+** Fix 12V output
+Change R18, R17, R16 and  Rb16.
+ - See 8.3.21 in datasheet for calculations
