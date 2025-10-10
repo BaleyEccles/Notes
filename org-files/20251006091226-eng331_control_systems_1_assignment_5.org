@@ -23,7 +23,7 @@ P_{e_{step}:a} &= \frac{a}{e_{step}(\infty)}\frac{\partial e_{step}(\infty)}{\pa
 P_{e_{step}:a} &= \frac{a}{\frac{a}{a + 1}} \frac{1}{\left(a + 1\right)^{2}} \\
 P_{e_{step}:a} &=\frac{1}{a + 1}
 \end{align*}
-:TODO: Add plot
+
 #+BEGIN_SRC octave :exports none :results output :session Q1
 clc
 clear
@@ -53,15 +53,15 @@ latex(de_da)
 P = de_da*a/(a/(a + 1));
 latex(P)
 
-%t = -2.2:0.1:10;
-%
-%err = 1./(1 + 1./t);
-%figure;
-%plot(t, err);
-%xlabel('a');
-%xlabel('Steady state error');
-%grid on;
-%print -dpng 'ENG331_Assignment_5_Q1.png'
+t = -1:0.1:10;
+
+err = 1./(1 + 1./t);
+figure;
+plot(t, err);
+xlabel('a'); % :TODO: Add title + axis labels
+xlabel('Steady state error');
+grid on;
+print -dpng 'ENG331_Assignment_5_Q1.png'
 #+END_SRC
 
 #+RESULTS:
@@ -71,21 +71,19 @@ latex(P)
 : \frac{1}{\left(a + 1\right)^{2}}
 : \frac{1}{a + 1}
 
+[[./ENG331_Assignment_5_Q1.png]]
+
 * Question 2
+With $H(s) = s + 1$, $G_1(s) = K_1$ and $G_2(s) = \frac{K_2}{s + 2}$.
 \begin{align*}
-T(s) &= \frac{G(s)}{1 + G(s)H(s)} \\
-T(s) &= \frac{(K_1 + D(s))\left(\frac{K_2}{s + 2}\right)}{1 + (K_1 + D(s))\left(\frac{K_2}{s + 2}\right)(s + 1)} \\
-T(s) &= \frac{K_{2} \left(D(s) + K_{1}\right)}{K_{2} \left(D(s) + K_{1}\right) \left(s + 1\right) + s + 2} \\
-T(s) &= \frac{D(s) + 100}{D(s) s + D(s) + 110 s + 120} \\
-\\
-K_p &= \lim_{s\rightarrow0}T(s) \\
-K_p &= \lim_{s\rightarrow0}\frac{D(s) + 100}{D(s) s + D(s) + 110 s + 120} \\
-K_p &= \lim_{s\rightarrow0}\frac{K_{2} \left(K_{1} s + 1\right)}{K_{2} \left(s + 1\right) \left(K_{1} s + 1\right) + s \left(s + 2\right)} \\
-K_p &= \\
-e_{step}(\infty) &= \frac{1}{1 + K_p} \\
-e_{step}(\infty) &= \frac{1}{1 + \frac{D(s) + 100}{D(s) + 120}} \\
-e_{step}(\infty) &= \frac{D(s) + 120}{2D(s) + 220} \\
+E(s) &= R(s) - C(s)H(s) \\
+C(s) &= D(s) G_2(s) + G_1(s) G_2(s) \left(- C(s) H(s) + R(s)\right) \\
+\Rightarrow C(s) &= \frac{D(s) G_2(s)}{G_1(s) G_2(s) H(s) + 1} + \frac{G_1(s) G_2(s) R(s)}{G_1(s) G_2(s) H(s) + 1} \\
+\frac{R(s) - E(s)}{H(s)} &= C(s) \\
+\Rightarrow E(s) &= \frac{- D(s) G_2(s) H(s) + R(s)}{G_1(s) G_2(s) H(s) + 1} \\
+\Rightarrow E(s) &= \frac{- D(s) K_{2} s - D(s) K_{2} + R(s) s + 2 R(s)}{K_{1} K_{2} s + K_{1} K_{2} + s + 2}
 \end{align*}
+
 
 #+BEGIN_SRC octave :exports none :results output :session Q2
 clc
@@ -99,31 +97,52 @@ if exist('OCTAVE_VERSION', 'builtin')
   pkg load symbolic
 end
 
-syms K_1 K_2 s D
+syms s R C K_1 K_2 D E G_1 G_2 H
 
-G = (K_1 + D)*(K_2/(s + 2));
+G_1 = K_1;
+G_2 = K_2/(s + 2);
+
 H = s + 1;
 
-T = G/(1 + G*H);
-T = simplify(T);
-latex(T)
+E_equ = R - C*H
 
-T = subs(T, D, 1/s);
-T = simplify(T);
-latex(T)
+C_equ = G_2*D + G_1*G_2*E_equ == C;
+latex(C_equ)
+C_equ = expand(solve(C_equ, C))
+latex(C_equ)
 
-K_p = simplify(subs(T, s, 0));
-latex(K_p)
-
-e_step = simplify(1/(1 + K_p));
-latex(e_step)
+E_equ = simplify(solve((R - E)/H == C_equ, E))
+latex(E_equ)
+ 
 #+END_SRC
 
 #+RESULTS:
-: \frac{K_{2} \left(D + K_{1}\right)}{K_{2} \left(D + K_{1}\right) \left(s + 1\right) + s + 2}
-: \frac{K_{2} \left(K_{1} s + 1\right)}{K_{2} \left(s + 1\right) \left(K_{1} s + 1\right) + s \left(s + 2\right)}
-: 1
-: \frac{1}{2}
+#+begin_example
+E_equ = (sym) -C⋅(s + 1) + R
+\frac{D K_{2}}{s + 2} + \frac{K_{1} K_{2} \left(- C \left(s + 1\right) + R\right)}{s + 2} = C
+C_equ = (sym)
+
+           D⋅K₂                     K₁⋅K₂⋅R        
+  ─────────────────────── + ───────────────────────
+  K₁⋅K₂⋅s + K₁⋅K₂ + s + 2   K₁⋅K₂⋅s + K₁⋅K₂ + s + 2
+\frac{D K_{2}}{K_{1} K_{2} s + K_{1} K_{2} + s + 2} + \frac{K_{1} K_{2} R}{K_{1} K_{2} s + K_{1} K_{2} + s + 2}
+E_equ = (sym)
+
+  -D⋅K₂⋅s - D⋅K₂ + R⋅s + 2⋅R
+  ──────────────────────────
+   K₁⋅K₂⋅s + K₁⋅K₂ + s + 2
+\frac{- D K_{2} s - D K_{2} + R s + 2 R}{K_{1} K_{2} s + K_{1} K_{2} + s + 2}
+#+end_example
+
+With $R(s) = D(s) = \frac{1}{s}$ we can find the sensitivity for $K_1$ and $K_2$
+\begin{align*}
+P_{}
+\end{align*}
+
+#+BEGIN_SRC octave :exports none :results output :session Q2
+
+#+END_SRC
+
 
 * Question 3
 ** a
@@ -156,6 +175,7 @@ latex(T)
 #+END_SRC
 
 #+RESULTS:
+: Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
 : \frac{1}{K + s^{4} + 8 s^{3} + 18 s^{2} + 16 s + 1}
 
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG331_Assignment_5_Q3.xopp]]
@@ -218,62 +238,50 @@ sum(poles)./length(poles)
 \begin{align*}
 \theta_a &= \frac{(2k + 1)180^o}{\#\textrm{finite poles} - \#\textrm{finite zeors}} \\
 \theta_a &= \frac{(2k + 1)180^o}{(4) - (0)} \\
-\Rightarrow \theta_a &= 45^o
+\Rightarrow \theta_a &= 45^o, 135^o, 225\ \textrm{and}\ 315^o
 \end{align*}
 
 *** 3 - $j\omega$ Crossings
 Using Rougth-Hurwitz on $s^{4} + 8 s^{3} + 18 s^{2} + 16 s + 1 + K$.
-:TODO: Unsure if this is right
-|-------+------------+-------+-------|
-| $s^4$ |          1 |    18 | 1 + K |
-|-------+------------+-------+-------|
-| $s^3$ |          8 |    16 |     0 |
-|-------+------------+-------+-------|
-| $s^2$ |         16 | K + 1 |     0 |
-|-------+------------+-------+-------|
-| $s^1$ | 31/2 - K/2 |     0 |     0 |
-|-------+------------+-------+-------|
-| $s^0$ |      K + 1 |     0 |     0 |
-|-------+------------+-------+-------|
+
+|-------+------------+-----+-------|
+| $s^4$ |          1 |  18 | 1 + K |
+|-------+------------+-----+-------|
+| $s^3$ |          8 |  16 |     0 |
+|-------+------------+-----+-------|
+| $s^2$ |         16 | K+1 |     0 |
+|-------+------------+-----+-------|
+| $s^1$ | K/2 - 31/2 |   0 |     0 |
+|-------+------------+-----+-------|
+| $s^0$ |       -x-1 |   0 |     0 |
+|-------+------------+-----+-------|
 
 For what value of $K$ does the first column encounter a zero?
 
-
 #+BEGIN_SRC octave :exports none :results output :session Q3
 pkg load symbolic
-syms K
+syms K w s
 
-A = -(1*16 - 18*8)/8
-
-B = -(1*0 - (K + 1)*8)/8
-
-C = -(8*(K + 1) - 16*16)/16
-
-D = -(8*0 - 16*0)/16
-
-E = simplify(-(16*0 - (K+1)*(31/2 - K/2))/((31/2 - K/2)))
-
-F = -(A*0 - C*0)/C
-
-solve(C == 0, K)
-solve(E == 0, K)
+equ1 = K/2 - 31/2 == 0
+equ2 = -K-1 == 0
+solve(equ1, K)
+solve(equ2, K)
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-A = 16
-B = (sym) K + 1
-C = (sym)
+equ1 = (sym)
 
-  31   K
-  ── - ─
-  2    2
-D = 0
-E = (sym) K + 1
-K + 1
-F = (sym) 0
+  K   31    
+  ─ - ── = 0
+  2   2
+equ2 = (sym) -K - 1 = 0
 ans = (sym) 31
 ans = (sym) -1
 #+end_example
+
+Solving the two equations in the first column gives $K = 31$ or $K = -1$.
+
+
 
 
