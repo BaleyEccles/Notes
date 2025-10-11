@@ -194,5 +194,105 @@ We should remove R16 and replace it with the following
 
 \[R_{FB1} = R16 || 2200 = 337.285\]
 \[337.285 = 1/(1/R16 + 1/2200)\]
-\[\Rightarrow R16 = 398.358 769\Omega\]
+\[\Rightarrow R16 = 398.358 769\Omega \]
+
+\[R16 \approx 400\Omega\]
+If we choose this, then:
+\[\frac{R_{FB2}}{R_{FB1}} = \frac{4722}{400 || 2200} = \frac{V_{out}}{0.8} - 1\]
+\[\Rightarrow V_{out} = 11.961\]
+
+This may be good enough, by if it doesnt we can remove Rb16 too and choose:
+
+#+BEGIN_SRC octave :exports none :results output :session Feedback
+clc;
+clear;
+close all;
+
+V_out = 12;
+
+R_FB2 = 22 + 4700;
+
+R_FB1 = R_FB2/(V_out/0.8 - 1);
+
+% Add actual avalible resistors to R_vals
+R_vals = [0, 1e3, 10e3, 1, 1.2, 1.5, 2, 2.7, 3.3, 4.3, 5.1, 6.8, 8.2, 10, 12, 15, 20, 27, 33, 43, 51, 68, 82, 100, 120, 150, 200, 270, 330, 430, 510, 680, 820, 1.2e3, 1.5e3, 2e3, 2.7e3, 3.3e3, 4.3e3, 5.1e3, 6.8e3, 8.2e3, 12e3, 15e3, 20e3, 27e3, 33e3, 43e3, 51e3, 68e3, 82e3, 100e3, 120e3, 150e3, 200e3, 270e3, 330e3, 430e3, 510e3, 680e3, 820e3, 1e6, 2e6];
+
+R16 = R_vals;
+
+Rb16 = 1./(1./R_FB1 - 1./R16);
+
+% May need to change tolerance
+tol = 5/100; % Tolerance of 5%
+
+for idx = 1:length(R16)
+  for jdx = 1:length(R_vals)
+    up_bound = R_vals(jdx) + R_vals(jdx)*tol;
+    low_bound = R_vals(jdx) - R_vals(jdx)*tol;
+    if (Rb16(idx) >= low_bound && Rb16(idx) <= up_bound)
+      percent_error = 100*abs(R_vals(jdx) - Rb16(idx))/Rb16(idx);
+      sprintf("For an error of %f choose:", percent_error)
+      sprintf("R16 = %f and ideally Rb16 = %f, but select Rb16 = %f from the resistor book.", R16(idx), Rb16(idx), R_vals(jdx))
+      
+    end
+  end
+end
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+ans = For an error of NaN choose:
+ans = R16 = 0.000000 and ideally Rb16 = -0.000000, but select Rb16 = 0.000000 from the resistor book.
+ans = For an error of 0.207116 choose:
+ans = R16 = 1000.000000 and ideally Rb16 = 508.945894, but select Rb16 = 510.000000 from the resistor book.
+ans = For an error of 4.110399 choose:
+ans = R16 = 430.000000 and ideally Rb16 = 1564.298921, but select Rb16 = 1500.000000 from the resistor book.
+ans = For an error of 0.406109 choose:
+ans = R16 = 510.000000 and ideally Rb16 = 995.955335, but select Rb16 = 1000.000000 from the resistor book.
+ans = For an error of 1.609488 choose:
+ans = R16 = 680.000000 and ideally Rb16 = 669.228845, but select Rb16 = 680.000000 from the resistor book.
+ans = For an error of 1.178314 choose:
+ans = R16 = 1500.000000 and ideally Rb16 = 435.127165, but select Rb16 = 430.000000 from the resistor book.
+ans = For an error of 4.360102 choose:
+ans = R16 = 15000.000000 and ideally Rb16 = 345.044281, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 3.810102 choose:
+ans = R16 = 20000.000000 and ideally Rb16 = 343.071368, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 3.382324 choose:
+ans = R16 = 27000.000000 and ideally Rb16 = 341.552409, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 3.160102 choose:
+ans = R16 = 33000.000000 and ideally Rb16 = 340.768635, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.927544 choose:
+ans = R16 = 43000.000000 and ideally Rb16 = 339.952250, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.807160 choose:
+ans = R16 = 51000.000000 and ideally Rb16 = 339.531185, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.645396 choose:
+ans = R16 = 68000.000000 and ideally Rb16 = 338.967019, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.562541 choose:
+ans = R16 = 82000.000000 and ideally Rb16 = 338.678782, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.490102 choose:
+ans = R16 = 100000.000000 and ideally Rb16 = 338.427181, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.435102 choose:
+ans = R16 = 120000.000000 and ideally Rb16 = 338.236400, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.380102 choose:
+ans = R16 = 150000.000000 and ideally Rb16 = 338.045834, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.325102 choose:
+ans = R16 = 200000.000000 and ideally Rb16 = 337.855483, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.282324 choose:
+ans = R16 = 270000.000000 and ideally Rb16 = 337.707581, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.260102 choose:
+ans = R16 = 330000.000000 and ideally Rb16 = 337.630799, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.236846 choose:
+ans = R16 = 430000.000000 and ideally Rb16 = 337.550484, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.224808 choose:
+ans = R16 = 510000.000000 and ideally Rb16 = 337.508924, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.208631 choose:
+ans = R16 = 680000.000000 and ideally Rb16 = 337.453094, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.200346 choose:
+ans = R16 = 820000.000000 and ideally Rb16 = 337.424505, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.193102 choose:
+ans = R16 = 1000000.000000 and ideally Rb16 = 337.399514, but select Rb16 = 330.000000 from the resistor book.
+ans = For an error of 2.176602 choose:
+ans = R16 = 2000000.000000 and ideally Rb16 = 337.342605, but select Rb16 = 330.000000 from the resistor book.
+#+end_example
+
 
