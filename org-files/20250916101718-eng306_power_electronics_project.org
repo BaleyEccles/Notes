@@ -178,3 +178,21 @@ Do as many LC stages with $470\mu F$ caps and $47\mu H$ inductors as possible.
 ** Fix 12V output
 Change R18, R17, R16 and  Rb16.
  - See 8.3.21 in datasheet for calculations
+\[\frac{R_{FB2}}{R_{FB1}} = \frac{V_{out}}{0.8} - 1\]
+\[\frac{R_{FB2}}{R_{FB1}} = \frac{12}{0.8} - 1 = 14\]
+
+In our circuit
+\[R_{FB2} = 22 + 4700 = 4722\]
+\[R_{FB1} = 470 || 2200 = 387.27\]
+
+\[\frac{R_{FB2}}{R_{FB1}} = \frac{4722}{387.27} = 12.183\]
+Solving $12.183 = \frac{V_{out}}{0.8} - 1$ we get $V_{out} = 10.554$, which is what we were seeing on the output.
+
+We should remove R16 and replace it with the following
+\[\frac{4722}{R_{FB1}} = \frac{12}{0.8} - 1\]
+\[R_{FB1} = \frac{4722}{\frac{12}{0.8} - 1} = 337.285\]
+
+\[R_{FB1} = R16 || 2200 = 337.285\]
+\[337.285 = 1/(1/R16 + 1/2200)\]
+\[\Rightarrow R16 = 398.358 769\Omega\]
+
