@@ -1,0 +1,101 @@
+:PROPERTIES:
+:ID:       0c5b686e-43a0-4325-9cfb-263b480c233a
+:END:
+#+title: Cascade Compensators (PI, Lag, PD, Lead, PID, Lag-Lead)
+#+date: [2025-10-14 Tue 08:04]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Cascade Compensators
+** Overview
+*** PI
+Function:
+ - Improve [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]]
+Compensator
+ - PI
+Transfer Function
+ - \[K\frac{s + z_c}{s}\]
+Characteristics
+1. Increase system type
+2. Error becomes zero
+3. Zero at $-z_c$ is small and negative
+4. Active circuits are required to implement
+   
+*** Lag
+Function:
+ - Improve [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]]
+Compensator
+ - Lag
+Transfer Function
+ - \[K\frac{s + z_c}{s + p_c}\]
+Characteristics
+1. Error is improved, but not zero
+2. pole at $-p_c$ is small and negative
+3. Zero at $-z_c$ is close to, and to the left of the pole at $-p_c$
+4. Active circuits are not required to implement
+   
+*** PD
+Function:
+ - Improve transient response
+Compensator
+ - PD
+Transfer Function
+ - \[K(s + z_c)\]
+Characteristics
+1. Zero at $-z_c$ is selected to put design point on root locus
+2. Active circuits are required to implement
+3. Can cause noise and saturation; implement with rate feedback or with a pole (lead)
+
+*** Lead
+Function:
+ - Improve transient response
+Compensator
+ - Lead
+Transfer Function
+ - \[K\frac{s + z_c}{s + p_c}\]
+Characteristics
+1. Zero at $-z_c$ and pole at $-p_c$ are selected to put design point on root locus
+2. Pole at $-p_c$ is more negative than zero at $-z_c$
+3. Active circuits are not required to implement
+
+*** PID
+Function:
+ - Improve [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]] and transient response
+Compensator
+ - PID
+Transfer Function
+ - \[K\frac{(s + z_{lag})(s + z_{lead})}{s}\]
+Characteristics
+1. Lag zero at $-z_{lag}$ and pole at origin improve [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]]
+2. Lead zero at $-z_{lead}$ improves transient response
+3. Lag zero at $-z_{lag}$ is close to, and to the left of the origin
+4. Lead zero at $-z_{lead}$ is selected to put design point on root locus
+5. Active circuits are required to implement
+6. Can cause noise and saturation; implement with rate feedback or with an additional pole
+
+
+*** Lag-Lead
+Function:
+ - Improve [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]] and transient response
+Compensator
+ - Lag-Lead
+Transfer Function
+ - \[K\frac{(s + z_{lag})(s + z_{lead})}{(s + p_{lag})(s + p_{lead})}\]
+Characteristics
+1. Lag pole at $-p_{lag}$ and lag zero at $-z_{lag}$ are used to improve [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]]
+2. Lead pole at $-p_{lead}$ and lead zero at $-z_{lead}$ improves transient response
+3. Lag pole at $-p_{lag}$ is small and negative
+4. Lag zero at $-z_{lag}$ is close to, and to the left of, the lag pole at $-p_{lag}$
+5. Lead zero at $-z_{lead}$and lead pole at $-p_{lead}$ are selected to put design point on root locus
+6. Lead pole at $-p_{lead}$ is more negative than lead zero at $-z_{lead}$
+7. Active circuits are not required to implement
+
+** Examples
+*** PI Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_Example.xopp]]
+
+*** PD Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_PD_Example.xopp]]
+
+*** PID Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_PID_Example.xopp]]

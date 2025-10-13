@@ -7,6 +7,7 @@
 #+STARTUP: latexpreview
 
 * Controller Design
+ - [[id:aa742807-9823-49a9-b08f-813dacd6f360][Controllers]]
 ** Nomenclature
 Process Variable - The variable that is trying to be controlled (output of the system)
 Control Variable - The variable that is being actuated (output of the controller)
@@ -19,7 +20,7 @@ Set Point - The input or reference value or slow changing variable
      - Can be used along with a PID to create a more complicated system
  - Time-Domain PID implementations
 
-** PID
+** [[id:0c5b686e-43a0-4325-9cfb-263b480c233a][PID]]
 Standard Form   
  - \[u(t) = K_p\left(e(t) + \frac{1}{T_i}\int e(\tau)d\tau + T_d\frac{de(t)}{dt}\right)\]
 Parallel Form
@@ -33,32 +34,10 @@ Astrom-Hagglund Tuning Method
 ** Design Via [[id:bcab7053-f2ea-4117-a8c8-eeea97587087][Root Locus]]
 1. Use the angle to find the point at which it is $180^o$
 2. Use the magnitude to find the gain
+   
 
-** Improving [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]] Using Cascade Compensations
+   
 
-*** PI Controller
-This is done by adding an integrator and a zero close to the origin
- - In series with $G(s)$ we have $\frac{K(s + a)}{s}$
-
-**** Passive Implementation
-It is not possible to build and ideal integrator with passive components
- - Now we have $G_c(s) = \frac{s + z_c}{s + p_c}$
-
-** Examples
-*** PI Example
-[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_Example.xopp]]
-
-*** PD Example
-[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_PD_Example.xopp]]
-
-*** PID Example
-[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_PID_Example.xopp]]
-
-** Feedback Compensator
-[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Feedback_Compensator.xopp]]
-\[T(s) = \frac{G(s)}{1 + H(s)G(s)}\]
-\[T(s) = \frac{N_{G(s)D_H(s)}}{N_G(s)N_D(s) + D_G(s)D_H(s)}\]
- - We can add a zero to $H(s)$ and it wont add a zero to the open loop
 
 
 

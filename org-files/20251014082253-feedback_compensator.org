@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       d1a60a3c-ffa8-4f12-977e-e166fc5b8b26
+:END:
+#+title: Feedback Compensator
+#+date: [2025-10-14 Tue 08:22]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* TODO Feedback Compensator
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Feedback_Compensator.xopp]]
+\[T(s) = \frac{G(s)}{1 + H(s)G(s)}\]
+\[T(s) = \frac{N_{G(s)D_H(s)}}{N_G(s)N_D(s) + D_G(s)D_H(s)}\]
+ - We can add a zero to $H(s)$ and it wont add a zero to the open loop
+

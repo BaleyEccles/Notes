@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       aa742807-9823-49a9-b08f-813dacd6f360
+:END:
+#+title: Controllers
+#+date: [2025-10-14 Tue 08:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Controllers
+These are designed using a [[id:bcab7053-f2ea-4117-a8c8-eeea97587087][Root Locus]], see [[id:97dc3da9-c40a-4945-b4f9-bf7b7657b70c][Controller Design]]
+ - [[id:0c5b686e-43a0-4325-9cfb-263b480c233a][Cascade Compensators]]
+ - [[id:d1a60a3c-ffa8-4f12-977e-e166fc5b8b26][Feedback Compensator]]
+
+
+   
+** Practical Implementation
+*** TODO Unrealisable Systems
+
+*** TODO Ideal Integration
+
+*** TODO Ideal Differentiation
