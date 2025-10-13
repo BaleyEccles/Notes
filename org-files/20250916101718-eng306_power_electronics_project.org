@@ -296,3 +296,48 @@ ans = R16 = 2000000.000000 and ideally Rb16 = 337.342605, but select Rb16 = 330.
 #+end_example
 
 
+* Testing
+** Performance
+Verify that the output voltage ripple remains within $0.084V$ of $12V$ with loads ranging from $24\Omega$ to $2.4\Omega$ and AC inputs from $20V$ to $32V$.
+
+If it can do $V_{in,rms} = 20V$ and $R_{load} = 2.4\Omega$ while remaining within $0.084V$, then we will have succeeded.
+
+Check if can charge a laptop.
+
+** Efficiency
+For different input voltages measure the loss at maximum load.
+
+\begin{align*}
+P_{in} &= V_{in} I_{in} \\
+P_{out} &= V_{out} I_{out} \\
+\eta &= \frac{P_{out}}{P_{in}}
+\end{align*}
+
+|--------------+----------+----------+-----------+-----------+--------------+--------|
+| $V_{in,rms}$ | $I_{in}$ | $P_{in}$ | $V_{out}$ | $I_{out}$ | $P_{output}$ | $\eta$ |
+|--------------+----------+----------+-----------+-----------+--------------+--------|
+|           32 |          |          |           |           |              |        |
+|           29 |          |          |           |           |              |        |
+|           26 |          |          |           |           |              |        |
+|           23 |          |          |           |           |              |        |
+|           20 |          |          |           |           |              |        |
+|--------------+----------+----------+-----------+-----------+--------------+--------|
+
+** Harmonics
+At maximum load ($R_{load} = 2.4\Omega$) and minimum input ($V_{in,rms} = 20V$)
+
+Calculate THD, $I_{1,rms}$ is at $50Hz$ and $I_{rms}$ is all frequencies.
+\begin{align*}
+I_{rms} &= \\
+I_{1,rms} &= \\
+THD &= \sqrt{\left(\frac{I_{rms}}{I_{1,rms}}\right)^2 - 1} 
+\end{align*}
+
+** Light or No Loading
+Have no-load and take scope shots of the output inductor and capacitors. Explain what is happening.
+
+** Regulation Capability
+Calculate line regulation ([[https://en.wikipedia.org/wiki/Line_regulation]])
+\[\text{Line Regulation}\%=\frac{\Delta V_o}{\Delta V_i\cdot V_o}\cdot 100\]
+
+Input changes in voltage to the input and measure the change in the output for various loads.
