@@ -35,9 +35,10 @@ Astrom-Hagglund Tuning Method
 1. Use the angle to find the point at which it is $180^o$
 2. Use the magnitude to find the gain
    
+** Robustness
+ - [[id:f5694854-e8a8-4805-822d-439df11bb95e][System Sensitivity]]
 
-   
-
-
-
-
+*** Gain and Phase Margin
+Done with [[id:0d927ec6-5c0d-497c-b054-43d5d88f8300][Nyquist Diagram]] or [[id:79b422d5-ff34-41ab-8b86-67e6ecfc68ad][Bode Plots]]
+\[G_M = 20\log_{10}(a)\]
+\[\Phi_M = a\]

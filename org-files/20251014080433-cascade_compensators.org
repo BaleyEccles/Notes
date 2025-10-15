@@ -86,7 +86,7 @@ Characteristics
 2. Lead pole at $-p_{lead}$ and lead zero at $-z_{lead}$ improves transient response
 3. Lag pole at $-p_{lag}$ is small and negative
 4. Lag zero at $-z_{lag}$ is close to, and to the left of, the lag pole at $-p_{lag}$
-5. Lead zero at $-z_{lead}$and lead pole at $-p_{lead}$ are selected to put design point on root locus
+5. Lead zero at $-z_{lead}$ and lead pole at $-p_{lead}$ are selected to put design point on root locus
 6. Lead pole at $-p_{lead}$ is more negative than lead zero at $-z_{lead}$
 7. Active circuits are not required to implement
 
