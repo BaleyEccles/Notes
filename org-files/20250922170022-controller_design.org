@@ -20,17 +20,6 @@ Set Point - The input or reference value or slow changing variable
      - Can be used along with a PID to create a more complicated system
  - Time-Domain PID implementations
 
-** [[id:0c5b686e-43a0-4325-9cfb-263b480c233a][PID]]
-Standard Form   
- - \[u(t) = K_p\left(e(t) + \frac{1}{T_i}\int e(\tau)d\tau + T_d\frac{de(t)}{dt}\right)\]
-Parallel Form
- - \[u(t) = K_pe(t) + K_i\int e(\tau)d\tau + K_d\frac{de(t)}{dt}\]
-
-*** Tuning Approaches
-Ziegler–Nichols Tuning Method
- - https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method
-Astrom-Hagglund Tuning Method
-
 ** Design Via [[id:bcab7053-f2ea-4117-a8c8-eeea97587087][Root Locus]]
 1. Use the angle to find the point at which it is $180^o$
 2. Use the magnitude to find the gain

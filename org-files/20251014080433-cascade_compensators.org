@@ -7,6 +7,8 @@
 #+STARTUP: latexpreview
 
 * Cascade Compensators
+ - [[id:81008646-ec90-4990-a45a-8723b13c16cb][Integration Windup]]
+ - [[id:14afe3da-5e70-40c3-9f6a-5c8b6b5424bc][Set-Point Weighting]]
 ** Overview
 *** PI
 Function:
@@ -72,6 +74,16 @@ Characteristics
 4. Lead zero at $-z_{lead}$ is selected to put design point on root locus
 5. Active circuits are required to implement
 6. Can cause noise and saturation; implement with rate feedback or with an additional pole
+   
+Standard Form   
+ - \[u(t) = K_p\left(e(t) + \frac{1}{T_i}\int e(\tau)d\tau + T_d\frac{de(t)}{dt}\right)\]
+Parallel Form
+ - \[u(t) = K_pe(t) + K_i\int e(\tau)d\tau + K_d\frac{de(t)}{dt}\]
+
+**** Tuning Approaches
+Ziegler–Nichols Tuning Method
+ - https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method
+Astrom-Hagglund Tuning Method
 
 
 *** Lag-Lead
@@ -99,3 +111,4 @@ Characteristics
 
 *** PID Example
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/Controler_Design_PID_Example.xopp]]
+

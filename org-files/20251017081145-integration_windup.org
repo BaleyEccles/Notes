@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       81008646-ec90-4990-a45a-8723b13c16cb
+:END:
+#+title: Integration Windup
+#+date: [2025-10-17 Fri 08:11]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Integration Windup
+Error accumulates while the system is running, the integrator takes this accumulated error and feeds it into the system.
+** Actuator Limits
+If the controller requests a value that is outside of the actuators limits, then the integrator will accumulate error. Anti-Windup can be used to counteract this.
+
+** Bumpless Transfer
+Initialise the integral term such that it is at the steady state value.

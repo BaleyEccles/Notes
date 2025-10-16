@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       14afe3da-5e70-40c3-9f6a-5c8b6b5424bc
+:END:
+#+title: Set-Point Weighting
+#+date: [2025-10-17 Fri 08:37]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Set-Point Weighting
+Changing the amount of a term that is included in the error.
+
+** Example
+The derivative of a step is infinite at the step time, so we may reduce the amount of the input step term is used in the error.
