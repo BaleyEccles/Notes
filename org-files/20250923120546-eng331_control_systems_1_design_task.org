@@ -80,6 +80,7 @@ scale2 = 0.045455
 #+end_example
 
 * Feed Forward
+** Real Tanks
 |  V |  h_1 | h_2 |
 |  5 |  5.5 |  11 |
 |  7 |    9 |  18 |
@@ -87,6 +88,74 @@ scale2 = 0.045455
 
 At 7 volts we get zero steady state error with a feed forward term of 0.3888, which gives a tank 2 height of 18cm.
 
+From the data above the following piece wise function can be obtained which provides the system with the required voltage for a input height.
+\begin{cases}
+V = 0.022h           & 0 < h < 0.11 \\
+V = 0.035h - 0.065   & 0.11 < h < 0.18 \\
+V = -0.01429h + 0.28 & 0.18 < h < \infty
+\end{cases}
+This was tested on the real tanks and in simulation, the simulation has a larger error than in real life
+
+** Non-Linear
+We want an equation that is $\frac{V_p(t)}{h_2(t)} = f(h_2)$
+\begin{align*}
+K_{pump}V_p(t) &= \frac{\pi}{4} D_2^2 \frac{dh_2(t)}{dt} + \frac{\pi}{4}D_{o2}^2C_d\sqrt{2gh_2(t)} \\
+\textrm{With } \frac{dh_2(t)}{dt} &= 0 \\
+K_{pump} V_p &= \frac{\pi C_{d} D_{o2} \sqrt{2g h_{2}}}{4} \\
+\Rightarrow \frac{V_p(t)}{h_2(t)} &= \frac{\pi C_{d} D_{o2} \sqrt{2g h_{2}}}{4 K_{pump} h_{2}} \\
+\Rightarrow \frac{V_p(t)}{h_2(t)} &= \frac{695.77}{\sqrt{h_2}}
+\end{align*}
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+
+syms D_2 D_o2 g K_pump V_p C_d t h_2 d_h_2
+
+equ1 = pi/4*D_2*d_h_2 + pi/4*D_o2*C_d*sqrt(2*g*h_2) == K_pump*V_p;
+equ2 = subs(equ1, d_h_2, 0);
+latex(equ2)
+equ3 = solve(equ2, V_p);
+equ4 = simplify(equ3/h_2);
+latex(equ4)
+
+val_K_pump = 2e-5;
+val_D_o1 = 5e-3;
+val_D_o2 = 5e-3;
+val_D_2 = 4e-2;
+val_C_d = 0.8;
+val_g = 9.81;
+equ5 = subs(equ4, K_pump, val_K_pump)
+equ5 = subs(equ5, D_o1, val_D_o1);
+equ5 = subs(equ5, D_o2, val_D_o2);
+equ5 = subs(equ5, D_2, val_D_2);
+equ5 = subs(equ5, C_d, val_C_d);
+equ5 = subs(equ5, g, val_g);
+latex(vpa(equ5))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+\frac{\sqrt{2} \pi C_{d} D_{o2} \sqrt{g h_{2}}}{4} = K_{pump} V_{p}
+\frac{\sqrt{2} \pi C_{d} D_{o2} \sqrt{g h_{2}}}{4 K_{pump} h_{2}}
+equ5 = (sym)
+
+                       ______
+  12500⋅√2⋅π⋅C_d⋅Dₒ₂⋅╲╱ g⋅h₂ 
+  ───────────────────────────
+              h₂
+error: 'D_o1' undefined near line 1, column 19
+\frac{695.77589486373630782025294921827}{h_{2}^{0.5}}
+#+end_example
+** Linear
 
 * Disturbance
 Tank 1 steady state = 7.5cm (h_1) : t = 12.19s, h = 20cm
