@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       49b8f9b7-7f4c-4eda-8b7c-63e064270e22
+:END:
+#+title: Three Phase Inverters
+#+date: [2025-10-17 Fri 16:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Three Phase Inverters
+** Delta
+[[./Three-Phase-Inverter.png]]
+ - Line to Line
+   - \[v_{ab} = v_{ag} - v_{bg}\]
+   - \[v_{bc} = v_{bg} - v_{cg}\]
+   - \[v_{ca} = v_{cg} - v_{ag}\]
+ - Phase Current
+   - \[i_a = \frac{v_{ab}}{R} - \frac{v_{ca}}{R}\]
+   - \[i_b = \frac{v_{bc}}{R} - \frac{v_{ab}}{R}\]
+   - \[i_c = \frac{v_{ca}}{R} - \frac{v_{bc}}{R}\]
+ - Output
+   - [[./Three-Phase-Inverter-Delta-Output.png]]
+ - RMS
+   - \[v_{ab,rms} = v_{bc,rms} = v_{ca,rms} = \sqrt{\frac{1}{\pi}\int_0^{\Phi}V_{in}^2dt} = V_{in}\sqrt{\frac{\Phi}{\pi}} = V_{in}\sqrt{\frac{2}{3}\]
+ - Harmonics
+   - [[./Three-Phase-Delta-Harmonics.png]]
+     
+** WYE
+[[./Three-Phase-Inverter-WYE.png]]
+ - Voltage
+   - \[v_n = \frac{v_{ag} + v_{bg} + v_{cg}}{3}\]
+   - \[0 = \frac{v_{ag} - v_n}{R} + \frac{v_{bg} - v_n}{R} + \frac{v_{cg} - v_n}{R}\]
+   - \[v_{an} = v_{ag} - v_n = \frac{2v_{ag}}{3} - \frac{v_{bg}}{3} - \frac{v_{cg}}{3}\]
+   - \[v_{bn} = v_{bg} - v_n = \frac{2v_{bg}}{3} - \frac{v_{ag}}{3} - \frac{v_{cg}}{3}\]
+   - \[v_{cn} = v_{ag} - v_n = \frac{2v_{cg}}{3} - \frac{v_{bg}}{3} - \frac{v_{ag}}{3}\]
+ - Current
+   - \[i_a = \frac{v_{an}}{R}\]
+   - \[i_b = \frac{v_{bn}}{R}\]
+   - \[i_c = \frac{v_{cn}}{R}\]
+ - RMS
+   - \[v_{an,rms} = \frac{v_{ab,rms}}{\sqrt{3}} = \sqrt{\frac{V_{in}^2}{\pi}\left[\frac{\pi}{27} + \frac{4\pi}{27} + \frac{\pi}{27}\right]} = \frac{\sqrt{2}}{3}V_{in}\]
+   - \[v_{an,rms} = V_{bn,rms} = v_{cn,rms}\]
+ - Harmonics
+   - [[./Three-Phase-Inverter-WYE-Harmonics.png]]
+     
