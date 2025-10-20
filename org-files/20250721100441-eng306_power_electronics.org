@@ -40,6 +40,8 @@
  - 4 Online quizzes
    - Second quiz:
    - Tutorial 3 Stuff
+ - Last quiz
+   - Only single phase inverters
 
 ** Assessment Task 3: Labs
  - 20%

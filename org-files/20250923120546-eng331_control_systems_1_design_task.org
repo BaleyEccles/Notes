@@ -81,29 +81,47 @@ scale2 = 0.045455
 
 * Feed Forward
 ** Real Tanks
-|  V |  h_1 | h_2 |
-|  5 |  5.5 |  11 |
-|  7 |    9 |  18 |
-| 10 | 14.5 |  28 |
+|  V |  h_1 |  h_2 |
+|  5 |  5.5 | 0.11 |
+|  7 |    9 | 0.18 |
+| 10 | 14.5 | 0.28 |
+
+|  V |  h_2 |
+|  5 | 0.11 |
+|  7 | 0.18 |
+| 10 | 0.28 |
 
 At 7 volts we get zero steady state error with a feed forward term of 0.3888, which gives a tank 2 height of 18cm.
 
 From the data above the following piece wise function can be obtained which provides the system with the required voltage for a input height.
 \begin{cases}
-V = 0.022h           & 0 < h < 0.11 \\
-V = 0.035h - 0.065   & 0.11 < h < 0.18 \\
-V = -0.01429h + 0.28 & 0.18 < h < \infty
+V = 45.45h           & 0 < h < 0.11 \\
+V = 28.57h + 1.86  & 0.11 < h < 0.18 \\
+V = 30h + 1.6 & 0.18 < h < \infty
 \end{cases}
 This was tested on the real tanks and in simulation, the simulation has a larger error than in real life
 
+** Linear
+| V |   h_2 |
+| 5 | 0.063 |
+| 7 | 0.124 |
+| 9 |   0.2 |
+
+\begin{cases}
+V = 79.37h           & 0 < x < 0.063 \\
+V = 32.79h + 2.937   & 0.063 < x < 0.124 \\
+V = 26.32h + 3.73832 & 0.124 < x < 0.2
+\end{cases}
+
+
 ** Non-Linear
-We want an equation that is $\frac{V_p(t)}{h_2(t)} = f(h_2)$
+We want an equation that is $V_p(t) = f(h_2)$
 \begin{align*}
 K_{pump}V_p(t) &= \frac{\pi}{4} D_2^2 \frac{dh_2(t)}{dt} + \frac{\pi}{4}D_{o2}^2C_d\sqrt{2gh_2(t)} \\
 \textrm{With } \frac{dh_2(t)}{dt} &= 0 \\
 K_{pump} V_p &= \frac{\pi C_{d} D_{o2} \sqrt{2g h_{2}}}{4} \\
-\Rightarrow \frac{V_p(t)}{h_2(t)} &= \frac{\pi C_{d} D_{o2} \sqrt{2g h_{2}}}{4 K_{pump} h_{2}} \\
-\Rightarrow \frac{V_p(t)}{h_2(t)} &= \frac{695.77}{\sqrt{h_2}}
+\Rightarrow V_p(t) &= \frac{\pi C_{d} D_{o2} \sqrt{2g h_{2}}}{4 K_{pump}} \\
+\Rightarrow V_p(t) &= 19.8793\sqrt{h_2(t)}
 \end{align*}
 
 #+BEGIN_SRC octave :exports code :results output :session Q1
@@ -120,42 +138,37 @@ end
 
 syms D_2 D_o2 g K_pump V_p C_d t h_2 d_h_2
 
-equ1 = pi/4*D_2*d_h_2 + pi/4*D_o2*C_d*sqrt(2*g*h_2) == K_pump*V_p;
+equ1 = pi/4*D_2*d_h_2 + pi/4*D_o2^2*C_d*sqrt(2*g*h_2) == K_pump*V_p;
 equ2 = subs(equ1, d_h_2, 0);
 latex(equ2)
 equ3 = solve(equ2, V_p);
-equ4 = simplify(equ3/h_2);
-latex(equ4)
 
-val_K_pump = 2e-5;
+
+val_K_pump = 0.0000035;
 val_D_o1 = 5e-3;
 val_D_o2 = 5e-3;
 val_D_2 = 4e-2;
 val_C_d = 0.8;
 val_g = 9.81;
-equ5 = subs(equ4, K_pump, val_K_pump)
-equ5 = subs(equ5, D_o1, val_D_o1);
+equ5 = subs(equ3, K_pump, val_K_pump)
 equ5 = subs(equ5, D_o2, val_D_o2);
 equ5 = subs(equ5, D_2, val_D_2);
 equ5 = subs(equ5, C_d, val_C_d);
 equ5 = subs(equ5, g, val_g);
+equ5 = simplify(equ5);
 latex(vpa(equ5))
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-\frac{\sqrt{2} \pi C_{d} D_{o2} \sqrt{g h_{2}}}{4} = K_{pump} V_{p}
-\frac{\sqrt{2} \pi C_{d} D_{o2} \sqrt{g h_{2}}}{4 K_{pump} h_{2}}
-equ5 = (sym)
+: \frac{\sqrt{2} \pi C_{d} D_{o2}^{2} \sqrt{g h_{2}}}{4} = K_{pump} V_{p}
+: equ5 = (sym)
+: 
+:                    2   ______
+:   448799⋅√2⋅C_d⋅Dₒ₂ ⋅╲╱ g⋅h₂ 
+:   ───────────────────────────
+:                2
+: 19.879313473829069834707380973779 h_{2}^{0.5}
 
-                       ______
-  12500⋅√2⋅π⋅C_d⋅Dₒ₂⋅╲╱ g⋅h₂ 
-  ───────────────────────────
-              h₂
-error: 'D_o1' undefined near line 1, column 19
-\frac{695.77589486373630782025294921827}{h_{2}^{0.5}}
-#+end_example
-** Linear
 
 * Disturbance
 Tank 1 steady state = 7.5cm (h_1) : t = 12.19s, h = 20cm
@@ -180,6 +193,13 @@ Tank 1 + disturbance steady state (h_1') = 5cm : t = 5.93, h_2 = 11->20cm
 |  5 |        5 |       10 |
 |  7 |        8 |       16 |
 | 10 |       13 |       26 |
+
+We can get the following equations that relate the standard deviation to the height in the tank:
+\[\begin{cases}
+\textrm{std} = 3.88h -0.08 & 0 < h < 0.15 \\
+\textrm{std} = 3.90h -0.08 & 0.15 < h < \infty
+\end{cases} \approx 3.9h\]
+
 
 * Part 2 & Controller Design & Evaluation
 

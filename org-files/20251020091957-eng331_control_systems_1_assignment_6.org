@@ -1,0 +1,170 @@
+:PROPERTIES:
+:ID:       27d00bd4-2808-44ca-b13a-e414fe665cd1
+:END:
+#+title: ENG331 - Control Systems 1 - Assignment 6
+#+date: [2025-10-20 Mon 09:19]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :Assignment:UTAS:2025:
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+
+* Question 1
+
+** Controller 1
+
+*** i
+Choosing:
+\[C_1(s) = K(s + 1)\]
+*** ii
+\begin{align*}
+G_1(s) &= \frac{C_1(s)G(s)}{1 + C_1(s)G(s)} \\
+G_1(s) &= \frac{K(s + 1)\frac{s + 10}{(s + 1)(s + 2)(s + 3)}}{1 + K(s + 1)\frac{s + 10}{(s + 1)(s + 2)(s + 3)}} \\
+G_1(s) &= \frac{K \left(s + 10\right)}{K \left(s + 10\right) + \left(s + 2\right) \left(s + 3\right)}
+\end{align*}
+
+#+BEGIN_SRC octave :exports none :results output :session Q1
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+
+syms s K
+
+C_1 = K*(s + 1);
+G = (s + 10)/((s + 1)*(s + 2)*(s + 3));
+
+G_1 = C_1*G/(1 + C_1*G);
+G_1 = simplify(G_1)
+latex(G_1)
+
+subs(G_1, s, -2 - 3*i)
+solve(G_1 == , K)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+G_1 = (sym)
+
+           K⋅(s + 10)         
+  ────────────────────────────
+  K⋅(s + 10) + (s + 2)⋅(s + 3)
+\frac{K \left(s + 10\right)}{K \left(s + 10\right) + \left(s + 2\right) \left(s + 3\right)}
+ans = (sym)
+
+          K⋅(8 - 3⋅ⅈ)        
+  ───────────────────────────
+  K⋅(8 - 3⋅ⅈ) - 3⋅ⅈ⋅(1 - 3⋅ⅈ)
+ans = (sym) 0
+#+end_example
+
+*** iii
+
+** Controller 2
+
+*** i
+
+*** ii
+
+*** iii
+
+* Question 2
+
+** a
+\begin{align*}
+\frac{R(s)}{C(s)} &= \frac{-K\cdot PID(s)\cdot G(s)}{1 + K\cdot PID(s)\cdot G(s)} \\
+\frac{R(s)}{C(s)} &= \frac{3 \left(s^{2} + 50 s + 625\right)}{s^{2} - 130 s - 1875}
+\end{align*}
+
+#+BEGIN_SRC octave :exports none :results output :session Q2
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+
+syms s
+
+G = (s + 25)/((s + 4)*(s + 5));
+PID = -(s + 25)*(s + 4)/s;
+K = 0.75;
+
+R_C = -K*PID*G/(1 + K*PID*G);
+R_C = simplify(R_C);
+latex(R_C)
+
+#+END_SRC
+
+#+RESULTS:
+: \frac{3 \left(s^{2} + 50 s + 625\right)}{s^{2} - 130 s - 1875}
+
+** b
+
+\begin{align*}
+PID(s) &= - 1000 C_{1} s - \frac{C_{1}}{C_{2}} - 5 - \frac{1}{200 C_{2} s} \\
+PID(s) &= - \frac{\left(1000 C_{2} s + 1\right) \left(C_{1} R_{1} s + 1\right)}{C_{2} R_{1} s}
+\end{align*}
+
+#+BEGIN_SRC octave :exports none :results output :session Q2
+syms s C_1 C_2 R_1
+
+R_2 = 1e3;
+
+PID_C = -((R_2/R_1 + C_1/C_2) + R_2*C_1*s + (1/(R_1*C_2))/(s));
+latex(PID_C)
+PID_C = factor(PID_C);
+latex(PID_C)
+[num_c, den_c] = numden(PID_C);
+expand(num_c)
+expand(den_c)
+[num, den] = numden(PID);
+expand(num)
+expand(den)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+- 1000 C_{1} s - \frac{C_{1}}{C_{2}} - \frac{1000}{R_{1}} - \frac{1}{C_{2} R_{1} s}
+- \frac{\left(1000 C_{2} s + 1\right) \left(C_{1} R_{1} s + 1\right)}{C_{2} R_{1} s}
+ans = (sym)
+
+                   2                          
+  - 1000⋅C₁⋅C₂⋅R₁⋅s  - C₁⋅R₁⋅s - 1000⋅C₂⋅s - 1
+ans = (sym) C₂⋅R₁⋅s
+ans = (sym)
+
+     2             
+  - s  - 29⋅s - 100
+ans = (sym) s
+#+end_example
+
+* Question 3
+
+** a
+ - Two integrator
+ - One zeros (negative)
+** b
+
+* Question 4 (Optional)
+
+** a
+
+** b
