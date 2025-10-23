@@ -35,7 +35,7 @@ To find the pole location we use:
 This allows us to find that the pole must be located at:
 \begin{align*}
 \tan^{-1}\left(\frac{3}{-2 + p_c}\right) &= 39^o \\
-\Rightarrow z_c &= 5.7
+\Rightarrow p_c &= 5.7
 \end{align*}
 
 Hence:
@@ -129,7 +129,7 @@ To find the pole location we use:
 This allows us to find that the pole must be located at:
 \begin{align*}
 \tan^{-1}\left(\frac{3}{-2 + p_c}\right) &= 21^o \\
-\Rightarrow z_c &= 9.815
+\Rightarrow p_c &= 9.815
 \end{align*}
 
 Hence:
@@ -239,13 +239,31 @@ latex(R_C)
 #+END_SRC
 
 #+RESULTS:
+: Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
 : \frac{3 \left(s^{2} + 50 s + 625\right)}{s^{2} - 130 s - 1875}
 
 ** b
 
 \begin{align*}
 PID(s) &= - 1000 C_{1} s - \frac{C_{1}}{C_{2}} - 5 - \frac{1}{200 C_{2} s} \\
-PID(s) &= - \frac{\left(1000 C_{2} s + 1\right) \left(C_{1} R_{1} s + 1\right)}{C_{2} R_{1} s}
+PID(s) &= - \frac{\left(1000 C_{2} s + 1\right) \left(C_{1} R_{1} s + 1\right)}{C_{2} R_{1} s} \\
+-\frac{(s + 4)(s + 10)}{s} &= - \frac{\left(1000 C_{2} s + 1\right) \left(C_{1} R_{1} s + 1\right)}{C_{2} R_{1} s} \\
+- s - 29 - \frac{100}{s} &= - 1000 C_{1} s - 1 - \frac{1000}{R_{1}} - \frac{1}{C_{2} R_{1} s}
+\end{align*}
+
+Comparing coefficients means:
+
+\[\begin{cases}
+1 &= 1000C_1 \\
+29 &= 1 + \frac{1000}{R_1} \\
+100 &= \frac{1}{C_2R_1}
+\end{cases}\]
+
+Which gives:
+\begin{align*}
+C_1 &= 1\ mF \\
+C_2 &= 280\ \mu F \\
+R_1 &= 35.714\ \Omega
 \end{align*}
 
 #+BEGIN_SRC octave :exports none :results output :session Q2
@@ -257,34 +275,48 @@ PID_C = -((R_2/R_1 + C_2/C_2) + R_2*C_1*s + (1/(R_1*C_2))/(s));
 latex(PID_C)
 PID_C = factor(PID_C);
 latex(PID_C)
-[num_c, den_c] = numden(PID_C);
-expand(num_c)
-expand(den_c)
-[num, den] = numden(PID);
-expand(num)
-expand(den)
+
+latex(expand(PID_C))
+latex(expand(PID))
+
+equ1 = 1 == 1000*C_1;
+equ2 = 29 == 1 + 1000/R_1;
+equ3 = 100 == 1/(C_2*R_1);
+sol = solve([equ1, equ2, equ3], [C_1, C_2, R_1])
+vpa(sol.C_1)
+vpa(sol.C_2)
+vpa(sol.R_1)
+
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-- 1000 C_{1} s - \frac{C_{1}}{C_{2}} - \frac{1000}{R_{1}} - \frac{1}{C_{2} R_{1} s}
-- \frac{\left(1000 C_{2} s + 1\right) \left(C_{1} R_{1} s + 1\right)}{C_{2} R_{1} s}
-ans = (sym)
+- 1000 C_{1} s - 1 - \frac{1000}{R_{1}} - \frac{1}{C_{2} R_{1} s}
+- \frac{1000 C_{1} C_{2} R_{1} s^{2} + C_{2} R_{1} s + 1000 C_{2} s + 1}{C_{2} R_{1} s}
+- 1000 C_{1} s - 1 - \frac{1000}{R_{1}} - \frac{1}{C_{2} R_{1} s}
+- s - 29 - \frac{100}{s}
+sol =
 
-                   2                          
-  - 1000⋅C₁⋅C₂⋅R₁⋅s  - C₁⋅R₁⋅s - 1000⋅C₂⋅s - 1
-ans = (sym) C₂⋅R₁⋅s
-ans = (sym)
+  scalar structure containing the fields:
 
-     2             
-  - s  - 29⋅s - 100
-ans = (sym) s
+    C_1 =
+
+      <class sym>
+
+    C_2 =
+
+      <class sym>
+
+    R_1 =
+
+      <class sym>
+ans = (sym) 0.0010000000000000000000000000000000
+ans = (sym) 0.00028000000000000000000000000000000
+ans = (sym) 35.714285714285714285714285714286
 #+end_example
 
 * Question 3
- - Two integrator
- - One zeros (negative)
-   
+
 ** a
 The controller must be capable of doing steady state for a ramp input, hence two integrator are required, so lets choose the structure:
 \[C(s) = \frac{s + z_c}{s^2}\]
@@ -292,11 +324,13 @@ The controller must be capable of doing steady state for a ramp input, hence two
 A required $\zeta$ for a 25% overshoot corresponds to $\zeta = 0.403$.
 
 Next we must find the location at which the above occurs on the root locus
-\begin{cases}
+
+\[\begin{cases}
 2 &= \frac{4}{0.403 \omega_n} \\
 \sigma_d &= 0.403 \omega_n \\
-\omega_d = \omega_n*sqrt(0.40e^2 - 1)
-\end{cases}
+\omega_d &= \omega_n\sqrt{0.40e^2 - 1}
+\end{cases}\]
+
 \[\Rightarrow \sigma_d = -2\]
 And
 \[\Rightarrow \omega_d = 4.532j\]
@@ -305,16 +339,18 @@ Next we find the angle required by the zero:
 
 \begin{align*}
 (2k + 1)180^o &= \sum \theta_z - \sum \theta_p \\
-(2k + 1)180^o &=  -371.91 + \theta_{z_c}
+(2k + 1)180^o &=  -371.91 + \theta_{z_c} \\
 \Rightarrow \theta_{z_c} &= 11.9^o
 \end{align*}
 
 This allows us to find that the zero must be located at:
 \begin{align*}
-\tan^{-1}\left(\frac{4.532}{-2 + z_c}\right) = 11.9^o \\
+\tan^{-1}\left(\frac{4.532}{-2 + z_c}\right) &= 11.9^o \\
 \Rightarrow z_c &= -23.5
 \end{align*}
 
+Hence:
+\[C(s) = \frac{s + 23.5}{s^2}\]
 
 #+BEGIN_SRC octave :exports none :results output :session Q3
 clc
@@ -377,3 +413,13 @@ theta_sum = 371.91
 #+end_example
 
 ** b
+\begin{align*}
+C(s)G(s) &= \frac{s + 23.5}{s^2}\cdot \frac{K}{(s + 4)(s + 6)(s  + 10)} \\
+C(s)G(s) &= \frac{K(s + 23.5)}{s^2(s + 4)(s + 6)(s  + 10)}
+\end{align*}
+
+We have two integrators, so it would be valid to approximate this as a second order system. Each of the poles/zeros are greater than 10 times away than the two poles at the origin. The second order approximation would be of the form:
+
+\[G_{2nd}(s) = \frac{KK_{2nd}}{s^2}\]
+
+Due to the two integrators the closed loop will have zero steady state error for both step and ramp inputs. 

@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       ced7f02c-f699-4986-be1b-13faac24e3be
+:END:
+#+title: ENG335 - Computational Intelligence - Exam
+#+date: [2025-10-22 Wed 16:13]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG335 - Computational Intelligence - Exam
+

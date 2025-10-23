@@ -1,0 +1,115 @@
+:PROPERTIES:
+:ID:       8c61d5e9-7ad8-492d-af57-4b0f73323909
+:END:
+#+title: ENG306 - Power Electronics - Presentation
+#+date: [2025-10-23 Thu 13:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Introduction
+:TYLER:
+ - What is a UPS?
+ - Types of UPS
+
+* Topologies
+:BALEY:
+
+** Transformer-Based
+[[./Transformer_Based_UPS.jpg]]
+NOTES:
+{
+Consists of rectifier, inverter, line frequency transformer and bypass circuit
+
+Converts AC to DC to charge the battery, then DC to AC for the load
+
+Uses two power frequency transformers, one to step down the voltage coming in to charge the battery, and another to step up the battery voltage to the AC mains voltage.
+
+A bypass switch is present, if rectifier, battery or inverter is damaged then the bypass switch will activate, allowing power to flow pass the UPS.
+} 
+*** Advantages
+ - Galvanic isolation
+ - Support high power
+
+*** Disadvantages
+ - They require large transformers for line frequency conversion
+   - Increased cost
+ - Low efficiency
+   - High current flows through the switches
+
+** Transformer-Less
+[[./Four_Legged_Transformer_Less.jpg]]
+
+*** Advantages
+ - Less costly
+ - Highly efficient
+ - Smaller than transformer based UPS
+   
+*** Disadvantages
+ - More likely to be effected by the transients
+   - Miscellaneous devices connected to the main utility grid
+ - Battery cost is higher
+   - Needs to achieve high DC link voltage
+ - Lower reliability
+
+** High Frequency Transformer Based
+[[./High_Frequency_Transformer_UPS.jpg]]
+Uses fast switching diodes and switches
+
+*** Advantages
+ - Smaller transformers
+ - Galvanic isolation
+ - Better efficiency
+
+*** Disadvantages
+ - More switches
+   - Reduces efficiency
+   - Higher cost
+
+* Battery Management
+:TYLER:
+
+* Inverter Control
+:BALEY:
+Application:
+1. Total Harmonic Distortion (THD) of the output voltage
+2. Transient response
+3. Power factor correction
+4. Voltage/current regulation
+
+Types
+1. Single loop control
+   - Output voltage is used for feedback
+2. Multi-loop system
+   - Multiple parameters are used for feedback
+3. Predictive control
+   - Predicts the future behaviour of the system
+4. Repetitive control
+   - Rejects periodic disturbances
+5. Iterative learning
+   - Adjusted through iteration
+   - Achieves zero tracking error
+6. Slide mode control
+   - Effective against non-linear systems
+
+* Transition Mechanisms
+:TYLER:
+
+* Power Quality
+:BALEY:
+|-------------------+---------------+---------------+------------|
+| Topology          | Grid Effect   | Power Quality | Efficiency |
+|-------------------+---------------+---------------+------------|
+| Transformer-Based | Polluted      | Average       | Lowe       |
+|-------------------+---------------+---------------+------------|
+| High-Frequency    | Less Polluted | Good          | High       |
+|-------------------+---------------+---------------+------------|
+| Transformer-Less  | Clean         | Excellent     | High       |
+|-------------------+---------------+---------------+------------|
+
+   
+
+* Applications
+:TYLER:
+
+* References
+https://www.sciencedirect.com/science/article/pii/S1364032115017189

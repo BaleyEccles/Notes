@@ -101,7 +101,7 @@ V = 30h + 1.6 & 0.18 < h < \infty
 \end{cases}
 This was tested on the real tanks and in simulation, the simulation has a larger error than in real life
 
-** Linear
+** Data From Simulation
 | V |   h_2 |
 | 5 | 0.063 |
 | 7 | 0.124 |
@@ -169,6 +169,14 @@ latex(vpa(equ5))
 :                2
 : 19.879313473829069834707380973779 h_{2}^{0.5}
 
+** Linearised
+
+\begin{align*}
+\frac{dV}{dh} &= \frac{9.94}{\sqrt{h_2} \\
+\frac{dV}{dh} |_{h_2=0.1} &= 31.4 \\
+V(h_2) \approx V(0.1) + \frac{dV}{dh} |_{h_2=0.1} (h_2 - 0.1) \\
+V(h_2) \approx 6.293 + 31.4(h_2 - 0.1)
+\end{align*}
 
 * Disturbance
 Tank 1 steady state = 7.5cm (h_1) : t = 12.19s, h = 20cm
@@ -204,6 +212,32 @@ We can get the following equations that relate the standard deviation to the hei
 * Part 2 & Controller Design & Evaluation
 
 ** Cascade Compensator
+
+*** Design Rational
+
+*** Calculations
+**** Pole-Zero Plots
+
+**** Root-Locus
+
+**** Nyquist/Bode Diagrams
+
+**** System Block Diagrams
+
+*** Analysis
+**** Predicted
+
+**** Simulated
+
+**** Frequency Responses
+
+**** Disturbances
+
+**** Noise
+
+**** Gain Margin And Phase Margin
+
+**** Sensitivity
 
 ** Feedback Compensator
 
