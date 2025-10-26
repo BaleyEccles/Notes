@@ -211,31 +211,233 @@ We can get the following equations that relate the standard deviation to the hei
 
 * Part 2 & Controller Design & Evaluation
 
+
+from the Figure :TODO: we can see that there are poles at $-0.2 + 0j$ and $-0.025 + 0j$. These can be used to create the root locus seen in Figure :TODO:. These will be used in our design for the cascade compensator.
+
+
+
+
 ** Cascade Compensator
 
 *** Design Rational
+In the non-linear system the calculated feed-forward equation does a very good job at reducing the steady state error. Even though the steady-state error is non-zero it will reduce complexity to have an integrator, so it would be valid to just add another pole.
 
 *** Calculations
+**** Design
+For a $10\ cm$ step the current system has a settling time of about $150\ s$ and zero overshoot, as seen in Figure :TODO:. To third the settling time and have 10% overshoot a damping ratio of $\zeta = 0.591$ and a natural frequency of $\omega_n = 0.135$.
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+  pkg load control
+end
+
+syms z w_n
+
+equ1 = 0.1 == exp(-z*pi/sqrt(1 - z^2));
+equ2 = 50 == 4/(z*w_n);
+
+sol = solve([equ1, equ2], [z, w_n]);
+z = vpa(sol.z)
+w_n = vpa(sol.w_n)
+
+
+#+END_SRC
+
+#+RESULTS:
+: z = (sym) 0.59115503379889750930516375129716
+: w_n = (sym) 0.13532829025560637657003556926944
+
+This allows us to find our design point:
+\[s = -0.08 \pm 0.109j\]
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+design_point = -z*w_n + w_n*sqrt(z^2 - 1)
+#+END_SRC
+
+#+RESULTS:
+: design_point = (sym) -0.08 + 0.10915010830734730779886269003451⋅ⅈ
+
+Next we must find the angles for each pole/zero and use the following equation
+\begin{align*}
+(2k + 1)180^o &= \sum \theta_z - \sum \theta_p \\
+(2k + 1)180^o &= \theta_c -42.3 - 116.7 \\
+\Rightarrow \theta_c & = 20.9^o
+\end{align*}
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+p1 = -0.2;
+p2 = -0.025;
+
+theta_p1 = -vpa(atan2(imag(design_point),(real(design_point) - p1))*180/pi)
+theta_p2 = -vpa(atan2(imag(design_point),(real(design_point) - p2))*180/pi)
+k = 0;
+sum = theta_p1 + theta_p2
+
+#+END_SRC
+
+#+RESULTS:
+: theta_p1 = (sym) -42.289160911593302703386170973398
+: theta_p2 = (sym) -116.74322538662649613800833633934
+: sum = (sym) -159.03238629821979884139450731273
+
+Hence our pole must be at p_c = -0.205$ and our controller will be:
+\[C(s) = K(s + 0.205)\]
+
+
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+p_c = vpa(imag(design_point)/tand(sum) - real(design_point))
+#+END_SRC
+
+#+RESULTS:
+: p_c = (sym) 0.36482686374624073498419349846282
+
+We can use the following equation to find $K$.
+\[K = \frac{1}{|G(s)C(s)|} = 0.00605\]
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+syms s
+G = 1/((s - p1)*(s - p2));
+C = 1/(s + p_c);
+K = vpa(1/(subs(abs(G*C), s, design_point)))
+#+END_SRC
+
+#+RESULTS:
+: K = (sym) 0.0060476057495766401129921923145199
+
 **** Pole-Zero Plots
+#+BEGIN_SRC octave :exports code :results output :session Q1
+close all;
+
+p1 = double(p1);
+p2 = double(p2);
+p_c = double(p_c);
+
+s = tf('s');
+g = 1/((s + -p1)*(s + -p2));
+figure;
+pzmap(g)
+pzmap(C)
+xlim([-0.5, 0.1]);
+legend('');
+
+#+END_SRC
+
+#+RESULTS:
+: Transfer function 'C' from input 'u1' to output ...
+: 
+:           1     
+:  y1:  ----------
+:       s + 0.3648
+: 
+: Continuous-time model.
 
 **** Root-Locus
+#+BEGIN_SRC octave :exports code :results output :session Q1
+close all;
+figure;
+rlocus(g*C)
+hold on;
+plot(double(real(design_point)), double(imag(design_point)), 'go', 'MarkerSize', 10, 'DisplayName', 'Design Point');
+#+END_SRC
+
+#+RESULTS:
 
 **** Nyquist/Bode Diagrams
+#+BEGIN_SRC octave :exports code :results output :session Q1
+close all;
+figure;
+nyquist(g*C);
+
+%figure;
+%nyquist(g*C);
+%xlim([-21, -19])
+%ylim([-0.1, 0.1])
+#+END_SRC
+
+#+RESULTS:
 
 **** System Block Diagrams
+:TODO:
 
 *** Analysis
-**** Predicted
+**** Linear
+#+BEGIN_SRC octave :exports code :results output :session Q1
+close all;
+K = double(K)
+s = tf('s');
+FB = feedback(K*g*C);
+[y, t] = step(FB);
+figure;
+plot(t, y)
+#+END_SRC
 
-**** Simulated
+#+RESULTS:
+: K = 6.0476e-03
 
-**** Frequency Responses
+From the step response (Figure :TODO:) we can see that we have reduced the settling time, as desired. As mentioned before there is a steady state-error that can be ignored, because it will be accounted for in the feed-forward term.
 
-**** Disturbances
+**** Non-Linear
+:TODO: See Non_Linear_Compensator.slx
+The non-linear system exhibits different behaviour, this is because the linear system is an approximation of the non-linear system, this can be seen by comparing the step responses in Figure :TODO: and :TODO:, the non-linear system has no overshoot whereas the linear one does.
+
+By comparing Figures (:TODO: no-feedback) and (:TODO: non-linear feedback) we can see that our goal of reducing the settling time marginally worked. The previous settling time was about 150s and now it is 100s, this is worse than the linear second order estimation but still an improvement. Given that there is no overshoot on the non-linear system it might be feasible to increase the overshoot and re-design the controller, sacrificing overshoot for settling time.
 
 **** Noise
+#+BEGIN_SRC octave :exports code :results output :session Q1
+hold off;
+figure;
+bode(FB)
+#+END_SRC
+
+#+RESULTS:
+
+For the linear system we can see the Bode plot in Figure :TODO:. It can be seen that the system acts as a low pass filter, the system is good at removing high frequency signals, this is good for removing the noise.
+
+**** Disturbances
+:TODO: See Non_Linear_Compensator.slx
+Adding a disturbance at $t = 100$ effects the system in ways that was not considered in the controller design, this can be seen in Figure :TODO:. 
 
 **** Gain Margin And Phase Margin
+The gain and phase margin can be found using the Nyquist diagram, as seen in Figure :TODO:. The Nyquist diagram crosses the real axis at about $-20$, thus the gain can be increase by $\frac{1}{20} = 0.05$ before the system becomes unstable. Hence $G_M = 20\log(0.05) = -60\ dB$.
+
+The phase margin can be found by measuring the angle between the unit circle intercept and the Nyquist diagram. This can be seen in Figure :TODO: and the phase margin can be estimated to be about $\Phi_M = 56^o$.
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+close all;
+figure;
+hold on;
+nyquist(g*C);
+xlim([-2, 2]);
+ylim([-2, 2]);
+theta = 0:0.01:2*pi;
+x = cos(theta);
+y = sin(theta);
+plot(x, y, 'b-', 'DisplayName', 'Unit Circle');  % Plot the unit circle in blue
+axis equal;
+
+%angle_degrees = 180 + 56;
+%angle_radians = deg2rad(angle_degrees);
+%
+%line_length = 2;
+%x_start = 0;
+%y_start = 0;
+%x_end = line_length * cos(angle_radians);
+%y_end = line_length * sin(angle_radians);
+%plot([x_start, x_end], [y_start, y_end], 'r-', 'LineWidth', 2);  % Plot the line in red
+
+hold off;
+#+END_SRC
+
+#+RESULTS:
 
 **** Sensitivity
 
