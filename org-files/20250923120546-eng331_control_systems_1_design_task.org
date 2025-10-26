@@ -47,6 +47,7 @@ scale2 = double(s2)
 
 #+RESULTS:
 #+begin_example
+Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
 warning: passing floating-point values to sym is dangerous, see "help sym"
 warning: called from
     double_to_sym_heuristic at line 50 column 7
@@ -252,8 +253,22 @@ w_n = vpa(sol.w_n)
 #+END_SRC
 
 #+RESULTS:
-: z = (sym) 0.59115503379889750930516375129716
-: w_n = (sym) 0.13532829025560637657003556926944
+#+begin_example
+<stdin>-518:7: SymPyDeprecationWarning: 
+
+non-Expr objects in a Matrix is deprecated. Matrix represents
+a mathematical matrix. To represent a container of non-numeric
+entities, Use a list of lists, TableForm, NumPy array, or some
+other data structure instead.
+
+See https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-non-expr-in-matrix
+for details.
+
+This has been deprecated since SymPy version 1.9. It
+will be removed in a future version of SymPy.
+z = (sym) 0.59115503379889750930516375129716
+w_n = (sym) 0.13532829025560637657003556926944
+#+end_example
 
 This allows us to find our design point:
 \[s = -0.08 \pm 0.109j\]
@@ -332,13 +347,9 @@ legend('');
 #+END_SRC
 
 #+RESULTS:
-: Transfer function 'C' from input 'u1' to output ...
-: 
-:           1     
-:  y1:  ----------
-:       s + 0.3648
-: 
-: Continuous-time model.
+: error: pzmap: require at least one LTI model
+: error: called from
+:     pzmap at line 68 column 5
 
 **** Root-Locus
 #+BEGIN_SRC octave :exports code :results output :session Q1
@@ -350,8 +361,13 @@ plot(double(real(design_point)), double(imag(design_point)), 'go', 'MarkerSize',
 #+END_SRC
 
 #+RESULTS:
+: error: lti: mtimes/mplus: one system is neither an lti system nor a numeric value
+: error: called from
+:     __numeric_to_lti__ at line 34 column 9
+:     __sys_group__ at line 30 column 16
+:     mtimes at line 60 column 7
 
-**** Nyquist/Bode Diagrams
+**** Nyquist Diagram
 #+BEGIN_SRC octave :exports code :results output :session Q1
 close all;
 figure;
@@ -364,6 +380,11 @@ nyquist(g*C);
 #+END_SRC
 
 #+RESULTS:
+: error: lti: mtimes/mplus: one system is neither an lti system nor a numeric value
+: error: called from
+:     __numeric_to_lti__ at line 34 column 9
+:     __sys_group__ at line 30 column 16
+:     mtimes at line 60 column 7
 
 **** System Block Diagrams
 :TODO:
@@ -382,6 +403,13 @@ plot(t, y)
 
 #+RESULTS:
 : K = 6.0476e-03
+: error: lti: mtimes/mplus: one system is neither an lti system nor a numeric value
+: error: called from
+:     __numeric_to_lti__ at line 34 column 9
+:     __sys_group__ at line 30 column 16
+:     mtimes at line 60 column 7
+: error: 'FB' undefined near line 1, column 15
+: error: 't' undefined near line 1, column 6
 
 From the step response (Figure :TODO:) we can see that we have reduced the settling time, as desired. As mentioned before there is a steady state-error that can be ignored, because it will be accounted for in the feed-forward term.
 
@@ -399,6 +427,7 @@ bode(FB)
 #+END_SRC
 
 #+RESULTS:
+: error: 'FB' undefined near line 1, column 6
 
 For the linear system we can see the Bode plot in Figure :TODO:. It can be seen that the system acts as a low pass filter, the system is good at removing high frequency signals, this is good for removing the noise.
 
@@ -438,8 +467,72 @@ hold off;
 #+END_SRC
 
 #+RESULTS:
+: error: lti: mtimes/mplus: one system is neither an lti system nor a numeric value
+: error: called from
+:     __numeric_to_lti__ at line 34 column 9
+:     __sys_group__ at line 30 column 16
+:     mtimes at line 60 column 7
 
 **** Sensitivity
+Looking at the root locus in Figure :TODO: we can see that the system might become unstable if the gain is too large, we can look at the sensitivity of the system with respect to the gain to quantify this, we aim to find $S_{T:K}$.
+
+\begin{align*}
+S_{T:K} &= \frac{K}{T}\frac{\partial T}{\partial K} \\
+S_{T:K} &= \frac{K}{T} \frac{\partial}{\partial K} \left[\frac{1262400 K}{1262400 K + \left(5 s + 1\right) \left(40 s + 1\right) \left(6312 s + 2302.7\right)}\right] \\
+S_{T:K} &= \frac{1262400 s^{3} + 744597 s^{2} + 109937 s + 2302}{1262400 K + 1262400 s^{3} + 744597 s^{2} + 109937 s + 2302} \rvert_{K = 0.0060476} \\
+S_{T:K} &= \frac{8787566400 s^{3} + 5183143079 s^{2} + 765274475 s + 16029703}{8787566400 s^{3} + 5183143079 s^{2} + 765274475 s + 69173387}
+\end{align*}
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+syms s K
+G = 1/((s + -p1)*(s + -p2));
+C = K/(s + p_c);
+T = G*C/(1 + G*C);
+T = simplify(T);
+latex(vpa(T))
+dT_dK = diff(T, K);
+T_SK = simplify((K/T)*dT_dK);
+%latex(vpa(T_SK));
+[num, den] = numden(T_SK);
+latex(vpa(expand(num)))
+latex(vpa(expand(den)))
+
+T_SK = simplify(subs(T_SK, K, 0.0060476))
+[num, den] = numden(T_SK);
+latex(vpa(expand(num)))
+latex(vpa(expand(den)))
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+\frac{1262400.0 K}{1262400.0 K + \left(5.0 s + 1.0\right) \left(40.0 s + 1.0\right) \left(6312.0 s + 2302.7874150813184437931175999439\right)}
+1262400.0 s^{3} + 744597.48301626368875862351998878 s^{2} + 109937.43367865932997069029199747 s + 2302.7874150813184437931175999439
+1262400.0 K + 1262400.0 s^{3} + 744597.48301626368875862351998878 s^{2} + 109937.43367865932997069029199747 s + 2302.7874150813184437931175999439
+T_SK = (sym)
+
+        6961⋅(5⋅s + 1)⋅(40⋅s + 1)⋅(6312⋅s + 733⋅π)       
+  ───────────────────────────────────────────────────────
+  6961⋅(5⋅s + 1)⋅(40⋅s + 1)⋅(6312⋅s + 733⋅π) + 16916160⋅π
+8787566400.0 s^{3} + 5183143079.2762115374487783226419 s^{2} + 765274475.83714759592597512259442 s + 16029703.196381057687243891613209
+8787566400.0 s^{3} + 5183143079.2762115374487783226419 s^{2} + 765274475.83714759592597512259442 s + 69173387.179330574475996121107707
+#+end_example
+
+This sensitivity is only dependent on the input, the plot of this function can be seen in Figure :TODO:. Large values the sensitivity goes to $1$ whereas at zero the sensitivity is $0.2317$, this means that sensitivity will be bounded between $0.2317$ and $1$. Thus, the :TODO:
+
+#+BEGIN_SRC octave :exports code :results output :session Q1
+close all;
+s = [0:0.00001:20e-2];
+Sens = (8787566400.0.*s.^3 + 5183143079.2762115374487783226419.*s.^2 + 765274475.83714759592597512259442.*s + 16029703.196381057687243891613209)./(8787566400.0.*s.^3 + 5183143079.2762115374487783226419.*s.^2 + 765274475.83714759592597512259442.*s + 69173387.179330574475996121107707);
+figure;
+plot(s, Sens)
+Sens(1)
+Sens(end)
+#+END_SRC
+
+#+RESULTS:
+: ans = 0.2317
+: ans = 0.8937
 
 ** Feedback Compensator
 
