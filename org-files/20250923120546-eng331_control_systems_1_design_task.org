@@ -6,7 +6,7 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 #+FILETAGS: :Assignment:UTAS:2025:
-#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}
 #+LATEX_HEADER_EXTRA: \usepackage{fontspec}
 #+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
@@ -16,6 +16,8 @@
 #+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
 #+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+#+PROPERTY: header-args :eval no
 
 * Feed Forward
 ** From Data
@@ -34,7 +36,7 @@ Data can be collected to create an approximation of a feed forward term, this wi
 
 From the data in the table above the following piece wise function can be obtained which provides the system with the required voltage for a input height.
 
-\[\begin{cases}
+\[V(h) = \begin{cases}
 V = 45.45h           & 0 < h < 0.11 \\
 V = 28.57h + 1.86  & 0.11 < h < 0.18 \\
 V = 30h + 1.6 & 0.18 < h < \infty
@@ -56,7 +58,7 @@ The same thing can be redone with data obtained from the non-linear simulation, 
 
 As before the data above was used to create the piece wise function seen below.
 
-\[\begin{cases}
+\[V(h) = \begin{cases}
 V = 79.37h           & 0 < h < 0.063 \\
 V = 32.79h + 2.937   & 0.063 < h < 0.124 \\
 V = 26.32h + 3.73832 & 0.124 < h < \infty
@@ -173,7 +175,7 @@ ylabel('Voltage (V)');
 title('Feed Forward Comparison');
 hold off;
 print -dpng 'ENG331_Design_FF_Comp.png'
-#+end_src
+#+END_SRC
 
 #+RESULTS:
 
@@ -203,14 +205,15 @@ A ~.mat~ file was obtained from the physical rigs at various heights to get an e
 
 Using Figure \ref{fig:fig2} and the recorded data we can get the following equation which relates height in tank 2 to the standard deviation of normally distributed noise.
 
-#+ATTR_LATEX: :placement [H]
-#+CAPTION: Noise Data \label{fig:fig2}
-[[./ENG331_Design_Noise.png]]
-
-\[\begin{cases}
+\[N(h) = \begin{cases}
 \textrm{std} = 3.88h -0.08 & 0 < h < 0.15 \\
 \textrm{std} = 3.90h -0.08 & 0.15 < h < \infty
 \end{cases} \approx 3.9h\]
+
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Noise Data \label{fig:fig2}
+[[./ENG331_Design_Noise.png]]
 
 #+BEGIN_SRC octave :exports none :results output :session NOISE
 clc
@@ -265,6 +268,7 @@ figure;
 hold on;
 plot(f, magnitudeH1, 'DisplayName', 'Magnitude of h1');
 plot(f, magnitudeH2, 'DisplayName', 'Magnitude of h2');
+xlim([0,5]);
 hold off;
 ylim([0, 100])
 title('Magnitude Spectrum');
@@ -277,21 +281,17 @@ print -dpng 'ENG331_Design_Noise_Fourier.png'
 
 #+RESULTS:
 
-Looking at the Fourier spectrum in Figure \ref{fig:fig3} we can see that there :TODO:
+The Fourier spectrum in Figure \ref{fig:fig3} cannot be used to get any insight into the noise, the sampling frequency of $10\ Hz$ ($5\ Hz$ taking into account Nyquist–Shannon Sampling Theorem ) is too small. There appears to be some notable figures where the noise is jumping up and down, however this is just an artefact of the data recording.
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Noise Fourier Spectrum \label{fig:fig3}
-[[./ENG331_Design_Noise.png]]
+[[./ENG331_Design_Noise_Fourier.png]]
 
-
-- In Lab Task 4 we applied normally distributed noise, is this reasonable?
-  :TODO:
-
+For the analysis it will be assumed that the noise is normally distributed. This is valid because of the Central Limit Theorem, the system is summing many distributions of noise from various sources (electrical, magnetic, sensor, human, etc).
 
 It is possible to reduce the noise by adding a filter, although this would have to be accounted for in the controller design. It would have to be a low pass filter, as the noise is high frequency, the cutoff of the filter would determine how much the system is effected, a lower cutoff will have a smaller effect on the system.
 
 * Part 2 & Controller Design & Evaluation
-
 #+BEGIN_SRC octave :exports none :results output :session A
 clc
 clear
@@ -361,7 +361,7 @@ In the non-linear system the calculated feed-forward equation does a very good j
 #+CAPTION: Cascade Compensated System Block Diagram \label{fig:D2}
 [[./ENG331_Design_Cascade_Diagram.png]]
 
-*** Calculations
+*** Design
 
 For a $10\ cm$ step the current system has a settling time of about $150\ s$ and zero overshoot, as seen in Figure \ref{fig:fig5}. To third the settling time and have 10% overshoot a damping ratio of $\zeta = 0.591$ and a natural frequency of $\omega_n = 0.135$ is required.
 
@@ -391,23 +391,8 @@ w_n = vpa(sol.w_n)
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
-<stdin>-158:7: SymPyDeprecationWarning: 
-
-non-Expr objects in a Matrix is deprecated. Matrix represents
-a mathematical matrix. To represent a container of non-numeric
-entities, Use a list of lists, TableForm, NumPy array, or some
-other data structure instead.
-
-See https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-non-expr-in-matrix
-for details.
-
-This has been deprecated since SymPy version 1.9. It
-will be removed in a future version of SymPy.
-z = (sym) 0.59115503379889750930516375129716
-w_n = (sym) 0.13532829025560637657003556926944
-#+end_example
+: z = (sym) 0.59115503379889750930516375129716
+: w_n = (sym) 0.13532829025560637657003556926944
 
 This allows us to find our design point:
 \[s = -0.08 \pm 0.109j\]
@@ -514,10 +499,10 @@ For the linear system we can see the Bode plot in Figure \ref{fig:fig8}. It can 
 #+CAPTION: Cascade Compensated System Bode Plot \label{fig:fig8}
 [[./ENG331_Design_Bode_Cascade.png]]
 
-Adding a disturbance at $t = 100$ effects the system in ways that was not considered in the controller design, this can be seen in Figure \ref{fig:fig9}. This is a particularly bad response because the design rational did not account for steady state error, that was the job of the feed forward term.
+Adding a disturbance at $t = 100$ effects the system in ways that was not considered in the controller design, this can be seen in Figure \ref{fig:fig9}. This is a particularly bad response because the design rational did not account for steady state error, that was the job of the feed forward term. The response could be improved by adding an integrator, but this would require redesigning the controller.
 
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Cascade Compensated System Bode Plot \label{fig:fig9}
+#+CAPTION: Non-Linear Cascade Compensated System Disturbance Plot \label{fig:fig9}
 [[./ENG331_Design_Disturbance_Cascade.png]]
 
 #+BEGIN_SRC octave :exports none :results output :session Q1
@@ -635,9 +620,9 @@ Sens = (8787566400.0.*s.^3 + 5183143079.2762115374487783226419.*s.^2 + 765274475
 
 figure;
 plot(s, Sens);
-xlabel('Frequency (s)');
+xlabel('Magnitude');
 ylabel('Sensitivity');
-title('Sensitivity vs Frequency');
+title('Sensitivity vs Magnitude');
 grid on;
 print -dpng 'ENG331_Design_Sens_Cascade.png';
 #+END_SRC
@@ -749,15 +734,14 @@ Or in feedback form:
 #+BEGIN_SRC octave :exports none :results output :session FB_C
 close all;
 
-p1 = double(p1);
-p2 = double(p2);
-z_c = double(z_c);
+p1 = double(p1)
+p2 = double(p2)
+z_c = double(z_c)
 
 s = tf('s');
 g = 1/((s + -p1)*(s + -p2));
 C = K*s;
-H = K*(s + 1/K);
-G = (g/(1 + g*H))
+G = (g/(1 + g*C))
 
 FB = feedback(G);
 figure;
@@ -768,17 +752,23 @@ print -dpng 'ENG331_Design_Step_FB.png';
 
 figure;
 pzmap(G)
+print -dpng 'ENG331_Design_PZ_FB.png';
 
 #+END_SRC
 
 #+RESULTS:
-: Transfer function 'G' from input 'u1' to output ...
-: 
-:                     s^2 + 0.225 s + 0.005               
-:  y1:  --------------------------------------------------
-:       s^4 + 0.9037 s^3 + 1.163 s^2 + 0.2295 s + 0.005025
-: 
-: Continuous-time model.
+#+begin_example
+p1 = -0.2000
+p2 = -0.025000
+z_c = 2.2042
+Transfer function 'G' from input 'u1' to output ...
+
+                     s^2 + 0.225 s + 0.005                
+ y1:  ----------------------------------------------------
+      s^4 + 0.9037 s^3 + 0.1627 s^2 + 0.004518 s + 2.5e-05
+
+Continuous-time model.
+#+end_example
 
 From the step response (Figure \ref{fig:fig14}) we can see that we have increased the overshoot considerably compared to the cascade compensator and reduced the settling time.
 
@@ -786,8 +776,78 @@ From the step response (Figure \ref{fig:fig14}) we can see that we have increase
 #+CAPTION: Feedback Compensated System Step Response \label{fig:fig14}
 [[./ENG331_Design_Step_FB.png]]
 
-This system should preform better for the non-linear system, looking at Figure (:TODO:, see Non_Linear_FB_Compensator.slx), it can be seen that this is not the case. It double the settling time and introduced considerable overshoot. This may be because of how the feedback was simulated, it used a derivative block because just a zero is a non-realisable system, this may have introduced some inconsistencies. However, the differences are way too big for this to be the only reason.
+From Figure \ref{fig:PZ} it can be seen that there is significant pole zero cancellation, this makes it possible to approximate the system as second order one. The specific second order approximation is, which was achieved by looking at the two free poles in the pole-zero plot:
 
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+syms s
+G_2 = simplify((s^2 + 0.225*s + 0.005)/(s^4 + 0.9037*s^3 + 0.1627*s^2 + 0.004518*s + 2.5e-05));
+[num, den] = numden(G_2);
+double(vpa(solve(num, s)));
+%double(vpa(solve(den, s)))
+%  -0.200000
+%  -0.025000
+
+%  -0.67127
+%  -0.200000
+%  -0.025000
+%  -0.007450
+latex(vpa(expand((s + 0.67127)*(s + 0.67127))))
+#+END_SRC
+
+#+RESULTS:
+: s^{2} + 1.3425399855575132042492702583233 s + 0.45060340320519194076276385766326
+
+\[G_{2nd}(s) = \frac{1}{s^{2} + 1.343 s + 0.450}\]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Feedback Compensated System Pole-Zero Plot \label{fig:PZ}
+[[./ENG331_Design_PZ_FB.png]]
+
+This system should preform better for the non-linear system, looking at Figure \ref{fig:fig15}, it can be seen that this is not the case. It double the settling time and introduced considerable overshoot. This may be because of how the feedback was simulated, it used a derivative block because just a zero is a non-realisable system, this may have introduced some inconsistencies. However, the differences are way too big for this to be the only reason, there is probably something else that I have not considered.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Non Linear Feedback Compensated System Step Response \label{fig:fig15}
+[[./ENG331_Design_FB_Step_NL.png]]
+
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+close all;
+figure;
+subplot(1, 2, 1);
+nyquist(G);
+axis equal;
+hold on;
+subplot(1, 2, 2);
+hold on;
+nyquist(G);
+xlim([-2, 2]);
+ylim([-2, 2]);
+theta = 0:0.01:2*pi;
+x = cos(theta);
+y = sin(theta);
+plot(x, y, 'b-', 'DisplayName', 'Unit Circle');  % Plot the unit circle in blue
+axis equal;
+
+%angle_degrees = 180 + 56;
+%angle_radians = deg2rad(angle_degrees);
+%
+%line_length = 2;
+%x_start = 0;
+%y_start = 0;
+%x_end = line_length * cos(angle_radians);
+%y_end = line_length * sin(angle_radians);
+%plot([x_start, x_end], [y_start, y_end], 'r-', 'LineWidth', 2);  % Plot the line in red
+
+hold off;
+print -dpng 'ENG331_Design_Nyquist_FB.png';
+#+END_SRC
+
+#+RESULTS:
+
+As seen in Figure \ref{fig:fig16} the gain margin can be calculated to be $G_M = 20\log(\frac{1}{200}) = −106\ dB$, this implies that the system will remain stable for a large amount of gain. Also the phase margin can be seen to be about $\Phi_M = 45^o$.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Feedback Compensated System Nyquist Plot \label{fig:fig16}
+[[./ENG331_Design_Nyquist_FB.png]]
 
 ** Combined Controller
 
@@ -797,4 +857,191 @@ Lets see how the two controllers combined together behave. As both of the contro
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: Combined Compensated System Block Diagram \label{fig:D3}
 [[./ENG331_Design_Combined_Diagram.png]]
-*** 
+
+*** Analysis
+
+The overall system is given by:
+\[T(s) = \frac{s^2 + 0.225 s + 0.005}{s^4 + 0.9037 s^3 + 0.1627 s^2 + 0.004519 s + 2.5\times10^{-5}}\]
+
+#+BEGIN_SRC octave :exports none :results output :session C
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+  pkg load control
+end
+
+p1 = -0.2;
+p2 = -0.025;
+z_c = 2.2042;
+
+s = tf('s');
+g = 1/((s + -p1)*(s + -p2));
+C_2 = 0.4537*s;
+G = (g/(1 + g*C_2));
+
+FB = feedback(G);
+
+C_1 = 0.00605/(s + 0.205);
+Plant = FB*C_1;
+T = feedback(Plant);
+
+figure;
+step(T)
+xlim([0, 50]);
+ylabel('T(s)');
+print -dpng 'ENG331_Design_Step_Combined.png';
+
+#+END_SRC
+
+#+RESULTS:
+
+Looking at Figure \ref{fig:fig17} we can notice some weird behaviour stemming from the system being higher order. Looking at the pole-zero plot of the combined non-feedback system in Figure \ref{fig:fig18} it can be recognised that we cannot simplify it by approximating it to a second order system.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Combined Compensated System Step Response \label{fig:fig17}
+[[./ENG331_Design_Step_Combined.png]]
+
+#+BEGIN_SRC octave :exports none :results output :session C
+close all;
+figure;
+subplot(1, 2, 1);
+pzmap(Plant);
+xlim([-2, 2]);
+ylim([-2, 2]);
+axis equal;
+subplot(1, 2, 2);
+rlocus(Plant);
+xlim([-2, 2]);
+ylim([-2, 2]);
+axis equal;
+print -dpng 'ENG331_Design_Combined_PZ_Rlocus.png';
+#+END_SRC
+
+#+RESULTS:
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Combined System Pole-Zero And Root Locus \label{fig:fig18}
+[[./ENG331_Design_Combined_PZ_Rlocus.png]]
+
+#+BEGIN_SRC octave :exports none :results output :session C
+close all;
+figure;
+bode(T)
+print -dpng 'ENG331_Design_Combined_Bode.png';
+#+END_SRC
+
+#+RESULTS:
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Combined System Bode Plot \label{fig:fig20}
+[[./ENG331_Design_Combined_Bode.png]]
+
+The Bode plot can be seen in Figure \ref{fig:fig20}, it can be seen that the attenuation start to become significant at $1\ rad/s$, it decreases at a rate of $60\ dB/decade$. This is because the system has poles with complex components of approximately $\pm 1$.
+
+\newpage
+
+* Appendix A - Cascade Compensator Design Code
+#+BEGIN_SRC octave :exports code :results output :session Q1 :eval no
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+  pkg load control
+end
+
+syms z w_n
+
+equ1 = 0.1 == exp(-z*pi/sqrt(1 - z^2));
+equ2 = 50 == 4/(z*w_n);
+
+sol = solve([equ1, equ2], [z, w_n]);
+z = vpa(sol.z)
+w_n = vpa(sol.w_n)
+#+END_SRC
+
+#+BEGIN_SRC octave :exports code :results output :session Q1 :eval no
+design_point = -z*w_n + w_n*sqrt(z^2 - 1)
+#+END_SRC
+
+#+BEGIN_SRC octave :exports code :results output :session Q1 :eval no
+p1 = -0.2;
+p2 = -0.025;
+
+theta_p1 = -vpa(atan2(imag(design_point),(real(design_point) - p1))*180/pi)
+theta_p2 = -vpa(atan2(imag(design_point),(real(design_point) - p2))*180/pi)
+k = 0;
+sum = theta_p1 + theta_p2
+#+END_SRC
+
+#+BEGIN_SRC octave :exports code :results output :session Q1 :eval no
+p_c = vpa(imag(design_point)/tand(sum) - real(design_point))
+#+END_SRC
+
+#+BEGIN_SRC octave :exports code :results output :session Q1 :eval no
+syms s
+
+g = 1/((s - p1)*(s - p2));
+C = 1/(s + p_c);
+K = vpa(1/(subs(abs(g*C), s, design_point)))
+#+END_SRC
+
+
+* Appendix A - Feedback Compensator Design Code
+#+BEGIN_SRC octave :exports code :results output :session FB_C :eval no
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+  pkg load control
+end
+
+syms z w_n
+
+equ1 = 0.5 == exp(-z*pi/sqrt(1 - z^2));
+equ2 = 50 == 4/(z*w_n);
+
+sol = solve([equ1, equ2], [z, w_n]);
+z = vpa(sol.z)
+w_n = vpa(sol.w_n)
+#+END_SRC
+
+#+BEGIN_SRC octave :exports code :results output :session FB_C :eval no
+design_point = -z*w_n + w_n*sqrt(z^2 - 1)
+#+END_SRC
+
+#+BEGIN_SRC octave :exports code :results output :session FB_C :eval no
+p1 = -0.2;
+p2 = -0.025;
+
+theta_p1 = -vpa(atan2(imag(design_point),(real(design_point) - p1))*180/pi)
+theta_p2 = -vpa(atan2(imag(design_point),(real(design_point) - p2))*180/pi)
+
+sum = theta_p1 + theta_p2 + 180
+#+END_SRC
+
+#+BEGIN_SRC octave :exports code :results output :session FB_C :eval no
+z_c = vpa(imag(design_point)/tand(sum) - real(design_point))
+#+END_SRC
+
+#+BEGIN_SRC octave :exports code :results output :session FB_C :eval no
+syms s
+K = double(vpa(1/(z_c)))
+1/K
+#+END_SRC
+
