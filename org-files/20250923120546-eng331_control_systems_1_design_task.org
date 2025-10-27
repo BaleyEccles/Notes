@@ -5,114 +5,63 @@
 #+date: [2025-09-23 Tue 12:05]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
-
-* ENG331 - Control Systems 1 - Design Task
-|--------------------------------+------------------------------+--------------------------------+------------------------------|
-| Actual Tank 1 Height $h_{1,i}$ | Uncalibrated value $v_{1,i}$ | Actual tank 2 height $h_{2,i}$ | Uncalibrated value $v_{2,i}$ |
-|--------------------------------+------------------------------+--------------------------------+------------------------------|
-|                             13 |                          255 |                           26.5 |                          548 |
-|--------------------------------+------------------------------+--------------------------------+------------------------------|
-|                            7.5 |                          135 |                           15.5 |                          306 |
-|--------------------------------+------------------------------+--------------------------------+------------------------------|
-#+BEGIN_SRC octave :exports code :results output :session Q1
-clc
-clear
-close all
-
-pkg load symbolic
-
-syms s1 o1 s2 o2
-h_1_1 = 13;
-v_1_1 = 255;
-h_2_1 = 26.5;
-v_2_1 = 548;
-
-h_1_2 = 7.5;
-v_1_2 = 135;
-h_2_2 = 15.5;
-v_2_2 = 306;
-
-equ1 = h_1_1 == v_1_1*s1 + o1;
-equ2 = h_1_2 == v_1_2*s1 + o1;
-[o1, s1] = solve(equ1, equ2)
-offset1 = double(o1)
-scale1 = double(s1)
-
-equ3 = h_2_1 == v_2_1*s2 + o2;
-equ4 = h_2_2 == v_2_2*s2 + o2;
-[o2, s2] = solve(equ3, equ4);
-offset2 = double(o2)
-scale2 = double(s2)
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    eq at line 93 column 5
-o1 = (sym)
-
-  21
-  ──
-  16
-
-s1 = (sym)
-
-  11 
-  ───
-  240
-offset1 = 1.3125
-scale1 = 0.045833
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    eq at line 93 column 5
-warning: passing floating-point values to sym is dangerous, see "help sym"
-warning: called from
-    double_to_sym_heuristic at line 50 column 7
-    sym at line 384 column 13
-    eq at line 93 column 5
-offset2 = 1.5909
-scale2 = 0.045455
-#+end_example
+#+FILETAGS: :Assignment:UTAS:2025:
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
 * Feed Forward
-** Real Tanks
-|  V |  h_1 |  h_2 |
-|  5 |  5.5 | 0.11 |
-|  7 |    9 | 0.18 |
-| 10 | 14.5 | 0.28 |
+** From Data
+Data can be collected to create an approximation of a feed forward term, this will provide a reasonable approximation and would be done when an analytical solution is not possible.
 
-|  V |  h_2 |
-|  5 | 0.11 |
-|  7 | 0.18 |
-| 10 | 0.28 |
+*** Real Tanks
+|-------------+----------+----------|
+| Voltage (V) | h_1 (cm) | h_2 (cm) |
+|-------------+----------+----------|
+|           5 |      5.5 |     0.11 |
+|-------------+----------+----------|
+|           7 |        9 |     0.18 |
+|-------------+----------+----------|
+|          10 |     14.5 |     0.28 |
+|-------------+----------+----------|
 
-At 7 volts we get zero steady state error with a feed forward term of 0.3888, which gives a tank 2 height of 18cm.
+From the data in the table above the following piece wise function can be obtained which provides the system with the required voltage for a input height.
 
-From the data above the following piece wise function can be obtained which provides the system with the required voltage for a input height.
-\begin{cases}
+\[\begin{cases}
 V = 45.45h           & 0 < h < 0.11 \\
 V = 28.57h + 1.86  & 0.11 < h < 0.18 \\
 V = 30h + 1.6 & 0.18 < h < \infty
-\end{cases}
-This was tested on the real tanks and in simulation, the simulation has a larger error than in real life
+\end{cases}\]
 
-** Data From Simulation
-| V |   h_2 |
-| 5 | 0.063 |
-| 7 | 0.124 |
-| 9 |   0.2 |
+This was tested on the real tanks and in simulation, the simulation has a larger error than in real life.
 
-\begin{cases}
-V = 79.37h           & 0 < x < 0.063 \\
-V = 32.79h + 2.937   & 0.063 < x < 0.124 \\
-V = 26.32h + 3.73832 & 0.124 < x < 0.2
-\end{cases}
+*** Simulation
+The same thing can be redone with data obtained from the non-linear simulation, the data can be seen in the table below.
+|-------------+----------|
+| Voltage (V) | h_2 (cm) |
+|-------------+----------|
+|           5 |    0.063 |
+|-------------+----------|
+|           7 |    0.124 |
+|-------------+----------|
+|           9 |      0.2 |
+|-------------+----------|
+
+As before the data above was used to create the piece wise function seen below.
+
+\[\begin{cases}
+V = 79.37h           & 0 < h < 0.063 \\
+V = 32.79h + 2.937   & 0.063 < h < 0.124 \\
+V = 26.32h + 3.73832 & 0.124 < h < \infty
+\end{cases}\]
+
 
 
 ** Non-Linear
@@ -125,7 +74,7 @@ K_{pump} V_p &= \frac{\pi C_{d} D_{o2} \sqrt{2g h_{2}}}{4} \\
 \Rightarrow V_p(t) &= 19.8793\sqrt{h_2(t)}
 \end{align*}
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session FF
 clc
 clear
 close all
@@ -170,55 +119,166 @@ latex(vpa(equ5))
 :                2
 : 19.879313473829069834707380973779 h_{2}^{0.5}
 
-** Linearised
+** Comparison
+To compare the three solutions we can plot them, this can be seen in Figure :TODO:.
 
-\begin{align*}
-\frac{dV}{dh} &= \frac{9.94}{\sqrt{h_2} \\
-\frac{dV}{dh} |_{h_2=0.1} &= 31.4 \\
-V(h_2) \approx V(0.1) + \frac{dV}{dh} |_{h_2=0.1} (h_2 - 0.1) \\
-V(h_2) \approx 6.293 + 31.4(h_2 - 0.1)
-\end{align*}
+The simulation follows the mathematical solution very closely, they differ a fair bit in the beginning which is due to not recording enough data. This is to be expected, as the simulation is based on the mathematical equations.
+
+The real tanks differ much more than the other two, this is because the real tanks have other losses and things that aren't considered in the simulation. The simulation has worse error on the equations gathered from the real tanks, this lines up with the plot.
+
+#+BEGIN_SRC octave :exports none :results output :session FF
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+end
+
+function V = f1(h)
+    V = NaN(size(h)); % Preallocate output array
+    V(h >= 0 & h < 0.11) = 45.45 * h(h >= 0 & h < 0.11);
+    V(h >= 0.11 & h < 0.18) = 28.57 * h(h >= 0.11 & h < 0.18) + 1.86;
+    V(h >= 0.18) = 30 * h(h >= 0.18) + 1.6;
+end
+
+function V = f2(h)
+    V = NaN(size(h)); % Preallocate output array
+    V(h >= 0 & h < 0.063) = 79.37 * h(h >= 0 & h < 0.063);
+    V(h > 0.063 & h < 0.124) = 32.79 * h(h > 0.063 & h < 0.124) + 2.937;
+    V(h > 0.124) = 26.32 * h(h > 0.124) + 3.73832;
+end
+
+h = 0:1e-3:0.2;
+
+V1 = f1(h);
+V2 = f2(h);
+V3 = 19.879313473829069834707380973779*sqrt(h);
+h = h.*1e2;
+figure;
+plot(h, V1, 'DisplayName', 'Real Tanks');
+hold on;
+plot(h, V2, 'DisplayName', 'Simulated Tanks');
+hold on;
+plot(h, V3, 'DisplayName', 'Mathmatical');
+legend;
+xlabel('height (cm)');
+ylabel('Voltage (V)');
+title('Feed Forward Comparison');
+hold off;
+#+end_src
+
+#+RESULTS:
 
 * Disturbance
-Tank 1 steady state = 7.5cm (h_1) : t = 12.19s, h = 20cm
-\[Vol = 0.000318\]
-\[q_1 = \frac{0.000318}{12.19} = 2.6086e-5\]
+By considering $q_{BYP} = \alpha_{BYP}\sqrt{2gh}$ we can form an equation for the outflow of the tank, where $\alpha_{BYP} = C_dCA_o$. The first step is to find the outflow of tank 1 with no disturbance ($q_1$), the time for tank 1 to reach steady sate is $12.19\ s$ and is at $7.5\ cm$, which means $q_1 = 0.000\ 026\ 086$. Next we find the outflow of tank 1 with a disturbance, it took $5.93\ s$ to reach steady sate at $5\ cm$, which means $q_1\prime = 0.000\ 024\ 138\ 080\ 150$. Finally
 
-Tank 1 + disturbance steady state (h_1') = 5cm : t = 5.93, h_2 = 11->20cm
-\[Vol = pi*(4.5e-2/2)^2 (20-11)*10^-2 = 0.000143138 \]
-\[q_2 = 0.000143138/t = 0.00002413808015\]
+\[\begin{align*}
+q_{BYP} &= q_1 - q_1\prime \\
+q_{BYP} &= \alpha_{BYP}\sqrt{2gh_1^{'}} \\
+\Rightarrow \alpha_{BYP} &= \frac{q_1 - q_1\prime}{\sqrt{2gh_1\prime}} \\
+\alpha_{BYP} &= 000\ 001\ 966\ 693\ 034
+\end{align*}\]
 
-\[q_{BYP} = q_1 - q_2\]
-\[q_{BYP} = 0.00000194791985\]
-
-\[q_{BYP} = C_dCA_o\sqrt{2gh_1^{'}}\]
-\[C_d\cdot A_o = \frac{q_{BYP}}{\sqrt{2gh_1^{'}}}\]
-\[C_d\cdot A_o = \frac{0.00000194791985}{\sqrt{2*9.81*5e-2}}\]
-\[\alpha_{BYP} = C_d\cdot A_o = 0.000\ 001\ 966\ 693\ 034\]
-\[q_{BYP} = \alpha_{BYP}\sqrt{2gh}\]
+This can be used in our simulations as a combined constant for or disturbance outflow equation.
 
 * Noise
+A ~.mat~ file was obtained from the physical rigs at various heights to get an equation for the noise.
+|----+----------+----------|
 |  V | h_1 (cm) | h_2 (cm) |
+|----+----------+----------|
 |  5 |        5 |       10 |
+|----+----------+----------|
 |  7 |        8 |       16 |
+|----+----------+----------|
 | 10 |       13 |       26 |
+|----+----------+----------|
 
-We can get the following equations that relate the standard deviation to the height in the tank:
+Using Figure :TODO: and the recorded data we can get the following equation which relates height in tank 2 to the standard deviation of normally distributed noise.
+
 \[\begin{cases}
 \textrm{std} = 3.88h -0.08 & 0 < h < 0.15 \\
 \textrm{std} = 3.90h -0.08 & 0.15 < h < \infty
 \end{cases} \approx 3.9h\]
 
+#+BEGIN_SRC octave :exports none :results output :session NOISE
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+end
+
+data = csvread('Noise.csv', 1, 0);
+t = data(:, 1);
+h1 = data(:, 2);
+h2 = data(:, 3);
+step = data(:, 4);
+
+figure;
+plot(t, h1, 'DisplayName', 'h1');
+hold on;
+plot(t, h2, 'DisplayName', 'h2');
+plot(t, step, 'DisplayName', 'step');
+hold off;
+
+title('Noise Data');
+xlabel('Time (s)');
+ylabel('Height (cm)');
+legend show;
+grid on;
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC octave :exports none :results output :session NOISE
+close all;
+Fs = 1 / (t(2) - t(1));  % Sampling frequency
+N = length(t);           % Number of points
+f = (0:N-1)*(Fs/N);      % Frequency vector
+
+H1 = fft(h1);            % FFT of h1
+H2 = fft(h2);            % FFT of h2
+Hstep = fft(step);       % FFT of step
+
+% Magnitude Spectrum
+magnitudeH1 = abs(H1);
+magnitudeH2 = abs(H2);
+
+% Plotting Magnitude Spectra
+figure;
+hold on;
+plot(f, magnitudeH1, 'DisplayName', 'Magnitude of h1');
+plot(f, magnitudeH2, 'DisplayName', 'Magnitude of h2');
+hold off;
+ylim([0, 100])
+title('Magnitude Spectrum');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+legend show;
+grid on;
+#+END_SRC
+
+#+RESULTS:
+
+Looking at the Fourier spectrum in Figure :TODO: we can see that there
+
+- In Lab Task 4 we applied normally distributed noise, is this reasonable?
+
+
+It is possible to reduce the noise by adding a filter, although this would have to be accounted for in the controller design. It would have to be a low pass filter, as the noise is high frequency, the cutoff of the filter would determine how much the system is effected, a lower cutoff will have a smaller effect on the system.
 
 * Part 2 & Controller Design & Evaluation
 
-
+** Cascade Compensator
 from the Figure :TODO: we can see that there are poles at $-0.2 + 0j$ and $-0.025 + 0j$. These can be used to create the root locus seen in Figure :TODO:. These will be used in our design for the cascade compensator.
 
-
-
-
-** Cascade Compensator
 
 *** Design Rational
 In the non-linear system the calculated feed-forward equation does a very good job at reducing the steady state error. Even though the steady-state error is non-zero it will reduce complexity to have an integrator, so it would be valid to just add another pole.
@@ -227,7 +287,7 @@ In the non-linear system the calculated feed-forward equation does a very good j
 **** Design
 For a $10\ cm$ step the current system has a settling time of about $150\ s$ and zero overshoot, as seen in Figure :TODO:. To third the settling time and have 10% overshoot a damping ratio of $\zeta = 0.591$ and a natural frequency of $\omega_n = 0.135$.
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 clc
 clear
 close all
@@ -273,7 +333,7 @@ w_n = (sym) 0.13532829025560637657003556926944
 This allows us to find our design point:
 \[s = -0.08 \pm 0.109j\]
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 design_point = -z*w_n + w_n*sqrt(z^2 - 1)
 #+END_SRC
 
@@ -287,7 +347,7 @@ Next we must find the angles for each pole/zero and use the following equation
 \Rightarrow \theta_c & = 20.9^o
 \end{align*}
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 p1 = -0.2;
 p2 = -0.025;
 
@@ -304,11 +364,9 @@ sum = theta_p1 + theta_p2
 : sum = (sym) -159.03238629821979884139450731273
 
 Hence our pole must be at p_c = -0.205$ and our controller will be:
-\[C(s) = K(s + 0.205)\]
+\[C(s) = \frac{K}{s + 0.205}\]
 
-
-
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 p_c = vpa(imag(design_point)/tand(sum) - real(design_point))
 #+END_SRC
 
@@ -318,7 +376,7 @@ p_c = vpa(imag(design_point)/tand(sum) - real(design_point))
 We can use the following equation to find $K$.
 \[K = \frac{1}{|G(s)C(s)|} = 0.00605\]
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 syms s
 G = 1/((s - p1)*(s - p2));
 C = 1/(s + p_c);
@@ -329,7 +387,7 @@ K = vpa(1/(subs(abs(G*C), s, design_point)))
 : K = (sym) 0.0060476057495766401129921923145199
 
 **** Pole-Zero Plots
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 close all;
 
 p1 = double(p1);
@@ -338,6 +396,7 @@ p_c = double(p_c);
 
 s = tf('s');
 g = 1/((s + -p1)*(s + -p2));
+C = 1/(s + p_c);
 figure;
 pzmap(g)
 pzmap(C)
@@ -347,12 +406,9 @@ legend('');
 #+END_SRC
 
 #+RESULTS:
-: error: pzmap: require at least one LTI model
-: error: called from
-:     pzmap at line 68 column 5
 
 **** Root-Locus
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 close all;
 figure;
 rlocus(g*C)
@@ -361,14 +417,9 @@ plot(double(real(design_point)), double(imag(design_point)), 'go', 'MarkerSize',
 #+END_SRC
 
 #+RESULTS:
-: error: lti: mtimes/mplus: one system is neither an lti system nor a numeric value
-: error: called from
-:     __numeric_to_lti__ at line 34 column 9
-:     __sys_group__ at line 30 column 16
-:     mtimes at line 60 column 7
 
 **** Nyquist Diagram
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 close all;
 figure;
 nyquist(g*C);
@@ -391,7 +442,7 @@ nyquist(g*C);
 
 *** Analysis
 **** Linear
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 close all;
 K = double(K)
 s = tf('s');
@@ -403,13 +454,6 @@ plot(t, y)
 
 #+RESULTS:
 : K = 6.0476e-03
-: error: lti: mtimes/mplus: one system is neither an lti system nor a numeric value
-: error: called from
-:     __numeric_to_lti__ at line 34 column 9
-:     __sys_group__ at line 30 column 16
-:     mtimes at line 60 column 7
-: error: 'FB' undefined near line 1, column 15
-: error: 't' undefined near line 1, column 6
 
 From the step response (Figure :TODO:) we can see that we have reduced the settling time, as desired. As mentioned before there is a steady state-error that can be ignored, because it will be accounted for in the feed-forward term.
 
@@ -420,7 +464,7 @@ The non-linear system exhibits different behaviour, this is because the linear s
 By comparing Figures (:TODO: no-feedback) and (:TODO: non-linear feedback) we can see that our goal of reducing the settling time marginally worked. The previous settling time was about 150s and now it is 100s, this is worse than the linear second order estimation but still an improvement. Given that there is no overshoot on the non-linear system it might be feasible to increase the overshoot and re-design the controller, sacrificing overshoot for settling time.
 
 **** Noise
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 hold off;
 figure;
 bode(FB)
@@ -440,7 +484,7 @@ The gain and phase margin can be found using the Nyquist diagram, as seen in Fig
 
 The phase margin can be found by measuring the angle between the unit circle intercept and the Nyquist diagram. This can be seen in Figure :TODO: and the phase margin can be estimated to be about $\Phi_M = 56^o$.
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 close all;
 figure;
 hold on;
@@ -483,7 +527,7 @@ S_{T:K} &= \frac{1262400 s^{3} + 744597 s^{2} + 109937 s + 2302}{1262400 K + 126
 S_{T:K} &= \frac{8787566400 s^{3} + 5183143079 s^{2} + 765274475 s + 16029703}{8787566400 s^{3} + 5183143079 s^{2} + 765274475 s + 69173387}
 \end{align*}
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 syms s K
 G = 1/((s + -p1)*(s + -p2));
 C = K/(s + p_c);
@@ -506,21 +550,23 @@ latex(vpa(expand(den)))
 
 #+RESULTS:
 #+begin_example
-\frac{1262400.0 K}{1262400.0 K + \left(5.0 s + 1.0\right) \left(40.0 s + 1.0\right) \left(6312.0 s + 2302.7874150813184437931175999439\right)}
-1262400.0 s^{3} + 744597.48301626368875862351998878 s^{2} + 109937.43367865932997069029199747 s + 2302.7874150813184437931175999439
-1262400.0 K + 1262400.0 s^{3} + 744597.48301626368875862351998878 s^{2} + 109937.43367865932997069029199747 s + 2302.7874150813184437931175999439
+\frac{1754200.0 K}{1754200.0 K + \left(5.0 s + 1.0\right) \left(40.0 s + 1.0\right) \left(8771.0 s + 691.0\right)}
+1754200.0 s^{3} + 532895.0 s^{2} + 39866.0 s + 691.0
+1754200.0 K + 1754200.0 s^{3} + 532895.0 s^{2} + 39866.0 s + 691.0
 T_SK = (sym)
 
-        6961⋅(5⋅s + 1)⋅(40⋅s + 1)⋅(6312⋅s + 733⋅π)       
-  ───────────────────────────────────────────────────────
-  6961⋅(5⋅s + 1)⋅(40⋅s + 1)⋅(6312⋅s + 733⋅π) + 16916160⋅π
-8787566400.0 s^{3} + 5183143079.2762115374487783226419 s^{2} + 765274475.83714759592597512259442 s + 16029703.196381057687243891613209
-8787566400.0 s^{3} + 5183143079.2762115374487783226419 s^{2} + 765274475.83714759592597512259442 s + 69173387.179330574475996121107707
+                  ⎛         3           2                ⎞           
+             6961⋅⎝1754200⋅s  + 532895⋅s  + 39866⋅s + 691⎠           
+  ───────────────────────────────────────────────────────────────────
+               3               2                                     
+  12210986200⋅s  + 3709482095⋅s  + 277507226⋅s + 4810051 + 23506280⋅π
+12210986200.0 s^{3} + 3709482095.0 s^{2} + 277507226.0 s + 4810051.0
+12210986200.0 s^{3} + 3709482095.0 s^{2} + 277507226.0 s + 78657207.561224685005409664907515
 #+end_example
 
 This sensitivity is only dependent on the input, the plot of this function can be seen in Figure :TODO:. Large values the sensitivity goes to $1$ whereas at zero the sensitivity is $0.2317$, this means that sensitivity will be bounded between $0.2317$ and $1$. Thus, the :TODO:
 
-#+BEGIN_SRC octave :exports code :results output :session Q1
+#+BEGIN_SRC octave :exports none :results output :session Q1
 close all;
 s = [0:0.00001:20e-2];
 Sens = (8787566400.0.*s.^3 + 5183143079.2762115374487783226419.*s.^2 + 765274475.83714759592597512259442.*s + 16029703.196381057687243891613209)./(8787566400.0.*s.^3 + 5183143079.2762115374487783226419.*s.^2 + 765274475.83714759592597512259442.*s + 69173387.179330574475996121107707);
@@ -535,5 +581,439 @@ Sens(end)
 : ans = 0.8937
 
 ** Feedback Compensator
+*** Design Rational
+Given the results on the non-linear system with the cascade compensator this design will drastically increase overshoot and decrease settling time.
+
+*** Calculations
+**** System Block Diagram
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG331_Project_Feedback_Compensator_Diagram.xopp]]
+**** Design
+If we choose a feedback compensator of the form $C(s) = K_fs$, we can get a non-unity feedback system where $H(s) = K_f\left(s + \frac{1}{K_f}\right)$. This is what we will be using to design the controller.
+
+As before, for a $10\ cm$ step the system has a $150\ s$ settling time and zero overshoot. In the linear system we will aim to reduce the settling time by a factor of three and increase the overshoot to 50%. This gives $\zeta = 0.215$ and $\omega_n = 0.371$.
+
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+  pkg load control
+end
+
+syms z w_n
+
+equ1 = 0.5 == exp(-z*pi/sqrt(1 - z^2));
+equ2 = 50 == 4/(z*w_n);
+
+sol = solve([equ1, equ2], [z, w_n]);
+z = vpa(sol.z)
+w_n = vpa(sol.w_n)
+
+#+END_SRC
+
+#+RESULTS:
+: z = (sym) 0.21545376196624678119163839407970
+: w_n = (sym) 0.37130936712320152624721257025123
+
+Thus, our design point is $-0.08 + 0.362j$.
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+design_point = -z*w_n + w_n*sqrt(z^2 - 1)
+#+END_SRC
+
+#+RESULTS:
+: design_point = (sym) -0.08 + 0.36258881134617550477021463565733⋅ⅈ
+
+
+Next we must find the angles for each pole/zero and use the following equation
+\begin{align*}
+(2k + 1)180^o &= \sum \theta_z - \sum \theta_p \\
+(2k + 1)180^o &= \theta_c - 71.68 - 98.62\\
+\Rightarrow \theta_c & = 9.7^o
+\end{align*}
+
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+p1 = -0.2;
+p2 = -0.025;
+
+theta_p1 = -vpa(atan2(imag(design_point),(real(design_point) - p1))*180/pi)
+theta_p2 = -vpa(atan2(imag(design_point),(real(design_point) - p2))*180/pi)
+
+sum = theta_p1 + theta_p2
+
+#+END_SRC
+
+#+RESULTS:
+: theta_p1 = (sym) -71.687862784313642138789936859293
+: theta_p2 = (sym) -98.625271772851647119627184285994
+: sum = (sym) -170.31313455716528925841712114529
+
+Hence our zero must be at $z_c = -2.04$ and our controller will be:
+\[C(s) = K(s + 0.205)\]
+
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+k = -1;
+angle = (2*k + 1)*180 - sum
+z_c = vpa(imag(design_point)/tand(angle) - real(design_point))
+#+END_SRC
+
+#+RESULTS:
+: angle = (sym) -9.6868654428347107415828788547132
+: z_c = (sym) -2.0441637863604992379038674772076
+
+We can use the following equation to find $K$.
+\[K_f = \frac{1}{z_c} = 0.489\]
+
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+syms s
+K = double(-vpa(1/(z_c)))
+#+END_SRC
+
+#+RESULTS:
+: K = 0.4892
+
+**** Pole-Zero Plots
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+close all;
+
+p1 = double(p1);
+p2 = double(p2);
+z_c = double(z_c);
+
+s = tf('s');
+g = 1/((s + -p1)*(s + -p2));
+C = K*s;
+G = (g/(1 + g*C));
+figure;
+pzmap(G)
+xlim([-1, 0.1]);
+legend('');
+
+#+END_SRC
+
+#+RESULTS:
+
+**** Root-Locus
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+close all;
+figure;
+rlocus(G)
+hold on;
+design_point
+%plot(double(real(design_point)), double(imag(design_point)), 'go', 'MarkerSize', 10, 'DisplayName', 'Design Point');
+xlim([-1, 0.1]);
+ylim([-2, 2]);
+#+END_SRC
+
+#+RESULTS:
+: design_point = (sym) -0.08 + 0.36258881134617550477021463565733⋅ⅈ
+
+**** Nyquist Diagram
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+close all;
+figure;
+nyquist(G);
+
+%figure;
+%nyquist(g*C);
+%xlim([-21, -19])
+%ylim([-0.1, 0.1])
+#+END_SRC
+
+#+RESULTS:
+
+
+*** Analysis
+
+**** Linear
+#+BEGIN_SRC octave :exports none :results output :session FB_C
+close all;
+s = tf('s');
+FB = feedback(G);
+[y, t] = step(FB);
+figure;
+plot(t, y)
+xlim([0, 50]);
+#+END_SRC
+
+#+RESULTS:
+
+From the step response (Figure :TODO:) we can see that we have increased the overshoot considerably compared to the cascade compensator and reduced the settling time.
+
+This system should preform better for the non-linear system, looking at Figure (:TODO:, see Non_Linear_FB_Compensator.slx), it can be seen that this is not the case. It double the settling time and introduced considerable overshoot. 
 
 ** Nested Control
+
+*** Design Rational
+We know the transfer function for each of the tanks, we could design a feedback system for each of them and an overall feedback system. Our design will be of the form as the one in Figure (:TODO:, Diagram)
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG331_Project_Nested_Diagram.xopp]]
+
+For Tank 1 a Lead controller will be selected as we don't care about the steady state situation, only the transient behaviour. For Tank 2 and the combined system we want zero steady state error and a good transient behaviour, so we will choose to have a PI for Tank 2 and a PID for the combined system.
+
+*** Tank 1 Design
+Tank 1's transfer function is given by:
+\[G_{h1}(s) = \frac{h_1(s)}{q_i(s)}= \frac{628.76}{s + 0.1992}\]
+Its step response can be seen in Figure :TODO:, it can be seen that the settling time is about $20\ s$. We will aim to reduce this by a factor of 2 and introduce a overshoot of 25%, that means that the new settling time will be $10\ s$, this corresponds to $\zeta = 0.403$ and $\omega_n = 0.991$. 
+
+#+BEGIN_SRC octave :exports none :results output :session NEST
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+  pkg load control
+end
+
+s = tf('s');
+G_h1 = 628.76/(s + 0.1992);
+step(G_h1)
+
+syms z w_n
+
+equ1 = 0.25 == exp(-z*pi/sqrt(1 - z^2));
+equ2 = 10 == 4/(z*w_n);
+
+sol = solve([equ1, equ2], [z, w_n]);
+z = vpa(sol.z)
+w_n = vpa(sol.w_n)
+
+#+END_SRC
+
+#+RESULTS: 
+: z = (sym) 0.40371275194342068038575605143555
+: w_n = (sym) 0.99080348112476513209932890033308
+
+A lead controller has the form $C_{lead}(s) = K\frac{s + z_c}{s + p_c}$ and our system is first order, so we can simply multiply the systems and apply the feedback equation to get our system.
+\[T_1(s) = \frac{1250(p_c + s)}{1250s^2 + s(1250K_c + 1250p_c + 249) + (1250K_cz_c + 249p_c)}\]
+
+#+BEGIN_SRC octave :exports none :results output :session NEST
+syms s K_c z_c p_c
+
+g = 1/(s + 0.1992);
+C = K_c*(s + z_c)/(s + p_c)
+
+T = simplify(C*g/(1 + g*C))
+[num, den] = numden(T);
+latex(expand(den))
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+C = (sym)
+
+  K_c⋅(s + z_c)
+  ─────────────
+     p_c + s
+T = (sym)
+
+               1250⋅K_c⋅(s + z_c)              
+  ─────────────────────────────────────────────
+  1250⋅K_c⋅(s + z_c) + (p_c + s)⋅(1250⋅s + 249)
+1250 K_{c} s + 1250 K_{c} z_{c} + 1250 p_{c} s + 249 p_{c} + 1250 s^{2} + 249 s
+#+end_example
+
+\[1250 K_{c} s + 1250 K_{c} z_{c} + 1250 p_{c} s + 249 p_{c} + 1250 s^{2} + 249 s\]
+
+This gives us a system of equations to solve with one degree of freedom, this allows us to choose one pole or zero position, if we choose $p_c = 0$ we will get zero steady state error and our desired metrics. Hence our controller is:
+\[C_2(s) = \frac{-0.1985(s - 0.003955)}{s}\]
+#+BEGIN_SRC octave :exports none :results output :session NEST
+syms z_c K_c
+p_c = 0;
+equ1 = 2*z*w_n == 1250*K_c + 1250*p_c + 249;
+equ2 = w_n^2   == 1250*K_c*z_c + 249*p_c;
+
+sol = solve([equ1, equ2], [K_c, z_c]);
+K_c = sol.K_c
+z_c = sol.z_c
+
+#+END_SRC
+
+#+RESULTS:
+: K_c = (sym) -0.198560000000000
+: z_c = (sym) -0.00395524390898047
+
+**** Pole-Zero Plots
+#+BEGIN_SRC octave :exports none :results output :session NEST
+close all;
+
+p1 = double(p1)
+p_c = double(p_c)
+z_c = double(z_c)
+
+s = tf('s');
+g = 1/(s + -p1)
+C = (s + -z_c)/(s + p_c)
+T_1 = C*g/(1 + C*g)
+figure;
+pzmap(g)
+pzmap(C)
+xlim([-0.3, 0.1]);
+legend('');
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+p1 = -0.1992
+p_c = 0
+z_c = -3.9552e-03
+Transfer function 'g' from input 'u1' to output ...
+
+          1     
+ y1:  ----------
+      s + 0.1992
+
+Continuous-time model.
+Transfer function 'C' from input 'u1' to output ...
+
+      s + 0.003955
+ y1:  ------------
+           s      
+
+Continuous-time model.
+Transfer function 'T_1' from input 'u1' to output ...
+
+            s^3 + 0.2032 s^2 + 0.0007879 s      
+ y1:  ------------------------------------------
+      s^4 + 1.398 s^3 + 0.2428 s^2 + 0.0007879 s
+
+Continuous-time model.
+#+end_example
+
+**** Step Response
+As seen in Figure :TODO: we have reduced the settling time even more than expected, this is due to the zeros making the system behave weird. Overall this design has been successful at reducing the settling time.
+
+#+BEGIN_SRC octave :exports none :results output :session NEST
+close all;
+figure;
+step(T_1)
+xlim([0,10])
+#+END_SRC
+
+#+RESULTS:
+
+*** Tank 2 Design
+Tank 2 is given by the following transfer function:
+\[G_{h2}(s) = \frac{h_2(s)}{q_{o1}(s)} = \frac{628.76}{s + 0.0249}\]
+
+For this we are going to design a PI controller, to do this we add an integrator and a zero to for our design point.
+
+Lets arbitrarily set our design point such that it has 10% overshoot and maintain the same settling time of $150\ s$.
+
+#+BEGIN_SRC octave :exports none :results output :session NEST
+close all
+s = tf('s');
+G_h2 = 628.76/(s + 0.0249);
+figure;
+step(G_h2)
+
+#+END_SRC
+
+#+RESULTS:
+
+This gives a design point of $-0.0267 \pm 0.0364$.
+
+#+BEGIN_SRC octave :exports none :results output :session NEST
+syms z w_n
+
+equ1 = 0.1 == exp(-z*pi/sqrt(1 - z^2));
+equ2 = 150 == 4/(z*w_n);
+
+sol = solve([equ1, equ2], [z, w_n]);
+z = vpa(sol.z)
+w_n = vpa(sol.w_n)
+
+design_point = -z*w_n + w_n*sqrt(z^2 - 1)
+#+END_SRC
+
+#+RESULTS:
+: z = (sym) 0.59115503379889750930516375129716
+: w_n = (sym) 0.045109430085202125523345189756481
+: design_point = (sym) -0.026666666666666666666666666666667 + 0.036383369435782435932954230011503⋅ⅈ
+
+\begin{align*}
+(2k + 1)180^o &= \sum \theta_z - \sum \theta_p \\
+(2k + 1)180^o &= \theta_c -92.77 -126.23 \\
+\Rightarrow \theta_c & = 39.01^o
+\end{align*}
+
+#+BEGIN_SRC octave :exports none :results output :session NEST
+p1 = -0.0249;
+pc = 0;
+
+theta_p1 = -vpa(atan2(imag(design_point),(real(design_point) - p1))*180/pi)
+theta_pc = -vpa(atan2(imag(design_point),(real(design_point) - pc))*180/pi)
+
+sum = theta_p1 + theta_pc
+
+k = 0;
+angle = (2*k + 1)*180 + sum
+#+END_SRC
+
+#+RESULTS:
+: theta_p1 = (sym) -92.779926769003752573103469332131
+: theta_pc = (sym) -126.23901581158754064651098667597
+: sum = (sym) -219.01894258059129321961445600810
+: angle = (sym) -39.018942580591293219614456008096
+
+Which means our controller is:
+\[C(s) = K\frac{s + 0.0182}{s}\]
+
+#+BEGIN_SRC octave :exports none :results output :session NEST
+z_c = vpa(imag(design_point)/tand(sum) - real(design_point))
+#+END_SRC
+
+#+RESULTS:
+: z_c = (sym) -0.018232693018779397319158176631821
+
+
+**** Pole-Zero Plots
+#+BEGIN_SRC octave :exports none :results output :session NEST
+close all;
+
+p1 = double(p1);
+z_c = double(p_c);
+
+s = tf('s');
+g = 1/(s + -p1)
+C = (s - z_c)/s;
+figure;
+pzmap(g)
+pzmap(C)
+xlim([-0.5, 0.1]);
+legend('');
+
+#+END_SRC
+
+#+RESULTS:
+: Transfer function 'g' from input 'u1' to output ...
+: 
+:           1     
+:  y1:  ----------
+:       s + 0.0249
+: 
+: Continuous-time model.
+
+**** Root-Locus
+#+BEGIN_SRC octave :exports none :results output :session NEST
+close all;
+figure;
+rlocus(g*C)
+hold on;
+plot(double(real(design_point)), double(imag(design_point)), 'go', 'MarkerSize', 10, 'DisplayName', 'Design Point');
+#+END_SRC
+
+#+RESULTS:
+
+*** Combined Design
+
+

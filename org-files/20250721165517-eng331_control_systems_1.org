@@ -32,6 +32,7 @@
  - [[id:862268d9-e7e1-4e3a-be45-5c027b31dd9b][ENG331 - Control Systems 1 - Assignment 3]]
  - [[id:3eb76f9d-5112-49a0-8b21-8976591d6fd6][ENG331 - Control Systems 1 - Assignment 4]]
  - [[id:4845e439-6804-4e2e-821c-ca470e9623e7][ENG331 - Control Systems 1 - Assignment 5]]
+ - [[id:27d00bd4-2808-44ca-b13a-e414fe665cd1][ENG331 - Control Systems 1 - Assignment 6]]
    
 ** Assessment Task 2: Design report
  - 20%
