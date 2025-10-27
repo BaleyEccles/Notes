@@ -120,7 +120,11 @@ latex(vpa(equ5))
 : 19.879313473829069834707380973779 h_{2}^{0.5}
 
 ** Comparison
-To compare the three solutions we can plot them, this can be seen in Figure :TODO:.
+To compare the three solutions we can plot them, this can be seen in \ref{fig:fig1}.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Feed Forward Comparison \label{fig:fig1}
+[[./ENG331_Design_FF_Comp.png]]
 
 The simulation follows the mathematical solution very closely, they differ a fair bit in the beginning which is due to not recording enough data. This is to be expected, as the simulation is based on the mathematical equations.
 
@@ -168,6 +172,7 @@ xlabel('height (cm)');
 ylabel('Voltage (V)');
 title('Feed Forward Comparison');
 hold off;
+print -dpng 'ENG331_Design_FF_Comp.png'
 #+end_src
 
 #+RESULTS:
@@ -196,7 +201,11 @@ A ~.mat~ file was obtained from the physical rigs at various heights to get an e
 | 10 |       13 |       26 |
 |----+----------+----------|
 
-Using Figure :TODO: and the recorded data we can get the following equation which relates height in tank 2 to the standard deviation of normally distributed noise.
+Using Figure \ref{fig:fig2} and the recorded data we can get the following equation which relates height in tank 2 to the standard deviation of normally distributed noise.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Noise Data \label{fig:fig2}
+[[./ENG331_Design_Noise.png]]
 
 \[\begin{cases}
 \textrm{std} = 3.88h -0.08 & 0 < h < 0.15 \\
@@ -232,7 +241,7 @@ xlabel('Time (s)');
 ylabel('Height (cm)');
 legend show;
 grid on;
-
+print -dpng 'ENG331_Design_Noise.png'
 #+END_SRC
 
 #+RESULTS:
@@ -263,29 +272,98 @@ xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 legend show;
 grid on;
+print -dpng 'ENG331_Design_Noise_Fourier.png'
 #+END_SRC
 
 #+RESULTS:
 
-Looking at the Fourier spectrum in Figure :TODO: we can see that there
+Looking at the Fourier spectrum in Figure \ref{fig:fig3} we can see that there :TODO:
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Noise Fourier Spectrum \label{fig:fig3}
+[[./ENG331_Design_Noise.png]]
+
 
 - In Lab Task 4 we applied normally distributed noise, is this reasonable?
+  :TODO:
 
 
 It is possible to reduce the noise by adding a filter, although this would have to be accounted for in the controller design. It would have to be a low pass filter, as the noise is high frequency, the cutoff of the filter would determine how much the system is effected, a lower cutoff will have a smaller effect on the system.
 
 * Part 2 & Controller Design & Evaluation
 
-** Cascade Compensator
-from the Figure :TODO: we can see that there are poles at $-0.2 + 0j$ and $-0.025 + 0j$. These can be used to create the root locus seen in Figure :TODO:. These will be used in our design for the cascade compensator.
+#+BEGIN_SRC octave :exports none :results output :session A
+clc
+clear
+close all
 
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+  pkg load control
+end
+
+s = tf('s');
+p1 = -0.2;
+p2 = -0.025;
+
+g = 1/((s + -p1)*(s + -p2));
+
+figure;
+
+% Create a 2x1 subplot layout
+subplot(1, 2, 1); % First subplot for pole-zero map
+pzmap(g)
+xlim([-0.25, 0.1]);
+ylim([-1, 1]);
+title('Pole-Zero Map');
+
+subplot(1, 2, 2); % Second subplot for root locus
+rlocus(g);
+title('Root Locus');
+
+% Save the figure as a PNG file
+print -dpng 'ENG331_Design_PZ_Rlocus.png';
+
+#+END_SRC
+
+#+RESULTS:
+
+From the Figure \ref{fig:fig4} we can see that there are poles at $-0.2 + 0j$ and $-0.025 + 0j$, which can be used to make the root locus seen on the right. These will be used in our design for the controllers.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Uncompensated System Pole-Zero and Root Locus \label{fig:fig4}
+[[./ENG331_Design_PZ_Rlocus.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Uncompensated System Step Response \label{fig:fig5}
+[[./ENG331_Design_Step.png]]
+
+
+#+BEGIN_SRC octave :exports none :results output :session A
+close all;
+figure;
+step(g/200*10e-2)
+ylabel('G(s)')
+print -dpng 'ENG331_Design_Step.png';
+#+END_SRC
+
+#+RESULTS:
+
+** Cascade Compensator
 
 *** Design Rational
 In the non-linear system the calculated feed-forward equation does a very good job at reducing the steady state error. Even though the steady-state error is non-zero it will reduce complexity to have an integrator, so it would be valid to just add another pole.
 
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Cascade Compensated System Block Diagram \label{fig:D2}
+[[./ENG331_Design_Cascade_Diagram.png]]
+
 *** Calculations
-**** Design
-For a $10\ cm$ step the current system has a settling time of about $150\ s$ and zero overshoot, as seen in Figure :TODO:. To third the settling time and have 10% overshoot a damping ratio of $\zeta = 0.591$ and a natural frequency of $\omega_n = 0.135$.
+
+For a $10\ cm$ step the current system has a settling time of about $150\ s$ and zero overshoot, as seen in Figure \ref{fig:fig5}. To third the settling time and have 10% overshoot a damping ratio of $\zeta = 0.591$ and a natural frequency of $\omega_n = 0.135$ is required.
 
 #+BEGIN_SRC octave :exports none :results output :session Q1
 clc
@@ -314,7 +392,8 @@ w_n = vpa(sol.w_n)
 
 #+RESULTS:
 #+begin_example
-<stdin>-518:7: SymPyDeprecationWarning: 
+Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
+<stdin>-158:7: SymPyDeprecationWarning: 
 
 non-Expr objects in a Matrix is deprecated. Matrix represents
 a mathematical matrix. To represent a container of non-numeric
@@ -378,115 +457,77 @@ We can use the following equation to find $K$.
 
 #+BEGIN_SRC octave :exports none :results output :session Q1
 syms s
-G = 1/((s - p1)*(s - p2));
+
+g = 1/((s - p1)*(s - p2));
 C = 1/(s + p_c);
-K = vpa(1/(subs(abs(G*C), s, design_point)))
+K = vpa(1/(subs(abs(g*C), s, design_point)))
 #+END_SRC
 
 #+RESULTS:
 : K = (sym) 0.0060476057495766401129921923145199
 
-**** Pole-Zero Plots
-#+BEGIN_SRC octave :exports none :results output :session Q1
-close all;
-
-p1 = double(p1);
-p2 = double(p2);
-p_c = double(p_c);
-
-s = tf('s');
-g = 1/((s + -p1)*(s + -p2));
-C = 1/(s + p_c);
-figure;
-pzmap(g)
-pzmap(C)
-xlim([-0.5, 0.1]);
-legend('');
-
-#+END_SRC
-
-#+RESULTS:
-
-**** Root-Locus
-#+BEGIN_SRC octave :exports none :results output :session Q1
-close all;
-figure;
-rlocus(g*C)
-hold on;
-plot(double(real(design_point)), double(imag(design_point)), 'go', 'MarkerSize', 10, 'DisplayName', 'Design Point');
-#+END_SRC
-
-#+RESULTS:
-
-**** Nyquist Diagram
-#+BEGIN_SRC octave :exports none :results output :session Q1
-close all;
-figure;
-nyquist(g*C);
-
-%figure;
-%nyquist(g*C);
-%xlim([-21, -19])
-%ylim([-0.1, 0.1])
-#+END_SRC
-
-#+RESULTS:
-: error: lti: mtimes/mplus: one system is neither an lti system nor a numeric value
-: error: called from
-:     __numeric_to_lti__ at line 34 column 9
-:     __sys_group__ at line 30 column 16
-:     mtimes at line 60 column 7
-
-**** System Block Diagrams
-:TODO:
-
 *** Analysis
-**** Linear
 #+BEGIN_SRC octave :exports none :results output :session Q1
 close all;
-K = double(K)
+K = double(K);
 s = tf('s');
+
+g = 1/((s - double(p1))*(s - double(p2)));
+C = 1/(s + double(p_c));
+
 FB = feedback(K*g*C);
-[y, t] = step(FB);
 figure;
-plot(t, y)
+step(FB);
+ylabel('T(s)')
+print -dpng 'ENG331_Design_Step_Cascade.png';
 #+END_SRC
 
 #+RESULTS:
-: K = 6.0476e-03
 
-From the step response (Figure :TODO:) we can see that we have reduced the settling time, as desired. As mentioned before there is a steady state-error that can be ignored, because it will be accounted for in the feed-forward term.
+From the step response (Figure \ref{fig:fig6}) we can see that we have reduced the settling time, as desired. As mentioned before there is a steady state-error that can be ignored, because it will be accounted for in the feed-forward term.
 
-**** Non-Linear
-:TODO: See Non_Linear_Compensator.slx
-The non-linear system exhibits different behaviour, this is because the linear system is an approximation of the non-linear system, this can be seen by comparing the step responses in Figure :TODO: and :TODO:, the non-linear system has no overshoot whereas the linear one does.
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Cascade Compensated System Step Response \label{fig:fig6}
+[[./ENG331_Design_Step_Cascade.png]]
 
-By comparing Figures (:TODO: no-feedback) and (:TODO: non-linear feedback) we can see that our goal of reducing the settling time marginally worked. The previous settling time was about 150s and now it is 100s, this is worse than the linear second order estimation but still an improvement. Given that there is no overshoot on the non-linear system it might be feasible to increase the overshoot and re-design the controller, sacrificing overshoot for settling time.
 
-**** Noise
+The non-linear system exhibits different behaviour, this is because the linear system is an approximation of the non-linear system, this can be seen by comparing the step responses in Figure \ref{fig:fig7} and \ref{fig:fig6}, the non-linear system has no overshoot whereas the linear one does.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Non Linear Cascade Compensated System Step Response \label{fig:fig7}
+[[./ENG331_Design_Step_Cascade_NL.png]]
+
+By comparing Figures \ref{fig:fig5} and \ref{fig:fig6} we can see that our goal of reducing the settling time worked. The previous settling time was about 150s and now it is 50s. Given that there is no overshoot on the non-linear system it might be feasible to increase the overshoot and re-design the controller, sacrificing overshoot for settling time.
+
 #+BEGIN_SRC octave :exports none :results output :session Q1
 hold off;
 figure;
 bode(FB)
+print -dpng 'ENG331_Design_Bode_Cascade.png';
 #+END_SRC
 
 #+RESULTS:
-: error: 'FB' undefined near line 1, column 6
 
-For the linear system we can see the Bode plot in Figure :TODO:. It can be seen that the system acts as a low pass filter, the system is good at removing high frequency signals, this is good for removing the noise.
+For the linear system we can see the Bode plot in Figure \ref{fig:fig8}. It can be seen that the system acts as a low pass filter, the system is good at attenuating high frequency signals.
 
-**** Disturbances
-:TODO: See Non_Linear_Compensator.slx
-Adding a disturbance at $t = 100$ effects the system in ways that was not considered in the controller design, this can be seen in Figure :TODO:. 
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Cascade Compensated System Bode Plot \label{fig:fig8}
+[[./ENG331_Design_Bode_Cascade.png]]
 
-**** Gain Margin And Phase Margin
-The gain and phase margin can be found using the Nyquist diagram, as seen in Figure :TODO:. The Nyquist diagram crosses the real axis at about $-20$, thus the gain can be increase by $\frac{1}{20} = 0.05$ before the system becomes unstable. Hence $G_M = 20\log(0.05) = -60\ dB$.
+Adding a disturbance at $t = 100$ effects the system in ways that was not considered in the controller design, this can be seen in Figure \ref{fig:fig9}. This is a particularly bad response because the design rational did not account for steady state error, that was the job of the feed forward term.
 
-The phase margin can be found by measuring the angle between the unit circle intercept and the Nyquist diagram. This can be seen in Figure :TODO: and the phase margin can be estimated to be about $\Phi_M = 56^o$.
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Cascade Compensated System Bode Plot \label{fig:fig9}
+[[./ENG331_Design_Disturbance_Cascade.png]]
 
 #+BEGIN_SRC octave :exports none :results output :session Q1
 close all;
 figure;
+subplot(1, 2, 1);
+nyquist(g*C);
+axis equal;
+hold on;
+subplot(1, 2, 2);
 hold on;
 nyquist(g*C);
 xlim([-2, 2]);
@@ -508,17 +549,35 @@ axis equal;
 %plot([x_start, x_end], [y_start, y_end], 'r-', 'LineWidth', 2);  % Plot the line in red
 
 hold off;
+print -dpng 'ENG331_Design_Nyquist_Cascade.png';
 #+END_SRC
 
 #+RESULTS:
-: error: lti: mtimes/mplus: one system is neither an lti system nor a numeric value
-: error: called from
-:     __numeric_to_lti__ at line 34 column 9
-:     __sys_group__ at line 30 column 16
-:     mtimes at line 60 column 7
 
-**** Sensitivity
-Looking at the root locus in Figure :TODO: we can see that the system might become unstable if the gain is too large, we can look at the sensitivity of the system with respect to the gain to quantify this, we aim to find $S_{T:K}$.
+The gain and phase margin can be found using the Nyquist diagram, as seen in Figure \ref{fig:fig10}. The Nyquist diagram crosses the real axis at about $-20$, thus the gain can be increase by $\frac{1}{20} = 0.05$ before the system becomes unstable. Thus, $G_M = 20\log(0.05) = -60\ dB$.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Cascade Compensated System Nyquist Plot \label{fig:fig10}
+[[./ENG331_Design_Nyquist_Cascade.png]]
+
+The phase margin can be found by measuring the angle between the unit circle intercept and the Nyquist diagram. This can be seen in the second plot of Figure \ref{fig:fig10} and the phase margin can be estimated to be about $\Phi_M = 56^o$.
+
+#+BEGIN_SRC octave :exports none :results output :session Q1
+close all;
+figure;
+rlocus(g*C)
+hold on;
+plot(double(real(design_point)), double(imag(design_point)), 'go', 'MarkerSize', 10, 'DisplayName', 'Design Point');
+print -dpng 'ENG331_Design_RLocus_Cascade.png';
+#+END_SRC
+
+#+RESULTS:
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Cascade Compensated System Root Locus \label{fig:fig11}
+[[./ENG331_Design_RLocus_Cascade.png]]
+
+Looking at the root locus in Figure \ref{fig:fig11} we can see that the system might become unstable if the gain is too large, we can look at the sensitivity of the system with respect to the gain to quantify this, we aim to find $S_{T:K}$.
 
 \begin{align*}
 S_{T:K} &= \frac{K}{T}\frac{\partial T}{\partial K} \\
@@ -550,45 +609,51 @@ latex(vpa(expand(den)))
 
 #+RESULTS:
 #+begin_example
-\frac{1754200.0 K}{1754200.0 K + \left(5.0 s + 1.0\right) \left(40.0 s + 1.0\right) \left(8771.0 s + 691.0\right)}
-1754200.0 s^{3} + 532895.0 s^{2} + 39866.0 s + 691.0
-1754200.0 K + 1754200.0 s^{3} + 532895.0 s^{2} + 39866.0 s + 691.0
+\frac{200.0 K}{200.0 K + \left(s + 0.36482686374624073498419349846282\right) \left(5.0 s + 1.0\right) \left(40.0 s + 1.0\right)}
+200.0 s^{3} + 117.96537274924814699683869969256 s^{2} + 17.417208868580833074288707430827 s + 0.36482686374624073498419349846282
+200.0 K + 200.0 s^{3} + 117.96537274924814699683869969256 s^{2} + 17.417208868580833074288707430827 s + 0.36482686374624073498419349846282
 T_SK = (sym)
 
-                  ⎛         3           2                ⎞           
-             6961⋅⎝1754200⋅s  + 532895⋅s  + 39866⋅s + 691⎠           
-  ───────────────────────────────────────────────────────────────────
-               3               2                                     
-  12210986200⋅s  + 3709482095⋅s  + 277507226⋅s + 4810051 + 23506280⋅π
-12210986200.0 s^{3} + 3709482095.0 s^{2} + 277507226.0 s + 4810051.0
-12210986200.0 s^{3} + 3709482095.0 s^{2} + 277507226.0 s + 78657207.561224685005409664907515
+      6961⋅(s + 0.36482686374624073498419349846282)⋅(5⋅s + 1)⋅(40⋅s + 1)     
+  ───────────────────────────────────────────────────────────────────────────
+  6961⋅(s + 0.36482686374624073498419349846282)⋅(5⋅s + 1)⋅(40⋅s + 1) + 2680⋅π
+1392200.0 s^{3} + 821156.95970751635124499418855994 s^{2} + 121241.19093419117903012369242599 s + 2539.5597985375817562249709427997
+1392200.0 s^{3} + 821156.95970751635124499418855994 s^{2} + 121241.19093419117903012369242599 s + 10959.028110158227635304855209989
 #+end_example
 
-This sensitivity is only dependent on the input, the plot of this function can be seen in Figure :TODO:. Large values the sensitivity goes to $1$ whereas at zero the sensitivity is $0.2317$, this means that sensitivity will be bounded between $0.2317$ and $1$. Thus, the :TODO:
+This sensitivity is only dependent on the input, the plot of this function can be seen in Figure \ref{fig:fig12}. Large values the sensitivity goes to $1$ whereas at zero the sensitivity is $0.2317$, this means that sensitivity will be bounded between $0.2317$ and $1$. Thus, the sensitivity of $K$ to the input is not an issue.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Cascade Compensated System Sensitivity Plot \label{fig:fig12}
+[[./ENG331_Design_Sens_Cascade.png]]
+
 
 #+BEGIN_SRC octave :exports none :results output :session Q1
 close all;
-s = [0:0.00001:20e-2];
+s = [0:0.00001:100e-2];
 Sens = (8787566400.0.*s.^3 + 5183143079.2762115374487783226419.*s.^2 + 765274475.83714759592597512259442.*s + 16029703.196381057687243891613209)./(8787566400.0.*s.^3 + 5183143079.2762115374487783226419.*s.^2 + 765274475.83714759592597512259442.*s + 69173387.179330574475996121107707);
+
 figure;
-plot(s, Sens)
-Sens(1)
-Sens(end)
+plot(s, Sens);
+xlabel('Frequency (s)');
+ylabel('Sensitivity');
+title('Sensitivity vs Frequency');
+grid on;
+print -dpng 'ENG331_Design_Sens_Cascade.png';
 #+END_SRC
 
 #+RESULTS:
-: ans = 0.2317
-: ans = 0.8937
 
 ** Feedback Compensator
 *** Design Rational
 Given the results on the non-linear system with the cascade compensator this design will drastically increase overshoot and decrease settling time.
 
-*** Calculations
-**** System Block Diagram
-[[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG331_Project_Feedback_Compensator_Diagram.xopp]]
-**** Design
-If we choose a feedback compensator of the form $C(s) = K_fs$, we can get a non-unity feedback system where $H(s) = K_f\left(s + \frac{1}{K_f}\right)$. This is what we will be using to design the controller.
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Feedback Compensated System Block Diagram \label{fig:D1}
+[[./ENG331_Design_FB_Diagram.png]]
+
+*** Design
+If we choose a feedback compensator of the form $C(s) = K_fs$ we can get a non-unity feedback system where $H(s) = K_f\left(s + \frac{1}{K_f}\right)$, this is what we will be using to design the controller.
 
 As before, for a $10\ cm$ step the system has a $150\ s$ settling time and zero overshoot. In the linear system we will aim to reduce the settling time by a factor of three and increase the overshoot to 50%. This gives $\zeta = 0.215$ and $\omega_n = 0.371$.
 
@@ -628,7 +693,6 @@ design_point = -z*w_n + w_n*sqrt(z^2 - 1)
 #+RESULTS:
 : design_point = (sym) -0.08 + 0.36258881134617550477021463565733⋅ⅈ
 
-
 Next we must find the angles for each pole/zero and use the following equation
 \begin{align*}
 (2k + 1)180^o &= \sum \theta_z - \sum \theta_p \\
@@ -643,40 +707,45 @@ p2 = -0.025;
 theta_p1 = -vpa(atan2(imag(design_point),(real(design_point) - p1))*180/pi)
 theta_p2 = -vpa(atan2(imag(design_point),(real(design_point) - p2))*180/pi)
 
-sum = theta_p1 + theta_p2
-
+sum = theta_p1 + theta_p2 + 180
 #+END_SRC
 
 #+RESULTS:
 : theta_p1 = (sym) -71.687862784313642138789936859293
 : theta_p2 = (sym) -98.625271772851647119627184285994
-: sum = (sym) -170.31313455716528925841712114529
+: sum = (sym) 9.6868654428347107415828788547132
 
-Hence our zero must be at $z_c = -2.04$ and our controller will be:
-\[C(s) = K(s + 0.205)\]
+Hence our zero must be at $z_c = -2.204$ and our controller will be:
+\[C(s) = K_f(s + 2.204)\]
 
 #+BEGIN_SRC octave :exports none :results output :session FB_C
-k = -1;
-angle = (2*k + 1)*180 - sum
-z_c = vpa(imag(design_point)/tand(angle) - real(design_point))
+z_c = vpa(imag(design_point)/tand(sum) - real(design_point))
 #+END_SRC
 
 #+RESULTS:
-: angle = (sym) -9.6868654428347107415828788547132
-: z_c = (sym) -2.0441637863604992379038674772076
+: z_c = (sym) 2.2041637863604992379038674772076
 
-We can use the following equation to find $K$.
-\[K_f = \frac{1}{z_c} = 0.489\]
+We can use the following equation to find $K_f$.
+\[K_f = \frac{1}{z_c} = 0.4537\]
 
 #+BEGIN_SRC octave :exports none :results output :session FB_C
 syms s
-K = double(-vpa(1/(z_c)))
+K = double(vpa(1/(z_c)))
+1/K
 #+END_SRC
 
 #+RESULTS:
-: K = 0.4892
+: K = 0.4537
+: ans = 2.2042
 
-**** Pole-Zero Plots
+Hence the non-unity feedback controller is:
+\[C(s) = 0.4537(s + 2.2042)\]
+Or in feedback form:
+\[C(s) = 0.4537s\]
+
+
+*** Analysis
+
 #+BEGIN_SRC octave :exports none :results output :session FB_C
 close all;
 
@@ -687,333 +756,45 @@ z_c = double(z_c);
 s = tf('s');
 g = 1/((s + -p1)*(s + -p2));
 C = K*s;
-G = (g/(1 + g*C));
+H = K*(s + 1/K);
+G = (g/(1 + g*H))
+
+FB = feedback(G);
+figure;
+step(FB*10e-2);
+xlim([0, 50]);
+ylabel('T(s)');
+print -dpng 'ENG331_Design_Step_FB.png';
+
 figure;
 pzmap(G)
-xlim([-1, 0.1]);
-legend('');
 
 #+END_SRC
 
 #+RESULTS:
-
-**** Root-Locus
-#+BEGIN_SRC octave :exports none :results output :session FB_C
-close all;
-figure;
-rlocus(G)
-hold on;
-design_point
-%plot(double(real(design_point)), double(imag(design_point)), 'go', 'MarkerSize', 10, 'DisplayName', 'Design Point');
-xlim([-1, 0.1]);
-ylim([-2, 2]);
-#+END_SRC
-
-#+RESULTS:
-: design_point = (sym) -0.08 + 0.36258881134617550477021463565733⋅ⅈ
-
-**** Nyquist Diagram
-#+BEGIN_SRC octave :exports none :results output :session FB_C
-close all;
-figure;
-nyquist(G);
-
-%figure;
-%nyquist(g*C);
-%xlim([-21, -19])
-%ylim([-0.1, 0.1])
-#+END_SRC
-
-#+RESULTS:
-
-
-*** Analysis
-
-**** Linear
-#+BEGIN_SRC octave :exports none :results output :session FB_C
-close all;
-s = tf('s');
-FB = feedback(G);
-[y, t] = step(FB);
-figure;
-plot(t, y)
-xlim([0, 50]);
-#+END_SRC
-
-#+RESULTS:
-
-From the step response (Figure :TODO:) we can see that we have increased the overshoot considerably compared to the cascade compensator and reduced the settling time.
-
-This system should preform better for the non-linear system, looking at Figure (:TODO:, see Non_Linear_FB_Compensator.slx), it can be seen that this is not the case. It double the settling time and introduced considerable overshoot. 
-
-** Nested Control
-
-*** Design Rational
-We know the transfer function for each of the tanks, we could design a feedback system for each of them and an overall feedback system. Our design will be of the form as the one in Figure (:TODO:, Diagram)
-[[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG331_Project_Nested_Diagram.xopp]]
-
-For Tank 1 a Lead controller will be selected as we don't care about the steady state situation, only the transient behaviour. For Tank 2 and the combined system we want zero steady state error and a good transient behaviour, so we will choose to have a PI for Tank 2 and a PID for the combined system.
-
-*** Tank 1 Design
-Tank 1's transfer function is given by:
-\[G_{h1}(s) = \frac{h_1(s)}{q_i(s)}= \frac{628.76}{s + 0.1992}\]
-Its step response can be seen in Figure :TODO:, it can be seen that the settling time is about $20\ s$. We will aim to reduce this by a factor of 2 and introduce a overshoot of 25%, that means that the new settling time will be $10\ s$, this corresponds to $\zeta = 0.403$ and $\omega_n = 0.991$. 
-
-#+BEGIN_SRC octave :exports none :results output :session NEST
-clc
-clear
-close all
-
-if exist('OCTAVE_VERSION', 'builtin')
-  set(0, "DefaultLineLineWidth", 2);
-  set(0, "DefaultAxesFontSize", 25);
-  warning('off');
-  pkg load symbolic
-  pkg load control
-end
-
-s = tf('s');
-G_h1 = 628.76/(s + 0.1992);
-step(G_h1)
-
-syms z w_n
-
-equ1 = 0.25 == exp(-z*pi/sqrt(1 - z^2));
-equ2 = 10 == 4/(z*w_n);
-
-sol = solve([equ1, equ2], [z, w_n]);
-z = vpa(sol.z)
-w_n = vpa(sol.w_n)
-
-#+END_SRC
-
-#+RESULTS: 
-: z = (sym) 0.40371275194342068038575605143555
-: w_n = (sym) 0.99080348112476513209932890033308
-
-A lead controller has the form $C_{lead}(s) = K\frac{s + z_c}{s + p_c}$ and our system is first order, so we can simply multiply the systems and apply the feedback equation to get our system.
-\[T_1(s) = \frac{1250(p_c + s)}{1250s^2 + s(1250K_c + 1250p_c + 249) + (1250K_cz_c + 249p_c)}\]
-
-#+BEGIN_SRC octave :exports none :results output :session NEST
-syms s K_c z_c p_c
-
-g = 1/(s + 0.1992);
-C = K_c*(s + z_c)/(s + p_c)
-
-T = simplify(C*g/(1 + g*C))
-[num, den] = numden(T);
-latex(expand(den))
-
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-C = (sym)
-
-  K_c⋅(s + z_c)
-  ─────────────
-     p_c + s
-T = (sym)
-
-               1250⋅K_c⋅(s + z_c)              
-  ─────────────────────────────────────────────
-  1250⋅K_c⋅(s + z_c) + (p_c + s)⋅(1250⋅s + 249)
-1250 K_{c} s + 1250 K_{c} z_{c} + 1250 p_{c} s + 249 p_{c} + 1250 s^{2} + 249 s
-#+end_example
-
-\[1250 K_{c} s + 1250 K_{c} z_{c} + 1250 p_{c} s + 249 p_{c} + 1250 s^{2} + 249 s\]
-
-This gives us a system of equations to solve with one degree of freedom, this allows us to choose one pole or zero position, if we choose $p_c = 0$ we will get zero steady state error and our desired metrics. Hence our controller is:
-\[C_2(s) = \frac{-0.1985(s - 0.003955)}{s}\]
-#+BEGIN_SRC octave :exports none :results output :session NEST
-syms z_c K_c
-p_c = 0;
-equ1 = 2*z*w_n == 1250*K_c + 1250*p_c + 249;
-equ2 = w_n^2   == 1250*K_c*z_c + 249*p_c;
-
-sol = solve([equ1, equ2], [K_c, z_c]);
-K_c = sol.K_c
-z_c = sol.z_c
-
-#+END_SRC
-
-#+RESULTS:
-: K_c = (sym) -0.198560000000000
-: z_c = (sym) -0.00395524390898047
-
-**** Pole-Zero Plots
-#+BEGIN_SRC octave :exports none :results output :session NEST
-close all;
-
-p1 = double(p1)
-p_c = double(p_c)
-z_c = double(z_c)
-
-s = tf('s');
-g = 1/(s + -p1)
-C = (s + -z_c)/(s + p_c)
-T_1 = C*g/(1 + C*g)
-figure;
-pzmap(g)
-pzmap(C)
-xlim([-0.3, 0.1]);
-legend('');
-
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-p1 = -0.1992
-p_c = 0
-z_c = -3.9552e-03
-Transfer function 'g' from input 'u1' to output ...
-
-          1     
- y1:  ----------
-      s + 0.1992
-
-Continuous-time model.
-Transfer function 'C' from input 'u1' to output ...
-
-      s + 0.003955
- y1:  ------------
-           s      
-
-Continuous-time model.
-Transfer function 'T_1' from input 'u1' to output ...
-
-            s^3 + 0.2032 s^2 + 0.0007879 s      
- y1:  ------------------------------------------
-      s^4 + 1.398 s^3 + 0.2428 s^2 + 0.0007879 s
-
-Continuous-time model.
-#+end_example
-
-**** Step Response
-As seen in Figure :TODO: we have reduced the settling time even more than expected, this is due to the zeros making the system behave weird. Overall this design has been successful at reducing the settling time.
-
-#+BEGIN_SRC octave :exports none :results output :session NEST
-close all;
-figure;
-step(T_1)
-xlim([0,10])
-#+END_SRC
-
-#+RESULTS:
-
-*** Tank 2 Design
-Tank 2 is given by the following transfer function:
-\[G_{h2}(s) = \frac{h_2(s)}{q_{o1}(s)} = \frac{628.76}{s + 0.0249}\]
-
-For this we are going to design a PI controller, to do this we add an integrator and a zero to for our design point.
-
-Lets arbitrarily set our design point such that it has 10% overshoot and maintain the same settling time of $150\ s$.
-
-#+BEGIN_SRC octave :exports none :results output :session NEST
-close all
-s = tf('s');
-G_h2 = 628.76/(s + 0.0249);
-figure;
-step(G_h2)
-
-#+END_SRC
-
-#+RESULTS:
-
-This gives a design point of $-0.0267 \pm 0.0364$.
-
-#+BEGIN_SRC octave :exports none :results output :session NEST
-syms z w_n
-
-equ1 = 0.1 == exp(-z*pi/sqrt(1 - z^2));
-equ2 = 150 == 4/(z*w_n);
-
-sol = solve([equ1, equ2], [z, w_n]);
-z = vpa(sol.z)
-w_n = vpa(sol.w_n)
-
-design_point = -z*w_n + w_n*sqrt(z^2 - 1)
-#+END_SRC
-
-#+RESULTS:
-: z = (sym) 0.59115503379889750930516375129716
-: w_n = (sym) 0.045109430085202125523345189756481
-: design_point = (sym) -0.026666666666666666666666666666667 + 0.036383369435782435932954230011503⋅ⅈ
-
-\begin{align*}
-(2k + 1)180^o &= \sum \theta_z - \sum \theta_p \\
-(2k + 1)180^o &= \theta_c -92.77 -126.23 \\
-\Rightarrow \theta_c & = 39.01^o
-\end{align*}
-
-#+BEGIN_SRC octave :exports none :results output :session NEST
-p1 = -0.0249;
-pc = 0;
-
-theta_p1 = -vpa(atan2(imag(design_point),(real(design_point) - p1))*180/pi)
-theta_pc = -vpa(atan2(imag(design_point),(real(design_point) - pc))*180/pi)
-
-sum = theta_p1 + theta_pc
-
-k = 0;
-angle = (2*k + 1)*180 + sum
-#+END_SRC
-
-#+RESULTS:
-: theta_p1 = (sym) -92.779926769003752573103469332131
-: theta_pc = (sym) -126.23901581158754064651098667597
-: sum = (sym) -219.01894258059129321961445600810
-: angle = (sym) -39.018942580591293219614456008096
-
-Which means our controller is:
-\[C(s) = K\frac{s + 0.0182}{s}\]
-
-#+BEGIN_SRC octave :exports none :results output :session NEST
-z_c = vpa(imag(design_point)/tand(sum) - real(design_point))
-#+END_SRC
-
-#+RESULTS:
-: z_c = (sym) -0.018232693018779397319158176631821
-
-
-**** Pole-Zero Plots
-#+BEGIN_SRC octave :exports none :results output :session NEST
-close all;
-
-p1 = double(p1);
-z_c = double(p_c);
-
-s = tf('s');
-g = 1/(s + -p1)
-C = (s - z_c)/s;
-figure;
-pzmap(g)
-pzmap(C)
-xlim([-0.5, 0.1]);
-legend('');
-
-#+END_SRC
-
-#+RESULTS:
-: Transfer function 'g' from input 'u1' to output ...
+: Transfer function 'G' from input 'u1' to output ...
 : 
-:           1     
-:  y1:  ----------
-:       s + 0.0249
+:                     s^2 + 0.225 s + 0.005               
+:  y1:  --------------------------------------------------
+:       s^4 + 0.9037 s^3 + 1.163 s^2 + 0.2295 s + 0.005025
 : 
 : Continuous-time model.
 
-**** Root-Locus
-#+BEGIN_SRC octave :exports none :results output :session NEST
-close all;
-figure;
-rlocus(g*C)
-hold on;
-plot(double(real(design_point)), double(imag(design_point)), 'go', 'MarkerSize', 10, 'DisplayName', 'Design Point');
-#+END_SRC
+From the step response (Figure \ref{fig:fig14}) we can see that we have increased the overshoot considerably compared to the cascade compensator and reduced the settling time.
 
-#+RESULTS:
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Feedback Compensated System Step Response \label{fig:fig14}
+[[./ENG331_Design_Step_FB.png]]
 
-*** Combined Design
+This system should preform better for the non-linear system, looking at Figure (:TODO:, see Non_Linear_FB_Compensator.slx), it can be seen that this is not the case. It double the settling time and introduced considerable overshoot. This may be because of how the feedback was simulated, it used a derivative block because just a zero is a non-realisable system, this may have introduced some inconsistencies. However, the differences are way too big for this to be the only reason.
 
 
+** Combined Controller
+
+*** Design Rational
+Lets see how the two controllers combined together behave. As both of the controllers are designed to increase the transient performance the two controllers being ran together might be able to increase the performance even more.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Combined Compensated System Block Diagram \label{fig:D3}
+[[./ENG331_Design_Combined_Diagram.png]]
+*** 
