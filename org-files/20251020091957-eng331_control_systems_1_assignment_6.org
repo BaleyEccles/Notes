@@ -14,7 +14,7 @@
 #+LATEX_HEADER_EXTRA: \usepackage{float}
 #+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
-#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}w
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
 * Question 1
 

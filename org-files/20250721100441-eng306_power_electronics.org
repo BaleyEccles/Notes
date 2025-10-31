@@ -56,3 +56,39 @@
 ** Assessment Task 4: Examination
  - 40%
  
+*** Tutorials
+**** Tutorial 1
+ - Questions: 6,7,8
+   
+**** Tutorial 2
+ - Questions: 1,2,3
+   
+**** Tutorial 3
+ - Don't do:
+   - Question 7
+
+**** Tutorial 5
+ - Only need to do CCM
+   - We can skip DCM stuff
+   - Otherwise do all of them
+ - 1.5 times better values for passive components in design questions
+ - 2 times better values for active components in design questions
+
+**** Tutorial 6
+ - Do all questions
+
+**** Tutorial 7
+ - Dont do question 8
+ - WYE and Delta loads
+
+*** Questions
+ - What switch should be chosen?
+ - Switching loss
+ - Conduction Loss
+   - Depends on switch
+     
+*** Exam Structure
+ - Numerical, conceptual and reasoning questions
+ - 7 Questions
+   - Not equally weighted
+ - Covers all topics
