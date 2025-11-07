@@ -44,4 +44,3 @@
  - 30%
  - Exam: Online
  - 120min
-

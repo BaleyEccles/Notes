@@ -5,6 +5,67 @@
 #+date: [2025-10-22 Wed 16:13]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 
-* ENG335 - Computational Intelligence - Exam
+* Introduction
+The integration of computational intelligence into sports analytics has generated significant interest, particularly in leveraging data-driven insights to enhance performance and predict outcomes. This report explores the application of neural networks to predict the sport in which an athlete is most likely to excel based on physiological and demographic characteristics. By examining variables such as height, weight, age, sex, and nationality, we aim to uncover patterns that relate specific body types to particular sports, thereby illuminating the relationship between physical attributes and athletic performance.
+
+The development of a feed-forward neural network using MATLAB's Neural Network Toolbox is central to this investigation. This system facilitates comprehensive analysis by training on historical athlete data, allowing for sophisticated predictions based on input characteristics. The report provides an overview of the methodology employed, including data processing, network training, and validation processes, while also discussing the system's performance across different sports contexts.
+
+Additionally, this analysis focuses on the implications of feature selection and the influence of unique body types on prediction accuracy. It addresses the challenges associated with sports that have less specificity concerning body dimensions and highlights the potential for further research in this exciting intersection of sports and computational intelligence.
+
+
+* Problem Description
+The characteristics of people effect how they preform at various tasks, by looking at stats about their body a prediction on the sport they are most likely to play. For example a tall person is more likely to play basketball as the game favours being tall. Likewise, some sports are indifferent to the players body, for example shooting as it dependent on the accuracy of the players hand, which is harder to measure.
+
+By looking at players gender, age, height, weight, nationality and the season in which it was played it is possible to determent which sport a person is competing in. Changing what data is available to the system will effect how the system preforms. 
+
+* Neural Network Toolbox
+The MATLAB Neural Network Toolbox facilitates the development of neural networks by offering a variety of functions. One key function is ~feedforwardnet~, which specifies the number of hidden layers and generates a network that can be trained with the ~train~ function. Prior to training, users must configure certain parameters, such as ~trainRatio~ and ~testRatio~, to guide the training process. Other functions for creating different types of neural networks include ~competlayer~ and ~lvqnet~.
+
+During the training process, a window displays the training state and various metrics, as seen in Figure \ref{fig:NN}. This window provides insights into the network's architecture, performance metrics, error histograms, and other relevant information. The displayed table summarizes the training state, including the time taken and performance indicators once training is complete. These tools are essential for evaluating the neural network's functionality and effectiveness, which will be discussed in the comparison section of this report.
+
+#+ATTR_LATEX: :placement [H] :width 0.35\textwidth
+#+CAPTION: Nerual Network Training Window \label{fig:NN}
+[[./NN_Window.png]]
+
+* Developed System
+The system that has been developed creates a feed-forward neural network with a hidden layer size of 10, this facilitates optimal results for the used data. The data is then split into training and verification sets, the training set is used to train the neural network, where as the verification set is verify that the system is working.
+
+The neural network and the training set is used to train the network. This produces a network that has its weights set at each neuron. Next the weighted network is verified to be working by running it on the verification set, this outputs a percentage of correct guesses from the neural network.
+
+* Analysis
+It is predicted that sport that require unique body types will provide a higher percentage of correct guesses from the neural networks. This is predicted because the body type will have features that  are less similar to other sports, as mentioned before people who play basketball are typically taller hence it is expected that the neural network will preform well for this.
+
+With a training set size of 50% and input of age, weight and nationality the neural network is able to predict correctly about 95% of the time, whereas if height is added to the input then the network guesses correctly about 97% of the time. This shows that the neural network is dependent on specific features of the competitors to guess correctly, by adding more relevant features the neural network is able to paint a better picture of what is required for a competitor to be good at a sport.
+
+For sports that don't require specific body types it is predicted that the neural network will preform worse, this is predicted because the data will have aspects that are closer to other sports. A good example of a sport like this is shooting, there is no advantage a competitor gets from being taller, larger, older, etc.
+
+With all available inputs (sex, age, height, weight, season and nationality) and a training percentage of 50% the network predicts correctly about 95% of the time, which is worse than the basketball case with less input data. As mentioned this is because the neural network has a harder time distinguishing between other sports with people that have similar bodies.
+
+There are many outliers in the data, for example aeronautics will always give either 100% or 0% correct predictions. This is not because the network is particular good or bad at analysing aeronautics players, but rather because there is only one competitor in the data. Similarly, the network boasts a correct prediction rate of 99% for many other sports which is due to lack of data rather than robustness of the neural network.
+
+* User Guide
+To run the program simply run ~main.m~, this will load the data from ~vaid_athlete.csv~ and start the user interface. The UI can be seen in Figure \ref{fig:ENG335_EXAM_UI}, it has sections for the user to input data, a run button and an output field.
+
+#+ATTR_LATEX: :placement [H] :width 0.35\textwidth
+#+CAPTION: Sport Selection User Interface \label{fig:ENG335_EXAM_UI}
+[[./ENG335_Exam_UI.png]]
+
+The inputs to the system are in the top two panels, namely the sport to predict and the inputs for the neural network. The sport selection determines which sport the neural network will predict based on the inputs. Whereas the input selection changes which variables are fed into the network.
+
+The button labels 'run' loads the data based on selection, trains the neural network, verifies the neural network and returns a percentage of correct predictions. The percentage is then displayed in the 'Percent Correct' field.
+
+* Conclusion
+
+
 

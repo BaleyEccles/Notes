@@ -55,7 +55,7 @@
 
 ** Assessment Task 4: Examination
  - 40%
- 
+ - Next week friday there may be another session
 *** Tutorials
 **** Tutorial 1
  - Questions: 6,7,8
@@ -91,4 +91,7 @@
  - Numerical, conceptual and reasoning questions
  - 7 Questions
    - Not equally weighted
+   - One question per topic
  - Covers all topics
+   
+ - Will get marks for copying down relevant question info
