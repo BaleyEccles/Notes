@@ -1,0 +1,138 @@
+
+* Week 1
+- From 01/12/2025 to 05/12/2025
+
+** Task you Did This Week
+*** Day 1
+**** Tour
+ - 1hr
+ - Just a tour of the building
+**** Laptop Setup
+ - 2hr
+ - Log into required stuff and learn about their intranet
+**** Knife Saftey
+ - 1hr
+ - Quiz required to use the kitchen
+**** CAD Exercises
+ - 4hr
+ - Recreate drawings in Fusion360
+*** Day 2
+**** VM Setup
+ - 3hr
+ - Download virtual machine
+ - Install VScode, git and Python
+**** Python Exercises
+ - 5hr
+ - Intro to how we are expected to use Python
+   - Code quality plugins etc.
+*** Day 3
+**** Git/Gitlab Exerise
+ - 5hr
+ - Learn how to use Git and GitLab
+ - Expectation for branch names and stuff
+**** AI Quiz
+ - 3hr
+ - How to use AI effectivly
+*** Day 4
+**** Excel Exercises
+ - 6hr
+ - Lean how to use Excel effectivly
+ - Learn VBA
+**** TEP Presentation + Quiz
+ - 2hr
+ - Learn how to use TEP for our projects
+*** Day 5
+**** Ignition Exercises
+ - 8hr
+ - Learn how to create HMI in SCADA using Ignition
+** What You Learn From These Tasks
+:TODO:
+** Evidence
+:TODO: Add images
+* Week 2
+- From 08/12/2025 to 12/12/2025
+** Task you Did This Week
+*** Day 1
+**** Research Quiz
+ - 4hr
+ - Learn how to research effectivly for our project
+**** Comparison Matrix Quiz
+ - 4hr
+ - Learn how to use a comparison matrix for our project
+*** Day 2
+**** Project Kickoff
+ - 30min
+ - Describe my project and what is expected of me
+ - This will be done for the rest of my time at SAGE
+**** Project Research
+ - 8hr
+ - Research the project
+*** Day 3
+**** Project Research
+ - 6hr
+ - Research the project
+**** Work Breakdown Structure Workshop + Quiz
+ - 2hr
+ - Learn about WBS and how to use them
+*** Day 4
+**** Project Research
+ - 4hr
+ - Research the project
+**** Create Project Presentation
+ - 4hr
+ - Create a presentation that describes my project
+*** Day 5
+**** Project Presentation
+ - 4hr
+ - Finish presntation and present it
+**** Jira Setuo
+ - 4hr
+ - A project managment tool that will be used
+   - Learnt how to use it
+** What You Learn From These Tasks
+:TODO:
+** Evidence
+:TODO: Add images
+* Week 3
+- From 15/12/2025 to 19/12/2025
+** Task you Did This Week
+*** Day 1
+**** Project Check-in
+ - 30min
+ - Check how Im going with the project
+   - Verify that I know what I am doing
+**** Project Research
+ - 8hr
+ - More project research
+*** Day 2
+**** Compare AutoCAD and AutoCAD Electrical
+ - 4hr
+ - For the project they need to know if can use AutoCAD Electrical or if they have to use AutoCAD
+ - SAGE typically uses AutoCAD Electrical, but their clients use AutoCAD
+**** Determine Feature Requirements
+ - 4hr
+ - Before begining on the project I need to know what I am doing
+ - Make a list of what is required for the program
+*** Day 3
+**** Learn AutoLISP
+ - 8hr
+ - AutoCAD and AutoCAD Electrical uses AutoLISP to do its scripting
+ - I need to use AutoLISP in my project to automate tasks in AutoCAD
+ - I made some scripts to do things
+*** Day 4
+**** Become Familiar With SAGE Scripts
+ - 4hr
+ - SAGE has AutoLISP scripts
+ - I went through and understood what they did
+**** Documentation
+ - 4hr
+ - Document what I have done so far and what will need to be done in the future
+*** Day 5
+**** Program Flow Chart
+ - 8hr
+ - Create a program flow chart so when I get back from a two week break I know what I am doing
+
+** What You Learn From These Tasks
+:TODO:
+** Evidence
+:TODO: Add images
