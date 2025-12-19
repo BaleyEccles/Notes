@@ -46,9 +46,11 @@
  - 8hr
  - Learn how to create HMI in SCADA using Ignition
 ** What You Learn From These Tasks
-:TODO:
+I already knew Python and Git, but did not know much to do with Excel and Ignition. The CAD stuff was a good referesher, as my project is about CAD. Overall, it was just a nice week to learn about the other interns and the engineers in my office.
+
 ** Evidence
-:TODO: Add images
+[[file:SAGE_Python_Code.PNG]]
+[[file:SAGE_Ignition.PNG]]
 * Week 2
 - From 08/12/2025 to 12/12/2025
 ** Task you Did This Week
@@ -85,14 +87,18 @@
 **** Project Presentation
  - 4hr
  - Finish presntation and present it
-**** Jira Setuo
+**** Jira Setup
  - 4hr
  - A project managment tool that will be used
    - Learnt how to use it
 ** What You Learn From These Tasks
-:TODO:
+Learnt about the project itself. I will be creating a program that automates the job of engineers, I will be required to create a VBA/python/AutoLISP program that automatically modifies an AutoCAD drawing based on an Excel spread sheet. The presentation nice because it let me learn about the other interns projects.
+
+Alot of project managment tools that will be useful for the project; being able to effectivly manage my time will be crucial in producing a good final program.
+
 ** Evidence
-:TODO: Add images
+[[file:SAGE_Presenation_1.png]]
+[[file:SAGE_Jira.png]]
 * Week 3
 - From 15/12/2025 to 19/12/2025
 ** Task you Did This Week
@@ -133,6 +139,10 @@
  - Create a program flow chart so when I get back from a two week break I know what I am doing
 
 ** What You Learn From These Tasks
-:TODO:
+This week provided a good introduction to the implementation of my project. Understanding what AutoLISP is capable of is crucial in developing my understanding of how I will implement my project.
+
+The program flow chart provides a great overview of what I need to accomplish over the coming weeks. It shows me how things will be done and along with documentation it tells me why.
+
 ** Evidence
-:TODO: Add images
+[[file:SAGE_Program_Flow_Chart.png]]
+[[file:SAGE_AutoCAD.png]]
