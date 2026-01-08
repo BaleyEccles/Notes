@@ -146,3 +146,75 @@ The program flow chart provides a great overview of what I need to accomplish ov
 ** Evidence
 [[file:SAGE_Program_Flow_Chart.png]]
 [[file:SAGE_AutoCAD.png]]
+
+* Week 4
+- From 5/1/2026 to 9/1/2026
+** Task you Did This Week
+*** Day 1
+**** Project Check-in
+ - 30min
+ - Update on what I am doing for my project.
+ - Said that I this week will be delayed because I have PLC training to do
+**** Project Development
+ - 7.5hr
+ - Start on reading the Excel template in python
+   - Succesfuly read configuration sheet
+   - Succesfuly read parameters and sheetList sheets
+ - VBA buttons in Excel to start and verify the sheet
+*** Day 2
+**** Project Development
+ - 1.5hr
+ - Fix sheetList dictionary bug
+ - Add debug logging and formatting changes from pylint
+ - Add docstrings to classes
+**** PLC Training - CAPS 1: ITIA
+ - 6.5hr
+ - Training course on Rockwell PLC's
+   - Learnt how PLC's work
+   - Learnt how PLC's interact with inputs/outputs
+*** Day 3
+**** Project Development
+ - 1.5hr
+ - Start verification of the sheets
+   - Small start on configuration verification
+**** PLC Training - CAPS 1: ITIA
+ - 6.5hr
+ - Relay logic
+   - Used timers and relays to build a circuit that turns on/off lights at specific times
+ - Learnt ladder diagrams
+   - How to implement them in Logix5000
+
+*** Day 4
+**** Project Development
+ - 1.5hr
+ - Finish configuration sheet verification
+ - Finish parameters sheet verification
+
+**** PLC Training - CAPS 1: ITIA
+ - 6.5hr
+ - Integration Project
+   - A project that takes place on a conveyer belt.
+     - Objects are put through the conveyer
+     - Depending on the object type do different things
+     - Read sensors to determine object type
+     - Write to actuators at specific times to move the objects
+   - Create a ladder logic program to complete the following
+     1. Tall plastic objects go all the way though
+     2. Tall metal objects get stoped by linear gate
+     3. Short objects get pushed off the conveyer
+
+*** Day 5
+**** Project Development
+ - 1.5hr
+ - Finish SheetList sheet verification
+ - Add error handling
+
+**** PLC Training - CAPS 1: ITIA
+ - 6.5hr
+ - Integration Project Testing
+ - PLC Fault Finding
+
+** What You Learn From These Tasks
+:TODO:
+** Evidence
+:TODO: TAKE PICTURES FROM ITIA
