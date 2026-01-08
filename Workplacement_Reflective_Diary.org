@@ -215,7 +215,7 @@ The program flow chart provides a great overview of what I need to accomplish ov
  - PLC Fault Finding
 
 ** What You Learn From These Tasks
-:TODO:
+Most of the week was spent learning how PLC's work and how to use them effectivly. I learnt Logix5000, a piece of design software for Rockwell PCL's, I implemented a ladder program in it that completes a complex task. This is a PLC's are used in industry all the time, hence learning them is a critical experience in my eningeering journey.
 
 ** Evidence
 [[./SAGE_Logix500_Integration_Project.png]]
