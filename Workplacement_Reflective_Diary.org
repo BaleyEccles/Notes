@@ -216,5 +216,7 @@ The program flow chart provides a great overview of what I need to accomplish ov
 
 ** What You Learn From These Tasks
 :TODO:
+
 ** Evidence
-:TODO: TAKE PICTURES FROM ITIA
+[[./SAGE_Logix500_Integration_Project.png]]
+[[./SAGE_Integration_Project_Conveyer.png]]
