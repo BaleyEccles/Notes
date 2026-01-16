@@ -20,5 +20,6 @@
 !*.db
 README.md
 !*.png
+!*.jpeg
 !*.jpg
 !*.svg
