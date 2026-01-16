@@ -222,3 +222,50 @@ Most of the week was spent learning how PLC's work and how to use them effectivl
 [[./SAGE_Integration_Project_Conveyer.png]]
 [[./SAGE_Logix5000.png]]
 [[./SAGE_Conveyer.png]]
+
+* Week 5
+- From 12/1/2026 to 16/1/2026
+** Task you Did This Week
+*** Day 1
+**** Project Checking
+ - 30min
+ - Talked to Felix Clark about how my project is going
+**** Project Work
+ - 7.5hr
+ - Start implementing automatic text replacment
+*** Day 2
+**** Project Work
+ - 8hr
+ - Finish implementing automatic text replacment
+ - Start automatic drawing generation
+
+*** Day 3
+**** Project Work
+ - 8hr
+ - Continue automatic drawing generation
+   
+*** Day 4
+**** Project Work
+ - 7.5hr
+ - Finish automatic drawing generation
+ - Made an example on how to use the developed program so far
+   
+**** Sprint Review
+ - 30min
+ - Made a plan for the following week
+ - Talked to Angello De Ionno about how my project is coming along
+ - Need more info on what is needed for this to be useful for SAGE
+   
+*** Day 5
+**** Project Work
+ - 8hr
+ - Code cleanup
+ - Documenatation
+
+** What You Learn From These Tasks
+How to effectivly combine programing languages together to complete a more compicated task. It is not possible to complete my project in just one programming language, Python does the heavy lifting, AutoLISP interacts with AutoCAD and VBA handles the Excel side of things.
+
+** Evidence
+[[./SAGE_GitLab.jpeg]]
+[[./SAGE_Confluence.jpeg]]
+[[./SAGE_AutoCAD_Example_1.png]]
