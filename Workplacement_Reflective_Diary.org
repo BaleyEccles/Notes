@@ -67,15 +67,14 @@ I already knew Python and Git, but did not know much to do with Excel and Igniti
  - Describe my project and what is expected of me
  - This will be done for the rest of my time at SAGE
 **** Project Research
- - 8hr
- - Research the project
-*** Day 3
-**** Project Research
- - 6hr
+ - 5.5hr
  - Research the project
 **** Work Breakdown Structure Workshop + Quiz
  - 2hr
  - Learn about WBS and how to use them
+*** Day 3
+Sick :(
+
 *** Day 4
 **** Project Research
  - 4hr
@@ -130,9 +129,6 @@ Alot of project managment tools that will be useful for the project; being able 
  - 4hr
  - SAGE has AutoLISP scripts
  - I went through and understood what they did
-**** Documentation
- - 4hr
- - Document what I have done so far and what will need to be done in the future
 *** Day 5
 **** Program Flow Chart
  - 8hr
