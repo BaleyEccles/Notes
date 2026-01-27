@@ -265,3 +265,55 @@ How to effectivly combine programing languages together to complete a more compi
 [[./SAGE_GitLab.jpeg]]
 [[./SAGE_Confluence.jpeg]]
 [[./SAGE_AutoCAD_Example_1.png]]
+
+* Week 6
+- From 19/1/2026 to 23/1/2026
+** Task you Did This Week
+*** Day 1
+**** Project Checking
+ - 30min
+ - Talked to Felix Clark about how my project is going
+   - Gave me a bunch more stuff to do
+**** Project Work
+ - 7.5hr
+ - Small suggestions that Felix Clark gave me
+   - Replace __TEXT__ with <<TEXT>> for text replacement
+   - Minor attribute modification in AutoCAD
+*** Day 2
+**** Lunch and Learn
+ - 1hr
+ - NHP - Stratix Switches Overview
+   - Talked about switches and stuff
+     
+**** Project Work
+ - 7hr
+ - Smarter reading of config sheet.
+ - Better reading logic for Parameters and SheetList
+
+*** Day 3
+**** Project Work
+ - 8hr
+ - Update the first example
+ - Run AutoLISP per dwg file
+   
+*** Day 4
+**** Project Work
+ - 7.5hr
+ - Get ready for inital release.
+ - Add release generation script and update Excel template
+ - Release version v0.0.1 of the program
+   
+**** Sprint Review
+ - 30min
+ - Made a plan for the following week
+ - Talked to Angello De Ionno about how my project is coming along
+
+*** Day 5
+**** Project Work
+ - 8hr
+ - Code cleanup
+ - Documenatation
+
+** TODO What You Learn From These Tasks
+
+** TODO Evidence
