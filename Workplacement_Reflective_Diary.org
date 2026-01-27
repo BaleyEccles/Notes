@@ -314,6 +314,10 @@ How to effectivly combine programing languages together to complete a more compi
  - Code cleanup
  - Documenatation
 
-** TODO What You Learn From These Tasks
+** What You Learn From These Tasks
+The Lunch and Learn was interesting, learning about how switches are used in industry made me recall the networking class I did in my second year at UTAS. The meeting with Felix gave me more undertstanding of how my project can/will be used to automate SAGE's processes.
 
-** TODO Evidence
+** Evidence
+[[./SAGE_Magit_Log.png]]
+[[./SAGE_AutoCAD_Example_1_2.png]]
+[[./SAGE_Jira_1.png]]
