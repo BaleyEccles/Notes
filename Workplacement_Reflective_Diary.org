@@ -321,3 +321,49 @@ The Lunch and Learn was interesting, learning about how switches are used in ind
 [[./SAGE_Magit_Log.png]]
 [[./SAGE_AutoCAD_Example_1_2.png]]
 [[./SAGE_Jira_1.png]]
+
+* Week 7
+- From 26/1/2026 to 30/1/2026
+** Task you Did This Week
+*** Day 1
+ - Public Holiday
+ - Austrlia Day
+*** Day 2
+**** Project Work
+ - 7.5hr
+ - Python code to open a new dwg file and run the AutoLISP
+ - Refactor AutoLISP loading code
+**** Project Check-in
+ - 30min
+ - Feix Clark and Melissa Jones
+ - Talked about next steps
+ - Gave me things to do
+ - Investigated attribute modification methods
+ - Showcase my project to Melissa Jones
+*** Day 3
+**** Project Work
+ - 8hr
+ - Started automatic layout generation
+
+*** Day 4
+**** Project Work
+ - 7.5hr
+ - Cleaned up the code that generates layouts
+**** Sprint Review
+ - With Amy Liddy and Angello De Ionno
+ - Talked about how my project is going
+ - Disscussed what is in the plan for the following week
+ - Showcase my project to Amy Liddy
+*** Day 5
+**** Project Work
+ - 8hr
+ - Layout generation work
+   - Renaming layouts
+   - Producing pdfs
+
+** What You Learn From These Tasks
+The project check-in was very productive, it gave me better insight to how the project will be used and what is required of me.
+
+** Evidence
+[[./SAGE_Melissa_Email.png]]
+[[./SAGE_AutoCAD_Layout.png]]
