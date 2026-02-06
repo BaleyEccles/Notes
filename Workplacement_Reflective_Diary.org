@@ -144,7 +144,7 @@ The program flow chart provides a great overview of what I need to accomplish ov
 [[file:SAGE_AutoCAD.png]]
 
 * Week 4
-- From 5/1/2026 to 9/1/2026
+- From 5/01/2026 to 9/01/2026
 ** Task you Did This Week
 *** Day 1
 **** Project Check-in
@@ -220,7 +220,7 @@ Most of the week was spent learning how PLC's work and how to use them effectivl
 [[./SAGE_Conveyer.png]]
 
 * Week 5
-- From 12/1/2026 to 16/1/2026
+- From 12/01/2026 to 16/01/2026
 ** Task you Did This Week
 *** Day 1
 **** Project Checking
@@ -267,7 +267,7 @@ How to effectivly combine programing languages together to complete a more compi
 [[./SAGE_AutoCAD_Example_1.png]]
 
 * Week 6
-- From 19/1/2026 to 23/1/2026
+- From 19/01/2026 to 23/01/2026
 ** Task you Did This Week
 *** Day 1
 **** Project Checking
@@ -323,7 +323,7 @@ The Lunch and Learn was interesting, learning about how switches are used in ind
 [[./SAGE_Jira_1.png]]
 
 * Week 7
-- From 26/1/2026 to 30/1/2026
+- From 26/01/2026 to 30/01/2026
 ** Task you Did This Week
 *** Day 1
  - Public Holiday
@@ -367,3 +367,54 @@ The project check-in was very productive, it gave me better insight to how the p
 ** Evidence
 [[./SAGE_Melissa_Email.png]]
 [[./SAGE_AutoCAD_Layout.png]]
+* Week 8
+- From 02/02/2026 to 06/02/2026
+** Task you Did This Week
+*** Day 1
+**** Project Work
+ - 8hr
+ - Refactor the way Python loads the AutoLISP scripts into AutCAD
+ - Minor bug fixes that were not addressed last week
+*** Day 2
+**** Project Work
+ - 7.5hr
+ - Modify the text in the layout
+   - Now when exported to pdf it has titles and stuff
+ - Create a second example
+**** Project checkin
+ - 30min
+ - Talked with Felix Clark about how my project is going
+ - Gave me extra work to do for this week
+*** Day 3
+**** Project Work
+ - 8hr
+ - Add support for multiple dwg files
+   - Instead of putting all the drawings into one file
+ - Small code changes
+ - Documentation
+*** Day 4
+**** Sprint review
+ - 30min
+ - Organised work to be done for the next week
+**** Critical Thinking Exercies
+ - 2hr
+ - Got into a group with other interns and solved problems
+**** Project Work
+ - 5.5hr
+ - Execel sheet for example 3
+   - Uses the up and coming feature of block placment
+ - Documentation
+   
+*** Day 5
+**** Project Work
+ - 8hr
+ - Block placment work
+   - Automatically build drawings using an Excel spreadsheet
+     
+** What You Learn From These Tasks
+The critical thinking exercise allowed me to meet new interns that I have not talked to yet. The project work has been more of the same stuff compared to the last few weeks, but it still has been enjoyable.
+
+** Evidence
+[[./SAGE_Excel_Block_Builder.png]]
+[[./SAGE_Critical_Thinking.png]]
+
