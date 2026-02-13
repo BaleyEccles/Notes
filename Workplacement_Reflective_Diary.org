@@ -418,3 +418,62 @@ The critical thinking exercise allowed me to meet new interns that I have not ta
 [[./SAGE_Excel_Block_Builder.png]]
 [[./SAGE_Critical_Thinking.png]]
 
+* Week 9
+- From 09/02/2026 to 13/02/2026
+** Task you Did This Week
+*** Day 1
+**** Project Checkin
+ - 30min
+ - Talked with Felix Clark about my project
+ - Said that I will do block placment this week
+ - Melissa Jones will join next week
+**** Project Work
+ - 7.5hr
+ - Block placement work
+   - Implement reading the Excel sheet in Python
+   - Finish the third example
+*** Day 2
+**** Project Work
+ - 4hr
+ - More block placement work
+   - Implement AutoLISP code to place blocks
+   - It works as intended
+**** AI Hackathon
+ - 4hr
+ - Presentation on how to use AI effectivly
+ - Designed and built a space invaders clone
+*** Day 3
+**** Project Work
+ - 8hr
+ - Combine pdfs
+   - When the drawings are plotted they are individual
+   - Now they are joined into one pdf
+ - A bunch of code cleanup
+*** Day 4
+**** Project work
+ - 7hr
+ - Release v0.0.3
+   - Includes block placemnt
+   - and combining pdfs
+   - Testing to ensure everything works
+**** Final Presentations
+ - 1hr
+ - Watched other interns final presentations
+**** Sprint Review
+ - 1hr
+ - Amy Liddy was late, had to wait an extra hour for her
+ - She wasn't able to make it
+ - Has to be reschedualed to next week
+*** Day 5
+**** Project Work
+ - 7hr
+ - Code cleanup
+ - Implement TODOs that are scattered around the code base
+   
+** What You Learn From These Tasks
+The other interns final presentations were interesting, one involved PowerCAD and the other WinCC OA. The AI hackathon highlighted what AI is capabale of and how to use it effectivly to develop things.
+
+** Evidence
+[[./SAGE_AI.png]]
+[[./SAGE_Jira_2.png]]
+[[./SAGE_AutoCAD_Block_Builder.png]]
