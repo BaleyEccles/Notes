@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       bb98cbbe-fcf6-45a6-99b9-13076f6f3d34
+:END:
+#+title: Multiplexers
+#+date: [2026-02-23 Mon 13:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Multiplexers
+
+** Select Line
+Binary number
+ - $S_0$, $S_1$ ...
+ - $2^n$ possible inputs
+** Data Inputs
+The input data that will be passed through depending when the Select Line is correct
+
+** Table
+| Data Select Inputs |     | Input Selected |
+|                S_1 | S_0 |                |
+|                  0 |   0 | D_0            |
+|                  0 |   1 | D_1            |
+|                  1 |   0 | D_2            |
+|                  1 |   1 | D_3            |

@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       caffd065-5a44-47b5-92a4-bda54e1884e7
+:END:
+#+title: ENG442 - Advanced Digital Electronics
+#+date: [2026-02-23 Mon 12:59]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:2026:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+
+* Notes
+[[id:cd800cc5-2b09-4528-8158-3c6f9faf2aa7][FPGAs (Field Programmable Gate Arrays)]]
+Computer organisation and design risc-V edition
+
+* Assessment
+
+** Group Project
+ - 30%
+   
+** Exam
+ - 40%
+   
+** Portfolio
+ - 30%
+

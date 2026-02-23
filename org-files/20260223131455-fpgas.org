@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       cd800cc5-2b09-4528-8158-3c6f9faf2aa7
+:END:
+#+title: FPGAs (Field Programmable Gate Arrays)
+#+date: [2026-02-23 Mon 13:14]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* FPGAs (Field Programmable Gate Arrays)
+
+** Architecture
+
+** History
+
+*** PLA, PAL
+Uses sum of products
+*** GAL
+Has one bit of memory and can feed it back into the logic
+*** CPLD
+Has multiple GALs in parallel to create more complex logic
+*** FPGA
+**** Configurable Logic Block
+Contains:
+ - LUTs
+   - Look Up Tables
+ - Adders
+ - MUX
+ - Flip-flops/Registers
+
+
