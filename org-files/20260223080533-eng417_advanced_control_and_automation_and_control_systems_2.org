@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       59b3af52-5441-476d-bbe0-5a026298abf2
+:END:
+#+title: ENG417 - Advanced Control and Automation and Control Systems 2
+#+date: [2026-02-23 Mon 08:05]
+#+AUTHOR: Baley Eccles - 652137
+#+FILETAGS: :UTAS:2026:
+#+STARTUP: latexpreview
+#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+
+* Notes
+ - 9am start, not 8am
+
+* Assessment
+
+** Automation Report
+ - 30%
+ - Week 11
+ - PLC programming
+   
+** Design Report
+ - 30%
+ - Week 12
+ - Week 6 milestone
+ - Aeroplane control system
+   
+** Final Exam
+ - 40%
+ - Exam period

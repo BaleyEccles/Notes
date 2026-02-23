@@ -15,6 +15,10 @@
      - We use [[id:d041a889-d4af-4598-8434-866ecc7ce005][Decibels]] to plot them
      - $+20dB/dec$ for [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][zeros]]
      - $-20dB/dec$ for [[id:720b73a5-8e1c-465f-a0a2-3db6189efbf4][poles]]
+
+** Problems
+ - $|G(s)| < 1$ when $\angle G(s) = -180^o$
+   - Because the signal is flipped and sent back to the error
 ** Example Bode Plots
 *** Frequency
 [[./Bode_Freq.png]]

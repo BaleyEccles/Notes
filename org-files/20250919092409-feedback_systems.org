@@ -12,3 +12,12 @@ For negative feedback:
 \[T(s) = \frac{G(s)}{1 + G(s)H(s)}\]
 For positive feedback:
 \[T(s) = \frac{G(s)}{1 - G(s)H(s)}\]
+
+** Naming
+[[./Feedback_Control.png]]
+ - $R(s)$ - Reference signal
+ - $E(s)$ - Error signal
+ - $C(s)$ - Controller
+ - $U(s)$ - Controller input
+ - $G(s)$ or $P(s)$ - Plant
+ - $C(s)$ or $Y(s)$ - Output

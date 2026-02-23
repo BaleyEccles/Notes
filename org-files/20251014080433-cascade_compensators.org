@@ -24,6 +24,7 @@ Characteristics
 4. Active circuits are required to implement
    
 *** Lag
+**** [[id:bcab7053-f2ea-4117-a8c8-eeea97587087][Root Locus]]
 Function:
  - Improve [[id:5233f426-b528-4635-9487-e7047b781af2][Steady State Error]]
 Compensator
@@ -35,7 +36,8 @@ Characteristics
 2. pole at $-p_c$ is small and negative
 3. Zero at $-z_c$ is close to, and to the left of the pole at $-p_c$
 4. Active circuits are not required to implement
-   
+**** [[id:79b422d5-ff34-41ab-8b86-67e6ecfc68ad][Bode Plot]]
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Bode_Plot_Lag.xopp]]
 *** PD
 Function:
  - Improve transient response
@@ -49,6 +51,7 @@ Characteristics
 3. Can cause noise and saturation; implement with rate feedback or with a pole (lead)
 
 *** Lead
+**** [[id:bcab7053-f2ea-4117-a8c8-eeea97587087][Root Locus]]
 Function:
  - Improve transient response
 Compensator
@@ -59,6 +62,9 @@ Characteristics
 1. Zero at $-z_c$ and pole at $-p_c$ are selected to put design point on root locus
 2. Pole at $-p_c$ is more negative than zero at $-z_c$
 3. Active circuits are not required to implement
+
+**** [[id:79b422d5-ff34-41ab-8b86-67e6ecfc68ad][Bode Plot]]
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Bode_Plot_Lead.xopp]]
 
 *** PID
 Function:
