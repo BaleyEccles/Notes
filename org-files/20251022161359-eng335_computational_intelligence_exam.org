@@ -66,6 +66,10 @@ The inputs to the system are in the top two panels, namely the sport to predict 
 The button labels 'run' loads the data based on selection, trains the neural network, verifies the neural network and returns a percentage of correct predictions. The percentage is then displayed in the 'Percent Correct' field.
 
 * Conclusion
+The report examines the integration of computational intelligence in sports analytics, using neural networks to predict the sport an athlete is likely to excel in based on physical and demographic factors. By analyzing characteristics such as height, weight, age, sex, and nationality, the study aims to identify patterns that correlate body types with specific sports. 
 
+The developed system employs MATLAB's Neural Network Toolbox to create a feed-forward neural network, allowing for robust training and validation against historical data. Performance analysis indicates that unique body types yield better prediction accuracy, particularly in sports that favour specific attributes, like basketball. Conversely, sports with less distinct physical demands, such as shooting, result in lower accuracy levels due to similarity in competitors' characteristics.
+
+The comprehensive user guide facilitates interaction with the system, enabling users to input data and receive predictions effectively. Overall, the findings highlight the impact of feature selection on prediction outcomes and suggest pathways for future research in this domain.
 
 
