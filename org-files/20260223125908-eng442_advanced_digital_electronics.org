@@ -29,4 +29,6 @@ Computer organisation and design risc-V edition
    
 ** Portfolio
  - 30%
+[[id:25c6c6a6-d98c-439f-81a3-16ddccfa12ec][ENG442 - Advanced Digital Electronics - Portfolio]]
+
 

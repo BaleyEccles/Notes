@@ -1,0 +1,63 @@
+:PROPERTIES:
+:ID:       25c6c6a6-d98c-439f-81a3-16ddccfa12ec
+:END:
+#+title: ENG442 - Advanced Digital Electronics - Portfolio
+#+date: [2026-02-24 Tue 09:56]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Week 1
+** Problem 1
+a) Briefly describe the purpose of a look up table (LUT).
+b) Briefly describe the purpose of a slice (or equivalently a configurable logic block).
+A configurable logic block is the fundamental component of FPGAs, it allow the implementation of logic and memory. The ug474 7Series CLB contains lookup tables, memory, shift registers, multiplexer and few more things.
+c) Briefly describe the purpose of the switch matrix.
+Allows connections between CLBs, inputs and outputs.
+d) With reference to the switch matrix, how might a CLB/Slice output be fed back to its input?
+The output of the CLB will be physically connected to a wire, the switch matrix will be used to connect this wire back to the physical input of the CLB.
+
+** Problem 2
+Consider the following code and answer the following Verilog questions. This code is for use on the Basys3 development board which has 16 switches (sw) and 16 LEDs (led).
+#+BEGIN_SRC verilog
+module calc(input [15:0] sw, output [15:0] led);
+   assign led = sw;
+endmodule
+#+END_SRC
+a) How many bits are input to the module?
+16
+b) How many bits are output from the module?
+16
+c) What does the module do?
+enables/disables the 16 LEDs based on the 16 switch inputs
+d) Rewrite the module to take only the lower 8 bits from the switches and output to the lower 8 LEDs. Also, change the module so that the switch must be off to turn the corresponding LED on.
+#+BEGIN_SRC verilog
+module calc(input [7:0] sw, output [7:0] led);
+   wire not_sw;
+   not not1(not_sw, sw[7:0]);
+   assign led = not_sw;
+endmodule
+#+END_SRC
+** Problem 3
+Write a Verilog module to implement a full adder.
+#+BEGIN_SRC verilog
+module adder(input A, input B, input Cin, output sum, output Cout);
+   assign sum = A ^ B ^ Cin;
+   assign Cout = A && B || Cin && (A ^ B);
+endmodule
+
+module test;
+   reg a, b, cin;
+   wire sum, cout;
+   adder dut(a, b, cin, sum, cout);
+   initial begin
+      a = 0;
+      b = 0;
+      cin = 0;
+      $monitor("%b + %b + %b = %b, %b", a, b, cin, sum, cout);
+      for (integer i = 0; i < 8; i = i + 1) begin
+         {a, b, cin} = i; // Concatenate i into {a, b, cin}
+         #1; // Wait for the outputs to stabilize
+      end
+   end
+endmodule
+#+END_SRC
