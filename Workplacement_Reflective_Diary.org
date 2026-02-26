@@ -477,3 +477,73 @@ The other interns final presentations were interesting, one involved PowerCAD an
 [[./SAGE_AI.png]]
 [[./SAGE_Jira_2.png]]
 [[./SAGE_AutoCAD_Block_Builder.png]]
+* Week 10
+- From 16/02/2026 to 20/02/2026
+** Task you Did This Week
+*** Day 1
+**** Project Work
+ - 8hr
+ - Code cleanup
+   - Change how Excel is read
+   - Automaticcally load the MAIN.lsp into AutoCAD
+*** Day 2
+**** Project Work
+ - 7.5hr
+ - More code cleanup
+   - Trust paths each time a LISP file is loaded
+     - This took forever
+**** Project Checkin
+ - 30min
+ - Talked with Melissa and Felix about what needs to be done for my project to be done
+   - Mostly just code cleanup and documentation
+*** Day 3
+**** Project Work
+ - 8hr
+ - Add dynamic block support
+ - Create Example 4
+   - Uses dynamic blocks to create PLC's
+*** Day 4
+**** Project Work
+ - 6hr
+ - Bunch of code cleanup
+   - Docstrings
+   - More Example 4 stuff
+ - Documenatation
+**** Sprint Review
+ - 30min
+ - Talked with Angello about what needs to be done for my project to be finished
+ - He will organise a code review
+ - Gave me things to do to ensure the code is up to SAGE standards
+**** Lunch and Learn
+ - 1hr
+ - Siemens Lunch and Learn-TIA Portal v21 Update and Redundancey
+   - This was kind of last minute and I joined late
+     
+**** Final Presentaions
+ - 30min
+ - Another intern is finishing soon
+ - It was on their AI Functional Design Specification Generation project
+   
+*** Day 5
+Sick :(
+
+** What You Learn From These Tasks
+The expectations for me on handover. Also the standards of what SAGE needs when it comes to code qualtity.
+** Evidence
+
+* Week 11
+- From 25/02/2026 to 27/02/2026
+** Task you Did This Week
+*** Day 1
+
+** What You Learn From These Tasks
+
+** Evidence
+* Week 12
+- From 03/03/2026 to 06/03/2026
+** Task you Did This Week
+*** Day 1
+
+** What You Learn From These Tasks
+
+** Evidence
