@@ -535,10 +535,43 @@ The expectations for me on handover. Also the standards of what SAGE needs when 
 - From 25/02/2026 to 27/02/2026
 ** Task you Did This Week
 *** Day 1
+**** Project Work
+ - 8hr
+ - Developer documentation
+   - How to setup an enviroment to continue development
+ - More dynamic block support
+   - Add support for boolean values
+
+*** Day 2
+**** Project Work
+ - 5hr
+ - More documenation
+ - Code security review
+**** Sprint Review
+ - 30min
+ - With Angello De Ionno
+ - Talked about how handover will go
+   - Need to organise a handover meeting
+**** Project Checkin
+ - 30min
+ - With Felix Clark and Alexander Hurley
+ - Alex is the person I will be handing over my project to
+ - This was kind of the handover meeting
+ - Another meeting will happen next week
+ - Showed Alex my project
+   
+*** Day 3
+**** Project Work
+ - 8hr
+ - Documentation and code cleanup
+ - Some handover preparation stuff
 
 ** What You Learn From These Tasks
+Similar to last week, I learnt about how handover is supposed to go. I will have a presentation next week where I will showcase everthing that I have done.
 
 ** Evidence
+[[./SAGE_Teams.png]]
+[[./SAGE_GitLab_2.png]]
 * Week 12
 - From 03/03/2026 to 06/03/2026
 ** Task you Did This Week
