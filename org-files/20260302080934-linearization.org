@@ -6,7 +6,13 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* Linearization
+* Linearization - With External Inputs
+
+
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Linearization_Example_2.xopp]]
+
+* Linearization - No External Inputs
 \[\underline{\dot{x}}(t) = f(\underline{x}(t), \underline{u}(t)) \rightarrow \underline{\dot{x}}\(t) = \underline{A}\underline{x}(t) + \underline{B}\underline{u}(t)\]
 
 ** Working
@@ -21,14 +27,25 @@ Choose to transform the state variable:
 \Rightarrow \Delta \dot{x} &= \frac{\partial f}{\partial x}|_{x=\bar{x}}\cdot \Delta x \\
 \Delta \dot{\underline{x}} &= \underline{A} \cdot \Delta\underline{x}
 \end{align*}
-
+Where
+\[\underline{A} = \frac{\partial f}{\partial x}|_{x = \bar{x}}\]
 ** Non-linear Effects:
  - Finite Escape Time
  - Multiple Isolated Equilibrium points
  - Limit Cycle
     - Fixed f & A oscillation that occur irrespective if initial conditions
    
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Linearization_Example_1.xopp]]
 
-
-
-
+* Common non-linearity
+** Saturation
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Saturation_Linear.xopp]]
+** Friction
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Friction_Linear.xopp]]
+** Dead-Zone/Dead-band
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Dead_Zone_Linear.xopp]]
+** Relay
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Relay_Linear.xopp]]
+** Backlash
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Backlash_Linear.xopp]]
