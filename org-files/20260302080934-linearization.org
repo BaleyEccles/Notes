@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       86965ecf-45f7-481a-a22b-9adb5a29983d
+:END:
+#+title: Linearization
+#+date: [2026-03-02 Mon 08:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Linearization
+\[\underline{\dot{x}}(t) = f(\underline{x}(t), \underline{u}(t)) \rightarrow \underline{\dot{x}}\(t) = \underline{A}\underline{x}(t) + \underline{B}\underline{u}(t)\]
+
+** Working
+Using [[id:356b1296-2188-4d04-9ccc-a4381bcc02b6][Taylor Series]] around $x = \bar{x}$:
+\[f(x) = f(\bar{x}) + f'(\bar{x})(x - \bar{x}) + \hdots\]
+There is an equilibrium point at $\dot{x} = f(x) = 0$
+\[f(x) = 0 + \frac{\partial f}{\partial x}|_{x=\bar{x}}(x - \bar{x}) + \textrm{H.O.T}\]
+Choose to transform the state variable:
+\begin{align*}
+\Delta x &= x - \bar{x} \\
+\Rightarrow \Delta \dot{x} &= \dot{x} \\
+\Rightarrow \Delta \dot{x} &= \frac{\partial f}{\partial x}|_{x=\bar{x}}\cdot \Delta x \\
+\Delta \dot{\underline{x}} &= \underline{A} \cdot \Delta\underline{x}
+\end{align*}
+
+** Non-linear Effects:
+ - Finite Escape Time
+ - Multiple Isolated Equilibrium points
+ - Limit Cycle
+    - Fixed f & A oscillation that occur irrespective if initial conditions
+   
+
+
+
+

@@ -17,6 +17,10 @@
 
 * Notes
  - 9am start, not 8am
+[[id:bcab7053-f2ea-4117-a8c8-eeea97587087][Root Locus]]
+[[id:b144cecf-1466-472d-9c0d-d7a9243beeb7][Motivation for Linearization]]
+[[id:86965ecf-45f7-481a-a22b-9adb5a29983d][linearization]]
+
 
 * Assessment
 

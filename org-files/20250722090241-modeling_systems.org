@@ -36,7 +36,7 @@ For negative feedback
  - $G(s)$ is the plant
  - $H(s)$ is the feedback
 
-** Linearization
+** [[id:86965ecf-45f7-481a-a22b-9adb5a29983d][Linearization]]
  - We can convert non-linear systems to linear ones
  - This can be done using a [[id:356b1296-2188-4d04-9ccc-a4381bcc02b6][Taylor Series]]
 

@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       b144cecf-1466-472d-9c0d-d7a9243beeb7
+:END:
+#+title: Motivation for Linearization
+#+date: [2026-03-02 Mon 08:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+
+* Motivation for [[id:86965ecf-45f7-481a-a22b-9adb5a29983d][Linearization]]
+** Homogeneity
+\[f(\alpha x) = \alpha f(x)\]
+for linear system $f$, and $\forall \alpha \in \Re$
+** Superposition
+\[f(x+y) = f(x) + f(y)\]
+for linear system $f$, and $\forall x,y \in \Re^{n}$
+** General non-linear model
+\[\underline{\dot{x}} = f(\underline{x}, \underline{u}, \underline{x}_0\]
+ - $f, g$ are non-linear
+\[y = f(\underline{x}, \underline{u}, \underline{x}_0\]
+
+*** Linear State-Space Model
+\[\underline{\dot{x}} = \underline{A}\underline{x} + \underline{D}\underline{u}\]
