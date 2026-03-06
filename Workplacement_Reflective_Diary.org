@@ -576,7 +576,42 @@ Similar to last week, I learnt about how handover is supposed to go. I will have
 - From 03/03/2026 to 06/03/2026
 ** Task you Did This Week
 *** Day 1
-
+**** Project Work
+ - 4hr
+ - Documenatation
+   - Angello De Ionno went through my documenatation and told me stuff that should be cleaned/changed
+*** Day 2
+**** Project Work
+- 8hr
+- Bunch more documenation
+  - Same stuff Angello sent yesterday
+- Code cleanup
+  - Angello also ran pylint and bandit on my code
+  - He said pylint must be >7.0
+  - And bandit was fine
+**** Project Checkin
+- Less than 10min
+- Brief check in to verify that I dont need anything and that Felix doesnt either
+*** Day 3
+**** Presentation Creation
+ - 3hr
+ - Create my final presentation to show what I have done during my 12 weeks at SAGE
+**** Other Intern Presentations
+ - 3hr
+ - Watched other interns present what they have done
+**** My Presentation
+ - 10min
+ - Present what I have done
+**** Project Work
+ - 2hr
+ - Small documenatation changes
+ - Get access to new GitLab repo and make pull request
+*** Day 4
+TODO 
 ** What You Learn From These Tasks
+Having Angello look over my documentation gave me a better understanding of what is required and how to meet SAGE standards. The other interns presentations were interesting.
 
 ** Evidence
+[[./SAGE_pylint.png]]
+[[./SAGE_Merge_Request.png]]
+[[./SAGE_Final_Presentation.png]]
