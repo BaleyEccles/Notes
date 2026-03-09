@@ -8,10 +8,61 @@
 
 * FPGAs (Field Programmable Gate Arrays)
 
-** Architecture
+** HDL (Hardware Definition Language)
+A way of describing how to build a circuit in the FPGA
+
+** Modelling
+*** Structural
+Structural based
+*** Data Flow
+input/output
+*** Behavioural
+event driven
+** Datatype and Operators
+Wires: connects two points together
+Register: Stores a value
+
+|------+----------------|
+| Name | Description    |
+|------+----------------|
+| 1    | Logic One      |
+| 0    | Logic Zero     |
+| z    | High Impedance |
+| x    | Undefined      |
+|------+----------------|
+
+*** Vectors
+#+BEGIN_SRC verilog
+wire [5:0] x; // 6-bit array net
+reg [5:0] y; // 6-bit array varible
+initial y = 6'b000000; // 6-bit initial value
+#+END_SRC
+
+*** Registers
+Is able to store a value
+
+*** Non-Blocking/Blocking Statements
+**** Blocking
+Must execute one after another
+#+BEGIN_SRC verilog
+x = 1;
+y = x;
+#+END_SRC
+x will be 1 and y will be 1
+**** Non-Blocking
+Is able to execute in parallel
+#+BEGIN_SRC verilog
+x <= 1;
+y <= x;
+#+END_SRC
+x will be 1 and y will be unchanged
+*** Parameters
+Similar to C macros or more like C++ templates
+
+** Examples
+[[id:126ea8f0-07e1-4d72-8ce8-f1ddd111ebfb][FPGA Examples]]
 
 ** History
-
 *** PLA, PAL
 Uses sum of products
 *** GAL
@@ -26,5 +77,4 @@ Contains:
  - Adders
  - MUX
  - Flip-flops/Registers
-
 

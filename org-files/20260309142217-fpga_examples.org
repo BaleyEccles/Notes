@@ -1,0 +1,232 @@
+:PROPERTIES:
+:ID:       126ea8f0-07e1-4d72-8ce8-f1ddd111ebfb
+:END:
+#+title: FPGA Examples
+#+date: [2026-03-09 Mon 14:22]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* FPGA Examples
+
+** Example - S-R Latch
+#+BEGIN_SRC verilog :tangle Example_S-R_Latch.v
+module SR_latch(s, r, c, q, qn);
+   input s, r, c;
+   output reg q;
+   output reg qn;
+
+   always @(s or r or c) begin
+      if (c & s) {q, qn} <= 2'b10;
+     else if (c & r) {q, qn} <= 2'b01;
+   end
+endmodule
+#+END_SRC
+
+** Example - D Latch
+#+BEGIN_SRC verilog :tangle Example_D_Latch.v
+module D_latch(d, c, q, qn);
+   input d, c;
+   output reg q;
+   output reg qn;
+
+   always @(d or c) begin
+      if (c) {q, qn} <= {d, ~d};
+   end
+endmodule
+#+END_SRC
+
+** Example - D Flip Flop
+#+BEGIN_SRC verilog :tangle Example_D_Flip_Flop.v
+`include "Example_D_Latch.v"
+module D_Flip_Flop_structural(d, clk, q, qn);
+   input d, clk;
+   output q, qn;
+
+   wire q1, q1n;
+
+   D_latch d1(d, clk, q1, q1n);
+   D_latch d1(q1, ~clk, q, qn);
+endmodule
+
+module D_Flip_Flop_behavioural(d, clk, q, qn);
+   input d, clk;
+   output q, qn;
+
+   always @(posedge clk) begin
+      q <= d;
+      qn <= ~d;
+   end
+endmodule
+#+END_SRC
+
+** Example - Register
+#+BEGIN_SRC verilog :tangle Example_Register.v
+module Register
+  #(parameter DATA_WIDTH=32)
+   (input [DATA_WIDTH-1:0] D, input clock, input enable, output reg [DATA_WIDTH-1:0] Q);
+
+   always @(posedge clock) begin
+      if (enable) Q <= D;
+   end 
+endmodule
+#+END_SRC
+
+** Example - ROM
+#+BEGIN_SRC text :tangle Example_ROM.hex
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+C
+D
+E
+F
+#+END_SRC
+
+#+BEGIN_SRC verilog :tangle Example_ROM.v
+module ROMTest();
+   integer i;
+   reg[3:0] ROM[15:0];
+
+   initial begin
+      $readmemh("Example_ROM.hex", ROM);
+      for (i = 0; i <= 15; i = i + 1) begin
+         $display("ROM[%0d] = 0b%0b", i, ROM[i]);
+      end
+   end
+endmodule
+#+END_SRC
+** Example - Up Down Counter
+Count up if $x$, count down if $\bar{x}$. If 9 -> 1, if 1 -> 9.
+:NOTE: Won't work, some clock and button problems, see video https://mylo.utas.edu.au/d2l/le/content/777450/viewContent/6458708/View for more information
+
+#+BEGIN_SRC text :tangle Example_Up_Down_Counter_Constrains.xdc
+set_property PACKAGE_PIN V17 [get_ports {sw[0]}]
+ set_property IOSTANDARD LVCMOS33 [get_ports {sw[0]}]
+    
+set_property PACKAGE_PIN W7 [get_ports {seg[0]}]
+ set_property IOSTANDARD LVCMOS33 [get_ports {seg[0]}]
+set_property PACKAGE_PIN W6 [get_ports {seg[1]}]
+ set_property IOSTANDARD LVCMOS33 [get_ports {seg[1]}]
+set_property PACKAGE_PIN U8 [get_ports {seg[2]}]
+ set_property IOSTANDARD LVCMOS33 [get_ports {seg[2]}]
+set_property PACKAGE_PIN V8 [get_ports {seg[3]}]
+ set_property IOSTANDARD LVCMOS33 [get_ports {seg[3]}]
+set_property PACKAGE_PIN U5 [get_ports {seg[4]}]
+ set_property IOSTANDARD LVCMOS33 [get_ports {seg[4]}]
+set_property PACKAGE_PIN V5 [get_ports {seg[5]}]
+ set_property IOSTANDARD LVCMOS33 [get_ports {seg[5]}]
+set_property PACKAGE_PIN U7 [get_ports {seg[6]}]
+ set_property IOSTANDARD LVCMOS33 [get_ports {seg[6]}]
+
+set_property PACKAGE_PIN T18 [get_ports btnU]
+ set_property IOSTANDARD LVCMOS33 [get_ports btnU]
+#+END_SRC
+
+#+BEGIN_SRC verilog :tangle Example_Up_Down_Counter.v
+`include "Example_7_seg_Counter.v"
+module counter(input sw, input btnU, output [6:0] seg);
+   reg [3:0] y; // state
+
+   bcdto7seg b2s(y, seg);
+   
+   initial y = 4'b0000;
+
+   always @(posedge btnU) begin
+      if (sw) begin
+         case (y)
+           4'h1: y = 4'h2;
+           4'h2: y = 4'h3;
+           4'h3: y = 4'h4;
+           4'h4: y = 4'h5;
+           4'h5: y = 4'h6;
+           4'h6: y = 4'h7;
+           4'h7: y = 4'h8;
+           4'h8: y = 4'h9;
+           4'h9: y = 4'h1;
+         endcase
+      end
+      else begin
+         case (y)
+           4'h1: y = 4'h9;
+           4'h2: y = 4'h1;
+           4'h3: y = 4'h2;
+           4'h4: y = 4'h3;
+           4'h5: y = 4'h4;
+           4'h6: y = 4'h5;
+           4'h7: y = 4'h6;
+           4'h8: y = 4'h7;
+           4'h9: y = 4'h8;
+         endcase
+      end
+   end
+endmodule
+#+END_SRC
+
+#+BEGIN_SRC verilog :tangle Example_7_seg_Counter.v
+`timescale 1ns / 1ps
+module bcdto7seg(input [3:0]  bcd, output [0:6] display);
+   reg [0:6] seg;
+   always @(bcd) begin
+      case (bcd)
+        4'd0 : display = ~7'h7e;
+        4'd1 : display = ~7'h30;
+        4'd2 : display = ~7'h6d;
+        4'd3 : display = ~7'h79;
+        4'd4 : display = ~7'h33;
+        4'd5 : display = ~7'h5b;
+        4'd6 : display = ~7'h5f;
+        4'd7 : display = ~7'h70;
+        4'd8 : display = ~7'h7f;
+        4'd9 : display = ~7'h7b;
+        default : display = ~7'h0;
+      endcase;
+   end
+endmodule
+#+END_SRC
+
+** Example - 7-Segment Display
+#+BEGIN_SRC verilog :tangle Example_7_seg.v
+`timescale 1ns / 1ps
+module decoder_bcdto7seg(input [3:0]  sw, output [0:6] seg);
+   reg [0:6] seg;
+   // Using if-else
+   always @(sw) begin
+      if (sw == 4'bd0) seg = ~7'h7e;  // ~b1111110
+      else if (sw == 4'd1) seg = ~7'h30;
+      else if (sw == 4'd2) seg = ~7'h6d;
+      else if (sw == 4'd3) seg = ~7'h79;
+      else if (sw == 4'd4) seg = ~7'h33;
+      else if (sw == 4'd5) seg = ~7'h5b;
+      else if (sw == 4'd6) seg = ~7'h5f;
+      else if (sw == 4'd7) seg = ~7'h70;
+      else if (sw == 4'd8) seg = ~7'h7f;
+      else if (sw == 4'd9) seg = ~7'h7b;
+      else seg = 7'h0;
+   end
+   // using switch case
+   always @(sw) begin
+      case (sw)
+        4'd0 : seg = ~7'h7e;
+        4'd1 : seg = ~7'h30;
+        4'd2 : seg = ~7'h6d;
+        4'd3 : seg = ~7'h79;
+        4'd4 : seg = ~7'h33;
+        4'd5 : seg = ~7'h5b;
+        4'd6 : seg = ~7'h5f;
+        4'd7 : seg = ~7'h70;
+        4'd8 : seg = ~7'h7f;
+        4'd9 : seg = ~7'h7b;
+        default : seg = ~7'h0;
+      endcase;
+   end
+endmodule
+#+END_SRC

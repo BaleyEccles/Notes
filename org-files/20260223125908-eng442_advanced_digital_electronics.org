@@ -17,7 +17,7 @@
 
 * Notes
 [[id:cd800cc5-2b09-4528-8158-3c6f9faf2aa7][FPGAs (Field Programmable Gate Arrays)]]
-Computer organisation and design risc-V edition
+[[id:4d4763bd-0281-4bff-a06a-94d8a5e20396][RISC-V]]
 
 * Assessment
 
