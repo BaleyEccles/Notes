@@ -607,7 +607,16 @@ Similar to last week, I learnt about how handover is supposed to go. I will have
  - Small documenatation changes
  - Get access to new GitLab repo and make pull request
 *** Day 4
-TODO 
+**** Project Work
+ - 8hr
+ - A bunch of small tasks to finalise the project
+ - Fix up documentation
+   - Fix GitLab links
+   - Add trouble shooting page
+   - etc
+ - Reach out to Felix to ensure he doesn't need anything more from me
+ - Handover meeting
+
 ** What You Learn From These Tasks
 Having Angello look over my documentation gave me a better understanding of what is required and how to meet SAGE standards. The other interns presentations were interesting.
 
