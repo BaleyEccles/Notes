@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       b29377c0-13e3-4242-9ffb-ee11173122bc
+:END:
+#+title: Matrix Rank
+#+date: [2026-03-16 Mon 08:12]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Matrix Rank
+Rank = max number of rows or columns that re linear independent
+
+If $\det(\underline{A}) \neq 0$, then $\underline{A}$ is full rank

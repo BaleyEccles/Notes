@@ -1,0 +1,104 @@
+:PROPERTIES:
+:ID:       91abfc71-ac31-4490-8d23-2d216b8fe303
+:END:
+#+title: State Space Control
+#+date: [2026-03-15 Sun 15:56]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* State Space Control
+[[id:6001038f-6a4b-49f6-a9b7-6378c74db194][Controllability]]
+** Advantages
+ - Non-linear systems
+ - MIMO  (Not just SISO)
+   - Multiple Inputs Multiple Outputs
+ - State describes distribution of energy in a systems
+ - Direct placement of closed-loop poles
+   - Although, we cannot place closed loop zeros
+ - Optimal control
+
+** ODE
+ - \[\dot{\underline{x}} = f(\underline{x},t)\]
+ - \[\dot{\underline{x}} = A\underline{x} + B \underline{u}\]
+ - \[\underline{y} = C\underline{x} + D \underline{u}\]
+   
+** LTI
+\[\sum_{j=0}^na_{n-j}\frac{d^jy}{dt^j} = \sum_{k=0}^nb_{n-k} \frac{d^ku}{dt^k}\]
+where $a_0 = 1$ and all $a_j$, $b_k$ are constants
+
+*** Choose states
+\[x_n = \frac{d^ny}{dt^n} - \beta_0 \frac{d^{n-1}u}{dt^{n-1}} - \beta_1 \frac{d^{n-2}u}{dt^{n-2}} - \hdots - \beta_{n-2} \frac{du}{dt} - \beta_{n-1}u = \frac{dx_{n-1}}{dt} - \beta_{n-1}u\]
+\[\beta_{n-1} = \beta_{n-1} - a_1\beta_{n-2} - a_2 \beta_{n-3}  - \hdots - a_{n-2}\beta_1 a_{n-1}\beta_0\]
+
+This guarantees the existence and uniqueness of the solution of the equations
+We obtain:
+\begin{bmatrix}
+\dot{x}_{1}\\
+\dot{x}_{2}\\
+\vdots \\
+\dot{x}_{n-1}\\
+\dot{x}_{n}
+\end{bmatrix} = \begin{bmatrix}
+0 & 1 & 0 & \hdots & 0 \\
+0 & 0 & 1 & \hdots & 0 \\
+\vdots & \vdots & \vdots & \hdots & \vdots \\
+0 & 0 & 0 & \hdots & 1 \\
+-a_n & -a_{n-1} & -a_{n-2} & \hdots & -a_1
+\end{bmatrix} \begin{bmatrix}
+x_{1}\\
+x_{2}\\
+\vdots \\
+x_{n-1} \\
+x_{n}
+\end{bmatrix} \begin{bmatrix}
+\beta_{1}\\
+\beta_{2}\\
+\vdots \\
+\beta_{n-1} \\
+\beta_{n}
+\end{bmatrix}
+\[y = \begin{bmatrix}1 & 0 & 0 & \hdots & 0\end{bmatrix} \begin{bmatrix}
+x_{1}\\
+x_{2}\\
+\vdots \\
+x_{n-1} \\
+x_{n}
+\end{bmatrix} + \begin{bmatrix}\beta_0\end{bmatrix}u\]
+
+**** Special case
+If we only have $\sum_{j=0}^na_{n-j}\frac{d^jy}{dt^j}d = b_nu$:
+\begin{bmatrix}
+\dot{x}_{1}\\
+\dot{x}_{2}\\
+\vdots \\
+\dot{x}_{n-1}\\
+\dot{x}_{n}
+\end{bmatrix} = \begin{bmatrix}
+0 & 1 & 0 & \hdots & 0 \\
+0 & 0 & 1 & \hdots & 0 \\
+\vdots & \vdots & \vdots & \hdots & \vdots \\
+0 & 0 & 0 & \hdots & 1 \\
+-a_n & -a_{n-1} & -a_{n-2} & \hdots & -a_1
+\end{bmatrix} \begin{bmatrix}
+x_{1}\\
+x_{2}\\
+\vdots \\
+x_{n-1} \\
+x_{n}
+\end{bmatrix} \begin{bmatrix}
+0 \\
+0 \\
+\vdots \\
+0 \\
+\beta_{n}
+\end{bmatrix}
+\[y = \begin{bmatrix}1 & 0 & 0 & \hdots & 0\end{bmatrix} \begin{bmatrix}
+x_{1}\\
+x_{2}\\
+\vdots \\
+x_{n-1} \\
+x_{n}
+\end{bmatrix} + \begin{bmatrix}0\end{bmatrix}u\]
+*** Example
+Video 2: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500978/View
+

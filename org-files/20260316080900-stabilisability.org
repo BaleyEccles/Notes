@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       03a9bc91-e20f-4dbc-95ea-cbe72149e5e4
+:END:
+#+title: Stabilisability
+#+date: [2026-03-16 Mon 08:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Stabilisability
+Checking which states are uncontrollable and if they are inherently unstable
+
+** Popov-Belevita-Hautus test (PBH)
+1. Find the [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of $A$, $\lambda_i$
+2. Check the [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank]] of the matrix: $[\lambda_iI -A\ B]$ for each $\lambda_i$
+   - If its full [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank]], the state associated with $\lambda_i$ is [[id:6001038f-6a4b-49f6-a9b7-6378c74db194][controllable]]
+   - For a matrix $M$ of size $m\times m$, full [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank]] satisfies
+     - $\textrm{rank}([\lambda_iI -A\ B]) = \min\{m,n\}$
+     
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Stabilistaion_Example.xopp]]

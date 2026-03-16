@@ -1,0 +1,185 @@
+:PROPERTIES:
+:ID:       6001038f-6a4b-49f6-a9b7-6378c74db194
+:END:
+#+title: Controllability
+#+date: [2026-03-15 Sun 16:18]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Controllability
+Being able to control all states with the input in [[id:91abfc71-ac31-4490-8d23-2d216b8fe303][State Space Control]]
+ - [[id:03a9bc91-e20f-4dbc-95ea-cbe72149e5e4][Stabilisability]]
+ 
+** Definition
+For the system $\underline{\dot{x}} = A \underline{x} + B\underline{u}$, with the initial conditions $\underline{x}(0) = \underline{x}_0$, is said to be controllable if there exists an input $u(t)$ which transfers the state from $\underline{x}_{0}$ to $\underline{x}$, for every vector $\underline{x} \in \Re^n$ and every condition $\underline{x}_0$ within time $t$.
+
+This definition is satisified if the controlability matrix $\underline{P}$ satisfies:
+
+$\textrm{rank}(\underline{P}) = n$, where $\underline{P}$ is $n\times n$ matrix
+$\underline{P} = [B\ AB\ A^2B\ \hdots\ A^{n-1}B]$
+Either $\underline{P}$ is [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][full rank]] (controllable) or [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank-deficient]] (uncontrollable)
+
+If $\det(\underline{P}) \neq 0$, then $\underline{P}$ is full rank
+
+Controllability can also be established using a matrix defined as the Controlability Gramian, given by:
+\[\underline{w}_{t_{f}} = \int_0^{t_f}e^{A\tau}BB^Te^{A^T\tau} d\tau\]
+Established if $\underline{w}_{t_f}$ is non-singular. The [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of $\underline{w}_{t_f}$ can be used to establish the degree to which state is controllable.
+
+** Fake /Proof/
+Consider a discrete system: apply an impulse as $u[n]$
+\begin{align*}
+\underline{x}[n+1] &= A\underline{x}[n] + Bu[n] \\
+\underline{x}[1] &= B\delta[n] \\
+\underline{x}[2] &= A\underline{x}[1] + Bu[1] \\
+     &= A[B\delta[n]] \\
+     &= AB\delta[n] \\
+\underline{x}[3] &= A\underline{x}[2] + Bu[2] \\
+     &= A(A[B\delta[n]]) \\
+     &= A^2B\delta[n]
+\end{align*}
+If $B, AB, A^2B, \hdots$ are all linear independent then we can reach every direction. If any of them are not then we cannot.
+
+** Examples
+Video 4: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500978/View
+
+** Linear [[id:97dc3da9-c40a-4945-b4f9-bf7b7657b70c][Control Design]]
+Take:
+\[\dot{\underline{x}}(t) = A\underline{x}(t) + B u(t)\]
+\[y(t) = C \underline{x}(t) + D u(t)\]
+ - With $D = 0$
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Linear_Control_Design_System.xopp]]
+ - $K = [k_1\ k_2\ k_3\ \hdots\ k_n]$
+ - It is possible for $r(t) = 0$
+   - The system of this case is called a *regulator*
+   - Drives $\Delta \underline{x} = 0$
+[[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of $A$ solve: $s^n + a_{n-1}s^{n-1} + a_{n-2}s^{n-2} + \hdots + a_1s + a_0 = 0$
+
+ - Control Law
+   - \[u(t) = -K x(t) + r(t)\]
+     
+*** Closed Loop Dynamics Impact
+How does the new control law impact the closed loop dynamics
+\begin{align*}
+& \begin{cases}
+\dot{\underline{x}} &= A\underline{x} + B u \\
+y &= C \underline{x}
+\end{cases} \\
+\Rightarrow & \begin{cases}
+\dot{\underline{x}} &= A\underline{x} + B (-K \underline{x} + r) \\
+y &= C \underline{x}
+\end{cases} \\
+\Rightarrow & \begin{cases}
+\dot{\underline{x}} &= (A - B K)\underline{x} + B r \\
+y &= C \underline{x}
+\end{cases}
+\end{align*}
+
+The closed loop zeroes are determined from the polynomial formed by the elements of $C$ if the system is cast in [[id:d6d06e75-adca-435d-8e0f-80ce765a4189][phase variable form]].
+
+** Dynamic Response Shaping
+For [[id:405c4318-12e5-45f8-8f69-c074d41a1481][Second Order Systems]] we use $\lambda_{1,2} = -\zeta \omega_n \pm \omega_n\sqrt{\zeta^2-1}$.
+
+*** Integral of Time Multiplying Absolute Error (ITAE)
+\[\textrm{ITAE} = \int_0^{\infty}t|e(t)|dt\]
+
+There exists a table of $\textrm{ITAE}$ polynomials that satisfies the above
+
+\[\begin{align*}
+\text{First:} & \quad s + \omega_n \\
+\text{Second:} & \quad s^2 + 1.4\omega_n s + \omega_n^2 \\
+\text{Third:} & \quad s^3 + 1.75\omega_n s^2 + 2.15\omega_n^2 s + \omega_n^3 \\
+\text{Fourth:} & \quad s^4 + 2.1\omega_n s^3 + 3.4\omega_n^2 s^2 + 2.7\omega_n^3 s + \omega_n^4 \\
+\text{Fifth:} & \quad s^5 + 2.8\omega_n s^4 + 5.0\omega_n^2 s^3 + 5.5\omega_n^3 s^2 + 3.4\omega_n^4 s + \omega_n^5 \\
+\text{Sixth:} & \quad s^6 + 3.25\omega_n s^5 + 6.6\omega_n^2 s^4 + 8.6\omega_n^3 s^3 + 7.45\omega_n^4 s^2 + 3.95\omega_n^5 s + \omega
+\end{align*}\]
+
+Closed-loop zeroes:
+ - Cancel these
+   - If they are minimum phase (left hand side of s-plane)
+ - Non-minimum phase zeroes cannot be cancelled
+   - They must be simulated
+
+** Pole Placement Method
+With:
+\[\dot{\underline{x}} &= (A - B K)\underline{x} + B r\]
+\[y &= C \underline{x}\]
+
+Three approaches 
+*** 1. Direct Comparison
+[[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of $A-BK$ match the system characteristic poles
+Desired poles are at $\mu_1, \mu_2, \hdots, \mu_n$
+Then:
+\begin{align*}
+&\textrm{eig}(A - BK) \\
+&\Rightarrow |A-BK-\lambda I| = 0 = (\lambda - \mu_1)(\lambda - \mu_2) \hdots (\lambda - \mu_{n})
+\end{align*}
+
+*** 2. Transformation to [[id:d6d06e75-adca-435d-8e0f-80ce765a4189][Phase Variable Form]]
+Assume we have a plant not in phase variable form:
+\begin{cases}
+\underline{\dot{z}} &= A\underline{z} + B u \\
+y &= C\underline{z}
+\end{cases}
+The [[id:6001038f-6a4b-49f6-a9b7-6378c74db194][Controllability]] matrix is $P_z[B\ AB\ A^2B\ \hdots\ A^{n-1}B]$
+Assume it is possible to transform to phase variable form through:
+\[\underline{z} = T\underline{x}\]
+ - $\underline{x}$ is the states in phase variable form
+\begin{cases}
+T\underline{\dot{x}} &= AT\underline{x} + B u \\
+y &= CT\underline{x}
+\end{cases}
+\begin{cases}
+\underline{\dot{x}} &= T^{-1}AT\underline{x} + T^{-1}B u \\
+y &= CT\underline{x}
+\end{cases}
+
+This system has [[id:6001038f-6a4b-49f6-a9b7-6378c74db194][Controllability]] matrix
+\begin{align*}
+P_x &= [T^{-1}B\ T^{-1}ATT^{-1}B\ (T^{-1}AT)^2T^{-1}B\ \hdots\ (T^{-1}AT)^{n-1}T^{-1}B] \\
+P_x &= [T^{-1}B\ T^{-1}AB\ \hdots\ T^{-1}A^{n-1}B] \\
+P_x &= T^{-1}[B\ AB\ \hdots\ A^{n-1}B] \\
+P_x &= T^{-1}P_z
+\end{align*}
+\[T = P_zP_z^{-1}\]
+
+Once in phase varible form, apply $u = -K_x\underline{x} + r$
+
+\begin{cases}
+\underline{\dot{x}} &= (T^{-1}AT - T^{-1}BK_x)\underline{x} + T^{-1}B u \\
+y &= CT\underline{x}
+\end{cases}
+
+Need [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of $(T^{-1}AT - T^{-1}BK_x)$
+
+Define $A_x = T^{-1}AT$, $B_x = T^{-1}B$
+Now we need [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of
+\[A_x - B_x K_x =\begin{bmatrix}
+0 & 1 & 0 & \hdots & 0 \\
+0 & 0 & 1 & \hdots & 0 \\
+0 & 0 & 0 & \hdots & 0 \\
+\vdots & \vdots & \vdots & \hdots & \vdots \\
+-(a_0 + k_1) & -(a_1 + k_2) & -(a_2 + k_3) & \hdots & -(a_{n-1} + k_n)
+\end{bmatrix}\]
+Crucially, $det(A_x - B_x K_x - \lambda I) = 0$
+\[= \lambda^n + (a_{n-1} + k_n)\lambda^{n-1} + (a_{n-2} + k_{n-1})\lambda^{n-2} + \hdots + (a_1 + k_2)\lambda + (a_0 + k_1)\]
+Transform back: $\underline{x} = T^{-1}\underline{z}$
+
+\begin{cases}
+\underline{\dot{z}} &= (A - BK_xT^{-1})\underline{z} + B u \\
+y &= C\underline{z}
+\end{cases}
+Set $K_z = KxT^{-1}$
+
+*** 3. Ackermann's Formula
+For single input-single output systems only
+
+With $A,B,C$ all defined, and $\underline{P} = [B\ AB\ A^2B\ \hdots\ A^{n-1}B]$, then:
+\[K = [0\ 0\ \hdots\ 0\ 1]P^{-1}\Phi(A)\]
+Where:
+\[\Phi(A) = A^n + \alpha_{n-1}A^{n-1} + \hdots + \alpha_1A + \alpha_0I\]
+and
+\[\Phi(A) = s^n + \alpha_{n-1}s^{n-1} + \hdots + \alpha_1s + \alpha_0\]
+is the defined characteristic polynomial 
+
+*** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Pole_Placement_Method_Example.xopp]]

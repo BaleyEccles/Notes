@@ -1,12 +1,13 @@
 :PROPERTIES:
 :ID:       0d927ec6-5c0d-497c-b054-43d5d88f8300
 :END:
-#+title: Nyquist Criterion
+#+title: Nyquist Stability Criterion
 #+date: [2025-09-09 Tue 09:26]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* Nyquist Criterion
+* Nyquist Stability Criterion
+
 /Given a Nyquist contour ${\displaystyle \Gamma _{s}}$, let ${\displaystyle P}$ be the number of poles of ${\displaystyle G(s)}$ encircled by ${\displaystyle \Gamma _{s}}$, and ${\displaystyle Z}$ be the number of zeros of ${\displaystyle 1+G(s)}$ encircled by ${\displaystyle \Gamma _{s}}$. Alternatively, and more importantly, if ${\displaystyle Z}$ is the number of poles of the closed loop system in the right half plane, and ${\displaystyle P}$ is the number of poles of the open-loop transfer function ${\displaystyle G(s)}$ in the right half plane, the resultant contour in the ${\displaystyle G(s)}$ -plane, ${\displaystyle \Gamma _{G(s)}}$ shall encircle (clockwise) the point ${\displaystyle (-1+j0)}$ ${\displaystyle N}$ times such that ${\displaystyle N=Z-P}$./
 ** For A Feedback System
 For a feedback system

@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       0f048a31-fe88-4f76-9461-fc5e5c72120e
+:END:
+#+title: Describing Functions
+#+date: [2026-03-15 Sun 14:15]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Describing Functions
+[[id:c7591f3a-c2d4-4591-b6af-b0db831a296c][Transfer Function]] for a non-linear component
+
+ - \[N(E, \omega) = \frac{B_1(E,\omega) + jA_1(E,\omega)}{E}\]
+ - \[N(E, \omega) = \frac{\sqrt{A_1^2(E,\omega) + B_1^2(E, \omega)}}{E}\angle \atan\left(\frac{A_1(E,\omega)}{B_1(E,\omega)}\right)\]
+   
+** [[id:90080c46-f2b3-4e73-995a-ef33b7e70bbe][Fourier Series]] Coefficients
+\[A_1 = \frac{1}{\pi}\int_0^{2\pi}y(t)\cos(\omega t)d(\omega t)\]
+\[B_1 = \frac{1}{\pi}\int_0^{2\pi}y(t)\sin(\omega t)d(\omega t)\]
+** Example
+Video 2: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500369/View
+
+** Stability Analysis
+Using [[id:0d927ec6-5c0d-497c-b054-43d5d88f8300][Nyquist Stability Criterion]]:
+\begin{align*}
+H(j\omega)\cdot N(E,\omega) &= -1 \\
+H(j\omega) &= \frac{-1}{N(E,\omega)}
+\end{align*}
+
+*** Notes
+ - Only predicts the fundamental component
+ - Excitation might be necessary to produce the limit cycle
+ - Limit cycles can be unstable
+   - To determine this make arguments on $\frac{-1}{N(E,\omega)}$
+ - $H(j\omega) &= \frac{-1}{N(E,\omega)}$, usually solved graphically
+   
+*** Example
+Video 4: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500369/View
+To determiner if amplitude, frequency and if stable/unstable use either:
+1. Real/imaginary components
+   - $\Re\{H(j\omega)\} = \Re\{-\frac{1}{N(E)}\}$
+   - $\Im\{H(j\omega)\} = \Im\{-\frac{1}{N(E)}\}$
+2. Magnitude/angle components
+   - $\left|H(j\omega)\right| = \left|-\frac{1}{N(E)}\right|$
+   - $\angle H(j\omega) = \angle -\frac{1}{N(E)}$
+
+

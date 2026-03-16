@@ -20,14 +20,17 @@
 [[id:bcab7053-f2ea-4117-a8c8-eeea97587087][Root Locus]]
 [[id:b144cecf-1466-472d-9c0d-d7a9243beeb7][Motivation for Linearization]]
 [[id:86965ecf-45f7-481a-a22b-9adb5a29983d][linearization]]
+[[id:0f048a31-fe88-4f76-9461-fc5e5c72120e][Describing Functions]]
 
-
+[[id:91abfc71-ac31-4490-8d23-2d216b8fe303][State Space Control]]
 * Assessment
 
 ** Automation Report
  - 30%
  - Week 11
  - PLC programming
+
+   
    
 ** Design Report
  - 30%
@@ -38,3 +41,5 @@
 ** Final Exam
  - 40%
  - Exam period
+
+
