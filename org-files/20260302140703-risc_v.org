@@ -13,3 +13,5 @@
 [[./RISC-V_Registers.png]]
 ** Datapath
 [[./RISC-V_Datapath.png]]
+
+** Busses
