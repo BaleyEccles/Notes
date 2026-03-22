@@ -1,0 +1,66 @@
+:PROPERTIES:
+:ID:       60cd0eb7-fec7-4961-ab79-fff3df6b0839
+:END:
+#+title: Observability
+#+date: [2026-03-23 Mon 08:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Observability
+Consider an unforced systedm:
+\[\dot{x} = A x\]
+ - n states ($n\times n$)
+\[y = C x\]
+ - m outputs ($m\times n$)
+_Completely observable_: if every state $x(t_0)$ can be determined from the measurement of $y(t)$ over a finite time interlace $t_0\leq t \leq t_1$
+
+Consider:
+if
+\[\dot{x} = Ax + Bu\]
+\[y = Cx + Du\]
+then
+\begin{align*}
+x(t) &= e^{At}x(0) + \int_0^te^{A(t-\tau)}d\tau \\
+y(t) &= Ce^{At}x(0) + \int_0^te^{A(t-\tau)}Bu(\tau)d\tau + Du(t) \\
+e^{At} &= \sum_{k=0}^{n-1}\alpha_k(t)A^k \\
+\Rightarrow y(t) &= \sum_{k=0}^{n-1}\alpha_k(t)A^kx(0)
+\end{align*}
+
+** Observability Matrix
+\[O_M = \begin{bmatrix}
+C \\
+CA \\
+CA^2 \\
+\vdots \\
+CA^{n-1}
+\end{bmatrix}\]
+ - $m\times n$ matrix
+If [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank]] of $O_M = n$ then all state variables can be determined based on the output quantities that are measured.
+
+** Examples
+Video 4: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500979/View
+
+** [[id:6001038f-6a4b-49f6-a9b7-6378c74db194][Controllability]] Relationship (Duality)
+Conisder a system $S_1$:
+\[\dot{x} = Ax + Bu\]
+\[y = Cx\]
+| x | nx1 |
+| u | rx1 |
+| y | mx1 |
+| A | nxn |
+| B | nxr |
+| C | mxn |
+
+This has a duel system $S_2$:
+\[\dot{z} = A^{*}z + C^{*}v\]
+\[w = B^{*}z\]
+| z  | nx1 |
+| v  | mx1 |
+| w  | rx1 |
+| A* | conjugate transpose of A |
+| B* | conjugate transpose of B |
+| C* | conjugate transpose of C |
+
+If $S_1$ is completely observable through (A,C) then $S_2$ is completely controllable (A*,C).
+If $S_1$ is completely controllable through (A,B) then $S_2$ is completely observalbe (A*,B*).
+

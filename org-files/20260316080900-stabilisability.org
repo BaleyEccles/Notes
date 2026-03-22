@@ -9,12 +9,7 @@
 * Stabilisability
 Checking which states are uncontrollable and if they are inherently unstable
 
-** Popov-Belevita-Hautus test (PBH)
-1. Find the [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of $A$, $\lambda_i$
-2. Check the [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank]] of the matrix: $[\lambda_iI -A\ B]$ for each $\lambda_i$
-   - If its full [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank]], the state associated with $\lambda_i$ is [[id:6001038f-6a4b-49f6-a9b7-6378c74db194][controllable]]
-   - For a matrix $M$ of size $m\times m$, full [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank]] satisfies
-     - $\textrm{rank}([\lambda_iI -A\ B]) = \min\{m,n\}$
+ - [[id:ca901fed-24f4-4441-a888-116f424ab284][Popov-Belevita-Hautus Test (PBH)]]
      
 ** Example
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/Stabilistaion_Example.xopp]]

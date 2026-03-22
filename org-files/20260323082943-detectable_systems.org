@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       7dc26160-17e0-422e-8ac9-dc3706de650c
+:END:
+#+title: Detectable Systems
+#+date: [2026-03-23 Mon 08:29]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Detectable Systems
+Detectable if:
+ - [[id:60cd0eb7-fec7-4961-ab79-fff3df6b0839][Observable]] states (anything)
+ - Unobservantt states (stable only)
+   
+[[id:ca901fed-24f4-4441-a888-116f424ab284][PBH Test]]:
+1. find $\lambda$
+2. Rank of:
+ - \[\begin{bmatrix}
+   \lambda_iI - A_i \\
+   C
+   \end{bmatrix} = \min\{m,n\}\]
+   - Is full rank and this state is observable 
+ 
+** Example
+Video 6: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500979/View

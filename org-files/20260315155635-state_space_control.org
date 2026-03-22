@@ -9,6 +9,8 @@
 * State Space Control
 [[id:75c352df-3843-4bd6-b15a-9ea7147879ae][Steady State Tracking of State Feedback]]
 [[id:6001038f-6a4b-49f6-a9b7-6378c74db194][Controllability]]
+[[id:60cd0eb7-fec7-4961-ab79-fff3df6b0839][Observability]]
+[[id:7dc26160-17e0-422e-8ac9-dc3706de650c][Detectable Systems]]
 ** Advantages
  - Non-linear systems
  - MIMO  (Not just SISO)
