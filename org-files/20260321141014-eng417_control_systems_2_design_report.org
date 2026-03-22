@@ -1,0 +1,411 @@
+:PROPERTIES:
+:ID:       ef0a1cbb-2d92-4e49-ba39-67265565cbfe
+:END:
+#+title: ENG417 - Control Systems 2 - Design Report
+#+date: [2026-03-21 Sat 14:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Question 1
+#+BEGIN_SRC text :exports none
+Show how the nonlinear coupled ODEs can be decomposed into the linear state matrices. You do not need to give exact definitions for the constants in the matrices, but should be able to demonstrate that the two linear state space models provided are indeed valid representations of the aircraft dynamics.
+#+END_SRC
+
+Given the following list of equations:
+
+\begin{align*}
+\dot{U} &= RV - WQ - g\sin(\theta) + \frac{1}{m}(-D + T\cos(\alpha)) \\
+\dot{V} &= -UR + WB + g\sin(\phi)\cos(\theta) + \frac{1}{m}(Y + T\cos(\alpha)\sin(\beta)) \\
+\dot{W} &= UQ - VP + g\cos(\phi)\cos(\theta) + \frac{1}{m}(-L -T\sin(\alpha)) \\
+\dot{P} &= (c_1R + c_2P)Q + c_3(L_A + L_T) + c_4(N_A + N_T) \\
+\dot{Q} &= c_5PR + c_6(P^2 - R^2) + c_7M \\
+\dot{R} &= (c_8P - c_2R)Q + c_4(L_A + L_T) + c_9(N_A + N_T)
+\end{align*}
+
+The goal is to show that they can be linearized into the following systems:
+
+\[\begin{bmatrix}
+\dot{u} \\
+\dot{w} \\
+\dot{q} \\
+\dot{\theta}
+\end{bmatrix} = \begin{bmatrix}
+x_u & x_w & x_q & x_\theta \\
+z_u & z_w & z_q & z_\theta \\
+m_u & m_w & m_q & m_\theta \\
+0 & 0 & 1 & 0
+\end{bmatrix} \begin{bmatrix}
+u \\
+w \\
+q \\
+\theta
+\end{bmatrix} + \begin{bmatrix}
+x_{\delta_E} & x_{\delta_T} \\
+z_{\delta_E} & z_{\delta_T} \\
+m_{\delta_E} & m_{\delta_T} \\
+0 & 0 \end{bmatrix} \begin{bmatrix}
+\delta_E \\
+\delta_T
+\end{bmatrix}\]
+
+\[\begin{bmatrix}
+\dot{\beta} \\
+\dot{p} \\
+\dot{r} \\
+\dot{\phi}
+\end{bmatrix} = \begin{bmatrix}
+y_{\beta} & y_{p} & y_{r} & y_{\phi} \\
+l_{\beta} & l_{p} & l_{r} & l_{\phi} \\
+n_{\beta} & n_{p} & n_{r} & n_{\phi} \\
+0 & 1 & 0 & 0
+\end{bmatrix} \begin{bmatrix}
+\beta \\
+p \\
+r \\
+\phi
+\end{bmatrix} + \begin{bmatrix}
+y_{\delta_A} & y_{\delta_R} \\
+l_{\delta_A} & l_{\delta_R} \\
+n_{\delta_A} & n_{\delta_R} \\
+0 & 0
+\end{bmatrix} \begin{bmatrix}
+\delta_A \\
+\delta_R
+\end{bmatrix}\]
+
+** Solution
+Choosing the state vector to be:
+\[\underline{x} = \begin{bmatrix}
+U \\
+W \\
+Q \\
+\theta
+\end{bmatrix}\]
+
+Then:
+\[\dot{\underline{x}} = \begin{bmatrix}
+\dot{U} \\
+\dot{W} \\
+\dot{Q} \\
+\dot{\theta}
+\end{bmatrix} = \begin{bmatrix}
+RV - WQ - g\sin(\theta) + \frac{1}{m}(-D + T\cos(\alpha)) \\
+UQ - VP + g\cos(\phi)\cos(\theta) + \frac{1}{m}(-L -T\sin(\alpha)) \\
+c_5PR + c_6(P^2 - R^2) + c_7M \\
+Q
+\end{bmatrix}\]
+
+Note: $\dot{\theta} = Q$ because $\theta$ is the pitch angle and $Q$ is the pitch rate.
+
+*** Equilibrium Point
+The equilibrium point occurs when $\dot{\underline{x}} = 0$, which gives the following set of equations:
+
+\begin{align*}
+0 &= RV - WQ - g\sin(\theta) + \frac{1}{m}(-D + T\cos(\alpha)) \\
+0 &= UQ - VP + g\cos(\phi)\cos(\theta) + \frac{1}{m}(-L -T\sin(\alpha)) \\
+0 &= c_5PR + c_6(P^2 - R^2) + c_7M \\
+0 &= Q
+\end{align*}
+
+Solving this we get the following equilibrium points:
+\[\bar{x} = \begin{bmatrix}
+\bar{U} \\
+\bar{W} \\
+0 \\
+\sin^{-1}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}
+\end{bmatrix}\]
+
+#+BEGIN_SRC octave :exports none :results output :session EQU_1
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+
+syms U V W Q theta R P g m D T alpha L phi M c_5 c_6
+
+% Define the equations
+eq1 = 0 == R*V - W*Q - g*sin(theta) + (1/m)*(-D + T*cos(alpha));
+eq2 = 0 == U*Q - V*P + g*cos(phi)*cos(theta) + (1/m)*(-L - T*sin(alpha));
+eq3 = 0 == c_5*P*R + c_6*(P^2 - R^2) + M;
+eq4 = 0 == Q;
+
+% Display the equations
+disp(eq1);
+disp(eq2);
+disp(eq3);
+disp(eq4);
+
+[U_eq, W_eq, Q_eq, theta_eq] = solve([eq1, eq2, eq3, eq4], [U, W, Q, theta]);
+
+latex(U_eq(2))
+latex(W_eq(2))
+latex(Q_eq(2))
+latex(theta_eq(2))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+-D + T⋅cos(α)
+  0 = -Q⋅W + R⋅V - g⋅sin(θ) + ─────────────
+                                    m
+-L - T⋅sin(α)
+  0 = -P⋅V + Q⋅U + g⋅cos(φ)⋅cos(θ) + ─────────────
+                                           m
+⎛ 2    2⎞
+  0 = M + P⋅R⋅c₅ + c₆⋅⎝P  - R ⎠
+0 = Q
+U
+W
+0
+\operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}
+#+end_example
+
+The equilibrium point is at:
+\[\bar{x} = \begin{bmatrix}
+\bar{U} \\
+\bar{W} \\
+0 \\
+\sin^{-1}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}
+\end{bmatrix}\]
+
+
+
+*** Linearising
+Taking the Taylor Series of the following about the found point:
+\[\dot{\underline{x}} = \begin{bmatrix}
+f_1(\underline{x}) \\
+f_2(\underline{x}) \\
+f_3(\underline{x}) \\
+f_4(\underline{x})
+\end{bmatrix} = \begin{bmatrix}
+RV - WQ - g\sin(\theta) + \frac{1}{m}(-D + T\cos(\alpha)) \\
+UQ - VP + g\cos(\phi)\cos(\theta) + \frac{1}{m}(-L -T\sin(\alpha)) \\
+c_5PR + c_6(P^2 - R^2) + c_7M \\
+Q
+\end{bmatrix}\]
+
+The first approximation of the Taylor Series is defined as:
+
+\[f_n(\underline{x}) \approx f_n(\bar{x}) + \sum_{m=1}^M\frac{\partial f_n}{\partial x_m}|_{x = \bar{x}}(x - \bar{x}_m)\]
+
+**** Linearisation of $f_1(\underline{x})$:
+\begin{align*}
+f_1(\bar{x}) &= RV - W\cdot 0 - g\sin\left(\sin^{-1}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}) + \frac{1}{m}(-D + T\cos(\alpha)) \\
+f_1(\bar{x}) &= 0
+\end{align*}
+#+BEGIN_SRC octave :exports none :results output :session EQU_1
+syms bar_U bar_W
+
+syms c_5 c_6 c_7;
+
+f_1 = R*V - W*Q - g*sin(theta) + (1/m)*(-D + T*cos(alpha));
+f_2 = U*Q - V*P + g*cos(phi)*cos(theta) + (1/m)*(-L - T*sin(alpha));
+f_3 = c_5*P*R + c_6*(P^2 - R^2) + c_7*M;
+f_4 = Q;
+
+f_1_bar_x = f_1
+theta_eq(2);
+f_1_bar_x = subs(f_1_bar_x, U, bar_U);
+f_1_bar_x = subs(f_1_bar_x, W, bar_W);
+f_1_bar_x = subs(f_1_bar_x, Q, 0);
+f_1_bar_x = subs(f_1_bar_x, theta, theta_eq(2));
+
+f_1_bar_x = simplify(f_1_bar_x)
+#+END_SRC
+
+#+RESULTS:
+: f_1_bar_x = (sym)
+: 
+:                           -D + T⋅cos(α)
+:   -Q⋅W + R⋅V - g⋅sin(θ) + ─────────────
+:                                 m
+: f_1_bar_x = (sym) 0
+
+\[\sum_{m=1}^M\frac{\partial f_n}{\partial x_m}|_{x = \bar{x}}(x - \bar{x}_m) = 0 + 0 - Q \bar{W} - g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right)\]
+
+#+BEGIN_SRC octave :exports none :results output :session EQU_1
+theta_eq(2);
+bar_x = [bar_U, bar_W, 0, theta_eq(2)];
+x = [U, W, Q, theta];
+
+
+
+d_f_1_d_x = [diff(f_1, U), diff(f_1, W), diff(f_1, Q), diff(f_1, theta)];
+d_f_1_d_x = subs(d_f_1_d_x, [U, W, Q, theta], bar_x);
+d_f_1_d_x_x_bar_x = simplify(d_f_1_d_x.*(x - bar_x));
+d_f_1_d_x_x_bar_x = sum(d_f_1_d_x_x_bar_x);
+latex(d_f_1_d_x_x_bar_x)
+
+
+#+END_SRC
+
+#+RESULTS:
+: - Q bar_{W} - g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right)
+
+Hence:
+\[f_1(\underline{x}) \approx - Q \bar{W} - g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right)\]
+
+#+BEGIN_SRC octave :exports none :results output :session EQU_1
+f_1_underline_x = simplify(f_1_bar_x + d_f_1_d_x_x_bar_x);
+latex(f_1_underline_x)
+#+END_SRC
+
+#+RESULTS:
+: - Q bar_{W} - g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right)
+
+**** Linearisation of $f_2(\underline{x})$:
+\begin{align*}
+f_2(\bar{x}) &= - \frac{L}{m} - P V - \frac{T \sin{\left(\alpha \right)}}{m} + g \sqrt{1 - \frac{\left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \cos{\left(\phi \right)}
+\end{align*}
+#+BEGIN_SRC octave :exports none :results output :session EQU_1
+syms bar_U bar_W
+
+f_2_bar_x = f_2
+theta_eq(2);
+f_2_bar_x = subs(f_2_bar_x, U, bar_U);
+f_2_bar_x = subs(f_2_bar_x, W, bar_W);
+f_2_bar_x = subs(f_2_bar_x, Q, 0);
+f_2_bar_x = subs(f_2_bar_x, theta, theta_eq(2));
+
+f_2_bar_x = simplify(f_2_bar_x);
+latex(f_2_bar_x)
+#+END_SRC
+
+#+RESULTS:
+: - \frac{L}{m} - P V - \frac{T \sin{\left(\alpha \right)}}{m} + g \sqrt{1 - \frac{\left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \cos{\left(\phi \right)}
+
+\[\sum_{m=1}^M\frac{\partial f_n}{\partial x_m}|_{x = \bar{x}}(x - \bar{x}_m) = Q \bar{U} - \frac{\left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right) \left(- D + R V m + T \cos{\left(\alpha \right)}\right) \cos{\left(\phi \right)}}{m}\]
+
+#+BEGIN_SRC octave :exports none :results output :session EQU_1
+bar_x = [bar_U, bar_W, 0, theta_eq(2)];
+x = [U, W, Q, theta];
+
+syms c_5 c_6 c_7
+
+d_f_2_d_x = [diff(f_2, U), diff(f_2, W), diff(f_2, Q), diff(f_2, theta)];
+d_f_2_d_x = subs(d_f_2_d_x, [U, W, Q, theta], bar_x);
+d_f_2_d_x_x_bar_x = simplify(d_f_2_d_x.*(x - bar_x));
+d_f_2_d_x_x_bar_x = sum(d_f_2_d_x_x_bar_x);
+latex(d_f_2_d_x_x_bar_x)
+
+#+END_SRC
+
+#+RESULTS:
+: Q bar_{U} - \frac{\left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right) \left(- D + R V m + T \cos{\left(\alpha \right)}\right) \cos{\left(\phi \right)}}{m}
+
+Hence:
+\[f_1(\underline{x}) \approx \frac{- L - T \sin{\left(\alpha \right)} + m \left(- P V + Q \bar{U} + g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \cos{\left(\phi \right)}\right) - \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right) \left(- D + R V m + T \cos{\left(\alpha \right)}\right) \cos{\left(\phi \right)}}{m}\]
+
+
+#+BEGIN_SRC octave :exports none :results output :session EQU_1
+f_2_underline_x = factor(f_2_bar_x + d_f_2_d_x_x_bar_x);
+latex(f_2_underline_x)
+#+END_SRC
+
+#+RESULTS:
+: \frac{D \theta \cos{\left(\phi \right)} - D \cos{\left(\phi \right)} \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} - L - P V m + Q bar_{U} m - R V m \theta \cos{\left(\phi \right)} + R V m \cos{\left(\phi \right)} \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} - T \theta \cos{\left(\alpha \right)} \cos{\left(\phi \right)} - T \sin{\left(\alpha \right)} + T \cos{\left(\alpha \right)} \cos{\left(\phi \right)} \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} + g m \sqrt{- \left(\frac{D}{g m} - \frac{R V}{g} - \frac{T \cos{\left(\alpha \right)}}{g m} - 1\right) \left(\frac{D}{g m} - \frac{R V}{g} - \frac{T \cos{\left(\alpha \right)}}{g m} + 1\right)} \cos{\left(\phi \right)}}{m}
+
+**** Linearisation of $f_3(\underline{x})$:
+\[f_3(\underline{x}) &= M c_{7} + P R c_{5} + c_{6} \left(P^{2} - R^{2}\right)\]
+$f_3(\underline{x})$ is already linear, so there is no need to make it linear.
+
+#+BEGIN_SRC text :exports none
+NOTE: I did run the previous code on f_3 and it produced the linear equation, hence the code for f_1 and f_2 is probably correct. ie. the linear approximation of f_3 is the same as f_3.
+#+END_SRC
+
+**** Linearisation of $f_4(\underline{x})$:
+\[f_4(\underline{x}) = Q\]
+$f_4(\underline{x})$ is also already linear, so there is no need to create an approximation for it.
+
+**** Linearisation Result
+Finally we must substitute the trim point values into the equations, the relevant values can be seen in the following table:
+| Gravity (g)              | 9.81 m/s |
+| Angle of Attack (\alpha) | 5^o      |
+| Velocity (V)             | 182 m/s  |
+| Mass (m)                 | 9295 kg  |
+|                          |          |
+
+#+BEGIN_SRC octave :exports none :results output :session EQU_1
+f_1_underline_x_subs = f_1_underline_x;
+f_2_underline_x_subs = f_2_underline_x;
+f_3_underline_x_subs = f_3;
+f_4_underline_x_subs = f_4;
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+f_1_underline_x_subs = (sym)
+
+                     __________________________________                                  
+                    ╱  2  2                          2                                   
+                   ╱  g ⋅m  - (-D + R⋅V⋅m + T⋅cos(α))   ⎛        ⎛-D + R⋅V⋅m + T⋅cos(α)⎞⎞
+  -Q⋅bar_W - g⋅   ╱   ──────────────────────────────── ⋅⎜θ - asin⎜─────────────────────⎟⎟
+                 ╱                  2  2                ⎝        ⎝         g⋅m         ⎠⎠
+               ╲╱                  g ⋅m
+f_2_underline_x_subs = (sym)
+
+                                                                                                         ↪
+                            ⎛-D + R⋅V⋅m + T⋅cos(α)⎞                                                      ↪
+  D⋅θ⋅cos(φ) - D⋅cos(φ)⋅asin⎜─────────────────────⎟ - L - P⋅V⋅m + Q⋅bar_U⋅m - R⋅V⋅m⋅θ⋅cos(φ) + R⋅V⋅m⋅cos ↪
+                            ⎝         g⋅m         ⎠                                                      ↪
+  ────────────────────────────────────────────────────────────────────────────────────────────────────── ↪
+                                                                                                         ↪
+  
+  ↪                                                                                                      ↪
+  ↪         ⎛-D + R⋅V⋅m + T⋅cos(α)⎞                                                      ⎛-D + R⋅V⋅m + T ↪
+  ↪ (φ)⋅asin⎜─────────────────────⎟ - T⋅θ⋅cos(α)⋅cos(φ) - T⋅sin(α) + T⋅cos(α)⋅cos(φ)⋅asin⎜────────────── ↪
+  ↪         ⎝         g⋅m         ⎠                                                      ⎝         g⋅m   ↪
+  ↪ ──────────────────────────────────────────────────────────────────────────────────────────────────── ↪
+  ↪                                        m                                                             ↪
+  
+  ↪                    ________________________________________________________       
+  ↪ ⋅cos(α)⎞          ╱  ⎛ D    R⋅V   T⋅cos(α)    ⎞ ⎛ D    R⋅V   T⋅cos(α)    ⎞        
+  ↪ ───────⎟ + g⋅m⋅  ╱  -⎜─── - ─── - ──────── - 1⎟⋅⎜─── - ─── - ──────── + 1⎟ ⋅cos(φ)
+  ↪        ⎠       ╲╱    ⎝g⋅m    g      g⋅m       ⎠ ⎝g⋅m    g      g⋅m       ⎠        
+  ↪ ──────────────────────────────────────────────────────────────────────────────────
+  ↪
+f_3_underline_x_subs = (sym)
+
+                     ⎛ 2    2⎞
+  M⋅c₇ + P⋅R⋅c₅ + c₆⋅⎝P  - R ⎠
+f_4_underline_x_subs = (sym) Q
+#+end_example
+
+\[\bar{x} = \begin{bmatrix}
+U \\
+W \\
+Q \\
+\theta
+\end{bmatrix} = \begin{bmatrix}
+\bar{U} \\
+\bar{W} \\
+0 \\
+\sin^{-1}{\left(- \frac{20 D}{1823679} + \frac{100 R V}{981} + \frac{20 T \cos{\left(\alpha \right)}}{1823679} \right)}
+\end{bmatrix}\]
+
+
+* Question 2
+#+BEGIN_SRC text :exports none
+Determine the following:
+a. The open-loop response of the aircraft to a 1% step in thrust.
+b. The open-loop response of the aircraft to a 1 degree step in elevator position.
+c. The open-loop response of the aircraft to a 1 degree step in aileron position.
+d. The open-loop response of the aircraft to a 1 degree step in rudder position.
+Include a description of the responses that you observe, and explain the differences between the two aircraft. Identify the short-period, phugoid, roll subsidence, spiral and Dutch roll modes. Without a controller, would you consider these responses to be acceptable?/
+#+END_SRC
+
+* Question 3
+#+BEGIN_SRC text :exports none
+Examine the controllability and observability of the aircraft dynamics. What is the minimum set of variables required to be actuated to control the system, and required to be measured to observe the system?
+#+END_SRC
+
+* Question 4
+#+BEGIN_SRC text :exports none
+Use the major and minor loop design techniques to design a pitch attitude hold control system.
+#+END_SRC

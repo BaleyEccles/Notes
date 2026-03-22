@@ -37,6 +37,7 @@
  - Week 12
  - Week 6 milestone
  - Aeroplane control system
+ - [[id:ef0a1cbb-2d92-4e49-ba39-67265565cbfe][ENG417 - Control Systems 2 - Design Report]]
    
 ** Final Exam
  - 40%
