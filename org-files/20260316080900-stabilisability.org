@@ -18,3 +18,45 @@ Checking which states are uncontrollable and if they are inherently unstable
      
 ** Example
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/Stabilistaion_Example.xopp]]
+
+** State Feedback Desgin
+1. We need the "Controllable Decomposition Form"
+
+*** Controllable Decomposition Form
+\[\underline{\dot{x}} = \begin{bmatrix}
+\underline{\dot{x}}_c \\
+\underline{\dot{x}}_u
+\end{bmatrix}= \begin{bmatrix}
+\underline{A}_c & \underline{A}_{12} \\
+\underline{0} & \underline{A}_u
+\end{bmatrix} \begin{bmatrix}
+\underline{x}_c \\
+\underline{x}_u
+\end{bmatrix} + \begin{bmatrix}
+\underline{B}_c \\
+\underline{0}
+\end{bmatrix}u\]
+
+Using state feedback:
+\[\underline{\dot{x}} = \begin{bmatrix}
+\underline{\dot{x}}_c \\
+\underline{\dot{x}}_u
+\end{bmatrix}= \begin{bmatrix}
+A_c - B_cK_c & A_{12}-B_cK_u \\
+0 & A_u
+\end{bmatrix} \begin{bmatrix}
+\underline{x}_c \\
+\underline{x}_u
+\end{bmatrix} + \begin{bmatrix}
+B_c \\
+0
+\end{bmatrix}u\]
+
+*** State Feedback
+\begin{align*}
+u &= -K x + r \\
+&-[K_c\ K_u]x + r
+\end{align*}
+
+*** Example
+Video 1: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500979/View

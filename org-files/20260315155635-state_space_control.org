@@ -7,6 +7,7 @@
 #+STARTUP: latexpreview
 
 * State Space Control
+[[id:75c352df-3843-4bd6-b15a-9ea7147879ae][Steady State Tracking of State Feedback]]
 [[id:6001038f-6a4b-49f6-a9b7-6378c74db194][Controllability]]
 ** Advantages
  - Non-linear systems
@@ -101,4 +102,3 @@ x_{n}
 \end{bmatrix} + \begin{bmatrix}0\end{bmatrix}u\]
 *** Example
 Video 2: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500978/View
-
