@@ -11,6 +11,9 @@
 [[id:6001038f-6a4b-49f6-a9b7-6378c74db194][Controllability]]
 [[id:60cd0eb7-fec7-4961-ab79-fff3df6b0839][Observability]]
 [[id:7dc26160-17e0-422e-8ac9-dc3706de650c][Detectable Systems]]
+
+[[id:5d8efe2d-b6fc-4173-ba45-20e0935430d1][Linear State Observer (Luenberger Observer)]]
+
 ** Advantages
  - Non-linear systems
  - MIMO  (Not just SISO)
@@ -20,7 +23,7 @@
    - Although, we cannot place closed loop zeros
  - Optimal control
 
-** ODE
+** ODE (Linear state equations)
  - \[\dot{\underline{x}} = f(\underline{x},t)\]
  - \[\dot{\underline{x}} = A\underline{x} + B \underline{u}\]
  - \[\underline{y} = C\underline{x} + D \underline{u}\]
@@ -104,3 +107,6 @@ x_{n}
 \end{bmatrix} + \begin{bmatrix}0\end{bmatrix}u\]
 *** Example
 Video 2: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500978/View
+
+
+

@@ -1,0 +1,213 @@
+:PROPERTIES:
+:ID:       5d8efe2d-b6fc-4173-ba45-20e0935430d1
+:END:
+#+title: Linear State Observer (Luenberger Observer)
+#+date: [2026-03-23 Mon 09:12]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Linear State Observer (Luenberger Observer)
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Linear_State_Observer.xopp]]
+
+\[e_{x_i} = x_i - \hat{x}_i\]
+ - Error in state estimate $i$
+With [[id:91abfc71-ac31-4490-8d23-2d216b8fe303][linear state equations]].
+_We define:_
+\[\hat{\dot{x}} = A\hat{x} + Bu + L(y - C\hat{x})\]
+\[\hat{\dot{x}} = (A - LC)\hat{x} + Bu + Ly\]
+ - $L$ are the observer gains
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Linear_State_Observer_Block_Diagram.xopp]]
+
+** Full-State Observers
+ - Includes all states of the system
+ - The order of the state observer is the order of the system
+*** Derivation
+_Find:_
+\begin{align*}
+e_{\dot{x}} &= \dot{x} - \hat{\dot{x}} \\
+&= Ax - Bu - ((A-LC) \hat{x} + Bu + Ly) \\
+&= A(x - \hat{x}) - LC(x - \hat{x}) \\
+\Rightarrow e_{\dot{x}} &= (A - LC)(x - \hat{x}) \\
+\textrm{Since } x-\hat{x} &= e_x, \\
+e_{\dot{x}} &= (A - LC)e_x \\
+\textrm{and } e_y &= Ce_x
+\end{align*}
+ - As time progresses, the error tends to zero.
+ - If $A-LC$ is stable, then $e_x\rightarrow 0$ for any initial vector $e(0)$. So $\hat{x}\rightarrow x$.
+ - Furthermore, if the pair $(A,C)$ is [[id:60cd0eb7-fec7-4961-ab79-fff3df6b0839][Observable]], then the [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of $A-LC$ can be placed arbitrarily.
+   
+_Applications:_
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Observer_Block_Diagram.xopp]]
+
+With the plant as [[id:91abfc71-ac31-4490-8d23-2d216b8fe303][linear state equations]].
+[[id:58f545f0-abf6-483d-8b44-046bad7f38a6][Feedback controller]]:
+\[u = -K \hat{x} +r\]
+Observer:
+\[e_x = x - \hat{x} \Rightarrow \hat{x} = x-e_x\]
+\[e_x = (A-LC) e_{x}\]
+\[\hat{\dot{x}} = A \hat{x} + Bu + L(y - C\hat{x})\]
+
+So,
+\begin{align*}
+\dot{x} &= Ax + B(-K \hat{x} + r) \\
+& A x + B(-K(x-e_x) + r) \\
+& (A-BK)x + BK e_x + Br
+\end{align*}
+
+\[\Rightarrow \begin{bmatrix}
+\dot{x} \\
+e_{\dot{x}}
+\end{bmatrix} = \begin{bmatrix}
+A - BK & BK\\
+\underline{0} & A-LC
+\end{bmatrix} \begin{bmatrix}
+x \\
+e_x
+\end{bmatrix} + \begin{bmatrix}
+B \\
+0
+\end{bmatrix}r\]
+
+Using the [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of the $A'$ matrix:
+\[\det(A-BK-\lambda I) \det(A - LC \lambda I) = 0\]
+ - Hence, the controller gains are independent of the observer gains
+The closed loop state equations:
+\[\Rightarrow \begin{bmatrix}
+\dot{x} \\
+\hat{\dot{x}}
+\end{bmatrix} = \begin{bmatrix}
+A & -BK \\
+LC & A-BK - LC
+\end{bmatrix} \begin{bmatrix}
+x \\
+\hat{x}
+\end{bmatrix} + \begin{bmatrix}
+B \\
+B
+\end{bmatrix}r\]
+
+*** Methods of Observer Pole Placement
+
+**** 1. Direct Comparison Method
+If the desired location of the closed-loop observer poles are know, and are $\lambda = \mu_1,\mu_2 \hdots \mu_n$, the choose
+\[L = \begin{bmatrix} l_1 \\ l_2 \\ \vdots \\ l_n \end{bmatrix}\]
+such that
+\[\det(A-LC - \lambda i) = (\lambda-\mu_1)(\lambda-\mu_2)\hdots(\lambda-\mu_n)\]
+
+**** 2. Cast the system in observer canonical form
+For a transfer function given by:
+\[G(s) = \frac{b_{n-1}s^{n-1} + b_{n-2}s^{n-2} + \hdots b_1s + b_0}{s^n a_{n-1}s^{n-1} + a_{n-2}s^{n-2} + \hdots a_1s + a_0}\]
+Observer canonical form is:
+\[\begin{bmatrix}
+\dot{x}_1 \\
+\dot{x}_2 \\
+\dot{x}_3 \\
+\vdots \\
+\dot{x}_{n-1} \\
+\dot{x}_n
+\end{bmatrix} = \begin{bmatrix}
+-a_{n-1} & 1 & 0 & 0 & \hdots & 0 \\
+-a_{n-2} & 0 & 1 & 0 & \hdots & 0 \\
+-a_{n-3} & 0 & 0 & 1 & \hdots & 0 \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \\
+-a_{1} & 0 & 0 & 0 & \hdots & 1 \\
+-a_{0} & 0 & 0 & 0 & \hdots & 0 \\
+\end{bmatrix}\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+\vdots \\
+x_{n-1} \\
+x_n
+\end{bmatrix} + \begin{bmatrix}
+b_{n-1} \\
+b_{n-2} \\
+b_{n-3} \\
+\vdots \\
+b_1 \\
+b_0
+\end{bmatrix}\]
+
+If the system is not initially in observer canonical form it can be transformed
+\begin{cases}
+\dot{z} &= Az + Bu \\
+y &= Cz
+\end{cases}
+
+\[O_{M_z} = \begin{bmatrix}
+C \\
+CA \\
+CA^2 \\
+\vdots \\
+CA^{n-1}
+\end{bmatrix}\]
+
+Assume a transformation exists:
+\[z = Tx\]
+
+\begin{cases}
+\dot{x} &= T^{-1} A T x + T^{-1} Bu \\
+y &= CTz
+\end{cases}
+Has [[id:60cd0eb7-fec7-4961-ab79-fff3df6b0839][observability]] matrix:
+\[O_{M_x} = C_{M_z}T\]
+\[\Rightarrow T = O_{M_z}^{-1}O_{M_x}\]
+Once in observer canonical form, choices of $Lx$ is straight forward. Similar to [[id:6001038f-6a4b-49f6-a9b7-6378c74db194][Controllability]] method 2.
+\[Lz = TLx\]
+
+
+**** 3. Ackermann's Formula
+For single input-single output systems only
+\[L = \Phi(A)O_M^{-1}\begin{bmatrix}0 \\ 0 \\ \vdots \\ 0 \\ 1 \end{bmatrix}\]
+Where:
+\[\Phi(A) = A^n + \alpha_{n-1}A^{n-1} + \hdots + \alpha_1A + \alpha_0I\]
+and $\alpha_0 \hdots \alpha_{n-1}$ are the desired characteristic coefficients.
+
+
+** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Linear_State_Observer_Example.xopp]]
+
+* Observers for [[id:7dc26160-17e0-422e-8ac9-dc3706de650c][Detectable Systems]]
+_Observer decomposition form:_
+\[\dot{x} = \begin{bmatrix}
+\dot{x}_o \\
+\dot{x}_u
+\end{bmatrix} = \begin{bmatrix}
+A_o & 0 \\
+A_{21} & A_u
+\end{bmatrix} \begin{bmatrix}
+x_o \\
+x_u
+\end{bmatrix} + \begin{bmatrix}
+B_o \\
+B_u
+\end{bmatrix}r\]
+\[\underline{y} = [C_o\ 0]\underline{x} + \begin{bmatrix} x_o \\ x_u \end{bmatrix} \underline{u}\]
+ - $x_o$ is the vector of observable states
+ - $x_u$ is the vector of unobservable states
+
+From the observer:
+\begin{align*}
+\hat{\dot{x}} &= (A - LC)\hat{x} + Bu +Ly\\
+\hat{y} &= Cx
+\end{align*}
+
+\[\begin{bmatrix}
+\hat{\dot{x}}_o \\
+\hat{\dot{x}}_u
+\end{bmatrix} = \begin{bmatrix}
+A_o -L_oC_o & 0 \\
+A_{21}-L_uC_o & A_u
+\end{bmatrix} \begin{bmatrix}
+\hat{x}_o \\
+\hat{x}_u
+\end{bmatrix} + \begin{bmatrix}
+L_o \\
+L_u
+\end{bmatrix}r\]
+\[\underline{y} = [C_o\ 0]\underline{x} + \begin{bmatrix} \hat{x}_o \\ \hat{x}_u \end{bmatrix}
+ - $A_u$ must have stable [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] to be [[id:7dc26160-17e0-422e-8ac9-dc3706de650c][Detectable]]
+
+** Looking at it through an Example
+
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Observers_Detectable_Systems_Example.xopp]]

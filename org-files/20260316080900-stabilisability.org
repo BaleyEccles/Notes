@@ -14,7 +14,7 @@ Checking which states are uncontrollable and if they are inherently unstable
 ** Example
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/Stabilistaion_Example.xopp]]
 
-** State Feedback Desgin
+** State Feedback Design
 1. We need the "Controllable Decomposition Form"
 
 *** Controllable Decomposition Form

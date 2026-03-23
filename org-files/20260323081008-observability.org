@@ -44,19 +44,19 @@ Video 4: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6500979/View
 Conisder a system $S_1$:
 \[\dot{x} = Ax + Bu\]
 \[y = Cx\]
-| x | nx1 |
-| u | rx1 |
-| y | mx1 |
-| A | nxn |
-| B | nxr |
-| C | mxn |
+| x | $n\times 1$ |
+| u | $r\times 1$ |
+| y | $m\times 1$ |
+| A | $n\times n$ |
+| B | $n\times r$ |
+| C | $m\times n$ |
 
 This has a duel system $S_2$:
 \[\dot{z} = A^{*}z + C^{*}v\]
 \[w = B^{*}z\]
-| z  | nx1 |
-| v  | mx1 |
-| w  | rx1 |
+| z  | $n\times 1$             |
+| v  | $m\times 1$             |
+| w  | $r\times 1$             |
 | A* | conjugate transpose of A |
 | B* | conjugate transpose of B |
 | C* | conjugate transpose of C |
