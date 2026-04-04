@@ -6,6 +6,10 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
+#+BEGIN_SRC text :export none
+Include question when answering
+#+END_SRC
+
 * Week 1
 ** Problem 1
 a) Briefly describe the purpose of a look up table (LUT).

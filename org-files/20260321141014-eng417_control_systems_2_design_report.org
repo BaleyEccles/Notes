@@ -17,10 +17,9 @@
 #+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
 #+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
 #+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
-#+PROPERTY: header-args :eval no
 
 * Question 1
-#+BEGIN_SRC text :exports none
+#+BEGIN_SRC text
 Show how the nonlinear coupled ODEs can be decomposed into the linear state matrices. You do not need to give exact definitions for the constants in the matrices, but should be able to demonstrate that the two linear state space models provided are indeed valid representations of the aircraft dynamics.
 #+END_SRC
 
@@ -111,7 +110,7 @@ Q
 Note: $\dot{\theta} = Q$ because $\theta$ is the pitch angle and $Q$ is the pitch rate.
 
 *** Equilibrium Point
-The equilibrium point occurs when $\dot{\underline{x}} = 0$, which gives the following set of equations:
+The equilibrium point occurs when $\dot{\underline{x}} = 0$ and at the trim point (which we will ignore for now), which gives the following set of equations:
 
 \begin{align*}
 0 &= RV - WQ - g\sin(\theta) + \frac{1}{m}(-D + T\cos(\alpha)) \\
@@ -128,7 +127,7 @@ Solving this we get the following equilibrium points:
 \sin^{-1}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}
 \end{bmatrix}\]
 
-#+BEGIN_SRC octave :exports none :results output :session EQU_1
+#+BEGIN_SRC octave :results output :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 clc
 clear
 close all
@@ -149,34 +148,34 @@ eq3 = 0 == c_5*P*R + c_6*(P^2 - R^2) + M;
 eq4 = 0 == Q;
 
 % Display the equations
-disp(eq1);
-disp(eq2);
-disp(eq3);
-disp(eq4);
+%disp(eq1);
+%disp(eq2);
+%disp(eq3);
+%disp(eq4);
 
 [U_eq, W_eq, Q_eq, theta_eq] = solve([eq1, eq2, eq3, eq4], [U, W, Q, theta]);
 
-latex(U_eq(2))
-latex(W_eq(2))
-latex(Q_eq(2))
-latex(theta_eq(2))
+%latex(U_eq(2))
+%latex(W_eq(2))
+%latex(Q_eq(2))
+%latex(theta_eq(2))
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
--D + T⋅cos(α)
-  0 = -Q⋅W + R⋅V - g⋅sin(θ) + ─────────────
-                                    m
--L - T⋅sin(α)
-  0 = -P⋅V + Q⋅U + g⋅cos(φ)⋅cos(θ) + ─────────────
-                                           m
-⎛ 2    2⎞
-  0 = M + P⋅R⋅c₅ + c₆⋅⎝P  - R ⎠
-0 = Q
-U
-W
-0
-\operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}
+error: package symbolic is not installed
+error: called from
+    load_packages at line 47 column 7
+    pkg at line 639 column 7
+error: system: unable to start subprocess for 'makeinfo --no-headers --no-warn --no-validate --plaintext --output=- "/tmp/octave-help-nmPpdJ"'
+error: called from
+    __makeinfo__ at line 163 column 22
+    __unimplemented__ at line 551 column 9
+error: 'R' undefined near line 1, column 12
+error: 'U' undefined near line 1, column 12
+error: 'c_5' undefined near line 1, column 12
+error: 'Q' undefined near line 1, column 12
+error: 'eq1' undefined near line 1, column 39
 #+end_example
 
 The equilibrium point is at:
@@ -212,7 +211,7 @@ The first approximation of the Taylor Series is defined as:
 f_1(\bar{x}) &= RV - W\cdot 0 - g\sin\left(\sin^{-1}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}) + \frac{1}{m}(-D + T\cos(\alpha)) \\
 f_1(\bar{x}) &= 0
 \end{align*}
-#+BEGIN_SRC octave :exports none :results output :session EQU_1
+#+BEGIN_SRC octave :results output :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 syms bar_U bar_W
 
 syms c_5 c_6 c_7;
@@ -222,14 +221,14 @@ f_2 = U*Q - V*P + g*cos(phi)*cos(theta) + (1/m)*(-L - T*sin(alpha));
 f_3 = c_5*P*R + c_6*(P^2 - R^2) + c_7*M;
 f_4 = Q;
 
-f_1_bar_x = f_1
+f_1_bar_x = f_1;
 theta_eq(2);
 f_1_bar_x = subs(f_1_bar_x, U, bar_U);
 f_1_bar_x = subs(f_1_bar_x, W, bar_W);
 f_1_bar_x = subs(f_1_bar_x, Q, 0);
 f_1_bar_x = subs(f_1_bar_x, theta, theta_eq(2));
 
-f_1_bar_x = simplify(f_1_bar_x)
+f_1_bar_x = simplify(f_1_bar_x);
 #+END_SRC
 
 #+RESULTS:
@@ -242,7 +241,7 @@ f_1_bar_x = simplify(f_1_bar_x)
 
 \[\sum_{m=1}^M\frac{\partial f_n}{\partial x_m}|_{x = \bar{x}}(x - \bar{x}_m) = 0 + 0 - Q \bar{W} - g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right)\]
 
-#+BEGIN_SRC octave :exports none :results output :session EQU_1
+#+BEGIN_SRC octave :results output :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 theta_eq(2);
 bar_x = [bar_U, bar_W, 0, theta_eq(2)];
 x = [U, W, Q, theta];
@@ -253,33 +252,34 @@ d_f_1_d_x = [diff(f_1, U), diff(f_1, W), diff(f_1, Q), diff(f_1, theta)];
 d_f_1_d_x = subs(d_f_1_d_x, [U, W, Q, theta], bar_x);
 d_f_1_d_x_x_bar_x = simplify(d_f_1_d_x.*(x - bar_x));
 d_f_1_d_x_x_bar_x = sum(d_f_1_d_x_x_bar_x);
-latex(d_f_1_d_x_x_bar_x)
+%latex(d_f_1_d_x_x_bar_x);
 
 
 #+END_SRC
 
 #+RESULTS:
-: - Q bar_{W} - g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right)
+: - Q bar_{W} + g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta + \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} - \pi\right)
 
 Hence:
 \[f_1(\underline{x}) \approx - Q \bar{W} - g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right)\]
 
-#+BEGIN_SRC octave :exports none :results output :session EQU_1
+#+BEGIN_SRC octave :results output :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 f_1_underline_x = simplify(f_1_bar_x + d_f_1_d_x_x_bar_x);
-latex(f_1_underline_x)
+%latex(f_1_underline_x)
 #+END_SRC
 
 #+RESULTS:
-: - Q bar_{W} - g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right)
+: error: 'f_1_bar_x' undefined near line 1, column 28
+: error: 'f_1_underline_x' undefined near line 1, column 7
 
 **** Linearisation of $f_2(\underline{x})$:
 \begin{align*}
 f_2(\bar{x}) &= - \frac{L}{m} - P V - \frac{T \sin{\left(\alpha \right)}}{m} + g \sqrt{1 - \frac{\left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \cos{\left(\phi \right)}
 \end{align*}
-#+BEGIN_SRC octave :exports none :results output :session EQU_1
+#+BEGIN_SRC octave :results output :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 syms bar_U bar_W
 
-f_2_bar_x = f_2
+f_2_bar_x = f_2;
 theta_eq(2);
 f_2_bar_x = subs(f_2_bar_x, U, bar_U);
 f_2_bar_x = subs(f_2_bar_x, W, bar_W);
@@ -287,15 +287,20 @@ f_2_bar_x = subs(f_2_bar_x, Q, 0);
 f_2_bar_x = subs(f_2_bar_x, theta, theta_eq(2));
 
 f_2_bar_x = simplify(f_2_bar_x);
-latex(f_2_bar_x)
+%latex(f_2_bar_x)
 #+END_SRC
 
 #+RESULTS:
-: - \frac{L}{m} - P V - \frac{T \sin{\left(\alpha \right)}}{m} + g \sqrt{1 - \frac{\left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \cos{\left(\phi \right)}
+: f_2_bar_x = (sym)
+: 
+:                                  -L - T⋅sin(α)
+:   -P⋅V + Q⋅U + g⋅cos(φ)⋅cos(θ) + ─────────────
+:                                        m
+: - \frac{L}{m} - P V - \frac{T \sin{\left(\alpha \right)}}{m} - g \sqrt{1 - \frac{\left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \cos{\left(\phi \right)}
 
 \[\sum_{m=1}^M\frac{\partial f_n}{\partial x_m}|_{x = \bar{x}}(x - \bar{x}_m) = Q \bar{U} - \frac{\left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right) \left(- D + R V m + T \cos{\left(\alpha \right)}\right) \cos{\left(\phi \right)}}{m}\]
 
-#+BEGIN_SRC octave :exports none :results output :session EQU_1
+#+BEGIN_SRC octave :results output :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 bar_x = [bar_U, bar_W, 0, theta_eq(2)];
 x = [U, W, Q, theta];
 
@@ -305,30 +310,30 @@ d_f_2_d_x = [diff(f_2, U), diff(f_2, W), diff(f_2, Q), diff(f_2, theta)];
 d_f_2_d_x = subs(d_f_2_d_x, [U, W, Q, theta], bar_x);
 d_f_2_d_x_x_bar_x = simplify(d_f_2_d_x.*(x - bar_x));
 d_f_2_d_x_x_bar_x = sum(d_f_2_d_x_x_bar_x);
-latex(d_f_2_d_x_x_bar_x)
+%latex(d_f_2_d_x_x_bar_x)
 
 #+END_SRC
 
 #+RESULTS:
-: Q bar_{U} - \frac{\left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right) \left(- D + R V m + T \cos{\left(\alpha \right)}\right) \cos{\left(\phi \right)}}{m}
+: Q bar_{U} - \frac{\left(- D + R V m + T \cos{\left(\alpha \right)}\right) \left(\theta + \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} - \pi\right) \cos{\left(\phi \right)}}{m}
 
 Hence:
 \[f_1(\underline{x}) \approx \frac{- L - T \sin{\left(\alpha \right)} + m \left(- P V + Q \bar{U} + g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \cos{\left(\phi \right)}\right) - \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right) \left(- D + R V m + T \cos{\left(\alpha \right)}\right) \cos{\left(\phi \right)}}{m}\]
 
 
-#+BEGIN_SRC octave :exports none :results output :session EQU_1
+#+BEGIN_SRC octave :results output :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 f_2_underline_x = factor(f_2_bar_x + d_f_2_d_x_x_bar_x);
-latex(f_2_underline_x)
+%latex(f_2_underline_x)
 #+END_SRC
 
 #+RESULTS:
-: \frac{D \theta \cos{\left(\phi \right)} - D \cos{\left(\phi \right)} \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} - L - P V m + Q bar_{U} m - R V m \theta \cos{\left(\phi \right)} + R V m \cos{\left(\phi \right)} \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} - T \theta \cos{\left(\alpha \right)} \cos{\left(\phi \right)} - T \sin{\left(\alpha \right)} + T \cos{\left(\alpha \right)} \cos{\left(\phi \right)} \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} + g m \sqrt{- \left(\frac{D}{g m} - \frac{R V}{g} - \frac{T \cos{\left(\alpha \right)}}{g m} - 1\right) \left(\frac{D}{g m} - \frac{R V}{g} - \frac{T \cos{\left(\alpha \right)}}{g m} + 1\right)} \cos{\left(\phi \right)}}{m}
+: - \frac{- D \theta \cos{\left(\phi \right)} - D \cos{\left(\phi \right)} \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} + \pi D \cos{\left(\phi \right)} + L + P V m - Q bar_{U} m + R V m \theta \cos{\left(\phi \right)} + R V m \cos{\left(\phi \right)} \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} - \pi R V m \cos{\left(\phi \right)} + T \theta \cos{\left(\alpha \right)} \cos{\left(\phi \right)} + T \sin{\left(\alpha \right)} + T \cos{\left(\alpha \right)} \cos{\left(\phi \right)} \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)} - \pi T \cos{\left(\alpha \right)} \cos{\left(\phi \right)} + g m \sqrt{- \left(\frac{D}{g m} - \frac{R V}{g} - \frac{T \cos{\left(\alpha \right)}}{g m} - 1\right) \left(\frac{D}{g m} - \frac{R V}{g} - \frac{T \cos{\left(\alpha \right)}}{g m} + 1\right)} \cos{\left(\phi \right)}}{m}
 
 **** Linearisation of $f_3(\underline{x})$:
 \[f_3(\underline{x}) &= M c_{7} + P R c_{5} + c_{6} \left(P^{2} - R^{2}\right)\]
 $f_3(\underline{x})$ is already linear, so there is no need to make it linear.
 
-#+BEGIN_SRC text :exports none
+#+BEGIN_SRC text
 NOTE: I did run the previous code on f_3 and it produced the linear equation, hence the code for f_1 and f_2 is probably correct. ie. the linear approximation of f_3 is the same as f_3.
 #+END_SRC
 
@@ -342,52 +347,58 @@ Finally we must substitute the trim point values into the equations, the relevan
 | Angle of Attack (\alpha) | 5^o      |
 | Velocity (V)             | 182 m/s  |
 | Mass (m)                 | 9295 kg  |
-|                          |          |
 
-#+BEGIN_SRC octave :exports none :results output :session EQU_1
+#+BEGIN_SRC octave :results output :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 f_1_underline_x_subs = f_1_underline_x;
 f_2_underline_x_subs = f_2_underline_x;
 f_3_underline_x_subs = f_3;
 f_4_underline_x_subs = f_4;
+
+value_g = 9.81;
+value_alpha = deg2rad(5);
+value_V = 182;
+value_m = 9295
+value_T = 0;
+value_R = 0;
+value_D = 0;
+value_L = 0;
+value_P = 0;
+value_M = 75674;
+value_c_7 = 3.450;
+value_phi = 0;
+value_bar_U = value_V;
+value_bar_W = 0;
+
+symbolics = [g, alpha, V, m, T, R, D, L, P, M, c_7, phi, bar_U, bar_W]
+value_symbolics = [value_g, value_alpha, value_V, value_m, value_T, value_R, value_D, value_L, value_P, value_M, value_c_7, value_phi, value_bar_U, value_bar_W]
+
+f_1_underline_x_subs = vpa(subs(f_1_underline_x_subs, symbolics, value_symbolics), 4)
+f_2_underline_x_subs = vpa(subs(f_2_underline_x_subs, symbolics, value_symbolics), 4)
+f_3_underline_x_subs = vpa(subs(f_3_underline_x_subs, symbolics, value_symbolics), 4)
+f_4_underline_x_subs = vpa(subs(f_4_underline_x_subs, symbolics, value_symbolics), 4)
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-f_1_underline_x_subs = (sym)
+error: 'f_1_underline_x' undefined near line 1, column 24
+error: 'f_2_underline_x' undefined near line 1, column 24
+error: 'f_3' undefined near line 1, column 24
+error: 'f_4' undefined near line 1, column 24
+value_m = 9295
+error: 'g' undefined near line 1, column 14
+value_symbolics =
 
-                     __________________________________                                  
-                    ╱  2  2                          2                                   
-                   ╱  g ⋅m  - (-D + R⋅V⋅m + T⋅cos(α))   ⎛        ⎛-D + R⋅V⋅m + T⋅cos(α)⎞⎞
-  -Q⋅bar_W - g⋅   ╱   ──────────────────────────────── ⋅⎜θ - asin⎜─────────────────────⎟⎟
-                 ╱                  2  2                ⎝        ⎝         g⋅m         ⎠⎠
-               ╲╱                  g ⋅m
-f_2_underline_x_subs = (sym)
+ Columns 1 through 6:
 
-                                                                                                         ↪
-                            ⎛-D + R⋅V⋅m + T⋅cos(α)⎞                                                      ↪
-  D⋅θ⋅cos(φ) - D⋅cos(φ)⋅asin⎜─────────────────────⎟ - L - P⋅V⋅m + Q⋅bar_U⋅m - R⋅V⋅m⋅θ⋅cos(φ) + R⋅V⋅m⋅cos ↪
-                            ⎝         g⋅m         ⎠                                                      ↪
-  ────────────────────────────────────────────────────────────────────────────────────────────────────── ↪
-                                                                                                         ↪
-  
-  ↪                                                                                                      ↪
-  ↪         ⎛-D + R⋅V⋅m + T⋅cos(α)⎞                                                      ⎛-D + R⋅V⋅m + T ↪
-  ↪ (φ)⋅asin⎜─────────────────────⎟ - T⋅θ⋅cos(α)⋅cos(φ) - T⋅sin(α) + T⋅cos(α)⋅cos(φ)⋅asin⎜────────────── ↪
-  ↪         ⎝         g⋅m         ⎠                                                      ⎝         g⋅m   ↪
-  ↪ ──────────────────────────────────────────────────────────────────────────────────────────────────── ↪
-  ↪                                        m                                                             ↪
-  
-  ↪                    ________________________________________________________       
-  ↪ ⋅cos(α)⎞          ╱  ⎛ D    R⋅V   T⋅cos(α)    ⎞ ⎛ D    R⋅V   T⋅cos(α)    ⎞        
-  ↪ ───────⎟ + g⋅m⋅  ╱  -⎜─── - ─── - ──────── - 1⎟⋅⎜─── - ─── - ──────── + 1⎟ ⋅cos(φ)
-  ↪        ⎠       ╲╱    ⎝g⋅m    g      g⋅m       ⎠ ⎝g⋅m    g      g⋅m       ⎠        
-  ↪ ──────────────────────────────────────────────────────────────────────────────────
-  ↪
-f_3_underline_x_subs = (sym)
+   9.8100e+00   8.7266e-02   1.8200e+02   9.2950e+03            0            0
 
-                     ⎛ 2    2⎞
-  M⋅c₇ + P⋅R⋅c₅ + c₆⋅⎝P  - R ⎠
-f_4_underline_x_subs = (sym) Q
+ Column 7:
+
+            0
+error: 'f_1_underline_x_subs' undefined near line 1, column 33
+error: 'f_1_underline_x_subs' undefined near line 1, column 33
+error: 'f_1_underline_x_subs' undefined near line 1, column 33
+error: 'f_1_underline_x_subs' undefined near line 1, column 33
 #+end_example
 
 \[\bar{x} = \begin{bmatrix}
@@ -404,7 +415,7 @@ Q \\
 
 
 * Question 2
-#+BEGIN_SRC text :exports none
+#+BEGIN_SRC text
 Determine the following:
 a. The open-loop response of the aircraft to a 1% step in thrust.
 b. The open-loop response of the aircraft to a 1 degree step in elevator position.
@@ -414,11 +425,227 @@ Include a description of the responses that you observe, and explain the differe
 #+END_SRC
 
 * Question 3
-#+BEGIN_SRC text :exports none
+#+BEGIN_SRC text
 Examine the controllability and observability of the aircraft dynamics. What is the minimum set of variables required to be actuated to control the system, and required to be measured to observe the system?
 #+END_SRC
 
+#+BEGIN_SRC octave :results output :session Q3
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+syms u w q theta delta_e delta_T
+
+%% Constants
+g = 9.81;
+m = 9295;
+V_0 = 182;
+I_y = 75674;
+rho = 0.460;
+S = 27.871;
+bar_bar_c = 3.450;
+theta_e = 0;
+
+x_delta_e = 3.651;
+x_delta_T = 4.2711;
+
+z_delta_e = 23.5329;
+z_delta_T = 0;
+
+m_delta_e = -12.7322;
+m_delta_T = 0;
+
+%% Equations
+X_u = 0.5*rho*V_0*S;
+X_w = 0.5*rho*V_0*S;
+X_dot_w = 0.5*rho*S*bar_bar_c;
+X_q = 0.5*rho*S*V_0*bar_bar_c;
+
+Z_u = 0.5*rho*V_0*S;
+Z_w = 0.5*rho*V_0*S;
+Z_dot_w = 0.5*rho*S*bar_bar_c;
+Z_q = 0.5*rho*S*V_0*bar_bar_c;
+
+M_u = 0.5*rho*V_0*S*bar_bar_c;
+M_w = 0.5*rho*V_0*S*bar_bar_c;
+M_dot_w = 0.5*rho*S*bar_bar_c*bar_bar_c;
+M_q = 0.5*rho*V_0*S*bar_bar_c*bar_bar_c;
+
+U_e = V_0;
+W_e = 0;
+
+x_u = (X_u/m) + (X_dot_w*Z_u/(m*(m - Z_dot_w)));
+z_u = Z_u/(m - Z_dot_w);
+m_u = (M_u/I_y) + (Z_u*M_dot_w/(I_y*(m - Z_dot_w)));
+
+x_w = (X_w/m) + (X_dot_w*Z_w/(m*(m - Z_dot_w)));
+z_w = Z_w/(m - Z_dot_w);
+m_w = (M_w/I_y) + (Z_w*M_dot_w/(I_y*(m - Z_dot_w)));
+
+x_q = ((X_q - m*W_e)/m) + ((Z_q + m*U_e)*X_dot_w)/(m*(m - Z_dot_w));
+z_q = (Z_q + m*U_e)/(m - Z_dot_w);
+m_q = (M_q/I_y) + ((Z_q + m*U_e)*M_dot_w)/(I_y*(m - Z_dot_w));
+
+x_theta = -g*cos(theta_e) - (X_dot_w*g*sin(theta_e))/(m - Z_dot_w);
+z_theta = -(m*g*sin(theta_e))/(m - Z_dot_w);
+m_theta = -(M_dot_w*m*g*sin(theta_e))/(I_y*(m - Z_dot_w));
+
+
+%% Symbolic Equations
+dot_u = u*x_u + w*x_w + q*x_q + theta*x_theta + delta_e*x_delta_e + delta_T*x_delta_T;
+dot_w = u*z_u + w*z_w + q*z_q + theta*z_theta + delta_e*z_delta_e + delta_T*z_delta_T;
+dot_q = u*m_u + w*m_w + q*m_q + theta*m_theta + delta_e*m_delta_e + delta_T*m_delta_T;
+dot_theta = u*0 + w*0 + q*1 + theta*0 + delta_e*0 + delta_T*0;
+
+latex(vpa(dot_u, 4))
+latex(vpa(dot_w, 4))
+latex(vpa(dot_q, 4))
+latex(vpa(dot_theta, 4))
+
+A = [x_u, x_w, x_q, x_theta; ...
+     z_u, z_w, z_q, z_theta; ...
+     m_u, m_w, m_q, m_theta; ...
+     0, 0, 1, 0;];
+
+B = [x_delta_e, x_delta_T; ...
+     z_delta_e, z_delta_T; ...
+     m_delta_e, m_delta_T; ...
+     0, 0;];
+
+latex(vpa(sym(A), 4))
+latex(vpa(sym(B), 4))
+#+END_SRC
+
+#+RESULTS:
+: Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
+: 4.271 \delta_{T} + 3.651 \delta_{e} + 0.8681 q - 9.81 \theta + 0.1258 u + 0.1258 w
+: 23.53 \delta_{e} + 182.9 q + 0.1258 u + 0.1258 w
+: - 12.73 \delta_{e} + 0.3679 q + 0.05332 u + 0.05332 w
+: q
+: \left[\begin{matrix}0.1258 & 0.1258 & 0.8681 & -9.81\\0.1258 & 0.1258 & 182.9 & 0\\0.05332 & 0.05332 & 0.3679 & 0\\0 & 0 & 1.0 & 0\end{matrix}\right]
+: \left[\begin{matrix}3.651 & 4.271\\23.53 & 0\\-12.73 & 0\\0 & 0\end{matrix}\right]
+
+Hence we get the following matrices for $A$ and $B$.
+\[A = \left[\begin{matrix}0.1258 & 0.1258 & 0.8681 & -9.81\\0.1258 & 0.1258 & 182.9 & 0\\0.05332 & 0.05332 & 0.3679 & 0\\0 & 0 & 1.0 & 0\end{matrix}\right]\]
+\[B = \left[\begin{matrix}3.651 & 4.271\\23.53 & 0\\-12.73 & 0\\0 & 0\end{matrix}\right]\]
+
+#+BEGIN_SRC octave :results output :session Q3
+P = [B, A*B, A^2*B, A^3*B];
+latex(sym(vpa(P, 4)))
+rank(P)
+#+END_SRC
+
+#+RESULTS:
+: \left[\begin{matrix}3.651 & 4.271 & -7.633 & 0.5374 & -171.4 & 0.3329 & -210.2 & 3.187\\23.53 & 0 & -2325.0 & 0.5374 & -885.0 & 41.78 & -2.309 \cdot 10^{4} & 31.1\\-12.73 & 0 & -3.235 & 0.2277 & -125.6 & 0.1411 & -102.5 & 2.297\\0 & 0 & -12.73 & 0 & -3.235 & 0.2277 & -125.6 & 0.1411\end{matrix}\right]
+: ans = 4
+
+Next we can use the following equation to find if its controllable:
+
+\begin{align*}
+\underline{P} &= [B\ AB\ A^2B\ \hdots\ A^{n-1}B] \\
+\underline{P} &= \left[\begin{matrix}3.651 & 4.271 & -7.633 & 0.5374 & -171.4 & 0.3329 & -210.2 & 3.187\\23.53 & 0 & -2325.0 & 0.5374 & -885.0 & 41.78 & -2.309 \cdot 10^{4} & 31.1\\-12.73 & 0 & -3.235 & 0.2277 & -125.6 & 0.1411 & -102.5 & 2.297\\0 & 0 & -12.73 & 0 & -3.235 & 0.2277 & -125.6 & 0.1411\end{matrix}\right] \\
+\textrm{rank}(P) &= 4
+\end{align*}
+
+Thus, the system is controllable. Next we can look at the minimal amount of variables to be actuated to control the system.
+
+#+BEGIN_SRC octave :results output :session Q3
+B_1 = B;
+B_1(:,1) = [];
+latex(sym(vpa(B_1, 4)))
+P_1 = [B_1, A*B_1, A^2*B_1, A^3*B_1];
+latex(sym(vpa(P_1, 4)))
+rank(P_1)
+B_2 = B;
+B_2(:,2) = [];
+latex(sym(vpa(B_2, 4)))
+P_2 = [B_2, A*B_2, A^2*B_2, A^3*B_2];
+latex(sym(vpa(P_2, 4)))
+rank(P_2)
+#+END_SRC
+
+#+RESULTS:
+: \left[\begin{matrix}4.271\\0\\0\\0\end{matrix}\right]
+: \left[\begin{matrix}4.271 & 0.5374 & 0.3329 & 3.187\\0 & 0.5374 & 41.78 & 31.1\\0 & 0.2277 & 0.1411 & 2.297\\0 & 0 & 0.2277 & 0.1411\end{matrix}\right]
+: ans = 3
+: \left[\begin{matrix}3.651\\23.53\\-12.73\\0\end{matrix}\right]
+: \left[\begin{matrix}3.651 & -7.633 & -171.4 & -210.2\\23.53 & -2325.0 & -885.0 & -2.309 \cdot 10^{4}\\-12.73 & -3.235 & -125.6 & -102.5\\0 & -12.73 & -3.235 & -125.6\end{matrix}\right]
+: ans = 4
+With:
+\begin{align*}
+B &= \left[\begin{matrix}4.271\\0\\0\\0\end{matrix}\right] \\
+P &= \left[\begin{matrix}4.271 & 0.5374 & 0.3329 & 3.187\\0 & 0.5374 & 41.78 & 31.1\\0 & 0.2277 & 0.1411 & 2.297\\0 & 0 & 0.2277 & 0.1411\end{matrix}\right] \\
+\textrm{rank}(P) &= 3
+\end{align*}
+
+And with:
+\begin{align*}
+B &= \left[\begin{matrix}3.651\\23.53\\-12.73\\0\end{matrix}\right] \\
+P &= \left[\begin{matrix}3.651 & -7.633 & -171.4 & -210.2\\23.53 & -2325.0 & -885.0 & -2.309 \cdot 10^{4}\\-12.73 & -3.235 & -125.6 & -102.5\\0 & -12.73 & -3.235 & -125.6\end{matrix}\right] \\
+\textrm{rank}(P) &= 4
+\end{align*}
+
+Hence we need $\delta_E$ for the system to be controllable, how ever we don't need $\delta_T$.
+
+** Observability
+To determine the observability we can use the following equation:
+\[O_M = \begin{bmatrix}
+C \\
+CA \\
+CA^2 \\
+\vdots \\
+CA^{n-1}
+\end{bmatrix}\]
+If [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank]] of $O_M = n$ then all state variables can be determined based on the output quantities that are measured.
+
+#+BEGIN_SRC octave :results output :session Q3
+O_M = [C, A*C, A^2*C, A^3*C];
+
+C = eye(4);
+
+cols = {[], [1], [1,2], [1,3], [1,4], [1,2,3], [1,2,4], [1,3,4], [1,2,3,4], [2], [2,3], [2,4], [2,3,4], [3], [3,4], [4]};
+for idx = 1:numel(cols)
+  cols_to_remove = cols{idx};
+  cols_keep = setdiff(1:size(C,2), cols_to_remove);
+  C_cols = C(:, cols_keep);
+  O_M = [C_cols, A*C_cols, A^2*C_cols, A^3*C_cols];
+  r = rank(O_M');
+  fprintf('removed: %s, kept: %s, rank=%d\n', mat2str(cols_to_remove), mat2str(cols_keep), r);
+end
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+removed: [], kept: [1 2 3 4], rank=4
+removed: 1, kept: [2 3 4], rank=4
+removed: [1 2], kept: [3 4], rank=4
+removed: [1 3], kept: [2 4], rank=4
+removed: [1 4], kept: [2 3], rank=4
+removed: [1 2 3], kept: 4, rank=4
+removed: [1 2 4], kept: 3, rank=4
+removed: [1 3 4], kept: 2, rank=4
+removed: [1 2 3 4], kept: [], rank=0
+removed: 2, kept: [1 3 4], rank=4
+removed: [2 3], kept: [1 4], rank=4
+removed: [2 4], kept: [1 3], rank=4
+removed: [2 3 4], kept: 1, rank=3
+removed: 3, kept: [1 2 4], rank=4
+removed: [3 4], kept: [1 2], rank=4
+removed: 4, kept: [1 2 3], rank=4
+#+end_example
+
+The only time the system was not fully observable is when none of the variables were available or when only $U$ was available. The minimum set of variables required to
+be measure the system is $\{W, Q, \theta\}$, we can choose any amount from the set and system will be fully observable.
+
+
 * Question 4
-#+BEGIN_SRC text :exports none
+#+BEGIN_SRC text
 Use the major and minor loop design techniques to design a pitch attitude hold control system.
 #+END_SRC

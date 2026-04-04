@@ -62,5 +62,5 @@ This has a duel system $S_2$:
 | C* | conjugate transpose of C |
 
 If $S_1$ is completely observable through (A,C) then $S_2$ is completely controllable (A*,C).
-If $S_1$ is completely controllable through (A,B) then $S_2$ is completely observalbe (A*,B*).
+If $S_1$ is completely controllable through (A,B) then $S_2$ is completely observable (A*,B*).
 
