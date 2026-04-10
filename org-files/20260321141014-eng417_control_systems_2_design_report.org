@@ -1,20 +1,25 @@
 :PROPERTIES:
 :ID:       ef0a1cbb-2d92-4e49-ba39-67265565cbfe
 :END:
-#+title: ENG417 - Control Systems 2 - Design Report
-#+date: [2026-03-21 Sat 14:10]
-#+AUTHOR: Baley Eccles - 652137
+#+title: ENG417 - Control Systems 2 - Design Report 1
+#+AUTHOR: Baley Eccles - 652137 and Tyler Robards - 651790
 #+STARTUP: latexpreview
 #+FILETAGS: :Assignment:UTAS:2026:
-#+LATEX_HEADER: \usepackage[a4paper, margin=2cm]{geometry}
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
 #+LATEX_HEADER_EXTRA: \usepackage{minted}
 #+LATEX_HEADER_EXTRA: \usepackage{fontspec}
 #+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
 #+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
 #+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
 #+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
 
+\newpage
 * Question 1
+The MATLAB/Octave code for this part can be seen in Appendix A or in the attached file called ~Q1.m~. It was originally written in Octave and tested to work in MATLAB.
 
 Given the following list of equations:
 
@@ -120,7 +125,7 @@ Solving this we get the following equilibrium points:
 \sin^{-1}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}
 \end{bmatrix}\]
 
-#+BEGIN_SRC octave :results output :eval never :exports none :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
+#+BEGIN_SRC octave :results output :exports none :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 clc
 clear
 close all
@@ -134,21 +139,41 @@ end
 
 syms U V W Q theta R P g m D T alpha L phi M c_5 c_6
 
-% Define the equations
+                                % Define the equations
 eq1 = 0 == R*V - W*Q - g*sin(theta) + (1/m)*(-D + T*cos(alpha));
 eq2 = 0 == U*Q - V*P + g*cos(phi)*cos(theta) + (1/m)*(-L - T*sin(alpha));
 eq3 = 0 == c_5*P*R + c_6*(P^2 - R^2) + M;
 eq4 = 0 == Q;
 
+%% For some reason MATLAB fails to solve this, but octave succeeds
 [U_eq, W_eq, Q_eq, theta_eq] = solve([eq1, eq2, eq3, eq4], [U, W, Q, theta]);
 
+if exist('OCTAVE_VERSION', 'builtin')
+  disp("Common octave W")
+else % Hardcode the solutions for MATLAB
+  U_eq(1) = U;
+  W_eq(1) = W;
+  Q_eq(1) = 0;
+  theta_eq(1) = asin((-D + R*V*m + T*cos(alpha))/(g*m));
+
+  U_eq(2) = U;
+  W_eq(2) = W;
+  Q_eq(2) = 0;
+  theta_eq(2) = asin((-D + R*V*m + T*cos(alpha))/(g*m));
+end
 latex(U_eq(2))
 latex(W_eq(2))
 latex(Q_eq(2))
 latex(theta_eq(2))
+
 #+END_SRC
 
 #+RESULTS:
+: Common octave W
+: U
+: W
+: 0
+: \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}
 
 
 
@@ -198,7 +223,7 @@ f_1_bar_x = simplify(f_1_bar_x);
 
 #+RESULTS:
 
-\[\sum_{m=1}^M\frac{\partial f_n}{\partial x_m}|_{x = \bar{x}}(x - \bar{x}_m) = 0 + 0 - Q \bar{W} - g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right)\]
+\[\sum_{m=1}^M\frac{\partial f_n}{\partial x_m}|_{x = \bar{x}}(x - \bar{x}_m) = 0 + 0 - Q \bar{W} - g \hdots\]
 
 #+BEGIN_SRC octave :results output :eval never :exports none :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 theta_eq(2);
@@ -262,7 +287,7 @@ latex(d_f_2_d_x_x_bar_x)
 #+RESULTS:
 
 Hence:
-\[f_1(\underline{x}) \approx \frac{- L - T \sin{\left(\alpha \right)} + m \left(- P V + Q \bar{U} + g \sqrt{\frac{g^{2} m^{2} - \left(- D + R V m + T \cos{\left(\alpha \right)}\right)^{2}}{g^{2} m^{2}}} \cos{\left(\phi \right)}\right) - \left(\theta - \operatorname{asin}{\left(\frac{- D + R V m + T \cos{\left(\alpha \right)}}{g m} \right)}\right) \left(- D + R V m + T \cos{\left(\alpha \right)}\right) \cos{\left(\phi \right)}}{m}\]
+\[f_w(\underline{x}) \approx \frac{- L - T \sin{\left(\alpha \right)} + m \left(\hdots\right) - \left(\hdots\right) \left(- D + R V m + T \cos{\left(\alpha \right)}\right) \cos{\left(\phi \right)}}{m}\]
 
 
 #+BEGIN_SRC octave :results output :eval never :exports none :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
@@ -283,10 +308,17 @@ $f_4(\underline{x})$ is also already linear, so there is no need to create an ap
 **** Linearisation Result
 
 Finally we must substitute the trim point values into the equations, the relevant values can be seen in the following table:
+
+#+ATTR_LATEX: :placement [H] :align |l|l|
+#+CAPTION: Trim point values
+|--------------------------+----------|
+| Name                     | Value    |
+|--------------------------+----------|
 | Gravity (g)              | 9.81 m/s |
 | Angle of Attack (\alpha) | 5^o      |
 | Velocity (V)             | 182 m/s  |
 | Mass (m)                 | 9295 kg  |
+|--------------------------+----------|
 
 #+BEGIN_SRC octave :results output :eval never :exports none :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q1.m
 f_1_underline_x_subs = f_1_underline_x;
@@ -354,51 +386,61 @@ This is consistent with the following matrix that was obtained by substituting e
 \[A = \left[\begin{matrix}-1.721 \cdot 10^{-7} & 1.108 \cdot 10^{-6} & 0 & -9.81\\-1.268 \cdot 10^{-5} & -4.203 \cdot 10^{-5} & 182.0 & 0\\1.123 \cdot 10^{-7} & 6.475 \cdot 10^{-8} & -1.076 \cdot 10^{-6} & 0\\0 & 0 & 1.0 & 0\end{matrix}\right]\]
 Although there are a lot of values that are close to zero but not exactly.
 
-:TODO: Linearistation of second system OR talk about how it would be similar
-
+If you were to copy the code and replace the equations/constants with the required ones you would find that lateral direction can also be linearised as described in the project sheet. I am not going to show that this is the case because it simply involves copying and replacing the relevant places in the code.
 
 * Question 2
+The MATLAB code for this part can be seen in Appendix B or in the attached file called ~Q2.m~.
 
 The longitudinal and lateral directions each have the linearised, decoupled state space models shown in the solution to Q1.
+
 The concise longitudinal/lateral aerodynamic stability and control derivatives, shown in tables A2.5, A26, A2.7 and A2.8 of the provided document are used to convert the provided aircraft and trim point specifications to match the values required to form the numerical state space models. These calculations can be seen in the MATLAB script shown in Appendix A {name it whatever you like}. These are then used to form state space models. These models are inspected to find poles. Both models have no zeros.
 
 Longitudinal Poles:
-$-0.3035+0j$
-$0.965 \pm 0.1020j$
-$-0.3+0j$
+\begin{align*}
+-0.3035 &+ 0j \\
+0.965 &\pm 0.1020j \\
+-0.3 &+ 0j 
+\end{align*}
 
 Lateral Poles:
-$-1.7188\pm12.7294j$
-$-0.1346+0j$
-$-0.2009+0j$
+\begin{align*}
+-1.7188 &\pm 12.7294j \\
+-0.1346 &+ 0j \\
+-0.2009 &+ 0j
+\end{align*}
 
 From these pole locations we can expect that the longitudinal model will be unstable due to the poles on the RHS of the s-plane. The lateral model may be stable, however slow moving due to the poles close to the Imaginary axis.  
-a.
+** Part a
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: $1\%$ Thrust Step \label{fig:fig1}
-[[./1% Thrust Step.png]]
+[[./1percent Thrust Step.png]]
 
 Figure \ref{fig:fig1} shows the open-loop longitudinal response to a 1% step in thrust. This shows an unstable response, with large growth in the states $w$ and $u$, which represent motion in the x and z directions. The response is not quickly damped and does not return to equilibrium.
+
 The phugoid mode is the low-frequency longitudinal mode, involving an exchange between forward speed, vertical motion and pitch over a long time scale. The plot shows very slow change over tens of seconds, which can represent the phugoid mode. The large growth of the states suggests the phugoid is lightly damped or unstable in the open-loop. The short-period mode is either weakly exited by the thrust input, or masked by the slow phugoid behaviour. This is because there are no obvious fast oscillation in the plot.
-This is not an acceptable response to thrust input alone. The long term divergence would not be acceptable without control. 
-b.
+This is not an acceptable response to thrust input alone. The long term divergence would not be acceptable without control.
+
+** Part b
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: $1^o$ Elevator Step \label{fig:fig2}
 [[./1deg Elevator Step.png]]
 
-The elevator step response, shown in \ref{fig:fig2}, is much more dramatic than the thrust response. The very large growth in states $u$ and $q$ and drift in $\theta$ is a clear sign of open-loop longitudinal instability. 
+The elevator step response, shown in \ref{fig:fig2}, is much more dramatic than the thrust response. The very large growth in states $u$ and $q$ and drift in $\theta$ is a clear sign of open-loop longitudinal instability.
+
 The rapid change in pitch rate is associated with the short-period dynamics, while the longer drift in speed and pitch angle show the phugoid behaviour. This response is unacceptable without control as a small elevator step produces very large state excursions, showing that pitch attitude cannot be maintained without feedback control.
-c.
+
+** Part c
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: $1^{o}$ Step in Aileron Position \label{fig:fig3}
 [[./1deg Aileron Step.png]]
 
 The aileron step response shows a quick growth then decay in $p$, $r$ and $\beta$ growing slowly and $\phi$ increasing and settling at a very large bank angle instead of returning to zero. This response shows the roll subsidence mode, through the fast response in roll rate $p$ and the spiral mode, through the long term drift in bank angle $\phi$. The roll subsidence mode is a fast, overdamped response which matches the roll rate response. As $\phi$ does not return to zero and instead grows to a large value, the spiral mode appears to be unstable. 
-A step in the aileron position causes the aircraft to move into a large sustained bank angle. This is not an acceptable open-loop response. 
-d.
+A step in the aileron position causes the aircraft to move into a large sustained bank angle. This is not an acceptable open-loop response.
+
+** Part d
 
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: $1^{o}$ Step in Rudder Position \label{fig:fig4}
@@ -410,6 +452,7 @@ Analysis confirms the longitudinal model is unstable, as expected from the pole 
 
 
 * Question 3
+The MATLAB/Octave code for this part can be seen in Appendix C or in the attached file called ~Q3.m~. It was originally written in Octave and tested to work in MATLAB.
 
 ** Longitudinal Direction
 *** Controllability
@@ -533,7 +576,7 @@ latex(vpa(sym(B), 4))
 : \left[\begin{matrix}-1.721 \cdot 10^{-7} & 1.108 \cdot 10^{-6} & 0 & -9.81\\-1.268 \cdot 10^{-5} & -4.203 \cdot 10^{-5} & 182.0 & 0\\1.123 \cdot 10^{-7} & 6.475 \cdot 10^{-8} & -1.076 \cdot 10^{-6} & 0\\0 & 0 & 1.0 & 0\end{matrix}\right]
 : \left[\begin{matrix}0.07149 & 0.08363\\0.4608 & 0\\-0.03062 & 0\\0 & 0\end{matrix}\right]
 
-Hence we get the following matrices for $A$ and $B$.
+By subsisting values from the project sheet we get the following matrices for $A$ and $B$.
 \[A = \left[\begin{matrix}-1.721 \cdot 10^{-7} & 1.108 \cdot 10^{-6} & 0 & -9.81\\-1.268 \cdot 10^{-5} & -4.203 \cdot 10^{-5} & 182.0 & 0\\1.123 \cdot 10^{-7} & 6.475 \cdot 10^{-8} & -1.076 \cdot 10^{-6} & 0\\0 & 0 & 1.0 & 0\end{matrix}\right]\]
 \[B = \left[\begin{matrix}0.07149 & 0.08363\\0.4608 & 0\\-0.03062 & 0\\0 & 0\end{matrix}\right]\]
 
@@ -553,7 +596,12 @@ Next we can use the following equation to find if its controllable:
 
 \begin{align*}
 \underline{P} &= [B\ AB\ A^2B\ \hdots\ A^{n-1}B] \\
-\underline{P} &= \left[\begin{matrix}0.07149 & 0.08363 & 4.983 \cdot 10^{-7} & -1.44 \cdot 10^{-8} & 0.3004 & -1.173 \cdot 10^{-12} & -7.46 \cdot 10^{-7} & -9.215 \cdot 10^{-8}\\0.4608 & 0 & -5.573 & -1.061 \cdot 10^{-6} & 0.0002471 & 1.71 \cdot 10^{-6} & -6.95 \cdot 10^{-5} & -8.65 \cdot 10^{-11}\\-0.03062 & 0 & 7.08 \cdot 10^{-8} & 9.394 \cdot 10^{-9} & -3.609 \cdot 10^{-7} & -8.041 \cdot 10^{-14} & 3.376 \cdot 10^{-8} & 1.107 \cdot 10^{-13}\\0 & 0 & -0.03062 & 0 & 7.08 \cdot 10^{-8} & 9.394 \cdot 10^{-9} & -3.609 \cdot 10^{-7} & -8.041 \cdot 10^{-14}\end{matrix}\right] \\
+\underline{P} &= \left[\begin{matrix}
+0.07149  & 0.08363 & 4.983 \cdot 10^{-7} & -1.44 \cdot 10^{-8}  & 0.3004               & \hdots \\
+0.4608   & 0       & -5.573              & -1.061 \cdot 10^{-6} & 0.0002471            & \hdots \\
+-0.03062 & 0       & 7.08 \cdot 10^{-8}  & 9.394 \cdot 10^{-9}  & -3.609 \cdot 10^{-7} & \hdots \\
+0        & 0       & -0.03062            & 0                    & 7.08 \cdot 10^{-8}   & \hdots 
+\end{matrix}\right] \\
 \textrm{rank}(P) &= 4
 \end{align*}
 
@@ -617,7 +665,7 @@ CA^2 \\
 \vdots \\
 CA^{n-1}
 \end{bmatrix}\]
-If [[id:b29377c0-13e3-4242-9ffb-ee11173122bc][rank]] of $O_M = n$ then all state variables can be determined based on the output quantities that are measured.
+If rank of $O_M = n$ then all state variables can be determined based on the output quantities that are measured.
 
 #+BEGIN_SRC octave :results output :eval never :exports none :session Q3 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q3.m
 C = eye(4);
@@ -809,7 +857,12 @@ As before we can find if it is controllable using:
 
 \begin{align*}
 \underline{P} &= [B\ AB\ A^2B\ \hdots\ A^{n-1}B] \\
-\underline{P} &= \left[\begin{matrix}0 & 0.08984 & -3.298 & -2.996 & 1.339 & 6.774 & -0.2396 & -0.2367\\0.1355 & 0.689 & -1.778 \cdot 10^{-5} & -0.0002842 & 0.007182 & 0.006524 & -0.002917 & -0.01475\\-0.01812 & -0.01646 & 9.895 \cdot 10^{-7} & 3.146 \cdot 10^{-5} & -0.001294 & -0.001175 & 0.0005255 & 0.002658\\0 & 0 & 0.1355 & 0.689 & -1.778 \cdot 10^{-5} & -0.0002842 & 0.007182 & 0.006524\end{matrix}\right] \\
+\underline{P} &= \left[\begin{matrix}
+0        & 0.08984  & -3.298               & -2.996              & \hdots \\
+0.1355   & 0.689    & -1.778 \cdot 10^{-5} & -0.0002842          & \hdots \\
+-0.01812 & -0.01646 & 9.895 \cdot 10^{-7}  & 3.146 \cdot 10^{-5} & \hdots \\
+0        & 0        & 0.1355               & 0.689               & \hdots 
+\end{matrix}\right] \\
 \textrm{rank}(P) &= 4
 \end{align*}
 
@@ -848,7 +901,7 @@ rank(P_3)
 : \left[\begin{matrix}\\\\\\\end{matrix}\right]
 : ans = 0
 
-When $B = \left[\begin{matrix}0.08984\\0.689\\-0.01646\\0\end{matrix}\right]$ and $B = \left[\begin{matrix}0\\0.1355\\-0.01812\\0\end{matrix}\right]$ the rank is 4. Only when $B = \left[\begin{matrix}\\\\\\\end{matrix}\right]$ do we get a rank of 0. Hence we either need either $\delta_A$ or $\delta_R$ for the system to be controllable.
+When $B = \left[\begin{matrix}0.08984\\0.689\\-0.01646\\0\end{matrix}\right]$ and $B = \left[\begin{matrix}0\\0.1355\\-0.01812\\0\end{matrix}\right]$ the rank is 4. Only when $B$ is an empty matrix do we get a rank of 0. Hence we either need either $\delta_A$ or $\delta_R$ for the system to be controllable.
 
 
 *** Observability
@@ -910,8 +963,9 @@ removed: 4, kept: [1 2 3], rank=4
 | $\phi$                 | $\beta$ $p$ $r$        |    4 |
 |------------------------+------------------------+------|
 
-Summarised in the table we see that the rank is only not 4 when every column is removed. Hence the minimal set of required variables is one or more of the following $\{$\beta$ $p$ $r$ $\phi$\}$.
+Summarised in the table we see that the rank is only not 4 when every column is removed. Hence the minimal set of required variables is one or more of the following $\{\beta, p, r, \phi\}$.
 * Question 4
+The MATLAB code for this part can be seen in Appendix D or in the attached file called ~Q4.m~.
 
 Pitch Attitude Hold control is used to improve both short-period and phugoid stability. The figure below (Figure \ref{fig:fig5}) shows one standard approach to direct pitch control, measuring both pitch rate $Q$ and pitch angle $\theta$. Major and Minor loop design is used to maintain both the short-period and phugoid stability. Rate Gyro and Attitude Gyro are assumed to be 1 for this task.
 
@@ -947,3 +1001,25 @@ As an example of system performance a sinusoidal reference can be used. This pro
 [[./SinusoidalRefrenceTracking.png]]
 
 Overall, this is an acceptable response. The controller can be seen to track an input reference accurately, with negligible stead-state error and very little overshoot. The short-period and phugoid response are now well damped and stable as seen in the closed-loop step response. This shows the chosen major and minor loop gains provide effective Pitch Attitude Hold control.
+
+\newpage
+* Appendix A - Code For Question 1
+
+#+INCLUDE: "/home/baley/UTAS/ENG417 - Control Systems 2/Q1.m" src octave
+
+\newpage
+* Appendix B - Code For Question 2
+
+#+INCLUDE: "/home/baley/UTAS/ENG417 - Control Systems 2/ENG417-Project/Q2.m" src octave
+
+\newpage
+* Appendix C - Code For Question 3
+
+#+INCLUDE: "/home/baley/UTAS/ENG417 - Control Systems 2/Q1.m" src octave
+
+\newpage
+* Appendix D - Code For Question 4
+
+#+INCLUDE: "/home/baley/UTAS/ENG417 - Control Systems 2/ENG417-Project/Q4.m" src octave
+
+

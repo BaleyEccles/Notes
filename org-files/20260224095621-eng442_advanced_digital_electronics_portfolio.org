@@ -5,35 +5,61 @@
 #+date: [2026-02-24 Tue 09:56]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
-
-#+BEGIN_SRC text :export none
-Include question when answering
-#+END_SRC
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
 
 * Week 1
 ** Problem 1
-a) Briefly describe the purpose of a look up table (LUT).
-b) Briefly describe the purpose of a slice (or equivalently a configurable logic block).
+/a) Briefly describe the purpose of a look up table (LUT)./
+
+Provides pre-computed outputs for input values. Can replace complex calculation/logic with a simple map from input to output. 
+
+/b) Briefly describe the purpose of a slice (or equivalently a configurable logic block)./
+
 A configurable logic block is the fundamental component of FPGAs, it allow the implementation of logic and memory. The ug474 7Series CLB contains lookup tables, memory, shift registers, multiplexer and few more things.
-c) Briefly describe the purpose of the switch matrix.
+
+/c) Briefly describe the purpose of the switch matrix./
+
 Allows connections between CLBs, inputs and outputs.
-d) With reference to the switch matrix, how might a CLB/Slice output be fed back to its input?
+
+/d) With reference to the switch matrix, how might a CLB/Slice output be fed back to its input?/
+
 The output of the CLB will be physically connected to a wire, the switch matrix will be used to connect this wire back to the physical input of the CLB.
 
 ** Problem 2
-Consider the following code and answer the following Verilog questions. This code is for use on the Basys3 development board which has 16 switches (sw) and 16 LEDs (led).
+/Consider the following code and answer the following Verilog questions. This code is for use on the Basys3 development board which has 16 switches (sw) and 16 LEDs (led)./
+
 #+BEGIN_SRC verilog
 module calc(input [15:0] sw, output [15:0] led);
    assign led = sw;
 endmodule
 #+END_SRC
-a) How many bits are input to the module?
+
+/a) How many bits are input to the module?/
+
 16
-b) How many bits are output from the module?
+
+/b) How many bits are output from the module?/
+
 16
-c) What does the module do?
+
+/c) What does the module do?/
+
 enables/disables the 16 LEDs based on the 16 switch inputs
-d) Rewrite the module to take only the lower 8 bits from the switches and output to the lower 8 LEDs. Also, change the module so that the switch must be off to turn the corresponding LED on.
+
+\newpage
+
+/d) Rewrite the module to take only the lower 8 bits from the switches and output to the lower 8 LEDs. Also, change the module so that the switch must be off to turn the corresponding LED on./
 #+BEGIN_SRC verilog
 module calc(input [7:0] sw, output [7:0] led);
    wire not_sw;
@@ -42,7 +68,8 @@ module calc(input [7:0] sw, output [7:0] led);
 endmodule
 #+END_SRC
 ** Problem 3
-Write a Verilog module to implement a full adder.
+/Write a Verilog module to implement a full adder./
+
 #+BEGIN_SRC verilog
 module adder(input A, input B, input Cin, output sum, output Cout);
    assign sum = A ^ B ^ Cin;
@@ -68,7 +95,8 @@ endmodule
 
 * Week 2
 ** Problem 1
-test text
+/Write a Verilog module using only structural modelling to take two 8-bit inputs from the Basys3 switches and add them together. You must use full adders for the addition operation. You do not need to include a carry-in to the least significant bit. The output must be displayed on the LEDs including the carry-out bit. Test your solution on the Basys3 development board./
+
 #+BEGIN_SRC verilog :tangle /home/baley/UTAS/ENG442 - Advanced Digital Electronics/Portfolio/Week_2_Problem_1/Week_2_Problem_1.srcs/constrs_1/new/constrains.xdc :comments link
 ## Switches
 set_property PACKAGE_PIN V17 [get_ports {sw[0]}]
@@ -127,6 +155,8 @@ set_property PACKAGE_PIN V13 [get_ports {led[8]}]
 
 #+END_SRC
 
+\newpage
+
 #+BEGIN_SRC verilog :tangle /home/baley/UTAS/ENG442 - Advanced Digital Electronics/Portfolio/Week_2_Problem_1/Week_2_Problem_1.srcs/sources_1/new/Full_Adder.v :comments link
 `timescale 1ns / 1ps
 
@@ -136,7 +166,7 @@ module Full_Adder(input A, input B, input Cin, output sum, output Cout);
 endmodule
 #+END_SRC
 
-#+BEGIN_SRC verilog :tangle /home/baley/UTAS/ENG442 - Advanced Digital Electronics/Portfolio/Week_2_Problem_1/Week_2_Problem_1.srcs/sources_1/new/8bit_adder.v :comments link :tangle no
+#+BEGIN_SRC verilog :tangle /home/baley/UTAS/ENG442 - Advanced Digital Electronics/Portfolio/Week_2_Problem_1/Week_2_Problem_1.srcs/sources_1/new/8bit_adder.v :comments link
 `include "Full_Adder.v"
 `timescale 1ns / 1ps
 
@@ -161,7 +191,10 @@ module Bit_Adder(input [15:0] sw, output [8:0] led);
 endmodule
 #+END_SRC
 
+\newpage
+
 ** Problem 2
+/Rewrite the module from Problem 1 to use data flow modeling. Retest your solution on the Basys 3 development board./
 
 #+BEGIN_SRC verilog :tangle /home/baley/UTAS/ENG442 - Advanced Digital Electronics/Portfolio/Week_2_Problem_1/Week_2_Problem_1.srcs/sources_1/new/8bit_adder.v :comments link
 `include "Full_Adder.v"
@@ -198,11 +231,19 @@ module Bit_Adder(input [15:0] sw, output [8:0] led);
 endmodule
 #+END_SRC
 
+\newpage
+
 * Week 3
 ** Problem 1
+/Design asynchronous state machine and implement it in Verilog to simulate the tossing of a coin. Inputs consist of two push buttons RST and TOSS. Each push button is normally at 0 until pressed when it becomes 1 until released. The circuit has two outputs, H and T (for heads and tails), which are 1 when active. When RST = 1, both H and T go to 0. Thus, if TOSS is pressed at a random time interval after RST is released, the circuit will simulate the tossing of a coin./
+
 *** a
-[[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG442_Portfolio_Week_3_Problem_1.xopp]]
+/Draw a state transition diagram for the synchronous state machine./
+
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG442_Portfolio_Week_3_Problem_1.xopp]]
 *** b
+/Implement the state machine in a Verilog module using behavioral modeling and a case statement./
+
 #+BEGIN_SRC verilog :tangle ENG442_Portfolio_Week_3_Problem_1.sv
 module coin_toss(input clk, input TOSS, input RST, output reg[1:0] Z, output reg [2:0] state);
    // All possible states:
@@ -241,8 +282,12 @@ module coin_toss(input clk, input TOSS, input RST, output reg[1:0] Z, output reg
       Z <= 2'b00;
    end
 endmodule
-
 #+END_SRC
+
+*** c
+/Write and execute a test bench to test your state machine module./
+
+\newpage
 
 #+BEGIN_SRC verilog :tangle ENG442_Portfolio_Week_3_Problem_1_tb.sv
 `timescale 1ns / 1ps
@@ -293,11 +338,22 @@ module tb_coin_toss;
       
       $finish;
    end
-   
-   
+
 endmodule
 #+END_SRC
+
 * Week 4
+** Problem 1
+/Write a Verilog module to implement the following block diagram according to the functionality specified below./
+
+/a) When the input is high, the output must all be high impedance irrespective of all other inputs. You must use an if statement to implement this logic./
+
+/b) When the first input is low all outputs must be set to zero. You must use an if statement to implement this logic./
+
+/c) On the rising edge of the clock, data_out must be set to the n-th Fibonacci number. If n = 0011, then data_out = 00000010 since the 3rd Fibonacci number is 2 (note that the zeroth Fibonacci number in this case is defined as 0 and the first Fibonacci number is 1). You may decide what to output when the Fibonacci number is greater than 255. You must use a case statement to implement this logic./
+
+/d) The odd and even outputs must produce the parity bit for the input n. Recall that "odd parity" means that the total number of "1" bits in a data string, including the parity bit, must always be odd, while "even parity" means that the total number of "1" bits must always be even. You must implement this logic using a for loop./
+
 #+BEGIN_SRC verilog :tangle ENG442_Portfolio_Week_4_Problem_1.v
 module fib(input clk, input en, input rst, input [3:0] n, output reg odd, output reg even, output reg [7:0] data_out);
    integer i;
@@ -342,9 +398,10 @@ module fib(input clk, input en, input rst, input [3:0] n, output reg odd, output
    end
 
 endmodule
-
 #+END_SRC
 
+** Problem 2
+/Implement a test case for the above module. You must use an initial block for the test case(s) and a while loop to iterate through the test cases./
 #+BEGIN_SRC verilog :tangle ENG442_Portfolio_Week_4_Problem_2.v
 `include "ENG442_Portfolio_Week_4_Problem_1.v"
 
@@ -391,5 +448,148 @@ module tb_fib;
    end
 
 endmodule
+#+END_SRC
 
+* Week 5
+
+** Problem 1
+/Draw the schematic of a ripple-carry ALU capable of performing add and subtract operations and explain how it operates. The design may only use standard logic components such as logic gates, multiplexers, 1-bit full adders, etc. Clearly identify control signals and their purpose./
+
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG442_Portfolio_Week_5.xopp]]
+
+
+ - Result is $C_{out}$ and $B_{out}$ depending on the operation selected
+ - $A$ and $B$ are the two bits to add/subtract
+ - $C_{in}$ is the carry/borrow in
+ - Output is the carry/borrow output
+ - Result is the output of the add/subtraction
+ - Choose operation based on operation input to multiplexers
+   - 0 for addition, 1 for subtraction
+     
+ - Use $(A \oplus B) \oplus C_{in}$ for subtraction result
+ - Use $(\sim A \& B) | (\sim A \& C_{in}) | (B \& C_{in})$ for subtraction $C_{out}$
+ - Use 1-bit adder for addition
+
+ - Can be used in series to create a multiple bit ALU
+   
+** Problem 2
+/Write Verilog modules to implement your ripple-carry ALU design. Ensure that you choose an appropriate implementation model for each module (structural, data-flow or behavioral) and include a brief explanation as to why you chose those approaches./
+#+BEGIN_SRC verilog :tangle ENG442_Portfolio_Week_5_Problem_2.v
+// 1-bit adder for ALU
+module full_adder (
+                   input wire  A,      // operand bit A
+                   input wire  B,      // operand bit B
+                   input wire  C_in,   // carry-in
+                   output wire result, // result bit (sum)
+                   output wire C_out   // carry-out
+                   );
+   assign result = A ^ B ^ C_in;
+   assign C_out  = (A & B) | (B & C_in) | (A & C_in);
+endmodule
+
+// 1-bit subtractor for ALU
+module full_subber (
+                    input wire  A,      // operand bit A
+                    input wire  B,      // operand bit B
+                    input wire  C_in,   // borrow-in (use as borrow-in)
+                    output wire result, // result bit (difference)
+                    output wire B_out   // borrow-out
+                    );
+   assign result = (A ^ B) ^ C_in;
+   assign B_out  = (~A & B) | (~A & C_in) | (B & C_in);
+endmodule
+
+// 2:1 multiplexer (single bit)
+module mux2to1 (
+                input wire  in_0,
+                input wire  in_1,
+                input wire  sel,
+                output wire out
+                );
+   assign out = sel ? in_1 : in_0;
+endmodule
+
+// 1-bit ALU: operation = 0 -> add, operation = 1 -> sub
+module ALU (
+            input wire  A,
+            input wire  B,
+            input wire  C_in,      // carry-in for add or borrow-in for sub
+            input wire  operation, // 0 = add, 1 = sub
+            output wire result,
+            output wire carry_borrow_out
+            );
+   wire add_result, sub_result;
+   wire add_cout,  sub_bout;
+
+   // instantiate adder and subtractor
+   full_adder u_adder (
+                       .A(A),
+                       .B(B),
+                       .C_in(C_in),
+                       .result(add_result),
+                       .C_out(add_cout)
+                       );
+
+   full_subber u_subber (
+                         .A(A),
+                         .B(B),
+                         .C_in(C_in),
+                         .result(sub_result),
+                         .B_out(sub_bout)
+                         );
+
+   // select result and carry/borrow based on operation
+   mux2to1 u_mux_result (
+                         .in_0(add_result),
+                         .in_1(sub_result),
+                         .sel(operation),
+                         .out(result)
+                         );
+
+   mux2to1 u_mux_cout (
+                       .in_0(add_cout),
+                       .in_1(sub_bout),
+                       .sel(operation),
+                       .out(carry_borrow_out)
+                       );
+endmodule
+#+END_SRC
+** Problem 3
+/Write test bench Verilog modules to test each module developed in Problem 2. Be sure to test an appropriate range of scenarios for each module. Comment on what you tested, with emphasis on how this ensures requirements have been met. Execute the test benches in a simulation environment (e.g., iVerilog) and comment on the results./
+
+#+BEGIN_SRC verilog :tangle ENG442_Portfolio_Week_5_Problem_3.v
+`include "ENG442_Portfolio_Week_5_Problem_2.v"
+`timescale 1ns/1ps
+
+module tb_ALU;
+   reg A, B, C_in, operation;
+   wire result, carry_borrow_out;
+
+   // Instantiate DUT
+   ALU dut (
+            .A(A),
+            .B(B),
+            .C_in(C_in),
+            .operation(operation),
+            .result(result),
+            .carry_borrow_out(carry_borrow_out)
+            );
+
+   integer i;
+
+   initial begin
+      $display("A B C_in op | result carry/borrow");
+      $display("------------|-------------------");
+
+      // Test all combinations of A,B,C_in and both operations
+      for (i = 0; i < 16; i = i + 1) begin
+         operation = (i >> 3) & 1;
+         A         = (i >> 2) & 1;
+         B         = (i >> 1) & 1;
+         C_in      = (i >> 0) & 1;
+         #5;
+         $display("%b %b %b    %b  |   %b       %b", A, B, C_in, operation, result, carry_borrow_out);
+      end
+   end
+endmodule
 #+END_SRC
