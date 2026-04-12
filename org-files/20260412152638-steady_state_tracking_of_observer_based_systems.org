@@ -1,0 +1,85 @@
+:PROPERTIES:
+:ID:       d75fac21-af4c-4c0b-b063-8cc963cfc14a
+:END:
+#+title: Steady-state tracking of observer-based systems
+#+date: [2026-04-12 Sun 15:26]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Steady-state tracking of observer-based systems
+\[H_{CL}(s) = C(sI - A + Bk)^{-1}B)\]
+\[G = -(C(A-Bk)^{-1}B)^{-1}\]
+
+** Servomechanism Design
+Assumptions:
+1. The open-loop plant model is controllable and observable
+2. The open loop plant model has no pole at $s=0$
+3. The open loop plant model has no zero at $s=0$
+
+Our obser-based compensator takes the form:
+\begin{cases}
+\dot{\eta}(t) &= r(t) - y(t) \\
+\hat{\dot{x}}(t) &= (A - LC)\hat{x}(t) + Bu(t) + Ly(t) \\
+u(t) &= -k\hat{x}(t) + K_e\eta(t)
+\end{cases}
+
+\[\begin{cases}
+\begin{bmatrix}
+\dot{\eta}(t) \\
+\hat{\dot{x}}(t) \\
+\end{bmatrix} &= \begin{bmatrix}
+0 & 0 \\
+BK_e & A - BK - LC
+\end{bmatrix} \begin{bmatrix}
+\eta(t) \\
+\hat{x}(t) \\
+\end{bmatrix} + \begin{bmatrix}
+1 \\ 0
+\end{bmatrix}r(t) + \begin{bmatrix}
+-1 \\ L
+\end{bmatrix}y(t) \\
+u(t) &= \begin{bmatrix}
+K_e & -K
+\end{bmatrix} \begin{bmatrix}
+\eta(t) \\ \hat{x}(t)
+\end{bmatrix}\end{cases}\]
+
+** Plant + Observer + controller + servomechanism closed-loop:
+\[\begin{bmatrix}
+\dot{x}(t) \\
+\dot{\eta}(t) \\
+\hat{\dot{x}}(t) \\
+\end{bmatrix} &= \begin{bmatrix}
+A & BK_e & -BK \\
+-C & 0 & 0\\
+LC &BK_e & A-BK-LC
+\end{bmatrix} \begin{bmatrix}
+x(t) \\
+\eta(t) \\
+\hat{x}(t) \\
+\end{bmatrix} + \begin{bmatrix}
+0 \\ 1 \\ 0
+\end{bmatrix}r(t)\]
+
+\[y(t) = \begin{bmatrix}
+C & 0 & 0
+\end{bmatrix} \begin{bmatrix}
+x(t) \\ \eta(t) \\ \hat{x}(t)
+\end{bmatrix}\]
+
+Using $e_x(t) = x(t) - \hat{x}(t) and $\dot{e_x}(t) = (A - LC)e_x(t)$:
+$n+1$ [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] are determined by : $\begin{bmatrix} A-BK & BK_e \\ -C & 0 \end{bmatrix}$
+$n$ [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] are determined by : $\begin{bmatrix} A-LC \end{bmatrix}$
+The new state $\eta(t)$ _does not_ destabilise the system
+
+Let the step be $r(t) = R$, $t\geq 0$
+Use the control law in steady-state: $u_{ss} = -K(x_{ss} - e_{x_{ss}}) + K_e\eta_{ss}$
+ - $A - LC$ must be non-singular
+$e_{x_{ss} = 0}$
+Which means:
+\[y_{ss} = R\]
+ - Perfect tracking
+
+
+** Example
+https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6515001/View

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       bdebbfc8-86fe-4ff1-bdbd-7f9ddcad98e3
+:END:
+#+title: Servomechanism with Observer
+#+date: [2026-04-12 Sun 15:26]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Servomechanism with Observer

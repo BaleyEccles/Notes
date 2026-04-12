@@ -46,4 +46,17 @@
       - $x[n]$ is [[id:240aca67-b15c-4bea-ba1e-09f80a59ccd5][Causel]]
 ** Things
  - If we cannot do partial fractions, we can divide by $z$ and then take partial fractions and then multiply by $z$.
- - 
+** Stability
+Stable if poles in unit circle 
+*** Bi-linear Transform
+\[z = e^{T_ss} \leftrightarrow s = \frac{1}{T_s}\ln(z)\]
+ - Exact
+\[z = \frac{as + b}{cs + d} \leftrightarrow s = \frac{-dz+b}{cz-a}}\]
+ - Approximate
+
+Transform that preserves stability:
+\[s = \frac{z+1}{z-1} \Leftrightarrow z = \frac{s+1}{s-1}\]
+ - Only for stability assessment
+
+
+

@@ -1,0 +1,54 @@
+:PROPERTIES:
+:ID:       7a588acb-2b8c-4e71-849c-255e1af09ec8
+:END:
+#+title: Digital Control
+#+date: [2026-04-12 Sun 15:57]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Digital Control
+** Digital to Analogue Conversion (DAC)
+Multiply bits by $2^n$ and sum them
+
+*** Zero-Order Hold
+For $n$ discrete data points, sample the $n^{th}$ data point and hold that value until the $n + 1$ data point
+\[G_h(s) = \frac{1}{s} - \frac{e^{-sT_s}}{s}\]
+
+** Analogue to Digital Conversion (ADC)
+1. Sample the signal for each $T_s$ seconds
+   - [[id:cbb625ec-3e7a-4e0c-8193-578ee9897e81][Nyquist–Shannon Sampling Theorem]] and all that stuff
+2. Divide y-axis into binary numbers
+3. Round value to closest binary number
+
+** Modelling Using the [[id:498ec752-aafa-4a86-abaa-dc5165992cf0][Z-Transform]]
+
+*** Pulse Transfer Function
+ - Basically the same as using the [[id:498ec752-aafa-4a86-abaa-dc5165992cf0][Z-Transform]]
+ - Using phantom sampling
+   - Sampling the output at the same time as the input
+\[r^{*}(t) = \sum_{n=0}^{\infty}r(nT_s) \detla (t - nT_s)\]
+$G(s)$ has impulse response $g(t)$, so we get $y(t)$as a sum of impulse response generate by sampling the input at exactly the sampling interval
+\[Y(z) = \sum_{m = 0}^{\infty}g(mT_s)z^{-m} \sum_{n=0}^{\infty}r(nT_s)z^{-n}\]
+\[Y(z) = G(z)R(z)\]
+
+
+** Block Diagram Rules
+1. Series s-domain blocks (no samplers in-between)
+\[Z\{G_2(s)G_1(s)\} \neq Z\{G_2(s)\}Z\{G_1(s)\}\]
+Do s-domain multiplication first:
+\[Z\{G_2(s)G_1(s)\} = Z\{G_2G_1(s)\} = G_2G_1(z)\]
+
+2. s-domain block, sampler, s-domain block
+\[Y(z) = G_2(z)G_1(z) R(z)\]
+
+3. s-domain input ($R(s)$), sampler, s-domain, phantom sampler
+\[Y(z) = G_1R(z) G_2(z)\]
+
+** Negative Feedback
+\[Y(z) = \frac{G(z)}{1 + HG(z)}R(z)\]
+
+
+** Steady State Error
+ - With a zero-order hold
+Use [[id:4e024817-5a11-4519-a4af-ada17c08e3de][Final Value Theorem]]
+

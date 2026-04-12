@@ -23,6 +23,8 @@
 [[id:0f048a31-fe88-4f76-9461-fc5e5c72120e][Describing Functions]]
 
 [[id:91abfc71-ac31-4490-8d23-2d216b8fe303][State Space Control]]
+
+[[id:7a588acb-2b8c-4e71-849c-255e1af09ec8][Digital Control]]
 * Assessment
 
 ** Automation Report

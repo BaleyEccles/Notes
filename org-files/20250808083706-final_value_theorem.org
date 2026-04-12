@@ -6,5 +6,9 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* Final Value Theorem
+* [[id:80120a64-eeb7-471c-94e2-a3c537a21699][s-Domain]]
  - \[c(t \rightarrow \infty) = \lim_{s\rightarrow 0} sC(s)\]
+
+* [[id:498ec752-aafa-4a86-abaa-dc5165992cf0][z-Domain]]
+\[e^{*}(\infty) = \lim_{z\rightarrow 1}(1 - z^{-1}) E(z)\]
+\[e^{*}(\infty) = \lim_{z\rightarrow 1}(1 - z^{-1}) \frac{R(z)}{1 + G(z)}\]
