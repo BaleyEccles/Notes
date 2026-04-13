@@ -25,6 +25,8 @@
 [[id:91abfc71-ac31-4490-8d23-2d216b8fe303][State Space Control]]
 
 [[id:7a588acb-2b8c-4e71-849c-255e1af09ec8][Digital Control]]
+
+[[id:c01b9931-64f5-41e2-8acd-c8a407771b18][Optimal Control Theory]]
 * Assessment
 
 ** Automation Report

@@ -46,4 +46,10 @@
  - Settling Time $T_s$
    - \[T_s \approx \frac{4}{\zeta \omega_n}\]
 
-
+** S-Plane Characteristics
+Vertical lines:
+ - Constant settling time
+Horizontal lines:
+ - Constant peak time
+Radial lines
+ - Constant percentage overshoot

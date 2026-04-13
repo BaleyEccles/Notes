@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       c01b9931-64f5-41e2-8acd-c8a407771b18
+:END:
+#+title: Optimal Control Theory
+#+date: [2026-04-13 Mon 10:37]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Optimal Control Theory
+Consider the general [[id:91abfc71-ac31-4490-8d23-2d216b8fe303][state space]] equation:
+\[\dot{x}(t) = g(x(t), u(t), t),\ x(t_0) = x_0\]
+We introduce a performance index/cost function/objective function. This is to be minimised:
+\[J = \int_{t_0}^{t_f}L(x(t), u(t), t)\ dt + \phi[x(t_f), t_f]\]
+ - $L(x(t), u(t), t)$ is the loss function
+   - It assigns penalty to $x$ and $u$
+ - $\phi[x(t_f), t_f]$ is the terminal cost
+   - Can penalise the state $x$ based on the time it achieves the final result
+The goal is to get $\min\{J\}$ from some $x^{*}(t)$ and $u^{ *}(t)$
+
+** Quadratic Performance Indices
+\begin{align*}
+J &= \int_{t_0}^{t_f}\left[\left(q_{11}x_1^2 + q_{22}x_2^2 + q_{33}x_3^2 + \hdots\right) + r_1u^2\right]\ dt \\
+J &= \int^{t_f}_{t_0}\left(\left[x_1\ x_2\ x_3\ \hdots\right]\begin{bmatrix}
+q_{11} & 0 & 0 & \hdots \\
+0 & q_{22} & 0 & \hdots \\
+0 & 0 & q_{33} & \hdots \\
+\vdots & \vdots & \vdots & \vdots
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2\\
+x_3\\
+\vdots
+ \end{bmatrix} + [u][r_1][u]\right)\ dt \\
+J &= \int_{t_0}^{t_f}(x^TQx + u^TRu) \ dt
+\end{align*}
+ - $Q$ is the state weighting matrix
+ - $R$ is the input weighting matrix

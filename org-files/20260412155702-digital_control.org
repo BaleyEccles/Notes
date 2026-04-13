@@ -52,3 +52,96 @@ Do s-domain multiplication first:
  - With a zero-order hold
 Use [[id:4e024817-5a11-4519-a4af-ada17c08e3de][Final Value Theorem]]
 
+** Transient Response
+\[z = e^{sT_s}\]
+*** Constant Settling Time
+\[s = \sigma_1 + j\omega\]
+ - \[\sigma_1 \approx \frac{-4}{t_s}\]
+This maps to:
+\[z = e^{\sigma_1 T_s}e^{j\omega T_s} = r_1e^{j\omega T_s}\]
+Which are circles in z-plane
+
+If $\sigma_1$ is negative
+ - If the [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace]] system is stable
+\[|e^{-\sigma_1T_s}| < 1\]
+ - The z-system is also stable
+   
+Notable Equation:
+\[\frac{t_s}{T_s} = \frac{-4}{\ln(r_1)}\]
+
+*** Constant Peak Time
+\[s = \sigma + \omeg_1j\]
+\[\omega_1 = \frac{\pi}{t_p}\]
+
+\[z = e^{\sigma T_s}e^{j\theta_1}\]
+Lines radially away from origin
+
+Notable Equation:
+\[\frac{t_p}{T_s} = \frac{\pi}{\theta_1}\]
+
+*** Constant Damping/Overshoot
+Constant $\zeta$:
+\[\frac{\sigma}{\omega} = -\tan\left(\sin^{-1}\left(\zeta\right)\right)\]
+\[\frac{\sigma}{\omega} = \frac{-\zeta}{\sqrt{1-\zeta^2}}\]
+
+\[s = \frac{-\omega\zeta}{\sqrt{1-\zeta^2}} + j\omega\]
+This maps to:
+\[z = e^{\frac{-\omega\zeta T_s}{\sqrt{1-\zeta^2}}} e^{j\omega T_s}\]
+\[z = e^{\frac{-\omega\zeta T_s}{\sqrt{1-\zeta^2}}} \angle T_s\]
+
+Curves from real-axis ($\Re\{z\}<0$) to $1 + 0j$
+
+** Gain Design On The z-Plane
+Use [[id:58f545f0-abf6-483d-8b44-046bad7f38a6][Feedback Systems]], but with $s = z$
+
+*** Example
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Digital_Gain_Design.xopp]]
+
+** Cascade Compensation For Sampled-Data Systems
+[[id:a35f01b0-8196-446b-98bf-f265aaef8ba6][Bi-Linear/Tustin Transform]] approach: allows s-domain design, then transformation to a z-domain characteristic
+
+It is reasonable to use when:
+\[\frac{0.15}{\omega_{\Phi_M}} < T_s < \frac{0.5}{\omega_{\Phi_M}}\]
+ - $\omega_{\Phi_M}$ is when the $|G_cG_p|dB$ - $\omega$ plot crosses zero
+   - [[id:0d927ec6-5c0d-497c-b054-43d5d88f8300][Gain/Phase Margin]]
+
+*** Example
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/Digital_Gain_Design_Controller.xopp]]
+
+** Implementation of Digital Controllers
+With:
+\[G_c(z)  = \frac{X(z)}{E(z)} = \frac{a_3z^3 + a_2z^2 + a_1z + a_0}{b_2z^2 + b_1z + b_0}\]
+ - This generalises
+We cant have the numerator being of larger order than the denominator
+ - \[a_3 = 0\]
+\begin{align*}
+(b_2z^2 + b_1z + b_0)X(z) &= (a_3z^3 + a_2z^2 + a_1z + a_0)E(z) \\
+x^{*}(t) = \frac{a_3}{b_2}e^{*}(t + T_s) + \frac{a_2}{b_2}e^{*}(t) &+ \frac{a_1}{b_2}e^{*}(t - T_s) + \frac{a_0}{b_2}e^{*}(t - 2T_s) - \frac{b_1}{b_2}x^{*}(t-T_s) - \frac{b_0}{b_2}x^{*}(t-2T_s)
+\end{align*}
+$e^{*}(t + T_s)$ is unimplementable, it depends on the future. Removing this then it can easily be implemented.
+
+** Continuous to Discrete [[id:91abfc71-ac31-4490-8d23-2d216b8fe303][State Space]]
+$\dot{\underline{x}} = A\underline{x} + B \underline{u}$ can be solve using:
+\[x(t) = e^{At}x(0) + \int_0^te^{A(t-\tau)}Bu\ d\tau\]
+
+Using the Transition Matrix:
+\[x(t) = \Phi(t)x(0) + \int_0^t\Phi(t-\tau)Bu\ d\tau\]
+
+In discrete time we introduce sampling every $T_s$ seconds:
+\begin{align*}
+n &= \frac{n}{T_s}, n \in \mathbb{Z} \\
+x[n+1] &= e^{AT_s}x[n] + \left\{\int_0^{T_s}e^{A\tau}b\ d\tau\right\}u[n]\\
+x[n+1] &= A(T_s)x[n] + B(T_s)u[n]
+\end{align*}
+ - This is now in valid state space form
+Note: $A \neq A(T_s)$ and $B \neq B(T_s)$
+Instead: $A(T_s) = \Phi(T_s) = e^{AT_s}$, which is seen in the Transition Matrix
+Also: $B(T_s) = \int_0^{T_s}e^{A\tau}B\ d\tau = \left\{IT_s + \frac{AT_s^2}{2!} + \frac{A^2T_s^3}{3!} + \hdots + \frac{A^kT_s^{(k+1)}}{(k+1)!} + \hdots\right\}B$ 
+
+
+*** Transition Matrix
+Using [[id:356b1296-2188-4d04-9ccc-a4381bcc02b6][Taylor Series]]:
+\[\Phi(t) = e^{At} = I + At + \frac{1}{2!}A^2t^2 + \hdots + \frac{1}{k!} A^kt^k + \hdots\]
+ - $\Phi(t)$ is the state transition matrix
+\[\Phi(t) = (sI - A)^{-1}\]
+Usually truncation privies sufficient accuracy for $A(T_s)$ to about $k=5 - 10$

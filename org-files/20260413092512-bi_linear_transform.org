@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       a35f01b0-8196-446b-98bf-f265aaef8ba6
+:END:
+#+title: Bi-linear Transform
+#+date: [2026-04-13 Mon 09:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bi-linear Transform
+\[z = e^{T_ss} \leftrightarrow s = \frac{1}{T_s}\ln(z)\]
+ - Exact
+\[z = \frac{as + b}{cs + d} \leftrightarrow s = \frac{-dz+b}{cz-a}}\]
+ - Approximate
+
+** Transform that preserves stability
+\[s = \frac{z+1}{z-1} \Leftrightarrow z = \frac{s+1}{s-1}\]
+ - Only for stability assessment
+
+** Tustin Transform
+Preserves dynamic behaviour with reasonable accuracy
+\[s = \frac{2(z-1)}{T_s(z+1)} \Leftrightarrow z = \frac{1 + \frac{T_s}{2}s}{1 - \frac{T_s}{2}s}\]
+
+
