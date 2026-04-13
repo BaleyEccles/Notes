@@ -67,9 +67,9 @@ C & 0 & 0
 x(t) \\ \eta(t) \\ \hat{x}(t)
 \end{bmatrix}\]
 
-Using $e_x(t) = x(t) - \hat{x}(t) and $\dot{e_x}(t) = (A - LC)e_x(t)$:
-$n+1$ [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] are determined by : $\begin{bmatrix} A-BK & BK_e \\ -C & 0 \end{bmatrix}$
-$n$ [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] are determined by : $\begin{bmatrix} A-LC \end{bmatrix}$
+Using $e_x(t) = x(t) - \hat{x}(t)$ and $\dot{e_x}(t) = (A - LC)e_x(t)$:
+$n+1$ [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] are determined by: $\begin{bmatrix} A-BK & BK_e \\ -C & 0 \end{bmatrix}$
+$n$ [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] are determined by: $\begin{bmatrix} A-LC \end{bmatrix}$
 The new state $\eta(t)$ _does not_ destabilise the system
 
 Let the step be $r(t) = R$, $t\geq 0$
