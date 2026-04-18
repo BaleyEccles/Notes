@@ -36,3 +36,5 @@ J &= \int_{t_0}^{t_f}(x^TQx + u^TRu) \ dt
 \end{align*}
  - $Q$ is the state weighting matrix
  - $R$ is the input weighting matrix
+
+** 

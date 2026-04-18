@@ -1,0 +1,131 @@
+:PROPERTIES:
+:ID:       e7bc3e0a-a624-40bb-bf05-2df4f499b488
+:END:
+#+title: Linear Quadratic Regulator (LQR)
+#+date: [2026-04-18 Sat 16:18]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Linear Quadratic Regulator (LQR)
+** Continuous
+Define the functional
+ - \[f(x,t) = \min_u\int_{t_0}^{t_f}h(x,u)\ dt = J\]
+   - $t_0$ initial time
+   - $t_f$ final time
+Regulator:
+ - $f(x, t_0) = f(x(0))$ some initial state not at equilibrium
+   - $f(x, t_f) = 0$ final state is at equilibrium
+\begin{cases}
+\dot{x} &= g(x,u,t) \\
+J &= \int_{t_0}^{t_f}h(x,u)\ dt
+\end{cases}
+Then by the Hamilton-Jacobi equation, J is minimised if:
+\[\frac{\partial f}{\partial t} = \min_u\left[h(x,u) + \frac{\partial f}{\partial x}^Tg(x,u)\right]\]
+
+Using [[id:129878a7-2136-473b-ac33-74da80b12e67][Linear and Time Invarient Systems (LTI)]]:
+\[J = \int_{t_0}^{t_f}(x^TQx + u^TRu)\ dt\]
+ - _Q_ uadratic
+\[\frac{\partial f}{\partial t} = -\min_u\left[x^TQx + u^TRu + \frac{\partial f}{\partial x}^T(Ax + Bu)\right]\]
+
+We can see this if:
+Introduce: $f(x,t) = x^TPx$
+ - $P$ is a square symmetric and _positive semi-definite_ matrix
+    - $x^TPx\geq 0\ \forall x\neq 0$
+\[\frac{\partial f}{\partial t} = \frac{\partial}{\partial t}(x^TPx) = x^T\frac{\partial P}{\partial t}x\]
+\[\frac{\partial f}{\partial t}^T = (2Px)^T = 2x^TP\]
+\[x^T\frac{\partial P}{\partial t}x = -\min_u\left[x^TQx + u^TRu + 2x^TP(Ax + Bu)\right]\]
+To minimise $u$, we take:
+\begin{align*}
+\frac{\partial}{\partial u}\left(x^T\frac{\partial P}{\partial t}x\right) &= 0 \\
+\Rightarrow 2u^TR + 2x^TPB &= 0 \\
+\Rightarrow u_{opt} &= -R^{-1}B^TPx \\
+\Rightarrow u_{opt} &= -Kx
+\end{align*}
+ - The optimal control law is the linear control law
+
+Substitute $u_{opt}$ back into :TODO::
+\[x^T\frac{\partial P}{\partial t}x = -x^T(Q - PBR^{-1}B^TP + 2PA)\]
+For symmetric $P$, we can show:
+\begin{align*}
+2x^TPAx &= x^T(A^TP + PA)x \\
+\Rightarrow \frac{\partial P}{\partial t} &= PA + A^TP + Q - PBR^{-1}B^TP
+\end{align*}
+ - Non-linear matrix differential equation
+   - This is a Riccati equation
+*** Riccati Equations
+Find $P(t)$ by integrating backwards in time:
+\[x^T(t_f)P(t_f)x(t_f) = 0\]
+
+Kalman proved:
+ - $P(t) \rightarrow P$ if $t_f -  t_0$ is large
+   - This is refereed to as the infinite horizon
+     - $\frac{\partial P}{\partial t} = 0$
+Produces the Riccati Equation (ARE):
+\[PA + A^TP + Q - PBR^{-1}BP = 0\]
+ - Solve for $P$
+** Discrete
+\[x[n+1] = A(T_s)x[n] + B(T_s)u[n]\]
+\[y[n] = Cx[n] + Du[n]\]
+The discrete performance index:
+\[J = \sum_{k=0}^{N-1} \left(x^T[k]Qx[k] + u^T[k]Ru[k]\right)T_s\]
+
+At the terminal time:
+\[K[N - (n+1)] = [T_sR + B(T_s)^TP[N-n]B(T_s)]^{-1}B(T_s)P[N-n]A\]
+\[P[N - (n+1)] = [T_sQ + K^T[N-(n+1)]T_sRK[N-(n+1)]] + [A(T_s)-B(T_s)K[N-(n+1)]]^TP[N-n][A-BK[N-(n+1)]]\]
+ - $n$ is increased from $0\rightarrow N-1$
+   
+In forward time, we get optimal control from:
+\[U_{opt}[n] = -K[n]x[n]\]
+Discrete ARE (DARE):
+\[P = A^T(T_s)PA(T_s)-(A(T_s)^TPB(T_s))(R + B^T(T_s)PB(T_s))^{-1}(B^T(T_s)PA(T_s)) + Q\]
+ - Infinite horizon
+ - $0\rightarrow\infty$
+   
+Boundary Condition:
+\[x^T[N]P[N]x[N]=0\]
+ - Regulator
+*** Example
+Video 3: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6531891/View
+A) Riccati Matrix $P$
+B) Optimal feedback matrix K
+C) The closed-loop [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][eigenvalues]]
+ - Given [[id:129878a7-2136-473b-ac33-74da80b12e67][Linear and Time Invarient System]] ($A$, $B$, $C$) and $J$ ($Q$, $R$)
+**** Solution
+***** A)
+Solve Riccati Equation for $P$:
+ - \[PA + A^TP + Q - PBR^{-1}BP = 0\]
+ - Sub in matrices
+ - Assume $P$ to be $2\times 2$ with unknown values
+   - $P$ is symmetric (top left and bottom right values are the same, same with top right and bottom left)
+ - Solve
+ - We get $P$
+***** B)
+Use:
+\[K = R^{-1}B^TP\]
+ - Just solve it
+***** C)
+Recall for a controllable system the [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][eigenvalues]] are:
+\[\det(A-BK - \lambda I) = 0\]
+ - Sub in matrices and solve
+ - \[\lambda = \hdots\]
+** Step Tracking - LQR
+\begin{cases}
+0 &= PA_a + A_a^TP + Q - PB_aR^{-1}B_a^TP \\
+u_{opt} &= -R^{-1}B_a^{-1}Px_a = -K_ax_a
+\end{cases}
+\[K_a = [K\ K_e]\]
+
+**  General Input LQ Tracking - Continuous Systems
+\[r \neq Au(t)\]
+Augment the performance matrix:
+\[J = \int_{t_0}^{t_f}[(r-x)^TQ(r-x) + u^TRu]\ dt\]
+\[\dot{P} = -PA - A^TP - Q + PBR^{-1}B^TP\]
+ - for infinite horizon: $\dot{P} = 0$
+We also get
+\[\dot{s} = (A - BR^{-1} B^TP)^Ts - Qr\]
+We calculate this in reverse-time! $s(t_f) = 0$
+ - $s$ is called the tracking vector
+\[u_{opt} = -R^{-1}B^TPx - R^{-1}B^Ts\]
+If we let $v = -R^{-1}B^Ts$ and $K = R^{-1}B^TP$, then:
+\[u_{opt} = -Kx + v\]
+
