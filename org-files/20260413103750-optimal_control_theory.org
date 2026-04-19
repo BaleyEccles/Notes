@@ -37,4 +37,6 @@ J &= \int_{t_0}^{t_f}(x^TQx + u^TRu) \ dt
  - $Q$ is the state weighting matrix
  - $R$ is the input weighting matrix
 
-** 
+** [[id:e7bc3e0a-a624-40bb-bf05-2df4f499b488][Linear Quadratic Regulator (LQR)]]
+
+** [[id:c10d4231-a05e-493b-98d3-b8198409edd1][Optimal State Observer]]

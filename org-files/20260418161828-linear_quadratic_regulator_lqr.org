@@ -115,7 +115,7 @@ u_{opt} &= -R^{-1}B_a^{-1}Px_a = -K_ax_a
 \end{cases}
 \[K_a = [K\ K_e]\]
 
-**  General Input LQ Tracking - Continuous Systems
+** General Input LQ Tracking - Continuous Systems
 \[r \neq Au(t)\]
 Augment the performance matrix:
 \[J = \int_{t_0}^{t_f}[(r-x)^TQ(r-x) + u^TRu]\ dt\]
@@ -128,4 +128,141 @@ We calculate this in reverse-time! $s(t_f) = 0$
 \[u_{opt} = -R^{-1}B^TPx - R^{-1}B^Ts\]
 If we let $v = -R^{-1}B^Ts$ and $K = R^{-1}B^TP$, then:
 \[u_{opt} = -Kx + v\]
+
+** General Input LQ Tracking - Discrete Systems
+\[J = \sum_{k=0}^{N-1}\left([r[k] - x[k]]^TQ[r[z]-x[k]] + u^T[k]Ru[k]\right)T_s\]
+
+Discrete minimisation of $J$ gives discrete recursive Riccati Equations:
+\[K[N-(n+1)] = [T_sR + B(T_s)^TP[N-n]B(T_s)]^{-1}B(T_s)^TP[N-n]A(T_s)\]
+$P$ is defined as:
+\[P[N-(n+1)] = [T_sQ + K^T[N-(n+1)]T_sRK[N-(n+1)]] + [A(T_s)-B(T_s)K[N-(n+1)]]^TP[N-n][A(T_s)-B(T_s)K[N-(N+1)]]\]
+ - These are ran in reverse time together with the discrete reverse-time state tracking equation:
+\[s[N-(n+1)] = F(T_s)s[N-n] + G(T_s)r[N-n]\]
+ - $s[N] = 0$
+Where $F(T_s)$ and $G(T_s)$ are the discrete transition and control matrices, in continuous time these are:
+\[F = (A-BR^{-1}B^TP)^T\]
+\[G = -Q\]
+discrete versions are (using $F(T_s) = e^{FT_s}$):
+\[F = I + FT_s + \frac{F^2T_s^2}{2!} + \frac{F^3T_s^3}{3!} + \hdots\]
+\[G = \sum_{K=0}^{\infty}\left(\frac{F^k T_s^{k+1}}{(k+1)!}\right)G\]
+The command vector takes the form:
+\[v[N-n] = -R^{-1}B^Ts[N-n]\]
+
+When ran in forward time, the optimal control at $n=kT_s$ is:
+\[u_{opt}[n] = v[n] - K[n]x[n]\]
+and we update the state through:
+\[x[n+1] = A(T_s)x[n] + B(T_s)u_{opt}[n]\]
+
+*** Example
+The optimal tracking system contain the plant:
+\[\begin{bmatrix}
+\dot{x}_1 \\
+\dot{x}_2
+\end{bmatrix} = \begin{bmatrix}
+0 & 1 \\
+-1 & -1
+\end{bmatrix}\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix} + \begin{bmatrix}
+0 \\
+1
+\end{bmatrix}u\]
+
+\[y = \begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix}\]
+
+The discrete performance index is:
+\[J = \sum_{k=0}^{200} \left([r_1[n]-x_1[n]\ r_2[n] - x_2[n]] + \begin{bmatrix}10 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix}r_{1}[n] - x_{1}[n] \\ r_{2}[n] - x_{2}[n] \end{bmatrix} + u^2[n]\right)T_s\]
+ - Note $Q = \begin{bmatrix}10 & 0 \\ 0 & 1 \end{bmatrix}$
+We require the system to track the decided state vector:
+\[\begin{bmatrix}
+r_1[n] \\
+r_2[n]
+\end{bmatrix} =\begin{bmatrix}
+1.0\sin(0.6284n) \\
+0.6\cos(0.6284n)
+\end{bmatrix}\]
+For $n\in [0,200]$ with $T_s = 0.1s$
+a) In reverse-time, starting with $P(N) = 0$ at $NT_s =20s$, compute the state feedback gains matrix $K[n]$ and Riccati matrix $P[n]$. Also in reverse-time, use the desrired state vector $r[n]$ to derive the state tracking equation with boundary condition $s[N]=0$; hence calculate $v[n]$
+b) In forward-time, use $r[n]$ and $x[n]$ to find the $u_{opt}[n]$. Hence, calculate the state trajectories
+
+**** Solution a)
+Start with $P[N] = 0$
+Find $K[N-(n+1)] = [T_sR + B(T_s)^TP[N-n]B(T_s)]^{-1}B(T_s)^TP[N-n]A(T_s)$ with $n=0$:
+\begin{align*}
+K[N-1] &= [T_sR + B(T_s)^TP[N]B(T_s)]^{-1}B(T_s)^TP[N]A(T_s)\\
+R &= 1 \\
+K[N-1] &= [T_s + B(T_s)^TP[N]B(T_s)]^{-1}B(T_s)^TP[N]A(T_s)
+\end{align*}
+$A(T_s)$ and $B(T_s)$ are unknown: get these from $A$ and $B$
+\begin{align*}
+A(T_s) &= I + AT_s + \frac{A^2T_s^2}{2!} + \frac{A^3T_s^3}{3!} + \hdots \frac{A^kT_s^k}{k!}\\
+k &= 10 \\
+A(T_s) &=\begin{bmatrix}0.9952 & 0.0950 \\ -0.0950 & 0.9002\end{bmatrix} \\
+\\
+B(T_s) &= I + BT_s + \frac{B^2T_s^2}{2!} + \frac{B^3T_s^3}{3!} + \hdots \frac{B^kT_s^k}{k!}\\
+k &= 1 \\
+B(T_s) &= \begin{bmatrix}0.005 \\ 0.0950\end{bmatrix} \\
+k &= 10 \\
+B(T_s) &=\begin{bmatrix}0.0048 \\ 0.0950\end{bmatrix}
+\end{align*}
+
+Work through iterations of :
+\[K[N-1] &= [T_sR + B(T_s)^TP[N]B(T_s)]^{-1}B(T_s)^TP[N]A(T_s)\]
+\[P[N-(n+1)] = [T_sQ + K^T[N-(n+1)]T_sRK[N-(n+1)]] + [A(T_s)-B(T_s)K[N-(n+1)]]^TP[N-n][A(T_s)-B(T_s)K[N-(N+1)]]\]
+Eventually these settle and stop changing, at the values:
+\[K = [2.0658\ 1.4880]\]
+\[P = \begin{bmatrix}8.0518 & 2.3145 \\ 2.3145 & 1.6310\end{bmatrix}\]
+
+Next we need $F(T_s)$ and $G(T_s)$.
+\begin{align*}
+F &= (A-BR^{-1}B^TP)^T \\
+&= \begin{bmatrix} 0 & -3.3145 \\ 1 & -2.6510\end{bmatrix} \\
+F(T_s) &= I + FT_s + \frac{F^2T_s^2}{2!} + \frac{F^3T_s^3}{3!} + \hdots \\
+&= \begin{bmatrix} 0.9848 & -0.2898 \\ 0.0374 & 0.7548\end{bmatrix} \\
+G &= -Q \\
+&= \begin{bmatrix} -10 & 0 \\ 0 & -1\end{bmatrix} \\
+G(T_s) &= (I + FT_s + \frac{F^2T_s^2}{2!} + \frac{F^3T_s^3}{3!} + \hdots)G \\
+&= \begin{bmatrix} -0.9948 & 0.0152 \\ -0.0458 & -0.0874\end{bmatrix}
+\end{align*}
+Tracking vector:
+\begin{align*}
+s[N-(n+1)] &= F(T_s)s[N-n] + G(T_s)r[N-n] \\
+s[N-(n+1)] &= \begin{bmatrix} 0.9848 & -0.2898 \\ 0.0374 & 0.7548\end{bmatrix}\begin{bmatrix} s_1[N-n] \\ s_2[N-n]\end{bmatrix} + \begin{bmatrix} -0.9948 & 0.0152 \\ -0.0458 & -0.0874\end{bmatrix}\begin{bmatrix} r_1[N-n] \\ r_2[N-n]\end{bmatrix} \\
+\end{align*}
+Start with $s[N] = 0$, we then get:
+\begin{align*}
+v[N-n] &= -R^{-1}B^Ts[N-n] \\
+v[N-n] &= -[0\ 1]\begin{bmatrix}s_1[N-n] \\ s_2[N-n]\end{bmatrix}
+\end{align*}
+Propagate backwards in time to get $s[n]$ and $v[n]$
+
+**** Solution b)
+\[\begin{bmatrix}
+x_1[n+1] \\
+x_2[n+1]
+\end{bmatrix}
+A(T_s)\begin{bmatrix}
+x_1[n] \\
+x_2[n]
+\end{bmatrix} + B(T_s)u_{opt}[n]\]
+where $u_{opt}[n] = v[n] - K[n]x[n]$
+ - We are using constant $K$
+\[\begin{bmatrix}
+x_1[n+1] \\
+x_2[n+1]
+\end{bmatrix}
+\begin{bmatrix}
+0 \\
+0
+\end{bmatrix}\]
+We recalculate in forward time
+
+   
 

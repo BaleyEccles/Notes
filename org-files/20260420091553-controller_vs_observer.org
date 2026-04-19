@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       feb9912c-ed58-4324-bb0b-7324af4b2f21
+:END:
+#+title: Controller vs Observer
+#+date: [2026-04-20 Mon 09:15]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* [[id:97dc3da9-c40a-4945-b4f9-bf7b7657b70c][Controller]] vs [[id:5d8efe2d-b6fc-4173-ba45-20e0935430d1][Observer]]
+Controller case: states vs control
+Observer case: model vs measurement
