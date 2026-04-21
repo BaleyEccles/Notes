@@ -33,8 +33,8 @@
  - 30%
  - Week 11
  - PLC programming
-
-   
+ - [[id:ee96f039-7a53-4728-b7ad-f64be8ef9bf8][ENG417 - Control Systems 2 - Automation Report: Part 1 - PLCs and SCADA]]
+ - [[id:9089281e-800d-45c1-bae9-5cf88cc1e0a5][ENG417 - Control Systems 2 - Automation Report: Part 2 – Robotics]]
    
 ** Design Report
  - 30%
@@ -46,5 +46,7 @@
 ** Final Exam
  - 40%
  - Exam period
-
-
+ - 6 Questions each worth 20
+   - Do 5 questions
+   - Capped at 100 points
+ - Questions similar to last years exam

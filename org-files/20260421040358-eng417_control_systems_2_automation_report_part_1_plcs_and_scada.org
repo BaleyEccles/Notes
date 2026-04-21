@@ -1,0 +1,82 @@
+:PROPERTIES:
+:ID:       ee96f039-7a53-4728-b7ad-f64be8ef9bf8
+:END:
+#+title: ENG417 - Control Systems 2 - Automation Report: Part 1 - PLCs and SCADA
+#+date: [2026-04-21 Tue 04:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+* Introduction
+
+* Tutorial
+#+BEGIN_SRC pascal
+IF (But_Red=1 OR %M2=1) THEN
+    Light_Red := 1;
+ELSE
+    Light_Red := 0;
+END_IF
+
+%MW1.0 := Light_Red;
+#+END_SRC
+
+* Lab
+#+BEGIN_SRC pascal
+IF (SW_Green=TRUE AND Output=FALSE AND Reset=False) THEN
+    Red_Timer := TRUE;
+ELSE
+    Red_Timer := FALSE;
+END_IF;
+
+TON_Red(IN:=Red_Timer,PT:=T#1s);
+Light_Red := TON_Red.Q;
+%MW1.0:=Light_Red;
+
+TON_Orange(IN:=Light_Red,PT:=T#1s);
+Light_Orange := TON_Orange.Q;
+%MW1.1:=Light_Orange;
+
+TON_Green(IN:=Light_Orange,PT:=T#1s);
+Light_Green := TON_Green.Q;
+%MW1.2 := Light_Green;
+
+TON_Output(IN:=Light_Green,PT:=T#1s);
+Output := TON_Output.Q;
+
+CTU_1(CU:=Light_Red,R:=Reset);
+CountValue := CTU_1.CV;
+#+END_SRC
+
+* "Dairy Gate" Problem
+#+BEGIN_SRC pascal
+TON_Gate(IN := Inside, PT := T#10M);
+
+(*
+If the cow is before and their is not a cow inside and the close button is not pushed then open the gate
+If the open button is pressed and the closed button is not pressed then open the gate
+If the cow has been inside for 10M and the closed button is not pressed then open the gate
+*)
+
+Gate := (((Before OR Gate) AND NOT Inisde) OR Open OR TON_Gate.Q) AND NOT Close;
+#+END_SRC
+
+* Personal Experience
+
+* Conclusion
+
+* Appendix A - Lab Results
+
+* Appendix B - "Dairy Gate" Problem
+
+* Appendix C - Personal Experience
