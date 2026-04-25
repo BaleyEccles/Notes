@@ -72,14 +72,14 @@ Develop estimates $\hat{x}(t)$ as a linear function of measurements $y(\tau)\ (0
 \[Q(t) = E[e_x(t)e_x^T(t)]\]
 
 The solution to the differential Riccati equation is:
-\[[hat{\dot{x}} = A\hat{x} + L(t)(y - c\hat{x}(t))\]
+\[\hat{\dot{x}} = A\hat{x} + L(t)(y - c\hat{x}(t))\]
  - \[L(t) = Q(t)C^T R_{vv}^{-1}\]
 and $Q(t) > 0$, which solves:
 \[\dot{Q}(t) = AQ(t) + Q(t)A^T + B_wR_{ww}B_w^T - Q(t)C^TB_{vv}^{-1}CQ(t)\]
 
 Convergence to steady state occurs when $\dot{Q}(t) = 0$
 \begin{cases}
-0 &= AQ_{ss} + Q_{ss}A^T + B_wR_{ww}B_w^T - Q_{ss}C^TB_{vv}^{-1}CQ_{ss} \\
+0 &= AQ_{ss} + Q_{ss}A^T + B_wR_{ww}B_w^T - Q_{ss}C^TR_{vv}^{-1}CQ_{ss} \\
 L_{ss} &= Q_{ss}C^TR_{vv}^{-1}
 \end{cases}
 
@@ -92,3 +92,81 @@ This will create a Linear Quadratic Estimator (LQE) / Kalman Filter
 Provided $Q_{ss}$ exists, the Kalman Filter is asymptotically stable and estimates:
 \[\hat{\dot{x}} = A\hat{x} + L_{ss}(y = C\hat{x}) = (A - L_{ss}C)\hat{x} + L_{ss}y\]
 
+** Example
+Video 1: https://mylo.utas.edu.au/d2l/le/content/778746/viewContent/6531894/View
+Given:
+$\dot{x} = Ax + Bu + B_ww$, $y = Cx + v$, $R_{ww} = 1$, $R_{vv} = r$
+
+Use:
+\[J = \textrm{trace}(Q(t))\]
+\[Q(t) = E[e_x(t)e_x^T(t)]\]
+
+Find $Q_{ss}$ and $L$ for this LQE problem
+1. $r = 0.1$
+2. $r = 1$
+3. $r = 10$
+
+*** Solution
+Solve Ricatti Equation:
+\[0 &= AQ_{ss} + Q_{ss}A^T + B_wR_{ww}B_w^T - Q_{ss}C^TR_{vv}^{-1}CQ_{ss}\]
+ - $Q_{ss}$ is $2\times 2$ with matrix with $q_{11}, q_{12}, q_{21}, q_{22}$
+ - Punch everything in, solve for the $Q_{ss}$ values
+ - $Q_{ss} > 0$
+   - So if the equations are quadratic use the positive value
+Use:
+\[L_{ss} = Q_{ss}C^TR_{vv}^{-1}\]
+ - These are the observer gains
+ - Just sub in each values of $r$
+
+** Discrete Systems
+\begin{align*}
+x[n+1] &= A(T_s)x[n] + B(T_s)u[n] + B_w(T_s)w[n] \\
+y[n] &= Cx[n] + v[n] \\
+R_{ww} &= E\{w[n]w^T[n]\} \\
+R_{vv} &= E\{v[n]v^T[n]\}
+Q[n] &= E\{e_x[n]e_x^T[n]\}
+\end{align*}
+
+A prior knowledge of the state is denoted $\hat{x}'[n]$. We can write an update equation:
+\[\hat{x}[n] = \hat{x}'[n] + L[n](y[n] - C\hat{x}'[n])\]
+ - $L$ is the observer gain/Kalman gain
+The innovation (measurement residual):
+\[i[n] = y[n] - C\hat{x}[n]\]
+
+If we substitute $y[n] = Cx[n] + v[n]$, we get
+\[\hat{x}[n] = \hat{x}'[n] + L[n](Cx[n] + v[n] - c\hat{x}'[n])\]
+Substitute this into the covariance matrix:
+\[Q[n] = (I-L[n]C)Q'[n](I-L[n]C)^TL[n]R_{vv}[n]L^T[n]\]
+ - This is the covariance matrix update equation
+   
+\[SSE = \textrm{trace}\{Q[n]\}\]
+ - Goal is to find $\min\{SSE\} = \min\{\textrm{trace}\{Q[n]\}\}$
+   
+\[L[n] = Q'[n]C^T(CQ'[n]C^T + R_{vv})^{-1}\]
+ - Called the Kalman gain equation
+
+The inverted matrix, $S[n] = CQ'[n]C^TR_{vv}$, sometimes called the measurement prediction covariance, is used to find an update to $Q[n]$:
+\begin{align*}
+Q[n] &= Q'[n] - Q'[n]C^TS^{-1}[n]CQ'[n] \\
+Q[n] &= (I - L[n]C)Q'[n]
+\end{align*}
+
+Everything for step $n$ is calculated, now project forward: $\hat{x}'[n+1] = A(T_s)\hat{x}[n]$ produces the estimate of state. Then, we need $Q'[n+1]$, we get this through:
+\[e'_x[n+1] = A(T_s)e_x[n] + B_ww[n]\]
+Then:
+\[Q'[n+1] &= A(T_s)Q[n]A^T(T_s) + B_w(T_s)R_{ww}B_w^T(T_s)\]
+
+
+*** Overview
+[[./Discrete_optimal_state_observer_procedure.png]]
+Kalman Gain:
+\[L[n] = Q'[n]C^T(CQ'[n]C^T + R_{vv})^{-1}\]
+Update Estimates:
+\[\hat{x}[n] = \hat{x}'[n] + L[n](Cx[n] + v[n] - c\hat{x}'[n])\]
+Update Covariance:
+\[Q[n] &= (I - L[n]C)Q'[n]\]
+Project to $n+1$:
+\begin{cases}
+\hat{x}'[n+1] &= A(T_s)\hat{x} \\
+Q'[n+1] &= A(T_s)Q[n]A^T(T_s) + B_w(T_s)R_{ww}B_w^T(T_s)
+\end{cases}
