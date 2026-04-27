@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       7a588acb-2b8c-4e71-849c-255e1af09ec8
 :END:
-#+title: Digital Control
+#+title: Discrete/Digital Control
 #+date: [2026-04-12 Sun 15:57]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview

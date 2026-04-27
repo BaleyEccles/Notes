@@ -1,0 +1,374 @@
+:PROPERTIES:
+:ID:       7009ec9a-1165-4820-bd47-d2ae12b27eab
+:END:
+#+title: Model Predictive Control (MPC)
+#+date: [2026-04-26 Sun 22:02]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Model Predictive Control (MPC)
+Uses [[id:c01b9931-64f5-41e2-8acd-c8a407771b18][Optimal Control Theory]] for its controller
+The controller runs optimisation for a 'horizon' for every time step
+Apply only the very fist control input calculated for the entire horizon
+
+** Advantages
+ - Conceptually straightforward
+ - Optimisation settings can be adjusted (dynamically) to improve performance
+ - Constraints can be introduced
+
+** Disadvantages
+ - Computation
+ - 'Decent' system model
+
+** Problem Formulation
+The objective of a MPC strategy is to compute a trajectory of future control input that optimises the future behaviour of a plant output, where the optimisation is conducted over a finite limited time window.
+
+** Model Choice
+[[id:7a588acb-2b8c-4e71-849c-255e1af09ec8][Discrete-time model]] needed
+Options:
+ - Discrete, finite impulse response
+ - Transfer function (z-domain)
+ - Discrete state-space
+   - We will look at this specifically
+
+** Mathematical Model
+Continuous-time system:
+\begin{align*}
+\dot{x}(t) &= Ax + Bu \\
+y &= Cx
+\end{align*}
+Convert to discrete-time system:
+\begin{align*}
+x[n+1] &= A(T_s)x[n] + B(T_s)u[n] \\
+y[n] &= Cx[n]
+\end{align*}
+
+_For MPC the discrete time notation is:_
+\begin{cases}
+x[k+1] &= Ax[k] + Bu[k] \\
+y[k] &= Cx[k]
+\end{cases}
+
+Note, we can find
+\[H(z) = \frac{Y(z)}{U(z)} = C(zI-A)^{-1}B\]
+and
+\[h[n] = CB\delta[n-1] + CAB\delta[n-2] + CA^2B\delta[n-3] + \hdots CA^{k-1}B\delta[n-k]\]
+
+_Integral state:_
+We have a new formulation to allow us to control the output of the system, as well as the states
+Let the following denote the system prior to the integrator state being included:
+\begin{align*}
+x_m[k+1] &= A_mx_m[k] + B_mu_m[k] \\
+y_m[k] &= C_mx_m[k]
+\end{align*}
+
+Take the difference:
+\begin{align*}
+\Delta x_m[k+1] &= x_m[k+1] - x_m[k] \\
+\Delta u_m[k]   &= u_m[k]   - u_m[k-1] \\
+&\textrm{This gives} \\
+\Delta x_m[k+1] &= A_m\Delta x_m[k] + B_m \Delta u_m[k]
+\end{align*}
+Define the augmented state vector:
+\[x[k] &= \begin{bmatrix}
+\Delta x_m[k] \\
+y[k]
+\end{bmatrix}\]
+
+Then:
+\begin{align*}
+y[k+1] - y[k] &= C_m[x_m[k+1] - x_m[k]] \\
+&= C_m\Delta x_m[k+1] \\
+&= C_m A_m\Delta x_m[k] + C_mB_m\Delta u_m[k] \\
+y[k+1] &= C_m A_m\Delta x_m[k] + C_mB_m\Delta u_m[k] + y[k]
+\end{align*}
+This is a state equation, putting it together with the state equation for $\Delta x_m$, we get:
+\begin{cases}
+\begin{bmatrix}
+\Delta x_m[k+1] \\
+y[k+1]
+\end{bmatrix} &= \begin{bmatrix}
+A_m & 0 \\
+C_mA_m & 1
+\end{bmatrix}\begin{bmatrix}
+\Delta x_m[k] \\
+y[k]
+\end{bmatrix} + \begin{bmatrix}
+B_m \\
+C_mB_m
+\end{bmatrix}\Delta u[k] \\
+y[k] &= [0\ 1]\begin{bmatrix}
+\Delta x_m[k] \\
+y[k]
+\end{bmatrix}
+\end{cases}
+
+This is denoted:
+\begin{cases}
+x[k+1] &= Ax[k] + B\Delta u[k] \\
+y[k] &= Cx[k]
+\end{cases}
+Where:
+\[x[k] = \begin{bmatrix}
+\Delta x_m[k] \\
+y[k]
+\end{bmatrix}\]
+
+*** SISO Case
+Assume:
+ - All states are measurable
+ - System is Single Input-Single Output
+
+Future changes in the control input are denoted:
+\begin{align*}
+\Delta u[k_i] &= u[k_i] - u[k_i - 1] \\
+\Delta u[k_i + 1] &= u[k_i + 1] - u[k_i] \\
+&\vdots \\
+\Delta u[k_i + N_c - 1] &= u[k_i N_c - 1] - u[k_i + N_c - 2]
+\end{align*}
+ - $k_i$ is a particular time step
+ - $N_c$ is the control horizon
+We get control step calculated for $N_c$ time steps, even though we apply only one.
+We calculate information about the state $x[k_i]$ up to the 'prediction horizon', $N_p$.
+These are:
+\[x[(k_i + 1)|k_i],\ x[(k_i + 2)|k_i],\ \hdots,\ x[(k_i + N_p)|k_i]\]
+Note: $N_c \leq N_p$ ($N_c$ usually about $20\%$ of $N_p$, though this is a control tuning choice)
+Prediction is achieved by iteratively applying the state space model:
+\begin{align*}
+x[(k_i + 1)|k_i] &= Ax[k_i] + B\Delta u[k_i] \\
+x[(k_i + 2)|k_i] &= Ax[(k_i + 1)|k_i] + B\Delta u[k_i + 1] \\
+&= A^2x[k_i] + AB\Delta u[k_i] + B\Delta u[k_i+1] \\
+&\vdots \\
+x[(k_i + N_p)|k_i] &= A^{N_p}x[k_i] + A^{N_p - 1}B\Delta u[k_i] + A^{N_p - 2}B \Delta u[k_i + 1] + \hdots + A^{N_p - N_c}B\Delta u[k_i + N_c - 1]
+\end{align*}
+
+The predicted outputs are:
+\begin{align*}
+y[(k_i + 1)|k_i] &= CAx[k_i] + CB\Delta u[k_i] \\
+y[(k_i + 2)|k_i] &= CA^2x[k_i] + CAB\Delta u[k_i] + CB\Delta u[k_i + 1] \\
+&\vdots \\
+y[(k_i + N_p)|k_i] &= CA^{N_p}x[k_i] + CA^{N_p-1}B\Delta u[k_i] + CA^{N_p - 2}B\Delta u[k_i + 1] + \hdots + CA^{N_p - N_c}B\Delta u[k_i + N_c - 1]\\
+\end{align*}
+
+Collect these expressions by writing:
+\begin{align*}
+Y &= \begin{bmatrix}
+y[(k_i + 1)|k_i] \\
+y[(k_i + 2)|k_i] \\
+\vdots \\
+y[(k_i + N_p)|k_i]
+\end{bmatrix} \\ 
+\Delta U &= \begin{bmatrix}
+\Delta u[k_i] \\
+\Delta u[k_i +1] \\
+\vdots \\
+\Delta u[k_i + N_p] \\
+\end{bmatrix} \\ 
+F &= \begin{bmatrix}
+CA \\
+CA^2 \\
+\vdots \\
+CA^{N_p}
+\end{bmatrix} \\ 
+\Phi &= \begin{bmatrix}
+CB & 0 & 0 & 0 & 0 \\
+CAB & CB & 0 & 0 & 0 \\
+CA^2B & CAB & CB & 0 & 0 \\
+\vdots & \vdots & \vdots & \vdots & \vdots \\
+CA^{N_p-1}B & CA^{N_p-2}B & CA^{N_p-3}B & \hdots & CA^{N_p-N_c}B
+\end{bmatrix} \\ 
+Y &= Fx[k_i] + \Phi \Delta U \\ 
+\end{align*}
+
+
+*** Optimisation
+Define $r[k_i]$ as the set point value at the sample $k_i$. The objective is to find $\Delta U$ that minimises some objective function.
+As a step input, define:
+\[R_s = \begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1
+\end{bmatrix} r[k_i]\]
+
+Define the cost function as:
+\[J = (R_s - Y)^T Q(R_s-Y) + \Delta U^TR\Delta U\]
+We can set $Q = I$, to be the identity matrix (so the outputs at all future time steps are equally weighted), then determine weighting through $R$ alone.
+Then find $\frac{\partial J}{\partial \Delta U} = 0$:
+\begin{align*}
+\Rightarrow \frac{\partial J}{\partial \Delta U} &= 0 \\
+0 &= \frac{\partial}{\partial \Delta U}\left([R_s - Fx[k_i]]^T[R_s - Fx[k_i]] - 2\Delta U^T\Phi^T(R_s - Fx[k_i])+ \Delta U^T(\Phi^T\Phi + R)\Delta U\right) \\
+\Rightarrow 0 &= -2\Phi^T(R_s - Fx[k_i]) + 2(\Phi^T\Phi + R)\Delta U \\
+\Rightarrow \Delta U_{opt} &= (\Phi^T\Phi + R)^{-1}\Phi^T(R_s - Fx[k_i])
+\end{align*}
+
+$\Delta U_{opt}$ contains the optimal control and future predicted optimal controls $\Delta u[k_i],\ \Delta u[k_i + 1],\ \hdots,\ u[k_i + N_c - 1]$. But only $\Delta u[k_i]$ is applied. Following this the systems moves and the computation is redone at $k_i + 1$.
+
+*** Closed-Loop System
+We have:
+\[\Delta U_{opt} = (\Phi^T\Phi + R)^{-1}\Phi^TR_s - (\Phi^T\Phi + R)^{-1}\Phi^TRFx[k_i]\]
+ - $(\Phi^T\Phi + R)^{-1}\Phi^TR_s$ is the set point tracking term
+ - $(\Phi^T\Phi + R)^{-1}\Phi^TFx[k_i]$ is the state feedback term
+
+The incremental controller only takes the first of these values:
+\begin{align*}
+\Delta U_{opt}[k_i] &= [1\ 0\ 0\ \hdots\ 0]\Delta U_{opt} \\ 
+&= K_yr[k_i] 0 K_{MPC}x[k_i]
+\end{align*}
+ - $K_y$ is the first element of $(\Phi^T\Phi + R)^{-1}\Phi^TR_s$
+ - $K_{MPC}$ is the first row of $(\Phi^T\Phi + R)^{-1}\Phi^TF$
+ - This matches the general linear state feedback setup
+
+The close loop system is:
+\begin{align*}
+x[k+1] &= Ax[k] - BK_{MPC}x[k] + BK_yr[k] \\
+x[k+1] &= (A - BK_{MPC})x[k] + BK_yr[k]
+\end{align*}
+
+The closed loop [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] are:
+\[\det(\lambda I - (A - BK_{MPC})) = 0\]
+ 
+** Example
+Consider a simple first order system:
+\being{align*}
+x_m[k+1] = 0.8 x_m[k] + 0.1u[k] \\
+y[k] = 1.0x_m[k]
+\end{align*}
+Let $N_p = 10$ and $N_c = 4$. Assume at $k_i = 0$ we have $r[k_i] = 1$ and
+\[x[k_i] = \begin{bmatrix}
+\Delta x_m[k_i] \\
+y[k_i]
+\end{bmatrix} = \begin{bmatrix}
+0.1 \\
+0.2
+\end{bmatrix}\]
+a) Find $\Delta U_{opt}$ for
+ i) $R = 0$
+ ii) $R = 10$
+b) Propagate the state to determine the optimal control sequence, for $R = 0$. Assume $u[-1] = 0$.
+
+*** Solution
+**** a)
+Find the augmented state space model (including output as state):
+\begin{cases}
+x[k+1] &= \begin{bmatrix}
+\Delta x_m[k+1] \\
+y[k+1]
+\end{bmatrix} = \begin{bmatrix}
+A_m & 0 \\
+C_mA_m & 1
+\end{bmatrix}\begin{bmatrix}
+\Delta x_m[k] \\
+y[k]
+\end{bmatrix} + \begin{bmatrix}
+B_m \\
+C_mB_m
+\end{bmatrix}\Delta u[k] \\
+y[k] &= [0\ 1]\begin{bmatrix}
+\Delta x_m[k] \\
+y[k]
+\end{bmatrix}
+\end{cases}
+
+\begin{align*}
+\Rightarrow x[k+1] &= \begin{bmatrix}
+0.8 0 \\
+0.8 1
+\end{bmatrix}x[k] + \begin{bmatrix}
+0.1 \\
+0.1
+\end{bmatrix}\Delta u[k] \\
+y[k] &= [0\ 1]x[k]
+\end{align*}
+
+\begin{align*}
+F &= \begin{bmatrix}
+CA \\
+CA^2 \\
+\vdots \\
+CA^{N_p}
+\end{bmatrix} = \begin{bmatrix}
+0.8 & 1 \\
+1.44 & 1 \\
+1.952 & 1 \\
+\vdots & \vdots\\
+3.571 & 1 \\
+\end{bmatrix} \\
+\Phi &= \begin{bmatrix}
+CB & 0 & 0 &  0 \\
+CAB & CB & 0 & 00 \\
+CA^2B & CAB & CB & 00 \\
+\vdots & \vdots  & \vdots & \vdots \\
+CA^{9}B & CA^{8}B & CA^{7}B& CA^{6}B
+\end{bmatrix} = \begin{bmatrix}
+0.1 & 0 & 0 & 0 \\
+0.18 & 0.1 & 0 & 0 \\
+\vdots & \vdots  & \vdots & \vdots \\
+0.446 & \hdots
+\end{bmatrix} \\
+\Phi^T\Phi &= \begin{bmatrix}
+1.1541 & \hdots & 0.7726 \\
+\vdots & \hdots & \vdots \\
+0.7776 & \hdots & 0.5943
+\end{bmatrix} \\
+\Phi^TF &= [\hdots] \\
+\Phi R &= [\hdots]
+\end{align*}
+
+i) $R = 0$
+\[\Delta U_{opt} &= (\Phi^T\Phi + 0)^{-1}\Phi^T(R_s - Fx[k_i]) = \begin{bmatrix} 7.2 \\ -6.4 \\ 0 \\ 0\end{bmatrix}\]
+ - Use $x[0] = [\hdots]$
+i) $R = 10$
+\[\Delta U_{opt} &= (\Phi^T\Phi + 10I)^{-1}\Phi^T(R_s - Fx[k_i]) = \begin{bmatrix} 0.1269 \\ 0.1034 \\ 0.0829 \\ 0.0650\end{bmatrix}\]
+ - Use $x[0] = [\hdots]$
+
+**** b)
+Since $u[-1] = 0$, and we take $\Delta u[0] = 7.2$, so
+\[u[0] = u[-1] + \Delta u[0] = 7.2\]
+
+Now propagate the state:
+\begin{align*}
+y_m[0] &= 1.0x_m[0] \\
+\begin{bmatrix}
+\Delta x_m[0] \\
+y_m[0]
+\end{bmatrix} &= \begin{bmatrix}
+0.1 \\
+0.2
+\end{bmatrix}
+&\\
+x_m[1] &= 0.8x_m[0] + 0.1 u[0] \\
+&= 0.88 \\
+\therefore y[1] &= 1.0x_m[1] \\
+&= 0.88
+\\
+\Delta x_m[1] &= x_m[1] - x_m[0]\\
+x[1] &= [\hdots]
+\end{align*}
+Moving forward a time step, recalculate the optimal control:
+\[\Delta U_{opt} &= (\Phi^T\Phi + 0)^{-1}\Phi^T(R_s - Fx[k_i]) = [\hdots]\]
+So, our next control input is:
+\[u[1] = u[0] - \Delta u[1] = 7.2 - 4.24 = 2.96\]
+Propagate the state at $k_i = 2$.
+\[\vdots\]
+The optimal control sequence is:
+\[\Delta U_{opt} = \begin{bmatrix}
+7.2\\
+-4.24 \\
+-0.96\\
+0
+\end{bmatrix}\]
+\[U_{opt} = \begin{bmatrix}
+7.2\\
+2.96 \\
+2\\
+2
+\end{bmatrix}\]
+This produced output:
+\[y = \begin{bmatrix}
+0.2 \\
+0.88\\
+1\\
+1
+\end{bmatrix}\]
+

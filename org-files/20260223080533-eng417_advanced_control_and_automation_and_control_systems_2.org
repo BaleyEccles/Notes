@@ -27,6 +27,8 @@
 [[id:7a588acb-2b8c-4e71-849c-255e1af09ec8][Digital Control]]
 
 [[id:c01b9931-64f5-41e2-8acd-c8a407771b18][Optimal Control Theory]]
+
+[[id:7009ec9a-1165-4820-bd47-d2ae12b27eab][Model Predictive Control (MPC)]]
 * Assessment
 
 ** Automation Report

@@ -75,7 +75,7 @@ The new state $\eta(t)$ _does not_ destabilise the system
 Let the step be $r(t) = R$, $t\geq 0$
 Use the control law in steady-state: $u_{ss} = -K(x_{ss} - e_{x_{ss}}) + K_e\eta_{ss}$
  - $A - LC$ must be non-singular
-$e_{x_{ss} = 0}$
+$e_{x_{ss}} = 0$
 Which means:
 \[y_{ss} = R\]
  - Perfect tracking
