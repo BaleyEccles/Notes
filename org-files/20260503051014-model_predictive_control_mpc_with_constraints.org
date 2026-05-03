@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       be11039b-a9b2-4a47-a5ca-9f6c2b581ce2
+:END:
+#+title: Model Predictive Control (MPC) With Constraints
+#+date: [2026-05-03 Sun 05:10]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Model Predictive Control (MPC) With Constraints
+MPC allows the direct and natural incorporation of constraints
+
+** Formulation of Constrained Control Problems
+$\Delta u[k]\leftarrow$ modify this when a constraint becomes active
+_Notation:_
+\[J = \frac{1}{2}x^TEx + x^TF\]
+ - $\frac{1}{2}x^TEx$ Quadratic term
+ - $x^TF$ Linear term
+ - $x$ is not a state vector
+ - $Mx \leq \gamma$ constraints 
+
+*** Unconstrained Solution
+\[x^{*} = \min_x\{J(x)\},\ x\in \mathbf{R}^n\]
+1. $x^{*}$ may not exist if $J(x)$ has no lower bound
+   - Assume that $J(k)$ is _bounded below_
+2. While the global minimum is most optimal, we struggle to find it efficiently. Finding a local minimum is considered sufficient.
+   
+Fist and second derivatives of $J(x)$:
+\begin{align*}
+g(x) &= \nabla J(x) \\
+G(x) &= \nabla^2 J(x)
+\end{align*}
+
+Minimised (locally) if:
+\[g^{*}(x) &= 0\]
+$G(x)$ is positive definite
+ - (\[s^TG(x^{*})s > 0\])
+
+Two cases
+1. Equality constraints
+   - $x = 10$
+2. Inequality constraints
+   - $-10 < x < 3$
+

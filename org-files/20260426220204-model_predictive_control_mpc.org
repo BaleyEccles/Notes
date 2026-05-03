@@ -11,6 +11,8 @@ Uses [[id:c01b9931-64f5-41e2-8acd-c8a407771b18][Optimal Control Theory]] for its
 The controller runs optimisation for a 'horizon' for every time step
 Apply only the very fist control input calculated for the entire horizon
 
+ - [[id:17695a1e-da1f-4777-a523-86635ade7ae6][Model Predictive Control (MPC) With Unmeasured States]]
+ - [[id:be11039b-a9b2-4a47-a5ca-9f6c2b581ce2][Model Predictive Control (MPC) With Constraints]]
 ** Advantages
  - Conceptually straightforward
  - Optimisation settings can be adjusted (dynamically) to improve performance
@@ -371,4 +373,5 @@ This produced output:
 1\\
 1
 \end{bmatrix}\]
+
 

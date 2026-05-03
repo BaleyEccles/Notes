@@ -1,0 +1,52 @@
+:PROPERTIES:
+:ID:       17695a1e-da1f-4777-a523-86635ade7ae6
+:END:
+#+title: Model Predictive Control (MPC) With Unmeasured States
+#+date: [2026-05-03 Sun 04:57]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Model Predictive Control (MPC) With Unmeasured States
+\[x_m[k+1] = A_mx_m[k] + B_mu[k]\]
+
+Feedback Observer:
+\[\hat{x}_m[k+1] = (A_m - LC_m)\hat{x}[k] + B_mu[k] + Ly[k]\]
+Error:
+\[e_m[k+1] = (A_m - LC_m) e_m[k]\]
+With initial error $e_m[0]$, we know
+\[e_m[k] = (A_m - LC_m)^ke_m[0]\]
+
+[[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of $A_m - LC_m$ can be place arbitrarily.
+Argument state representation:
+\[x_m \rightarrow x = \begin{bmatrix}\Delta x \\ y\end{bmatrix}\]
+\[\hat{x}[k_i + 1] = A\hat{x}[k_i] + B\Delta u[k_i] + L(y[k_i] - C\hat{x}[k_i])\]
+Optimal control:
+\begin{align*}
+\Delta U_{opt} &= (R + \Phi^T Q \Phi)^{-1} \Phi^TQ (R_s - F\hat{x}[k_i]) \\
+\Delta u[k_i] &= K_yr[k_i] - K_{MPC}\hat{x}[k_i]
+\end{align*}
+
+Closed-loop state equations:
+\[x[k+1] = Ax[k] + BK_yr[k] - BK_{MPC}\hat{x}[k]\]
+Observer error dynamics:
+\[e_x[k+1] = (A-LC)e_x[k]\]
+ - \[e_x[k] = x[k] - \hat{x}[k]\]
+
+\[x[k+1] = (A-BK_{MPC})x[k] - BK_{MPC} e_x[k] + BK_y r[k]\]
+Together:
+\[\begin{bmatrix}
+e_x[k+1] \\
+x[k+1]
+\end{bmatrix} = \begin{bmatrix}
+A - LC & 0 \\
+-BK_{MPC} & A-BK_{MPC}
+\end{bmatrix} \begin{bmatrix}
+e_x[k] \\
+x[k]
+\end{bmatrix} + \begin{bmatrix}
+0 \\
+BK_y
+\end{bmatrix} r[k]\]
+
+\[\det = (A - LC)(A-BK_{MPC})\]
+
