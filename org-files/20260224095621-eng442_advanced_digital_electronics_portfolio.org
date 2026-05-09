@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       25c6c6a6-d98c-439f-81a3-16ddccfa12ec
 :END:
-#+title: ENG442 - Advanced Digital Electronics - Portfolio
+#+title: ENG442 - Advanced Digital Electronics - Portfolio - Part 1
 #+date: [2026-02-24 Tue 09:56]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview

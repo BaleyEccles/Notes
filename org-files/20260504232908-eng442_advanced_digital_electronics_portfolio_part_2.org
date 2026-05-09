@@ -1,0 +1,643 @@
+:PROPERTIES:
+:ID:       4905c204-4471-4663-822c-3b0e7a6e1b4f
+:END:
+#+title: ENG442 - Advanced Digital Electronics - Portfolio - Part 2
+#+date: [2026-05-04 Mon 23:29]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Week 6
+** Problem 1
+:TODO: Verify that this works and get Ben to look at it
+/Write a Verilog module that connects your ALU from Week 5 Problem 2 to appropriate I/O and then synthesise, implement and load your design on to the Basys3 FPGA board. You must demonstrate the working solution to the lecturer/tutor and answer questions during class or you may arrange a separate meeting to discuss./
+#+BEGIN_SRC verilog :tangle /home/baley/UTAS/ENG442 - Advanced Digital Electronics/Portfolio/Week_6_Problem_1/Week_6_Problem_1.srcs/constrs_1/new/constrains.xdc :comments link
+## Switches
+set_property PACKAGE_PIN V17 [get_ports {sw[0]}]
+  set_property IOSTANDARD LVCMOS33 [get_ports {sw[0]}]
+set_property PACKAGE_PIN V16 [get_ports {sw[1]}]
+  set_property IOSTANDARD LVCMOS33 [get_ports {sw[1]}]
+set_property PACKAGE_PIN W16 [get_ports {sw[2]}]
+  set_property IOSTANDARD LVCMOS33 [get_ports {sw[2]}]
+set_property PACKAGE_PIN W17 [get_ports {sw[3]}]
+  set_property IOSTANDARD LVCMOS33 [get_ports {sw[3]}]
+
+## LEDs
+set_property PACKAGE_PIN U16 [get_ports {led[0]}]
+  set_property IOSTANDARD LVCMOS33 [get_ports {led[0]}]
+set_property PACKAGE_PIN E19 [get_ports {led[1]}]
+  set_property IOSTANDARD LVCMOS33 [get_ports {led[1]}]
+#+END_SRC
+
+#+BEGIN_SRC verilog :tangle /home/baley/UTAS/ENG442 - Advanced Digital Electronics/Portfolio/Week_6_Problem_1/Week_6_Problem_1.srcs/sources_1/new/ALU.v :comments link
+// 1-bit adder for ALU
+module full_adder (
+                   input wire  A,      // operand bit A
+                   input wire  B,      // operand bit B
+                   input wire  C_in,   // carry-in
+                   output wire result, // result bit (sum)
+                   output wire C_out   // carry-out
+                   );
+   assign result = A ^ B ^ C_in;
+   assign C_out  = (A & B) | (B & C_in) | (A & C_in);
+endmodule
+
+// 1-bit subtractor for ALU
+module full_subber (
+                    input wire  A,      // operand bit A
+                    input wire  B,      // operand bit B
+                    input wire  C_in,   // borrow-in (use as borrow-in)
+                    output wire result, // result bit (difference)
+                    output wire B_out   // borrow-out
+                    );
+   assign result = (A ^ B) ^ C_in;
+   assign B_out  = (~A & B) | (~A & C_in) | (B & C_in);
+endmodule
+
+// 2:1 multiplexer (single bit)
+module mux2to1 (
+                input wire  in_0,
+                input wire  in_1,
+                input wire  sel,
+                output wire out
+                );
+   assign out = sel ? in_1 : in_0;
+endmodule
+
+// 1-bit ALU: operation = 0 -> add, operation = 1 -> sub
+module ALU (
+            input wire  A,
+            input wire  B,
+            input wire  C_in,      // carry-in for add or borrow-in for sub
+            input wire  operation, // 0 = add, 1 = sub
+            output wire result,
+            output wire carry_borrow_out
+            );
+   wire add_result, sub_result;
+   wire add_cout,  sub_bout;
+
+   // instantiate adder and subtractor
+   full_adder u_adder (
+                       .A(A),
+                       .B(B),
+                       .C_in(C_in),
+                       .result(add_result),
+                       .C_out(add_cout)
+                       );
+
+   full_subber u_subber (
+                         .A(A),
+                         .B(B),
+                         .C_in(C_in),
+                         .result(sub_result),
+                         .B_out(sub_bout)
+                         );
+
+   // select result and carry/borrow based on operation
+   mux2to1 u_mux_result (
+                         .in_0(add_result),
+                         .in_1(sub_result),
+                         .sel(operation),
+                         .out(result)
+                         );
+
+   mux2to1 u_mux_cout (
+                       .in_0(add_cout),
+                       .in_1(sub_bout),
+                       .sel(operation),
+                       .out(carry_borrow_out)
+                       );
+endmodule
+#+END_SRC
+
+#+BEGIN_SRC verilog :tangle /home/baley/UTAS/ENG442 - Advanced Digital Electronics/Portfolio/Week_6_Problem_1/Week_6_Problem_1.srcs/sources_1/new/tb_ALU.v :comments link
+module tb_ALU(input sw[3:0], output [1:0] led);
+   reg A, B, C_in, operation;
+   wire result, carry_borrow_out;
+
+   // Instantiate DUT
+   ALU dut (
+            sw[0],
+            sw[1],
+            sw[2],
+            sw[3],
+            led[0],
+            led[1]
+            );
+endmodule
+#+END_SRC
+** Problem 2
+:TODO: Have not started on this
+/You are now to reimplement the ALU module using the Verilog add (+) and subtract (-) operators instead of structurally including sub-modules such as a full adder and without using a ripple-carry implementation. Rerun your testbench using this new module and ensure that it behaves logically the same. Note that aside from referencing the new implementation of the ALU, you should not have to make any changes to the testbench file. You do NOT need to run the new version on the Basys3 board./
+
+#+BEGIN_SRC verilog :tangle ENG442_Portfolio_Week_6_Problem_2.v
+// 1-bit adder for ALU
+module full_adder (
+                   input wire  A,      // operand bit A
+                   input wire  B,      // operand bit B
+                   input wire  C_in,   // carry-in
+                   output wire result, // result bit (sum)
+                   output wire C_out   // carry-out
+                   );
+   assign result = A ^ B ^ C_in;
+   assign C_out  = (A & B) | (B & C_in) | (A & C_in);
+endmodule
+
+// 1-bit subtractor for ALU
+module full_subber (
+                    input wire  A,      // operand bit A
+                    input wire  B,      // operand bit B
+                    input wire  C_in,   // borrow-in (use as borrow-in)
+                    output wire result, // result bit (difference)
+                    output wire B_out   // borrow-out
+                    );
+   assign result = (A ^ B) ^ C_in;
+   assign B_out  = (~A & B) | (~A & C_in) | (B & C_in);
+endmodule
+
+// 2:1 multiplexer (single bit)
+module mux2to1 (
+                input wire  in_0,
+                input wire  in_1,
+                input wire  sel,
+                output wire out
+                );
+   assign out = sel ? in_1 : in_0;
+endmodule
+
+// 1-bit ALU: operation = 0 -> add, operation = 1 -> sub
+module ALU (
+            input wire  A,
+            input wire  B,
+            input wire  C_in,      // carry-in for add or borrow-in for sub
+            input wire  operation, // 0 = add, 1 = sub
+            output wire result,
+            output wire carry_borrow_out
+            );
+   wire add_result, sub_result;
+   wire add_cout,  sub_bout;
+
+   // instantiate adder and subtractor
+   full_adder u_adder (
+                       .A(A),
+                       .B(B),
+                       .C_in(C_in),
+                       .result(add_result),
+                       .C_out(add_cout)
+                       );
+
+   full_subber u_subber (
+                         .A(A),
+                         .B(B),
+                         .C_in(C_in),
+                         .result(sub_result),
+                         .B_out(sub_bout)
+                         );
+
+   // select result and carry/borrow based on operation
+   mux2to1 u_mux_result (
+                         .in_0(add_result),
+                         .in_1(sub_result),
+                         .sel(operation),
+                         .out(result)
+                         );
+
+   mux2to1 u_mux_cout (
+                       .in_0(add_cout),
+                       .in_1(sub_bout),
+                       .sel(operation),
+                       .out(carry_borrow_out)
+                       );
+endmodule
+#+END_SRC
+
+#+BEGIN_SRC verilog :tangle ENG442_Portfolio_Week_6_Problem_2_tb.v
+`include "ENG442_Portfolio_Week_6_Problem_2.v"
+`timescale 1ns/1ps
+
+module tb_ALU;
+   reg A, B, C_in, operation;
+   wire result, carry_borrow_out;
+
+   // Instantiate DUT
+   ALU dut (
+            .A(A),
+            .B(B),
+            .C_in(C_in),
+            .operation(operation),
+            .result(result),
+            .carry_borrow_out(carry_borrow_out)
+            );
+
+   integer i;
+
+   initial begin
+      $display("A B C_in op | result carry/borrow");
+      $display("------------|-------------------");
+
+      // Test all combinations of A,B,C_in and both operations
+      for (i = 0; i < 16; i = i + 1) begin
+         operation = (i >> 3) & 1;
+         A         = (i >> 2) & 1;
+         B         = (i >> 1) & 1;
+         C_in      = (i >> 0) & 1;
+         #5;
+         $display("%b %b %b    %b  |   %b       %b", A, B, C_in, operation, result, carry_borrow_out);
+      end
+   end
+endmodule
+#+END_SRC
+** Problem 3
+/Complete the ALU from problem 2 by implementing all operations required by RISC-V R-type instructions./
+:TODO: 
+* Week 7
+/Compile the following C code segments into RSIC-V assembly./
+** Problem 1
+/Array access (you may use registers for variables i, g and h):/
+#+BEGIN_SRC C
+void main () {
+    int i = 3;
+    int h = 12;
+    int A[4] = {9, 8, 7, 6};
+    int g = h + A[i];
+}
+#+END_SRC
+
+#+BEGIN_SRC asm
+    .data
+A:  .word 9, 8, 7, 6 # array A
+    .text
+
+    li t0, 3       # i = 3
+    li t1, 12      # h = 12
+    la t2, A       # Load address of A
+    slli t3, t0, 2 # Calculate i*4
+    add t3, t3, t2 # Address of A[i]
+    lw t4, 0(t3)   # A[i] = t4
+    add t5, t1, t4 # g = h + A[i]
+#+END_SRC
+
+** Problem 2
+/IF statement (test your code with different values for i & j such that sometimes the IF block is executed and other times the ELSE block is executed):/
+#+BEGIN_SRC C
+int i = 5;
+int j = 5;
+int f;
+int g = 3;
+int h = 2;
+int main() {
+    if(i == j)
+        f = g + h;
+    else
+        f = g - h;
+}
+#+END_SRC
+*** a)
+/Compile the above code using registers for all variables./
+#+BEGIN_SRC asm
+    .text
+    .globl main
+main:
+    # Initialize constants
+    li t0, 5 # i = 5
+    li t1, 5 # j = 5
+    li t2, 3 # g = 3
+    li t3, 2 # h = 2
+    li t4, 0 # f = 0
+
+    beq t0, t1, if_equal  # If i == j, goto if_equal
+else:
+    sub t4, t2, t3 # f = g - h
+    j end # Jump to end
+
+if_equal:
+    add t4, t2, t3 # f = g + h
+
+end:
+    # t4 = f
+
+#+END_SRC
+
+*** b)
+/Rewrite the assembly program to store the variable f in memory as a global variable./
+#+BEGIN_SRC asm
+    .data
+i:      .word 5
+j:      .word 5
+g:      .word 3
+h:      .word 2
+f:      .word 0   # Global variable f
+
+    .text
+    .globl main
+main:
+    lw t0, i # Load i into t0
+    lw t1, j # Load j into t1
+
+    beq t0, t1, if_equal  # If i == j, goto if_equal
+else:
+    lw t2, g       # Load g into t2
+    lw t3, h       # Load h into t3
+    sub t4, t2, t3 # f = g - h
+    sw t4, f       # Store result in f
+    j end          # Jump to end
+
+if_equal:
+    lw t2, g # Load g into t2
+    lw t3, h # Load h into t3
+    add t4, t2, t3 # f = g + h
+    sw t4, f       # Store result in f
+
+end:
+
+#+END_SRC
+*** c)
+/Rewrite the assembly program to store the variable f in memory as a local variable. (i.e. the variable will be declared on the first line of the main function)./
+#+BEGIN_SRC asm
+    .text
+    .globl main
+main:
+    # Allocate stack space for local variable f (4 bytes)
+    addi sp, sp, -4 # Make space on the stack
+    
+    # Initialize constants
+    li t0, 5 # i = 5
+    li t1, 5 # j = 5
+    li t2, 3 # g = 3
+    li t3, 2 # h = 2
+
+    beq t0, t1, if_equal  # If i == j, goto if_equal
+else:
+    sub t4, t2, t3 # f = g - h
+    sw t4, 0(sp)   # Store f in local variable on stack
+    j end          # Jump to end
+
+if_equal:
+    add t4, t2, t3 # f = g + h
+    sw t4, 0(sp)   # Store f in local variable on stack
+
+end:
+    # f is the first item on the stack
+#+END_SRC
+** Problem 3
+/Basic loop:/
+#+BEGIN_SRC C
+int g = 0;
+int h = 10;
+int i = 0;
+int j = 1;
+int A[10] = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
+int main() {
+ loop:
+    g = g + A[i];
+    i = i + j;
+    if (i != h) goto loop;
+}
+#+END_SRC
+
+#+BEGIN_SRC asm
+.data
+A:      .word 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024
+
+.text
+.globl main
+main:
+    li t0, 0            # g = 0  = t0
+    li t1, 10           # h = 10 = t1
+    li t2, 0            # i = 0  = t2
+    li t3, 1            # j = 1  = t3
+
+loop:
+    lw t4, A(t2)        # Load A[i] into t4
+    add t0, t0, t4      # g = g + A[i]
+    
+    add t2, t2, t3      # i = i + j
+    
+    bne t2, t1, loop    # if (i != h) goto loop
+end:
+    # finish loop
+
+#+END_SRC
+** Problem 4
+/WHILE loop:/
+#+BEGIN_SRC C
+int i = 0;
+int j = 1;
+int k = 5;
+int A[6] = {5, 5, 5, 5, 3, 5};
+int main() {
+    while(A[i] == k)
+        i = i + j;
+}
+#+END_SRC
+
+#+BEGIN_SRC asm
+    .data
+A:      .word 5, 5, 5, 5, 3, 5
+
+    .text
+    .globl main
+main:
+    li t0, 0            # i = 0 = t0
+    li t1, 1            # j = 1 = t1
+    li t2, 5            # k = 5 = t2
+
+loop:
+    lw t3, A(t0)        # Load A[i] into t3
+    beq t3, t2, continue # if (A[i] == k) go to continue
+    j end               # else exit loop
+    
+continue:
+    add t0, t0, t1      # i = i + j
+    j loop              # Repeat the loop
+
+end:
+    # finish while loop
+#+END_SRC
+
+
+** Problem 5
+/SWITCH statement (store f in a register; store all other variables in static memory; bonus marks if you use a jump table to implement the SWITCH statement; test with different values of k):/
+
+#+BEGIN_SRC C
+int f;
+int g = 1;
+int h = 2;
+int i = 0;
+int j = 1;
+int k = 2;
+int main() {
+    switch (k) {
+    case 0: f = i + j; break;
+    case 1: f = g + h; break;
+    case 2: f = g - h; break;
+    case 3: f = i - j; break;
+    }
+}
+#+END_SRC
+
+#+BEGIN_SRC asm
+    .data
+g: .word 1 # g = 1
+h: .word 2 # h = 2
+i: .word 0 # i = 0
+j: .word 1 # j = 1
+k: .word 2 # k = 2
+
+    .text
+    .globl main
+main:
+    # Load the value of k into a register
+    lw t0, k         # Load k into t0 (temporary register)
+
+    # f stored in x1
+    li x1, 0 # f
+    
+    # Switch statement logic
+    li t1, 0         # Case 0
+    beq t0, t1, case_0   # If k == 0, jump to case_0
+
+    li t1, 1         # Case 1
+    beq t0, t1, case_1   # If k == 1, jump to case_1
+
+    li t1, 2         # Case 2
+    beq t0, t1, case_2   # If k == 2, jump to case_2
+
+    li t1, 3         # Case 3
+    beq t0, t1, case_3   # If k == 3, jump to case_3
+
+    j end_switch     # Jump to end
+
+case_0:
+    lw t2, i         # Load i into t2
+    lw t3, j         # Load j into t3
+    add x1, t2, t3   # f = i + j
+    j end_switch
+
+case_1:
+    lw t2, g         # Load g into t2
+    lw t3, h         # Load h into t3
+    add x1, t2, t3   # f = g + h
+    j end_switch
+
+case_2:
+    lw t2, g         # Load g into t2
+    lw t3, h         # Load h into t3
+    sub x1, t2, t3   # f = g - h
+    j end_switch
+
+case_3:
+    lw t2, i         # Load i into t2
+    lw t3, j         # Load j into t3
+    sub x1, t2, t3   # f = i - j
+    j end_switch
+
+end_switch:
+    # Done
+#+END_SRC
+
+* Week 8
+** Problem 1
+/Compile the following C code into RISC-V assembly. Not that sums is stored in static memory and i and x are stored in local stack memory. Make sure variables are updated in memory each time values are assigned to them./
+
+#+BEGIN_SRC C
+#define LENGTH 10
+int sums[LENGTH];
+
+int sum(int x) {
+    if(x <= 0) {
+        return 0;
+    }
+    return x + sum(x - 1);
+}
+
+int main() {
+    for (int i = 0; i < LENGTH; ++i) {
+        sums[i] = sum(i);
+    }
+    return 0;
+}
+#+END_SRC
+
+
+#+BEGIN_SRC asm
+    .set LENGTH, 10
+    .set LENGTH_IN_BYTES, 40 # could probably use a macro to calculate this
+    .data
+sums: .space LENGTH_IN_BYTES # 10*4 = 10 length array
+
+    .text
+    .globl main
+
+    # Recursive sum function
+sum:
+    addi sp, sp, -16 # Create stack frame
+    sw ra, 12(sp) # Save return address
+    sw a0, 8(sp) # Save argument x
+
+    li t0, 0
+    ble a0, t0, base_case      # If (x <= 0), jump to base case
+
+    addi a0, a0, -1 # x = x - 1
+    jal sum     # call sum(x - 1)
+    
+    lw t1, 8(sp)  # Load original x
+    add a0, a0, t1 # x + sum(x - 1)
+    j end_sum    # Jump to end
+
+base_case:
+    li a0, 0 # Return 0 for base case
+
+end_sum:
+    lw ra, 12(sp)    # Restore return address
+    addi sp, sp, 16  # Restore stack pointer
+    ret # Return
+
+main:
+    la t0, sums # Load address of sums
+    li t1, 0    # Initialize i = 0
+
+loop:
+    li t2, LENGTH
+    bge t1, t2, end_loop # if (i >= LENGTH) exit loop
+
+    mv a0, t1 # Pass i to sum
+    jal sum   # call sum(i)
+
+    sw a0, 0(t0)   # Store return value in sums[i]
+    addi t0, t0, 4 # Move to next integer in sums
+    addi t1, t1, 1 # i++
+
+    j loop # Repeat loop
+
+end_loop:
+    # Done
+#+END_SRC
+
+/Execute the assembly program in RARS and address the following:/
+*** a)
+/Explain how you have used the ~sp~ and/or ~fp~ registers in your assembly program. If you have not used the ~fp~ register then explain how this can be used./
+
+~sp~ is the stack pointer, it points to a place on the stack. It allows you to store and retrieve variables. The usage in this case is storing x in the recursive function so it does not overwrite its self when the recursive function is called.
+
+:TODO: fp usage/explanation
+*** b)
+/What is the starting address of the text segment? What is the starting address of the data segment?/
+:TODO: IDK
+
+*** c)
+/Include a screenshot of memory after your program has ended execution and provide a brief explanation of the values stored./
+:TODO:
+
+*** d)
+/For each instruction that is different in the basic column, explain how the basic code is the same as the source code (if multiple explanations are the same, feel free to reference previous explanations). You must demonstrate the working solution to the lecturer/tutor and answer questions during class or you may arrange a separate meeting to discuss./
+:TODO:
+
+** Problem 2
+/Disable the pseudo-instructions by turning off the “Permit extended (pseudo) instructions and formats” option in the Settings menu and try to assemble your program. RARS will let you know if there is a problem. Pseudo-instructions will need to be converted. Rewrite your code without pseudo-instructions and verify by assembling and running it in RARS./
+:TODO:
+
+* Week 9
+/For each instruction below, highlight the active control signals and the active paths in the data path. If the instruction uses an immediate value, annotate the immediate generator's output with the instruction type./
+
+* Week 10
+/The below RISC-V assembly program is to be run on a five-stage pipelined datapath. For each of the first 5 cycles, highlight the active control signals and the active paths in the datapath.Ignore pipeline stages that are executing instructions before ~Loop~./
