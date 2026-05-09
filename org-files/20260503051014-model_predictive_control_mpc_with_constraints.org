@@ -334,3 +334,204 @@ Use equality constrains to find the solution
 _Let's check:_
 \[Mx_0^{*} = [\hdots][\hdots] = [1\ 1/3\ -5]^T \leq [1\ 1\ 1]^T\]
 
+
+** Hildreth's Procedure
+ - Primal-Dual Methods
+Primal: $\max_{\lambda \geq 0}\{\min_{x_0}\{\frac{1}{2}x_0^TE_0x_0 + x_0^TF_0 + \lambda^T(Mx_0 - \gamma)\}\}$
+ - \[x_0 = -E_0^T(F_0 + M^T\lambda)\]
+Dual: $P_0 = ME_0^{-1}M^T$, $K_0 = \gamma + ME_0^{-1}F_0$
+ - \[\max_{\lambda\geq 0}\{\frac{1}{2}\lambda^TP_0\lambda - \lambda^TK_0 - \frac{1}{2}F_0^TE_0^{-1}F_0\}\]
+Finding $\lambda$ rather than $x_0$
+
+_Hildreth's Procedure:_
+\[\lambda_i^{m+1} = \max(0, w_i^{m+1})\]
+Where
+\[w_i^{m+1} = -\frac{1}{p_{ii}}\left[k_i + \sum_{j=1}^{i-1}p_{ij}\lambda_j^{m+1} + \sum_{j=i+1}^np_{ij}\lambda_j^m\right]\]
+And
+ - $p_{ij}$ is the $ij^{th}$ element of $P_0 = ME_0^{-1}M^T$
+ - $k_i$ is the $i^{th}$ element of $K_0 = \gamma + ME_0^{-1}F_0$
+
+*** Example
+Use Hildreth's Procedure to minimise:
+\[J = \frac{1}{2}x_0^T E_0x_0 + x_0^TF_0\]
+Where
+\[E_0 = 2\times 2 \textrm{ matrix}\]
+\[F_0 = 1\times 2 \textrm{ matrix}\]
+Subject to:
+ - \[0 \leq x_1 \rightarrow - x_1 \leq 0\]
+ - \[0 \leq x_2 \rightarrow - x_2 \leq 0\]
+ - \[3x_1 + 2x_2 \leq 4\]
+
+Form $Mx \leq \gamma$
+ - Sub in values from inequalities to $M$ and $\gamma$ so they form a matrix equation
+   
+Find $x_0^{*}$ unconstrained:
+\[x_0^{*} = -E_0^{-1}F_0 = \hdots\]
+ - We are given $E_0$ and $F_0$
+
+Check constraints:
+\[Mx_0^{*} = [\hdots]\]
+Check if $Mx_0^{*}$ holds by comparing it to $\gamma$
+ - \[Mx_0^{*} \leq \gamma\]
+
+Condition 3 is violated in this example. So look for optimal $\lambda^{*}$:
+\[P_0 = ME_0M^T\]
+\[K_0 = \gamma + ME_0^{-1}F_0\]
+
+Use Hildreth's procedure:
+$p_{ii}$ and $k_i$ are from $P_0$ and $K_0$
+
+Iterate:
+$m=-1$:
+\[\lambda_1^0 = \lambda_2^0 = \lambda_3^0 = 0\]
+$m=0$:
+$i = 1$:
+\[\ w_1^1 = \hdots = -1\]
+ - This is from the $w_i^{m+1}$ equation
+\[\lambda_1^1 = \max\{0, w_1^1\} = \max\{0, -1\} = 0\]
+$i = 2$:
+\[w_2^1 = \hdots = -\frac{1}{2}\]
+\[\lambda_2^1 = \max\{0, w_2^1\} = \max\{0, -\frac{1}{2}\} = 0\]
+$i = 3$:
+\[w_3^1 = \hdots = \frac{1}{29}\]
+\[\lambda_3^1 = \max\{0, w_3^1\} = \max\{0, \frac{1}{29}\} = \frac{1}{29}\]
+
+Because $\lambda_3^1$ has changed from $\lambda_3^0$ we need to do another step:
+$m=1$:
+$i=1$:
+\[\ w_1^2 = \hdots = -\frac{24}{29}\]
+\[\lambda_1^2 = \max\{0, w_1^2\} = \max\{0, -\frac{24}{29}\} = 0\]
+$m=1$:
+$i=2$:
+\[\ w_2^2 = \hdots = -\frac{11}{29}\]
+\[\lambda_2^2 = \max\{0, w_2^2\} = \max\{0, -\frac{11}{29}\} = 0\]
+$i=3$:
+\[\ w_3^2 = \hdots = \frac{1}{29}\]
+\[\lambda_3^2 = \max\{0, w_3^2\} = \max\{0, \frac{1}{29}\} = \frac{1}{29}\]
+
+Our iterations have converged to: $\lambda_1 = 0$, $\lambda_2 = 0$ and $\lambda_3 = \frac{1}{29}$.
+Now, generate the constrained optimum for $x_0^{*}$:
+\[x_0^{*} = x_0^{*} - E_0^{-1}M^T\lambda^{*} = [\hdots]\]
+
+** Applying Constraints to MPC
+*** Constraints on the rate-of-change of the control action
+\[\Delta I_{\min}\leq \Delta u[k]\leq \Delta U_{\max}\]
+ - \[Mx_0 \leq \gamma \rightarrow M\Delta u \leq \gamma\]
+\[\begin{bmatrix}
+-I_m\\ I_m
+\end{bmatrix} \Delta u[k] \leq \begin{bmatrix}
+-\Delta U_{\min} \\
+\Delta U_{\max}
+\end{bmatrix}\]
+ - $I_m$ is the $m\times m$ identity matrix
+   
+This is valid for one time step, if we wish to contain every $N_p$ time step:
+\[\begin{bmatrix}
+-I_m & 0 & \hdots & 0 & 0 \\
+I_m & 0 & \hdots & 0 & 0 \\
+0 & -I_m & \hdots & 0 & 0 \\
+0 & I_m & \hdots & 0 & 0 \\
+\vdots & \vdots &  & \vdots & \vdots \\
+0 & 0 & \hdots & -I_m & 0 \\
+0 & 0 & \hdots & I_m & 0 \\
+0 & 0 & \hdots & 0 & -I_m \\
+0 & 0 & \hdots & 0 & I_m \\
+\end{bmatrix} \begin{bmatrix}
+\Delta u[k] \\
+\Delta u[k + 1] \\
+\vdots \\
+\Delta u[k + N_p-2] \\
+\Delta u[k + N_p-1]
+\end{bmatrix} \leq \begin{bmatrix}
+-\Delta U_{\min} \\
+\Delta U_{\max} \\
+-\Delta U_{\min} \\
+\Delta U_{\max} \\
+\vdots \\
+-\Delta U_{\min} \\
+\Delta U_{\max} \\
+-\Delta U_{\min} \\
+\Delta U_{\max}
+\end{bmatrix}\]
+\[M\Delta U \leq \gamma\]
+
+Applying this constraint in only the first time step: all but the first two rows become zero.
+
+*** Constraints of controls action magnitude
+\[U_{\min,i} \leq u_i[k] \leq U_{\max,i},\ i=1,2,\hdots,m\]
+
+
+
+\[\begin{bmatrix}
+u[k] \\
+u[k+1] \\
+u[k+2] \\
+\vdots \\
+u[k + N_p - 1]
+\end{bmatrix} = \begin{bmatrix}
+I_{m} \\
+I_{m} \\
+I_{m} \\
+\vdots \\
+I_{m}
+\end{bmatrix}u[k-1] + \begin{bmatrix}
+I_m & 0 & 0 & 0 & \hdots & 0 \\
+I_m & I_m & 0 & 0 & \hdots & 0 \\
+I_m & I_m & I_m & 0 & \hdots & 0 \\
+\vdots & \vdots & \vdots & \vdots &  & \vdots \\
+I_m & I_m & I_m & I_m & \hdots & I_m \\
+\end{bmatrix}\begin{bmatrix}
+\Delta u[k] \\
+\Delta u[k+1] \\
+\Delta u[k+2] \\
+\vdots \\
+\Delta u[k + N_p -1]
+\end{bmatrix}\]
+\[U = I_{N_p}u[k-1] +H\Delta U\]
+
+Suppose $U_{\min} \leq U \leq U_{\max}$, we can express:
+\[\begin{bmatrix}
+-U\\ U
+\end{bmatrix} \leq \begin{bmatrix}
+-U_{\min} \\
+U_{\max}
+\end{bmatrix}\]
+
+\[\Rightarrow\begin{bmatrix}
+-H\\ H
+\end{bmatrix} \Delta U \leq \begin{bmatrix}
+-U_{\min} + I_{N_p}u[k-1]\\
+U_{\max} - I_{N_p}u[k-1]
+\end{bmatrix}\]
+\[M\Delta U \leq \gamma\]
+
+In the special case where constraints are imposed on first time step only: $H = I_m$ (with a bunch of zeros)
+
+*** Constraints on Plant Output
+\[Y = Fx[k] + \Phi \Delta U\]
+Constraint: $Y_{\min} \leq Y \leq Y_{\max}$
+\[\Rightarrow\begin{bmatrix}
+-Y\\ Y
+\end{bmatrix} \leq \begin{bmatrix}
+-Y_{\min} \\
+Y_{\max}
+\end{bmatrix}\]
+
+\[\Rightarrow\begin{bmatrix}
+-Fx[k] - \Phi \Delta U\\
+Fx[k] + \Phi \Delta U
+\end{bmatrix} \leq \begin{bmatrix}
+-Y_{\min} \\
+Y_{\max}
+\end{bmatrix}\]
+
+\[\Rightarrow\begin{bmatrix}
+-\Phi \\
++\Phi
+\end{bmatrix} \Delta U \leq \begin{bmatrix}
+-Y_{\min} + Fx[k] \\
+Y_{\max} - Fx[k]
+ \end{bmatrix}\]
+\[M \Delta U \leq \gamma\]
+Can use $\hat{x}[k]$ if observer included
+

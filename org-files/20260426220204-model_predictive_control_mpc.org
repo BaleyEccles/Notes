@@ -232,9 +232,9 @@ The closed loop [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] are:
  
 ** Example
 Consider a simple first order system:
-\being{align*}
-x_m[k+1] = 0.8 x_m[k] + 0.1u[k] \\
-y[k] = 1.0x_m[k]
+\begin{align*}
+x_m[k+1] &= 0.8 x_m[k] + 0.1u[k] \\
+y[k] &= 1.0x_m[k]
 \end{align*}
 Let $N_p = 10$ and $N_c = 4$. Assume at $k_i = 0$ we have $r[k_i] = 1$ and
 \[x[k_i] = \begin{bmatrix}
