@@ -18,7 +18,7 @@
 * Notes
 [[id:cd800cc5-2b09-4528-8158-3c6f9faf2aa7][FPGAs (Field Programmable Gate Arrays)]]
 [[id:4d4763bd-0281-4bff-a06a-94d8a5e20396][RISC-V]]
-
+[[id:bb98cbbe-fcf6-45a6-99b9-13076f6f3d34][Multiplexers]]
 * Assessment
 
 ** Group Project
@@ -30,5 +30,6 @@
 ** Portfolio
  - 30%
 [[id:25c6c6a6-d98c-439f-81a3-16ddccfa12ec][ENG442 - Advanced Digital Electronics - Portfolio]]
+[[id:4905c204-4471-4663-822c-3b0e7a6e1b4f][ENG442 - Advanced Digital Electronics - Portfolio - Part 2]]
 
 

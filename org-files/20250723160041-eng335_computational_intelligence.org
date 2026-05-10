@@ -50,3 +50,4 @@
  - 40%
  - Matlab code and 10 page report
  - Due: Exam Period
+ - [[id:ced7f02c-f699-4986-be1b-13faac24e3be][ENG335 - Computational Intelligence - Exam]]

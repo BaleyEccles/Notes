@@ -6,6 +6,8 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
+[[id:bdebbfc8-86fe-4ff1-bdbd-7f9ddcad98e3][Servomechanism with Observer]]
+
 * Linear State Observer (Luenberger Observer)
 [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Linear_State_Observer.xopp]]
 
