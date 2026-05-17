@@ -1,0 +1,228 @@
+
+:PROPERTIES:
+:ID:       1eece1ca-8bf1-48c4-aec3-405764a8097a
+:END:
+#+title: ENG417 - Control Systems 2 - Design Report 2
+#+date: [2026-05-11 Mon 05:07]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+\[\begin{bmatrix}
+\dot{u} \\ \dot{w} \\ \dot{q} \\ \dot{\theta}
+\end{bmatrix} &= \begin{bmatrix}
+-0.0002 & 0.0013 & -15.8623 & -9.7727 \\
+-0.0148 & -0.0490 & 181.3074 & -0.8550 \\
+0.0005 & 0.0003 & -0.0913 & -0.0004 \\
+0.0000 & 0.0000 & 1.0000 & 0.0000
+\end{bmatrix} \begin{bmatrix}
+u \\ w \\ q \\ \theta
+\end{bmatrix} + \begin{bmatrix}
+83.4038 & 97.5694 \\
+537.5876 & 0.0000 \\
+-123.2522 & 0.0000 \\
+0.0000 & 0.0000
+\end{bmatrix} \begin{bmatrix}
+\delta_e \\ \delta_t
+\end{bmatrix}\]
+
+\[\begin{bmatrix}
+\dot{\beta} \\ \dot{p} \\ \dot{r} \\ \dot{\phi}
+\end{bmatrix} &= \begin{bmatrix}
+-3.4367 & 16.3088 & -180.6900 & 9.7727 \\
+-23.2336 & -1.3654 & 0.2569 & 0.0000 \\
+0.3220 & -0.0313 & -0.1835 & 0.0000 \\
+0.0000 & 1.0000 & 0.0000 & 0.0000
+\end{bmatrix} \begin{bmatrix}
+\beta \\ p \\ r \\ \phi
+\end{bmatrix} + \begin{bmatrix}
+0.0000 & 0.1048 \\
+7.2348 & 1.4712 \\
+0.0801 & -0.0208 \\
+0.0000 & 0.0000
+\end{bmatrix} \begin{bmatrix}
+\delta_a \\ \delta_r
+\end{bmatrix}\]
+
+* 5. LQR regulator
+/Design an LQR regulator that produces a desirable wing leveller control system./
+:TODO: I don't think this correct, it should be harder than this
+Lets choose:
+\[Q = \begin{bmatrix}
+0 & 0 & 0 & 0 \\
+0 & 50 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 200
+\end{bmatrix}\]
+And
+\[R = \begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}\]
+This applies a large weighting to $\phi$ (wing level), lesser weighting to the $p$ (rate of change of wing level), and apply no weighting to the other two angular velocities.
+
+#+BEGIN_SRC octave :results output :exports none :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q5.m
+%% Aircraft matrices
+A = [...
+      -3.4367, 16.3088, -180.6900, 9.7727 ; ...
+      -23.2336, -1.3654, 0.2569, 0.0000 ; ...
+      0.3220, -0.0313, -0.1835, 0.0000 ; ...
+      0.0000, 1.0000, 0.0000, 0.0000];
+B = [...
+    0.0000; ...
+    7.2348; ...
+    0.0801; ...
+    0.0000];
+
+%% Weighting matrices
+Q = diag([0 50 0 200]);
+R = diag([1 1]);
+
+%% LQR gain
+K = lqr(A,B,Q,R);
+
+%% Closed-loop matrix
+Acl = A - B*K;
+
+%% Eigenvalues
+eig(Acl)
+
+%% Simulation
+sys_cl = ss(Acl,B,eye(4),zeros(4,2));
+
+t = 0:0.01:20;
+
+x0 = [5*pi/180 0 0 10*pi/180];
+
+initial(sys_cl,x0,t)
+grid on
+#+END_SRC
+
+* 6. Mach Number Hold Control System
+/Use controller pole-placement techniques to design a Mach Number hold control system./
+** System Derivation
+A first order lag with 5 seconds means the throttle is defined by:
+\begin{align*}
+\frac{\delta_T(s)}{\delta_{T_c}(s)} &= \frac{1}{5s + 1} \\
+\dot{\delta_T} &= -0.2\delta_T + 0.2\delta_{T_c}
+\end{align*}
+
+The elevator servo has a time constant of 20 ms, this means it is defined by:
+\begin{align*}
+\frac{\delta_E(s)}{\delta_{E_c}(s)} &= \frac{1}{0.02s + 1} \\
+\dot{\delta_E} &= -50\delta_E + 50\delta_{E_c}
+\end{align*}
+
+Using a 800 ms time contestant for the altimeter means it is defined by:
+
+\begin{align*}
+\frac{A(s)}{h(s)} &= \frac{1}{0.8s + 1} \\
+\dot{A} &= -1.25A + 1.25h
+\end{align*}
+
+The height is defined by:
+\[\dot{h} = -w + 181.3\theta\]
+ - Where $U_0 = V_0\cos(\alpha_e) = 182\cos(5^o) = 181.3$, the trim velocity.
+
+A 50 ms time contestant means the Mach Meter is defined by:
+\begin{align*}
+\frac{M(s)}{u(s)} &= \frac{1}{0.05s + 1} \\
+\dot{M} &= -20M + 20u
+\end{align*}
+
+These can be introduced as new states in the system:
+\[x = \begin{bmatrix}
+u \\
+w \\
+q \\
+\theta \\
+h \\
+\delta_E \\
+\delta_T \\
+A \\
+M
+\end{bmatrix}\]
+And the new input vector to be:
+\[u =  \begin{bmatrix}
+\delta_{E_c} \\
+\delta_{T_c}
+\end{bmatrix}
+\]
+
+And we can calculate the new $A$ and $B$ to be:
+\[A = \begin{bmatrix}
+-0.0002 & 0.0013 & -15.8623 & -9.7727 & 0.0000 & 83.4038 & 97.5694 & 0.0000 & 0.0000 \\
+-0.0148 & -0.0490 & 181.3074 & -0.8550 & 0.0000 & 537.5876 & 0.0000 & 0.0000 & 0.0000 \\
+0.0005 & 0.0003 & -0.0913 & -0.0004 & 0.0000 & -123.2522 & 0.0000 & 0.0000 & 0.0000 \\
+0.0000 & 0.0000 & 1.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 \\
+0.0000 & -1.0000 & 0.0000 & 181.3000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 \\
+0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & -50.0000 & 0.0000 & 0.0000 & 0.0000 \\
+0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & -0.2000 & 0.0000 & 0.0000 \\
+0.0000 & 0.0000 & 0.0000 & 0.0000 & 1.2500 & 0.0000 & 0.0000 & -1.250 & 0.0000 \\
+20.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & -20.0000
+\end{bmatrix}\]
+And:
+\[B = \begin{bmatrix}
+0.0000 & 0.0000 \\
+0.0000 & 0.0000 \\
+0.0000 & 0.0000 \\
+0.0000 & 0.0000 \\
+0.0000 & 0.0000 \\
+50.0000 & 0.0000 \\
+0.0000 & 0.2000 \\
+0.0000 & 0.0000 \\
+0.0000 & 0.0000
+\end{bmatrix}\]
+
+** Controllability
+
+#+BEGIN_SRC octave :results output :exports none :session Q6 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q6.m
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load control
+end
+
+A = [...
+      -0.0002, 0.0013, -15.8623, -9.7727, 0.0000, 83.4038, 97.5694, 0.0000, 0.0000; ...
+      -0.0148, -0.0490, 181.3074, -0.8550, 0.0000, 537.5876, 0.0000, 0.0000, 0.0000; ...
+      0.0005, 0.0003, -0.0913, -0.0004, 0.0000, -123.2522, 0.0000, 0.0000, 0.0000; ...
+      0.0000, 0.0000, 1.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000; ...
+      0.0000, -1.0000, 0.0000, 181.3000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000; ...
+      0.0000, 0.0000, 0.0000, 0.0000, 0.0000, -50.0000, 0.0000, 0.0000, 0.0000; ...
+      0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, -0.2000, 0.0000, 0.0000; ...
+      0.0000, 0.0000, 0.0000, 0.0000, 1.2500, 0.0000, 0.0000, -1.250, 0.0000; ...
+      20.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, -20.0000 ...
+    ];
+B = [...
+      0.0000, 0.0000; ...
+      0.0000, 0.0000; ...
+      0.0000, 0.0000; ...
+      0.0000, 0.0000; ...
+      0.0000, 0.0000; ...
+      50.0000, 0.0000; ...
+      0.0000, 0.2000; ...
+      0.0000, 0.0000; ...
+      0.0000, 0.0000 ... 
+    ];
+Co = ctrb(A, B);
+rank(Co)
+#+END_SRC
+
+#+RESULTS:
+: ans = 6
+
+The rank of the controllability matrix is 6, so the system is controllable.
+
+** Mach Number Hold
+
+* 7. Model Predictive Control (MPC)
+/Implement a model predictive control system to execute an altitude-adjustment-and-hold command, taking the plane from its starting altitude of 30 000 ft and ending at an altitude of 32 000 ft. Note that in practice, the trim state changes here, but the linearised dynamics still provide a reasonable model of the system. As part of your response, show that the transfer function between the elevator angle and altitude is given approximately by $\frac{h(s)}{\delta_e(s)} = \frac{V_0}{s}\left(\frac{\theta(s)}{\delta_e(s)} - \frac{\alpha(s)}{\delta_e(s)}\right)$/
+
+
+
+

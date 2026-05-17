@@ -43,7 +43,9 @@
  - Week 12
  - Week 6 milestone
  - Aeroplane control system
- - [[id:ef0a1cbb-2d92-4e49-ba39-67265565cbfe][ENG417 - Control Systems 2 - Design Report]]
+ - [[id:ef0a1cbb-2d92-4e49-ba39-67265565cbfe][ENG417 - Control Systems 2 - Design Report 1]]
+ - [[id:1eece1ca-8bf1-48c4-aec3-405764a8097a][ENG417 - Control Systems 2 - Design Report 2]]
+ - ~deltaU = quadprog(E_0, F_0, M, gamma)~
    
 ** Final Exam
  - 40%
