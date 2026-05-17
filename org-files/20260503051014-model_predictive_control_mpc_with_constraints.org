@@ -535,3 +535,205 @@ Y_{\max} - Fx[k]
 \[M \Delta U \leq \gamma\]
 Can use $\hat{x}[k]$ if observer included
 
+** Overview
+
+*** Constraints on Rate-of-Change-of-Controller
+\[\begin{bmatrix}
+-I_m & 0 & \hdots & 0 \\
+I_m & 0 & \hdots & 0 \\
+\end{bmatrix}\Delta U \leq
+\begin{bmatrix}
+-U_{\min} \\
+U_{\max}
+\end{bmatrix}\]
+*** Constraints on Controller Magnitude
+\[\begin{bmatrix}
+-I_m & 0 & \hdots & 0 \\
+I_m & 0 & \hdots & 0 \\
+\end{bmatrix}\Delta U \leq
+\begin{bmatrix}
+-U_{\min} + I_{N_p} u[k-1] \\
+U_{\max} - I_{N_p} u[k-1] \\
+\end{bmatrix}\]
+*** Constraints on Plant Output
+\[\begin{bmatrix}
+-\Phi \\
+\Phi
+\end{bmatrix}\Delta U \leq
+\begin{bmatrix}
+-Y_{\min} + F x[k] \\
+Y_{\max} - F x[k] \\
+\end{bmatrix}\]
+
+** Example
+Plant is deserved by:
+\[G(s) = \frac{10}{s^2 + 0.1s + 3}\]
+Assume sampling time of $\Delta t = 0.1s$. Design a discrete time MPC system with $N_c = 3$, $N_p = 20$, $R = 0.01I$.
+A constraint is applied on the rate-of-change of control signal:
+\[-1.5 \leq \Delta u[k] \leq 3.0\]
+Assume the system starts at rest ($x[0] = \underline{0}$), and apply a unit step input as the reference.
+
+*** Solution
+Convert to state space form:
+\[\dot{x} = \begin{bmatrix}
+-0.1 & -3 \\
+1 & 0
+\end{bmatrix}x + \begin{bmatrix}
+1 \\
+0
+\end{bmatrix}u\]
+\[y = \begin{bmatrix}
+0 & 10
+\end{bmatrix}x\]
+
+Convert to discrete form:
+\begin{align*}
+A_m(T_s) &= [\hdots] \\
+B_m(T_s) &= [\hdots] \\
+C_m(T_s) &= [\hdots]
+\end{align*}
+
+Augment the system by defining:
+\[x = \begin{bmatrix}
+\Delta x_m \\ y
+\end{bmatrix}\]
+then:
+\[A = \begin{bmatrix}
+A_m & 0 \\
+C_mA_m & 1
+\end{bmatrix} = [\hdots]\]
+\[B = \begin{bmatrix}
+B_m \\
+C_mB_m
+\end{bmatrix} = [\hdots]\]
+\[C = \begin{bmatrix}
+0 & 0 & 1
+\end{bmatrix} = [\hdots]\]
+
+The objective function is:
+\[J = (R_s - Y)^T(R_s - Y) + \Delta U^T R\Delta U\]
+Where $Y = Fx[k_i] + \Phi\Delta U$
+For which the optimal control is:
+\[\Delta U_{opt} = (\Phi^T\Phi + R)^{-1}\Phi^T(R_s - Fx[k_i]) = E_0^{-1} F_0\]
+
+Here:
+\[F &= \begin{bmatrix}
+CA \\
+CA^2 \\
+\vdots \\
+CA^{N_p}
+\end{bmatrix} = [\hdots]\]
+ - $20\times 3$
+   - $N_p$ by number of states
+
+\[\Phi &= \begin{bmatrix}
+CB & 0 & 0 & 0 & 0 \\
+CAB & CB & 0 & 0 & 0 \\
+CA^2B & CAB & CB & 0 & 0 \\
+\vdots & \vdots & \vdots & \vdots & \vdots \\
+CA^{N_p-1}B & CA^{N_p-2}B & CA^{N_p-3}B & \hdots & CA^{N_p-N_c}B
+\end{bmatrix} = [\hdots]\]
+ - $20\times 3$
+   - $N_p\times N_c$
+
+\[R_s = \begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1
+\end{bmatrix} r[k_i] = \begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1
+\end{bmatrix}\]
+ - $N_P\times 1$
+ - $r[k_i]$ is a unit step
+
+We need to write $M$ and $\gamma$ also:
+\begin{align*}
+-1.5 &\leq \Delta u[k] &\leq 3.0 \\
+-1.5 &\leq \Delta u[k] & \Delta u[k]\leq 3.0 \\
+-u[k] &\leq 1.5 \\
+\end{align*}
+
+\[\begin{bmatrix}
+-I_m & 0 & \hdots & 0 \\
+I_m & 0 & \hdots & 0 \\
+\end{bmatrix}\Delta U \leq
+\begin{bmatrix}
+-U_{\min} \\
+U_{\max}
+\end{bmatrix} = \begin{bmatrix}
+-1 & 0 & 0 \\
+1  & 0 & 0 \\
+\end{bmatrix}\begin{bmatrix}
+\Delta u[k] \\
+\Delta u[k+1] \\
+\Delta u[k+2]
+\end{bmatrix} \leq
+\begin{bmatrix}
+1.5 \\
+3.0
+\end{bmatrix}\]
+\[M \Delta U \leq \gamma\]
+
+Note we can establish $E_0$ and $F_0$:
+\[E_0 = 2(\Phi^T\Phi + RI) = [\hdots]\]
+\[F_0 = 2\Phi^Tx[k] - 2\Phi^TR_s = [\hdots]\]
+ - For first time step $x$ is a zero vector
+
+The unconstrained optimum:
+\[\Delta U_{opt} = -E_0^{-1}F_0 = [\hdots]\]
+
+Checking against the constraint:
+\[M\Delta U_{opt} = \begin{bmatrix} -3.741 \\ 5.741\end{bmatrix} \leq \gamma\]
+ - Second constraint is violated as $5.741 \nleq 3.0$
+   
+To verify the optimal constrained $\Delta U$, use Hildreth's procedure:
+\[P_0 = ME_0M^T = [\hdots] = \begin{bmatrix}
+p_{11} & p_{12} \\
+p_{21} & p_{22}
+\end{bmatrix}\]
+\[K_0 = \gamma + ME_0^{-1}F_0 = [\hdots] = \begin{bmatrix}
+k_1 \\
+k_2
+\end{bmatrix}\]
+
+_Hildreth's Procedure:_
+\[\lambda_i^{m+1} = \max(0, w_i^{m+1})\]
+\[w_i^{m+1} = -\frac{1}{p_{ii}}\left[k_i + \sum_{j=1}^{i-1}p_{ij}\lambda_j^{m+1} + \sum_{j=i+1}^np_{ij}\lambda_j^m\right]\]
+ - $m$: iterate
+ - $i$: count of Lagrange multipliers
+
+_$m=0$:_
+$\lambda_1 = 0$, $\lambda_2 = 0$
+_$i=1$:_
+\[w_1^1 = -\frac{1}{p_{11}}\left[k_1 + \sum_{j=1}^{1-1}p_{1j}\lambda_j^{0+1} + \sum_{j=1+1}^np_{1j}\lambda_j^0\right] = -\frac{1}{5.665}\left[5.240 + 0 + -5.665\cdot 0\right] = -0.925\]
+\[\lambda_1^{1} = \max(0, w_1^{1}) = \max(0, -0.925) = 0\]
+
+_$i=2$:_
+\[w_2^1 = -\frac{1}{p_{22}}\left[k_2 + \sum_{j=1}^{2-1}p_{2j}\lambda_j^{0+1} + \sum_{j=2+1}^np_{2j}\lambda_j^0\right] = 0.1306\]
+\[\lambda_2^{1} = \max(0, w_1^{1}) = \max(0, 0.1306) = 0.1306\]
+
+_$m=1$:_
+$\lambda_1^0 = 0$, $\lambda_2^0 = 0.1306$
+_$i=1$:_
+\[w_1^2 = -0.286\]
+\[\lambda_1^{2} = 0\]
+
+_$i=2$:_
+\[w_2^2 = 0.1306\]
+\[\lambda_2^{2} = 0.1306\]
+
+No change from $m = 0$ to $m = 1$so, we are done.
+We have convergence at $\lambda_1 = 0$ and $\lambda_2 = 0.1306$. So,
+\[\Lambda^{*} = \begin{bmatrix}
+0 \\
+0.1306
+\end{bmatrix}\]
+We apply those:
+\[\Delta U_{opt}^{*} = -E_0^{-1}F_0 - E_0^{-1}M^T\lambda^{*} = [\hdots]\]
+
+We apply:
+\[u[0] = [1\ 0\ 0]\Delta U_{opt} = 3.0\]
