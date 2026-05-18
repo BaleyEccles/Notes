@@ -1,0 +1,84 @@
+:PROPERTIES:
+:ID:       da8e3161-b92b-4bec-9e04-cd8ee696baeb
+:END:
+#+title: Robust Control & Stability Margins
+#+date: [2026-05-18 Mon 09:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Robust Control & Stability Margins
+Robustness: "The ability of a system to operate adequately despite imperfections"
+ - [[id:79b422d5-ff34-41ab-8b86-67e6ecfc68ad][Bode Plots]]
+   
+** Stability Margins
+Looking at a [[id:58f545f0-abf6-483d-8b44-046bad7f38a6][Feedback System]]
+\[\frac{Y(j\omega)}{R(j\omega)} = \frac{G(j\omega)}{1 + L(j\omega)\]
+ - $L(j\omega) = G(j\omega)H(j\omega)$
+
+As $1 + L(j\omega) \rightarrow 0$, we get instability.
+\[\Rightarrow |L(j\omega)| = 1\]
+and
+\[\angle L(j\omega) = -180^o = 0\ dB\]
+
+If $|L(j\omega)| > 1$ when $\angle L(j\omega)$ crosses $-180^o$, we have an instability.
+
+$(|L|, \angle L) = (1, -180^o)$ is the _critical point_ for closed loop instability.
+
+The _gain crossover frequency_ $\omega_{gc}$ satisfies $L(j\omega_{gc}) = 1$.
+If $\angle L(j\omega_{gc}) = -180^o$, we would be unstable. So, the _phase margin_ $\Phi_M$ measures:
+\[\Phi_M = \angle L(j\omega_{gc}) + 180^o\]
+ - $\Phi_M > 0$ indicates stability
+
+The _phase crossover frequency_ $\omega_{pc}$ satisfies $\angle L(j\omega) = -180^o$
+So the gain margin, $G_M$, measures:
+\[G_M = -20\log_{10}(L(j\omega))\]
+
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Stability_Margin.xopp]]
+
+*** Example
+Major loop and minor loop
+\[G_1(s) = \frac{1}{s(s+5)(s+15)}\]
+Minor loop:
+ - $H_1(s) = K_fs$, in loop
+Major loop
+ - $K$, in line
+$K_f = 81.25$, $K = 624.3$
+What are $G_M$ and $\Phi_M$
+
+**** Solution
+Forward path:
+\[G(s) = 624.3\frac{G_1}{1 + G_1H_1} = \frac{624.3}{s^3 + 20s^2 + 156.25s}\]
+
+\[L(s) = G(s)H(s) = G(s)1 = G(s)\]
+
+Phase crossover: $\omega_{pc}$, $\angle L(j\omega) = -180^o$
+\begin{align*}
+\angle L(j\omega) &= \angle(624.3) - \angle((j\omega_{pc})^2 + 20(j\omega_{pc})^2 + 156.25(j\omega_{pc})) \\
+-180^o &= 0^o - \angle(-20\omega_{pc}^2 + j(156.25 \omega_{pc} - \omega_{pc}^3)) \\
+-180^o &= -\tan^{-1}\left(\frac{156.25\omega_{pc} - \omega_{pc}^2}{-20\omega_{pc}^2}\right) \\
+0 &= 156.25\omega_{pc} - \omega_{pc}^2 \\
+\omega_{pc} &= 12.5
+\end{align*}
+
+Find $|L(j\omega_{pc})|$
+\begin{align*}
+|L(j\omega_{pc})| &= \frac{624.3}{\sqrt{(20\omega_{pc}^2)^2 + (156.25\omega_{pc} - \omega_{pc}^3)^2}} \\
+&= 0.2 \\
+&= -14.0\ dB \\
+\therefore G_M &= -(20\log_{10}(0.2)) = +14.0\ dB
+\end{align*}
+
+Find gain crossover frequency: $|L(j\omega_{gc})| = 1$
+\begin{align*}
+|L(j\omega_{gc})| &= 1 \\
+1 &= \frac{624.3}{\sqrt{(20\omega_{gc}^2)^2 + (156.25\omega_{gc} - \omega_{gc}^3)^2}} \\
+\omega_{gc} &= 3.875\ rad/s
+\end{align*}
+
+Then, $\angle L(j\omega_{gc})$
+\begin{align*}
+\angle L(j\omega_{gc}) &= \hdots \\
+&= -118.8^o \\
+\therefore \Phi_M &= -118.8^o + 180^o \\
+\Phi_M &= 61.2^o
+\end{align*}

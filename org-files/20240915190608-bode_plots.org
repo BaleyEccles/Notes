@@ -24,4 +24,43 @@
 [[./Bode_Freq.png]]
 *** Phase
 [[./Bode_Phase.png]]
+** Example
+\[G(s) = 500\frac{s + 3}{(s + 1)(s + 50)}\]
+Plot $|G(j\omega)|$ and $\angle G(j\omega)$
+*** Magnitude
+\[|G(0)| = 500\frac{3}{50} = 150\]
+\[|G(0)|_{dB} = 20\log_{10}(150) = 43.5\ dB\]
+
+Poles: $\omega = 1$, $\omega = 50$
+ - $-20\ dB/dec$
+Zero: $\omega = 3$
+ - $+20\ dB/dec$
+
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Bode_Plot_Magnitude_Example.xopp]]
+*** Phase
+Initial phase:
+\[G(j\omega) = 500\frac{j\omega + 3}{(j\omega + 1)(j\omega + 50)}\]
+Poles:
+ - $\omega = 1$
+   - $\omega = 1/10$
+     - ON
+   - $\omega = 1\cdot 10 = 10$
+     - OFF
+   - $-45^o/dec$
+ - $\omega = 50$
+   - $\omega = 50/10 = 5$
+     - ON
+   - $\omega = 50\cdot 10 = 500$
+     - OFF
+   - $-45^o/dec$
+Zero: $\omega = 3$
+ - $+20\ dB/dec$
+   - $\omega = 3/10$
+     - ON
+   - $\omega = 3\cdot 10 = 30$
+     - OFF
+   - $+45^o/dec$
+Two poles, one zero therefore end at $-90^o$
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Bode_Plot_Phase_Example.xopp]]
+
 

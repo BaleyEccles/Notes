@@ -103,7 +103,7 @@ Use [[id:58f545f0-abf6-483d-8b44-046bad7f38a6][Feedback Systems]], but with $s =
 It is reasonable to use when:
 \[\frac{0.15}{\omega_{\Phi_M}} < T_s < \frac{0.5}{\omega_{\Phi_M}}\]
  - $\omega_{\Phi_M}$ is when the $|G_cG_p|dB$ - $\omega$ plot crosses zero
-   - [[id:0d927ec6-5c0d-497c-b054-43d5d88f8300][Gain/Phase Margin]]
+   - [[id:da8e3161-b92b-4bec-9e04-cd8ee696baeb][Robust Control & Stability Margins]]
 
 *** Example
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/Digital_Gain_Design_Controller.xopp]]

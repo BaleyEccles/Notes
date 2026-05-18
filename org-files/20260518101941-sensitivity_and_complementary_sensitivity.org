@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       dabb699a-0ded-4b33-8c07-53f9ce562e2d
+:END:
+#+title: Sensitivity and Complementary Sensitivity
+#+date: [2026-05-18 Mon 10:19]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* [[id:f5694854-e8a8-4805-822d-439df11bb95e][Sensitivity]] and Complementary Sensitivity
+Disturbance ($D(s)$) after controller ($C(s)$) and noise ($N(s)$) after plant, with feedback
+
+** Gang of Four
+\[S(s) = \frac{1}{1  + G(s)C(s)}\]
+ - Sensitivity Function
+\[T(s) = \frac{G(s)C(s)}{1 + G(s) C(s)}\]
+ - Complementary Sensitivity Function
+ - $S(s) + T(s) = 1$
+\[G(s)S(s) = \frac{G(s)}{1 + G(s) C(s)}\]w
+ - Load Sensitivity Function
+\CG(s)S(s) = \frac{C(s)}{1 + G(s) C(s)}\]w
+ - Noise Sensitivity Function
+
+*** Sensitivity Function
+Represents how _disturbances_ and _plant uncertainty_ propagate to the output.
+
+*** Complementary Sensitivity Function
+Represents how _references_ and _noise_ propagate to the output.
+
+** Bandwidth
+ - Disturbance rejection sets a lower bound on the controller bandwidth ($|T(\omega)| > \frac{1}{\sqrt{2}}$)
+ - Noise rejection sets an upper bound on the controller bandwidth
+
+** Model Uncertainty
+Small variations.
+\[\frac{dT(s)}{T(s)} = S(s) \frac{dG(s)}{G(s)}\]
+
