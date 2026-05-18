@@ -45,28 +45,38 @@ u \\ w \\ q \\ \theta
 
 * 5. LQR regulator
 /Design an LQR regulator that produces a desirable wing leveller control system./
-:TODO: I don't think this correct, it should be harder than this
 Lets choose:
 \[Q = \begin{bmatrix}
 0 & 0 & 0 & 0 \\
-0 & 50 & 0 & 0 \\
+0 & 10 & 0 & 0 \\
 0 & 0 & 0 & 0 \\
-0 & 0 & 0 & 200
+0 & 0 & 0 & 50
 \end{bmatrix}\]
 And
 \[R = \begin{bmatrix}
-1 & 0 \\
-0 & 1
+1
 \end{bmatrix}\]
-This applies a large weighting to $\phi$ (wing level), lesser weighting to the $p$ (rate of change of wing level), and apply no weighting to the other two angular velocities.
+This applies a large weighting to $\phi$ (wing level), lesser weighting to the $p$ (roll rate), and apply no weighting to the other states.
 
 #+BEGIN_SRC octave :results output :exports none :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q5.m
-%% Aircraft matrices
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load control
+end
+
 A = [...
       -3.4367, 16.3088, -180.6900, 9.7727 ; ...
       -23.2336, -1.3654, 0.2569, 0.0000 ; ...
       0.3220, -0.0313, -0.1835, 0.0000 ; ...
       0.0000, 1.0000, 0.0000, 0.0000];
+
+% Aileron input only
 B = [...
     0.0000; ...
     7.2348; ...
@@ -74,28 +84,212 @@ B = [...
     0.0000];
 
 %% Weighting matrices
-Q = diag([0 50 0 200]);
-R = diag([1 1]);
+Q = diag([0, 10, 0, 50]);
+R = 50;
 
 %% LQR gain
-K = lqr(A,B,Q,R);
+K = lqr(A, B, Q, R)
 
 %% Closed-loop matrix
 Acl = A - B*K;
 
-%% Eigenvalues
+%% Closed-loop eigenvalues
 eig(Acl)
 
 %% Simulation
-sys_cl = ss(Acl,B,eye(4),zeros(4,2));
+sys_cl = ss(Acl, zeros(4,1), eye(4), zeros(4,1));
 
 t = 0:0.01:20;
 
-x0 = [5*pi/180 0 0 10*pi/180];
+                                % Small roll
+%% Initial condition:
+x0 = [5*pi/180; 0; 0; 10*pi/180];
 
-initial(sys_cl,x0,t)
+initial(sys_cl, x0, t)
 grid on
+legend('\beta', 'p', 'r', '\phi')
+title('LQR Wing Leveller Small Roll Response')
+xlabel('Time [s]')
+ylabel('State response')
+
+%% Small Roll Aileron deflection
+[y, t, x] = initial(sys_cl, x0, t);
+
+delta_a = -x*K'*180/pi;
+
+figure
+plot(t, delta_a)
+grid on
+xlabel('Time [s]')
+ylabel('\delta_a [deg]')
+title('Small Roll - Aileron Deflection')
+
+%% Small Roll - Aileron deflection rate
+delta_a_rate = gradient(delta_a, t);
+
+figure
+plot(t, delta_a_rate)
+grid on
+xlabel('Time [s]')
+ylabel('$\dot{\delta}_a$ [deg/s]', 'interpreter', 'latex')
+title('Small Roll - Aileron Deflection Rate')
+
+                                % Large roll
+x0 = [0; 0; 0; 40*pi/180];
+
+initial(sys_cl, x0, t)
+grid on
+legend('\beta', 'p', 'r', '\phi')
+title('LQR Wing Leveller Large Roll Response')
+xlabel('Time [s]')
+ylabel('State response')
+
+%% Large Roll Aileron deflection
+[y, t, x] = initial(sys_cl, x0, t);
+
+delta_a = -x*K'*180/pi;
+
+figure
+plot(t, delta_a)
+grid on
+xlabel('Time [s]')
+ylabel('\delta_a [deg]')
+title('Large Roll - Aileron Deflection')
+
+%% Large Roll - Aileron deflection rate
+delta_a_rate = gradient(delta_a, t);
+
+figure
+plot(t, delta_a_rate)
+grid on
+xlabel('Time [s]')
+ylabel('$\dot{\delta}_a$ [deg/s]', 'interpreter', 'latex')
+title('Large Roll - Aileron Deflection Rate')
 #+END_SRC
+
+#+RESULTS:
+#+begin_example
+error: package control is not installed
+error: called from
+    load_packages at line 47 column 7
+    pkg at line 712 column 7
+error: 'is_real_scalar' undefined near line 65, column 14
+error: called from
+    issample at line 65 column 7
+    lqr at line 92 column 7
+error: 'K' undefined near line 1, column 13
+error: 'Acl' undefined near line 1, column 5
+error: 'Acl' undefined near line 1, column 13
+error: 'sys_cl' undefined near line 1, column 9
+error: legend: no valid object to label
+error: called from
+    legend>parse_opts at line 777 column 7
+    legend at line 216 column 3
+#+end_example
+
+** Results
+This provides gains of:
+\[K = [-0.0505\ 0.2073\ 4.8324\ 0.6889]\]
+
+This means the control law is:
+\[\delta_a = −0.0505\beta, 0.2073p, 4.8324r, 0.6889\phi\]
+
+And the eigenvalues are:
+\[\lambda = -2.2934 \pm 20.7639j,\ 1.1429 \pm 0.6648j\]
+
+Notably, all the eigenvalues have $\Re\{\lambda\} < 0$, so the system is stable.
+
+** Plots
+*** Small Roll and Roll Rate
+ - With the initial conditions of $\beta = 5^o,\ p = 0\ r = 0\ \phi = 10^o$.
+
+Looking at the plots in Figure :TODO: we can see that all of the responses settle around the 4 second mark, with the exception of the first state which settles much quicker at 2 seconds. The 4^{th} (:TODO: I dont know if this will look good) state (wing level $\phi$) smoothly reaches zero, this is because of the large weighting in the $Q$ matrix. The 2^{nd} state (roll rate ($p$)) has an initial oscillation before smoothly settling to zero, this is also because of the weighting in the $Q$ matrix. The sideslip angle ($\beta$) and yaw rate ($r$) are not directly penalised in the selected $Q$ matrix. However, they are still affected through the coupled aircraft dynamics and the feedback gain $K$, so they also decay to zero in the closed-loop response. \\
+
+Looking at Figure :TODO: (:TODO: \delta_a aileron deflection) we can see that the angle does not exceed $\pm 30^o$, which was the limits of the provided plane, so in this factor the controller is capable of achieving the desired outcome. The plot shows low magnitude high frequency oscillation amongst the settling, this poses the question about the deflection rate, this can be seen in Figure :TODO:. It can be seen that the maximum deflection rate of the aileron is $32^o/s$, this is once again below the maximum of $90^o/s$. There are considerable oscillation in the aileron deflection rate, however no maximum aileron deflection acceleration is provided, so this can be assumed to possible.
+
+*** Large Roll
+ - With the initial conditions of $\beta = 0,\ p = 0\ r = 0\ \phi = 40^o$.
+
+Looking at Figure :TODO: we can see that the response is the same just scaled, which is expected as this is a linear system. Looking at the aileron deflection in Figure :TODO: we can see that it almost reaches the maximum of $-30^o$, likewise with Figure :TODO: the aileron deflection just barely goes of there the maximum of $90^o/s$. This means that the controller is capable of handling roll angles approximately in the range $-40^o < \phi < 40^o$.
+
+The $40^o$ roll angle is large, however this may be encountered because it is a fighter jet. But, the response may not be indicative of the real response as this model is linearised around a trim point.
+
+** Stability Margins
+Looking at the stability margins we would expect the gain margin to be infinite ($G_M = \infty$) and the phase margin to be greater than sixty degrees ($\Phi_M > 60^o$), as this is a LQR regulator.
+
+We can get the $L$ function to find the gain and phase margin, it works out to be:
+\begin{align*}
+L &= K(sI - A)^{-1}B \\
+\begin{bmatrix}
+\dot{\beta} \\
+\dot{p} \\
+\dot{r} \\
+\dot{\phi}
+\end{bmatrix}
+&=
+\begin{bmatrix}
+-3.437 & 16.31 & -180.7 & 9.773 \\
+-23.23 & -1.365 & 0.2569 & 0 \\
+0.322 & -0.0313 & -0.1835 & 0 \\
+0 & 1 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+\beta \\
+p \\
+r \\
+\phi
+\end{bmatrix}
++
+\begin{bmatrix}
+0 \\
+7.235 \\
+0.0801 \\
+0
+\end{bmatrix}
+\begin{bmatrix}
+\delta_a
+\end{bmatrix}
+\\[1em]
+\begin{bmatrix}
+L
+\end{bmatrix}
+&=
+\begin{bmatrix}
+-0.05051 & 0.2073 &  4.832 & 0.6889
+\end{bmatrix}
+\begin{bmatrix}
+\beta \\
+p \\
+r \\
+\phi
+\end{bmatrix}
++
+\begin{bmatrix}
+0
+\end{bmatrix}
+\begin{bmatrix}
+\delta_a
+\end{bmatrix}
+\end{align*}
+
+
+#+BEGIN_SRC octave :results output :exports none :session EQU_1 :tangle /home/baley/UTAS/ENG417 - Control Systems 2/Q5.m
+L = ss(A, B, K, 0)
+
+[GM, PM, Wcg, Wcp] = margin(L)
+
+%% In dB
+GM_dB = 20*log10(GM)
+
+%% Plot Bode
+figure
+margin(L)
+grid on
+title('Open-loop Stability Margins for LQR Wing Leveller')
+#+END_SRC
+
+The bode plot can be seen in Figure :TODO:. The gain margin is $G_M = \infty$ and the phase margin is $\Phi_M = 84.7^o$, both are as good as expected.
+
 
 * 6. Mach Number Hold Control System
 /Use controller pole-placement techniques to design a Mach Number hold control system./
@@ -219,6 +413,7 @@ rank(Co)
 The rank of the controllability matrix is 6, so the system is controllable.
 
 ** Mach Number Hold
+
 
 * 7. Model Predictive Control (MPC)
 /Implement a model predictive control system to execute an altitude-adjustment-and-hold command, taking the plane from its starting altitude of 30 000 ft and ending at an altitude of 32 000 ft. Note that in practice, the trim state changes here, but the linearised dynamics still provide a reasonable model of the system. As part of your response, show that the transfer function between the elevator angle and altitude is given approximately by $\frac{h(s)}{\delta_e(s)} = \frac{V_0}{s}\left(\frac{\theta(s)}{\delta_e(s)} - \frac{\alpha(s)}{\delta_e(s)}\right)$/
