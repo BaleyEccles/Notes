@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       0d0f84e7-bd6a-4128-a9db-19ca85ca0159
+:END:
+#+title: Reflections of EM Radiation
+#+date: [2026-07-11 Sat 16:42]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Reflections of EM Radiation
+Has waves $E$ (electrical) and $H$ (magnetic) in perpendicular directions and travel in $s$
+ - Reflected using [[id:e6de8110-daa6-4ccf-b02e-557d1c570e9b][Snell's Law]] and [[id:4b4c57f7-00f4-4e83-8c62-736ca7202183][Wave Reflection and Transmission at Oblique Angles]]
+ - Two cases
+   1. E-field in the plane of incidence
+   2. E-field perpendicular to the plane of incidence
+ We typically consider the first medium to be air ($\epsilon_1 = \epsilon_0$ and $\mu_1 = \mu_0$) and the second to be something else ($\epsilon_2 = \epsilon_r\epsilon_0$ and $\mu_2 = \mu_0$):
+ - \[\Gamma_{\|} = \frac{\epsilon_r\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\epsilon_r\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}}\]
+ - \[\Gamma_{\perp} = \frac{\sin(\theta_i) - \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}}\]

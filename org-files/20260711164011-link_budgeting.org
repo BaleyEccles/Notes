@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       4362e842-7f04-4ca8-a88e-f183d5c00225
+:END:
+#+title: Link Budgeting
+#+date: [2026-07-11 Sat 16:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Link Budgeting
+The universal link budget:
+\[P_r[dBw] = P_t[dBw] + \sum dB\ Gains - \sum dB\ Losses\]
+For SNR:
+\[\frac{S}{N} = P_r[dBw] - P_N[dBw] = P_t[dBw] + \sum dB\ Gains - \sum dB\ Losses - P_N[dBw]\]
+Receiver sensitivity = $P_N[dB] + \frac{S}{N}[dB]$

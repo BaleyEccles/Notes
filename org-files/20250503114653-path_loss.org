@@ -9,3 +9,56 @@
 * Path Loss
 \[PL[dB] = 10 \alpha \log_{10}\left(\frac{d}{d_0}\right)\]
  - $\alpha$ is the path loss index
+   
+\[PL = 10\log_{10}\left(\frac{P_t}{P_r}\right)\]
+\[PL = 10\log_{10}(L_p) - G_t[dBi] - G_r[dBi]\]
+ - $L_p = \frac{(4\pi)^2 d^2}{\lambda^2}$
+ - With $L = 1$
+   
+** Free Space PL
+\[\propto \frac{1}{d^2}\]
+** Two-Ray PL
+\[\propto \frac{1}{d^4}\]
+** More Generally
+\[P_r(d) \propto \frac{P_t}{d^n}\]
+\[P_r(d) = \frac{P_t}{L_0\frac{d}{d_0}^n}\]
+ - Environmental path loss model
+ - $P_t$ Transmitter power
+ - $d$ Tx-Rx distance
+ - $d_0$ Reference distance (eg 1m)
+ - $L_0$ Constant calculated based on measurements at distances $d_0$
+ - $n$ Path loss index/exponent (ranging from $1.5 \rightarrow 7$)
+This can be written as:
+\[L_p[dB] = L_0[dB] + 10 n \log_{10}(\frac{d}{d_0})\]
+ - Where $L_p[dB]$ is the path loss component alone
+Other profiles are possible:
+
+\[L_p[dB] = nd\]
+ - (Exponential loss)
+   
+Okumura Model: widley used in urban areas
+\[L_p[dB] = L_F + A_{mu}(f,d) - G(h_{te}) - G(h_{re}) - G_{AREA}\]
+ - $L_F$ Free space path loss
+ - $A_{mu}$ median attenuation relative to free space
+ - $G(h_{te}) = 20\log_{10}(\frac{h_{te}}{200})$
+   - $30m < h_{te} < 1000m$
+ - $G(h_{re}) = 10\log_{10}(\frac{h_{re}}{3})$
+   - $h_{re} < 3m$
+ - $G(h_{re}) = 20\log_{10}(\frac{h_{re}}{3})$
+   - $ 3 < h_{re} < 10m$
+ - $G_{AREA}$ Gain due to environment
+
+Hata Model (empirical formulation of Okumura)
+\[L_p[dB] = 69.55 + 26.161\log(f_c) - 13.82\log_{10}(h_{te}) - a(h_{re}) + (44.9 - 6.55\log_{10}(h_{te}))\log_{10}(d)\]
+
+Where for small-medium sized urban areas:
+\[a(h_{re}) = (1.1\log_{10}(f_c) - 0.7)h_{re} - (1.56\log_{10}(f_c) - 0.8)\ dB\]
+For large cities:
+\[a(h_{re}) = \begin{cases}
+8.29(\log_{10}(1.54h_{re}))^2 - 1.1\ dB &,\ f \leq 300 MHz \\
+3.2(\log_{10}(11.75h_{re}))^2 - 4.97\ dB &,\ f > 300 MHz
+\end{cases}\]
+Rural areas:
+\[L_p[dB] = L_p[dB, urban] - 4.78(\log_{10}(f_c))^2 + 18.33\log_{10}(f_c) - 40.94\]
+
+$f_c$ is measured in MHz for all Hata Models

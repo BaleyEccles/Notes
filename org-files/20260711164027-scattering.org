@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       eb41cb2a-6982-445e-a882-8bfc5570c4e7
+:END:
+#+title: Scattering
+#+date: [2026-07-11 Sat 16:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Scattering
+ - Max extent
+ - Min extent
+ - $h = $ protuberance
+Expect scattering if:
+\[h_c = \frac{\lambda}{8\sin(\theta_i)}\]
+If $h > h_c$, expect scattering
+** Impacts
+1. Reduce received power
+2. Increase in multi path component
+
+For point 1, if the surface is rough, the reflection coefficient is modified $Gamma_{rough} = \rho_s\Gamma$, where
+\[\rho_s = \left[e^{-8\frac{\pi \sigma_h \sin(\theta_i)}{\lambda}^2}\right]I_0(8\frac{\pi \sigma_h \sin(\theta_i)}{\lambda}^2)\]
+ - $\sigma_h$ standard deviation of protuberance heights
+ - $I_0(x) = \frac{1}{2\pi} \int_{-\pi}^{\pi}e^{x\cos(\theta)}d\theta$
+   - Modified zeroth order Benel function of first kind
+

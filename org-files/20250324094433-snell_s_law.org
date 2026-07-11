@@ -18,3 +18,9 @@
  - If $\theta_i > \theta_c$
  - None of the wave will be transmitted into the media
  - \[\sin(\theta_i) = \frac{n_2}{n_1}\]
+** Internal Angle
+\[\sqrt{\mu_1\epsilon_1}\sin(90^o - \theta_i) = \sqrt{\mu_2\epsilon_2}\sin(90^o - \theta_t)\]
+ - $\theta_i = \theta_r$
+So,
+ - \[E_r = \Gamma E_i\]
+ - \[E_t = (1 + \Gamma)E_i\]

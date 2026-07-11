@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       869c16a1-5431-42f1-a200-b59e9785af7d
+:END:
+#+title: ENG405 - Communication Systems 2
+#+date: [2026-07-11 Sat 12:28]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Notes
+ - [[id:d265fa3b-0fc5-4726-9c6c-bb739453f47a][ENG308 - Communication Systems 1]]
+\[P_R = \frac{P_zG_tG_r\lambda^2}{(4\pi)^2d^2L}\]
+ - $P_t$ Transmit power
+ - $G_t$ Tx antenna gain
+   - $G = \frac{4\pi A}{\lambda^2}$
+ - $G_r$ Rx antenna gain
+   - $G = \frac{4\pi A}{\lambda^2}$
+ - $\lambda$ Carrier wavelength
+   - $\lambda = \frac{c}{f_c}$
+   - $c = 3\times 10^8$ (speed of light)
+ - $d$ Tx-Rx distacne
+ - $L$ System loss factor
+   
+[[id:02bfbdda-9313-461d-b699-4a96f5c1f9d2][Reference distance d0]]
+[[id:406cc66e-e15e-45d3-9a59-548f11bef0e2][Effective Isotropic Radieated Power (EIRP)]]
+[[id:71813bb9-a0ae-459a-b6b8-49fcbea3462c][Two-Ray Reflection Model]]
+[[id:0d0f84e7-bd6a-4128-a9db-19ca85ca0159][Reflections of EM Radiation]]
+[[id:5c7a2564-4736-445c-b417-bc5fe2920203][Diffraction]]
+[[id:244088d2-641b-4711-a24b-034f0f5af679][Fresnel Zone]]
+[[id:eb41cb2a-6982-445e-a882-8bfc5570c4e7][Scattering]]
+[[id:4362e842-7f04-4ca8-a88e-f183d5c00225][Link Budgeting]]
+[[id:5f52ce94-c82b-4d58-82a9-4fe4598fda29][Path Loss]]
+[[id:2b5bb5b6-3dcf-41df-8973-9ed0d856ad73][Log-Normal Shadowing]]
+
+* Diagram
+:TODO:
+* Assessment
+** Simulation Project 1
+ - Due Week 6
+** Mid Semester Test
+ - Due Week 8
+** Simulation Project 2
+ - Due Week 9
+** Simulation Project 3
+ - Due Week 12
+** Exam

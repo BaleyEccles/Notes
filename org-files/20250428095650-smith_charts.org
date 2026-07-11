@@ -19,7 +19,7 @@ Circle of radius $r_l$
 
 ** Location of Voltage Maxima/Minima
 Occurs when the VSW circle passes the real axis.
-Max distance: $d_{max} = 0.25\lambda - \angle\lambda$
+Max distance: $d_{max} = 0.25\lambda - \angle\Gamma \lambda$
 Min distance: $d_{max} = 0.5\lambda - \angle\lambda = d_{max} + 0.25\lambda$
 
 ** [[id:0850f22d-b384-4606-a3be-d262e8980559][Admittance]]

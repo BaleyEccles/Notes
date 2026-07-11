@@ -54,7 +54,10 @@ The wave impedance is $Z(d)$
 ** Input Impedance
 $z(d)\vert_{d = l}$ is the Input Impedance at the input end of the transmission line
  - \[Z_{in} = Z_{0}\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)}\]
- - \[V_{in} = I_{in}Z_{in} = \frac{V_gV_{in}}{Z_g + Z_{in}}\]
+   - \[\beta = \frac{2\pi}{\lambda}\]
+   - \[\lambda = \frac{v_p}{f}\]
+     - $v_p = 3\times 10^8$ in air
+ - \[V_{in} = I_{in}Z_{in} = \frac{V_gZ_{in}}{Z_g + Z_{in}}\]
 
 ** Example
 [[xopp-pages:/home/baley/UTAS/org-roam/org-files/Reflection Coefficient of an RC Series Load.xopp]]

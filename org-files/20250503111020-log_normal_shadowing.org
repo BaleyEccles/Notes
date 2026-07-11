@@ -12,7 +12,11 @@ Conversion to [[id:d041a889-d4af-4598-8434-866ecc7ce005][Decibels]] will result 
 
 [[id:5f52ce94-c82b-4d58-82a9-4fe4598fda29][Path Loss]] occur in [[id:97a0e6e7-0a41-4597-9897-df6785384d70][Electromagnetic Waves]] 
 
-* Fade Margin
+\[P_r[dBm] = P_t[dBm] - L_p[dB] + X_{\sigma}\]
+ - $X_{\sigma} = N\{0, \sigma^2\}$
+\[\Pr(P_r(d) > \gamma) = Q\left(\frac{\gamma-\overline{P_r(d)}}{\sigma}\right)\]
+* Shadow Fade Margin (SFM)
 Distance from the average power to $\gamma$
 \[\Pr(\gamma < P_r) = Q\left(\frac{\gamma-P_r}{\sigma}\right) = X\%\]
+We can use a Q table to solve this
 

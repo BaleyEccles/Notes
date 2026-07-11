@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       406cc66e-e15e-45d3-9a59-548f11bef0e2
+:END:
+#+title: Effective Isotropic Radieated Power (EIRP)
+#+date: [2026-07-11 Sat 12:35]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Effective Isotropic Radieated Power (EIRP)
+\[EIRP = P_T G_t\]
+Isotropic antenna has $G=1 = 0dBi$
+Half-wave dipole antenna has $G=1.64 = 2.15dBi = 0dBd$

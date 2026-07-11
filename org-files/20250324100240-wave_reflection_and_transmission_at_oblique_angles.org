@@ -22,4 +22,3 @@ We can use [[id:e6de8110-daa6-4ccf-b02e-557d1c570e9b][Snell's Law]] law to find 
  - \[\Gamma_{\|} = \frac{E_{\| 0}^r}{E_{\| 0}^i} = \frac{\eta_2\cos(\theta_i)-\eta_1\cos(\theta_t)}{\eta_2\cos(\theta_i)+\eta_1\cos(\theta_t)}\]
  - \[\tau_{\|} = \frac{E_{\| 0}^t}{E_{\| 0}^i} = \frac{2\eta_2\cos(\theta_i)}{\eta_2\cos(\theta_i)+\eta_1\cos(\theta_t)}\]
    - \[\tau_{\|} = (1 + \Gamma_{\|})\frac{\cos(\theta_i)}{\cos(\theta_t)}\]
-** TODO Example
