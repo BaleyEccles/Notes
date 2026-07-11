@@ -1,0 +1,105 @@
+:PROPERTIES:
+:ID:       6e4a22da-fc94-456d-afad-f7a647dd8f33
+:END:
+#+title: ENG439 - High Frequency Electronics - Tutorial 1
+#+date: [2026-07-09 Thu 18:15]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Question 1
+** a
+Using:
+\[Z_{in} = Z_{0}\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)}\]
+*** $Z_{in1}$
+\begin{align*}
+\beta &= \frac{2\pi}{\lambda} \\
+Z_{in1} &= Z_0\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)} \\
+Z_{in1} &= 75\frac{80 + j75\tan(\frac{2\pi}{\lambda} 0.2\lambda)}{75 + j80\tan(\frac{2\pi}{\lambda} 0.2\lambda)} \\
+Z_{in1} &= (71.13 - 2.7j)\Omega
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1
+warning('off','all');
+pkg load symbolic
+syms lambda
+Z_in1 = 75*(80 + i*75*tan((2*pi/lambda)*0.2*lambda))/(75 + i*80*tan((2*pi/lambda)*0.2*lambda));
+latex(vpa(Z_in1, 4))
+#+END_SRC
+
+#+RESULTS:
+: 71.13 - 2.7 i
+
+*** $Z_{in2}$
+\begin{align*}
+\beta &= \frac{2\pi}{\lambda} \\
+Z_{in2} &= Z_0\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)} \\
+Z_{in2} &= 75\frac{100 + j75\tan(\frac{2\pi}{\lambda} 0.2\lambda)}{75 + j100\tan(\frac{2\pi}{\lambda} 0.2\lambda)} \\
+Z_{in2} &= (58.7 - 10.06j)\Omega
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1
+Z_in2 = 75*(100 + i*75*tan((2*pi/lambda)*0.2*lambda))/(75 + i*100*tan((2*pi/lambda)*0.2*lambda));
+latex(vpa(Z_in2, 4))
+#+END_SRC
+
+#+RESULTS:
+: 58.7 - 10.06 i
+
+** b
+\begin{align*}
+Z_L &= \frac{1}{\frac{1}{Z_{in1}} + \frac{1}{Z_{in2}}} \\
+Z_L &= (29.35 - 5.032j)\Omega
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1
+Z_L = 1/((1/Z_in1) + (1/Z_in2));
+latex(vpa(Z_L, 4))
+#+END_SRC
+
+#+RESULTS:
+: 29.35 - 5.032 i
+
+** c
+\begin{align*}
+\beta &= \frac{2\pi}{\lambda} \\
+Z_{in} &= Z_0\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)} \\
+Z_{in} &= 75\frac{(29.35 - 5.032j) + j75\tan(\frac{2\pi}{\lambda} 0.2\lambda)}{75 + j(29.35 - 5.032j)\tan(\frac{2\pi}{\lambda} 0.2\lambda)} \\
+Z_{in} &= (105.8 + 81.57j)\Omega
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1
+Z_in2 = 75*((29.35 - 5.032i) + i*75*tan((2*pi/lambda)*0.2*lambda))/(75 + i*(29.35 - 5.032i)*tan((2*pi/lambda)*0.2*lambda));
+latex(vpa(Z_in2, 4))
+#+END_SRC
+
+#+RESULTS:
+: 105.8 + 81.57 i
+
+
+
+** d
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG439_Tutorial_1_Q1_d.xopp]]
+
+** TODO e
+:TODO:
+Using:
+\[\Gamma = \frac{Z_L - Z_0}{Z_L + Z_0}\]
+We get
+** g
+Using:
+\[V_{in} = \frac{V_g Z_{in}}{Z_g + Z_{in}}\]
+
+We get:
+\begin{align*}
+
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1
+syms t
+V_g = 10*cos(4*pi*(10^8)*t)
+Z_g = 75
+V_in = V_g*Z_in/(Z_g + Z_in)
+#+END_SRC
+
+#+RESULTS:
+: V_g = (sym) 10⋅cos(64⋅√385531421917553⋅t)

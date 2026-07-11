@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       2510eddb-5a03-4c78-80d1-6778a7d8f082
+:END:
+#+title: ENG439 - High Frequency Electronics
+#+date: [2026-07-09 Thu 13:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Notes
+[[id:ce0c7328-ddd0-4e97-8f84-f1e373c1436c][ENG305 - Transmission Lines and Electromagnetic Waves]]
+ - [[id:6af733cd-5562-4d42-a360-45271082b3c0][Transmission Line Theory]]
+* Assessment
+Microwave Engineering, D.M. Pozar
+** Design Report
+ - 5 parts
+ - Design Report Extension Task
+
+** Assessed Tutorials
+ - 12, take 10 best
+[[id:6e4a22da-fc94-456d-afad-f7a647dd8f33][ENG439 - High Frequency Electronics - Tutorial 1]]
+** Mid Semester Test
+ - after break
+   
+** External Assessment (Exam)
+- 30%
+
