@@ -1,0 +1,258 @@
+:PROPERTIES:
+:ID:       348a72c0-0839-4cd2-aa09-08452564f5f1
+:END:
+#+title: ENG405 - Communication Systems 2 – Project 1
+#+date: [2026-07-16 Thu 18:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+
+* Question 1
+The received complex signal is:
+\[S=X+jY\]
+And each are distributed normally:
+\begin{align*}
+X &\sim \mathcal{N}(x_0,\sigma^2) \\
+Y &\sim \mathcal{N}(y_0,\sigma^2)
+\end{align*}
+
+$X$ and $Y$ are independent. The deterministic LOS vector is:
+\[r_0=x_0+jy_0\]
+
+The received amplitude is
+\[A=\sqrt{X^2+Y^2}\]
+
+** (A) Distribution Of The Received Amplitude
+
+The PDF of $X$ and $Y$ is
+
+\[f_{X,Y}(x,y) = \frac{1}{2\pi\sigma^2} \exp\left[ -\frac{(x-x_0)^2+(y-y_0)^2}{2\sigma^2} \right]\]
+
+
+We need this in polar coordinates, so let $x = a\cos\theta$ and $y = a\sin\theta$, where $a\geq 0$ and $a$ is the Jacobian. Also use the substitution $x_0 = r_0\cos\theta_0$ and $y_0 = r_0\sin\theta_0$.
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+warning('off','all');
+pkg load symbolic
+
+syms x y r_0 theta theta_0 sigma a I
+x_0 = r_0*cos(theta_0);
+y_0 = r_0*sin(theta_0);
+
+f = (1/(2*pi*sigma^2))*exp(-((x - x_0)^2 + (y - y_0)^2)/(2*sigma^2));
+
+f_polar = subs(f, [x, y], [a*cos(theta), a*sin(theta)])*a;
+
+f_polar = simplify(f_polar);
+latex(f_polar)
+#+END_SRC
+
+#+RESULTS:
+: \frac{a e^{\frac{- a^{2} + 2 a r_{0} \cos{\left(\theta - \theta_{0} \right)} - r_{0}^{2}}{2 \sigma^{2}}}}{2 \pi \sigma^{2}}
+
+Hence:
+\[f_{A,\Theta}(a,\theta) = \frac{a}{2 \pi \sigma^{2}} \exp\left[\frac{- a^{2} + 2 a r_{0} \cos{\left(\theta - \theta_{0} \right)} - r_{0}^{2}}{2 \sigma^{2}}\right]\]
+
+
+The PDF of $A$ is obtained by integrating over all angles:
+\begin{align*}
+f_A(a) &= \int_{-\pi}^{\pi} f_{A,\Theta}(a,\theta)d\theta \\
+f_A(a) &= \frac{a}{2\pi\sigma^2}\exp\left[-\frac{a^2 + r_0^2}{2\sigma^2}\right]\int_{-\pi}^{\pi}\exp\left[\frac{ar_0}{\sigma^2}\cos(\theta - \theta_0)\right]\ d\theta \\
+f_A(a) &= \boxed{\frac{a}{2\pi\sigma^2}\exp\left[-\frac{a^2 + r_0^2}{2\sigma^2}\right]I_0\left(\frac{ar_0}{\sigma^2}\right)}
+\end{align*}
+
+** (b) Approximate Expression For PDF
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+latex(vpa(1/(2*pi)*((x^0)/(factorial(0))*int((cos(theta))^0, theta, -pi, pi)), 4))
+latex(vpa(1/(2*pi)*((x^1)/(factorial(1))*int((cos(theta))^1, theta, -pi, pi)), 4))
+latex(vpa(1/(2*pi)*((x^2)/(factorial(2))*int((cos(theta))^2, theta, -pi, pi)), 4))
+latex(vpa(1/(2*pi)*((x^3)/(factorial(3))*int((cos(theta))^3, theta, -pi, pi)), 4))
+latex(vpa(1/(2*pi)*((x^4)/(factorial(4))*int((cos(theta))^4, theta, -pi, pi)), 4))
+#+END_SRC
+
+#+RESULTS:
+: 1.0
+: 0
+: 0.25 x^{2}
+: 0
+: 0.01562 x^{4}
+: ans = 64.020
+
+\begin{align*}
+f(x) &= \sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n \\
+e^{x\cos \theta} &= \sum_{n=0}^{\infty}\frac{(x\cos\theta)^n}{n!} = \sum_{n=0}^{\infty}\frac{x^n\cos^n\theta}{n!} \\
+f(x) &= \frac{1}{2\pi}\sum_{n=0}^{\infty} \frac{x^n}{n!}\int_{-\pi}^{\pi}\cos^n(\theta)\ d\theta \\
+\Rightarrow f(x) &\approx \boxed{1 + \frac{x^2}{4}} + \frac{x^4}{64}
+\end{align*}
+
+Hence:
+\begin{align*}
+I_0\left(\frac{ar_0}{\sigma^2}\right) &\approx 1 + \frac{a^2r_0^2}{4\sigma^4} \\
+\Rightarrow f_A(a) &= \boxed{\frac{a}{2\pi\sigma^2}\exp\left[-\frac{a^2 + r_0^2}{2\sigma^2}\right]\left(1 + \frac{a^2r_0^2}{4\sigma^4}\right)}
+\end{align*}
+
+
+** (c) Distribution Of Received Power
+
+
+** (d) Explanation Of Outage Probability
+
+** (e) Required value of $R$
+
+** (f) Significance For Mobile Systems
+
+* Question 2
+Wave 1 has LOS from the transmitter to the receiver, it has path length:
+\[d_1 = \sqrt{d^2 + (h_t - h_r)^2}\]
+
+Wave 2 is reflected off the ground, it has path length:
+\[d_2 = \sqrt{d^2 + (h_t + h_r)^2}\]
+It is reflected with angle:
+\[\psi = \tan^{-1}\left(\frac{h_t + h_r}{d}\right)\]
+The complex ground permittivity can be calculated as:
+\[\tilde{\epsilon_r} = \epsilon_r - j\frac{\sigma}{\omega\epsilon_0}\]
+In the notes we assumed that the reflection coefficient ($\Gamma$) is $-1$ because we assumed that the reflection ($\psi$) is small, this is not true and the actual value depends on:
+\begin{align*}
+\Gamma_{\|} &= \frac{\epsilon_r\sin(\theta_i) - \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\epsilon_r\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}} \\
+\Gamma_{\perp} &= \frac{\sin(\theta_i) - \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}}
+\end{align*}
+$\Gamma_{\|}$ is for parallel polarised waves and $\Gamma_{\perp}$ is for perpendicularly polarised waves.
+
+
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export
+clear;
+close all;
+clc;
+warning('off','all');
+
+% Physical constants
+c = 299792458;
+epsilon_0 = 8.854187817e-12;
+
+% Transmitter and receiver parameters
+Pt = 1;              % Transmitted power in watts
+Gt = 1;              % Transmitter antenna gain
+Gr = 1;              % Receiver antenna gain
+
+ht = 10;             % Transmitter height in metres
+hr = 2;              % Receiver height in metres
+
+% Ground parameters
+epsilon_r = 15;      % Relative permittivity
+sigma = 0.005;       % Conductivity in S/m
+
+% Frequencies
+frequencies = [500e6, 2.4e9];
+
+% Distance range
+d = logspace(0, 4, 5000);  % 1 m to 10 km
+
+% Select polarisation:
+% "H" = horizontal
+% "V" = vertical
+polarisation = "H";
+
+for index = 1:length(frequencies)
+
+    f = frequencies(index);
+    omega = 2*pi*f;
+    lambda = c/f;
+    k = 2*pi/lambda;
+
+    % Complex relative permittivity
+    epsilon_complex = epsilon_r - 1i*sigma/(omega*epsilon_0);
+
+    % Direct and reflected path lengths
+    r1 = sqrt(d.^2 + (ht - hr)^2);
+    r2 = sqrt(d.^2 + (ht + hr)^2);
+
+    % Grazing angle
+    psi = atan((ht + hr)./d);
+
+    % Fresnel reflection coefficient
+    root_term = sqrt(epsilon_complex - cos(psi).^2);
+
+    if strcmpi(polarisation, "H")
+        Gamma = (sin(psi) - root_term) ...
+              ./ (sin(psi) + root_term);
+    else
+        Gamma = (epsilon_complex*sin(psi) - root_term) ...
+              ./ (epsilon_complex*sin(psi) + root_term);
+    end
+
+    % Full electromagnetic two-path field
+    field_full = exp(-1i*k*r1)./r1 ...
+               + Gamma.*exp(-1i*k*r2)./r2;
+
+    Pr_full = Pt*Gt*Gr*(lambda/(4*pi))^2 ...
+            .* abs(field_full).^2;
+
+    % Simplified two-ray model: Gamma = -1
+    field_two_ray = exp(-1i*k*r1)./r1 ...
+                  - exp(-1i*k*r2)./r2;
+
+    Pr_two_ray = Pt*Gt*Gr*(lambda/(4*pi))^2 ...
+               .* abs(field_two_ray).^2;
+
+    % Free-space propagation
+    Pr_free_space = Pt*Gt*Gr ...
+        .* (lambda./(4*pi*r1)).^2;
+
+    % Far-distance two-ray approximation
+    Pr_far = Pt*Gt*Gr ...
+        .* (ht^2*hr^2)./(d.^4);
+
+    % Prevent log10(0)
+    Pr_full = max(Pr_full, realmin);
+    Pr_two_ray = max(Pr_two_ray, realmin);
+    Pr_free_space = max(Pr_free_space, realmin);
+    Pr_far = max(Pr_far, realmin);
+
+    % Received power in dBm
+    Pr_full_dBm = 10*log10(Pr_full/1e-3);
+    Pr_two_ray_dBm = 10*log10(Pr_two_ray/1e-3);
+    Pr_free_space_dBm = 10*log10(Pr_free_space/1e-3);
+    Pr_far_dBm = 10*log10(Pr_far/1e-3);
+
+    figure(index);
+
+    semilogx(d, Pr_full_dBm, "linewidth", 1.5);
+    hold on;
+    semilogx(d, Pr_two_ray_dBm, "--", "linewidth", 1.5);
+    semilogx(d, Pr_free_space_dBm, ":", "linewidth", 1.5);
+    semilogx(d, Pr_far_dBm, "-.", "linewidth", 1.5);
+
+    grid on;
+
+    xlabel("Horizontal distance, d (m)");
+    ylabel("Received power (dBm)");
+
+    title(sprintf( ...
+        "Ground-reflection model at %.1f MHz", f/1e6));
+
+    legend( ...
+        "Full Fresnel model", ...
+        "Two-ray, \Gamma = -1", ...
+        "Free space", ...
+        "Far two-ray approximation", ...
+        "location", "southwest");
+
+    % Crossover distance
+    crossover_distance = 4*pi*ht*hr/lambda;
+
+    fprintf("\nFrequency: %.1f MHz\n", f/1e6);
+    fprintf("Wavelength: %.4f m\n", lambda);
+    fprintf("Approximate crossover distance: %.2f m\n", ...
+            crossover_distance);
+end
+#+END_SRC
+
+#+RESULTS:
+: Frequency: 500.0 MHz
+: Wavelength: 0.5996 m
+: Approximate crossover distance: 419.17 m
+: 
+: Frequency: 2400.0 MHz
+: Wavelength: 0.1249 m
+: Approximate crossover distance: 2012.01 m

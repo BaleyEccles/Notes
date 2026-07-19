@@ -30,12 +30,16 @@
 [[id:4362e842-7f04-4ca8-a88e-f183d5c00225][Link Budgeting]]
 [[id:5f52ce94-c82b-4d58-82a9-4fe4598fda29][Path Loss]]
 [[id:2b5bb5b6-3dcf-41df-8973-9ed0d856ad73][Log-Normal Shadowing]]
+[[id:f75bbeec-95c4-4074-965f-bbfcba7252f3][System Performance Metrics]]
+
+
 
 * Diagram
 :TODO:
 * Assessment
 ** Simulation Project 1
  - Due Week 6
+[[id:348a72c0-0839-4cd2-aa09-08452564f5f1][ENG405 - Communication Systems 2 – Project 1]]
 ** Mid Semester Test
  - Due Week 8
 ** Simulation Project 2
