@@ -1,10 +1,22 @@
 :PROPERTIES:
 :ID:       6e4a22da-fc94-456d-afad-f7a647dd8f33
 :END:
-#+title: ENG439 - High Frequency Electronics - Tutorial 1
+#+title: ENG439 - High Frequency Electronics - Question Week 1
 #+date: [2026-07-09 Thu 18:15]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
 
 * Question 1
 ** a
@@ -18,7 +30,7 @@ Z_{in1} &= 75\frac{80 + j75\tan(\frac{2\pi}{\lambda} 0.2\lambda)}{75 + j80\tan(\
 Z_{in1} &= (71.13 - 2.7j)\Omega
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q1
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
 warning('off','all');
 pkg load symbolic
 syms lambda
@@ -27,6 +39,7 @@ latex(vpa(Z_in1, 4))
 #+END_SRC
 
 #+RESULTS:
+: Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
 : 71.13 - 2.7 i
 
 *** $Z_{in2}$
@@ -37,7 +50,7 @@ Z_{in2} &= 75\frac{100 + j75\tan(\frac{2\pi}{\lambda} 0.2\lambda)}{75 + j100\tan
 Z_{in2} &= (58.7 - 10.06j)\Omega
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q1
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
 Z_in2 = 75*(100 + i*75*tan((2*pi/lambda)*0.2*lambda))/(75 + i*100*tan((2*pi/lambda)*0.2*lambda));
 latex(vpa(Z_in2, 4))
 #+END_SRC
@@ -48,58 +61,160 @@ latex(vpa(Z_in2, 4))
 ** b
 \begin{align*}
 Z_L &= \frac{1}{\frac{1}{Z_{in1}} + \frac{1}{Z_{in2}}} \\
-Z_L &= (29.35 - 5.032j)\Omega
+Z_L &= (32.3 - 3.559 j)\Omega
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q1
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
 Z_L = 1/((1/Z_in1) + (1/Z_in2));
 latex(vpa(Z_L, 4))
 #+END_SRC
 
 #+RESULTS:
-: 29.35 - 5.032 i
+: 32.3 - 3.559 i
 
 ** c
 \begin{align*}
 \beta &= \frac{2\pi}{\lambda} \\
 Z_{in} &= Z_0\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)} \\
-Z_{in} &= 75\frac{(29.35 - 5.032j) + j75\tan(\frac{2\pi}{\lambda} 0.2\lambda)}{75 + j(29.35 - 5.032j)\tan(\frac{2\pi}{\lambda} 0.2\lambda)} \\
-Z_{in} &= (105.8 + 81.57j)\Omega
+Z_{in} &= (110.2 + 70.88 j)\Omega
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q1
-Z_in2 = 75*((29.35 - 5.032i) + i*75*tan((2*pi/lambda)*0.2*lambda))/(75 + i*(29.35 - 5.032i)*tan((2*pi/lambda)*0.2*lambda));
-latex(vpa(Z_in2, 4))
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+Z_0 = 75;
+Z_in3 = 75*(Z_L + i*Z_0*tan((2*pi/lambda)*0.2*lambda))/(Z_0 + i*Z_L*tan((2*pi/lambda)*0.2*lambda));
+latex(vpa(Z_in3, 4))
 #+END_SRC
 
 #+RESULTS:
-: 105.8 + 81.57 i
+: 110.2 + 70.88 i
 
 
 
 ** d
 [[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG439_Tutorial_1_Q1_d.xopp]]
 
-** TODO e
-:TODO:
-Using:
-\[\Gamma = \frac{Z_L - Z_0}{Z_L + Z_0}\]
-We get
-** g
-Using:
-\[V_{in} = \frac{V_g Z_{in}}{Z_g + Z_{in}}\]
-
-We get:
+** e
 \begin{align*}
-
+\Gamma_{AA\prime} &= \frac{Z_{in} - Z_0}{Z_{in} + Z_0} \\
+\Gamma_{AA\prime} &= \frac{(110.2 + 70.88 j) - 75}{(110.2 + 70.88 j) + 75} \\
+\Gamma_{AA\prime} &= 0.2935 + 0.2705 j \\
+\Gamma_{AA\prime} &= 0.3991\angle 42.66^{\circ}
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q1
-syms t
-V_g = 10*cos(4*pi*(10^8)*t)
-Z_g = 75
-V_in = V_g*Z_in/(Z_g + Z_in)
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+Z_0 = 75;
+G_AA = (Z_in3 - Z_0)/(Z_in3 + Z_0);
+G_AA = vpa(G_AA, 4);
+latex(vpa(G_AA, 4))
+latex(abs(vpa(G_AA, 4)))
+latex(vpa(angle(vpa(G_AA, 4))*180/pi, 4))
 #+END_SRC
 
 #+RESULTS:
-: V_g = (sym) 10⋅cos(64⋅√385531421917553⋅t)
+: 0.2935 + 0.2705 i
+: 0.3991
+: 42.66
+
+** f
+\begin{align*}
+VSWR &= \frac{1 + |\Gamma_{AA\prime}|}{1 - |\Gamma_{AA\prime}|} \\
+VSWR &= \frac{1 + |(0.2935 + 0.2705 j)|}{1 - |(0.2935 + 0.2705 j)|} \\
+VSWR &= 2.328
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+VSWR = abs((1 + abs(G_AA))/(1 - abs(G_AA)));
+latex(vpa(VSWR, 4))
+#+END_SRC
+
+#+RESULTS:
+: 2.328
+
+** g
+\begin{align*}
+\tilde{V}_{in} &= \frac{V_g Z_{in}}{Z_g + Z_{in}} \\
+\tilde{V}_{in} &= (6.467 + 1.352 j)V \\
+\tilde{V}_{in} &= 6.607 \angle 11.81^{\circ} \\
+\Rightarrow V_{in}(t) &= 6.607\cos(4\pi\times 10^8t + 11.81^{\circ})V \\
+\tilde{I}_{in} &= \frac{V_{in}}{Z_{in}} \\
+\tilde{I}_{in} &= (0.0471 - 0.01803 j)A \\
+\tilde{I}_{in} &= 0.05044 \angle -20.95^{\circ} \\
+\Rightarrow I_{in}(t) &= 0.05044\cos(4\pi\times 10^8t -20.95^{\circ})A
+\end{align*}
+
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+syms t
+V_g = 10;
+V_in = (V_g*Z_in3)/(Z_0 + Z_in3);
+latex(vpa(V_in, 4))
+latex(abs(vpa(V_in, 4)))
+latex(vpa(angle(vpa(V_in, 4))*180/pi, 4))
+
+I_in = V_in/Z_in3;
+latex(vpa(I_in, 4))
+latex(abs(vpa(I_in, 4)))
+latex(vpa(angle(vpa(I_in, 4))*180/pi, 4))
+#+END_SRC
+
+#+RESULTS:
+: 6.467 + 1.352 i
+: 6.607
+: 11.81
+: 0.0471 - 0.01803 i
+: 0.05044
+: -20.95
+
+* Question 2
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export
+warning('off','all');
+
+Z_L = 280+182*i;
+Z_0 = 100;
+G_L = (Z_L - Z_0)/(Z_L + Z_0);
+latex(vpa(G_L, 4))
+latex(abs(vpa(G_L, 4)))
+latex(vpa(angle(vpa(G_L, 4))*180/pi, 4))
+#+END_SRC
+
+#+RESULTS:
+: 0.5719 + 0.205 i
+: 0.6075
+: 19.72
+
+\begin{align*}
+\Gamma_L &= \frac{Z_L - Z_0}{Z_L + Z_0} \\
+\Gamma_L &= 0.5719 + 0.2050j \\
+\Gamma_L &= 0.6075\angle 19.72^{\circ}
+\end{align*}
+** a
+\begin{align*}
+\beta &= \frac{2\pi}{\lambda} \\
+d_{\max} &= \frac{\angle \Gamma_L}{2\beta} \\
+d_{\max} &= 2.0546\ \textrm{cm}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export
+lambda = 75;
+beta = 2*pi/lambda;
+d_max = angle(G_L)/(2*beta)
+#+END_SRC
+
+#+RESULTS:
+: d_max = 2.0546
+
+** b
+\begin{align*}
+\beta &= \frac{2\pi}{\lambda} \\
+d_{\min} &= \frac{\angle \Gamma_L + \pi}{2\beta} \\
+d_{\min} &= 20.805\ \textrm{cm}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export
+lambda = 75;
+beta = 2*pi/lambda;
+d_max = (angle(G_L) + pi)/(2*beta)
+#+END_SRC
+
+#+RESULTS:
+: d_max = 20.805

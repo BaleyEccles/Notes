@@ -1,0 +1,278 @@
+:PROPERTIES:
+:ID:       14089828-0911-4637-8537-1e34b01aa1a3
+:END:
+#+title: ENG439 - High Frequency Electronics - Question Week 2
+#+date: [2026-07-18 Sat 15:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+* Question 1
+** a
+*** Propagation Constant
+\begin{align*}
+\omega &= 2\pi f \\
+\omega &= 2\pi 800\times10^6 \\
+\omega &= 5.0265\times10^9\ \textrm{rad/s} \\
+\gamma &= \sqrt{(R + j\omega L)(G + j\omega C)} \\
+\gamma &= \sqrt{(4 + j\omega 0.5\mu)(0.02 + j\omega 200p)} \\
+\gamma &= 0.54 + 50.27j\ \textrm{m}^{-1}
+\end{align*}
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+warning('off','all');
+pkg load symbolic
+f = 800e6;
+L = 0.5e-6;
+C = 200e-12;
+R = 4;
+G = 0.02;
+
+w = 2*pi*f
+g = sqrt((R + i*w*L)*(G + i*w*C))
+#+END_SRC
+
+#+RESULTS:
+: w = 5.0265e+09
+: g =   0.5400 + 50.2676i
+
+*** Characteristic Impedance
+\begin{align*}
+Z_0 &= \sqrt{\frac{R + j\omega L}{G + j\omega C}} \\
+Z_0 &= 49.9930 +  0.4575i\ \Omega \\
+Z_0 &= 50.0\angle 0.5243^{\circ}\ \Omega
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+Z_0 = sqrt((R + i*w*L)/(G + i*w*C))
+latex(abs(vpa(Z_0, 4)))
+latex(vpa(angle(vpa(Z_0, 4))*180/pi, 4))
+#+END_SRC
+
+#+RESULTS:
+: Z_0 =  49.9930 +  0.4575i
+: Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
+: 50.0
+: 0.5243
+
+*** Attenuation
+\begin{align*}
+A_{N_p} &= \alpha l \\
+A_{N_p} &= 0.54\cdot 30\times10^{-2} \\
+A_{N_p} &= 0.1620\ \textrm{Np} \\
+1\ \textrm{Np} &= 8.868\ \textrm{dB} \\
+\Rightarrow A_{N_p}[\textrm{dB}] &= 1.4366 [\textrm{dB}]
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+l = 30e-2
+a = real(g)
+A_N_p = a*l
+A_N_p*8.868
+#+END_SRC
+
+#+RESULTS:
+: l = 0.3000
+: a = 0.5400
+: A_N_p = 0.1620
+: ans = 1.4366
+
+
+** b
+*** Propagation Constant
+\begin{align*}
+\omega &= 2\pi f \\
+\omega &= 2\pi(800\times10^6) \\
+\omega &= 5.0265\times10^9\ \textrm{rad/s} \\
+\gamma &= \sqrt{(R+j\omega L)(G+j\omega C)} \\
+\gamma &= j50.27\ \textrm{m}^{-1}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+warning('off','all');
+f = 800e6;
+L = 0.5e-6;
+C = 200e-12;
+R = 0;
+G = 0;
+
+w = 2*pi*f
+g = sqrt((R + i*w*L)*(G + i*w*C))
+#+END_SRC
+
+#+RESULTS:
+: w = 5.0265e+09
+: g =        0 + 50.2655i
+
+*** Characteristic Impedance
+\begin{align*}
+Z_0 &= \sqrt{\frac{R+j\omega L}{G+j\omega C}} \\
+Z_0 &= \sqrt{\frac{j\omega L}{j\omega C}} \\
+Z_0 &= \sqrt{\frac{L}{C}} \\
+Z_0 &= \sqrt{\frac{0.5\times10^{-6}}{200\times10^{-12}}} \\
+Z_0 &= 50\ \Omega \\
+Z_0 &= 50\angle0^\circ\ \Omega
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+Z_0 = sqrt((R + i*w*L)/(G + i*w*C))
+#+END_SRC
+
+#+RESULTS:
+: Z_0 = 50
+
+*** Attenuation
+For a lossless transmission line,
+
+\begin{align*}
+\alpha &= 0\ \textrm{Np/m} \\
+A_{\textrm{Np}} &= \alpha l \\
+A_{\textrm{Np}} &= 0(30\times10^{-2}) \\
+A_{\textrm{Np}} &= 0\ \textrm{Np} \\
+A[\textrm{dB}] &= 0\ \textrm{dB}
+\end{align*}
+
+Therefore, the (30\ \textrm{cm}) lossless transmission line has no attenuation.
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+l = 30e-2;
+a = real(g);
+A_Np = a*l
+A_dB = A_Np*8.686
+#+END_SRC
+
+#+RESULTS:
+: A_Np = 0
+: A_dB = 0
+
+* Question 2
+** a
+
+https://www.engineeringtoolbox.com/relative-permittivity-d_1660.html
+\[\epsilon_r = 2.1\]
+
+Using:
+\[f_{m,n} = \frac{c}{2\sqrt{\mu\epsilon}}\sqrt{\left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2}\]
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export
+warning('off','all');
+a = 1.07e-2;
+b = 0.43e-2;
+mu_r = 1;
+eps_r = 2.1;
+c = 3e8;
+f = @(m,n) (c/(2*sqrt(mu_r*eps_r)))*sqrt((m/a)^2 + (n/b)^2);
+f(1,0)
+f(2,0)
+f(0,1)
+f(1,1)
+f(1,1)
+#+END_SRC
+
+#+RESULTS:
+: ans = 9.6738e+09
+: ans = 1.9348e+10
+: ans = 2.4072e+10
+: ans = 2.5943e+10
+: ans = 2.5943e+10
+
+|-------+-----------+-----------------------|
+| Order | Mode      | Cutoff Frequency      |
+|-------+-----------+-----------------------|
+|     1 | $TE_{10}$ | $9.673\ \textrm{GHz}$ |
+|     2 | $TE_{20}$ | $19.34\ \textrm{GHz}$ |
+|     3 | $TE_{01}$ | $24.07\ \textrm{GHz}$ |
+|     4 | $TE_{11}$ | $25.94\ \textrm{GHz}$ |
+|     5 | $TM_{11}$ | $25.94\ \textrm{GHz}$ |
+|-------+-----------+-----------------------|
+
+** b
+Using:
+\begin{align*}
+k &= \frac{2\pi f \sqrt{\epsilon_r}}{c} \\
+k_c &= \pi\sqrt{\left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2} \\
+& \begin{cases}
+\beta = \sqrt{k^2 - k_c^{2}}&, f>f_c  \\
+\alpha = \sqrt{k_c^2 - k^{2}}&, f<f_c 
+\end{cases} \\
+\gamma &= \alpha + j\beta
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export
+f = 15e9;
+k = 2*pi*f*sqrt(eps_r)/c
+f_k_c = @(m,n) pi*sqrt((m/a)^2 + (n/b)^2);
+f_g = @(k_c) sqrt(k_c^2 - k^2);
+
+k_c = f_k_c(1,0)
+g = f_g(k_c)
+k_c = f_k_c(2,0)
+g = f_g(k_c)
+k_c = f_k_c(0,1)
+g = f_g(k_c)
+#+END_SRC
+
+#+RESULTS:
+: k = 455.26
+: k_c = 293.61
+: g =         0 + 347.9321i
+: k_c = 587.21
+: g = 370.89
+: k_c = 730.60
+: g = 571.42
+
+We get
+\[k = 455.26\ \textrm{rad/m}\]
+|-----------+-------------------------------------+------------------------------------------+-----------------|
+| Mode      | $k_{c,nm}$                          | Propagation Constant                     | Behaviour       |
+|-----------+-------------------------------------+------------------------------------------+-----------------|
+| $TE_{10}$ | $k_{c,10} = 293.61\ \textrm{rad/m}$ | $\gamma_{10} = j347.93\ \textrm{m}^{-1}$ | Propagating     |
+| $TE_{20}$ | $k_{c,20} = 587.21\ \textrm{rad/m}$ | $\gamma_{20} = 370.89 \textrm{m}^{-1}$   | Not propagating |
+| $TE_{01}$ | $k_{c,01} = 730.60\ \textrm{rad/m}$ | $\gamma_{01} = 571.42\ \textrm{m}^{-1}$  | Not propagating |
+|-----------+-------------------------------------+------------------------------------------+-----------------|
+
+
+* Q3
+\begin{align*}
+\epsilon_e &= \frac{\epsilon_r + 1}{2} + \frac{\epsilon_r - 1}{2\sqrt{1 + \frac{12d}{W}}} \\
+\epsilon_e &= \frac{8}{5} + \frac{3}{5 \sqrt{1 + \frac{132}{5 W}}} \\
+Z_0 &= \begin{cases}
+\frac{120\pi}{\sqrt{\epsilon_e}[1.393 + \frac{W}{d} + 0.667\ln(\frac{W}{d} + 1.444)]} &, \frac{W}{d}\geq 1 \\
+\frac{60}{\sqrt{\epsilon_e}}\ln\left(\frac{8d}{W} + \frac{W}{4d}\right) &, \frac{W}{d} \leq 1
+\end{cases}
+\end{align*}
+
+Using the case for $\frac{W}{d}\geq 1$ we solve to get $W = 3.52\ \textrm{mm}$ and $\frac{W}{d} = 1.60 \geq 1$, this means it is correct.
+
+#+BEGIN_SRC octave :results output :exports none :session Q3 :eval no-export
+warning('off', 'all');
+pkg load symbolic
+
+syms W positive
+
+e_r = 2.2;
+d = 2.2;       % Substrate thickness in mm
+Z_0 = 75;      % Characteristic impedance in ohms
+
+e_e = (e_r + 1)/2 + (e_r - 1)/(2*sqrt(1 + 12*d/W));
+
+equ = Z_0 == 120*pi / (sqrt(e_e) * (W/d + 1.393 + 0.667*log(W/d + 1.444)));
+
+W = vpasolve(equ, W, 3.5)
+W/d
+#+END_SRC
+
+#+RESULTS:
+: W = (sym) 3.5287160270293034292954301125302
+: ans = (sym) 1.6039618304678651951342864147865
+
+
