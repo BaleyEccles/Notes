@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       e2c1c2e3-814b-4add-9340-997af1fe57fa
+:END:
+#+title: Moment Generating Function (MGFs)
+#+date: [2026-07-13 Mon 10:53]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Moment Generating Function (MGFs)
+Say we have random variable $X$ with PDF $f_X(x)$, then
+\[E[X] = \int_{-\infty}^{\infty} xf_X(x)dx\]
+ - First moment (mean)
+\[E[X^2] = \int_{-\infty}^{\infty} x^2f_X(x)dx\]
+ - Second moment
+ - $Var[X] = E[X^2] - [E[X]]^2$
+\[E[X^3] = \int_{-\infty}^{\infty} x^3f_X(x)dx\]
+ - Third moment (skewness)
+\[E[X^4] = \int_{-\infty}^{\infty} x^4f_X(x)dx\]
+ - Fourth moment (Kurtosis)
+Moment generating function:
+\[M_X(s) = E[e^{sX}] = \int_{-\infty}^{\infty}e^{sX}f_X(x)dx\]
+\[\frac{d M_X(s)}{ds}|_{s=n} = E[X^n]\]
+ - This is very close to the [[id:80120a64-eeb7-471c-94e2-a3c537a21699][Laplace Transform]], just evaluated at $-x$

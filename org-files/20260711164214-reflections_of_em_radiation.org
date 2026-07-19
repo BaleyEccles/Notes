@@ -13,5 +13,5 @@ Has waves $E$ (electrical) and $H$ (magnetic) in perpendicular directions and tr
    1. E-field in the plane of incidence
    2. E-field perpendicular to the plane of incidence
  We typically consider the first medium to be air ($\epsilon_1 = \epsilon_0$ and $\mu_1 = \mu_0$) and the second to be something else ($\epsilon_2 = \epsilon_r\epsilon_0$ and $\mu_2 = \mu_0$):
- - \[\Gamma_{\|} = \frac{\epsilon_r\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\epsilon_r\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}}\]
+ - \[\Gamma_{\|} = \frac{\epsilon_r\sin(\theta_i) - \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\epsilon_r\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}}\]
  - \[\Gamma_{\perp} = \frac{\sin(\theta_i) - \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}}\]

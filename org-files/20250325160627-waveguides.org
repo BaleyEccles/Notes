@@ -31,7 +31,8 @@ Using $\tilde{E}_x(x,y,z) = \tilde{e}_x(x,y)e^{-j\beta z}$ and similar equations
    -\frac{j}{k_c^2}\left(\omega\epsilon\frac{\partial \tilde{E}_z}{\partial x} + \beta\frac{\partial \tilde{H}_z}{\partial y}\right)\]
  - Now to find $\beta$
    - \[\beta = \sqrt{k^2-k_c^2} = \sqrt{\omega^2\mu\epsilon - \left(\frac{m\pi}{a}\right)^2 - \left(\frac{n\pi}{b}\right)^2}\]
-*** TODO TE
+*** TE
+ - \[k_c = \pi\sqrt{\left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2}\]
 ** Waveguide Cutoff Frequency
 By setting $\beta = 0$ we can find
  - \[f_{mn} = \frac{1}{2\sqrt{\mu\epsilon}}\sqrt{\left(\frac{m}{a}\right)^2 - \left(\frac{n}{b}\right)^2}\]

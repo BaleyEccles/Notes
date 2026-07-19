@@ -37,6 +37,10 @@ We should use Transmission Line Theory if
  - \[Z_0 = \frac{R'+L'j\omega}{\gamma} = \frac{R'+L'j\omega}{\sqrt{(R' + L' j\omega) + (G' +C'j\omega)}} = \sqrt{\frac{R' + L'j\omega}{G' + C'j\omega}}\]
  - Relates the forward propagating voltage to the forward propagating current
    - *NOT* The total voltage to total current on the transmission line
+     -
+
+*** Propagation Constant
+ - \[\gamma = \sqrt{(R + j\omega L)(G + j\omega C)}\]
 ** Types
  - [[id:edebf41f-5b67-41c6-8996-7da80196e3a3][Lossless Transmission Lines]]
  - [[id:b33bc66e-a3b5-49b5-adf2-a416c00ea997][Terminated Lossless Transmission Lines]]

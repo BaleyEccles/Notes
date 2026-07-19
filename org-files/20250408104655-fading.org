@@ -7,11 +7,71 @@
 #+STARTUP: latexpreview
 
 * Fading
-\[r = h*a\]
-Two types:
+\[Tx\{s(t)\} \rightarrow |h| \rightarrow |h+n(t)| \rightarrow Rx\]
+ - $h$ can vary over time and can be multiple samples long
+\[s(t) = \Re\{s_0(t)e^{j2\pi f_ct}\} = s_{\alpha}(t)\cos(2\pi f_ct) - s_{\alpha}(t)\sin(2\pi f_ct)\]
 
+\[r(t) &= \Re\left\{\sum_{k=1}^N a_k s_0(t - T_k) e^{j2\pi f_c(t - T_k) + j\phi_k}\right\} + n(t)\]
+ - The noise ($n(t)$) is typically small
+This has [[id:67259b4a-7fd8-4d7b-afaf-42c443f305a6][baseband]] equivalent:
+\[r_0(t) = \sum_{k=1}^N a_k s_0(t - T_k) e^{j(\phi_c - 2\pi f_cT_k)} + n(t)\]
+This meas there are a channel impulse response:
+\[h(t,\tau) = \sum_{k=1}^N a_k \delta (t - T_k) e^{j(\phi_k - 2\pi f_c \tau_k)}\]
+
+** Fading Channel Characteristics
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Fading_Channel_Characteristics.xopp]]
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Fading_Channel_Characteristics_Recived.xopp]]
+
+** Amount of Fading
+Additionally, define the Amount of Fading (AF):
+\[AF = \frac{Var[\alpha^2]}{(E[\alpha^2])^2} = \frac{E[\gamma^2] - (E[\gamma])^2}{(E[\gamma])^2}\]
+ - Tends to be independent of $\Omega$
+
+** Fast & Slow Fading
+[[id:b46c0234-ae60-47ca-b311-c89820a62fd4][Coherence Time]]: $\Delta \tau \propto \frac{1}{f_{d}}$
+ - $f_d$ is the [[id:02463fc8-1fc6-427f-acd1-03542a688e16][Doppler Shift Frequency]]
+\[\Delta \tau = \frac{1}{f_{d_{\max}}}\sqrt{\frac{9}{16\pi}}\]
+If $T_s < \Delta \tau$, we have slow fading
+If $T_s > \Delta \tau$, we have fast fading
+
+** Flat & Frequency-Selective Fading
+If the frequency profile is affected uniformly, we have Flat Fading
+If the frequency profile is affected non-uniformly, we have Frequency-Selective Fading
+
+A flat response occurs when the transmitted bandwidth is smaller than the coherence bandwidth ($\Delta f$)
+\[\Delta f \propto \frac{1}{\tau_{\max}}\]
+A frequency-selective response occurs when the transmitted bandwidth is greater than the coherence bandwidth
+
+*** Time-Varying Impulse Response Examples
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Flat_and_Frequency_Selective_Fading_Response.xopp]]
+ - Wideband channel
+ - Frequency Selective
+ - Slow Fading
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Flat_and_Frequency_Selective_Fading_Response_2.xopp]]
+ - Narrowband
+ - Fast Fading
+   
+** Narrowband Fading Model
+ - All paths arrive at the same time (assumption)
+\[r(t) = \Re\left\{e^{j2\pi f_c t} s_0(t) \sum_{k=1}^N a_k e^{j\phi_k}\right\} + n(t)\]
+\[r(t) = \Re\left\{e^{j2\pi f_c t} s_0(t) \alpha(t) + n(t) \right\}\]
+
+Equivalent baseband:
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Narrowband_Fading_Model_Baseband.xopp]]
+The statistics of $\alpha(t)$ are affected by all scales
+ - Mean power level of $E\{\alpha^2(t)\} = \Omega$
+   1. Including large and medium loss
+      - $\Omega = P_t K\left(\frac{d_0}{d}\right)^n \psi$
+        - $\psi \sim N\{0, \sigma_s^2\}$
+        - $P_t K\left(\frac{d_0}{d}\right)^n$ Large-scale (environmental model)
+   2. Excluding large and medium loss
+      - $\Omega = 1$
+        
 ** [[id:788c38cf-cc37-463b-84d6-a40be1715904][Non-Dispersive Fading]]
 Scattering of the transmitted signal causes very small path delays compared to the signal period.
 
 ** [[id:abae31a2-cc7c-4a2d-b1cf-ed322480482e][Multipath Fading]]
 There can be several scatters in the channel that results in copies of the signal being received at various time delays.
+
+
+

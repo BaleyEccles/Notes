@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       334b984a-96f8-488d-a84d-8e3525af5e64
+:END:
+#+title: Outage Probability
+#+date: [2026-07-13 Mon 10:53]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Outage Probability
+\[P_{out} = \int_0^{\gamma_{th}}f_{\gamma}(\gamma) d\gamma\]
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Outage_Probability.xopp]]
+ - Threshold must be met for successful communication
+Comes from
+\[F_{\gamma} = \int_0^{\gamma}f_{\gamma}(\gamma\prime)d\gamma\prime\]
+Which is the cumulative distribution
+
+Defined from [[id:e2c1c2e3-814b-4add-9340-997af1fe57fa][Moment Generating Function (MGFs)]]:
+\begin{align*}
+\frac{dF_{\gamma}}{d\gamma} &= f_{\gamma}(\gamma) \\
+\Rightarrow s L\{F_{\gamma}(\gamma)\} &= L\{f_{\gamma}(\gamma)\} \\
+\Rightarrow L\{F_{\gamma}(\gamma)\} &= \frac{1}{s}M_{\gamma}(-s) \\
+\Rightarrow P_{out} &= L^{-1}\left\{\frac{1}{s}M_{\gamma}(-s)|_{\gamma = \gamma_{th}}\right\}
+\end{align*}
+
+With pure large scale [[id:5f52ce94-c82b-4d58-82a9-4fe4598fda29][Path Loss]] the SNR (\gamma) changes deterministically with distance. For some range ($\gamma_{th}$) there is a threshold distance where the successful communication works, outside of that range it does not.
+ - $\Pr(d_{th}) = P_{th}$
+   - $d_{th}$ threshold distance
+   - $P_{th}$ threshold power
+
+With [[id:2b5bb5b6-3dcf-41df-8973-9ed0d856ad73][Shadowing]] $P_{th}$ depends on the shadowing statistics, this makes the outage threshold not a perfect sphere.
+ - $P_{out}(d) = \Pr(P_r(d) \leq P_{th}) = \Pr(P_t[dB] + P_L[dB] + \psi[dB] \leq P_{th}[dB])$
+ - $P_{out}(d) = 1 - Q\left(\frac{P_{th} - (P_t[dB] - P_L[dB])}{\sigma_{\psi_{dB}}}\right)$

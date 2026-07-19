@@ -31,12 +31,11 @@
 This can be written as:
 \[L_p[dB] = L_0[dB] + 10 n \log_{10}(\frac{d}{d_0})\]
  - Where $L_p[dB]$ is the path loss component alone
-Other profiles are possible:
-
+** Other profiles are possible
 \[L_p[dB] = nd\]
  - (Exponential loss)
    
-Okumura Model: widley used in urban areas
+*** Okumura Model: widley used in urban areas
 \[L_p[dB] = L_F + A_{mu}(f,d) - G(h_{te}) - G(h_{re}) - G_{AREA}\]
  - $L_F$ Free space path loss
  - $A_{mu}$ median attenuation relative to free space
@@ -48,7 +47,7 @@ Okumura Model: widley used in urban areas
    - $ 3 < h_{re} < 10m$
  - $G_{AREA}$ Gain due to environment
 
-Hata Model (empirical formulation of Okumura)
+*** Hata Model (empirical formulation of Okumura)
 \[L_p[dB] = 69.55 + 26.161\log(f_c) - 13.82\log_{10}(h_{te}) - a(h_{re}) + (44.9 - 6.55\log_{10}(h_{te}))\log_{10}(d)\]
 
 Where for small-medium sized urban areas:
@@ -58,7 +57,7 @@ For large cities:
 8.29(\log_{10}(1.54h_{re}))^2 - 1.1\ dB &,\ f \leq 300 MHz \\
 3.2(\log_{10}(11.75h_{re}))^2 - 4.97\ dB &,\ f > 300 MHz
 \end{cases}\]
-Rural areas:
+*** Rural areas:
 \[L_p[dB] = L_p[dB, urban] - 4.78(\log_{10}(f_c))^2 + 18.33\log_{10}(f_c) - 40.94\]
 
 $f_c$ is measured in MHz for all Hata Models

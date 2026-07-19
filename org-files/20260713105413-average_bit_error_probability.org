@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       31476de7-c786-4389-979a-92763064c569
+:END:
+#+title: Average Bit Error Probability
+#+date: [2026-07-13 Mon 10:54]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Average Bit Error Probability
+Conditional bit error rate (conditional on [[id:8c79d3ee-766a-4f72-a070-7a44d0f85ac1][Fading]])
+\[P_b(E|\gamma)\]
+ - $E_b/N_0 \rightarrow \gamma$
+   
+To find the total bit error rate:
+\[P_b(E) = \int_0^{\infty}P_b(E|\gamma)f_{\gamma}(\gamma)d\gamma\]
+Using the alternative form of [[id:c98340df-6fe8-481d-a2b1-28b7198a62c7][The Q Function]]

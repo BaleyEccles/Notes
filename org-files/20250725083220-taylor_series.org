@@ -6,4 +6,10 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-* TODO Taylor Series
+* Taylor Series
+about $a$:
+\[f(x) = \sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x - a)^n\]
+
+about $0$
+\[f(x) = \sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n\]
+

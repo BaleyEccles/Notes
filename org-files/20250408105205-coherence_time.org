@@ -18,5 +18,6 @@ The [[id:cfec5fb5-467e-4a16-a78c-32ebbdd4fb9a][channel]] is expected to change o
 ** Notation
 Denoted
  - \[\Delta T\]
+ - \[\Delta \tau\]
 
 

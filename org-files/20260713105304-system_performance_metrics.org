@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       f75bbeec-95c4-4074-965f-bbfcba7252f3
+:END:
+#+title: Communication System Performance Metrics
+#+date: [2026-07-13 Mon 10:53]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Communication System Performance Metrics
+** [[id:8d6a30bf-313d-42cf-9413-b1bc405b8044][Average Signal-to-Noise Ratio]]
+
+** [[id:334b984a-96f8-488d-a84d-8e3525af5e64][Outage Probability]]
+
+** [[id:31476de7-c786-4389-979a-92763064c569][Average Bit Error Probability]]
+
+** [[id:0f7f2074-0093-40b1-9017-5912dd02ff9e][Probability Transformation]]

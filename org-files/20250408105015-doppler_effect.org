@@ -12,3 +12,8 @@
    - \[f_d = \frac{v}{c}f_c\]
  - Increases bandwidth
    - \[B_{Doppler} = B_{static} + 2|f_{d,\max}|\]
+
+
+** Doppler Shift Frequency
+\[f_{d_{\max}} = \frac{v_{\max}}{c}f_c\]
+ - $c$ is typically the speed of light $c = 3\times 10^8 m/s$

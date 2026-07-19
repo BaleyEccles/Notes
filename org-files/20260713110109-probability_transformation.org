@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       0f7f2074-0093-40b1-9017-5912dd02ff9e
+:END:
+#+title: Probability Transformation
+#+date: [2026-07-13 Mon 11:01]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Probability Transformation
+If we have distribution for a random variable $X$ and $Y = g(X)$, then we can see that:
+\[F_Y(y) = \Pr\{Y \leq y\} = \Pr\{g(X) \leq y\}\]
+1. $g$ increasing
+   - $F_Y(y) = \Pr\{X \leq g^{-1}(y)\} = F_X(g^{-1}(y)$
+2. $g$ decreasing
+   - $F_Y(y) = \Pr\{X \geq g^{-1}(y)\} = 1 - F_X(g^{-1}(y))$
+Look to the chain rule for $f_Y(y) = \frac{dF_y}{dy}$:
+For 1.
+\begin{align*}
+f_y(y) &= \frac{dF_X(g^{-1}(y)}{dy} \\
+&= f_X(g^{-1}(y))\frac{d}{dy}g^{-1}(y)
+\end{align*}
+For 2.
+\begin{align*}
+f_y(y) &= -f_X(g^{-1}(y))\frac{d}{dy}g^{-1}(y)
+\end{align*}
+
+We combine them:
+\[f_Y(y) = f_X(g^{-1}(y))\left|\frac{dx}{dy}\right|\]
+Flat Fading Model
+\[r(t) = \alpha\cdot u(t) + n(t)\]
+ - $\Omega = \bar{\alpha}^2$
+   
+The instantaneous [[id:8d6a30bf-313d-42cf-9413-b1bc405b8044][SNR]]:
+\[\gamma = \alpha^2 \frac{E_s}{N_0} = \Omega \frac{E_s}{N_0}\]
+
+\begin{align*}
+\gamma &= g(\alpha) = \alpha^2 \frac{E_s}{N_0} \\
+\Rightarrow \alpha &= g^{-1}(\gamma) = \sqrt{\frac{\gamma}{E_s/N_0}} \\
+\left|\frac{d\alpha}{d\gamma}\right| &= \frac{1}{2\frac{E_s}{N_0}\sqrt{\frac{\gamma}{E_s/N_0}}} \\
+f_{\gamma}(\gamma) &= f_{\alpha}(g^{-1}(\gamma))\left|\frac{d\alpha}{d\gamma}\right| \\
+&= \frac{f_{\alpha}(\sqrt{\frac{\Omega\gamma}{\bar{\gamma}}})}{2\sqrt{\frac{\gamma\bar{\gamma}}{\Omega}}}
+\end{align*}
+
+
+
+

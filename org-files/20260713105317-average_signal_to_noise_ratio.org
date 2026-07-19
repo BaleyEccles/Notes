@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       8d6a30bf-313d-42cf-9413-b1bc405b8044
+:END:
+#+title: Average Signal-to-Noise Ratio
+#+date: [2026-07-13 Mon 10:53]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Average Signal-to-Noise Ratio
+Average [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][SNR]]: $\bar{\gamma} = E_b/N_0$ in [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][AWGN channels]]
+\[\bar{\gamma} = \int_0^{\infty}\gamma f_{\gamma}(\gamma)d\gamma\]
+ - $\gamma$ can change over time
+ - $E_b/N_0 \rightarrow \gamma$
+   
+Average SNR using [[id:e2c1c2e3-814b-4add-9340-997af1fe57fa][Moment Generating Function (MGFs)]]:
+\[\bar{\gamma} = \frac{d M_{\gamma}(s)}{ds}|_{s = 0}\]
+for
+\[M_{\gamma}(s) = \int_0^{\infty}f_{\gamma}(\gamma)e^{s\gamma}d\gamma\]

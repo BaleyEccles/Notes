@@ -18,5 +18,5 @@ Conversion to [[id:d041a889-d4af-4598-8434-866ecc7ce005][Decibels]] will result 
 * Shadow Fade Margin (SFM)
 Distance from the average power to $\gamma$
 \[\Pr(\gamma < P_r) = Q\left(\frac{\gamma-P_r}{\sigma}\right) = X\%\]
-We can use a Q table to solve this
+We can use a [[id:c98340df-6fe8-481d-a2b1-28b7198a62c7][Q table]] to solve this
 

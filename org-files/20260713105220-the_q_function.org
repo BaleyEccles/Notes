@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       c98340df-6fe8-481d-a2b1-28b7198a62c7
+:END:
+#+title: The Q Function
+#+date: [2026-07-13 Mon 10:52]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* The Q Function
+\[Q(x) = \int_x^{\infty}\frac{1}{\sqrt{2\pi}e^{-\frac{\lambda^2}{2}} d\lambda\]
+ - Can use Q tables to solve
+   
+** Alternative Form (Craig's Form)
+\[Q(x) = \frac{1}{\pi} \int_0^{\frac{\pi}{2}}e^{-\frac{x^2}{2\sin(\theta)}}d\theta\]
+ - $x \geq 0$
