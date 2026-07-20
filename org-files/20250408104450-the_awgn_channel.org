@@ -15,10 +15,8 @@
  - \[y_i(t) = \lambda z_i(t) + n_s(t)\]
  - [[file:Screenshot 2025-04-08 at 10-41-05 Set 7.2 - Small-scale models - ENG308 ENG743 Communication Systems 1 and Communication Systems.png]]
 
-** Bit Error Rate
-The lower bound of BER:
- - \[BER = \frac{n^{\underline{o}}\textrm{errors}}{\textrm{total }n^{\underline{o}}\textrm{ bits}}\]
-
+** [[id:47bfedb9-46c9-43ca-b0bb-e75a4df5cc8c][Bit Error Rate]]
+ - \[P_b(E) = Q\left(\sqrt{\frac{2E_b}{N_0}}\right)\]
 ** Received
  - Using a [[id:0cfc0c4f-2408-42e6-944f-e37acc4116f1][Discrete Receiver]]
  - \[r[i] = A_j\int_{-\infty}^{\infty}g(\tau)g^H(\tau - T_s)d\tau + \int_{-\infty}^{\infty}n_s(\tau)g^H(\tau - T_s)d\tau\]
@@ -44,6 +42,7 @@ Using Hypothesis Testing:
    
 [[id:5234f870-7031-4a58-9d29-08e0c5d53c4d][Maximum Aposteriari Probability (MAP) // Maximum Likelihood (ML)]]
 When our constellation symbol is received it will be some distance away from the true constellation point. Our goal is to find which symbol the received symbol corresponds to. We can simply find the distance from the received symbol to each of the constellation points and choose the one with smallest distance.
+
 
 
 

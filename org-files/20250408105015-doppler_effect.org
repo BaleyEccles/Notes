@@ -17,3 +17,20 @@
 ** Doppler Shift Frequency
 \[f_{d_{\max}} = \frac{v_{\max}}{c}f_c\]
  - $c$ is typically the speed of light $c = 3\times 10^8 m/s$
+** [[id:39875b0e-c1ff-4da0-9612-514bdd77a047][Autocorrelation of Time-Varying Channels]]
+*** [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]
+\[S_{\alpha\alpha}(f) = \frac{c}{\sqrt{1-\left(\frac{f}{f_{d\max}}\right)}}\]
+ - $|f| < f_{d\max}$
+**** Jakes' Model / Clark's Spectrum
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Jakes_Model_Clarks_Spectrum.xopp]]
+ - Flat around $f/f_{d\max} = 0$
+*** [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]]
+\[R_{\alpha\alpha}(\tau) = J_0(2\pi f_{d\max}\tau)\pi f_{d\max} c\]
+ - $J_0(x)$ is the zeroth-order [[id:6aa137e2-5360-440a-adc0-ed6a8e29c957][Bessel Function]] of the first kind
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Doppler_Effect_Autocorrelation.xopp]]
+Crosses $\tau$ axis at $f_{d\max}\tau \approx 0.4$
+
+The channels is approximately constant for: $\tau << \frac{0.4}{f_{d\max}}$
+ - The time delay for 'decorrelation' is $\tau = \frac{0.4}{f_{d\max}}$
+ - The time to stay coherent is $\tau = \frac{0.04}{f_{d\max}}$
+

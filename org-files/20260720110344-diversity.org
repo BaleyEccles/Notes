@@ -1,0 +1,121 @@
+:PROPERTIES:
+:ID:       b9a90e8f-d256-42cc-a549-89dc14f5e76e
+:END:
+#+title: Diversity
+#+date: [2026-07-20 Mon 11:03]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Diversity
+[[id:47bfedb9-46c9-43ca-b0bb-e75a4df5cc8c][Bit Error Rate]] - [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][Signal To Noise Ratio (SNR)]] Plot:
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/BER_SNR_Plot.xopp]]
+
+[[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][AWGN]]:
+\[P_b(E) = Q(\sqrt{2\bar{\gamma}}) \rightarrow \approx e^{-\bar{\gamma}}\]
+[[id:2f39c6c4-53d7-4281-b06b-41ec371e5ca2][Rayleigh]]:
+\[P_b(E) = \frac{1}{2}\left(1 - \sqrt{\frac{\bar{\gamma}}{1 + \bar{\gamma}}}\right) \rightarrow \approx \frac{1}{\bar{\gamma}}\]
+
+Under [[id:8c79d3ee-766a-4f72-a070-7a44d0f85ac1][fading]] the [[id:6dae5a04-3df1-48aa-a9d0-01ec02dbc57c][Bandwidth Efficiency]] is:
+\[\eta_B = \log_2(1 + |\alpha|^2 \bar{\gamma})\]
+_NOTE:_ $P_{out}$ is probability of outage, not power output
+\begin{align*}
+P_{out} &= \Pr(C < R) \\
+&= \Pr(|\alpha|^2 < \frac{2^r - 1}{\bar{\gamma}}) \\
+&\textrm{If } \alpha \textrm{ is Rayleigh Distributed} \\
+&= 1 - e^{-\frac{2^r - 1}{\bar{\gamma}}}
+\end{align*}
+As $\bar{\gamma} \rightarrow \infty$, $P_{out} = 1 - \frac{2^r - 1}{\bar{\gamma}}$. $\therefore P_{out} \propto \frac{1}{\bar{\gamma}}$
+
+Spatial, time, frequency and multi-path variants.
+** Spatial Diversity
+One transmitter ($Tx$) to multiple receivers ($Rx_1, Rx_2, Rx_3, \hdots, Rx_N$). Each ave their own fading.($\alpha_1, \alpha_2, \alpha_3, \hdots, \alpha_N$).
+ - Assume all paths are independent and identically distributed (iid).
+ - For examples assume Rayleigh [[id:8c79d3ee-766a-4f72-a070-7a44d0f85ac1][Fading]] ($f_{\gamma}(\gamma) = \frac{1}{\bar{\gamma}}e^{-\frac{\gamma}{\bar{\gamma}}}\ \bar{\gamma} \geq 0$)
+
+\[x = \begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_N \\
+\end{bmatrix} =\begin{bmatrix}
+\alpha_1 \\
+\alpha_2 \\
+\vdots \\
+\alpha_N \\
+\end{bmatrix}r + \begin{bmatrix}
+n_1 \\
+n_2 \\
+\vdots \\
+n_N \\
+\end{bmatrix} = \alpha r + n\]
+The output
+\begin{align*}
+y &= \sum_{k=1}^Nw_k^{*}x_k = w^Hx \\
+  &= w^H\alpha r + w^Hn
+\end{align*}
+
+Three options for selecting $w$ are:
+1. Selection Combining (SC)
+   - Simple 
+2. Maximum Ratio Combining (MRC)
+   - Most complex
+3. Equal Gain Combining (EGC)
+   - Between complexity
+
+*** Selection Combining (SC)
+The antenna with the highest [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][SNR]] is selected in preference to all the others.
+\[w_i = \begin{cases}
+1 &, \gamma = \max_k\{\gamma_k\} \\
+0 &, \textrm{otherwise}
+\end{cases}\]
+
+\[\therefore \textrm{Output SNR} = \gamma_{out} = \max_k\{\gamma_k\}\]
+
+**** Outage probability:
+\begin{align*}
+P_{out} &= \Pr[\gamma_{out} < \gamma_{th}] \\
+&= \Pr\left[\gamma_1, \gamma_2, \gamma_3, \hdots, \gamma_N < \gamma_{th}\right] \\
+&= \left(1-e^{-\gamma_{th}/\bar{\gamma}}\right)^N
+\end{align*}
+
+As $\bar{\gamma} \rightarrow \infty$:
+\[P_{out} &= \left(\frac{\gamma_{th}}{\bar{\gamma}}\right)^N \propto \frac{1}{\bar{\gamma}^N}\]
+
+**** [[id:47bfedb9-46c9-43ca-b0bb-e75a4df5cc8c][Bit Error Rate]]
+[[id:8904baec-0390-4296-b7e6-9ef4ede346a5][CDF]] of $\gamma$ comes from $P_{out}$:
+\begin{align*}
+F_{\gamma_{SC}}(\gamma) &= (1 - e^{\gamma/\bar{\gamma}})^N \\
+f_{\gamma_{SC}}(\gamma) &= \frac{N}{\bar{\gamma}}e^{-\gamma/\bar{\gamma}}(1 - e^{\gamma/\bar{\gamma}})^{N-1}
+\end{align*}
+
+\[P_b(E) = \int_0^{\infty}Q(\sqrt{2r})f_{\gamma_{SC}}(\gamma)\ d\gamma\]
+ - Assumes B[[id:d272c047-df78-4f69-8f3e-b682c8f53a99][PSK]]
+
+*** Maximum Ratio Combining (MRC)
+\begin{align*}
+y &= w^H\alpha r + w^Hn \\
+\gamma_{out} &= \frac{E\{|w^H\alpha r|^2\}}{E\{|w^Hn|^2\}} \\
+&\textrm{A good channel estimate means $\alpha$ is known} \\
+\gamma_{out} &= \frac{|w^H\alpha|^2E\{|r|^2\}}{|w^H|^2E\{n^2\}} \\
+\gamma_{out} &= \frac{|w^H\alpha|^2P_r}{|w^H|^2\sigma^2} \\
+\end{align*}
+So, choose $w$ such that:
+\[w_{MRC} = \max_w\{\gamma_{out}\} = \max_w[\frac{|w^H\alpha|^2}{\sigma^2|w|^2}]\]
+By Cauchy-Schwarz, $w=\alpha$
+\[y = r\sum_{k=1}^N|\alpha_k|^2 + n\]
+and
+\[\gamma_{out} = \sum_{k=1}^N\gamma_k\]
+
+\[M_{\gamma_{out}}(s) = \frac{1}{(1 - s\bar{\gamma})^N}\]
+\[f_{\gamma_{out}} = \frac{1}{(N-1)!}\frac{\gamma_{out}^{N-1}}{\bar{\gamma}^N}e^{\gamma_{out}/\bar{\gamma}}\]
+
+**** Average SNR
+\[\gamma_{out} = \sum_{k=1}^N\gamma_k\]
+\[E\{\gamma_{out}\} = N\bar{\gamma}\]
+**** Outage Probability
+\[P_{out} = 1 - e^{-\gamma_{th}/\bar{\gamma}}\sum_{k=0}^{N-1}(\frac{\gamma_{th}}{\bar{\gamma}})^k\frac{1}{k!}\]
+As $\bar{\gamma} \rightarrow \infty$, $P_{out}\propto \frac{1}{\bar{\gamma}^N}$
+
+**** [[id:47bfedb9-46c9-43ca-b0bb-e75a4df5cc8c][Bit Error Rate]]
+$\bar{\gamma} = $
+\[BER \]

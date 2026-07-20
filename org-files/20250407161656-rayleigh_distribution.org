@@ -11,5 +11,16 @@
  - \[F(\lambda;\sigma) = 1 - e^{\frac{\lambda^2}{2\sigma^2}}\]
  - [[file:ReighlyDist.png]]
 
+\[f_{\gamma}(\gamma) = \frac{1}{\bar{\gamma}}e^{-\frac{\gamma}{\bar{\gamma}}}\ \bar{\gamma} \geq 0\]
+
+
+** [[id:e2c1c2e3-814b-4add-9340-997af1fe57fa][Moment Generating Function (MGF)]]
+\[M_{\gamma}(s) = F(-s) = \frac{1}{1 - s\bar{\gamma}}\]
+ 
 ** [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]
 \[S(f-f_c) = \frac{1}{\pi f_d\sqrt{1 - (\frac{f-f_c}{f_d})^2}\]
+
+
+
+
+

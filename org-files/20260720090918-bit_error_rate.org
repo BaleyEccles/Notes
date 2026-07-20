@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       47bfedb9-46c9-43ca-b0bb-e75a4df5cc8c
+:END:
+#+title: Bit Error Rate
+#+date: [2026-07-20 Mon 09:09]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Bit Error Rate
+The lower bound of BER:
+ - \[BER = \frac{n^{\underline{o}}\textrm{errors}}{\textrm{total }n^{\underline{o}}\textrm{ bits}}\]
+   
+** In [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]]
+ - \[P_b(E) = Q\left(\sqrt{\frac{2E_b}{N_0}}\right) = Q(\sqrt{2\bar{\gamma}})\]
+SEE [[id:8c79d3ee-766a-4f72-a070-7a44d0f85ac1][Fading]]
+** BPSK in [[id:2f39c6c4-53d7-4281-b06b-41ec371e5ca2][Rayleigh Distribution]]
+ - Using [[id:47bfedb9-46c9-43ca-b0bb-e75a4df5cc8c][Bit Error Rate]] in [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]] ($\frac{E_b}{N_0}\rightarrow \gamma$)
+
+\begin{align*}
+P_b(E|\gamma) &= Q\left(\sqrt{2\gamma}\right) \\
+&= I_r(\sqrt{2}, \bar{\gamma}) \\
+&= \frac{1}{2}\left(1 - \sqrt{\frac{\bar{\gamma}}{1 + \bar{\gamma}}}\right)
+\end{align*}
+
+** Rician
+ - Using the [[id:e2c1c2e3-814b-4add-9340-997af1fe57fa][MGF]]:
+\begin{align*}
+P_b(E) &= \int_0^{\infty} P_b(E|\gamma)f_{\gamma}(\gamma)\ d\gamma \\
+&= I_n(\sqrt{2}, \sqrt{K}, \bar{\gamma})
+\end{align*}
+
+** M-[[id:a424999e-1f28-437b-92f3-ba2f21cf8138][PAM]], M-[[id:d272c047-df78-4f69-8f3e-b682c8f53a99][PSK]], M-[[id:44e2b236-fe48-411c-9dec-a4a46674f379][QAM]]
+The procedure for an exact calculation:
+1. Find a SER probability in [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][AWGN]]
+   - We know how to do this approximately
+2. Find a conversion from SER to BER
+   - We know how to do this approximately
+3. Replace $\frac{E_s}{N_0} \rightarrow \gamma \log_2(M)$ and average over the PDF
+   - We can do this 
+
+To help improve accuracy slightly, we can use better results for step 1 and 2.
+
+*** MPSK
+\[P_{b,MPSK} \approx \frac{2}{\max\left(\log_2(M), 2\right)}\sum_{i=1}^{\max\left(\frac{M}{4}, 1\right)}Q\left(\sqrt{\frac{2E_b\log_2M}{N_0}}\sin\left(\frac{(2i - 1)\pi}{M}\right)\right)\]
+*** MQAM
+\[P_{b,MQAM} \approx \frac{4}{\log_2(M)}(1 - 1/\sqrt{M})\sum_{i=1}^{\sqrt{M}/2}Q\left((2i - 1)\sqrt{\frac{3E_b\log_2M}{(M-1)N_0}}\right)\]
+ - Square [[id:44e2b236-fe48-411c-9dec-a4a46674f379][QAM]]
+These are true and better than [[id:3eb4dc51-a876-4615-9141-a2b81384919e][union bound]] in [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]]. From here $\frac{E_b}{N_0}\rightarrow \gamma$, integrate over the fading distribution.
+
+
+** Coherent Detection of [[id:b36203ff-c777-465d-bf78-b6fac862f519][FSK]]
+*** BPSK
+\[P_b(E) = \frac{1}{2}\left(1 - \sqrt{\frac{\bar{\gamma}/2}{1 + \bar{\gamma}/2}}\right)\]
+Above $M=2$, beyond our scope
+
+** Non-coherent Detection of [[id:b36203ff-c777-465d-bf78-b6fac862f519][FSK]]
+In [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]],
+\[P_s(E) = \sum_{m=1}^{M-1}(-1)^{m+1} {(M-1)\choose m}}\frac{1}{m+1}\exp\left[-\frac{m}{m+1}\frac{E_s}{N_0}\right]\]
+We also have:
+\[P_b(E) = \frac{1}{2}\frac{M}{M-1}P_s(E)\]
+Rayleigh Fading we get:
+\[P_s(E) = \sum_{m=1}^{M-1}(-1)^{m+1}{M-1\choose m}\frac{1}{1 + m(1 + \bar{\gamma})}\]
+Rician Fading we get:
+\[P_s(E) = \sum_{m=1}^{M-1}(-1)^{m+1}{M-1\choose m}\frac{1 + K}{1 + K + m(1 + K + \bar{\gamma})}\exp\left[\frac{-Km\bar{\gamma}}{1 + K + m(1 + K + \bar{\gamma})}\right]\]
+
+
+

@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       39875b0e-c1ff-4da0-9612-514bdd77a047
+:END:
+#+title: Autocorrelation of Time-Varying Channels
+#+date: [2026-07-20 Mon 10:13]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* [[id:2e3961b9-fea7-451f-af2b-02cbd9559c8e][Autocorrelation]] of Time-Varying Channels
+A random process is [[id:fc7d67e1-d69e-4079-b78e-3223e9d62787][WSS]] if its first and second moments ([[id:89ee50f1-67c5-4a9a-a5ec-0fa9cbb2dfcb][mean]] and variance) don't vary with time.
+In the WSS case, we can improve time:
+\[R_{XX}(\tau) = E\{X(t)X(t + \tau)\}\]
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Correlated_Signals.xopp]]
+1. Samples are not correlated with previous signal
+2. Samples are correlated with previous signal
+
+[[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]:
+\[S_{XX}(\omega) = \mathcal{F}\{R_{XX}(\tau)\}\]
+
+ - [[id:02463fc8-1fc6-427f-acd1-03542a688e16][Doppler Effect]]
+
+** Level Crossing Rate and Average Fade Duration
+Presume signal $z(t)$ has threshold value $z_{th}$, below which the signal is considered to have [[id:8c79d3ee-766a-4f72-a070-7a44d0f85ac1][faded]].
+ - Level crossing is defined as the amount of times the signal goes below $z_{th}$
+ - Fade duration is defined as the amount of time the signal is spent below $z_{th}$ before going above $z_{th}$
+ - $L_z$ average number of times per second that envelope ($z(t) = |\alpha(t)|$) crosses $z_{th}$ in the downward direction
+ - $\bar{t_z}$ average time that the envelope remains below $z_{th}$
+   
+** Assuming [[id:2f39c6c4-53d7-4281-b06b-41ec371e5ca2][Rayleigh Distribution]] and [[id:02463fc8-1fc6-427f-acd1-03542a688e16][Clarke's Spectrum]] ($E[z^2(t)] = 2\sigma^2$)
+\[L_z = \sqrt{2\pi}f_{d\max}\frac{z_{th}}{\sqrt{2\sigma^2}}e^{-\frac{z_{th}^2}{2\sigma^2}}\]
+\[\bar{t_z} = \frac{\sigma}{z_{th}f_{d\max}\sqrt{\pi}}\left[e^{\frac{z_{th}^2}{2\sigma^2}} - 1\right]\]
+Some times we get a parameterisation:
+ - \[\rho = \frac{z_{th}}{\sqrt{\bar{\rho_r}}} = \frac{z_{th}}{\sqrt{2\sigma^2}} = \frac{\textrm{Threshold load}}{\textrm{Avg received level}}\]
+
+** Assuming [[id:781fb64b-2931-4b73-b490-bc2170dbdfb6][Rician Distribution]]
+\[L_z = \sqrt{2\pi(n + 1)}f_{d\max}\rho e^{-(n + (n+1)\rho^2)} I_0\left(2\rho\sqrt{n(n+1)}\right)\]
+\[\bar{t_z} = \frac{1 - Q_1(\sqrt{2n}, \sqrt{2(n + 1)\rho^2})}{\sqrt{n\pi (n+1)} f_{d\max} \rho e^{-(n + (n+1)\rho^2)} I_0(2\rho\sqrt{n(n+1)})}\]
+ - Where: $Q_1(a,b) = \int_b^{\infty}xe^{-\frac{x^2 + a^2}{2}}I_0(ax)\ dx$

@@ -7,6 +7,7 @@
 #+STARTUP: latexpreview
 
 * Fading
+ -  
 \[Tx\{s(t)\} \rightarrow |h| \rightarrow |h+n(t)| \rightarrow Rx\]
  - $h$ can vary over time and can be multiple samples long
 \[s(t) = \Re\{s_0(t)e^{j2\pi f_ct}\} = s_{\alpha}(t)\cos(2\pi f_ct) - s_{\alpha}(t)\sin(2\pi f_ct)\]
@@ -73,5 +74,17 @@ Scattering of the transmitted signal causes very small path delays compared to t
 ** [[id:abae31a2-cc7c-4a2d-b1cf-ed322480482e][Multipath Fading]]
 There can be several scatters in the channel that results in copies of the signal being received at various time delays.
 
+** [[id:2f39c6c4-53d7-4281-b06b-41ec371e5ca2][Rayleigh Distribution]]
+\[I = I_r(a, \bar{\gamma}) = \frac{1}{2}\left(1 - \sqrt{\frac{a^2\frac{\bar{\gamma}}{2}}{1 + \frac{a^2\bar{\gamma}}{2}}}\right)\]
 
+** Hoyt Fading
+\[I = I_q(a, q, \bar{\gamma}) = \frac{1}{\pi}\int_0^{\frac{\pi}{2}}\left[1 + \frac{a^2}{\sin^2\theta}\bar{\gamma} + \frac{q^2a^2\bar{\gamma}^2}{(1 + q^2)^2\sin^4\theta}\right]^{-\frac{1}{2}}\ d\theta\]
 
+** Rician Fading
+\[I = I_n(a, n, \bar{\gamma}) = \frac{1}{\pi}\int_0^{\frac{\pi}{2}}\frac{(1 + n^2)\sin^2\theta}{(1 + n^2)\sin^2\theta + \frac{a^2\bar{\gamma}}{2}\exp\left[-\frac{n^2a^2\bar{\gamma}/2}{(1 + n^2)\sin^2\theta + \frac{a^2\bar{\gamma}}{2}}\right]\ d\theta\]
+ - :TODO: This is wrong
+
+** Nakagami-m
+\[I = I_m(a, m \bar{\gamma}) = \frac{1}{\pi} = \int_0^{pi/2}\left(1 + \frac{a^2\bar{\gamma}}{2m\sin^2\theta}\right)^{-m}\ d\theta\]
+
+SEE [[id:47bfedb9-46c9-43ca-b0bb-e75a4df5cc8c][Bit Error Rate]]

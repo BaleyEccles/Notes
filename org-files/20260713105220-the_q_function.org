@@ -13,3 +13,12 @@
 ** Alternative Form (Craig's Form)
 \[Q(x) = \frac{1}{\pi} \int_0^{\frac{\pi}{2}}e^{-\frac{x^2}{2\sin(\theta)}}d\theta\]
  - $x \geq 0$
+
+** Integrals Involving The Q Function
+\begin{align*}
+I &= \int_0^{\infty}Q(a\sqrt{\gamma})f_{\gamma}(\gamma)\ d\gamma \\
+&= \frac{1}{\pi}\int_{\theta = 0}^{\pi/2}M_{\gamma}\right(-\frac{a^2}{2\sin^2\theta}\left)\ d\theta
+\end{align*}
+ - Where $M_{\gamma}$ is a [[id:e2c1c2e3-814b-4add-9340-997af1fe57fa][Moment Generating Function]]
+
+
