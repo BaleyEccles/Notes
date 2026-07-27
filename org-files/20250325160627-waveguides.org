@@ -8,15 +8,19 @@
 
 * Waveguides
  - Used to guide a [[id:97a0e6e7-0a41-4597-9897-df6785384d70][Electromagnetic Wave]] between two locations
- - if $k < k_c$ the wave will not be transmitted through the waveguide
+ - if $k < k_c$ or $f < f_c$ the wave will not be transmitted through the waveguide
  - Two types   
    - Transverse magnetic (TM)
      - When some of the wave is propagating in $\hat{k}$
    - Transverse electric (TE)
      - When none of the wave is propagating in $\hat{k}$
+ - [[id:2cc87992-48a3-45d7-b015-dc512453a0ec][Coaxial Cable]]
 ** Solving
 Using $\tilde{E}_x(x,y,z) = \tilde{e}_x(x,y)e^{-j\beta z}$ and similar equations for the others.
+\[k_c^2 = \gamma^2 + k^2\]
+
 *** TM
+ - $E_z \neq 0$, $H_z = 0$
  - \[\tilde{E}_x = \frac{j\omega\epsilon\frac{\partial \tilde{e}_z}{\partial y } - j\beta\frac{\partial \tilde{h}_z}{\partial x}}
    {\omega^2\mu\epsilon - \beta^2} =
    \frac{-j}{k_c^2}\left(\beta\frac{\partial \tilde{E}_z}{\partial x} + \omega\mu \frac{\partial \tilde{H}_z}{\partial y}\right)\]
@@ -31,13 +35,28 @@ Using $\tilde{E}_x(x,y,z) = \tilde{e}_x(x,y)e^{-j\beta z}$ and similar equations
    -\frac{j}{k_c^2}\left(\omega\epsilon\frac{\partial \tilde{E}_z}{\partial x} + \beta\frac{\partial \tilde{H}_z}{\partial y}\right)\]
  - Now to find $\beta$
    - \[\beta = \sqrt{k^2-k_c^2} = \sqrt{\omega^2\mu\epsilon - \left(\frac{m\pi}{a}\right)^2 - \left(\frac{n\pi}{b}\right)^2}\]
+\[(E_T)_{TM} = \frac{-\gamma}{k_c^2}\nabla_TE_z\]
+\[H = \frac{1}{Z_{TM}}(\hat{z}\times E)\]
+Wave impedance:
+\[Z_{TM} = \frac{E_x}{H_y} = -\frac{E_y}{H_x} = \frac{\gamma}{j\omega\epsilon} = \eta\sqrt{1 - \frac{f_c^2}{f^2}\]
 *** TE
+ - $E_z = 0$, $H_z \neq 0$
  - \[k_c = \pi\sqrt{\left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2}\]
+\[(E_T)_{TE} = \frac{-\gamma}{k_c^2}\nabla_TH_z\]
+\[H = -Z_{TE}(\hat{z}\times E)\]   
+Wave impedance:
+\[Z_{TE} = \frac{E_x}{H_y} = -\frac{E_y}{H_x} = \frac{j\omega\mu}{\gamma} = \frac{\eta}{\sqrt{1 - \frac{f_c^2}{f^2}}}\]
+*** TEM
+ - $E_z = 0$, $H_z \neq 0$
 ** Waveguide Cutoff Frequency
 By setting $\beta = 0$ we can find
  - \[f_{mn} = \frac{1}{2\sqrt{\mu\epsilon}}\sqrt{\left(\frac{m}{a}\right)^2 - \left(\frac{n}{b}\right)^2}\]
+ - \[f_c = \frac{k_c}{2\pi\sqrt{\mu\epsilon}}\]
+ - \[k_c = \sqrt{\left(\frac{m\pi}{a}\right)^2 + \left(\frac{n\pi}{b}\right)^2}\]
 ** Dominant Modes
 The mode at which the waveguide has the lowest cutoff frequency
+** $\gamma$
+\[\gamma = \sqrt{k_c^2 - k^2}\]
 ** Waveguide Phase Velocity
 These are valid for both TM and TE
  - \[\beta = \omega\sqrt{\mu\epsilon} \sqrt{1 - \left(\frac{f_{mn}}{f}\right)^2} = \frac{\omega}{u_{p0}}\sqrt{1 - \left(\frac{f_{mn}}{f}\right)^2}\]
@@ -49,3 +68,15 @@ These are valid for both TM and TE
  - \[Z_{TE}= \frac{\omega\mu}{\beta} = \frac{\eta}{\sqrt{1-\left(\frac{f_{mn}}{f}\right)^2}}\]
   - Where $\eta$ is the intrinsic impedance of the guide dielectric
     - \[\eta = \sqrt{\frac{\mu}{\epsilon}}\]
+** Wavelengths
+\[\frac{1}{\lambda^2} = \frac{1}{\lambda_g^2} + \frac{1}{\lambda_c^2}\]
+ - $\lambda_c = \frac{u}{f}$
+ - $u = \sqrt{\mu\epsilon} = \frac{\omega}{k}$
+   
+** Phase Velocity
+\[v_p = \frac{\lambda_g}{\lambda}u\]
+
+** Group Velocity
+\[v_g = \frac{\lambda}{\lambda_g}u\]
+
+

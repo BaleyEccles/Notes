@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       159a9efc-e2b7-4d42-aa27-a47a5ddb7e6e
+:END:
+#+title: Two Port Networks
+#+date: [2026-07-21 Tue 15:04]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Two Port Networks

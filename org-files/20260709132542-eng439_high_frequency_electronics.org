@@ -9,6 +9,9 @@
 * Notes
 [[id:ce0c7328-ddd0-4e97-8f84-f1e373c1436c][ENG305 - Transmission Lines and Electromagnetic Waves]]
  - [[id:6af733cd-5562-4d42-a360-45271082b3c0][Transmission Line Theory]]
+ - [[id:a4ec2f93-bf78-4ad6-a253-6f8c8e521c9d][Waveguides]]
+ - [[id:159a9efc-e2b7-4d42-aa27-a47a5ddb7e6e][Two Port Networks]]
+ - [[id:ce7f7be0-a734-4999-9175-9aabfa310530][Network Analysis]]
 * Assessment
 Microwave Engineering, D.M. Pozar
 ** Design Report

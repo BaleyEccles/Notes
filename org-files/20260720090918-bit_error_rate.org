@@ -55,7 +55,8 @@ Above $M=2$, beyond our scope
 
 ** Non-coherent Detection of [[id:b36203ff-c777-465d-bf78-b6fac862f519][FSK]]
 In [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]],
-\[P_s(E) = \sum_{m=1}^{M-1}(-1)^{m+1} {(M-1)\choose m}}\frac{1}{m+1}\exp\left[-\frac{m}{m+1}\frac{E_s}{N_0}\right]\]
+\[P_s(E) = \sum_{m=1}^{M-1}(-1)^{m+1} {(M-1)\choose m}}\frac{1}{m+1}\textrm{MGF}\left[-\frac{m}{m+1}\right]\]
+ - [[id:e2c1c2e3-814b-4add-9340-997af1fe57fa][Moment Generating Function (MGFs)]]
 We also have:
 \[P_b(E) = \frac{1}{2}\frac{M}{M-1}P_s(E)\]
 Rayleigh Fading we get:

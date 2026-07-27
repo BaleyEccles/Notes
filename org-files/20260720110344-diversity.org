@@ -116,6 +116,26 @@ and
 \[P_{out} = 1 - e^{-\gamma_{th}/\bar{\gamma}}\sum_{k=0}^{N-1}(\frac{\gamma_{th}}{\bar{\gamma}})^k\frac{1}{k!}\]
 As $\bar{\gamma} \rightarrow \infty$, $P_{out}\propto \frac{1}{\bar{\gamma}^N}$
 
-**** [[id:47bfedb9-46c9-43ca-b0bb-e75a4df5cc8c][Bit Error Rate]]
-$\bar{\gamma} = $
+**** :TODO: [[id:47bfedb9-46c9-43ca-b0bb-e75a4df5cc8c][Bit Error Rate]]
+$\bar{\gamma}$
 \[BER \]
+
+*** Equal Gain Combining (EGC)
+Only take the angle for our weights
+\begin{align*}
+w_k &= e^{j\angle \alpha_k} \\
+y &= w^Hx \\
+&= \sum_{k=1}^Nw_k^{*}x_k \\
+&= r\left[\sum_{k=1}^N|\alpha_k|\right] + n
+\end{align*}
+
+**** Average SNR
+\[E\{\gamma_{out}\} &= [1 + (N-1)\frac{\pi}{4}]\bar{\gamma}\]
+
+*** Diversity Order
+$BER \propto \left(\frac{1}{\bar{\gamma}}\right)^N$ OR $P_{out} \propto \left(\frac{1}{\bar{\gamma}}\right)^N$
+\[\Rightarrow -\frac{\log(BER)}{\log(\bar{\gamma})} = N\]
+ - At high SNR
+Diversity order
+\[D = \lim_{SNR \rightarrow \infty} -\frac{\log(BER)}{\log(SNR)} \]
+   

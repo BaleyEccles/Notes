@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       2cc87992-48a3-45d7-b015-dc512453a0ec
+:END:
+#+title: Coaxial Cable
+#+date: [2026-07-21 Tue 13:39]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Coaxial Cable
+** Attenuation
+\[\alpha = \frac{R_c}{4\pi Z_0}\left[\frac{1}{a} + \frac{1}{b}\right]\]
+\[R_c = \sqrt{\frac{\omega \mu_0}{2\sigma}}\]
+
