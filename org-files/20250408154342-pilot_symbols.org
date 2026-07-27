@@ -37,4 +37,5 @@ We can send some known set of symbols to find $h[n]$
    - $\underline{A}$ must be full ranked
  - Best estimate of the channel impulse response
    - \[\underline{\tilde{h}} = (\underline{A}^H\underline{A})^{-1}\underline{A}^H\underline{r}\]
+ - $H$ is the [[id:51260ef9-3b99-4fa4-a4f2-ff241ff32bff][Hermitian Transpose]]
 

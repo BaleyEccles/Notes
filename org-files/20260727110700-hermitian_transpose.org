@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       51260ef9-3b99-4fa4-a4f2-ff241ff32bff
+:END:
+#+title: Hermitian Transpose
+#+date: [2026-07-27 Mon 11:07]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Hermitian Transpose
+Denoted $A^H$
+It is the complex conjugate transpose
+

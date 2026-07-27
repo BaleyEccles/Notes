@@ -8,7 +8,7 @@
 
 * Notes
  - [[id:d265fa3b-0fc5-4726-9c6c-bb739453f47a][ENG308 - Communication Systems 1]]
-\[P_R = \frac{P_zG_tG_r\lambda^2}{(4\pi)^2d^2L}\]
+\[P_R = \frac{P_tG_tG_r\lambda^2}{(4\pi)^2d^2L}\]
  - $P_t$ Transmit power
  - $G_t$ Tx antenna gain
    - $G = \frac{4\pi A}{\lambda^2}$
@@ -19,7 +19,7 @@
    - $c = 3\times 10^8$ (speed of light)
  - $d$ Tx-Rx distacne
  - $L$ System loss factor
-   
+
 [[id:02bfbdda-9313-461d-b699-4a96f5c1f9d2][Reference distance d0]]
 [[id:406cc66e-e15e-45d3-9a59-548f11bef0e2][Effective Isotropic Radieated Power (EIRP)]]
 [[id:71813bb9-a0ae-459a-b6b8-49fcbea3462c][Two-Ray Reflection Model]]
@@ -33,6 +33,7 @@
 [[id:f75bbeec-95c4-4074-965f-bbfcba7252f3][System Performance Metrics]]
 [[id:39875b0e-c1ff-4da0-9612-514bdd77a047][Autocorrelation of Time-Varying Channels]]
 [[id:b9a90e8f-d256-42cc-a549-89dc14f5e76e][Diversity]]
+[[id:0048a310-96ae-4bc2-af5f-b458e95fc678][Equalisers]]
 
 * Diagram
 :TODO:

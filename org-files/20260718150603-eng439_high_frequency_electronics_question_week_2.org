@@ -29,7 +29,7 @@
 \gamma &= \sqrt{(4 + j\omega 0.5\mu)(0.02 + j\omega 200p)} \\
 \gamma &= 0.54 + 50.27j\ \textrm{m}^{-1}
 \end{align*}
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_2_Q1.m
 warning('off','all');
 pkg load symbolic
 f = 800e6;
@@ -53,7 +53,7 @@ Z_0 &= 49.9930 +  0.4575i\ \Omega \\
 Z_0 &= 50.0\angle 0.5243^{\circ}\ \Omega
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_2_Q1.m
 Z_0 = sqrt((R + i*w*L)/(G + i*w*C))
 latex(abs(vpa(Z_0, 4)))
 latex(vpa(angle(vpa(Z_0, 4))*180/pi, 4))
@@ -74,7 +74,7 @@ A_{N_p} &= 0.1620\ \textrm{Np} \\
 \Rightarrow A_{N_p}[\textrm{dB}] &= 1.4366 [\textrm{dB}]
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_2_Q1.m
 l = 30e-2
 a = real(g)
 A_N_p = a*l
@@ -98,7 +98,7 @@ A_N_p*8.868
 \gamma &= j50.27\ \textrm{m}^{-1}
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_2_Q1.m
 warning('off','all');
 f = 800e6;
 L = 0.5e-6;
@@ -124,7 +124,7 @@ Z_0 &= 50\ \Omega \\
 Z_0 &= 50\angle0^\circ\ \Omega
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_2_Q1.m
 Z_0 = sqrt((R + i*w*L)/(G + i*w*C))
 #+END_SRC
 
@@ -142,9 +142,9 @@ A_{\textrm{Np}} &= 0\ \textrm{Np} \\
 A[\textrm{dB}] &= 0\ \textrm{dB}
 \end{align*}
 
-Therefore, the (30\ \textrm{cm}) lossless transmission line has no attenuation.
+Therefore, the ($30\ \textrm{cm}$) lossless transmission line has no attenuation.
 
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_2_Q1.m
 l = 30e-2;
 a = real(g);
 A_Np = a*l
@@ -163,7 +163,7 @@ https://www.engineeringtoolbox.com/relative-permittivity-d_1660.html
 
 Using:
 \[f_{m,n} = \frac{c}{2\sqrt{\mu\epsilon}}\sqrt{\left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2}\]
-#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export :tangle ENG439_Week_2_Q2.m
 warning('off','all');
 a = 1.07e-2;
 b = 0.43e-2;
@@ -207,7 +207,7 @@ k_c &= \pi\sqrt{\left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2} \\
 \gamma &= \alpha + j\beta
 \end{align*}
 
-#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export :tangle ENG439_Week_2_Q2.m
 f = 15e9;
 k = 2*pi*f*sqrt(eps_r)/c
 f_k_c = @(m,n) pi*sqrt((m/a)^2 + (n/b)^2);
@@ -253,15 +253,15 @@ Z_0 &= \begin{cases}
 
 Using the case for $\frac{W}{d}\geq 1$ we solve to get $W = 3.52\ \textrm{mm}$ and $\frac{W}{d} = 1.60 \geq 1$, this means it is correct.
 
-#+BEGIN_SRC octave :results output :exports none :session Q3 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q3 :eval no-export :tangle ENG439_Week_2_Q3.m
 warning('off', 'all');
 pkg load symbolic
 
 syms W positive
 
 e_r = 2.2;
-d = 2.2;       % Substrate thickness in mm
-Z_0 = 75;      % Characteristic impedance in ohms
+d = 2.2;
+Z_0 = 75;
 
 e_e = (e_r + 1)/2 + (e_r - 1)/(2*sqrt(1 + 12*d/W));
 
@@ -275,4 +275,12 @@ W/d
 : W = (sym) 3.5287160270293034292954301125302
 : ans = (sym) 1.6039618304678651951342864147865
 
-
+\newpage
+* Appendix A - Octave Code For Question 1
+#+INCLUDE: "./ENG439_Week_2_Q1.m" src octave
+\newpage
+* Appendix B - Octave Code For Question 2
+#+INCLUDE: "./ENG439_Week_2_Q2.m" src octave
+\newpage
+* Appendix C - Octave Code For Question 3
+#+INCLUDE: "./ENG439_Week_2_Q3.m" src octave

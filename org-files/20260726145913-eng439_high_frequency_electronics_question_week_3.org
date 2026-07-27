@@ -1,0 +1,249 @@
+:PROPERTIES:
+:ID:       1f4c0ec5-3410-491f-aabe-8a224ce3512c
+:END:
+#+title: ENG439 - High Frequency Electronics - Question Week 3
+#+date: [2026-07-26 Sun 14:59]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+* Question 1
+** a
+\[Z_{in} = Z_{0}\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)}\]
+Where:
+\[\beta = \frac{2\pi}{\lambda}\]
+** b
+\begin{align*}
+Z_{in} &= Z_{0}\frac{Z_L + jZ_0\tan(\beta l)}{Z_0 + jZ_L\tan(\beta l)} \\
+Z_L &\rightarrow \infty \\
+\Rightarrow \frac{Z_0}{Z_L} &\rightarrow 0 \\
+\Rightarrow Z_{in} &= \frac{Z_0}{j\tan(\beta l)} \\
+\textrm{Sub in } l &= \frac{\lambda}{8} \textrm{ and } \beta = \frac{2\pi}{\lambda} \\
+Z_{in} &= \frac{Z_0}{j\tan\left(\frac{\pi}{4}\right)} \\
+&= -jZ_0
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_3_Q1.m
+warning('off','all');
+pkg load symbolic
+beta_l = 2*pi/8
+Z_in_open = -i*Z_0*cot(beta_l)
+#+END_SRC
+
+#+RESULTS:
+: beta_l = 0.7854
+: Z_in_open = (sym) -ⅈ⋅Z₀
+
+** c
+\begin{align*}
+Y_{in} &= \frac{1}{Z_{in}} \\
+Y_{in} &= \frac{1}{-jZ_0} \\
+Y_{in} &= \frac{j}{Z_0} \\
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_3_Q1.m
+Y_in = simplify(1/Z_in_open)
+#+END_SRC
+
+#+RESULTS:
+: Y_in = (sym)
+: 
+:   ⅈ 
+:   ──
+:   Z₀
+
+* Question 2
+
+** a
+*** Stub 1
+$A = 1$, $B = 0$, $C = Y$ and $D = 1$. From question 1 the impedance for a stub ($Z_{\textrm{stub}}$) is:
+\begin{align*}
+Z_{\textrm{stub}} &= \frac{Z_0}{j\tan(\beta l)} \\
+\textrm{Sub in } l &= \frac{\lambda}{8} \textrm{ and } \beta = \frac{2\pi}{\lambda} \\
+Z_{\textrm{stub}} &= \frac{Z_0}{j\tan\left(\frac{\pi}{4}\right)} \\
+&= -jZ_0 \\
+Y_{\textrm{stub}} &= \frac{1}{Z_{in}} \\
+Y_{\textrm{stub}} &= \frac{1}{-jZ_0} \\
+Y_{\textrm{stub}} &= \frac{j}{Z_0}\\
+\Rightarrow M &= \begin{bmatrix} 
+1 & 0 \\
+\frac{j}{Z_0} & 1
+\end{bmatrix}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export :tangle ENG439_Week_3_Q2.m
+warning('off','all');
+pkg load symbolic
+
+syms Z_0 positive
+
+theta_stub = 2*pi/8
+Z_stub = simplify(-i*Z_0*cot(theta_stub))
+Y_stub = simplify(1/Z_stub)
+
+M_1 = [sym(1), sym(0); Y_stub, sym(1)]
+M_3 = M_1
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+theta_stub = 0.7854
+Z_stub = (sym) -ⅈ⋅Z₀
+Y_stub = (sym)
+
+  ⅈ 
+  ──
+  Z₀
+M_1 = (sym 2×2 matrix)
+
+  ⎡1   0⎤
+  ⎢     ⎥
+  ⎢ⅈ    ⎥
+  ⎢──  1⎥
+  ⎣Z₀   ⎦
+M_3 = (sym 2×2 matrix)
+
+  ⎡1   0⎤
+  ⎢     ⎥
+  ⎢ⅈ    ⎥
+  ⎢──  1⎥
+  ⎣Z₀   ⎦
+#+end_example
+
+*** Stub 2
+Same as Stub 1, so:
+\[M &= \begin{bmatrix} 
+1 & 0 \\
+\frac{j}{Z_0} & 1
+\end{bmatrix}\]
+*** Transmission Line
+$A = \cos(\beta l)$, $B = jZ_0\sin(\beta l)$, $C = jY_0\sin(\beta l)$ and $D = \cos(\beta l)$.
+\begin{align*}
+\beta l &= \frac{2\pi}{\lambda} \frac{\lambda}{4} \\
+&= \frac{\pi}{2} \\
+\Rightarrow M &= \begin{bmatrix}
+0 & \frac{jZ_0}{\sqrt{2}} \\
+\frac{jZ_0}{\sqrt{2}} & 0
+\end{bmatrix}
+\end{align*}
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export :tangle ENG439_Week_3_Q2.m
+theta_line = 2*pi/4
+Z_c = Z_0/sqrt(sym(2));
+
+M_2 = [cos(theta_line), i*Z_c*sin(theta_line);
+i*sin(theta_line)/Z_c, cos(theta_line)];
+
+M_2 = simplify(M_2)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+theta_line = 1.5708
+M_2 = (sym 2×2 matrix)
+
+  ⎡                           √2⋅ⅈ⋅Z₀      ⎤
+  ⎢1/16331239353195370        ───────      ⎥
+  ⎢                              2         ⎥
+  ⎢                                        ⎥
+  ⎢       √2⋅ⅈ                             ⎥
+  ⎢       ────          1/16331239353195370⎥
+  ⎣        Z₀                              ⎦
+#+end_example
+
+** b
+\begin{align*}
+M_{TOT} &= \prod M \\
+&= \begin{bmatrix} 
+1 & 0 \\
+\frac{j}{Z_0} & 1
+\end{bmatrix}
+\begin{bmatrix}
+0 & \frac{jZ_0}{\sqrt{2}} \\
+\frac{jZ_0}{\sqrt{2}} & 0
+\end{bmatrix}
+\begin{bmatrix} 
+1 & 0 \\
+\frac{j}{Z_0} & 1
+\end{bmatrix} \\
+&= 
+\begin{bmatrix}
+-\frac{1}{\sqrt{2}} & \frac{jZ_0}{\sqrt{2}} \\
+\frac{j}{\sqrt{2}Z_0} & -\frac{1}{\sqrt{2}} \\
+\end{bmatrix}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export :tangle ENG439_Week_3_Q2.m
+M_2 = [sym(0), sym(sqrt(2)*i*Z_0/2); sym(sym(sqrt(2))*i/Z_0), sym(0)];
+M = simplify(M_1*M_2*M_3)
+#+END_SRC
+
+#+RESULTS:
+: M = (sym 2×2 matrix)
+: 
+:   ⎡-√2   √2⋅ⅈ⋅Z₀⎤
+:   ⎢────  ───────⎥
+:   ⎢ 2       2   ⎥
+:   ⎢             ⎥
+:   ⎢√2⋅ⅈ   -√2   ⎥
+:   ⎢────   ────  ⎥
+:   ⎣2⋅Z₀    2    ⎦
+
+** c
+From the textbook we get these equations:
+\begin{align*}
+S_{11} & = \frac{A + \frac{B}{Z_0} - CZ_0 - D}{A + \frac{B}{Z_0} + CZ_0 + D} \\
+S_{12} & = \frac{2(AD - BC)}{A + \frac{B}{Z_0} + CZ_0 + D} \\
+S_{21} & = \frac{2}{A + \frac{B}{Z_0} + CZ_0 + D} \\
+S_{11} & = \frac{-A + \frac{B}{Z_0} - CZ_0 + D}{A + \frac{B}{Z_0} + CZ_0 + D} \\
+\end{align*}
+With $Z_0 = 1$ and the previous values for $A,B,C,D$ we get:
+\[S = \begin{bmatrix}
+0 & -\frac{1 + j}{\sqrt{2}} \\
+-\frac{1 + j}{\sqrt{2}} & 0 \\
+\end{bmatrix}\]
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export :tangle ENG439_Week_3_Q2.m
+M = simplify(subs(M, Z_0, 1));
+
+A = simplify(M(1,1));
+B = simplify(M(1,2));
+C = simplify(M(2,1));
+D = simplify(M(2,2));
+
+S_11 = simplify((A + B - C - D)/(A + B + C + D));
+S_12 = simplify(2*(A*D - B*C)/(A + B + C + D));
+S_21 = simplify(2/(A + B + C + D));
+S_22 = simplify((-A + B - C + D)/(A + B + C + D));
+
+S = simplify([S_11, S_12; S_21, S_22])
+#+END_SRC
+
+#+RESULTS:
+: S = (sym 2×2 matrix)
+: 
+:   ⎡             √2⋅(-1 - ⅈ)⎤
+:   ⎢     0       ───────────⎥
+:   ⎢                  2     ⎥
+:   ⎢                        ⎥
+:   ⎢√2⋅(-1 - ⅈ)             ⎥
+:   ⎢───────────       0     ⎥
+:   ⎣     2                  ⎦
+
+\newpage
+* Appendix A - Octave Code For Question 1
+#+INCLUDE: "./ENG439_Week_3_Q1.m" src octave
+\newpage
+* Appendix B - Octave Code For Question 2
+#+INCLUDE: "./ENG439_Week_3_Q2.m" src octave
+
