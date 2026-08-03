@@ -61,7 +61,7 @@ Z_{N1} & \hdots & \hdots & Z_{NN}
 Admittance parameters
 
 *** S-parameter
-Better suited for high frequency analysis.
+Better suited for high frequency analysis.2
 $V^+_N$ is the wave entering Nth port
 $V^-_N$ is the wave exiting Nth port
 \[\begin{bmatrix}
@@ -125,3 +125,14 @@ V^+_N
 \[C = \frac{1}{Z_3}\]
 \[D = 1 + \frac{Z_2}{Z_3}\]
 
+*** Reciprocal condition
+\[S_{ij} = S_{ji}\]
+
+*** Lossless Conditions
+\[|S_{11}|^2 + |S_{12}|^2 + |S_{13}|^2 = 1\]
+\[|S_{12}|^2 + |S_{22}|^2 + |S_{23}|^2 = 1\]
+\[|S_{13}|^2 + |S_{23}|^2 + |S_{33}|^2 = 1\]
+
+\[S_{11}^{*} S_{12} + S_{12}^{*} S_{22} + S_{13}^{*} S_{23} = 0\]
+\[S_{11}^{*} S_{13} + S_{12}^{*} S_{23} + S_{13}^{*} S_{33} = 0\]
+\[S_{12}^{*} S_{13} + S_{22}^{*} S_{23} + S_{23}^{*} S_{33} = 0\]

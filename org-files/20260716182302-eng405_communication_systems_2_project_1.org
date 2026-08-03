@@ -22,7 +22,7 @@ $X$ and $Y$ are independent. The deterministic LOS vector is:
 The received amplitude is
 \[A=\sqrt{X^2+Y^2}\]
 
-** (A) Distribution Of The Received Amplitude
+** (a) Distribution Of The Received Amplitude
 
 The PDF of $X$ and $Y$ is
 
@@ -93,7 +93,25 @@ I_0\left(\frac{ar_0}{\sigma^2}\right) &\approx 1 + \frac{a^2r_0^2}{4\sigma^4} \\
 \end{align*}
 
 
-** (c) Distribution Of Received Power
+** TODO (c) Distribution Of Received Power
+Let the received power be $L = A^2 \Rightarrow A = \sqrt{L}$, we can transform the PDF using $f_L(l) = f_A(\sqrt{L})\frac{1}{2\sqrt{L}}$ because $\frac{dA}{dL} = \frac{1}{2\sqrt{L}}$ and the probability within the amplitude interval must equal the probability within the corresponding power interval ($f_L(l)dl = f_A(a)da$). This means:
+\begin{align*}
+\frac{dA}{dL} &= \frac{1}{2\sqrt{L}} \\
+f_L(l) &= \frac{\sqrt{l}}{2\pi\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]I_0\left(\frac{\sqrt{l}r_0}{\sigma^2}\right) \frac{1}{2\sqrt{l}} \\
+f_L(l) &= \frac{1}{4\pi\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]I_0\left(\frac{\sqrt{l}r_0}{\sigma^2}\right)
+\end{align*}
+Using the Taylor series approximation we can get the statistical distribution of the power of the incoming signal:
+\[f_L(l) \approx \boxed{\frac{1}{4\pi\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]\left(1 + \frac{lr_0^2}{4\sigma^4}\right)}\]
+
+We can find the maximum error by considering the first eliminated term of the Taylor approximation:
+\[\frac{x^4}{64} = \frac{r_0^4l^2}{64\sigma^{8}}\]
+This allows us to find the approximate error:
+\begin{align*}
+\Delta f_L(l) &= \frac{1}{4\pi\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]I_{\textrm{error}} \\
+\Delta f_L(l) &= \frac{1}{4\pi\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]\frac{r_0^4l^2}{64\sigma^{8}} \\
+\Delta f_L(l) &= \frac{r_0^4l^2}{256\pi\sigma^{10}}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]
+\end{align*}
+We know that the maximum error :TODO:
 
 
 ** (d) Explanation Of Outage Probability
@@ -281,3 +299,8 @@ end
 : Frequency: 2400.0 MHz
 : Wavelength: 0.1249 m
 : Approximate crossover distance: 2012.01 m
+
+* Question 3
+
+** a
+we can 

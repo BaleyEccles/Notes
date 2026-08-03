@@ -145,6 +145,8 @@ b)
 \hat{y}[n] &= \sum_{j = -k}^k c_jy[n - j] \\
 \hat{y}[-3] &= \sum_{j = -1}^1 c_jy[-3 - j] = 0 \\
 \hat{y}[-2] &= \sum_{j = -1}^1 c_jy[-2 - j] = -1/104 \\
+\end{align*}
+\begin{align*}
 \hat{y}[-1] &= \sum_{j = -1}^1 c_jy[-1 - j] = 0 \\
 \hat{y}[0] &= \sum_{j = -1}^1 c_jy[0 - j] = 1 \\
 \hat{y}[+1] &= \sum_{j = -1}^1 c_jy[1 - j] = 0 \\
@@ -223,4 +225,170 @@ Pass through equaliser:
 0.0789 & k=3
 \end{cases}\]
 
+
+** Nonlinear Equalisers
+*** Decision Feedback Detector/Equaliser (DFD/DFE)
+Incoming signal set $x = [x_1, x_2, \hdots, x_N]^T$
+ - Gaussian distributed
+\[f(x_1, x_2, \hdots, x_N) = \frac{1}{\sqrt{(2\pi)^N\det(\Sigma)}}e^{-\frac{x^T\Sigma x}{2}}\]
+Where $\Sigma$ is the autocovariance matrix of $x$
+\begin{align*}
+\textrm{cov}(X, Y) &= E\{(X - E(X))\overline{(Y - E(Y))}\} \\
+&= E\{X\overline{Y}\} - E\{X\}E\{\overline{Y}\} \\
+\Sigma &=\begin{bmatrix}
+\textrm{cov}(x_1, x_1) & \textrm{cov}(x_1, x_2) & \hdots & \textrm{cov}(x_1, x_N) \\
+\textrm{cov}(x_2, x_1) & \textrm{cov}(x_2, x_2) & \hdots & \textrm{cov}(x_2, x_N) \\
+\vdots & \vdots & \vdots & \vdots \\
+\textrm{cov}(x_N, x_1) & \textrm{cov}(x_N, x_2) & \hdots & \textrm{cov}(x_N, x_N) \\
+\end{bmatrix}
+\end{align*}
+Use $\Delta^2 = x^T\Sigma^{-1}x$ as a sufficient probability metric.
+
+If $x$ is and i.i.d sequence, $\textrm{cov}(x_i,x_j) = 0$ whenever $i \neq j$ and $\textrm{cov}(x_i, x_i) = 1$. This means $\Sigma = I \Rightarrow \Sigma^{-1} = I$
+\[\Rightarrow \Delta^2 = x^Tx = |x|^2 = \sum_{i=1}^N x_i^2\]
+So,
+\begin{align*}
+f(x_1, x_2, \hdots, x_N) &= \frac{1}{\sqrt{(2\pi)^N\det(\Sigma)}}e^{-\frac{x^T\sum_{i=1}^N x_i^2}{2}} \\
+&= \frac{1}{\sqrt{(2\pi)^N\det(\Sigma)}}\prod_{i=1}^Ne^{-\frac{x_i^2}{2}}
+\end{align*}
+DFD attempts to maximise the $i^{th}$ factor in the product when detecting the $i^{th}$ signal.
+For symbols $a[1], a[2],\hdots, a[i],\hdots, a[N]$, we designate estimates of these as $\hat{a}[1], \hat{a}[2],\hdots, \hat{a}[i],\hdots, \hat{a}[N]$. When detecting symbol $i$, assume we already have estimates $\hat{a}[i-1], \hdots, \hat{a}[2], \hat{a}[1]$. So, the probability distribution for symbol $a[i]$ is:
+\[\Pr(a[i]|[r[i],\underline{\hat{a}}]) = P_0 e^{-\frac{(r[i] - h[0]a[i] - \sum_{k=1}^Mh[k]\hat{a}[i-k])^2}{\sigma^2}}\]
+ - $\underline{\hat{a}} = (\hat{a}[1], \hat{a}[2], \hdots ,\hat{a}[i-1])$
+\[r[i] - h[0]a[i] - \sum_{k=1}^Mh[k]\hat{a}[i-k]\]
+ - This is just trying to get the noise term
+
+\[DFD \Rightarrow \min_{a[i]}\left(r[i] - h[0]a[i] - \sum_{k=1}^Mh[k]\hat{a}[i - k]\right)\]
+ - $h[n]$ is the channel impulse response (found by [[id:533199e6-1d41-4223-a95e-b4ee0de5f926][Pilot Symbols]])
+ - $\hat{a}[n]$ previously-determined sequence of inputs estimated at the receiver
+ - $r[i]$ current received values
+ - $a[i]$ current set of possible choices in the constellation
+   
+** Maximum Aposteriori Probability (MAP) Detector
+The problem: given a set of measured statistics $r[i]$, what is the most likely set of initial symbols that produced this evidence?
+Using Bayesian terms:
+\[\Pr(a[i]|r[i]) = \frac{\Pr(r[i]|a[i])\Pr(a[i])}{\Pr(r[i])}\]
+Find $$\max_{a[i]}\Pr(a[i]|r[i])$$
+This comes from Baye's Rule $\Pr(X|Y) = \frac{\Pr(Y|X)\Pr(X)}{\Pr(Y)}$
+ - $\Pr(X)$ is the 'prior probability'
+ - $\Pr(Y|X)$ is the 'likelihood function' - probability of seeing evidence $y$ given parameter $x$
+ - $\Pr(Y|X)$ is the 'posterior probability' - probability of seeing evidence $x$ given parameter $y$
+   
+Hidden Markov Model:
+In a graph of an initial known state ($X_0$) and final known state ($X_N$) and unknown state between ($X_k = \{X_1, X_2, \hdots X_{N-1}\}$). For each unknowns state we get and evidence $E_k$, we want to maximise all these evidences. $E_k$ only depends on $X_k$. Prior probability: $\Pr(E_k = e_k|X_k)$, and $e_k$ comes from our measurement of $r[k]$, at time $k$. Probability of hidden variable is inferred from:
+\[\Pr(X_k|[E_1 = e_1, \hdots, E_N = e_N])\]
+We want to find $$x_k = \max_{x_k}(\Pr(X_k = x_k| [e_1, \hdots, e_N]))$$
+Our approach is iterative and comprises:
+ - forward message (move from time $0\rightarrow k$), allowing probability distribution of $X_k$ to be determined
+ - Backward message (mores from time $N+1 \rightarrow k$), allows update to produce posterior probability
+   
+Let $e_{1:k} = \{e_1, e_2, \hdots, e_k\}$ and $e_{k+1:N} = \{e_{k+1}, e_{k+2},\hdots, e_N\}$. So we can rewrite it as:
+\begin{align*}
+x_k &= \max_{x_k}(\Pr(X_k=x_k|[e_{1:k}, e_{k+1:N}])) \\
+&= \max_{x_k}\left(\frac{\Pr(e_{k+1:N}|[X_k=x_k, e_{1:k}]) \Pr(X_k=x_k|e_{1:k})}{\Pr(e_k)}\right) \\
+&= \max_{x_k}\left(\Pr(e_{k+1:N}|[X_k=x_k, e_{1:k}]) \Pr(X_k=x_k|e_{1:k})\right) \\
+&= \max_{x_k}\left(\Pr(e_{k+1:N}|X_k=x_k) \otimes \Pr(X_k=x_k|e_{1:k})\right) \\
+\end{align*}
+ - $\otimes$ is the piece wise multiplication
+_The Forward Message_
+Itterativley , we want to find the next part of $\Pr(X_{k+1}|e_{1:k+1})$ from $\Pr(X_k|e_{1:k})$. Since the state is a column vector with $M$ symbols, the message is also a column vector with $M$ symbols.
+At step $k+1$, we receive $E_{k+1}$, and this revises  the likelihood function: $\Pr(E_{k+1}= e_{k+1}|X_{k+1})$
+From Baye's Rule: $\Pr(X_{k+1}|[e_{1:k},e_{k+1}]) = \beta\Pr(e_{k+1}|[X_{k+1}e_{1:k}])\Pr(X_{k+1}|e_{1:k})$
+Using _Probability marginalisation:_ $\Pr(A) = \sum_b\Pr(A, B=b)$
+\[\Rightarrow \Pr(X_{k+1}|[e_{1:k},e_{k+1}]) = \beta_1 \sum_{x_k}\Pr(e_{k+1}|x_{k+1})\Pr(X_{k+1}, x_k|e_{1:k})\]
+Using _General probability multiplication:_ $\Pr(A) = \sum_b\Pr(A, B=b) = \sum_b\Pr(A|B=b)\Pr(B=b)$
+\[\Rightarrow \boxed{\Pr(X_{k+1}|[e_{1:k},e_{k+1}]) = \beta_1 \Pr(e_{k+1}|X_{k+1})\sum_{x_k}\Pr(X_{k+1}|[x_ke_{1:k}])\Pr(x_k|e_{1:k})}\]
+ - Forward message at $k=1$
+   - $\Pr(X_{k+1}|[e_{1:k},e_{k+1}])$
+ - New evidence
+   - $\Pr(e_{k+1}|X_{k+1})$
+ - State transition probability
+   - $\Pr(X_{k+1}|[x_ke_{1:k}])$
+ - Forward message at $k$
+   - $\Pr(x_k|e_{1:k})$
+     
+_Backwards Message:_
+\[\Pr(e_{k+1:N|X_k}) = \beta_2\sum_{x_{k+1}}\Pr(e_{k+1}|x_{k+1})\Pr(e_{k+2:N}|x_{k+1})\Pr(x_{k+1}|X_k)\]
+ - Backwards message at $k+1$
+   - $\Pr(e_{k+1:N|X_k})$
+ - New evidence at $k+1$
+   - $\Pr(e_{k+1}|x_{k+1})$
+ - Backwards message at $k+2$
+   - $\Pr(e_{k+2:N}|x_{k+1})$
+ - State transition probability
+   - $\Pr(x_{k+1}|X_k)$
+
+
+*** Matrix implementation of forward-backwards messages
+asssume $M$ levels of modulation so $X_k = \{x_1, \hdots, x_M\}$. We implement
+1. The state transition model, $\Pr(X_k|X_{k-1})$, given by:
+\[T = \begin{bmatrix}
+\Pr(x_k = x_1 | x_{k-1} = x_1) & \Pr(x_k = x_2 | x_{k-1} = x_1) & \hdots & \Pr(x_k = x_M | x_{k-1} = x_1) \\
+\Pr(x_k = x_1 | x_{k-1} = x_2) & \Pr(x_k = x_2 | x_{k-1} = x_2) & \hdots & \Pr(x_k = x_M | x_{k-1} = x_2) \\
+\vdots & \vdots & \vdots & \vdots \\
+\Pr(x_k = x_1 | x_{k-1} = x_M) & \Pr(x_k = x_2 | x_{k-1} = x_M) & \hdots & \Pr(x_k = x_M | x_{k-1} = x_M)
+\end{bmatrix}\]
+2. The observation matrix $O_k$ from $\Pr(e_k|X_k)$
+\[O_k = \begin{bmatrix}
+\Pr(e_k|x_k=x_1) & 0 & \hdots & 0 \\
+0 & \Pr(e_k|x_k=x_2) & \hdots & 0 \\
+0 & 0 & \hdots & 0 \\
+0 & 0 & \hdots & \Pr(e_k|x_k=x_M)
+\end{bmatrix}\]
+3. Let  the forward message be:
+\[z^k = [z_1^k\ z_2^k\ \hdots z_M^k]^T\]
+ - $k$ camto iterations
+Then, $z^{k+1} = O_{k+1}T^Tz^k$
+4. Let the backwards message be:
+\[b^k = [b_1^k\ b_2^k\ \hdots b_M^k]^T\]
+\[b^{k+1} = T O_{k+1}b^{k+2}\]
+5. MAP distributions:
+\begin{align*}
+\max\{\Pr(X_k|e_{1:N})\} &= \max_{x_k}\{z^k\otimes b^{k+1}\} \\
+&= \begin{bmatrix}
+z_1^kb_1^{k+1} \\
+z_2^kb_2^{k+1} \\
+\vdots \\
+z_M^kb_M^{k+1}
+\end{bmatrix}
+\end{align*}
+
+
+**** MAP Algorithm Initialisation
+|-------+---------+---------------|
+| Known | Unknown | Known/Unknown |
+|-------+---------+---------------|
+$z_0 = \begin{bmatrix}0 \\ 0 \\ 1 \\ 0\end{bmatrix}$
+ - Known
+$b^N = \begin{bmatrix}1 \\ 0 \\ 0 \\ 0\end{bmatrix}$
+ - Known ending
+$b^N = \begin{bmatrix}1/4 \\ 1/4 \\ 1/4 \\ 1/4\end{bmatrix}$
+ - Unknown ending
+
+*** Maximum Likelihood Sequence Estimation (MLSE)
+\[\max_{x_1,\hdots, x_N} [\Pr([x_1,\hdots,x_N]|e_{1:N})]\]
+ - Can do this through Veterbi Algorithm
+Using Trellis Diagram (See notes for example)
+Lets say the transmitted symbols are $\{-1, -1, +1, -1\}$. The receiver does not know this, but knows:
+\[h^T = [0.7442, 0.2986]\]
+\[r = \begin{bmatrix}
+-0.6940 + j2.982
+-0.6438 + j0.5172
+0.3640 + j0.1393
+0.0770 + j0.0902
+0.6871 + j0.5272
+\end{bmatrix}\]
+The Viterbi Algorithm then has paths calculated:
+\[\Delta_l = \|r[k] - h[0] a_k - h[1] a_{k-1}\|^2\]
+
+**** Example
+1. Starting at state 1, we have $r[1] = -0.6940 + j2.9822$
+For $\Delta_1 = \|-0.6940 + j2.9822 - 0.7442(+1) - 0.2986(+1)\|^2 = 3.1040$
+For $\Delta_2 = \|-0.6940 + j2.9822 - 0.7442(-1) - 0.2986(+1)\|^2 = 0.1504$
+2. At state 2, we have $r[2]$ and 4 $\Delta_i$ values to calculate
+For $\Delta_3 = \|-0.6438 -j0.5172 - 0.7442(+1) - 0.2986(+1)\|^2 = 3.1108$
+For $\Delta_4 = \|-0.6438 -j0.5172 - 0.7442(-1) - 0.2986(-1)\|^2 = 0.4264$
+For $\Delta_5 = \|-0.6438 -j0.5172 - 0.7442(-1) - 0.2986(+1)\|^2 = 1.4552$
+For $\Delta_6 = \|-0.6438 -j0.5172 - 0.7442(+1) - 0.2986(-1)\|^2 = 0.3066$
+:NOTE: See notes for the diagram and results
 
