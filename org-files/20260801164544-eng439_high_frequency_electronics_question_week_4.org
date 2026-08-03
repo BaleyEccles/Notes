@@ -1,0 +1,405 @@
+:PROPERTIES:
+:ID:       ae0e3d63-51db-44c1-8f19-86ab94fda920
+:END:
+#+title: ENG439 - High Frequency Electronics - Question Week 4
+#+date: [2026-08-01 Sat 16:45]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+* Question 1
+** a
+$S^H$ is the Hermitian transpose or the conjugate transpose of $S$, it is defend as $(S^{*})^T$:
+\[(S^HS)_{ij} &= \sum_{k=1}^N (S^H)_{ik}S_{kj}\]
+\[(S^HS)_{ij} &= \sum_{k=1}^N S^{*}_{ki}S_{kj}\]
+\[(S^HS)_{ij} &= \sum_{k=1}^N S_{ki}S_{kj}^{*}\]
+
+
+Replacing $S^HS$ with the identity matrix ($I$) we get:
+\begin{align*}
+\sum_{k=1}^N S_{ki}S_{kj}^{*} &= I \\
+\sum_{k=1}^N S_{ki}S_{kj}^{*} &= \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}\\
+\end{align*}
+We can see that when $i = j$ (the diagonal) it is equal to $1$ and in the other cases it is always equal to $0$, hence:
+\begin{align*}
+\sum_{k=1}^N S_{ki}S_{kj}^{*} &= 1, \textrm{ for } i = j \\
+\sum_{k=1}^N S_{ki}S_{kj}^{*} &= 0, \textrm{ for } i \neq j
+\end{align*}
+
+
+** b
+Reciprocal condition:
+\[S_{ij} = S_{ji}\]
+Lossless Conditions:
+\[|S_{11}|^2 + |S_{12}|^2 + |S_{13}|^2 = 1\]
+\[|S_{12}|^2 + |S_{22}|^2 + |S_{23}|^2 = 1\]
+\[|S_{13}|^2 + |S_{23}|^2 + |S_{33}|^2 = 1\]
+And:
+\[S_{11}^{*} S_{12} + S_{12}^{*} S_{22} + S_{13}^{*} S_{23} = 0\]
+\[S_{11}^{*} S_{13} + S_{12}^{*} S_{23} + S_{13}^{*} S_{33} = 0\]
+\[S_{12}^{*} S_{13} + S_{22}^{*} S_{23} + S_{23}^{*} S_{33} = 0\]
+
+We know that $S_{kk} = 1$ because it is perfectly matched and from the reciprocal condition that $S = S^T$.
+\[S = \begin{bmatrix}
+0 & S_{12} & S_{13} \\
+S_{12} & 0 & S_{23} \\
+S_{13} & S_{23} & 0 \\
+\end{bmatrix}\]
+
+Using the lossless condition we get:
+\[|S_{12}|^2 + |S_{13}|^2 = 1\]
+\[|S_{12}|^2 + |S_{23}|^2 = 1\]
+\[|S_{13}|^2 + |S_{23}|^2 = 1\]
+And solving we get $|S_{12}| = |S_{13}| = |S_{23}| = \frac{1}{\sqrt{2}}$. This means that all three transmission coefficients must be nonzero. However the orthogonality conditions becomes:
+\[S_{13}^{*} S_{23} = 0\]
+\[S_{12}^{*} S_{23} = 0\]
+\[S_{12}^{*} S_{13} = 0\]
+These equations require at least one value in every equation to be zero, this is a contraction. Therefore, three ports cannot be perfectly matched simultaneously.
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_4_Q1.m
+warning('off','all');
+pkg load symbolic
+syms A B C
+
+EQU1 = A^2 + B^2 == 1;
+EQU2 = A^2 + C^2 == 1;
+EQU3 = B^2 + C^2 == 1;
+sol = solve([EQU1, EQU2, EQU3], [A, B, C])
+% number of solutions
+n = numel(sol);
+
+for k = 1:n
+  A = sol{k}.A;
+  B = sol{k}.B;
+  C = sol{k}.C;
+
+  fprintf("Solution %d:\n", k);
+  disp(A); disp(B); disp(C);
+end
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+error: abs: not defined for cell
+Solution 1:
+  -√2 
+  ────
+   2  
+  -√2 
+  ────
+   2  
+  -√2 
+  ────
+   2  
+Solution 2:
+  -√2 
+  ────
+   2  
+  -√2 
+  ────
+   2  
+  √2
+  ──
+  2 
+Solution 3:
+  -√2 
+  ────
+   2  
+  √2
+  ──
+  2 
+  -√2 
+  ────
+   2  
+Solution 4:
+  -√2 
+  ────
+   2  
+  √2
+  ──
+  2 
+  √2
+  ──
+  2 
+Solution 5:
+  √2
+  ──
+  2 
+  -√2 
+  ────
+   2  
+  -√2 
+  ────
+   2  
+Solution 6:
+  √2
+  ──
+  2 
+  -√2 
+  ────
+   2  
+  √2
+  ──
+  2 
+Solution 7:
+  √2
+  ──
+  2 
+  √2
+  ──
+  2 
+  -√2 
+  ────
+   2  
+Solution 8:
+  √2
+  ──
+  2 
+  √2
+  ──
+  2 
+  √2
+  ──
+  2
+#+end_example
+
+* Question 2
+** a
+At the junction:
+\begin{align*}
+P &= \frac{|V|^2}{2Z} \\
+\Rightarrow \frac{P_2}{P_3} &= \frac{Z_2}{Z_1} \\
+\textrm{from } P_2 &= 2P_3 \\
+Z_2 &= 2Z_1
+\end{align*}
+
+For Port 1 to be matched the parallel combination must be $Z_0 = 75\ \Omega$:
+\begin{align*}
+\frac{1}{75} &= \frac{1}{Z_1} + \frac{1}{Z_2} \\
+\textrm{Sub in } Z_2 &= 2Z_1 \\
+\frac{1}{75} &= \frac{1}{2Z_1} + \frac{1}{Z_2} \\
+\Rightarrow Z_1 &= 112.5\ \Omega \\
+\Rightarrow Z_2 &= 225\ \Omega
+\end{align*}
+
+** b
+*** Port 1
+Exciting Port 1 we set:
+\[V_1^+ \neq = 0,\ V_2^+ = V_3^+ = 0\]
+Ports 2 and 3 have no incident waves the negative is at the junction:
+\[V_2^- = V_3^- = V_J\]
+At Port 1:
+\[V_1^- = V_J - V_1^+\]
+Kirchhoff's current law:
+\[\frac{V_1^+ - V_1^-}{75} + \frac{V_2^+ - V_2^-}{112.5} + \frac{V_3^+ - V_3^-}{225} = 0\]
+Solving we get $V_J = V_1^+$, which means:
+\begin{align*}
+V_1^+ &= V_J - V_1^+ = 0\\
+V_2^+ &= V_J = V_1^+ \\
+V_3^+ &= V_J = V_1^+
+\end{align*}
+
+Using $S_{ij} = \frac{V^-_i}{V^+_j}|_{V^+_k = 0\textrm{ for } k\neq j}$
+\[\begin{bmatrix}
+S_{11} \\
+S_{21} \\
+S_{31}
+\end{bmatrix} = \begin{bmatrix}
+0 \\
+1 \\
+1
+\end{bmatrix}\]
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_4_Q2.m
+warning('off','all');
+pkg load symbolic
+syms V1P V1N V2P V2N V3P V3N VJ
+
+EQU = 0 == (V1P - V1N)/75 + (V2P - V2N)/112.5 + (V3P - V3N)/225
+EQU = subs(EQU, V1N, VJ - V1P);
+EQU = subs(EQU, V2P, 0);
+EQU = subs(EQU, V3P, 0);
+EQU = subs(EQU, V2N, VJ);
+EQU = subs(EQU, V3N, VJ);
+solve(EQU, VJ)
+#+END_SRC
+
+#+RESULTS:
+: EQU = (sym)
+: 
+:         V1N   V1P   2⋅V2N   2⋅V2P   V3N   V3P
+:   0 = - ─── + ─── - ───── + ───── - ─── + ───
+:         75    75     225     225    225   225
+: ans = (sym) V1P
+
+*** Port 2
+Exciting Port 2 we set:
+\[V_2^+ \neq = 0,\ V_1^+ = V_3^+ = 0\]
+The reflected waves are:
+\begin{align*}
+V_1^- &= V_J \\
+V_2^- &= V_J - V_2^+ \\
+V_3^- &= V_J
+\end{align*}
+Kirchhoff's current law:
+\[-\frac{V_J}{75} + \frac{V_2^+ - (V_J - V_2^+)}{112.5} - \frac{V_J}{225} = 0\]
+Solving we get $V_J = \frac{2}{3}V_2^+$, which means:
+\begin{align*}
+S_{12} &= \frac{V_1^-}{V_2^+} = \frac{V_J}{V_2^+} = \frac{2}{3} \\
+S_{22} &= \frac{V_2^-}{V_2^+} = \frac{V_J - V_2^+}{V_2^+} = \frac{2}{3} - 1 = \frac{-1}{3} \\
+S_{32} &= \frac{V_3^-}{V_2^+} = \frac{V_J}{V_2^+} = \frac{2}{3} \\
+\end{align*}
+Hence:
+\[\begin{bmatrix}
+S_{12} \\
+S_{22} \\
+S_{32}
+\end{bmatrix} = \begin{bmatrix}
+2/3 \\
+1/3 \\
+2/3
+\end{bmatrix}\]
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_4_Q2.m
+EQU2 = 0 == -(VJ)/(75) + (V2P - (VJ - V2P))/(112.5) - (VJ)/(225)
+solve(EQU2, VJ)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+EQU2 = (sym)
+
+      4⋅V2P   2⋅VJ
+  0 = ───── - ────
+       225     75
+ans = (sym)
+
+  2⋅V2P
+  ─────
+    3
+#+end_example
+
+*** Port 3
+Exciting Port 3 we set:
+\[V_3^+ \neq = 0,\ V_1^+ = V_2^+ = 0\]
+The junction voltage satisfies:
+\[V_J = V_1^- = V_2^- = V_3^+ + V_3^-\]
+Kirchhoff's current law:
+\[-\frac{V_1^-}{75} + \frac{-V_2^-}{112.5} + \frac{V_3^+ - V_3^-}}{225} = 0\]
+Solving we get $V_J = \frac{1}{3}V_3^+$, which means:
+\begin{align*}
+S_{13} &= \frac{V_1^-}{V_3^+} = \frac{V_J}{V_3^+} = \frac{1}{3} \\
+S_{23} &= \frac{V_2^-}{V_3^+} = \frac{V_J}{V_3^+} = \frac{1}{3} \\
+S_{33} &= \frac{V_3^-}{V_3^+} = \frac{V_J - V_3^+}{V_2^+} = \frac{-2}{3} \\
+\end{align*}
+Hence:
+\[\begin{bmatrix}
+S_{13} \\
+S_{23} \\
+S_{33}
+\end{bmatrix} = \begin{bmatrix}
+1/3 \\
+1/3 \\
+-2/3
+\end{bmatrix}\]
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_4_Q2.m
+EQU3 = 0 == -(V1N)/(75) + (-V2N)/(112.5) + (V3P - V3N)/(225)
+EQU3 = subs(EQU3, V1N, VJ);
+EQU3 = subs(EQU3, V2N, VJ);
+EQU3 = subs(EQU3, V3N, VJ - V3P);
+solve(EQU3, VJ)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+EQU3 = (sym)
+
+        V1N   2⋅V2N   V3N   V3P
+  0 = - ─── - ───── - ─── + ───
+        75     225    225   225
+ans = (sym)
+
+  V3P
+  ───
+   3
+#+end_example
+
+*** S Matrix
+\[\boxed{S = \begin{bmatrix}
+0 & 2/3 & 1/3 \\
+1 & 1/3 & 1/3 \\
+1 & 2/3 & -2/3
+\end{bmatrix}}\]
+
+* Question 3
+** i - Lossless or Lossy
+It is lossy because a lossless system requires $S^TS = I$, which is not true proven by the following ~octave~ code:
+#+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG439_Week_4_Q3.m
+S = [ ...
+      0         , -i/sqrt(2), -i/sqrt(2); ...
+      -i/sqrt(2), 0         , 0         ; ...
+      -i/sqrt(2), 0         , 0         ; ...
+    ];
+S'*S
+#+END_SRC
+
+#+RESULTS:
+: ans =
+: 
+:    1.0000        0        0
+:         0   0.5000   0.5000
+:         0   0.5000   0.5000
+** ii - Reciprocal or non-reciprocal
+Reciprocal network requires $S = S^T$, which is obviously true:
+#+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG439_Week_4_Q3.m
+pkg load symbolic
+syms sqrt2
+S = [ ...
+      0         , -i/sqrt(2), -i/sqrt(2); ...
+      -i/sqrt(2), 0         , 0         ; ...
+      -i/sqrt(2), 0         , 0         ; ...
+    ];
+S
+S'
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+S =
+
+        0 +      0i        0 - 0.7071i        0 - 0.7071i
+        0 - 0.7071i        0 +      0i        0 +      0i
+        0 - 0.7071i        0 +      0i        0 +      0i
+ans =
+
+        0 -      0i        0 + 0.7071i        0 + 0.7071i
+        0 + 0.7071i        0 -      0i        0 -      0i
+        0 + 0.7071i        0 -      0i        0 -      0i
+#+end_example
+
+** iii - Matched or mis-matched
+Matched when $S_{ii} = 0$, from the matrix $S_{11} = S_{22} = S_{33} = 0$, therefore it is matched.
+
+** iv - Symmetric or asymmetric
+Ports 2 and 3 are symmetric because they have the same scattering properties:
+\begin{align*}
+S_{12} &= S_{13} \\
+S_{21} &= S_{31} \\
+S_{22} &= S_{33} \\
+S_{23} &= S_{32}
+\end{align*}
