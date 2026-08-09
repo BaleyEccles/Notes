@@ -403,3 +403,14 @@ S_{21} &= S_{31} \\
 S_{22} &= S_{33} \\
 S_{23} &= S_{32}
 \end{align*}
+
+\newpage
+* Appendix A - Octave Code For Question 1
+#+INCLUDE: "./ENG439_Week_4_Q1.m" src octave
+\newpage
+* Appendix B - Octave Code For Question 2
+#+INCLUDE: "./ENG439_Week_4_Q2.m" src octave
+\newpage
+* Appendix C - Octave Code For Question 3
+#+INCLUDE: "./ENG439_Week_4_Q3.m" src octave
+\newpage

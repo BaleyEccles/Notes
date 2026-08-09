@@ -1,0 +1,325 @@
+:PROPERTIES:
+:ID:       6da06155-5d3d-4321-b7e5-1ba14b082ac8
+:END:
+#+title: ENG439 - High Frequency Electronics - Question Week 5
+#+date: [2026-08-09 Sun 13:57]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+* Question 1
+KCL at port 1:
+\begin{align*}
+I_1 &= I_{A1} + I_B \\
+&= \frac{V_1}{Z_A} + \frac{V_1 - V_2}{Z_B}
+\end{align*}
+KCL at port 2:
+\begin{align*}
+I_2 &= I_{A2} + I_B \\
+&= \frac{V_2}{Z_A} + \frac{V_2 - V_1}{Z_B}
+\end{align*}
+
+\begin{align*}
+\begin{bmatrix}
+I_1 \\
+I_2 \\
+\end{bmatrix} &= 
+\begin{bmatrix}
+Y_{11} & Y_{12} \\
+Y_{21} & Y_{22}
+\end{bmatrix}
+\begin{bmatrix}
+V_1 \\
+V_2
+\end{bmatrix} \\\begin{bmatrix}
+I_1 \\
+I_2 \\
+\end{bmatrix} &= \begin{bmatrix}
+\frac{1}{Z_A} + \frac{1}{Z_B} & \frac{-1}{Z_B} \\
+\frac{-1}{Z_B} & \frac{1}{Z_A} + \frac{1}{Z_B}
+\end{bmatrix}\begin{bmatrix}
+V_1 \\
+V_2
+\end{bmatrix}\\
+[Z] &= [Y]^{-1} \\
+[Z] &= \begin{bmatrix}\frac{Z_{A} \left(Z_{A} + Z_{B}\right)}{2 Z_{A} + Z_{B}} & \frac{Z_{A}^{2}}{2 Z_{A} + Z_{B}}\\\frac{Z_{A}^{2}}{2 Z_{A} + Z_{B}} & \frac{Z_{A} \left(Z_{A} + Z_{B}\right)}{2 Z_{A} + Z_{B}}\end{bmatrix}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q1.m
+warning('off','all');
+pkg load symbolic
+syms Z_A Z_B
+Y = [ 1/Z_A + 1/Z_B, -1/Z_B; ...
+      -1/Z_B, 1/Z_A + 1/Z_B ...
+    ];
+latex(simplify(inv(Y)))
+
+#+END_SRC
+
+#+RESULTS:
+: \left[\begin{matrix}\frac{Z_{A} \left(Z_{A} + Z_{B}\right)}{2 Z_{A} + Z_{B}} & \frac{Z_{A}^{2}}{2 Z_{A} + Z_{B}}\\\frac{Z_{A}^{2}}{2 Z_{A} + Z_{B}} & \frac{Z_{A} \left(Z_{A} + Z_{B}\right)}{2 Z_{A} + Z_{B}}\end{matrix}\right]
+
+The ABCD Matrix is:
+\begin{align*}
+[ABCD] &= 
+\begin{bmatrix}
+1 & 0 \\
+\frac{1}{Z_A} & 1
+\end{bmatrix}\begin{bmatrix}
+1 & Z_B \\
+0 & 1
+\end{bmatrix}\begin{bmatrix}
+1 & 0 \\
+\frac{1}{Z_A} & 1
+\end{bmatrix} \\
+&= 
+\begin{bmatrix}
+\frac{Z_{A} + Z_{B}}{Z_{A}} & Z_{B}\\\frac{2 Z_{A} + Z_{B}}{Z_{A}^{2}} & \frac{Z_{A} + Z_{B}}{Z_{A}}
+\end{bmatrix}
+\end{align*}
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q1.m
+warning('off','all');
+pkg load symbolic
+syms Z_A Z_B
+M1 = [sym(1), sym(0); 1/Z_A, sym(1)];
+M2 = [sym(1), Z_B; sym(0), sym(1)];
+M3 = [sym(1), sym(0); 1/Z_A, sym(1)];
+ABCD = M1*M2*M3;
+ABCD = simplify(ABCD)
+latex(ABCD)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+ABCD = (sym 2×2 matrix)
+
+  ⎡ Z_A + Z_B            ⎤
+  ⎢ ─────────      Z_B   ⎥
+  ⎢    Z_A               ⎥
+  ⎢                      ⎥
+  ⎢2⋅Z_A + Z_B  Z_A + Z_B⎥
+  ⎢───────────  ─────────⎥
+  ⎢      2         Z_A   ⎥
+  ⎣   Z_A                ⎦
+\left[\begin{matrix}\frac{Z_{A} + Z_{B}}{Z_{A}} & Z_{B}\\\frac{2 Z_{A} + Z_{B}}{Z_{A}^{2}} & \frac{Z_{A} + Z_{B}}{Z_{A}}\end{matrix}\right]
+#+end_example
+
+Using:
+\begin{align*}
+S_{11} &= \frac{A + \frac{B}{Z_0} - C Z_0 - D}{A + \frac{B}{Z_0} + C Z_0 + D} \\
+S_{22} &= \frac{-A + \frac{B}{Z_0} - C Z_0 + D}{A + \frac{B}{Z_0} + C Z_0 + D} \\
+S_{21} &= \frac{2}{A + \frac{B}{Z_0} + C Z_0 + D} \\
+S_{12} &= \frac{2(AD-BC)}{A + \frac{B}{Z_0} + C Z_0 + D}
+\end{align*}
+The $S$ matrix is:
+\[S &= \begin{bmatrix}
+\frac{- Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}} & \frac{2 Z_{0} Z_{A}^{2}}{2 Z_{0}^{2} Z_{A} + Z_{0}^{2} Z_{B} + 2 Z_{0} Z_{A}^{2} + 2 Z_{0} Z_{A} Z_{B} + Z_{A}^{2} Z_{B}}\\\frac{2 Z_{0} Z_{A}^{2}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}} & \frac{- Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}
+\end{bmatrix}\]
+Or:
+\begin{align*}
+S_{11} &= \frac{- Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}} \\
+S_{22} &= \frac{- Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}} \\
+S_{21} &= \frac{2 Z_{0} Z_{A}^{2}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}} \\
+S_{12} &= \frac{2 Z_{0} Z_{A}^{2}}{2 Z_{0}^{2} Z_{A} + Z_{0}^{2} Z_{B} + 2 Z_{0} Z_{A}^{2} + 2 Z_{0} Z_{A} Z_{B} + Z_{A}^{2} Z_{B}}
+\end{align*}
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q1.m
+syms Z_0
+A = ABCD(1,1);
+B = ABCD(1,2);
+C = ABCD(2,1);
+D = ABCD(2,2);
+
+S11 = simplify( ( A + B/Z_0 - C*Z_0 - D ) / ( A + B/Z_0 + C*Z_0 + D ) );
+S22 = simplify( ( -A + B/Z_0 - C*Z_0 + D ) / ( A + B/Z_0 + C*Z_0 + D ) );
+S21 = simplify(  2 / ( A + B/Z_0 + C*Z_0 + D ) );
+S12 = simplify(  2*(A*D - B*C) / ( A + B/Z_0 + C*Z_0 + D ) );
+latex(S11)
+latex(S22)
+latex(S21)
+latex(S12)
+S = [S11, S12;
+     S21, S22];
+
+latex(S)
+#+END_SRC
+
+#+RESULTS:
+: \frac{- Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}
+: \frac{- Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}
+: \frac{2 Z_{0} Z_{A}^{2}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}
+: \frac{2 Z_{0} Z_{A}^{2}}{2 Z_{0}^{2} Z_{A} + Z_{0}^{2} Z_{B} + 2 Z_{0} Z_{A}^{2} + 2 Z_{0} Z_{A} Z_{B} + Z_{A}^{2} Z_{B}}
+: \left[\begin{matrix}\frac{- Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}} & \frac{2 Z_{0} Z_{A}^{2}}{2 Z_{0}^{2} Z_{A} + Z_{0}^{2} Z_{B} + 2 Z_{0} Z_{A}^{2} + 2 Z_{0} Z_{A} Z_{B} + Z_{A}^{2} Z_{B}}\\\frac{2 Z_{0} Z_{A}^{2}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}} & \frac{- Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}{Z_{0}^{2} \left(2 Z_{A} + Z_{B}\right) + 2 Z_{0} Z_{A} \left(Z_{A} + Z_{B}\right) + Z_{A}^{2} Z_{B}}\end{matrix}\right]
+
+* Question 2
+** a
+\[S=\frac{1}{2}\begin{bmatrix}0 & -j\sqrt{2} & -\sqrt{2} & 0\\-j\sqrt{2} & 0 & 0 & -\sqrt{2}\\-\sqrt{2} & 0 & 0 & -j\sqrt{2}\\0 & -\sqrt{2} & -j\sqrt{2} & 0\end{bmatrix}\]
+*** (i) Reciprocal
+Networks are reciprocal if $S = S^T$, this is obviously true just by looking at the matrix or the ~octave~ code:
+#+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+S = (1/2) * [ ...
+              0,        -1i*sqrt(2), -sqrt(2),   0; ...
+              -1i*sqrt(2), 0,         0,         -sqrt(2); ...
+              -sqrt(2),    0,         0,         -1i*sqrt(2); ...
+              0,         -sqrt(2),  -1i*sqrt(2), 0 ...
+]
+S'
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+S =
+
+        0 +      0i        0 - 0.7071i  -0.7071 +      0i        0 +      0i
+        0 - 0.7071i        0 +      0i        0 +      0i  -0.7071 +      0i
+  -0.7071 +      0i        0 +      0i        0 +      0i        0 - 0.7071i
+        0 +      0i  -0.7071 +      0i        0 - 0.7071i        0 +      0i
+ans =
+
+        0 -      0i        0 + 0.7071i  -0.7071 -      0i        0 -      0i
+        0 + 0.7071i        0 -      0i        0 -      0i  -0.7071 -      0i
+  -0.7071 -      0i        0 -      0i        0 -      0i        0 + 0.7071i
+        0 -      0i  -0.7071 -      0i        0 + 0.7071i        0 -      0i
+#+end_example
+
+*** (ii) Lossless
+Lossless if the following condition is true $S^HS=I$, where $H$ indicates the Hermitian transpose (~S'~ in octave). This can be verified using the ~octave~ code:
+#+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+S = (1/2) * [0,        -1i*sqrt(2), -sqrt(2),   0; ...
+              -1i*sqrt(2), 0,         0,         -sqrt(2); ...
+              -sqrt(2),    0,         0,         -1i*sqrt(2); ...
+              0,         -sqrt(2),  -1i*sqrt(2), 0 ...
+]
+real(S'*S)
+imag(S'*S)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+S =
+
+        0 +      0i        0 - 0.7071i  -0.7071 +      0i        0 +      0i
+        0 - 0.7071i        0 +      0i        0 +      0i  -0.7071 +      0i
+  -0.7071 +      0i        0 +      0i        0 +      0i        0 - 0.7071i
+        0 +      0i  -0.7071 +      0i        0 - 0.7071i        0 +      0i
+ans =
+
+   1   0   0   0
+   0   1   0   0
+   0   0   1   0
+   0   0   0   1
+ans =
+
+            0            0            0  -4.2664e-17
+            0            0  -4.2664e-17            0
+            0   4.2664e-17            0            0
+   4.2664e-17            0            0            0
+#+end_example
+
+The imaginary components are non-zero due to floating point error, and the real components is equal to the identity matrix, therefore it is lossless.
+*** (iii) Matched at every port
+Matched when $S_{ii} = 0$, this is true by looking at the matrix. The diagonal components are all equal to zero.
+
+** b
+\begin{align*}
+a &= \begin{bmatrix}
+1 \\ 0 \\ 0 \\ 0
+\end{bmatrix} \\
+b &= Sa \\
+&=\frac{1}{2}\begin{bmatrix}0 & -j\sqrt{2} & -\sqrt{2} & 0\\-j\sqrt{2} & 0 & 0 & -\sqrt{2}\\-\sqrt{2} & 0 & 0 & -j\sqrt{2}\\0 & -\sqrt{2} & -j\sqrt{2} & 0\end{bmatrix} \begin{bmatrix}
+1 \\ 0 \\ 0 \\ 0
+\end{bmatrix}\\
+&=\begin{bmatrix}
+0 \\ \frac{-j\sqrt{2}}{2} \\ \frac{-\sqrt{2}}{2} \\ 0
+\end{bmatrix}
+\end{align*}
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+a = [1; 0; 0; 0]
+b = S*a
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+a =
+
+   1
+   0
+   0
+   0
+b =
+
+        0 +      0i
+        0 - 0.7071i
+  -0.7071 +      0i
+        0 +      0i
+#+end_example
+
+*** (i) Power Delivered to each port
+Using $P_i = |b_i|^2$:
+_Port 1:_
+\[P_1 = |0|^2 = 0\]
+_Port 2:_
+\[P_1 = |-\frac{j}{\sqrt{2}}|^2 = 0.5\]
+_Port 3:_
+\[P_1 = |-\frac{1}{\sqrt{2}}|^2 = 0.5\]
+_Port 4:_
+\[P_1 = |0|^2 = 0\]
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+P_1 = abs(b(1))^2
+P_2 = abs(b(2))^2
+P_3 = abs(b(3))^2
+P_4 = abs(b(4))^2
+#+END_SRC
+
+#+RESULTS:
+: P_1 = 0
+: P_2 = 0.5000
+: P_3 = 0.5000
+: P_4 = 0
+
+*** (ii) Phase of each signal
+_Port 1:_
+\[\angle 0 = 0\]
+_Port 2:_
+\[\angle -\frac{j}{\sqrt{2}} = -90\]
+_Port 3:_
+\[\angle -\frac{1}{\sqrt{2}} = 180\]
+_Port 4:_
+\[\angle 0 = 0\]
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+angle_1 = angle(b(1))*180/pi
+angle_2 = angle(b(2))*180/pi
+angle_3 = angle(b(3))*180/pi
+angle_4 = angle(b(4))*180/pi
+#+END_SRC
+
+#+RESULTS:
+: angle_1 = 0
+: angle_2 = -90
+: angle_3 = 180
+: angle_4 = 0
+
+** c
+\[\sum |b_i|^2 = |a_i|^2\]
+This can be show to be true using the following ~octave~ code:
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+abs(sum(a))
+abs(sum(b))
+#+END_SRC
+
+#+RESULTS:
+: ans = 1
+: ans = 1
+
+Both answers are equal to $1$ so the power delivered conserved

@@ -81,7 +81,6 @@ V^+_2 \\
 V^+_N
 \end{bmatrix}\]
 \[S_{ij} = \frac{V^-_i}{V^+_j}|_{V^+_k = 0\textrm{ for } k\neq j}\]
-
 *** ABCD Parameters of Some Useful Two-Port Circuits
 **** Series Impedance
 [[./ABCD Series Impedance.png]]
@@ -136,3 +135,53 @@ V^+_N
 \[S_{11}^{*} S_{12} + S_{12}^{*} S_{22} + S_{13}^{*} S_{23} = 0\]
 \[S_{11}^{*} S_{13} + S_{12}^{*} S_{23} + S_{13}^{*} S_{33} = 0\]
 \[S_{12}^{*} S_{13} + S_{22}^{*} S_{23} + S_{23}^{*} S_{33} = 0\]
+Or:
+$S^HS = I$
+
+*** Matched
+\[S_{ii} = 0\]
+
+*** Power
+For an input vector:
+\[a = \begin{bmatrix}
+a_1 & a_2 & a_3 & \vdots
+\end{bmatrix}\]
+\[b = Sa\]
+and the power delivered to port $i$ is:
+\[P_i &= |b_i|^2\]
+
+
+*** ABCD -> S Matrix
+\[S_{11}=\frac{A + \frac{B}{Z_0} - C Z_0 - D}{A + \frac{B}{Z_0} + C Z_0 + D}\]
+\[S_{22}=\frac{-A + \frac{B}{Z_0} - C Z_0 + D}{A + \frac{B}{Z_0} + C Z_0 + D}\]
+\[S_{21}=\frac{2}{A + \frac{B}{Z_0} + C Z_0 + D}\]
+\[S_{12}=\frac{2(AD-BC)}{A + \frac{B}{Z_0} + C Z_0 + D}\]
+** 4 Port Networks
+*** Symmetric coupler
+\[\theta = \phi = \frac{\pi}{2}\]
+\[S = \begin{bmatrix}
+0 & \alpha & j\beta & 0 \\
+\alpha & 0 & 0 & j\beta \\
+j\beta & 0 & 0 & \alpha \\
+0  & j\beta & \alpha & 0
+\end{bmatrix}\]
+\[\alpha^2 + \beta^2 = 1\]
+*** Asymmetric coupler
+\[\theta = 0 \quad \phi = \pi\]
+\[S = \begin{bmatrix}
+0& \alpha & \beta & 0 \\
+\alpha & 0 & 0 & -\beta \\
+\beta & 0 & 0 & \alpha \\
+0 & -\beta & \alpha & 0 \\
+\end{bmatrix}\]
+\[\alpha^2 + \beta^2 = 1\]
+*** Directional Couplers
+[[./Directional Couplers.png]]
+_Coupling:_
+\[C = 10\log_{10}\frac{P_1}{P_3} = -20\log_{10}\beta dB\]
+_Directivity:_
+\[D = 10\log_{10}\frac{P_3}{P_4} = 20\log_{10}\frac{\beta}{|S_{14}|}dB\]
+_Isolation:_
+\[I = 10\log_{10}\frac{P_1}{P_4} = -20\log_{10}|S_{14}| dB\]
+_Insertion Loss:_
+\[L = 1 - \log_{10}\frac{P_1}{P_2} = -20\log_{10}|S_{12 dB}|\]
