@@ -34,6 +34,7 @@
 [[id:39875b0e-c1ff-4da0-9612-514bdd77a047][Autocorrelation of Time-Varying Channels]]
 [[id:b9a90e8f-d256-42cc-a549-89dc14f5e76e][Diversity]]
 [[id:0048a310-96ae-4bc2-af5f-b458e95fc678][Equalisers]]
+[[id:231a118c-a538-4759-a73a-228e4376af96][Orthogonal Frequency Division Multiplexing (OFDM)]]
 
 * Diagram
 :TODO:
@@ -43,6 +44,10 @@
 [[id:348a72c0-0839-4cd2-aa09-08452564f5f1][ENG405 - Communication Systems 2 – Project 1]]
 ** Mid Semester Test
  - Due Week 8
+ - 2 sided notes
+ - Previous tests and tutorials
+   - For stuff that isnt covered in tests tutorials will be similar to test
+     - Performance of OFDM there is no practice materials
 ** Simulation Project 2
  - Due Week 9
 ** Simulation Project 3

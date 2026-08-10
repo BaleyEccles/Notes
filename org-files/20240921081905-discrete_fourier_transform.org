@@ -89,11 +89,11 @@
        \end{bmatrix}\]
    - Inverse Matrix form
      - \[\underline{x}=\underline{X}\underline{F}^{-1}\]
-     - \[\underline{F}^{-1}=\frac{\underline{F}^{*}}{N}\]
+     - \[\underline{F}^{-1}=\frac{\underline{F}^H}{N}\]
      - This grows at $O(N^2)$
-*** Fast Fourier Transform (FFT)
+**** Fast Fourier Transform (FFT)
  - We can improve the speed of the DFT
-**** Radix-2 Decimation-In-Time
+***** Radix-2 Decimation-In-Time
  - With $N=2^A$, $A\in\mathbb{Z}^{+}$, padding the extra terms with zeros.
  - We can split the input into two components (even and odd terms) and apply a DFT to each of them.
  - \[DFT=DFT_{even}+DFT_{odd}e^{-j \frac{2k\pi}{N}}\]

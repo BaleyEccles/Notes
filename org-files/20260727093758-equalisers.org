@@ -166,7 +166,7 @@ Three important features:
 1. The ideal infinite-length MMSE equaliser cancels the noise whitening filter
 2. The infinite-length equaliser is identical to the ZF equaliser except for the noise term $N_0$
 3. There is a balance between inverting the channel and noise
-\[C = Y^H[Y^HY + N_0I]^{-1}\hat{Y}\]
+\[C = Y^H[YY^H + N_0I]^{-1}\hat{Y}\]
  - $H$ indicates the [[id:51260ef9-3b99-4fa4-a4f2-ff241ff32bff][Hermitian Transpose]]
 
 **** Performance
@@ -202,7 +202,7 @@ And
 0 & 0.1 & 0 \\
 0 & 0 & 0.1 \\
 \end{bmatrix}\]
-\[C = Y^H[Y^HY + N_0I]^{-1}\hat{Y} = \begin{bmatrix}
+\[C = Y^H[YY^H + N_0I]^{-1}\hat{Y} = \begin{bmatrix}
 -0.263 \\
 1.086 \\
 -0.263
@@ -318,6 +318,53 @@ _Backwards Message:_
  - State transition probability
    - $\Pr(x_{k+1}|X_k)$
 
+**** Example
+ - Two taps
+ - BPSK
+\[a[i] = \{-1, +1\}\]
+\[h = [h[0]\ h[1]]^T\]
+The received signal at time step $i$ is:
+\[r[i] = h[0]a[i] + h[1]a[i - 1] + n_s[i]\]
+Naively (not hidden Markov), we want to recast this into hidden Markov model
+Defining the states: $x_i = \{a_i, a_{i-1}a\}$ (Include $a_{i-2}$ if three taps and so on)
+Four possible sates:
+\[x_1 = \{+1, +1\}\ x_2 = \{+1, -1\}\ x_3 = \{-1, +1\}\ x_4 = \{-1, -1\}\]
+
+_Transition matrix:_
+Start by assuming each symbol is equally likely:
+\[\Pr(a_i = +1) = \Pr(a_i = -1) = \frac{1}{2}\]
+ - Assume memory-less modulation
+ - All pairs in states $x_i$ are also equally likely
+\[x_i = \{+1(a_i), +1 (a_{i-1})\} \rightarrow x_{i+1} \{+1 (a_{i+1}), +1 (a_i)\} \textrm{ or } \{-1 (a_{i+1}), +1 (a_i)\}\]
+It is impossible to get to $\{+1, -1\}$ or $\{-1, -1\}$ from $\{+1, +1\}$
+\[T = \begin{bmatrix}
+\frac{1}{2} & 0 & \frac{1}{2} & 0 \\
+\frac{1}{2} & 0 & \frac{1}{2} & 0 \\
+0 & \frac{1}{2} & 0 & \frac{1}{2} \\
+0 & \frac{1}{2} & 0 & \frac{1}{2}
+\end{bmatrix}\]
+ - $4\times 4$ as there are $4$ states
+ - top to bottom is _Transition From_ (States $1,2,3,4$)
+ - left to right is _Transition To_ (States $1,2,3,4$)
+_Observation Matrix:_
+\begin{align*}
+\Pr(e_i|x_i) &= \beta e^{-\frac{(n_s[i])^2}{2\sigma^2}} \\
+n_s[i] &= r[i] - a[i]h[0] - a[i-1]h[1] \\
+O_i &= \begin{bmatrix}
+e^{-\frac{(r[i] - h[0] - h[1])^2}{2\sigma^2}} & 0 & 0 & 0 \\
+0 & e^{-\frac{(r[i] - h[0] + h[1])^2}{2\sigma^2}} & 0 & 0 \\
+0 & 0 & e^{-\frac{(r[i] + h[0] - h[1])^2}{2\sigma^2}} & 0 \\
+0 & 0 & 0 & e^{-\frac{(r[i] + h[0] + h[1])^2}{2\sigma^2}}
+\end{bmatrix}
+\begin{matrix}
+x_1 = \{a_i = +1, a_{i-1} = +1\} \vspace{1.5mm}\\
+x_2 = \{a_i = +1, a_{i-1} = -1\} \vspace{1.5mm}\\
+x_3 = \{a_i = -1, a_{i-1} = +1\} \vspace{1.5mm}\\
+x_4 = \{a_i = -1, a_{i-1} = -1\} \vspace{1.5mm}\\
+\end{matrix}
+\end{align*}
+ - We drop $\beta$ as the relative probabilities are important, but we must normalise the message vectors at each step
+
 
 *** Matrix implementation of forward-backwards messages
 asssume $M$ levels of modulation so $X_k = \{x_1, \hdots, x_M\}$. We implement
@@ -391,4 +438,6 @@ For $\Delta_4 = \|-0.6438 -j0.5172 - 0.7442(-1) - 0.2986(-1)\|^2 = 0.4264$
 For $\Delta_5 = \|-0.6438 -j0.5172 - 0.7442(-1) - 0.2986(+1)\|^2 = 1.4552$
 For $\Delta_6 = \|-0.6438 -j0.5172 - 0.7442(+1) - 0.2986(-1)\|^2 = 0.3066$
 :NOTE: See notes for the diagram and results
+
+
 

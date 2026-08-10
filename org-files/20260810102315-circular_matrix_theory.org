@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       ba86b339-ae85-45c2-88d4-ce44835059c4
+:END:
+#+title: Circular Matrix Theory
+#+date: [2026-08-10 Mon 10:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Circular Matrix Theory
+\[C = \begin{bmatrix}
+c_0 & c_{n-1}& c_{n-2} & \hdots & c_1 \\
+c_1 & c_0 & c_{n-1}& \hdots & c_2 \\
+c_2 & c_1 & c_0 & \hdots & c_3 \\
+\vdots & c_2 & c_1  & \hdots & \vdots \\
+c_{n-2} & \vdots & c_2 & \hdots & c_{N-1} \\
+c_{n-1} & c_{n-2} & \vdots & \hdots & c_0
+\end{bmatrix}\] 
+
+Can form a circular matrix $C$ if only a vector $c = [c_0\ c_1\ \hdots\ c_{N-1}]$ is defined
+ - The [[id:e7ad3ee3-7394-40ed-b2a3-ca0815bd9280][Eigenvalues]] of $c$ are the column of the [[id:38634596-7d68-46dc-a12c-bb0d244f7835][DFT]] matrix of the same size
+ - We would calculate these as $cF$
+This means we can find:
+\[C = \frac{1}{N}F^H\Lambda F\]
+If we define $\lambda = [\lambda_0\ \lambda_1\ \hdots\ \lambda_{n-1}]$, then $\lambda = cF$
+Also it will be useful to normalise the DFT: $\mathcal{F} = \frac{1}{\sqrt{N}}F$, so $\mathcal{F}\mathcal{F}^H = I$
