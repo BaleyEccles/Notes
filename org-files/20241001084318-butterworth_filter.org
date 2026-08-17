@@ -34,3 +34,11 @@
    1. \[\left(\frac{\omega_1}{\omega_c}\right)^{2N}=10^{Rp/10}-1\]
       - OR
    2. \[\left(\frac{\omega_2}{\omega_c}\right)^{2N}=10^{As/10}-1\]
+      
+** Insertion Loss Method
+\[P_{LR} = 1 + k^2 \left(\frac{\omega}{\omega_c}\right)^{2N}\]
+ - $k = 1$ for $-3\ \mathrm{dB}$
+ - At the band edge the power loss ratio is at $1 + k^2$
+ - Insertion loss increases at $20N\ \mathrm{dB/dec}$
+
+   

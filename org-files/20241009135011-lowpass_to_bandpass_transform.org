@@ -6,8 +6,6 @@
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
 
-
-
 * Lowpass to Bandpass Transform
 Using the transform:
  - \[s=\frac{\lambda^2+\omega_0^2}{B\lambda}\]

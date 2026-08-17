@@ -243,7 +243,7 @@ b &= Sa \\
 0 \\ \frac{-j\sqrt{2}}{2} \\ \frac{-\sqrt{2}}{2} \\ 0
 \end{bmatrix}
 \end{align*}
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+#+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
 a = [1; 0; 0; 0]
 b = S*a
 #+END_SRC
@@ -275,7 +275,7 @@ _Port 3:_
 _Port 4:_
 \[P_1 = |0|^2 = 0\]
 
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+#+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
 P_1 = abs(b(1))^2
 P_2 = abs(b(2))^2
 P_3 = abs(b(3))^2
@@ -290,14 +290,14 @@ P_4 = abs(b(4))^2
 
 *** (ii) Phase of each signal
 _Port 1:_
-\[\angle 0 = 0\]
+\[\angle 0 = 0^{\circ}\]
 _Port 2:_
-\[\angle -\frac{j}{\sqrt{2}} = -90\]
+\[\angle -\frac{j}{\sqrt{2}} = -90^{\circ}\]
 _Port 3:_
-\[\angle -\frac{1}{\sqrt{2}} = 180\]
+\[\angle -\frac{1}{\sqrt{2}} = 180^{\circ}\]
 _Port 4:_
-\[\angle 0 = 0\]
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+\[\angle 0 = 0^{\circ}\]
+#+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
 angle_1 = angle(b(1))*180/pi
 angle_2 = angle(b(2))*180/pi
 angle_3 = angle(b(3))*180/pi
@@ -313,7 +313,7 @@ angle_4 = angle(b(4))*180/pi
 ** c
 \[\sum |b_i|^2 = |a_i|^2\]
 This can be show to be true using the following ~octave~ code:
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
+#+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
 abs(sum(a))
 abs(sum(b))
 #+END_SRC
@@ -323,3 +323,31 @@ abs(sum(b))
 : ans = 1
 
 Both answers are equal to $1$ so the power delivered conserved
+
+** d
+Given the input:
+\[a &= \begin{bmatrix}
+1 \\ 0 \\ 0 \\ 0
+\end{bmatrix}\]
+We see an output of:
+\[b &=\begin{bmatrix}
+0 \\ \frac{-j\sqrt{2}}{2} \\ \frac{-\sqrt{2}}{2} \\ 0
+\end{bmatrix}\]
+
+Thus the power is:
+\[|b|^2 = P_{out} = \begin{bmatrix}
+0 \\ \frac{1}{2} \\ \frac{1}{2} \\ 0
+\end{bmatrix}\]
+This means that half the power goes to port 2 and the other half to port 3. The phase is:
+\[\angle b = \begin{bmatrix}
+0 \\ -90^{\circ} \\ 180^{\circ} \\ 0
+\end{bmatrix}\]
+The difference between port 2 and 3 is: $180^{\circ} - (-90^{\circ})= 90^{\circ}$, this means that the phase of port 1 and 2's voltage is separated by $90^{\circ}$. Looking at the slides we can see that these are the properties of The Quadrature Hybrid.
+
+\newpage
+* Appendix A - Octave Code For Question 1
+#+INCLUDE: "./ENG439_Week_5_Q1.m" src octave
+\newpage
+* Appendix B - Octave Code For Question 2
+#+INCLUDE: "./ENG439_Week_5_Q2.m" src octave
+\newpage

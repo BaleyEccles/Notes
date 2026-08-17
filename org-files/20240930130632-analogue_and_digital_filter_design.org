@@ -8,3 +8,18 @@
 
 * Analogue And Digital Filter Design
  - [[id:bcb77fab-6805-43a4-91f7-0e0840e1230c][Analogue Filters]]
+
+** Insertion Loss Method
+Filter response is defined by its insertion loss / power loss ratio:
+\[P_{LR} = \frac{P_{\mathrm{source}}}{P_{\mathrm{load}}} = \frac{P_{\mathrm{inc}}}{P_{\mathrm{load}}} = \frac{1}{1 - |\Gamma(\omega)|^2}\]
+\[IL = 10\log_{10}(P_{LR})\]
+
+If the load and source matched: $IL = \frac{1}{|S_{12}|^2}$
+
+\[|\gamma(\omega)|^2 = \frac{M(\omega^2)}{M(\omega^2) + N(\omega^2)}\]
+ - $M$ and $N$ are real polynomials of $\omega^2$
+\[P_{LR} = 1 + \frac{M(\omega^2)}{N(\omega^2)}\]
+
+ - [[id:56282249-0495-405c-a570-7176a5121a5e][Butterworth Filter]]
+ - [[id:99234b34-6f57-48d9-8c43-133a62620d54][Type 1 Chebyshev Filters]]
+

@@ -14,7 +14,6 @@
    - Pass band tolerance
  - $\Delta_2$ is the tolerance from the bottom of the filter
    - Stop band tolerance
- - [[file:Fig2m.webp]]
 ** Properties
  - \[\lvert H(-\omega)\rvert=\lvert H(\omega)\rvert\]
  - \[\lvert H(\omega)\rvert = 1-\Delta_1 \rightarrow \lvert H(\omega)\rvert_{dB}=-Rp[dB]\]
