@@ -5,9 +5,21 @@
 #+date: [2026-07-16 Thu 18:23]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
-
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
 
 * Question 1
+** (a) Distribution Of The Received Amplitude
 The received complex signal is:
 \[S=X+jY\]
 And each are distributed normally:
@@ -22,26 +34,23 @@ $X$ and $Y$ are independent. The deterministic LOS vector is:
 The received amplitude is
 \[A=\sqrt{X^2+Y^2}\]
 
-** (a) Distribution Of The Received Amplitude
-
 The PDF of $X$ and $Y$ is
-
 \[f_{X,Y}(x,y) = \frac{1}{2\pi\sigma^2} \exp\left[ -\frac{(x-x_0)^2+(y-y_0)^2}{2\sigma^2} \right]\]
 
 
 We need this in polar coordinates, so let $x = a\cos\theta$ and $y = a\sin\theta$. Also use the substitution $x_0 = r_0\cos\theta_0$ and $y_0 = r_0\sin\theta_0$.
 
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_1_Q1.m
 clc
 clear
 close all
+
 if exist('OCTAVE_VERSION', 'builtin')
   set(0, "DefaultLineLineWidth", 2);
   set(0, "DefaultAxesFontSize", 25);
   warning('off');
   pkg load symbolic
 end
-
 
 syms x y r_0 theta theta_0 sigma a I
 x_0 = r_0*cos(theta_0);
@@ -66,13 +75,14 @@ Hence:
 The PDF of $A$ is obtained by integrating over all angles:
 \begin{align*}
 f_A(a) &= \int_{-\pi}^{\pi} f_{A,\Theta}(a,\theta)d\theta \\
-f_A(a) &= \frac{a}{2\pi\sigma^2}\exp\left[-\frac{a^2 + r_0^2}{2\sigma^2}\right]\int_{-\pi}^{\pi}\exp\left[\frac{ar_0}{\sigma^2}\cos(\theta - \theta_0)\right]\ d\theta \\
-f_A(a) &= \boxed{\frac{a}{2\pi\sigma^2}\exp\left[-\frac{a^2 + r_0^2}{2\sigma^2}\right]I_0\left(\frac{ar_0}{\sigma^2}\right)}
+2\pi I_0(x) &= \int_{-\pi}^{\pi}e^{x\cos(\theta)}\ d\theta \\
+\Rightarrow f_A(a) &= \frac{2\pi a}{2\pi\sigma^2}\exp\left[-\frac{a^2 + r_0^2}{2\sigma^2}\right]\int_{-\pi}^{\pi}\exp\left[\frac{ar_0}{\sigma^2}\cos(\theta - \theta_0)\right]\ d\theta \\
+f_A(a) &= \boxed{\frac{a}{\sigma^2}\exp\left[-\frac{a^2 + r_0^2}{2\sigma^2}\right]I_0\left(\frac{ar_0}{\sigma^2}\right)}
 \end{align*}
 
 ** (b) Approximate Expression For PDF
 
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_1_Q1.m
 latex(vpa(1/(2*pi)*((x^0)/(factorial(0))*int((cos(theta))^0, theta, -pi, pi)), 4))
 latex(vpa(1/(2*pi)*((x^1)/(factorial(1))*int((cos(theta))^1, theta, -pi, pi)), 4))
 latex(vpa(1/(2*pi)*((x^2)/(factorial(2))*int((cos(theta))^2, theta, -pi, pi)), 4))
@@ -86,7 +96,6 @@ latex(vpa(1/(2*pi)*((x^4)/(factorial(4))*int((cos(theta))^4, theta, -pi, pi)), 4
 : 0.25 x^{2}
 : 0
 : 0.01562 x^{4}
-: ans = 64.020
 
 \begin{align*}
 f(x) &= \sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n \\
@@ -98,7 +107,7 @@ f(x) &= \frac{1}{2\pi}\sum_{n=0}^{\infty} \frac{x^n}{n!}\int_{-\pi}^{\pi}\cos^n(
 Hence:
 \begin{align*}
 I_0\left(\frac{ar_0}{\sigma^2}\right) &\approx 1 + \frac{a^2r_0^2}{4\sigma^4} \\
-\Rightarrow f_A(a) &= \boxed{\frac{a}{2\pi\sigma^2}\exp\left[-\frac{a^2 + r_0^2}{2\sigma^2}\right]\left(1 + \frac{a^2r_0^2}{4\sigma^4}\right)}
+\Rightarrow f_A(a) &= \boxed{\frac{a}{\sigma^2}\exp\left[-\frac{a^2 + r_0^2}{2\sigma^2}\right]\left(1 + \frac{a^2r_0^2}{4\sigma^4}\right)}
 \end{align*}
 
 
@@ -106,11 +115,11 @@ I_0\left(\frac{ar_0}{\sigma^2}\right) &\approx 1 + \frac{a^2r_0^2}{4\sigma^4} \\
 Let the received power be $L = A^2 \Rightarrow A = \sqrt{L}$, we can transform the PDF using $f_L(l) = f_A(\sqrt{L})\frac{1}{2\sqrt{L}}$ because $\frac{dA}{dL} = \frac{1}{2\sqrt{L}}$ and the probability within the amplitude interval must equal the probability within the corresponding power interval ($f_L(l)dl = f_A(a)da$). This means:
 \begin{align*}
 \frac{dA}{dL} &= \frac{1}{2\sqrt{L}} \\
-f_L(l) &= \frac{\sqrt{l}}{2\pi\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]I_0\left(\frac{\sqrt{l}r_0}{\sigma^2}\right) \frac{1}{2\sqrt{l}} \\
-f_L(l) &= \frac{1}{4\pi\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]I_0\left(\frac{\sqrt{l}r_0}{\sigma^2}\right)
+f_L(l) &= \frac{\sqrt{l}}{\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]I_0\left(\frac{\sqrt{l}r_0}{\sigma^2}\right) \frac{1}{2\sqrt{l}} \\
+f_L(l) &= \frac{1}{2\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]I_0\left(\frac{\sqrt{l}r_0}{\sigma^2}\right)
 \end{align*}
 Using the Taylor series approximation we can get the statistical distribution of the power of the incoming signal:
-\[f_L(l) \approx \boxed{\frac{1}{4\pi\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]\left(1 + \frac{lr_0^2}{4\sigma^4}\right)}\]
+\[f_L(l) \approx \boxed{\frac{1}{2\sigma^2}\exp\left[-\frac{l + r_0^2}{2\sigma^2}\right]\left(1 + \frac{lr_0^2}{4\sigma^4}\right)}\]
 
 The relative error is approximately the first ignored term of the Taylor Series, this is $\epsilon_{\textrm{rel}} \approx \frac{x^4}{64}$. Substituting in $x = \frac{\sqrt{l} r_0}{\sigma^2}$ we get $\epsilon_{\textrm{rel}} = \frac{l^2r_0^4}{64\sigma^8}$. As $l \rightarrow \infty$, $\epsilon_{\textrm{rel}} \rightarrow \infty$, so there is no bound on the maximum error.
 
@@ -132,7 +141,11 @@ And $P_{\textrm{out}} = 1 - P_{\textrm{success}}$:
 
 The boundary between outage and a successful call is $z = \frac{l}{R}$:
 
-#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q1d1}
+[[./Q1d_Pr_Line.png]]
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_1_Q1.m
 close all
 R = 1;
 l = [0:0.001:1];
@@ -145,6 +158,7 @@ text(0.3, 0.6, 'z < l/R', 'FontSize', 40);
 text(0.6, 0.4, 'z > l/R', 'FontSize', 40);
 xlabel("Desired power, l");
 ylabel("Interference power, z");
+print("Q1d_Pr_Line.png", "-dpng");
 #+END_SRC
 
 #+RESULTS:
@@ -155,12 +169,12 @@ When adding the requirement that the desired signal power must exceed $R_N\chi_l
 We require $P_{\textrm{out}} \geq 0.5\%$
 \begin{align*}
 P_{\textrm{out}} &= \frac{R\chi_z}{R\chi_z + \chi_l}e^{-\left(\frac{r_0^2}{R\chi_z + \chi_l}\right)} \\
-0.5 &\leq \frac{R\chi_z}{R\chi_z + \chi_l}e^{-\left(\frac{r_0^2}{R\chi_z + \chi_l}\right)} \\
+0.005 &\leq \frac{R\chi_z}{R\chi_z + \chi_l}e^{-\left(\frac{r_0^2}{R\chi_z + \chi_l}\right)} \\
 \chi_l &= 5\chi_z \\
 r_0^2 &= 0.8\chi_l \\
 \Rightarrow r_0^2 &= 4\chi_z \\
-\Rightarrow 0.5 &\leq \frac{R\chi_z}{R\chi_z + 5\chi_z}e^{-\left(\frac{4\chi_z}{R\chi_z + 5\chi_z}\right)} \\
-\Rightarrow 0.5 &\leq \frac{R}{R + 5}e^{-\left(\frac{4}{R + 5}\right)} \\
+\Rightarrow 0.005 &\leq \frac{R\chi_z}{R\chi_z + 5\chi_z}e^{-\left(\frac{4\chi_z}{R\chi_z + 5\chi_z}\right)} \\
+\Rightarrow 0.005 &\leq \frac{R}{R + 5}e^{-\left(\frac{4}{R + 5}\right)} \\
 \end{align*}
 Using ~Octave~/~MATLAB~
 #+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export
@@ -173,7 +187,14 @@ R_dB = vpa(10*log10(R_val))
 : R_val = (sym) 0.055764813887475151713817805805105
 : R_dB = (sym) -12.536397428991592734233585002252
 \[\boxed{R = 0.0558} = \boxed{-12.54\ \textrm{dB}}\]
-** TODO (f) Significance For Mobile Systems
+** (f) Significance For Mobile Systems
+From the outage probability equation we can see few things:
+\[P_{\textrm{out}} &= \frac{R\chi_z}{R\chi_z + \chi_l}\exp\left[-\frac{r_0^2}{R\chi_z + \chi_l}\right]\]
+1. As the SIR ($R$) increases the outage probability ($P_{out}$) increases. This means that a system that requires a higher quality signal will have increased outages.
+2. As the interfering signal power ($\chi_z$) increases the outage probability ($P_{out}$) increases. This would occur in dense areas where there are many interfering signals, such as cities.
+3. As the average desired signal power ($\chi_l$) increases the outage probability ($P_{out}$) decreases. This means that increasing the transmitter power will improve the received data, this could be done by choosing the closest/strongest base station to communicate to.
+4. As the LOS component ($r_0$) increases the probability ($P_{out}$) decreases. This means positioning the antenna in the direction of the receiver will decrease outages, for rural base stations this would mean making the antenna transmit in a circle and taller, in urban areas this would mean directing the antenna down streets and away from buildings.
+
 
 * Question 2
 ** Full Reflected-Wave Model
@@ -191,7 +212,7 @@ In the notes we assumed that the reflection coefficient ($\Gamma$) is $-1$ becau
 \Gamma_{\|} &= \frac{\epsilon_r\sin(\theta_i) - \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\epsilon_r\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}} \\
 \Gamma_{\perp} &= \frac{\sin(\theta_i) - \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}}
 \end{align*}
-$\Gamma_{\|}$ is for parallel polarised waves and $\Gamma_{\perp}$ is for perpendicularly polarised waves.
+$\Gamma_{\|}$ is for parallel/vertical polarised waves and $\Gamma_{\perp}$ is for perpendicularly/horizontal polarised waves.
 
 The two waves can be represented by:
 \begin{align*}
@@ -208,15 +229,81 @@ The path loss is defined as:
 Which means the path loss is:
 \[PL = -10\log_{10}\left(\frac{G_tG_r\lambda^2}{(4\pi)^2L}\left|\frac{e^{-j\frac{2\pi}{\lambda}d_1}}{d_1} + \Gamma\frac{e^{-j\frac{2\pi}{\lambda}d_2}}{d_2}\right|^2\right)\]
 ** Simplified Two-Ray Model
-We can simplify the two-ray model by assuming the wave is totally reflected with a $180^{\circ}$ shift ($\Gamma = -1$), at large distances the distance travelled by each wave will be the same ($d_1 = d_2 = d_3$), and the difference in path length is $\Delta d = \frac{2 h_t h_r}{d}$ (https://en.wikipedia.org/wiki/Two-ray_ground-reflection_model#Approximation). Preforming these approximations we get:
+We can simplify the two-ray model by assuming the wave is totally reflected with a $180^{\circ}$ shift ($\Gamma = -1$), at large distances the distance travelled by each wave will be the same ($d_1 = d_2 = d_3$). Preforming these approximations we get:
 \begin{align*}
 P_r &= P_t G_t G_r \frac{h_t^2 h_r^2}{d^4} \\
 PL &= 40\log_{10}(d) - 20\log_{10}(h_t) - 20\log_{10}(h_r) - 10\log_{10}(G_tG_r)
 \end{align*}
 This approximation is valid for when the distance between the receiver and transmitter is large ($d >> \frac{4\pi h_t h_r}{\lambda}$).
 
-** Simulation
-#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export
+** Free-Space Model
+The free space model simply ignores all losses and only takes into account the transmitter power, receiver gain, transmitter gain, wavelength/frequency and the distance. It is simply:
+\[P_r = P_tG_tG_R\left(\frac{\lambda}{4\pi d_1}\right)^2\]
+** Analysis
+The ~Octave~/~MATLAB~ code can be seen in ~ENG405_Project_1_Q2.m~, it uses $h_t = 10\ \mathrm{m}$, $h_r = 2\ \mathrm{m}$ $\epsilon_r = 15$, $\sigma = 0.005\ \mathrm{S/m}$, $P_t = 1\ \mathrm{W}$ and unity gain for the receiver and transmitter. The Figures \ref{fig:Q21}, \ref{fig:Q22}, \ref{fig:Q23} and \ref{fig:Q24} were produced by the code.
+
+Figure \ref{fig:Q21} shows the each of the models at $500\ \mathrm{MHz}$. The Full Fresnel model and the Two-ray simplified model shows the patterns of constructive and destructive interference. The interference is caused by the reflected wave from the ground arriving at the receiver with different phase from the LOS wave.
+
+The biggest general disagreements between each model is at short distances, this is because the reflection coefficient is smaller at larger reflection angles. The Full Fresnel model has reflection coefficient at $0\ \mathrm{m}$ of:
+\begin{align*}
+\Gamma_{\|} &= \frac{\epsilon_r\sin(\theta_i) - \sqrt{\epsilon_r - \cos^2(\theta_i)}}{\epsilon_r\sin(\theta_i) + \sqrt{\epsilon_r - \cos^2(\theta_i)}} \\
+&= 0.67
+\end{align*}
+Where as all the other models assume it is $1$. Although the difference is small for all except the far two-ray approximation (not surprising given the name and equation used). As the distance increase they become almost identical, with exception of the free space model which diverges significantly, this is because the approximation only has $d^{-2}$ term not $d^{-4}$.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q21}
+[[./ENG405_Q2_500.0_MHz_Ground_Reflection_H_sigma_0.0050_er_15.00_ht_10.00_hr_2.00_.png]]
+
+Looking at Figure \ref{fig:Q22}, which are the models simulated at $2.4\ \mathrm{GHz}$. We can see that there are many more points where the signal interferes constructively and destructively, this is simply due to the smaller wavelength. As before the same with disagreements between models is true, smaller distance means more error and larger is less error.
+
+Both frequencies (Figures \ref{fig:Q21} and \ref{fig:Q22}) reach the asymptote of the far two-ray approximation, this is due to the $d^{-4}$ term, same with the asymptote for the free space model being due to the $d^{-2}$.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q22}
+[[./ENG405_Q2_2400.0_MHz_Ground_Reflection_H_sigma_0.0050_er_15.00_ht_10.00_hr_2.00_.png]]
+
+Increasing the heights of the antennas will increase the power received , this intuitively makes sense, as we increase the heights of the antennas the amount of the signal hitting the ground reduces. Changing the heights of antennas also changes the amount and locations of the interference, this is due to allowing/not allowing the phase change more or less from the greater/lower distance. This can also be seen in Figure \ref{fig:Q23}, by multiplying the receiver height by $10$ we see that interference gets more squished. The power increase (at $1000\ \mathrm{m}$) from $\approx-70\ \mathrm{dBm} \approx 1\times10^{-8}\ \mathrm{W}$ to $\approx-50\ \mathrm{dBm} \approx 1\times10^{-10}\ \mathrm{W}$, which is a $100$ times increase in power received, this is predicted because $P_r\propto h_t^2h_r^2$.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q23}
+[[./ENG405_Q2_500.0_MHz_Ground_Reflection_H_sigma_0.0050_er_15.00_ht_10.00_hr_20.00_.png]]
+
+Changing the ground permittivity changes the reflection coefficient, so it will only change the full model. We would expect for larger $\epsilon_r$ the power increases slightly because more of the wave is reflected, for smaller $\epsilon_r$ we would expect to see less power delivered. This can be seen in Figures \label{fig:Q24} and \label{fig:Q25}, the power is slightly lower in the second Figure. As the distance gets larger the effect gets smaller, this is because the angle of reflection coefficient goes to $1$ ($\theta_i \rightarrow 0 \Rightarrow \Gamma \rightarrow 1$)
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q24}
+[[./ENG405_Q2_500.0_MHz_Ground_Reflection_H_sigma_0.0050_er_100.00_ht_10.00_hr_2.00_.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q25}
+[[./ENG405_Q2_500.0_MHz_Ground_Reflection_H_sigma_0.0050_er_0.00_ht_10.00_hr_2.00_.png]]
+
+The simplification of $\Gamma = -1$ assumes that the reflected signal has the same amplitude as the incident signal and has a $180^{\circ}$ phase shift. The simulation shows that this is inaccurate for small distances (large reflection angles), this is because the reflection coefficient far from $-1$ for these cases. As the distance increase (small reflection angles) the assumption becomes considerable more accurate. Likewise, the assumption that $d_1 \approx d_2$ also only holds for large distances, for short distances this isn't true and can be seen in the simulation.
+
+Changing the polarisation from perpendicular/horizontal to parallel/vertical will introduce the possibility of encountering the Brewster angle, this can cause the reflection coefficient to become zero. This would cause none of the power from the ground reflected signal to be received, reducing power received but deleting the interference patterns. This can be seen in Figure \ref{fig:Q26} at about $46.5\ \mathrm{m}$, the calculations for this are as follows.
+
+\begin{align*}
+\theta_B &= \tan^{-1}\left(\frac{1}{\sqrt{\epsilon_r}}\right) \\
+\tan(\theta_B) &= \frac{h_t + h_r}{d} \\
+d &= \frac{h_t + h_r}{\tan(\theta_B)} \\
+d &= (h_t + h_r)\sqrt{\epsilon_r} \\
+d &= (10 + 2)\sqrt{15} \\
+d &= 46.5\ \mathrm{m}
+\end{align*}
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q26}
+[[./ENG405_Q2_2400.0_MHz_Ground_Reflection_V_sigma_0.0050_er_15.00_ht_10.00_hr_2.00_.png]]
+
+Real life measurements would contain many more propagation paths, the wave would reflect off the atmosphere, buildings, trees, vehicles etc.. The new equation to consider is:
+
+\[E = \sum_{n=1}^{\infty}E_n\]
+
+This would produce a less regular curve than the two path model. Receiver noise would make it impossible to measure the lower powered signals, whereas the simulation is able to theoretically predict them. Change in the antenna distances would change the measured values, particularly at $2.4\ \mathrm{GHz}$ where the antennas would only need to move by a few centimetres (due to the short wavelength). Overall, we would expect the real measurements to produce a plot that is smoother with less obvious interference patterns.
+
+
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export :tangle ENG405_Project_1_Q2.m
 clear
 close all
 clc
@@ -226,9 +313,11 @@ if exist('OCTAVE_VERSION', 'builtin')
   warning('off');
 end
 
-%% Physical constants
-c = 299792458; % Speed of light
+%% Constants
+c = 3e8; % Speed of light
 epsilon_0 = 8.854187817e-12; % Permitivity of free space
+epsilon_r = 15; % Relative permittivity
+sigma = 0.005; % Conductivity
 
 %% Transmitter and receiver parameters
 Pt = 1; % Transmitted power
@@ -238,15 +327,9 @@ Gr = 1; % Receiver antenna gain
 ht = 10; % Transmitter height
 hr = 2; % Receiver height
 
-%% Ground parameters
-epsilon_r = 15; % Relative permittivity
-sigma = 0.005; % Conductivity
-
-%% Frequencies
 frequencies = [500e6, 2.4e9];
 
-%% Distance range
-d = logspace(0, 4, 5000);  %% 1 m to 10 km
+d = logspace(0, 4, 10000);
 
 %% Polarisation:
 %% "H" = horizontal
@@ -260,23 +343,17 @@ for index = 1:length(frequencies)
   lambda = c/f;
   k = 2*pi/lambda;
   
-  %% Complex relative permittivity
   epsilon_complex = epsilon_r - 1i*sigma/(omega*epsilon_0);
 
-  %% Direct and reflected path lengths
   r1 = sqrt(d.^2 + (ht - hr)^2);
   r2 = sqrt(d.^2 + (ht + hr)^2);
 
-  %% Grazing angle
   psi = atan((ht + hr)./d);
 
-  %% Fresnel reflection coefficient
-  root_term = sqrt(epsilon_complex - cos(psi).^2);
-
   if strcmpi(polarisation, "H")
-    Gamma = (sin(psi) - root_term) ./ (sin(psi) + root_term);
+    Gamma = (sin(psi) - sqrt(epsilon_complex - cos(psi).^2)) ./ (sin(psi) + sqrt(epsilon_complex - cos(psi).^2));
   else
-    Gamma = (epsilon_complex*sin(psi) - root_term) ./ (epsilon_complex*sin(psi) + root_term);
+    Gamma = (epsilon_complex*sin(psi) - sqrt(epsilon_complex - cos(psi).^2)) ./ (epsilon_complex*sin(psi) + sqrt(epsilon_complex - cos(psi).^2));
   end
 
   %% Full electromagnetic two-path field
@@ -284,12 +361,12 @@ for index = 1:length(frequencies)
 
   Pr_full = Pt*Gt*Gr*(lambda/(4*pi))^2 .* abs(field_full).^2;
 
-  %% Simplified two-ray model: Gamma = -1
+  %% Simplified two-ray model
   field_two_ray = exp(-1i*k*r1)./r1 - exp(-1i*k*r2)./r2;
 
   Pr_two_ray = Pt*Gt*Gr*(lambda/(4*pi))^2 .* abs(field_two_ray).^2;
 
-  %% Free-space propagation
+  %% Free-space
   Pr_free_space = Pt*Gt*Gr .* (lambda./(4*pi*r1)).^2;
 
   %% Far-distance two-ray approximation
@@ -301,7 +378,6 @@ for index = 1:length(frequencies)
   Pr_free_space = max(Pr_free_space, realmin);
   Pr_far = max(Pr_far, realmin);
   
-  %% Received power in dBm
   Pr_full_dBm = 10*log10(Pr_full/1e-3);
   Pr_two_ray_dBm = 10*log10(Pr_two_ray/1e-3);
   Pr_free_space_dBm = 10*log10(Pr_free_space/1e-3);
@@ -320,44 +396,29 @@ for index = 1:length(frequencies)
   xlabel("Horizontal distance, d (m)");
   ylabel("Received power (dBm)");
 
-  title(sprintf( "Ground-reflection model at %.1f MHz", f/1e6));
+  title(sprintf("Ground-reflection model at %.1f MHz, sigma %.4f, epsilon_r %.2f, ht %.2f, hr %.2f", f/1e6, sigma, epsilon_r, ht, hr));
 
-  legend( "Full Fresnel model", "Two-ray, \Gamma = -1", "Free space", "Far two-ray approximation", "location", "southwest");
+  legend("Full Fresnel model", "Two-ray, \Gamma = -1", "Free space", "Far two-ray approximation", "location", "southwest");
+  pause(0.5); % pause so it prints correctly
+  print(sprintf("ENG405_Q2_%.1f_MHz_Ground_Reflection_%s_sigma_%.4f_er_%.2f_ht_%.2f_hr_%.2f_.png", f/1e6, polarisation, sigma, epsilon_r, ht, hr), "-dpng");
 
-  Gamma_H = (sin(psi) - root_term) ./ (sin(psi) + root_term);
+  Gamma_H = (sin(psi) - sqrt(epsilon_complex - cos(psi).^2)) ./ (sin(psi) + sqrt(epsilon_complex - cos(psi).^2));
 
-  Gamma_V = (epsilon_complex*sin(psi) - root_term) ./ (epsilon_complex*sin(psi) + root_term);
+  Gamma_V = (epsilon_complex*sin(psi) - sqrt(epsilon_complex - cos(psi).^2)) ./ (epsilon_complex*sin(psi) + sqrt(epsilon_complex - cos(psi).^2));
   hold off;
-  figure;
-  semilogx(d, abs(Gamma_H), "linewidth", 1.5);
-  hold on;
-  semilogx(d, abs(Gamma_V), "--", "linewidth", 1.5);
-  grid on;
-  
-  xlabel("Distance (m)");
-  ylabel("|\Gamma|");
-  title(sprintf( "Reflection coefficient magnitude at %.1f MHz", f/1e6));
-  legend("Horizontal", "Vertical");
-
-  %% Crossover distance
-  crossover_distance = 4*pi*ht*hr/lambda;
 
   fprintf("\nFrequency: %.1f MHz\n", f/1e6);
   fprintf("Wavelength: %.4f m\n", lambda);
-  fprintf("Approximate crossover distance: %.2f m\n", crossover_distance);
 end
 #+END_SRC
 
 #+RESULTS:
 : Frequency: 500.0 MHz
-: Wavelength: 0.5996 m
-: Approximate crossover distance: 419.17 m
+: Wavelength: 0.6000 m
 : 
 : Frequency: 2400.0 MHz
-: Wavelength: 0.1249 m
-: Approximate crossover distance: 2012.01 m
+: Wavelength: 0.1250 m
 
-:TODO: Report, where it is better than the approximation, difference from real measurements
 
 * Question 3
 ** a
@@ -374,9 +435,9 @@ The unit power QPSK pilot bits can be generate using:
 \[x[n] = \frac{(1 - 2b_1) + j(1 - 2b_2)}{\sqrt{2}}\]
 The received signal is:
 \[y[n] = h_0x[n] + h_1x[n-1] + h_2x[n-2] + n[n]\]
-Where $n[n]$ is the receivers noise ($n[n] \sim CN(0,N_0)$) and is generate using:
+Where $n[n]$ is the receivers noise and is generated using:
 \[n[n] = \sqrt{\frac{N_0}{2}}(n_1[n] + jn_2[n])\]
-Where $n_1,n_2 \sim N(0,N_0)$. The channel can be estimated using
+Where $n_1,n_2 \sim N(0,N_0)$. The channel can be estimated using:
 \[r = Ah + n\]
 Where for a 3 tap channel:
 \[A = \begin{bmatrix}
@@ -386,7 +447,21 @@ x[4] & x[3] & x[2] \\
 \vdots & \vdots & \vdots \\
 x[N] & x[N - 1] x[N - 2]
 \end{bmatrix}\]
-And can be calculated using $h_{LS} = (A^HA)^{-1}A^Hr$
+And can be calculated using $\tilde{h} = (A^HA)^{-1}A^Hr$
+This can be seen implemented in the ~Octave~/~MATLAB~ code ~ENG405_Project_1_Q3.m~. With a random seed of ~31~, and running from ~Octave~, the output has an actual channel response and estimated response of:
+\begin{align*}
+h &= \begin{bmatrix}
+-0.470796 - 0.523828j \\
+ 0.376513 + 0.354112j \\
+-0.011633 - 0.088637j
+\end{bmatrix} &
+\tilde{h} &= \begin{bmatrix}
+-0.487280 - 0.489631j \\
+ 0.317130 + 0.380030j \\
+ 0.020867 - 0.008645j
+\end{bmatrix} 
+\end{align*}
+We can see that the estimation is close, but not equal, to the actual response, as expected.
 
 #+BEGIN_SRC octave :results output :exports none :session Q3 :eval no-export :tangle ENG405_Project_1_Q3.m
 clear
@@ -408,7 +483,7 @@ taps = 3;
 Np = 64; % pilot symbols count
 
 %% Noise power
-N0 = 0.01;
+N0 = 0.2;
 
 %% Generate the fading channel
 h = sqrt(Pk/2).*(randn(taps,1) + 1i*randn(taps,1));
@@ -442,37 +517,28 @@ for n = taps:Np
 end
 
 % Corresponding received samples
-y_LS = received(taps:Np);
+y_est = received(taps:Np);
 
 %% Least-squares channel estimate
-h_est = X_pilot \ y_LS;
+h_est = X_pilot \ y_est;
 
 disp("Estimated channel impulse response:");
 disp(h_est);
-
-disp("Channel estimation error:");
-disp(h_est - h);
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-Actual channel impulse response:
--0.470796 - 0.523828i
-   0.376513 + 0.354112i
-  -0.011633 - 0.088637i
-Estimated channel impulse response:
--0.474482 - 0.516181i
-   0.363235 + 0.359907i
-  -0.004366 - 0.070750i
-Channel estimation error:
--3.6860e-03 + 7.6465e-03i
-  -1.3279e-02 + 5.7954e-03i
-   7.2672e-03 + 1.7887e-02i
-#+end_example
+: Actual channel impulse response:
+: -0.470796 - 0.523828i
+:    0.376513 + 0.354112i
+:   -0.011633 - 0.088637i
+: Estimated channel impulse response:
+: -0.470796 - 0.523828i
+:    0.376513 + 0.354112i
+:   -0.011633 - 0.088637i
 
 ** b
 *** Zero-Forcing Equaliser (ZF)
-Zero-Forcing Equaliser minimises peak distortion, this cancels the intersymbol interference, but amplifies the noise. The Zero-Forcing Equaliser coefficients can be found using:
+Zero-Forcing Equaliser minimises peak distortion, this attempts cancels the inter-symbol interference, but amplifies the noise. The Zero-Forcing Equaliser coefficients can be found using:
 \[\begin{cases}
 \hat{y}[n] = \sum_{j = -k}^k c_jy[n - j] \\
 \hat{y}[n] = \begin{cases}
@@ -507,96 +573,180 @@ c_{k}
 YC &= \hat{Y}
 \end{align*}
 So, the ZF coefficients can be found using $C &= Y^{-1}\hat{Y}$.
-:TODO: add matrices + code note
+This was also implemented in ~Octave~/~MATLAB~ code ~ENG405_Project_1_Q3.m~. With the same random seed of ~31~ and in ~Octave~ the ZF equaliser coefficients are:
+\[C = \begin{bmatrix}
+ 0.105939 - 0.114521j \\
+ 0.177829 - 0.179540j \\
+-0.749485 + 0.768159j \\
+-0.395034 + 0.311390j \\
+\end{bmatrix}\]
+
+The tolerance to noise can be found using:
+\[\sigma_{\hat{y}}^2 = \sigma^2\sum_{j=-k}^k|c_j|^2\]
+It comes out to $\sigma_{\hat{y}}^2 = 1.49\sigma^2$, this means that it amplifies the noise by $1.49$. This shows the noise enhancement of the ZF equaliser.
 *** Minimum Mean Square Error Equaliser (MMSE)
-The Minimum Mean Square Error Equaliser (MMSE) minimises the mean square error ($\{c_k\} = \min_{c_k}\{E[(a[k] - \hat{a}[k])^2]\}$). The coefficients can be found using either of the two equations:
+The Minimum Mean Square Error Equaliser (MMSE) minimises the mean square error ($$\{c_k\} = \min_{c_k}\{E[(a[k] - \hat{a}[k])^2]\}$$). The coefficients can be found using either of the two equations:
 \begin{align*}
-C &= [Y^HY + N_0I]^{-1}Y_H\hat{Y} & C &= Y^H[YY^H + N_0I]^{-1}\hat{Y}
+C &= [Y^HY + N_0I]^{-1}Y^H\hat{Y} & C &= Y^H[YY^H + N_0I]^{-1}\hat{Y}
 \end{align*}
-We need the identity matrix to be $5\times 5$ (or $7\times 7$ for the second equation) because we chose $5$ coefficients for the equalisers. The matrices $C$ and $\hat{Y}$ will be:
+I chose $5$ coefficients for the equalisers , this means we need the identity matrix to be $5\times 5$ (or $7\times 7$ for the second equation). The matrices $C$ and $\hat{Y}$ will be:
 \begin{align*}
 C &= \begin{bmatrix}
-c_0 \\ c_2 \\ c_3 \\ c_4 \\ c_5
+c_0 \\ c_1 \\ c_2 \\ c_3 \\ c_4
 \end{bmatrix} & \hat{Y} &= 
 \begin{bmatrix}
-0 \\ 0 \\ 1 \\ 0 \\ 0
+0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0
 \end{bmatrix}
 \end{align*}
-:TODO: add matrices + code note
+The ~Octave/MATLAB~ code in ~ENG405_Project_1_Q3.m~ calculates this. From the code the matrix $Y$ is $7\times 5$ and can be seen here:
+\[Y = \begin{bmatrix}
+-0.4745 - 0.5162j &        0           &        0           &        0           &         0           \\
+ 0.3632 + 0.3599j &  -0.4745 - 0.5162j &        0           &        0           &         0           \\
+-0.0044 - 0.0708j &   0.3632 + 0.3599j &  -0.4745 - 0.5162j &        0           &         0           \\
+      0           &  -0.0044 - 0.0708j &   0.3632 + 0.3599j &  -0.4745 - 0.5162j &         0           \\
+      0           &        0           &  -0.0044 - 0.0708j &   0.3632 + 0.3599j &   -0.4745 - 0.5162j \\
+      0           &        0           &        0           &  -0.0044 - 0.0708j &    0.3632 + 0.3599j \\
+      0           &        0           &        0           &        0           &   -0.0044 - 0.0708j
+\end{bmatrix}\]
+
+Finally, the code produces the MMSE coefficients matrix $C$ as:
+\[C = \begin{bmatrix}
+ 0.034721 - 0.040409j \\
+ 0.093654 - 0.104297j \\
+ 0.214433 - 0.236242j \\
+-0.510646 + 0.520469j \\
+-0.211862 + 0.162920j \\
+\end{bmatrix}\]
+
+
 #+BEGIN_SRC octave :results output :exports none :session Q3 :eval no-export :tangle ENG405_Project_1_Q3.m
 %% Equaliser parameters
 Lc = 5; % Number of equaliser coefficients
 
-%% Construct the channel convolution matrix
-Y = zeros(taps + Lc - 1, Lc);
+%% Desired combined channel-equaliser response
+hat_Y = zeros(taps + Lc - 1, 1);
 
+offset = ceil(Lc/2);
+hat_Y(offset + 1) = 1;
+
+Y = zeros(Lc + taps - 1, Lc);
 for column = 1:Lc
   Y(column:column+taps-1, column) = h_est;
 end
 
-%disp("Channel convolution matrix Y:");
-%disp(Y);
-
-%% Desired combined channel-equaliser response
-hat_Y = zeros(taps + Lc - 1, 1);
-
-offset = floor(Lc/2);
-hat_Y(offset + 1) = 1;
-
-%disp("Desired combined response:");
-%disp(hat_Y);
-
-%% Zero-forcing equaliser
 C_ZF = pinv(Y)*hat_Y;
+C_ZF_noise = sum(abs(C_ZF).^2)
 
-disp("ZF equaliser coefficients:");
+disp("Y:");
+disp(Y);
+
+disp("hat_Y:");
+disp(hat_Y);
+
+disp("ZF:");
 disp(C_ZF);
 
 %% MMSE equaliser
-C_MMSE = inv(Y'*Y + N0*eye(Lc))*Y'*hat_Y
-%C_MMSE = Y'*inv(Y*Y' + N0*eye(Lc + 2))*hat_Y
+C_MMSE = Y'*inv(Y*Y' + N0*eye(Lc + 2))*hat_Y;
+C_MMSE = inv(Y'*Y + N0*eye(Lc))*Y'*hat_Y;
 
-disp("MMSE equaliser coefficients:");
-
-%% Combined channel-equaliser responses
-combined_ZF = conv(h_est, C_ZF);
-combined_MMSE = conv(h_est, C_MMSE);
-
-%disp("Estimated channel convolved with ZF equaliser:");
-%disp(combined_ZF);
-
-disp("Estimated channel convolved with MMSE equaliser:");
-disp(combined_MMSE);
+disp("MMSE:");
+disp(C_MMSE);
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-ZF equaliser coefficients:
-0.027934 - 0.009850i
-   0.057789 - 0.032988i
-  -0.880272 + 0.972140i
-  -0.563559 + 0.643270i
-  -0.207652 + 0.308216i
-C_MMSE =
+C_ZF_noise = 1.7108
+Y:
+Columns 1 through 4:
 
-   0.039397 - 0.016795i
-   0.082308 - 0.054077i
-  -0.840674 + 0.929871i
-  -0.530194 + 0.602012i
-  -0.191532 + 0.284344i
-MMSE equaliser coefficients:
-Estimated channel convolved with MMSE equaliser:
--0.027362 - 0.012367i
-  -0.046612 - 0.008749i
-   0.926866 - 0.000000i
-  -0.081900 + 0.017642i
-  -0.102143 + 0.047219i
-  -0.127001 + 0.069233i
-   0.020954 + 0.012310i
+  -0.4708 - 0.5238i        0 +      0i        0 +      0i        0 +      0i
+   0.3765 + 0.3541i  -0.4708 - 0.5238i        0 +      0i        0 +      0i
+  -0.0116 - 0.0886i   0.3765 + 0.3541i  -0.4708 - 0.5238i        0 +      0i
+        0 +      0i  -0.0116 - 0.0886i   0.3765 + 0.3541i  -0.4708 - 0.5238i
+        0 +      0i        0 +      0i  -0.0116 - 0.0886i   0.3765 + 0.3541i
+        0 +      0i        0 +      0i        0 +      0i  -0.0116 - 0.0886i
+        0 +      0i        0 +      0i        0 +      0i        0 +      0i
+
+ Column 5:
+
+        0 +      0i
+        0 +      0i
+        0 +      0i
+        0 +      0i
+  -0.4708 - 0.5238i
+   0.3765 + 0.3541i
+  -0.0116 - 0.0886i
+hat_Y:
+0
+   0
+   0
+   1
+   0
+   0
+   0
+ZF:
+0.043304 + 0.008576i
+   0.098782 - 0.006121i
+   0.158543 - 0.063169i
+  -0.740290 + 0.873963i
+  -0.394714 + 0.449764i
+MMSE:
+0.043304 + 0.008576i
+   0.098782 - 0.006121i
+   0.158543 - 0.063169i
+  -0.740290 + 0.873963i
+  -0.394714 + 0.449764i
 #+end_example
 
 ** c
-:TODO: Report
+Running the ~Octave~/~MATLAB~ code in ~ENG405_Project_1_Q3.m~ we find the following metrics of the ZF and MMSE equalisers:
+#+BEGIN_SRC
+ZF BER = 0.085885
+MMSE BER = 0.084405
+ZF residual ISI power = 0.110011
+MMSE residual ISI power = 0.086896
+ZF peak distortion D0 = 0.792777
+MMSE peak distortion D0 = 0.893709
+ZF noise gain = 1.498601
+MMSE noise gain = 0.727356
+ZF output noise power = 0.299720
+MMSE output noise power = 0.145471
+ZF MSE = 0.535628
+MMSE MSE = 0.522520
+#+END_SRC
+We can see that the ZF noise gain ($1.4986$) is the same as calculated before and that it performs worse than the MMSE equaliser which had a noise gain of $0.7273$. This is to be expected as I have stated that the ZF equaliser amplifies noise more and is because the MMSE equaliser takes the noise into consideration when calculating the channel. Every other metric is similar to one another, with the MMSE performing slightly better on every metrics, which is expected.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q3c1}
+[[./Q3c_Combined_Channel_and_ZF_Equaliser_Response.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q3c2}
+[[./Q3c_Combined_Channel_and_MMSE_Equaliser_Response.png]]
+
+Figures \ref{fig:Q3c1} and \ref{fig:Q3c2} show the channel response of ZF and MMSE equalisers respectively. They show main peak at $3$, which is the chosen offset, the other impulses indicate how much of the other neighbouring symbols will effect detected symbol.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q3c3}
+[[./Q3c_Received_QPSK_Constellation_Before_Equalisation_No_Noise.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q3c4}
+[[./Q3c_Received_QPSK_Constellation_Before_Equalisation.png]]
+
+Figure \ref{fig:Q3c3} shows the constellation before equalisation with no noise, it shows how the channel effects the location of the symbols. Each of the points should ideally be moved to one of the four QPSK symbol positions, they may be inaccurate due to the estimation of the channel. When adding noise it randomly moves the symbols about the no-noise constellation, this can be seen in Figure \ref{fig:Q3c4}.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q3c5}
+[[./Q3c_QPSK_Constellation_After_ZF_Equalisation.png]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q3c6}
+[[./Q3c_QPSK_Constellation_After_MMSE_Equalisation.png]]
+
+The received symbols after equalisation can be seen in Figures \ref{fig:Q3c5} and \ref{fig:Q3c6}, they show how the symbols are transformed by the equaliser to the four possible QPSK positions. These are used to find the metrics mentioned before.
+
 #+BEGIN_SRC octave :results output :exports none :session Q3 :eval no-export :tangle ENG405_Project_1_Q3.m
 N_bits = 100000; % Must be even
 
@@ -625,28 +775,20 @@ z_MMSE = filter(C_MMSE, 1, y_received);
 g_ZF = conv(h, C_ZF);
 g_MMSE = conv(h, C_MMSE);
 
-disp("Actual channel convolved with ZF equaliser:");
-disp(g_ZF);
-
-disp("Actual channel convolved with MMSE equaliser:");
-disp(g_MMSE);
-
-%% Main cursor values
 main_ZF = g_ZF(offset + 1);
 main_MMSE = g_MMSE(offset + 1);
 
-%% Remove the equaliser decision offset
+%% Remove the equaliser offset
 z_ZF = z_ZF(offset + 1:end);
 z_MMSE = z_MMSE(offset + 1:end);
 
-% Ensure all vectors have the same length
+%% Ensure all vectors have the same length
 N_valid = min([length(x_data), length(z_ZF), length(z_MMSE)]);
 
 x_valid = x_data(1:N_valid);
 z_ZF = z_ZF(1:N_valid);
 z_MMSE = z_MMSE(1:N_valid);
 
-%% Correct the main cursor amplitude and phase
 z_ZF = z_ZF/main_ZF;
 z_MMSE = z_MMSE/main_MMSE;
 
@@ -662,61 +804,49 @@ bits_MMSE(2:2:end) = imag(z_MMSE) < 0;
 
 reference_bits = data_bits(1:2*N_valid);
 
-%% Calculate BER
-BER_ZF = mean(bits_ZF != reference_bits);
-BER_MMSE = mean(bits_MMSE != reference_bits);
+BER_ZF = mean(bits_ZF ~= reference_bits);
+BER_MMSE = mean(bits_MMSE ~= reference_bits);
 
-printf("ZF BER   = %.6e\n", BER_ZF);
-printf("MMSE BER = %.6e\n", BER_MMSE);
+fprintf("ZF BER = %.6f\n", BER_ZF);
+fprintf("MMSE BER = %.6f\n", BER_MMSE);
 
-%% Residual ISI power
 ISI_ZF = sum(abs(g_ZF).^2) - abs(main_ZF)^2;
 ISI_MMSE = sum(abs(g_MMSE).^2) - abs(main_MMSE)^2;
 
-printf("ZF residual ISI power   = %.6e\n", ISI_ZF);
-printf("MMSE residual ISI power = %.6e\n", ISI_MMSE);
+fprintf("ZF residual ISI power = %.6f\n", ISI_ZF);
+fprintf("MMSE residual ISI power = %.6f\n", ISI_MMSE);
 
-%% Normalised peak distortion
 D0_ZF = (sum(abs(g_ZF)) - abs(main_ZF))/abs(main_ZF);
 D0_MMSE = (sum(abs(g_MMSE)) - abs(main_MMSE))/abs(main_MMSE);
 
-printf("ZF peak distortion D0   = %.6f\n", D0_ZF);
-printf("MMSE peak distortion D0 = %.6f\n", D0_MMSE);
+fprintf("ZF peak distortion D0 = %.6f\n", D0_ZF);
+fprintf("MMSE peak distortion D0 = %.6f\n", D0_MMSE);
 
-%% Noise enhancement
 noise_gain_ZF = sum(abs(C_ZF).^2);
 noise_gain_MMSE = sum(abs(C_MMSE).^2);
 
 output_noise_ZF = N0*noise_gain_ZF;
 output_noise_MMSE = N0*noise_gain_MMSE;
 
-printf("ZF noise gain   = %.6f\n", noise_gain_ZF);
-printf("MMSE noise gain = %.6f\n", noise_gain_MMSE);
+fprintf("ZF noise gain = %.6f\n", noise_gain_ZF);
+fprintf("MMSE noise gain = %.6f\n", noise_gain_MMSE);
 
-printf("ZF output noise power   = %.6e\n", output_noise_ZF);
-printf("MMSE output noise power = %.6e\n", output_noise_MMSE);
+fprintf("ZF output noise power = %.6f\n", output_noise_ZF);
+fprintf("MMSE output noise power = %.6f\n", output_noise_MMSE);
 
-%% Approximate output SINR
-SINR_ZF = abs(main_ZF)^2/(ISI_ZF + output_noise_ZF);
-SINR_MMSE = abs(main_MMSE)^2/(ISI_MMSE + output_noise_MMSE);
-
-printf("ZF output SINR   = %.2f dB\n", 10*log10(SINR_ZF));
-printf("MMSE output SINR = %.2f dB\n", 10*log10(SINR_MMSE));
-
-%% Mean-square error
 MSE_ZF = mean(abs(x_valid - z_ZF).^2);
 MSE_MMSE = mean(abs(x_valid - z_MMSE).^2);
 
-printf("ZF MSE   = %.6e\n", MSE_ZF);
-printf("MMSE MSE = %.6e\n", MSE_MMSE);
+fprintf("ZF MSE = %.6f\n", MSE_ZF);
+fprintf("MMSE MSE = %.6f\n", MSE_MMSE);
 
-%% Plot combined impulse responses
 figure;
 stem(0:length(g_ZF)-1, abs(g_ZF), "filled");
 grid on;
 xlabel("Sample index");
 ylabel("|g_{ZF}[n]|");
 title("Combined Channel and ZF Equaliser Response");
+print("_Q3c_Combined_Channel_and_ZF_Equaliser_Response.png", "-dpng");
 
 figure;
 stem(0:length(g_MMSE)-1, abs(g_MMSE), "filled");
@@ -724,8 +854,8 @@ grid on;
 xlabel("Sample index");
 ylabel("|g_{MMSE}[n]|");
 title("Combined Channel and MMSE Equaliser Response");
+print("_Q3c_Combined_Channel_and_MMSE_Equaliser_Response.png", "-dpng");
 
-%% Plot received constellation before equalisation
 figure;
 plot(real(y_received(1:min(5000,end))), imag(y_received(1:min(5000,end))), "*");
 grid on;
@@ -733,8 +863,8 @@ axis equal;
 xlabel("In-phase");
 ylabel("Quadrature");
 title("Received QPSK Constellation Before Equalisation");
+print("_Q3c_Received_QPSK_Constellation_Before_Equalisation_No_Noise.png", "-dpng");
 
-%% Plot ZF output constellation
 figure;
 plot(real(z_ZF(1:min(5000,end))), imag(z_ZF(1:min(5000,end))), "*");
 grid on;
@@ -742,8 +872,8 @@ axis equal;
 xlabel("In-phase");
 ylabel("Quadrature");
 title("QPSK Constellation After ZF Equalisation");
+print("_Q3c_QPSK_Constellation_After_ZF_Equalisation.png", "-dpng");
 
-%% Plot MMSE output constellation
 figure;
 plot(real(z_MMSE(1:min(5000,end))), imag(z_MMSE(1:min(5000,end))), "*");
 grid on;
@@ -751,49 +881,28 @@ axis equal;
 xlabel("In-phase");
 ylabel("Quadrature");
 title("QPSK Constellation After MMSE Equalisation");
+print("_Q3c_QPSK_Constellation_After_MMSE_Equalisation.png", "-dpng");
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-Actual channel convolved with ZF equaliser:
--0.018311 - 0.009995i
-  -0.030481 - 0.008557i
-   0.955904 + 0.009113i
-  -0.076993 + 0.041930i
-  -0.084355 + 0.073020i
-  -0.123753 + 0.084985i
-   0.029735 + 0.014820i
-Actual channel convolved with MMSE equaliser:
--0.027346 - 0.012730i
-  -0.046296 - 0.010029i
-   0.931070 + 0.008078i
-  -0.086590 + 0.040056i
-  -0.081484 + 0.069078i
-  -0.113276 + 0.079227i
-   0.027431 + 0.013669i
-ZF BER   = 4.000160e-05
-MMSE BER = 5.000200e-05
-ZF residual ISI power   = 4.521242e-02
-MMSE residual ISI power = 4.371517e-02
-ZF peak distortion D0   = 0.455159
-MMSE peak distortion D0 = 0.481842
-ZF noise gain   = 2.594751
-MMSE noise gain = 2.343986
-ZF output noise power   = 2.594751e-02
-MMSE output noise power = 2.343986e-02
-ZF output SINR   = 11.09 dB
-MMSE output SINR = 11.11 dB
-ZF MSE   = 7.905710e-02
-MMSE MSE = 7.862911e-02
+ZF BER = 0.000000
+MMSE BER = 0.000000
+ZF residual ISI power = 0.100461
+MMSE residual ISI power = 0.100461
+ZF peak distortion D0 = 0.702393
+MMSE peak distortion D0 = 0.702393
+ZF noise gain = 1.710799
+MMSE noise gain = 1.710799
+ZF output noise power = 0.000000
+MMSE output noise power = 0.000000
+ZF MSE = 0.128300
+MMSE MSE = 0.128300
 #+end_example
 
-
-
-
 ** d
-#+BEGIN_SRC octave :results output graphics file :exports both :session Q3 :eval no-export :tangle ENG405_Project_1_Q3.m
-pause % Dont do part this becaues it takes too long :TODO: Remove from final submition
-exit
+#+BEGIN_SRC octave :results output graphics file :exports none :session Q3 :eval no-export :tangle ENG405_Project_1_Q3.m
+disp("This may take a long time to compute")
 
 %% Channel timing parameters
 coherence_time = 10e-3;      % 10 ms
@@ -802,12 +911,11 @@ data_rate = 100e3;           % 100 kbps
 bits_per_channel = round(coherence_time*data_rate);
 symbols_per_channel = bits_per_channel/2;
 
-printf("Bits per channel response = %d\n", bits_per_channel);
-printf("Symbols per channel response = %d\n", symbols_per_channel);
+fprintf("Bits per channel response = %d\n", bits_per_channel);
+fprintf("Symbols per channel response = %d\n", symbols_per_channel);
 
 %% Simulation Parameters
 SNR_dB = -20:1:30;
-%SNR_dB = 0:2:10;
 number_channels = 1000;
 
 BER_ZF_curve = zeros(size(SNR_dB));
@@ -815,15 +923,11 @@ BER_MMSE_curve = zeros(size(SNR_dB));
 
 %% Repeat the simulation for each SNR
 for SNR_index = 1:length(SNR_dB)
-  printf("Step %d/%d\n", SNR_index, length(SNR_dB));
+  fprintf("Step %d/%d\n", SNR_index, length(SNR_dB));
   
-  %% Convert SNR from dB to linear
   SNR = 10^(SNR_dB(SNR_index)/10);
 
-  % Unit-energy QPSK, so Es = 1
-  Es = 1;
-  N0_MC = Es/SNR;
-
+  N0_MC = 1/SNR;
   total_errors_ZF = 0;
   total_errors_MMSE = 0;
   total_bits = 0;
@@ -858,10 +962,10 @@ for SNR_index = 1:length(SNR_dB)
       X_pilot_MC(n-taps+1,:) = pilot_symbol_MC(n:-1:n-taps+1).';
     end
 
-    y_LS_MC = pilot_received_MC(taps:Np);
+    y_est_MC = pilot_received_MC(taps:Np);
 
     %% Least-squares channel estimate
-    h_est_MC = X_pilot_MC \ y_LS_MC;
+    h_est_MC = X_pilot_MC \ y_est_MC;
 
     %% Construct channel convolution matrix
     Y_MC = zeros(taps + Lc - 1, Lc);
@@ -941,9 +1045,9 @@ for SNR_index = 1:length(SNR_dB)
     reference_bits_MC = data_bits_MC(1:2*N_valid_MC);
 
     %% Count bit errors
-    total_errors_ZF = total_errors_ZF + sum(bits_ZF_MC != reference_bits_MC);
+    total_errors_ZF = total_errors_ZF + sum(bits_ZF_MC ~= reference_bits_MC);
 
-    total_errors_MMSE = total_errors_MMSE + sum(bits_MMSE_MC != reference_bits_MC);
+    total_errors_MMSE = total_errors_MMSE + sum(bits_MMSE_MC ~= reference_bits_MC);
 
     total_bits = total_bits + length(reference_bits_MC);
 
@@ -953,7 +1057,7 @@ for SNR_index = 1:length(SNR_dB)
   BER_ZF_curve(SNR_index) = total_errors_ZF/total_bits;
   BER_MMSE_curve(SNR_index) = total_errors_MMSE/total_bits;
 
-  printf(["SNR = %2d dB, ZF BER = %.6e, MMSE BER = %.6e\n"], SNR_dB(SNR_index), BER_ZF_curve(SNR_index), BER_MMSE_curve(SNR_index));
+  fprintf(["SNR = %2d dB, ZF BER = %.6f, MMSE BER = %.6f\n"], SNR_dB(SNR_index), BER_ZF_curve(SNR_index), BER_MMSE_curve(SNR_index));
 
 end
 
@@ -966,14 +1070,16 @@ xlabel("E_s/N_0 (dB)");
 ylabel("Bit Error Rate");
 title("Monte Carlo BER of ZF and MMSE Equalisers");
 legend("ZF equaliser", "MMSE equaliser", "location", "southwest");
-
 print("Q3d_BER_ZF_MMSE.png", "-dpng");
 #+END_SRC
 
 #+BEGIN_SRC octave :results output :exports none :session Q3 :eval no-export :tangle ENG405_Project_1_Q3.m
-pause
+%pause % stop octave from closing my figures >:(
 #+END_SRC
 
-:TODO: Report, talk about plots and what not. Add no equaliser plot
+The BER-SNR plot can be seen in Figure \ref{fig:Q3c7}, which was produced by the code in ~ENG405_Project_1_Q3.m~. For small and large SNR the ZF and MMSE have basically the same BER, this is because at the extremes either the noise dominates and the BER is very high, or there is no noise and the BER is low. For very small SNR the plots approach 0.5 BER, meaning the choice is effectively random. For large SNR they both converge at around $6\times 10^{-3}$, the noise is no longer having an effect on the symbol and it is now coming down to the inter-symbol interference cause by the imperfect equalisers. For the moderate SNR region the MMSE equaliser provides lower BER than the ZF equaliser, this is likely because the MMSE equaliser accounts for the noise whereas the ZF equaliser doesn't (it amplifies it). 
 
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:Q3c7}
 [[./ENG405_Project_1_Q3_d.png]]
+

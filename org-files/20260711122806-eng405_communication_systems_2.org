@@ -35,7 +35,7 @@
 [[id:b9a90e8f-d256-42cc-a549-89dc14f5e76e][Diversity]]
 [[id:0048a310-96ae-4bc2-af5f-b458e95fc678][Equalisers]]
 [[id:231a118c-a538-4759-a73a-228e4376af96][Orthogonal Frequency Division Multiplexing (OFDM)]]
-
+[[id:9127e107-dcc1-4ead-8e48-0a243a720e43][Mobile Communications]]
 * Diagram
 :TODO:
 * Assessment
