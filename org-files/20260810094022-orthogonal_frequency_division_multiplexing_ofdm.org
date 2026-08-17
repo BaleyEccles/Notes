@@ -122,8 +122,63 @@ _SNR:_
 Then:
 \[BER = \frac{1}{2}\left(1 - \sqrt{\frac{\bar{\gamma}/2}{1 + \bar{\gamma}/2}}\right)\]
  - For BPSK
+   
+** Specific OFDM Impairments
+*** Inter-carrier Interference (ICI)
+If we have a carrier frequency offset, $\Delta F$, we can get significant impact on the orthogonal structure.
+Transmitted signal:
+\[d[n] &= \frac{1}{N}\sum_{m=0}^{N-1} a[m]e^{j\frac{2\pi mn}{N}}\]
+The carrier offset introduces a $e^{j2\pi \Delta F t}$ term.
+Define normalise frequency offset: $\epsilon = \frac{\Delta F}{\left(\frac{B}{N}\right)}$
+ - $B$: Total OFDM BW
+ - $N$: Number of sub-carriers
+The receiver sees:
+\[r[n] = \frac{1}{N}\sum_{k=N/2}^{N/2}d[m] C[m]e^{j \frac{2\pi n}{N} (k + \epsilon)} + n_s[n]\]
+The data on the $l^{th}$ sub-carrier is:
+\begin{align*}
+R[l] &= \sum_{n=0}^{N-1} r[n]e^{j\frac{2\pi k n}{n}} \\
+&= \frac{1}{N} \sum_{n=0}^{N-1} \sum_{k=-N/2}^{N/2} d[m]C[m]e^{j\frac{2\pi n (l - k + \epsilon)}{N}} + N_s[l] \\
+\mathrm{Using: }& \sum_{n=0}^{N-1}e^{j\theta n} = \frac{\sin\left(\frac{N\theta}{2}\right)}{\sin\left(\frac{\theta}{2}\right)} \\
+R[l] &= \boxed{d[l]C[l]\frac{\sin\left(\frac{N\epsilon}{2}\right)}{\sin\left(\frac{\epsilon}{2}\right)} \frac{1}{N}} + \boxed{\sum_{k= -N/2, k\neq l}^{N/2}d[k]C[k]\left(\frac{\sin(\pi\epsilon)}{N\sin\left(\pi \frac{l - k + \epsilon}{N}\right)}\right)} + N_s[l]
+\end{align*}
+ - First box is useful signal
+ - Second box is ICI ($P_{ICI}$)
+We can evaluate this with a signal-to-interference-plus-noise ratio (SINR).
+\begin{align*}
+SINR &= \frac{\mathrm{Signal\ Power}}{\mathrm{Interference + Noise\ Power}} \\
+\mathrm{Signal\ Power} &= E\left\{|d[l]|^2\right\}E\left\{|C[l]|^2\right\}\left(\frac{\sin(\pi \epsilon)}{N\sin\left(\frac{\pi\epsilon}{N}\right)}\right) \\
+P_{ICI} &= E\left\{|I_l[n]|^2\right\} = E\left\{|C[n]|^2\right\}E\left\{|d[n]|^2\right\}{\sum_{k= -N/2, k\neq l}^{N/2}\left(\frac{\sin(\pi\epsilon)}{N\sin\left(\pi \frac{l - k + \epsilon}{N}\right)}\right)}
+\end{align*}
+
+Using some approximations:
+\begin{align*}
+P_{ICI} &\leq E\left\{|C[l]|^2\right\}E\left\{|d[l]|^2\right\} \sin^2(\pi \epsilon)\sum_{u = -\infty, u\neq 0}^{\infty}\frac{1}{4u^2} \\
+&\leq P E\left\{|C[l]|^2\right\} \sin^2(\pi \epsilon) 2\frac{1}{4} \frac{\pi^2}{6} \\
+SNIR &\leq \frac{P E\left\{|C[l]|^2\right\} \frac{\sin^2(\pi \epsilon)}{(\pi\epsilon)^2}}{\frac{\pi^2}{12}PE\{|C[l]|^2\} \sin^2(\pi \epsilon) + \sigma_n^2} \\
+\end{align*}
+If $\sigma_n^{2 = 0}$, then:
+\[SIR = \frac{12}{\pi^4\epsilon^2}\]
+
+*** Inter-symbol Interference (ISI)
+This can only occur if the CP is too short.
+\[P_{ISI} = \sum_{n=L_{CP} + 1}^L |C[n]|^2 E_s\]
+ - $L_{CP}$: Number of CP taps
+ - $L$: Number of channel taps
+\[SINR = \frac{|C[k]|^2E_s}{P_{ISI} + \sigma_n^2}\]
+
+*** Peak-to-Average Power Ratio (PAPR)
+Significant impact on amplifier design, which should be linear over the whole dynamic range. Distortion will be introduced by the amplifier.
+\[PAPR = \frac{\max_n |d[n]|^2}{E\{|d[n]|^2\}}\]
+\[E\{|d[n]|^2\} = \frac{1}{N^2}\sum_{m=0}^{N-1}E\{|a[m]|^2\}\]
+Peak Power:
+\[\max_n|d[n]| = \max_n\left|\frac{1}{N}\sum_{m=0}^{N-1} a[m]\right|\]
+
+PAPR increases linearly with the number of sub carriers
+It is possible to asses the impact of PAPR using the Complementary Cumulative Distribution Function (CCDF), which gives the probability that $PAPR$ exceeds threshold $\chi_{th}$:
+\[CCDF(PAPR) = \Pr(PAPR > \chi_{th}) = 1 - (1 - e^{-\chi_{th}})^N\]
 
 ** System Diagram
 [[./OFDM_Diagram.png]]
+
 
 
