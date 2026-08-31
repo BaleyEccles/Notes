@@ -9,7 +9,9 @@
 * Bit Error Rate
 The lower bound of BER:
  - \[BER = \frac{n^{\underline{o}}\textrm{errors}}{\textrm{total }n^{\underline{o}}\textrm{ bits}}\]
-   
+
+Can be found in fading channels
+\[P_b(E) &= \int_0^{\infty} P_b(E|\gamma)f_{\gamma}(\gamma)\ d\gamma\]
 ** In [[id:f043ac02-9b06-42f2-b9cd-ad32801de2ed][The AWGN Channel]]
  - \[P_b(E) = Q\left(\sqrt{\frac{2E_b}{N_0}}\right) = Q(\sqrt{2\bar{\gamma}})\]
 SEE [[id:8c79d3ee-766a-4f72-a070-7a44d0f85ac1][Fading]]
@@ -21,7 +23,8 @@ P_b(E|\gamma) &= Q\left(\sqrt{2\gamma}\right) \\
 &= I_r(\sqrt{2}, \bar{\gamma}) \\
 &= \frac{1}{2}\left(1 - \sqrt{\frac{\bar{\gamma}}{1 + \bar{\gamma}}}\right)
 \end{align*}
-
+** Symbol Error
+\[\Pr(\textrm{bit error}) = \frac{\Pr(\textrm{sym error})}{\log_2(M)}\]
 ** Rician
  - Using the [[id:e2c1c2e3-814b-4add-9340-997af1fe57fa][MGF]]:
 \begin{align*}

@@ -39,7 +39,7 @@ Reflected:
    - This means the power:
      - \[P_r(d) = P_t G_t G_r \frac{h_t^2h_r^2}{d^4}\]
  - There is a threshold distance:
-   - \[d_f \frac{4\pi h_t h_r}{\lambda}\]
+   - \[d_f = \frac{4\pi h_t h_r}{\lambda}\]
      - Fresnel distance
    - for $d < d_f,\ \frac{1}{d^2}$
    - for $d > d_f,\ \frac{1}{d^4}$

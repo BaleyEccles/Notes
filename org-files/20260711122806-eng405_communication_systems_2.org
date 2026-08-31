@@ -36,6 +36,13 @@
 [[id:0048a310-96ae-4bc2-af5f-b458e95fc678][Equalisers]]
 [[id:231a118c-a538-4759-a73a-228e4376af96][Orthogonal Frequency Division Multiplexing (OFDM)]]
 [[id:9127e107-dcc1-4ead-8e48-0a243a720e43][Mobile Communications]]
+
+[[id:8a1866b9-c963-412a-9e11-6726ab809ee5][Error Control Codes]]
+[[id:9a3a019a-1b55-42fc-b4e2-b3c5ddc5b001][Binary Symmetric Channel (BSC)]]
+[[id:f2c1ae5d-5769-4589-ac0c-4c7df6bb0211][Binary Erasure Channel (BEC)]]
+[[id:70a97d9e-e944-48a9-8fc5-cf501a7a12ed][Channel Capacity]]
+[[id:1aa43cbf-971d-4746-9e70-49c82b154323][Error Detection]]
+
 * Diagram
 :TODO:
 * Assessment
@@ -48,6 +55,9 @@
  - Previous tests and tutorials
    - For stuff that isnt covered in tests tutorials will be similar to test
      - Performance of OFDM there is no practice materials
+     - Equalisers and fading similar to tutorial
+   - OFDM plenty, mobile comms plenty
+ - [[id:31a3f79b-0e63-4ea7-b0fb-5ac537f550f5][ENG405 - Communication Systems 2 - Cheat Sheet]]
 ** Simulation Project 2
  - Due Week 9
 ** Simulation Project 3

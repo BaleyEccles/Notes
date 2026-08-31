@@ -7,7 +7,6 @@
 #+STARTUP: latexpreview
 
 * Orthogonal Frequency Division Multiplexing (OFDM)
-
  - $N$ is the amount of sub carriers
 
 ** Standard IEEE 802.11a
@@ -44,6 +43,8 @@ The receiver only sees the sum of these:
  - $L \geq M$
  - $d = \mathcal{F}^H a$
    - $d$ is $N$ samples
+   - \[\mathcal{F} = \frac{1}{\sqrt{N}}F\]
+     - $F$ is the [[id:38634596-7d68-46dc-a12c-bb0d244f7835][Discrete Fourier Transform]] matrix
 Due to the CP, we can represent the channel by a circular matrix
 \[\begin{bmatrix}
 r[1] \\
@@ -51,14 +52,12 @@ r[2] \\
 \vdots \\
 r[N]
 \end{bmatrix}=\begin{bmatrix}
-c_0 & 0 & 0 & \hdots & C_L \\
-c_1 & c_0 & 0 \hdots & 0 \\
-\vdots & c_1 & c_0 \hdots & 0 \\
-\vodts & \vdots & \vdots & \vdots & \vdots \\
-c_L & c_{L-1} & \hdots \\
-0 & c_L & \hdots \\
-\vdots & \vdots \\
-0 & \hdots c_L & c_{L-1} &\hdots & C_0
+c_0 & c_{n-1}& c_{n-2} & \hdots & c_1 \\
+c_1 & c_0 & c_{n-1}& \hdots & c_2 \\
+c_2 & c_1 & c_0 & \hdots & c_3 \\
+\vdots & c_2 & c_1  & \hdots & \vdots \\
+c_{n-2} & \vdots & c_2 & \hdots & c_{N-1} \\
+c_{n-1} & c_{n-2} & \vdots & \hdots & c_0
 \end{bmatrix}\begin{bmatrix}
 d[1] \\
 d[2] \\
@@ -84,6 +83,11 @@ fr &= \Lambda a + \mathcal{F} n_s \\
 We can work with this thanks to [[id:533199e6-1d41-4223-a95e-b4ee0de5f926][channel estimation]]
 We do not have [[id:abae31a2-cc7c-4a2d-b1cf-ed322480482e][dispersive]] effects at the receiver
 
+The receiver decodes using
+\[a_r =\frac{1}{\sqrt{N}}\Lambda^{-1}Fr\]
+$\Lambda$ is diagonal matrix of $\lambda = cF$
+ - $c$ is the channel impulse response
+   - $F$ is the [[id:38634596-7d68-46dc-a12c-bb0d244f7835][Discrete Fourier Transform]] matrix
 ** Performance of OFDM
 \begin{align*}
 r &= c[n] * d[n] + n_s[n] \\

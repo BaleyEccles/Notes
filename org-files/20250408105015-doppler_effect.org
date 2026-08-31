@@ -17,6 +17,8 @@
 ** Doppler Shift Frequency
 \[f_{d_{\max}} = \frac{v_{\max}}{c}f_c\]
  - $c$ is typically the speed of light $c = 3\times 10^8 m/s$
+\[\Delta \tau = \frac{1}{f_{d_{\max}}}\sqrt{\frac{9}{16\pi}}\]
+ - [[id:788c38cf-cc37-463b-84d6-a40be1715904][Non-Dispersive Fading Channel]]
 ** [[id:39875b0e-c1ff-4da0-9612-514bdd77a047][Autocorrelation of Time-Varying Channels]]
 *** [[id:def80455-6762-45b0-a916-3d9daa457cb8][Power Spectral Density]]
 \[S_{\alpha\alpha}(f) = \frac{c}{\sqrt{1-\left(\frac{f}{f_{d\max}}\right)}}\]

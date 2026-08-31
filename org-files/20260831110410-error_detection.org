@@ -1,0 +1,72 @@
+:PROPERTIES:
+:ID:       1aa43cbf-971d-4746-9e70-49c82b154323
+:END:
+#+title: Error Detection
+#+date: [2026-08-31 Mon 11:04]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Error Detection
+We can code a system if we transmit two bits for one bit ($1 \rightarrow 11$ and $0 \rightarrow 00$) we can check if an error occurred by seeing $01$ or $10$. An undetected error is if we transmit $00$ and receive $11$ and vice versa.
+The probability of each case is:
+\begin{align*}
+00 &\rightarrow (1 - \epsilon)(1 - \epsilon) \\
+01 &\rightarrow (1 - \epsilon)\epsilon \\
+10 &\rightarrow \epsilon(1 - \epsilon) \\
+11 &\rightarrow \epsilon^2
+\end{align*}
+
+With $\frac{E_b}{N_0} = 6.8\ dB$ and $\epsilon = 0.001$:
+|----------+-------------|
+| Codeword | Probability |
+|----------+-------------|
+|       00 | 0.998 000   |
+|       01 | 0.000 999   |
+|       10 | 0.000 999   |
+|       11 | 0.000 001   |
+|----------+-------------|
+
+Bit Error Rate (BER) vs Frame Error Rate (FER)
+\[BER = \frac{\textrm{# error in bits}}{\textrm{# transmitted bits}}\]
+\[FER = \frac{\textrm{# error frames}}{\textrm{# transmitted frames}}\]
+\[FER = 1 - (1 - BER)^N\]
+ - $N$ is the number of bits per frame
+\[FER \approx N\cdot BER\]
+ - If $BER$ is low
+** Example - Uncoded System
+$\epsilon = 0.01$
+1000 frames
+2000 bits/frame
+
+\[BER = \epsilon = 0.01\]
+\[FER = 1 - (1 - \epsilon)^N = 1 - (1 - 0.01)^{2000} \approx 1\]
+Effective throughput $= 100\%$
+** Example - Coded System
+$\epsilon = 0.01$
+BER:
+\[P_{\textrm{correct}} = (1 - \epsilon)^2 = 0.95801\]
+\[P_{\textrm{detect}} = (1 - \epsilon)\epsilon + \epsilon(1 - \epsilon) = 0.0198\]
+\[P_{\textrm{undeteced}} = \epsilon^2 = 0.0001\]
+FER:
+\[P_{\textrm{accept}} = (1 - 2\epsilon(1 - \epsilon))^N = 0.98^{2000} = 4.26\times10^{-19}\]
+\[FER = 1 - P_{accept} = 1\]
+\[P_{\textrm{undetected frame}} = \frac{\epsilon^2}{(1 + \epsilon)^2 + \epsilon^2} = 1.02\times10^{-4}\]
+\[E[T] = \frac{1}{P_{\textrm{accept}}} = 2.35\times10^{17}\]
+\[\eta = \frac{k}{n}P_{\textrm{accept}} = \frac{1}{2}4.26\times^{-18} = 2.13\times10^{-18}\]
+
+Total Bits $= T\cdot \textrm{\#bits/frame}\cdot \frac{n}{k}\cdot E[T] = 9.4\times10^{23}\ \textrm{bits}$
+
+|--------------+------------+-----------+----------------|
+| Frame Length |   P_accept |      E[T] | n=0.5*P_accept |
+|--------------+------------+-----------+----------------|
+|         2000 | 4.3*10^-18 | 2.3*10^17 |     2.1*10^-18 |
+|          250 |     0.0067 |       148 |         0.0034 |
+|          100 |     0.1350 |      7.39 |          0.068 |
+|           50 |     0.3650 |      2.72 |          0.184 |
+|           10 |     0.8190 |      1.22 |          0.409 |
+|--------------+------------+-----------+----------------|
+
+** 3 Coded Bits
+\[R_c = \frac{k}{n} = \frac{1}{3}\]
+ - $k$ is the number of uncoded bits
+ - $n$ is the number of coded bits

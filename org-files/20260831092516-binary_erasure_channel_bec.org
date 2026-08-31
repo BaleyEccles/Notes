@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       f2c1ae5d-5769-4589-ac0c-4c7df6bb0211
+:END:
+#+title: Binary Erasure Channel (BEC)
+#+date: [2026-08-31 Mon 09:25]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Binary Erasure Channel (BEC)
+Bits $0 \rightarrow 0$ or $0 \rightarrow E$
+Bits $1 \rightarrow 1$ or $1 \rightarrow E$
+Where $E$ is an erasure, it says this bit had an error
+
+

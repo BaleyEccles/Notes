@@ -16,7 +16,7 @@ Allows us to determine how compressible a piece of information is
 
 ** Examples
 *** Mutual information
- - \[I(x,y) = \log_2\left(\frac{\Pr(x|y)}{\Pr(x)}\right)\]   
+ - \[I(x,y) = \log_2\left(\frac{\Pr(x|y)}{\Pr(x)}\right)\]
 *** Alphabet
 Given some alphabet $\{\alpha, \beta, \gamma, \delta\}$
 1. $H(x)$ if each character is equally likely

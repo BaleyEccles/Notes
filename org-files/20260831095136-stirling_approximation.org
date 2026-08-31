@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       3f0026bc-4e26-4b3b-a50f-3d7a4c992ea6
+:END:
+#+title: Stirling Approximation
+#+date: [2026-08-31 Mon 09:51]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Stirling Approximation
+\[n! = n^ne^{-n}\sqrt{2\pi n}\]

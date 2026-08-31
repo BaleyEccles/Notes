@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       70a97d9e-e944-48a9-8fc5-cf501a7a12ed
+:END:
+#+title: Channel Capacity
+#+date: [2026-08-31 Mon 09:39]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Channel Capacity
+** Example
+$a \rightarrow a$ and $a \rightarrow b$
+$b \rightarrow b$ and $b \rightarrow c$
+$c \rightarrow c$ and $c \rightarrow d$
+$d \rightarrow d$ and $d \rightarrow a$
+With probabilities of $0.5$
+If we say we cannot receive a $b$ or $d$. This means if we receive a $b$, then it must be an $a$ and if we receive a $d$, then it must be an $c$.
+$a \rightarrow a \rightarrow a$
+$b \rightarrow b \rightarrow a$
+$c \rightarrow c \rightarrow c$
+$d \rightarrow d \rightarrow c$
+
+This is not possible to do for a [[id:9a3a019a-1b55-42fc-b4e2-b3c5ddc5b001][Binary Symmetric Channel (BSC)]], the entropy becomes zero.

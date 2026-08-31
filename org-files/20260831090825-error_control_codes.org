@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       8a1866b9-c963-412a-9e11-6726ab809ee5
+:END:
+#+title: Error Control Codes (ECC)
+#+date: [2026-08-31 Mon 09:08]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Error Control Codes (ECC)
+For some input $X = \{00,01,10,11\}$
+We get some output $Y = \{00,01,10,11\}$
+
+** Discrete-Memoryless Channel
+\[X \rightarrow^{\Pr(Y|X)} Y\]
+\[\Pr(y|x) = \prod_i^n\Pr(y_i|x_i)\]
+
+For a [[id:9a3a019a-1b55-42fc-b4e2-b3c5ddc5b001][Binary Symmetric Channel (BSC)]].
+Transmit $n$ bits, the amount of incorrect bits is $n\epsilon$ bits.
+Possible sequence disagree $n\choose n\epsilon$.
+Using the [[id:3f0026bc-4e26-4b3b-a50f-3d7a4c992ea6][Stirling Approximation]]:
+\[{n\choose{n\epsilon}}\approx 2^{nH_b(\epsilon)}\]
+\[H_b(\epsilon) = -\epsilon \log_2(\epsilon) - (1 - \epsilon)\log_2(1-\epsilon)\]
+
+Any input sequence there exists $\approx 2^{nH_b(\epsilon)}$ high probable outputs
+Total number of highly probable output sequence is $\approx 2^{nH(y)}$
+\[M = \frac{2^{nH(y)}}{2^{n^{H_b(\epsilon)}}}\]
+\[R = \frac{\log_2(M)}{n} = H(Y)- H_b(\epsilon)\]
+ - $R$ is the rate
+$R$ is maximised when $\Pr(x=0) = \Pr(y=0) = 0.5$:
+\[R = 1 - H_b(\epsilon)\]
+\[C = \max_{\Pr(x)}I(X,Y)\]
+With a power constrained input sequence
+\begin{align*}
+\frac{1}{n}\sum_i^nx_i^2 &\leq P\\
+y &= x + z \\
+\frac{1}{n}\sum_i^n(y_i - x_i)^2 &\leq P_N \\
+||y-x||^2 &\leq n P_N
+\end{align*}
+
+Number of message that can be transmitted reliably:
+\[M = \left(\frac{\sqrt{n(P_N + P)}}{\sqrt{nP_N}}\right)^n = \left(1 + \frac{P}{P_N}\right)^{n/2}\]
+\[SNR = \frac{P}{P_N}\]
+\begin{align*}
+C &= \frac{1}{n}\log_2(M) \\
+&= \frac{1}{n}\log\left(1 + \frac{P}{P_N}\right)^{\frac{n}{2}} \\
+&= \frac{1}{2}\log\left(1 + \frac{P}{P_N}\right) \\
+P_N &= \int_{-BW}^{BW} \frac{N_0}{2}df \\
+&= BW N_0 \\
+&= \frac{1}{2}\log\left(1 + \frac{P}{N_0 BW}\right)\ \textrm{bits/transmission}\\
+\textrm{transmission/sec} = 2BW \\
+\Rightarrow C &= BW\log_2\left(1 + \frac{P}{N_0 BW}\right)\ \textrm{bits/transmission}\\
+\end{align*}
+ - This is the [[id:b90da113-9aad-4168-93f6-da016a54f577][Nyquist-Shannon Capacity Theorem]]
+\begin{align*}
+r &= \frac{R}{BW} \\
+r &< \log_2\left(1 + \frac{P}{N_0BW}\right) \\
+E_b &= \frac{P}{R} \\
+r &< \log_2\left(1 + r\frac{E_b}{N_0}\right) \\
+\Rightarrow \frac{E_b}{N_0} &> \frac{2^r - 1}{r}
+\end{align*}

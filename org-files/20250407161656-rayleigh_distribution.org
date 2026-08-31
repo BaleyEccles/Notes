@@ -11,8 +11,8 @@
  - \[F(\lambda;\sigma) = 1 - e^{\frac{\lambda^2}{2\sigma^2}}\]
  - [[file:ReighlyDist.png]]
 
+** PDF
 \[f_{\gamma}(\gamma) = \frac{1}{\bar{\gamma}}e^{-\frac{\gamma}{\bar{\gamma}}}\ \bar{\gamma} \geq 0\]
-
 
 ** [[id:e2c1c2e3-814b-4add-9340-997af1fe57fa][Moment Generating Function (MGF)]]
 \[M_{\gamma}(s) = F(-s) = \frac{1}{1 - s\bar{\gamma}}\]

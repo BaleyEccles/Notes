@@ -12,7 +12,7 @@
    
 \[PL = 10\log_{10}\left(\frac{P_t}{P_r}\right)\]
 \[PL = 10\log_{10}(L_p) - G_t[dBi] - G_r[dBi]\]
- - $L_p = \frac{(4\pi)^2 d^2}{\lambda^2}$
+ - $L_p = \frac{(4\pi)^2 d^2}{\lambda^2}$c
  - With $L = 1$
    
 ** Free Space PL

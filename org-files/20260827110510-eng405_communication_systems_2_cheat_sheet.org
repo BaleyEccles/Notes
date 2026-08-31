@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       31a3f79b-0e63-4ea7-b0fb-5ac537f550f5
+:END:
+#+title: ENG405 - Communication Systems 2 - Cheat Sheet
+#+date: [2026-08-27 Thu 11:05]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* ENG405 - Communication Systems 2 - Cheat Sheet
+** Large-Scale Path Loss / Link Budgets
+\begin{align*}
+P_{dBW} &= 10\log_{10}(P_{W}) \\
+P_{dBm} &= 10\log_{10}(P_{mW}) \\
+X_{dB} &= 20\log_{10}(X)
+\end{align*}
+
+\[P_r = P_t G_t G_r\left(\frac{\lambda}{4\pi d}\right)^2\frac{1}{L}\]
+
+\[f=\lambda c\]
+
+\[PL_{FS} = 20\log_{10}\left(\frac{4\pi d}{\lambda}\right)\]
+
+\[P_r(dBm) = P_t(dBm) - PL + \sum G_T - \sum G_R\]
+
+\[P_r \propto \frac{1}{d^2}\]
+ - In free space
+
+Two-Ray Ground Model:
+\[P_r = \frac{P_tG_tG_rh_t^2h_r^2}{d^4}\]
+
+
+** Rayleigh Fading + Doppler
+
+** Channel Impulse Responses + ZF/MMSE Equalisers
+
+** OFDM Fundamentals
+
+** Cellular Frequency Reuse + SIR
+
+** Erlang B / Traffic Engineering
+
+** MAP/Viterbi/DFD Detection

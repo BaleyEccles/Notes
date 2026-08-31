@@ -25,7 +25,7 @@ The cluster size $N$ fits: $N = i^2 + ij + j^2,\ i,j\in \mathds{Z}^+ \cup \{0\}$
  - Can tessellate by moving $i$ then rotating by $120^{\circ}$ then going $j$ and placing the base station (repeating)
 The distance between co-channel interferer $BS_s$ is
 \[D = R\sqrt{3N}\]
-The frequency reverse ratio:
+The frequency reuse ratio/factor:
 \[Q = \frac{D}{R} = \sqrt{3N}\]
 
 ** Interference and System Capacity
@@ -37,14 +37,16 @@ The frequency reverse ratio:
 The signal-to-interference (ISR) is:
 \[\frac{S}{I} = \frac{S}{\sum_{i=1}^{i_0}I_i}\]
  - $I_i$: The signal power from co-channel BS $i$
- - $i_0$: The total number of co-channel interferers
+ - $i_0$: The total number of first tier co-channel interferers
  - $S$: Desired signal power
 Worst-case for $SIR$ at $R$:
 \begin{align*}
 S &= cd^{-n} = cR^{-n} \\
 \frac{S}{I} &= \frac{cR^{-n}}{\sum_{i=1}^{i_0}I_i} \\
 I_i &= cD^{-n} \\
-\frac{S}{I} &= \frac{\left(\frac{D}{R}\right)^n}{i_0} = \frac{Q^n}{i_0} = \frac{(3N)^{n/2}}{i_0}
+\frac{S}{I} &= \frac{\left(\frac{D}{R}\right)^n}{i_0} \\
+&= \frac{Q^n}{i_0} \\
+\frac{S}{I} &= \frac{(3N)^{n/2}}{i_0}
 \end{align*}
 If we have omnidirectional antennas, then $i_0 = 6$.
 
@@ -74,7 +76,7 @@ Assign frequencies of neighbouring channels non-sequentially.
 Quality of Service (QoS) - Probability of dropped call
 $P_{r,\min}$ - Below this value call is dropped
 $P_{rh}$ - Hand off power level
-
+\[\Delta = P_{rh} - P_{r,\min}\]
 ** Cell Splitting
 Place half width hexagons in original hexagon ($R \rightarrow \frac{R}{2}$)
  - Improves SIR
@@ -85,7 +87,9 @@ Place half width hexagons in original hexagon ($R \rightarrow \frac{R}{2}$)
 ** Sectoring
 By not using omnidirectional antennas we can sector off hexagons into:
  - $120^{\circ}$ sectoring: thirds
+   - $i_0 = 2, 3$, depending on the geometry
  - $60^{\circ}$ sectoring: sixths
+   - $i_0 = 1, 2$, depending on the geometry
 
  - Reduces co-channel interference
 
@@ -117,6 +121,7 @@ Assume:
 \[\Pr(\mathrm{blocking}) = GoS = \frac{\frac{A^C}{C!}}{\sum_{k=0}^C \frac{A^k}{k!}}\]
  - We have the Erlang B table for this
 
+
 *** Blocked Calls Delayed
  - Assignment to the queue if the system is blocked
  - GoS is the probability that a call is held longer than a predefined time
@@ -124,7 +129,7 @@ Assume:
 \[\Pr(\mathrm{delay} > 0) = \frac{A^C}{A^C + C!\left(1 - \frac{A}{C}\right)\sum_{k=0}^{C-1}\frac{A^l}{k!}}\]
  - We have the Erlang C table for this
 \[\Pr(\mathrm{delay} > t\ |\ \mathrm{delay} > 0) = e^{-\left(\frac{C-A}{H}t\right)}\]
-So, $GoS = \Pr(\mathrm{delay} > 0)\Pr(\mathrm{delay} > t\ |\ \mathrm{delay} > 0)$
+So, $GoS = \Pr(\mathrm{delay} > t) = \Pr(\mathrm{delay} > 0)\Pr(\mathrm{delay} > t\ |\ \mathrm{delay} > 0)$
 
 ** Outage Probability in Cellular Systems
  - We need a threshold SIR level

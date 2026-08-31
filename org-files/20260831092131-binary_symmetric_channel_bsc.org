@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       9a3a019a-1b55-42fc-b4e2-b3c5ddc5b001
+:END:
+#+title: Binary Symmetric Channel (BSC)
+#+date: [2026-08-31 Mon 09:21]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Binary Symmetric Channel (BSC)
+Bits $0\rightarrow 0$ (probability $\epsilon$) or $0\rightarrow 1$ (probability $1 - \epsilon$)
+Bits $1\rightarrow 1$ (probability $\epsilon$) or $1\rightarrow 0$ (probability $1 - \epsilon$)
+Perfect if $\epsilon = 0$, worst if $\epsilon = 0.5$
+** How to find $\epsilon$
+Assume binary antipodal signalling over [[id:0a3093d2-6df1-49f4-b00a-f506505c424d][AWGN]]
+\[\epsilon = \Pr(1|0) = \Pr(0|1) = Q\left(\sqrt{\frac{2E_b}{N_0}}\right)\]
+\[x = 0 \rightarrow -\sqrt{E_b}\]
+\[x = 1 \rightarrow \sqrt{E_b}\]
+\[\Pr(y|x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\dfrac{(y - x)^2}{2\sigma^2}}\]
