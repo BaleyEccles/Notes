@@ -17,7 +17,17 @@ From the geometry, the excess path lenght of the wave is:
 So the phase difference is:
 \[\phi = \frac{2\pi \Delta}{\lambda} \approx \frac{2\pi}{\lambda}\frac{h^2}{2}\frac{d_1 _{ d_2}}{d_1d_2}\]
 From a small angle approximation (so a ntenna height is << d), $\alpha = \beta + \gamma$. and
+\[\beta = \tan^{-1}\left(\frac{h}{d_2}\right)\]
+\[\gamma = \tan^{-1}\left(\frac{h - h_t}{d_1}\right)\]
 \[\alpha \approx h\frac{d_1 + d_2}{d_1d_2}\]
 Usually, the Fresnel-Kirchoff diffraction parameter is used to normalise:
-\[\nu = h\sqrt{\frac{2(d_1 + d_2)}{\lambda d_1 d_2}} = \alpha \sqrt{\frac{2d_1 d_2}{\lambda(d_1 + d_2)}}\]
-Therefor, $\phi = \frac{\pi}{2}\nu^2$
+\[\nu = \alpha \sqrt{\frac{2d_1 d_2}{\lambda(d_1 + d_2)}} \approxh\sqrt{\frac{2(d_1 + d_2)}{\lambda d_1 d_2}} \]
+Therefore, $\phi = \frac{\pi}{2}\nu^2$
+The gain is:
+\[G_d(dB) = \begin{cases}
+0 &, \nu \leq -1 \\
+20\log_{10}(0.5 - 0.62\nu) &, -1 < \nu \leq 0 \\
+20\log_{10}(0.5e^{-0.95\nu}) &, 0 \leq \nu \leq 1 \\
+20\log_{10}(0.4 - \sqrt{0.1184 - (0.38 - 0.1\nu)^2}) &, 1 \leq \nu < 2.4 \\
+20\log_{10}(\frac{0.225}{\nu}) &, \nu \ge 2.4
+\end{cases}\]

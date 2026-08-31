@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       edb14fad-b35e-48e4-a1a3-8fcd7174d53b
+:END:
+#+title: Microstrip
+#+date: [2026-08-25 Tue 12:18]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Microstrip
+\[\epsilon_{eff} \approx \frac{\epsilon_r + 1}{2} + \frac{\epsilon_r - 1}{2}\frac{1}{\sqrt{1 + 12h/W}}\]
+
+\[Z_0 =
+\begin{cases}
+\dfrac{120\pi}
+{\sqrt{\varepsilon_e}\left(1.393+\dfrac{W}{d}
++0.667\ln\left(\dfrac{W}{d}+1.444\right)\right)},
+& \dfrac{W}{d}\ge 1, \\[1.2em]
+\dfrac{60}{\sqrt{\varepsilon_e}}
+\ln\left(\dfrac{8d}{W}+\dfrac{W}{4d}\right),
+& \dfrac{W}{d}\le 1.
+\end{cases}\]

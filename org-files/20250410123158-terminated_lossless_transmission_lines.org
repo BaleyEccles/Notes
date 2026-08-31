@@ -37,7 +37,7 @@ Occurs when $2\beta d +\theta_r = 2n\pi$
 ** Power
  - \[P_{avg} = \frac{V_0^+}{2 Z_0}(1-|\Gamma|^2)\]
 ** Voltage Reflection Coefficient
- - \[\Gamma = \frac{V_0^+}{V_0^-} = \frac{Z_L - Z_0}{Z_L + Z_0}\]
+ - \[\Gamma = \frac{V_0^-}{V_0^+} = \frac{Z_L - Z_0}{Z_L + Z_0}\]
 $\Gamma$ may be complex
  - \[\Gamma = |\Gamma| e^{j\theta_r}\]
  - $|\Gamma| < 1$ in passive circuits

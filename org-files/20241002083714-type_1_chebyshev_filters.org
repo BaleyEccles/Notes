@@ -13,7 +13,8 @@
    - $N$ is the filter order
    - $\omega_1$ is the pass band edge frequency
    - $C_N(\nu)$ is the [[id:25ea284c-2a78-4646-aa84-11b739b9020e][Chebyshev polynomials]] of order $N$
-
+\[\epsilon = \sqrt{10^{\frac{R_p}{10}} - 1}\]
+\[N \geq \frac{\cosh^{-1}\left(\sqrt{\frac{10^{\frac{L_A}{10}} - 1}{\epsilon^2}}\right)}{\cosh^{-1}(\Omega_s)}\]
 ** Poles
  - They occur such that
    - \[1+\epsilon^2C_{N}^2\left(\frac{s}{j\omega_1}\right)=0\]

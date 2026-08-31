@@ -1,0 +1,213 @@
+:PROPERTIES:
+:ID:       f798997a-f8d2-48b9-b1a7-a500d4d7559e
+:END:
+#+title: ENG439 - High Frequency Electronics - Question Week 6
+#+date: [2026-08-17 Mon 14:26]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+* Question 1
+\begin{align*}
+IL &= 10\log_{10}(P_{LR}) \\
+3 &= 10\log_{10}(1 + k^2) \\
+k &= 0.997
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_6_Q1.m
+pkg load symbolic
+syms k
+
+vpasolve(3 == 10*log10(1 + k^2), k)
+#+END_SRC
+
+#+RESULTS:
+: Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
+: ans = (sym) 0.99762834511098350274928187753979
+
+\begin{align*}
+P_{LR}(N) &= 1 + k^2 T_N^2\left(\frac{\omega}{\omega_c}\right) \\
+P_{LR}(N) &= 1 + (0.997)^2 T_N^2\left(\frac{5}{3}\right) \\
+P_{LR}(2) &= 1 + (0.997)^2 T_2^2\left(\frac{5}{3}\right) \\
+P_{LR}(2) &= 1 + (0.997)^2 \left(\left(\frac{5}{3}\right)^2 - 1\right)^2 \\
+P_{LR}(2) &= 21.66 = 13.36\ \mathrm{dB} < 20\ \mathrm{dB}\\
+P_{LR}(3) &= 1 + (0.997)^2 T_3^2\left(\frac{5}{3}\right) \\
+P_{LR}(2) &= 1 + (0.997)^2 \left(4\left(\frac{5}{3}\right)^3 - 3\left(\frac{5}{3}\right)\right)^2 \\
+P_{LR}(2) &= 182.9 = 22.62\ \mathrm{dB} > 20\ \mathrm{dB} \\
+\therefore N = 3
+\end{align*}
+
+Using the $3\ \mathrm{dB}$ Chebyshev table we get:
+\begin{align*}
+g_1 &= 3.3487 \\
+g_2 &= 0.7117 \\
+g_3 &= 3.3487 \\
+g_4 &= 1.0000
+\end{align*}
+
+\[L_1 \rightarrow C_2 \rightarrow L_3\]
+
+\begin{align*}
+L_k &= \frac{Z_0 g_k}{\omega_c} \\
+L_1 &= \frac{75\cdot 3.3487}{2\pi 3\times10^9} \\
+L_1 &= 13.32\ \matrm{nH} \\
+L_3 &= \frac{75\cdot 3.3487}{2\pi 3\times10^9} \\
+L_3 &= 13.32\ \matrm{nH} \\
+C_k &= \frac{g_k}{Z_0\omega_c} \\
+C_2 &= \frac{0.7117}{75\cdot 2\pi 3\times10^9} \\
+C_2 &= 0.5\ \mathrm{pF}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_6_Q1.m
+Z_0 = 75;
+f_c = 3e9;
+w_c = 2*pi*f_c
+
+g_1 = 3.3487;
+g_2 = 0.7117;
+g_3 = 3.3487;
+g_4 = 1.0000;
+
+L_1 = Z_0*g_1/w_c
+C_2 = g_2/(Z_0*w_c)
+L_3 = Z_0*g_3/w_c
+#+END_SRC
+
+#+RESULTS:
+: w_c = 1.8850e+10
+: L_1 = 1.3324e-08
+: C_2 = 5.0342e-13
+: L_3 = 1.3324e-08
+
+* Question 2
+3rd order with equal-ripple response, so we can use the $3\ \mathrm{dB}$ Chebyshev table:
+\begin{align*}
+g_1 &= 3.3487 \\
+g_2 &= 0.7117 \\
+g_3 &= 3.3487 \\
+g_4 &= 1.0000
+\end{align*}
+
+
+Using the high-pass transformation $$\omega \leftarrow -\frac{\omega_c}{\omega}$$, this converts inductors to capacitors and vice versa.
+\[L_1 \rightarrow C_2 \rightarrow L_3 \Rightarrow C_1 \rightarrow L_2 \rightarrow C_3\]
+\begin{align*}
+C_k' &= \frac{1}{Z_0 \omega_c g_k} \\
+C_1' &= 0.95\ \mathrm{pF} \\
+C_3' &= 0.95\ \mathrm{pF} \\
+L_k' &= \frac{Z_0}{\omega_c g_k} \\
+L_2' &= 11.18 \mathrm{nH}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q2 :eval no-export :tangle ENG439_Week_6_Q2.m
+Z_0 = 50;
+f_c = 1e9;
+w_c = 2*pi*f_c
+
+g_1 = 3.3487;
+g_2 = 0.7117;
+g_3 = 3.3487;
+g_4 = 1.0000;
+
+C_1 = 1/(Z_0*w_c*g_1)
+L_2 = Z_0/(w_c*g_2)
+C_3 = 1/(Z_0*w_c*g_3)
+#+END_SRC
+
+#+RESULTS:
+: w_c = 6.2832e+09
+: C_1 = 9.5055e-13
+: L_2 = 1.1181e-08
+: C_3 = 9.5055e-13
+
+* Question 3
+Using the Maximally Flat Table with $N = 4$:
+\begin{align*}
+g_1 &= 1.0598 \\
+g_2 &= 0.5116 \\
+g_3 &= 0.3181 \\
+g_4 &= 0.1104 \\
+g_5 &= 1.0000 \\
+\end{align*}
+
+\begin{align*}
+\Delta &= 5\% \\
+\Delta &= \frac{\omega_2 - \omega_1}{\omega_0}
+\end{align*}
+For band-pass transformation inductors are replaced with series LC circuits:
+\begin{align*}
+L_k' &= \frac{Z_0g_k}{\Delta \omega_0} \\
+C_k' &= \frac{\Delta}{Z_0 g_k \omega_0} \\
+\end{align*}
+
+Capacitors are replaced with parallel LC circuits:
+\begin{align*}
+L_k' &= \frac{Z_0\Delta}{g_k \omega_0} \\
+C_k' &= \frac{g_k}{Z_0\Delta \omega_0} \\
+\end{align*}
+
+Using the following ~octave~ code we get:
+#+BEGIN_SRC octave :results output :exports both :session Q3 :eval no-export :tangle ENG439_Week_6_Q3.m
+Z_0 = 50;
+f_0 = 2e9;
+w_0 = 2*pi*f_0;
+D = 5/100;
+
+g_1 = 1.0598;
+g_2 = 0.5116;
+g_3 = 0.3181;
+g_4 = 0.1104;
+g_5 = 1.0000;
+
+L_1 = Z_0*g_1/(D*w_0)
+C_1 = D/(Z_0*g_1*w_0)
+
+L_2 = Z_0*D/(g_2*w_0)
+C_2 = g_2/(Z_0*D*w_0)
+
+L_3 = Z_0*g_3/(D*w_0)
+C_3 = D/(Z_0*g_3*w_0)
+
+L_4 = Z_0*D/(g_4*w_0)
+C_4 = g_4/(Z_0*D*w_0)
+
+#+END_SRC
+
+#+RESULTS:
+: L_1 = 8.4336e-08
+: C_1 = 7.5087e-14
+: L_2 = 3.8887e-10
+: C_2 = 1.6285e-11
+: L_3 = 2.5314e-08
+: C_3 = 2.5016e-13
+: L_4 = 1.8020e-09
+: C_4 = 3.5141e-12
+
+\begin{align*}
+L_1 &= 84.34\ \mathrm{nH} & C_1 &= 0.0751\ \mathrm{pF} \\
+L_2 &= 0.389\ \mathrm{nH} & C_2 &= 16.28\ \mathrm{pF} \\
+L_3 &= 25.31\ \mathrm{nH} & C_3 &= 0.250\ \mathrm{pF} \\
+L_4 &= 1.802\ \mathrm{nH} & C_4 &= 3.514\ \mathrm{pF}
+\end{align*}
+
+\newpage
+* Appendix A - Octave Code For Question 1
+#+INCLUDE: "./ENG439_Week_6_Q1.m" src octave
+\newpage
+* Appendix B - Octave Code For Question 2
+#+INCLUDE: "./ENG439_Week_6_Q2.m" src octave
+\newpage
+* Appendix C - Octave Code For Question 3
+#+INCLUDE: "./ENG439_Week_6_Q3.m" src octave
+\newpage

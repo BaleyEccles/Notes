@@ -13,6 +13,7 @@
  - [[id:159a9efc-e2b7-4d42-aa27-a47a5ddb7e6e][Two Port Networks]]
  - [[id:ce7f7be0-a734-4999-9175-9aabfa310530][Network Analysis]]
  - [[id:b01c8577-794b-41fc-b88c-143b1711d726][Analogue And Digital Filter Design]]
+ - [[id:edb14fad-b35e-48e4-a1a3-8fcd7174d53b][Microstrip]]
 * Assessment
 Microwave Engineering, D.M. Pozar
 ** Design Report
@@ -28,7 +29,7 @@ Microwave Engineering, D.M. Pozar
 [[id:6da06155-5d3d-4321-b7e5-1ba14b082ac8][ENG439 - High Frequency Electronics - Question Week 5]]
 ** Mid Semester Test
  - after break
-   
+ - [[id:a6dd599f-5fe7-4321-8c3b-e2ad742b8c5b][ENG439 - High Frequency Electronics - Formula Sheet]]
 ** External Assessment (Exam)
 - 30%
 
