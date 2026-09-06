@@ -58,8 +58,10 @@
      - Equalisers and fading similar to tutorial
    - OFDM plenty, mobile comms plenty
  - [[id:31a3f79b-0e63-4ea7-b0fb-5ac537f550f5][ENG405 - Communication Systems 2 - Cheat Sheet]]
-** Simulation Project 2
- - Due Week 9
 ** Simulation Project 3
+ - Due Week 9
+ - [[id:c7b20e70-138a-4214-b0d5-54b9a357e3e8][ENG405 - Communication Systems 2 – Project 3]]
+** Simulation Project 2
  - Due Week 12
+
 ** Exam

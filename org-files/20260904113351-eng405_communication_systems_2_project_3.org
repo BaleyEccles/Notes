@@ -1,0 +1,336 @@
+:PROPERTIES:
+:ID:       c7b20e70-138a-4214-b0d5-54b9a357e3e8
+:END:
+#+title: ENG405 - Communication Systems 2 – Project 3
+#+date: [2026-09-04 Fri 11:33]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+* Question 1
+** Assumptions
+1. Assume that the shadowing in is Gaussian ($X_{\sigma} \sim \mathcal{N}(0, \sigma^2)$).
+2. The small urban population is based off the Hata model (https://en.wikipedia.org/wiki/Hata_model), more specifically the urban small/medium sized city.
+3. 16-QAM uses gray coding.
+4. A noise temperature of $T_0 = 290\ \textrm{K}$
+   
+** a
+The average path loss is:
+
+\begin{align*}
+PL_{\textrm{avg}} &= \frac{1}{10}\sum_{i=1}^{10} PL_i \\
+&= \frac{1}{10}\left(133.8 + 142.6 + 138.9 + 146.1 + 135.4 + 140.7 + 147.3 + 137.1 + 141.9 + 132.5\right) \\
+&= \boxed{139.63\ \textrm{dB}}
+\end{align*}
+Using the assumed Hata model:
+\begin{align*}
+L_U &= 69.55 + 26.16 \log_{10}f - 13.82 \log_{10}h_{B} - C_{H} + [44.9 - 6.55 \log_{10}h_{B}] \log_{10}d \\
+C_H &= 0.8 + (1.1 \log_{10}f - 0.7) h_{M} - 1.56 \log_{10}f
+\end{align*}
+_Note:_ that $f$ is in MHz, $d$ is in km and everything else is in SI units.
+
+With $f = 1000\ \textrm{MHz}$, $h_B = 50\ \textrm{m}$, $hM = 2\ \textrm{m}$:
+\begin{align*}
+L_U &= 33.772 \log_{10}(d) + 123.23 \\
+139.63 &= 33.772 \log_{10}(d) + 123.23 \\
+\Rightarrow d &= \boxed{3.06\ \textrm{km}}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_3_Q1.m
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+syms log_10_d
+
+f = 1000;
+hB = 50;
+hM = 2;
+
+CH = 0.8 + (1.1*log10(f) - 0.7)*hM - 1.56*log10(f);
+
+LU = 69.55 + 26.16*log10(f) - 13.82*log10(hB) - CH + (44.9 - 6.55*log10(hB))*log_10_d;
+latex(vpa(LU,5))
+
+vpa(10^((vpasolve(LU == 139.63, log_10_d))), 5)
+#+END_SRC
+
+#+RESULTS:
+: 33.772 log_{10 d} + 123.23
+: ans = (sym) 3.0592
+
+The standard deviation estimated be found using (https://en.wikipedia.org/wiki/Unbiased_estimation_of_standard_deviation):
+\begin{align*}
+\sigma &= \sqrt{\dfrac{1}{n - 1} \sum_{i=1}^n \left(PL_i - PL_{\textrm{avg}}\right)^2} \\
+\Rightarrow \sigma &= 5.01\ \textrm{dB}
+\end{align*}
+
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_3_Q1.m
+
+PL_i = [133.8, 142.6, 138.9, 146.1, 135.4, 140.7, 147.3, 137.1, 141.9, 132.5];
+PL_avg = 139.63;
+n = length(PL_i)
+sig = sqrt((1/(n - 1))*sum((PL_i - PL_avg).^2))
+#+END_SRC
+
+#+RESULTS:
+: n = 10
+: sig = 5.0051
+
+** b
+*** Power Requirement
+The probability of a bit error using M-QAM is (from notes from Communications Systems 1):
+\[P_{b,MQAM} \approx \frac{4}{\log_2(M)}(1 - 1/\sqrt{M})\sum_{i=1}^{\sqrt{M}/2}Q\left((2i - 1)\sqrt{\frac{3E_b\log_2M}{(M-1)N_0}}\right)\]
+Hence, for 16-QAM:
+\[P_b =\frac{3}{8}Q\left(\sqrt{\frac{2E_b}{5N_0}}\right)+\frac{3}{8}Q\left(3\sqrt{\frac{2E_b}{5N_0}}\right)\]
+Using the ~Octave/MATLAB~ code in Appendix :TODO: we can solve this with $P_b = \frac{0.01}{100}$ this to get:
+\[\frac{E_b}{N_0} = 12.20\ \textrm{dB}\]
+#+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG405_Project_3_Q1.m
+clearvars
+clc
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+
+
+
+M = 16;
+k = log2(M);
+idx = 1:(sqrt(M) / 2);
+
+syms gamma_b positive
+
+argument = (2 .* idx - 1) .* sqrt((3 .* gamma_b .* k) / (M - 1));
+Pb_MQAM = (4 / k) * (1 - 1 / sqrt(M)) * sum(0.5 .* erfc(argument / sqrt(2)));
+
+latex(Pb_MQAM)
+
+Pb_function = @(gamma_b) (4 / k) * (1 - 1 / sqrt(M)) * sum(0.5 .* erfc(((2 .* idx - 1) .* sqrt((3 .* gamma_b .* k) / (M - 1))) / sqrt(2)));
+gamma_solution = fzero(@(gamma_b) Pb_function(gamma_b) - 1e-4, [1, 100]);
+
+disp("Eb/N0 in dB:")
+disp(10 * log10(gamma_solution))
+#+END_SRC
+
+#+RESULTS:
+: \frac{3 \operatorname{erfc}{\left(\frac{\sqrt{10} \sqrt{\gamma_{b}}}{5} \right)}}{8} + \frac{3 \operatorname{erfc}{\left(\frac{3 \sqrt{10} \sqrt{\gamma_{b}}}{5} \right)}}{8}
+: Eb/N0 in dB:
+: 12.205
+
+From the provided noise figure we can get power required (https://en.wikipedia.org/wiki/Noise_figure):
+\begin{align*}
+PN &= (kT_0B)_{\textrm{dBm}}+ NF \\
+N_0 &= 10\log_{10}\left(\frac{1.38\times 10^{-23}\cdot 290\cdot 20\times10^6}{10^{-3}}\right) + 6 \\
+N_0 &= -94.96\ \textrm{dBm}
+\end{align*}
+*** Simulation
+Using the Hata mean path loss from before we can find the total path loss including shadowing ($X_s$) as:
+\[PL(d) = 33.772 \log_{10}(d) + 123.23 + X_s\]
+
+Each Nakagami branch has power gain (https://en.wikipedia.org/wiki/Nakagami_distribution):
+\begin{align*}
+G_i &\sim \textrm{Nakagami}\left(m, \Omega\right) \\
+m &\sim U(2,3)\qquad \Omega = 1 \\
+G_i &\sim \textrm{Nakagami}\left(U(2,3), 1\right)
+\end{align*}
+Using Maximum Ratio Combining (MRC) we can get the MRC gain as:
+\[G_{\textrm{MRC}} = \sum_{i=1}^LG_i\]
+Hence, the power becomes:
+\begin{align*}
+P_r &= P_t + G_t + G_r - PL(d) + 10\log_{10}(G_{\textrm{MRC}}) \\
+P_r &= P_t + 10 + 10 - 33.772 \log_{10}(d) - 123.23 - X_s + 10\log_{10}(G_{\textrm{MRC}}) \\
+P_r &= P_t - 103.23 - X_s - 33.772 \log_{10}(d) + 10\log_{10}(G_{\textrm{MRC}})
+\end{align*}
+
+This allows us to create the simulation found in ~:TODO: (ADD CODE NAME)~. It was chosen that there would be 4 diverse paths ($L = 4$) and so that the maximum transmitter power is $P_{\textrm{out}}(5\ \textrm{km}) \approx 0.01$.
+
+:TODO: add plot
+** c
+:TODO: add plot
+
+** d
+From the notes the amount of fading in the Nakagami-m distribution is $AF = \frac{1}{m}$, and that it should be between 0 and 2. Given that our $m$ is uniformly distributed we can simply find the expected value to get an estimate:
+\begin{align*}
+E[AF] &= \int_2^3 \frac{1}{m}\ dm \\
+E[AF] &= \ln(3) - \ln(2) \\
+E[AF] &= 0.405
+\end{align*}
+For $L$ branches we need to divide by $L$ to get the per-branch amount of fading:
+\begin{align*}
+AF_{\textrm{Branch}} &= \frac{AF}{L} \\
+AF_{\textrm{Branch}} &= \frac{0.405}{4} \\
+AF_{\textrm{Branch}} &= 0.101
+\end{align*}
+:TODO: Include log-normal shadowing fading
+
+** e
+:TODO:
+
+#+BEGIN_SRC python :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_3_Q1.py
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.special import erfc # Q function
+from scipy.optimize import fsolve # For solving
+
+# Given data
+loss_samples = np.array([133.8,142.6,138.9,146.1,135.4,140.7,147.3,137.1,141.9,132.5])
+sigma_s = np.std(loss_samples, ddof=1)
+
+def path_loss_hata(d_km):
+    """
+    Description: Caclulates the path loss from the Hata model
+    Inputs:
+     - 'd_km' distance in kilometers
+    Returns: Path loss provided by the Hata model
+    """
+    f_MHz = 1000.0
+    hb = 50.0
+    hr = 2.0
+    a_hr = (1.1*np.log10(f_MHz)-0.7)*hr - (1.56*np.log10(f_MHz)-0.8)
+    A = 69.55 + 26.16*np.log10(f_MHz) - 13.82*np.log10(hb) - a_hr
+    B = 44.9 - 6.55*np.log10(hb)
+    return A + B*np.log10(d_km)
+
+BW = 20e6
+Rb = 4*BW # 16-QAM, Rs ~= BW, 4 bits/symbol
+NF_dB = 6.0
+Gt_dB = 10.0
+Gr_dB = 10.0
+N0Rb_dBm = (-174.0 + NF_dB) + 10*np.log10(Rb)
+target_ber = 1e-4
+
+def Q(x):
+    """
+    Description: Calculates the Q Function
+    Inputs:
+     - 'x' input to Q function
+    Returns: The output of the Q function
+    """
+    return 0.5*erfc(x/np.sqrt(2))
+
+def ber16qam(ebn0):
+    """
+    Description: Calculates the bit error rate for 16-QAM
+    Inputs:
+     - 'ebn0' Signal to Noise Ratio for calculation
+    Returns: The BER of 16-QAM with provided BER
+    """
+    return (3/8)*Q(np.sqrt((2/5)*ebn0)) + (3/8)*Q(np.sqrt((2/5)*ebn0))
+
+ebn0_req = fsolve(lambda x: ber16qam(x) - target_ber, x0=10.0)[0]
+
+ebn0_req_dB = 10*np.log10(ebn0_req)
+Pr_req_dBm = N0Rb_dBm + ebn0_req_dB
+
+# Four independent MRC branches
+L = 4
+rng = np.random.default_rng(123)
+Nmc = 200_000
+
+def nakagami_m(m):
+    """
+    Description: Calculates the Nakagami-m distribution
+    Notes:
+     - Uses a transformed Gamma function (https://en.wikipedia.org/wiki/Nakagami_distribution)
+    Inputs:
+     - 'm' The shape of the Nakagami-m distribution
+    Returns: A Nakagami-m distributed number
+    """
+    return rng.gamma(shape=m, scale=1.0/m)
+
+shadow_dB = rng.normal(0.0, sigma_s, Nmc)
+m = rng.uniform(2.0, 3.0, Nmc)
+g = np.zeros(Nmc)
+for _ in range(L):
+    g += nakagami_m(m)
+    channel_effect_dB = 10*np.log10(g) - shadow_dB
+
+PL5_dB = path_loss_hata(5.0)
+
+# Maximum constant power chosen so only 1% of channel states fail BER <= 1e-4 at 5 km
+q01 = np.quantile(channel_effect_dB, 0.01)
+Pt_max_dBm = Pr_req_dBm - Gt_dB - Gr_dB + PL5_dB - q01
+
+# Power required in each channel state if ideal power control is used
+Pt_required_dBm = Pr_req_dBm - Gt_dB - Gr_dB + PL5_dB - channel_effect_dB
+Pt_required_W = 10**((Pt_required_dBm - 30)/10)
+Pt_average_W = np.mean(Pt_required_W)
+
+dist_km = np.linspace(1.0, 5.0, 81)
+outage = []
+mean_ber = []
+
+for d in dist_km:
+    Pr_dBm = Pt_max_dBm + Gt_dB + Gr_dB - path_loss_hata(d) + channel_effect_dB
+    ebn0 = 10**((Pr_dBm - N0Rb_dBm)/10)
+    ber = ber16qam(ebn0)
+    outage.append(np.mean(ber > target_ber))
+    mean_ber.append(np.mean(ber))
+
+outage = np.array(outage)
+mean_ber = np.array(mean_ber)
+
+# Outage plot
+plt.figure(figsize=(7,4.5))
+plt.semilogy(dist_km, np.maximum(outage, 1/Nmc), linewidth=1.8)
+plt.axhline(0.01, linestyle='--', linewidth=1.2, label='1% outage design target')
+plt.xlabel('Distance from base station (km)')
+plt.ylabel('Outage probability')
+plt.title('Outage Probability vs Distance, 16-QAM, L = 4 MRC')
+plt.grid(True, which='both', alpha=0.3)
+plt.legend()
+plt.tight_layout()
+outage_path = "./ENG405_Project_3_Q1_outage_probability.png"
+plt.savefig(outage_path, dpi=180)
+plt.close()
+
+# BER plot
+plt.figure(figsize=(7,4.5))
+plt.semilogy(dist_km, np.maximum(mean_ber, 1e-12), linewidth=1.8)
+plt.axhline(target_ber, linestyle='--', linewidth=1.2, label='BER requirement = 0.01%')
+plt.xlabel('Distance from base station (km)')
+plt.ylabel('Average BER')
+plt.title('Average BER vs Distance, 16-QAM, L = 4 MRC')
+plt.grid(True, which='both', alpha=0.3)
+plt.legend()
+plt.tight_layout()
+ber_path = "./ENG405_Project_3_Q1_ber_vs_distance.png"
+plt.savefig(ber_path, dpi=180)
+plt.close()
+
+print(f"Required Eb/N0 for BER=1e-4: {ebn0_req_dB:.2f} dB")
+print(f"Required received power: {Pr_req_dBm:.2f} dBm")
+print(f"Hata path loss at 5 km: {PL5_dB:.2f} dB")
+print(f"Selected 99%-reliable constant transmit power: {Pt_max_dBm:.2f} dBm = {10**((Pt_max_dBm-30)/10):.1f} W")
+print(f"Mean required transmit power with ideal power control: {Pt_average_W:.1f} W = {10*np.log10(Pt_average_W*1000):.2f} dBm")
+print(f"Simulated outage at 5 km: {outage[-1]:.4f}")
+print(f"Simulated average BER at 5 km: {mean_ber[-1]:.3e}")
+print(outage_path)
+print(ber_path)
+#+END_SRC
+
+#+RESULTS:
+
+* Question 2
