@@ -8,3 +8,4 @@
 
 * Symbol Energy
 \[E_s =\frac{1}{M}\sum_{j=0}^{M-1}||\underline{s}_j||^2\]
+\[\Pr(\textrm{bit error}) \leq \frac{1}{\log_2(M)}\Pr(\textrm{symbol error})\]

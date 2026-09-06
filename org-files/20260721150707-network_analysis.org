@@ -205,7 +205,7 @@ j\beta & 0 & 0 & \alpha \\
 *** Directional Couplers
 [[./Directional Couplers.png]]
 _Coupling:_
-\[C = 10\log_{10}|S_{31}| dB\]
+\[C = 10\log_{10}|S_{31}| dB = -20\log_{10}|\beta|\]
 _Directivity:_
 \[D = 10\log_{10}\frac{P_}{P_4} = 20\log_{10}\frac{|S_{31}|}{|S_{41}|}dB = 20\log_{10}\frac{\beta}{|S_{14}|}dB\]
 _Isolation:_

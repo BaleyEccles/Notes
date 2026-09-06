@@ -109,6 +109,10 @@ C &= Y^{-1}\hat{Y}
 **** Tolerance of ZF equaliser to noise
 \[\sigma_{\hat{y}}^2 = \sigma^2\sum_{j=-k}^k|c_j|^2\]
 
+**** Output
+\[y[n] = a*h = \sum_{k=0}^{\infty}a[k] h[n-k]\]
+\[\hat{y} = y[n]*c[n] = \sum_{k=0}^{\infty}y[k]c[n-k]\]
+
 **** Example
 A sampled channel impulse response is found to be $0.1, 1.0, -0.2$ corresponding to  $y[-1], y[0], y[1]$.
 a) Find the coefficient of a 3 tap ZF equaliser
@@ -168,6 +172,11 @@ Three important features:
 3. There is a balance between inverting the channel and noise
 \[C = Y^H[YY^H + N_0I]^{-1}\hat{Y}\]
  - $H$ indicates the [[id:51260ef9-3b99-4fa4-a4f2-ff241ff32bff][Hermitian Transpose]]
+**** Noise
+\[\sigma^2 = \frac{N_0}{2T_s}\]
+
+**** Output
+\[\hat{y} = c*y = \sum_{k=0}^{\infty} c[k]y[n-k]\]
 
 **** Performance
 \[J_{\min} = T_s\int_{-\frac{1}{2T_s}}^{\frac{1}{2T_s}}\frac{N_0}{F_{\Sigma}(f) + N_0} df\]
@@ -258,7 +267,7 @@ For symbols $a[1], a[2],\hdots, a[i],\hdots, a[N]$, we designate estimates of th
 \[r[i] - h[0]a[i] - \sum_{k=1}^Mh[k]\hat{a}[i-k]\]
  - This is just trying to get the noise term
 
-\[DFD \Rightarrow \min_{a[i]}\left(r[i] - h[0]a[i] - \sum_{k=1}^Mh[k]\hat{a}[i - k]\right)\]
+\[DFD \Rightarrow \min_{a[i]}\left(r[i] - h[0]a[i] - \sum_{k=1}^Mh[k]\hat{a}[i - k]\right)^2\]
  - $h[n]$ is the channel impulse response (found by [[id:533199e6-1d41-4223-a95e-b4ee0de5f926][Pilot Symbols]])
  - $\hat{a}[n]$ previously-determined sequence of inputs estimated at the receiver
  - $r[i]$ current received values

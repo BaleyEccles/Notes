@@ -21,7 +21,7 @@ From a small angle approximation (so a ntenna height is << d), $\alpha = \beta +
 \[\gamma = \tan^{-1}\left(\frac{h - h_t}{d_1}\right)\]
 \[\alpha \approx h\frac{d_1 + d_2}{d_1d_2}\]
 Usually, the Fresnel-Kirchoff diffraction parameter is used to normalise:
-\[\nu = \alpha \sqrt{\frac{2d_1 d_2}{\lambda(d_1 + d_2)}} \approxh\sqrt{\frac{2(d_1 + d_2)}{\lambda d_1 d_2}} \]
+\[\nu = \alpha \sqrt{\frac{2d_1 d_2}{\lambda(d_1 + d_2)}} \approx h\sqrt{\frac{2(d_1 + d_2)}{\lambda d_1 d_2}} \]
 Therefore, $\phi = \frac{\pi}{2}\nu^2$
 The gain is:
 \[G_d(dB) = \begin{cases}

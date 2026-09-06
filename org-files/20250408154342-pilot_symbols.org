@@ -31,7 +31,7 @@ We can send some known set of symbols to find $h[n]$
    n_s[M+1] \\
    \vdots \\
    n_s[N]
-   \end{bmatrix}\]
+   \end{bmatrix}w\]
    - $\underline{a}$ are the pilot symbols
    - \[\underline{r} = \underline{A}\underline{h} + \underline{n}\]
    - $\underline{A}$ must be full ranked

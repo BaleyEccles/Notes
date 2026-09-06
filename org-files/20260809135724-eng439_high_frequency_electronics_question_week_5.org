@@ -311,7 +311,7 @@ angle_4 = angle(b(4))*180/pi
 : angle_4 = 0
 
 ** c
-\[\sum |b_i|^2 = |a_i|^2\]
+R\[\sum |b_i|^2 = |a_i|^2\]2
 This can be show to be true using the following ~octave~ code:
 #+BEGIN_SRC octave :results output :exports both :session Q1 :eval no-export :tangle ENG439_Week_5_Q2.m
 abs(sum(a))

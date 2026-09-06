@@ -5,104 +5,128 @@
 #+date: [2026-08-25 Tue 12:03]
 #+AUTHOR: Baley Eccles - 652137
 #+STARTUP: latexpreview
+#+FILETAGS: :UTAS:2026:
+#+OPTIONS: toc title
+#+LATEX_CLASS_OPTIONS: [9pt,a4paper]
+#+LATEX_HEADER: \usepackage[a4paper,margin=0.35in]{geometry}
+#+LATEX_HEADER: \usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \usepackage{multicol}
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: \setlength{\parskip}{0pt}
+#+LATEX_HEADER: \setlength{\columnsep}{0.18in}
+#+LATEX_HEADER: \setlength{\abovedisplayskip}{2pt}
+#+LATEX_HEADER: \setlength{\belowdisplayskip}{2pt}
+#+LATEX_HEADER: \setlength{\abovedisplayshortskip}{1pt}
+#+LATEX_HEADER: \setlength{\belowdisplayshortskip}{1pt}
+#+LATEX_HEADER: \usepackage{titlesec}
+#+LATEX_HEADER: \titlespacing*{\section}{0pt}{3pt}{1pt}
+#+LATEX_HEADER: \titlespacing*{\subsection}{0pt}{2pt}{0pt}
 
-* ENG439 - High Frequency Electronics - Formula Sheet
-** Transmission Lines
-\[Z_{in} = Z_0\frac{Z_L + j Z_0\tan(\beta l)}{Z_0 + j Z_L\tan(\beta l )}\]
-\[\beta = \frac{2\pi}{\lambda}\]
-\[\Gamma = \frac{Z_L - Z_0}{Z_L + Z_0}\]
-\[VSWR = \frac{1 + |\Gamma|}{1 - |\Gamma|}\]
+#+BEGIN_EXPORT latex
+\begin{multicols}{2}
+\small
+#+END_EXPORT
 
-** Waveforms
-\[V_g(t) = V_g\cos(\omega t)\]
-\[\tilde{V}_{in} = \tilde{V}_g \frac{Z_{in}}{Z_g + Z_{in}}\]
-\[\tilde{I}_{in} = \frac{\tilde{V}_in}{Z_{in}}\]
-\[\tilde{V}_{in} = |V_{in}|\angle \phi\]
-\[V_{in}(t) = |V_{in}|\cos(\omega t + \phi)\]
+#+OPTIONS: toc:nil
 
-** Standing Waves
-\[\Gamma = |\Gamma|e^{j\theta_r}\]
-\[\Gamma(d) = \Gamma e^{-j2\beta d}\]
-\[\theta_{\Gamma} - 2\beta d_{\max} = 2n\pi\]
-\[\theta_{\Gamma} - 2\beta d_{\min} = (2n + 1)\pi\]
-\[d_{\max} \rightarrow d_{\min} = \frac{\lambda}{4}\]
-\[d_{\max_1} \rightarrow d_{\max_2} = \frac{\lambda}{2}\]
-\[d_{\min_1} \rightarrow d_{\min_2} = \frac{\lambda}{2}\]
+* Transmission Lines
+\[Z_{in}=Z_0\frac{Z_L+jZ_0\tan\beta l}{Z_0+jZ_L\tan\beta l},
+\quad
+\beta=\frac{2\pi}{\lambda},
+\quad
+\Gamma=\frac{Z_L-Z_0}{Z_L+Z_0},
+\quad\]
+\[VSWR=\frac{1+|\Gamma|}{1-|\Gamma|}\]
+\[|\Gamma| = \frac{VSWR - 1}{VSWR + 1}\]
+\[P = I^2Z = \frac{V^2}{Z} = VI\]
 
-** TEM Transmission-Line Parameters
-\[\gamma = \alpha + j\beta = \sqrt{(R' + j\omega L')(G' + j\omega C')}\]
-\[Z_0 = \sqrt{\frac{R' + j\omega L'}{G' + j\omega C'}}\]
-\[u_p = \frac{\omega}{\beta}\]
-\[\beta_{TEM} \approx \omega\sqrt{L'C'}\]
-\[Z_0_{TEM} \approx \sqrt{\frac{L'}{C'}}\]
-\[u_p_{TEM} \approx \frac{1}{\sqrt{L'C'}}\]
-\[u_p_{\mathrm{dialetric}} = \frac{3\times10^8}{\epsilon_r}\]
+* Waveforms
+\[V_g(t)=V_g\cos\omega t,\qquad
+\tilde V_{in}=\tilde V_g\frac{Z_{in}}{Z_g+Z_{in}},
+\qquad
+\tilde I_{in}=\frac{\tilde V_{in}}{Z_{in}}\]
+\[\tilde V_{in}=|V_{in}|\angle\phi
+\quad\Rightarrow\quad
+V_{in}(t)=|V_{in}|\cos(\omega t+\phi)\]
 
-** Microstrip
-\[\epsilon_{eff} \approx \frac{\epsilon_r + 1}{2} + \frac{\epsilon_r - 1}{2}\frac{1}{\sqrt{1 + 12h/W}}\]
-\[Z_0 =
+* Standing Waves
+\[\Gamma(d)=|\Gamma|e^{j(\theta_\Gamma-2\beta d)}\]
+\[\theta_\Gamma-2\beta d_{\max}=2n\pi,\qquad
+\theta_\Gamma-2\beta d_{\min}=(2n+1)\pi\]
+\[d_{\max}\leftrightarrow d_{\min}=\frac{\lambda}{4},
+\qquad
+\Delta d_{\max}=\Delta d_{\min}=\frac{\lambda}{2}\]
+
+* TEM Transmission-Line Parameters
+\[\gamma=\alpha+j\beta
+=\sqrt{(R'+j\omega L')(G'+j\omega C')},
+\qquad
+Z_0=\sqrt{\frac{R'+j\omega L'}{G'+j\omega C'}}\]
+\[u_p=\frac{\omega}{\beta}\]
+\[\beta\approx\omega\sqrt{L'C'},\qquad
+Z_0\approx\sqrt{\frac{L'}{C'}},\qquad
+u_p\approx\frac{1}{\sqrt{L'C'}}\]
+\[u_p=\frac{c}{\sqrt{\epsilon_r}}
+\quad(\mu_r\approx1)\]
+
+* Microstrip
+\[\epsilon_{eff}\approx
+\frac{\epsilon_r+1}{2}
++\frac{\epsilon_r-1}{2}
+\frac{1}{\sqrt{1+12d/W}}\]
+\[Z_0\approx
 \begin{cases}
-\dfrac{120\pi}
-{\sqrt{\epsilon_{eff}}\left(1.393+\dfrac{W}{d}
-+0.667\ln\left(\dfrac{W}{d}+1.444\right)\right)},
-& \dfrac{W}{d}\ge 1, \\[1.2em]
 \dfrac{60}{\sqrt{\epsilon_{eff}}}
 \ln\left(\dfrac{8d}{W}+\dfrac{W}{4d}\right),
-& \dfrac{W}{d}\le 1.
+& W/d\le1 \\[ex]
+\dfrac{120\pi}
+{\sqrt{\epsilon_{eff}}
+\left(W/d+1.393+0.667\ln(W/d+1.444)\right)},
+& W/d\ge1
 \end{cases}\]
+\[\lambda_g=\frac{c}{f\sqrt{\epsilon_{eff}}},
+\qquad
+l=\frac{\theta}{360^\circ}\lambda_g\]
 
-\[\lambda_g = \frac{c}{f\sqrt{\epsilon_{eff}}}\]
-\[l = \frac{\theta}{360^{\circ}}\lambda_g\]
+* Rectangular Waveguides
+\[\epsilon_{r,air} = 1\]
+\[f_{c,mn}=\frac{c}{2\sqrt{\epsilon_r}}\sqrt{\left(\frac{m}{a}\right)^2+\left(\frac{n}{b}\right)^2}\]
+\[f_{c,10} = \frac{c}{2a\sqrt{\epsilon_r}}\]
+\[TE:\;(m,n)\neq(0,0),
+\qquad
+TM:\;m,n\neq0,
+\qquad
+\text{propagation: }f>f_c\]
+\[k=\frac{2\pi}{\lambda},
+\qquad
+\beta=k\sqrt{1-\left(\frac{f_c}{f}\right)^2}\]
+\[\lambda_g=
+\frac{\lambda}{\sqrt{1-(f_c/f)^2}}\]
+\[v_p=
+\frac{c/\sqrt{\epsilon_r}}
+{\sqrt{1-(f_c/f)^2}},
+\qquad
+v_g=
+\frac{c}{\sqrt{\epsilon_r}}
+\sqrt{1-(f_c/f)^2}\]
+\[v_pv_g=\frac{c^2}{\epsilon_r}\]
 
-** Rectangular Waveguides
-\[f_{c,mn} = \frac{c}{2\sqrt{\epsilon_r}}\sqrt{\left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2}\]
-\[m_{TE} + n_{TE} \neq 0\]
-\[m_{TM}\cdot n_{TM} \neq 0\]
-
-\[\mathrm{prpagate} = f > f_c\]
-\[\beta = k\sqrt{1 - \left(\frac{f_c}{f}\right)^2}\]
-\[k = \frac{2\pi}{\lambda}\]
-\[\lambda_g = \frac{\lambda}{\sqrt{1 - \left(\frac{f_c}{f}\right)^2}\]
-\[v_p = \frac{\frac{c}{\sqrt{\epsilon_r}}}{\sqrt{1 - \left(\frac{f_c}{f}\right)^2}\]
-\[v_g = \frac{c}{\sqrt{\epsilon_r}}\sqrt{1 - \left(\frac{f_c}{f}\right)^2}\]
-\[v_pv_g = \frac{c^2}{\epsilon_r}\]
-
+* Network Parameters
 ** Z Parameters
-\[\begin{bmatrix}
-V_1 \\
-V_2 \\
-\vdots \\
-V_N
-\end{bmatrix} = \begin{bmatrix}
-Z_{11} & Z_{12} & \hdots & Z_{1N} \\
-Z_{21} & Z_{22} & \hdots & \vdots\\
-\vdots& \hdots& \vdots& \vdots \\
-Z_{N1} & \hdots & \hdots & Z_{NN}
-\end{bmatrix}\begin{bmatrix}
-I_1 \\
-I_2 \\
-\vdots \\
-I_N
-\end{bmatrix}\]
-\[Z_{ij} = \frac{V_i}{I_j}|_{I_k = 0\textrm{ for } k\neq j}\]
+\[\mathbf V=\mathbf Z\mathbf I,
+\qquad
+Z_{ij}=
+\left.\frac{V_i}{I_j}\right|_{I_k=0,\;k\neq j}\]
 
 ** Y Parameters
-\[Y = \begin{bmatrix}
-Y_{11} & Y_{12} & \hdots & Y_{1N} \\
-Y_{21} & Y_{22} & \hdots & \vdots\\
-\vdots& \hdots& \vdots& \vdots \\
-Y_{N1} & \hdots & \hdots & Y_{NN}
-\end{bmatrix} = Z^{-1} = \begin{bmatrix}
-Z_{11} & Z_{12} & \hdots & Z_{1N} \\
-Z_{21} & Z_{22} & \hdots & \vdots\\
-\vdots& \hdots& \vdots& \vdots \\
-Z_{N1} & \hdots & \hdots & Z_{NN}
-\end{bmatrix}^{-1}\]
+\[\mathbf I=\mathbf Y\mathbf V,
+\qquad
+\mathbf Y=\mathbf Z^{-1}\]
 
 ** ABCD Parameters
 \[\begin{bmatrix}
 V_1 \\
-V_2
+I_2
 \end{bmatrix} = \begin{bmatrix}
 A & B \\
 C & D
@@ -110,109 +134,119 @@ C & D
 V_2 \\
 -I_2
 \end{bmatrix}\]
+\[A = \frac{V_1}{V_2}|_{I_2 = 0}\]
+\[B = \frac{-V_1}{I_2}|_{V_2 = 0}\]
+\[C = \frac{I_1}{V_2}|_{I_2 = 0}\]
+\[D = \frac{-I_1}{I_2}|_{V_2 = 0}\]
 
-\[T_{A} &= \begin{bmatrix}
-A_A & B_A \\
-C_A & D_A
+\[T_{\rm series}=
+\begin{bmatrix}1&Z\\0&1\end{bmatrix},
+\qquad
+T_{\rm shunt}=
+\begin{bmatrix}1&0\\Y&1\end{bmatrix}\]
+\[T_{\rm TL}=
+\begin{bmatrix}
+\cos\beta l & jZ_0\sin\beta l\\
+jY_0\sin\beta l & \cos\beta l
 \end{bmatrix}\]
-\[T_{B} &= \begin{bmatrix}
-A_B & B_B \\
-C_B & D_B
-\end{bmatrix}\]
-\[T_{\mathrm{total}} = T_AT_B\]
-
-\[T_{\mathrm{series}} = \begin{bmatrix}
-1 & Z \\
-0 & 1
-\end{bmatrix}\]
-\[T_{\mathrm{shunt}} = \begin{bmatrix}
-1 & 0 \\
-\frac{1}{Z} & 1
-\end{bmatrix}\]
-\[T_{\textrm{Transmission line}} = \begin{bmatrix}
-\cos(\beta l) & j Z_0\sin(\beta l) \\
-j \frac{1}{Z_0}\sin(\beta l) & \cos(\beta l)
-\end{bmatrix}\]
-
+\[A_{\textrm{recip}}D_{\textrm{recip}} + B_{\textrm{recip}}C_{\textrm{recip}} = 1\]
 ** S Parameters
-\[\begin{bmatrix}
-V^-_1 \\
-V^-_2 \\
-\vdots \\
-V^-_N
-\end{bmatrix} = \begin{bmatrix}
-S_{11} & S_{12} & \hdots & S_{1N} \\
-S_{21} & S_{22} & \hdots & \vdots\\
-\vdots& \hdots& \vdots& \vdots \\
-S_{N1} & \hdots & \hdots & S_{NN}
-\end{bmatrix}\begin{bmatrix}
-V^+_1 \\
-V^+_2 \\
-\vdots \\
-V^+_N
-\end{bmatrix}\]
-\[S_{ij} = \frac{V^-_i}{V^+_j}|_{V^+_k = 0\textrm{ for } k\neq j}\]
-\[S_{\textrm{matched}} = \begin{bmatrix}
-0 & S_{12} & \hdots & S_{1N} \\
-S_{21} & 0 & \hdots & \vdots\\
-\vdots& \hdots& \vdots& \vdots \\
-S_{N1} & \hdots & \hdots & 0
-\end{bmatrix}\]
-\[S_{\textrm{recip}} = S_{\textrm{recip}}^T\]
-\[\sum_i|S_{ij,\textrm{lossless}}|^2 = 1\]
-\[\sum|a_{i,\textrm{lossless}}|^2 = \sum|b_{i,\textrm{lossless}}|^2\]
+\[\mathbf V^-=\mathbf S\mathbf V^+,
+\qquad
+S_{ij}=
+\left.\frac{V_i^-}{V_j^+}\right|_{V_k^+=0,\;k\neq j}\]
+\[A=\mathbf SB\]
+\[P_i^+ = |a_i|^2 ,\qquad P_i^- = |b_i|^2\]
+\[|S_{ij}|^2 = \frac{P_i^-}{P_j^+}\]
 
+\[S_{ii,\textrm{matched}}=0,\qquad \mathbf S_{\textrm{reciprocal}}=\mathbf S^T\]
+\[\mathbf S_{\text{lossless}}^\dagger\mathbf S=\mathbf I,\qquad \sum_k|S_{kj}|^2=1\]
+\[\sum_i|a_i|^2=\sum_i|b_i|^2 = \begin{cases}|S_{11}|^2 + |S_{21}|^2 &= 1 \\|S_{22}|^2 + |S_{12}|^2 &= 1\end{cases}\]
 
-** ABCD To S Conversion
-\[\begin{aligned}
-S_{11} &= \frac{-A+B/Z_0-CZ_0+D}{A+B/Z_0+CZ_0+D} \\
-S_{12} &= \frac{2(AD-BC)}{A+B/Z_0+CZ_0+D} \\
-S_{21} &= \frac{2}{A+B/Z_0+CZ_0+D} \\
-S_{22} &=\frac{-A+B/Z_0+CZ_0+D}{A+B/Z_0+CZ_0+D}
-\end{aligned}\]
+* ABCD $\rightarrow$ S
+\[\Delta_S=A+\frac{B}{Z_0}+CZ_0+D\]
+\[S_{11}=
+\frac{A+B/Z_0-CZ_0-D}{\Delta_S},
+\qquad
+S_{21}=\frac{2}{\Delta_S}\]
+\[S_{12}=
+\frac{2(AD-BC)}{\Delta_S},
+\qquad
+S_{22}=
+\frac{-A+B/Z_0-CZ_0+D}{\Delta_S}\]
 
+* Directional Couplers
+\[RL=-20\log_{10}|S_{11}|,
+\qquad
+IL=-20\log_{10}|S_{12}|\]
+\[C=-20\log_{10}|S_{13}| = -20\log_{10}|\beta|\]
+\[I=-20\log_{10}|S_{14}|\]
+\[D=I-C
+=20\log_{10}\left|\frac{S_{13}}{S_{14}}\right|\]
+\[\alpha^2 + \beta^2 = 1\]
+\[S_{21} = \alpha, \qquad S_{31} = j\beta\]
+* Even/Odd-Mode Analysis
+\[\Gamma=\frac{\Gamma_e+\Gamma_o}{2},
+\qquad
+T=\frac{\Gamma_e-\Gamma_o}{2}\]
 
-** Directional Couplers
-\[RL = -20\log_{10}|S_{11}|\]
-\[IL = -20\log_{10}|S_{21}|\]
-\[C = -20\log_{10}|S_{31}|\]
-\[I = -20\log_{10}|S_{41}|\]
-\[D = I - C\]
-\[D = 20\log_{10}\left|\frac{S_{31}}{S_{41}}\right|\]
+* Filters
+\[L_k=\frac{Z_0g_k}{\omega_c},
+\qquad
+C_k=\frac{g_k}{Z_0\omega_c}\]
+\[\Omega_s = \frac{\omega_s}{\omega_c}\]
+\[n \geq \frac{\log_{10}\left(\dfrac{10^{A_s/10} - 1}{10^{A_p/10} - 1}\right)}{2\log_{10}(\Omega_s)}\]
+\[A_p = 3dB\]
+\[\epsilon = \sqrt{10^{A_p/10} - 1}\]
+\[n \geq \dfrac{\cosh^{-1}\left(\sqrt{\frac{10^{A_s/10} - 1}{\epsilon}}\right)}{\cosh^{-1}(\Omega_s)}\]
 
-** Even/Odd Mode Analysis
-\[\Gamma = \frac{\Gamma_e + \Gamma_o}{2}\]
-\[T = \frac{\Gamma_e - \Gamma_o}{2}\]
+* Frequency Transformations
+\[\omega_0=\sqrt{\omega_1\omega_2},
+\qquad
+\Delta=\frac{\omega_2-\omega_1}{\omega_0}\]
 
-** Filters
-\[L_k = \frac{Z_0g_k}{\omega_c\]
-\[C_k = \frac{g_k}{Z_0\omega_c}\]
+** High Pass
+\[L_{LP}\rightarrow
+C_{HP}=\frac{1}{Z_0\omega_cg_k}\]
+\[C_{LP}\rightarrow
+L_{HP}=\frac{Z_0}{\omega_cg_k}\]
 
-** Transformations
-\[\Delta = \frac{\omega_2 - \omega_1}{\omega_0}\]
-\[\omega_0 = \sqrt{\omega_1\omega_2}\]
-*** High Pass
-\[L_{LP} \rightarrow C_{HP} = \frac{1}{Z_0\omega_c g_k}\]
-\[C_{LP} \rightarrow L_{HP} = \frac{Z_0}{\omega_c g_k}\]
-*** Band Pass
-\[L_{LP} \rightarrow L_{BP} &= \frac{g_kZ_0}{\omega_0 \Delta} +  C_{BP} &= \frac{\Delta}{Z_0\omega_0 g_k}\]
-\[C_{LP} \rightarrow L_{BP} &= \frac{\Delta Z_0}{\omega_0 g_k} || C_{BP} &= \frac{g_k}{Z_0\omega_0 \Delta}\]
-*** Band Stop
-\[L_{LP} \rightarrow L_{BS} &= \frac{Z_0g_k\Delta}{\omega_0} ||   C_{BS} &= \frac{1}{Z_0\omega_0 g_k \Delta}\]
-\[C_{LP} \rightarrow L_{BS} &= \frac{Z_0}{\omega_0 g_k \Delta} + C_{BS} &= \frac{g_k \Delta}{Z_0\omega_0}\]
-
-** Richards' Transformation
-\[L_{LP} \rightarrow Z_{\textrm{series stub}} = Z_0 g_k\]
-\[L_{LP} \rightarrow Z_{\textrm{shunt stub}} = \frac{Z_0}{g_k}\]
-** Kuroda's identities
-\[n^2 = 1 + \frac{Z_{\textrm{stub}}}{Z_{\textrm{UE}}}\]
-\[Z_{\textrm{UE}_1} = Z_0\]
-\[Z_{\textrm{series stub}} \rightarrow Z_{\textrm{shunt stub}} = \begin{cases}
-Z_{\textrm{UE}}' &= n^2 Z_{\textrm{stub}} \\
-Z_{\textrm{stub}}' &= n^2 Z_{\textrm{UE}} \\
+** Band Pass
+\[L_{LP}\rightarrow\begin{cases}
+L_s=\dfrac{Z_0g_k}{\omega_0\Delta}\\
+C_s=\dfrac{\Delta}{Z_0\omega_0g_k}
 \end{cases}\]
-\[Z_{\textrm{shunt stub}} \rightarrow Z_{\textrm{series stub}} = \begin{cases}
-Z_{\textrm{UE}}' &= \frac{Z_{\textrm{stub}}}{n^2} \\
-Z_{\textrm{stub}}' &= \frac{Z_{\textrm{UE}}}{n^2} \\
+\[C_{LP}\rightarrow\begin{cases}
+L_p=\dfrac{Z_0\Delta}{\omega_0g_k}\\
+C_p=\dfrac{g_k}{Z_0\omega_0\Delta}
 \end{cases}\]
 
+** Band Stop
+\[L_{LP}\rightarrow\begin{cases}
+L_p=\dfrac{Z_0g_k\Delta}{\omega_0}\\
+C_p=\dfrac{1}{Z_0\omega_0g_k\Delta}
+\end{cases}\]
+\[C_{LP}\rightarrow\begin{cases}
+L_s=\dfrac{Z_0}{\omega_0g_k\Delta}\\
+C_s=\dfrac{g_k\Delta}{Z_0\omega_0}
+\end{cases}\]
+
+* Richards' Transformation
+\[\theta=\beta l=45^\circ\]
+\[L_{LP}\rightarrow
+Z_{\rm series,SC}=Z_0g_k,
+\qquad
+C_{LP}\rightarrow
+Z_{\rm shunt,OC}=\frac{Z_0}{g_k}\]
+
+* Kuroda's Identities
+$\theta = 45^{\circ}$, $\lambda/8$ at $f_c$.
+\[n^2=1+\frac{Z_{\textrm{stub}}}{Z_{\textrm{UE}}}\]
+\[Z_{\textrm{series stub}} \rightarrow Z_{\textrm{shunt stub}}\]
+\[Z_{\textrm{UE}}' = n^2 Z_{\textrm{UE}},
+\qquad
+Z_{\textrm{stub}}' = n^2 Z_{\textrm{stub}}\]
+\[Z_{\textrm{shunt stub}} \rightarrow Z_{\textrm{series stub}}\]
+\[Z_{\textrm{UE}}' = \frac{Z_{\textrm{UE}}}{n^2},
+\qquad
+Z_{\textrm{stub}}' = \frac{Z_{\textrm{stub}}}{n^2}\]

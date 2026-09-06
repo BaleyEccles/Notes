@@ -1,0 +1,52 @@
+:PROPERTIES:
+:ID:       6bb8a06a-4e96-4971-b574-63c60c63faf2
+:END:
+#+title: ENG439 - High Frequency Electronics - Question Week 7
+#+date: [2026-09-04 Fri 10:11]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+* Question 1
+** a
+Using the Chebyshev table:
+\[g_1 = 3.3487,\qquad g_2 = 0.7117,\qquad g_3 = 3.3487\]
+Using the high pass transformation ($g_k \rightarrow \frac{1}{g_k}$), $g_1$ and $g_3$ are capacitors, and $g_2$ will be an inductor. Then, using Richards transformation, $g_1$ and $g_3$ will become open circuit stubs, and $g_{2}$ will be a short series short circuit stub. The impedance can be found:
+
+\begin{align*}
+Z_{s1} &= g_1Z_0 \\
+Z_{s1} &= 3.3487\cdot 50 \\
+Z_{s1} &= 167.44\ \Omega \\
+Z_{s2} &= \frac{Z_0}{g_2} \\
+Z_{s2} &= \frac{50}{0.7117} \\
+Z_{s2} &= 70.25\ \Omega \\
+Z_{s3} &= Z_{s1} \\
+\Rightarrow Z_{s3} &= 167.44\ \Omega
+\end{align*}
+This means the circuit is a series open circuit of impedance $164.93\ \Omega$, a shunt short circuit of impedance $70.25\ \Omega$, and a series open circuit of impedance $164.93\ \Omega$.
+
+** b
+This is not possible using the Kuroda identities, there are no transformations that convert series OC stubs to shunt OC stubs.
+
+** c
+Given the impossibility of part b, we will use the impedances from part a and assume that they are OC shunt stubs.
+\begin{align*}
+\epsilon_{eff} &= \frac{\epsilon_r + 1}{2} + \frac{\epsilon_r - 1}{2}\frac{1}{\sqrt{1 + 21h/W}} \\
+l &= \frac{\lambda_g}{8} \\
+\lambda_g &= \frac{c}{f \sqrt{\epsilon_{eff}}} \\
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG439_Week_7_Q1.m
+
+#+END_SRC
