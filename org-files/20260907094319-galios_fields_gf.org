@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       687ddfb2-0060-4bd8-a07b-f53d057e2fb2
+:END:
+#+title: Galios Fields (GF)
+#+date: [2026-09-07 Mon 09:43]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Galios Fields (GF)
+
+** GF(2)
+Is binary field
+\[0 + 0 = 0\]
+\[0 + 1 = 1\]
+\[1 + 0 = 1\]
+\[1 + 1 = 0\]
+Sub field of an extension field $GF(2^m)$, $m > 0$, $m\in \mathbb{N}$
+\[GF(2) = \{0,1\}\]
+\[GF(2^m) = \{0, \alpha^0, \alpha^1, \alpha^2, \hdots\}\]
+Irreducible polynomial
+\[\alpha^{\left(2^m - 1\right)} = 1 = \alpha^0\]
+ - It loops
+
+*** Example
+\[GF(2^3)\]
+
+|-----+-----+-----+-----|
+| Sym | X^0 | X^1 | X^2 |
+|-----+-----+-----+-----|
+| 0   |   0 |   0 |   0 |
+| a^0 |   1 |   0 |   0 |
+| a^1 |   0 |   1 |   0 |
+| a^2 |   0 |   0 |   1 |
+| a^3 |   1 |   1 |   0 |
+| a^4 |   0 |   1 |   1 |
+| a^5 |   1 |   1 |   1 |
+| a^6 |   1 |   0 |   1 |
+|-----+-----+-----+-----|
+Addition:
+\[\alpha^0 + \alpha^4 = 100 \oplus 011 = 111 = \alpha^5\]
+
+\[f(X) = 1 + X + X^3\]
+ - $m = 3$
+Roots:
+\begin{align*}
+f(\alpha^{?}) &= 0 \\
+0 &= 1 + \alpha + \alpha^3 \\
+\alpha^3 &= \alpha + 1 \\
+&\Rightarrow 1X^0 + 1X^1 + 0X^2 \\
+&= 110 \\
+\alpha^0 &\Rightarrow 1X^0 + 0X^1 + 0X^2 \\
+\alpha^1 &\Rightarrow 0X^0 + 1X^1 + 0X^2 \\
+\alpha^2 &\Rightarrow 0X^0 + 0X^1 + 1X^2 \\
+\alpha^4 &= \alpha^3\alpha = (\alpha + 1)\alpha = \alpha^2 + \alpha \\
+\alpha^4 &\Rightarrow 0X^0 + 1X^1 + 1X^2 \\
+&\vdots
+\end{align*}
+

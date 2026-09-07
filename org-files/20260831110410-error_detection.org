@@ -7,6 +7,12 @@
 #+STARTUP: latexpreview
 
 * Error Detection
+
+[[id:687ddfb2-0060-4bd8-a07b-f53d057e2fb2][Galios Fields (GF)]]
+[[id:5f09c487-40ff-46a0-b755-b8f129e98ebe][Parity Check Codes]]
+[[id:362ad5bc-234d-4218-a99c-fa03b4dc0cea][Hamming Distance]]
+[[id:91819072-d543-4ef1-b41d-c18778464fb1][Linear Block Codes]]
+
 We can code a system if we transmit two bits for one bit ($1 \rightarrow 11$ and $0 \rightarrow 00$) we can check if an error occurred by seeing $01$ or $10$. An undetected error is if we transmit $00$ and receive $11$ and vice versa.
 The probability of each case is:
 \begin{align*}
@@ -52,7 +58,7 @@ FER:
 \[FER = 1 - P_{accept} = 1\]
 \[P_{\textrm{undetected frame}} = \frac{\epsilon^2}{(1 + \epsilon)^2 + \epsilon^2} = 1.02\times10^{-4}\]
 \[E[T] = \frac{1}{P_{\textrm{accept}}} = 2.35\times10^{17}\]
-\[\eta = \frac{k}{n}P_{\textrm{accept}} = \frac{1}{2}4.26\times^{-18} = 2.13\times10^{-18}\]
+\[\eta = R_c P_{\textrm{accept}}= \frac{k}{n}P_{\textrm{accept}} = \frac{1}{2}4.26\times^{-18} = 2.13\times10^{-18}\]
 
 Total Bits $= T\cdot \textrm{\#bits/frame}\cdot \frac{n}{k}\cdot E[T] = 9.4\times10^{23}\ \textrm{bits}$
 

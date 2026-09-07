@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       5f09c487-40ff-46a0-b755-b8f129e98ebe
+:END:
+#+title: Parity Check Codes
+#+date: [2026-09-07 Mon 10:19]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Parity Check Codes
+Add a 1/0 bit at the end of a sequence depending on if there are even or odd number of 1 bits
+
+** Even Parity
+\[1011\boxed{1}\]
+$\boxed{1}$ is the parity bit
+It has a minimum [[id:362ad5bc-234d-4218-a99c-fa03b4dc0cea][Hamming Distance]] of $d_{\min} = 2$
+
+** Example
+Even parity $1100$
+\[\rightarrow 11000\boxed{0}\]
+[[id:9a3a019a-1b55-42fc-b4e2-b3c5ddc5b001][BSC]], $\epsilon = 0.01$
+No errors $\Rightarrow (1 - \epsilon)^5 = 0.951$
+1 error $\Rightarrow 5\epsilon(1 - \epsilon)^4 = 0.048$
+ - detectable
+2 error $\Rightarrow K_2\epsilon(1 - \epsilon)^4 = K_2\cdot 9.7\times10^{-5}$
+ - Undetectable
+3 error $\Rightarrow K_3\epsilon(1 - \epsilon)^4 = K_3\cdot 9.7\times10^{-7}$
+ - Detectable
+Odd errors can be detected

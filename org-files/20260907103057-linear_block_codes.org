@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       91819072-d543-4ef1-b41d-c18778464fb1
+:END:
+#+title: Linear Block Codes
+#+date: [2026-09-07 Mon 10:30]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Linear Block Codes
+[[id:6ec7c6cc-7e06-4eee-a0f1-e31389b9dd81][Hamming Codes]]
+\[\boxed{\textrm{k-bits}} \rightarrow \boxed{\textrm{n-bits}}\]
+
+Systematic Codes:
+\[\boxed{\textrm{k-bits}} &\rightarrow \boxed{\textrm{k-bits}}\boxed{\textrm{n-k-bits}}\]
+
+** Matrix Form
+ - $x$ is the data
+ - $c$ is the codeword
+ - $G$ is the generator matrix
+   - $k\times n$
+\[c = xG\]
+
+$G = [I | P]$ will give a systematic code.
+
+** Dual Code
+Every linear generator, $G$, matrix has a dual code $H$ (parity check matrix).
+\begin{align*}
+GH^T &= 0 \\
+c &= xG \\
+cH^T &= xGH^T = 0 \\
+cH^T &= 0
+\end{align*}
+
+\[H = [-P^T | I_{n-k}]\]
+
+** Syndrome
+
+\begin{align*}
+r &= c + e \\
+S &= rH^T \\
+S &= (c + e)H^T \\
+S &= 0 + eH^T \\
+S &= eH^T 
+\end{align*}
+1. Block code is linear if any linear combination of two codewords is also a codeword
+2. Hamming weight of a codeword is the number of non-zero elements in the codeword
+3. Minimum Hamming Weight is minimum of all Hamming Weights
+
+   
+

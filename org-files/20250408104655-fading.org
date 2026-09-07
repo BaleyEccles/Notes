@@ -16,10 +16,11 @@
  - The noise ($n(t)$) is typically small
 This has [[id:67259b4a-7fd8-4d7b-afaf-42c443f305a6][baseband]] equivalent:
 \[r_0(t) = \sum_{k=1}^N a_k s_0(t - T_k) e^{j(\phi_c - 2\pi f_cT_k)} + n(t)\]
-This meas there are a channel impulse response:
+This means there is a channel impulse response:
 \[h(t,\tau) = \sum_{k=1}^N a_k \delta (t - T_k) e^{j(\phi_k - 2\pi f_c \tau_k)}\]
 
 ** Fading Channel Characteristics
+
 [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Fading_Channel_Characteristics.xopp]]
 [[xopp-figure:/home/baley/UTAS/org-roam/org-files/Fading_Channel_Characteristics_Recived.xopp]]
 

@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       362ad5bc-234d-4218-a99c-fa03b4dc0cea
+:END:
+#+title: Hamming Distance
+#+date: [2026-09-07 Mon 10:19]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Hamming Distance
+amount of symobls/bits that need to change from $A\rightarrow B$
+
+** Example
+$1001 \rightarrow 1010$
+has Hamming distance of 2:
+$10\boxed{0}\boxed{1} \rightarrow 10\boxed{1}\boxed{0}$
