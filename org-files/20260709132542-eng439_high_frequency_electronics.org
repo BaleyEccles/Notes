@@ -27,6 +27,8 @@ Microwave Engineering, D.M. Pozar
 [[id:1f4c0ec5-3410-491f-aabe-8a224ce3512c][ENG439 - High Frequency Electronics - Question Week 3]]
 [[id:ae0e3d63-51db-44c1-8f19-86ab94fda920][ENG439 - High Frequency Electronics - Question Week 4]]
 [[id:6da06155-5d3d-4321-b7e5-1ba14b082ac8][ENG439 - High Frequency Electronics - Question Week 5]]
+[[id:f798997a-f8d2-48b9-b1a7-a500d4d7559e][ENG439 - High Frequency Electronics - Question Week 6]]
+[[id:6bb8a06a-4e96-4971-b574-63c60c63faf2][ENG439 - High Frequency Electronics - Question Week 7]]
 ** Mid Semester Test
  - after break
  - [[id:a6dd599f-5fe7-4321-8c3b-e2ad742b8c5b][ENG439 - High Frequency Electronics - Formula Sheet]]

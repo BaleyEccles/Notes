@@ -1,0 +1,108 @@
+:PROPERTIES:
+:ID:       1f7f4504-387a-4309-8e60-72382b726158
+:END:
+#+title: ENG439 - High Frequency Electronics - Question Week 8
+#+date: [2026-09-10 Thu 18:55]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+* Question 1
+** a
+\begin{align*}
+z_L &= \frac{100 - j50}{50} = 2 - j1 \\
+y_L &= \frac{1}{2 - j1} = 0.4 + j0.2
+\end{align*}
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG439_Week8_Q1_a.xopp]]
+From the Figure we get:
+\begin{align*}
+d_1 &= 0.161 - 0.036 \\
+d_1 &= 0.125 \lambda \\
+d_2 &= 0.339 - 0.036 \\
+d_2 &= 0.303 \lambda
+\end{align*}
+And
+\begin{align*}
+y_{1} &= -j \\
+y_{2} &= +j
+\end{align*}
+
+Using $y_s = -j \frac{1}{\tan(\beta l_{s1})}$ ($\beta = \frac{2\pi}{\lambda}$) this means:
+\begin{align*}
+-j &= -j\frac{1}{\tan(\beta l_{s1}) \\
+\Rightarrow l_{s1} &= 0.125\lambda \\
+j &= -j\frac{1}{\tan(\beta l_{s2}) \\
+\Rightarrow l_{s2} &= 0.375\lambda
+\end{align*}
+
+** b
+For solution 1:
+\begin{align*}
+Y_L &= \frac{-j}{Z_0} \\
+Y_L &= -j0.02\ \textrm{S} \\
+Y_L &= \frac{-j}{\omega L} \\
+-j0.02 &= \frac{-j}{\omega L} \\
+0.02 &= \frac{1}{2\pi 1\times 10^9 L} \\
+\Rightarrow L &= 7.96\ \textrm{nH}
+\end{align*}
+
+For solution 2:
+\begin{align*}
+Y_L &= \frac{j}{Z_0} \\
+Y_L &= j0.02\ \textrm{S} \\
+Y_L &= \frac{-j}{\omega L} \\
+j0.02 &= j\omega C
+0.02 &= 2\pi 1\times 10^9 C \\
+\Rightarrow C &= 3.18\ \textrm{pF}
+\end{align*}
+
+** Question 2
+*** a
+\begin{align*}
+Q_T &= \sqrt{\frac{R_x}{\min(R_s, R_L) - 1}} \\
+R_x &= \min(R_s, R_L) (Q_T^2 + 1) \\
+R_x &= \min(50, 100) (5^2 + 1) \\
+R_x &= 1300\ \Omega
+\end{align*}
+
+*** b
+\begin{align*}
+z_L &= 2 - j \\
+r_x &= 26
+\end{align*}
+
+[[xopp-pages:/home/baley/UTAS/org-roam/org-files/ENG439_Week8_Q2_b.xopp]]
+From the image:
+\begin{align*}
+- 4.8j - (-1j) &= -3.8j \\
+X_{C2} &= -3.8\cdot 50 \\
+\Rightarrow X_{C2} &= -190\ \Omega
+b_{L1} &= -0.18 \\
+\Rightarrow B_{L1} &= -3.6\ \textrm{mS} \\
+0 - 3.6 &= -3.6 \\
+X_{C2} &= -3.6\cdot 50 \\
+\Rightarrow X_{C2} &= 180\ \Omega
+\end{align*}
+
+*** c
+\begin{align*}
+\lvert X_C\rvert &= \frac{1}{\omega C} \\
+\Rightarrow C_1 &= 0.837\ \textrm{pF} \\
+\Rightarrow C_2 &= 0.884\ \textrm{pF} \\
+Y_L &= \frac{-j}{\omega L} \\
+\Rightarrow L_1 &= 44.2\ \textrm{nH}
+\end{align*}
+
+*** d
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG439_Week8_Q2_d.xopp]]
