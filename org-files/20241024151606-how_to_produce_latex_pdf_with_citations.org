@@ -17,3 +17,18 @@
  - 'ENG307 - Electrical and Mechatronic Design - Design Assignment 2' is a good example
    
 ~yes "" | xelatex report.tex  && biber report && yes "" | xelatex report.tex~
+
+* Headers
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER: \usepackage[export]{adjustbox}
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [12pt]

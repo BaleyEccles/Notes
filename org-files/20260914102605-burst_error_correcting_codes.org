@@ -1,0 +1,48 @@
+:PROPERTIES:
+:ID:       5033ffd9-730e-4414-ba8c-b00c4fa4e28a
+:END:
+#+title: Burst Error Correcting Codes
+#+date: [2026-09-14 Mon 10:26]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Burst Error Correcting Codes
+** Interleaving
+Take the code words and transmit the nth bit of each code word, now burst errors become bit errors
+
+** Reed-Solomon Codes (RS)
+ - Subset of BCH codes
+\[(n,k) = (2^m - 1, 2^m - 1 - 2t)\]
+ - $t$ is the number of errors to fix
+Generator polynomial
+\[g(x) = g_0 + g_1X^1 + g_2X^2 + \hdots X^{2t}\]
+$g(x)$ roots $\{\alpha^1, \alpha^2, \hdots, \alpha^{2t}\}$
+\[g(x) = (X - \alpha^1)(X - \alpha^2)(x - \alpha^3)\hdots(X - \alpha^{2t})\]
+
+*** Exmaple
+$RS(7,3)$
+\[g(x) = \alpha^3 + \alpha^1 X + \alpha^0 X^2 + \alpha^3 X^3 + X^4\]
+Message 010 110 111
+$\alpha^1 = 010$
+$\alpha^3 = 110$
+$\alpha^5 = 111$
+\[m(x) = \alpha^1 + \alpha^3 X + \alpha^5X^2\]
+\[p(x) = X^{n-k}m(x) \mod g(x)\]
+\[p(x) = \alpha^0 + \alpha^2 X + \alpha^4 X^2 + \alpha^6 X^3\]
+\[c(x) = \underbrace{\alpha^0 + \alpha^2 X + \alpha^4 X^2 + \alpha^6 X^3} + \underbrace{\alpha^1 X^4 + \alpha^3 X^5 + \alpha^5 X^4}\]
+                 Parity                      Data
+ - See notes for full Example
+
+*** Chien Search
+Error locator polynomial
+\[\sigma (x) = (1 + \beta_1 X)(1 + \beta_2 X)\hdots (1 + \beta_v X)\]
+ - $\beta_n$ is the error locations
+ - $v$ is number of errors
+$\left\{\frac{1}{\beta_1}, \frac{1}{\beta_2}, \hdots, \frac{1}{\beta_v}\right\}$ roots of $\sigma(t)$
+\[\begin{bmatrix}
+S_1 & S_2 & \hdots & S_{t - 1} & S_{t} \\
+S_2 & S_3 & \hdots & S_{t} & S_{t + 1} \\
+\vdots & \vdots & \hdots & \vdots & \vdots \\
+S_t & S_{t + 1} & \hdots & \hdots & S_{2t - 1} \\
+\end{bmatrix}\]
+

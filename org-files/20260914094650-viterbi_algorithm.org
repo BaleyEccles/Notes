@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       dc801ca3-26d2-45d3-a69b-998dfb132361
+:END:
+#+title: Viterbi Algorithm
+#+date: [2026-09-14 Mon 09:46]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Viterbi Algorithm
+Using a Trellis Diagram
+\[\Delta_l = \|r[k] - h[0] a_k - h[1] a_{k-1}\|^2\]

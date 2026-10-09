@@ -1,0 +1,109 @@
+:PROPERTIES:
+:ID:       4902c463-4e42-4bd6-ab54-6e23402981da
+:END:
+#+title: Frequency-Hopped Spread Spectrum (FH-SS)
+#+date: [2026-09-28 Mon 09:11]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Frequency-Hopped Spread Spectrum (FH-SS)
+\[W = \frac{B}{Q}\]
+ - $B$ is the total hopping bandwidth
+ - $W$ is the instantaneous bandwidth
+ - Each range $Q$ has width $W$ with carrier frequency in the centre
+   - $Q$ bands selected pseudo randomly
+ - $q$ is the modulation size
+ - $M$ is the number of hop options
+   - $M = qQ$ levels
+   
+\[\begin{cases}
+T_s &< T_c,\qquad \textrm{slow hopping} \\
+T_s &> T_c,\qquad \textrm{fast hopping}
+\end{cases}\]
+ - Duration of each loop $T_c$
+ - Duration of each data symbol $T_s$
+   - There are $N$ hops in $T_s$
+   - $N = \frac{T_s}{T_c}$
+
+** Receiver Design
+Modulation is done with non-coherent [[id:b36203ff-c777-465d-bf78-b6fac862f519][FSK]], so the receiver needs a non-coherent detector sampling at $T_c$. Since the Tx and Rx need the same pseudocode to follow the carrier frequency movements across the $Q$ levels, they must be synchronised. Synchronism to other users is not needed.
+
+Receiver:
+\[\boxed{\textrm{BPF}}\rightarrow \boxed{(\ )^2}\rightarrow \boxed{\int_0^{T_c}dt}\rightarrow \boxed{\textrm{sample at } T_c} \rightarrow \boxed{\textrm{Threshold}}\]
+
+Within the band $Q$ there are $q$ receiver filter banks. The receiver wants the other bands in $q$ to be empty to have a high signal-to-interference ratio and have the best chance to correctly interpreting the input signal.
+
+
+** Performance - Error Performance And Number Of Users
+Probability of each band $Q_i$ is $\frac{1}{Q}$
+If one user transmit one bit in $N$ timeslots, the individual transmission rate is $\frac{1}{N}$. The system with $K$ users transmits $R = \frac{K}{N}$
+
+We can estimate the error probability: consider the first user, then $K - 1$ interferes exist.
+Probability that the band is not occupied by another user at the timeslot that we transmit is:
+\[\Pr(\textrm{correct}) = \left( 1 - \frac{1}{M} \right)^{K-1}\]
+
+The probability that the receiver cannot make a single correct decision at any $T_c$ in $T_s$ is:
+\[\Pr(\textrm{not correct}) = \left[ 1 - \left( 1 - \frac{1}{M} \right)^{K-1} \right]^N\]
+So,
+\[\boxed{\Pr(\textrm{sym error}) \approx \left( 1 - \frac{1}{q} \right){\left[ 1 - \left( 1 - \frac{1}{M} \right)^{K-1} \right]^N }}\]
+
+\[\Pr(\textrm{bit error}) = \frac{q}{2(q-1)}\Pr(\textrm{sym error})\]
+
+If $M >> 1$, $P(\textrm{sym error}) = \left( 1 - \frac{1}{q} \right)\left[ 1 - e^{- \frac{K-1}{M}} \right]^N$
+
+** Processing Gain
+FHSS: $R_e = \frac{B}{R_b} \neq \frac{T_s}{T_c}$
+
+\begin{align*}
+R_e &= \frac{M}{T_c} NT_c \\
+R_b &= \frac{1}{NT_c} \\
+B &= \frac{M}{T_c} \\
+R_e &= MN
+\end{align*}
+
+
+** Radio Channel Capacity Example
+Assume BFSK, so $q=2$. Assume that the active number of users is $K = \lambda M + 1$. Find $\lambda$ maximising $K$, given $M >> 1$. Also $T_c = \frac{2}{W} = \frac{M}{B}$
+
+We get
+\begin{align*}
+\Pr(\textrm{bit error}) = \Pr(\textrm{sym error}) &= \frac{1}{2}\left(  1- e^{-\frac{K-1}{M}} \right) \\
+\Rightarrow \ln(2\Pr(\textrm{sym error})) &= N\ln \left( 1 - e^{-\frac{K-1}{M}} \right)
+\end{align*}
+
+$N = T_s/T_c = \frac{B}{MR}$, and $M = \frac{K-1}{\lambda}$, we get
+\[K = 1 + \frac{B}{\ln(2R_b(E))} \lambda \ln(1 - e^{-\lambda})\]
+
+Find $\frac{dK}{d\lambda} = 0\Rightarrow \lambda = \ln(2)$, so
+\begin{align*}
+K_0 &= 1 + \frac{B}{R\ln(2R_b(E))} \ln(2) \ln(1 - e^{-\ln(2)}) \\
+&= 1 - \frac{B}{R\ln(2R_b(E))} \ln^2(2) \\
+&\approx 1 + \frac{B/R}{E_b/I_0}\ln^2(2)
+\end{align*}
+
+
+** Factors Impacting Interference Power
+:TODO: Move to SDFM or whatever its called from previous week lecture
+1. Voice activity gain, $\gamma_v$
+   Monitor each users activity and switch the transmitter off during dead periods. The activity of each of the speakers in a two-way conversation gives approximately  $\gamma_v = 2.67$, so $\frac{1}{\gamma_v}$ is the overall activity proportion.
+   
+2. Antenna gain $\gamma_a$
+   Sectoring provides an improvement, but also has a spatial interference component. If there is $120^{\circ}$-sectoring, then $\gamma_a = 2.4$. And for $60^{\circ}$-sectoring, $\gamma_a = 4.0$
+   
+3. Inter cell interference
+   All co-channel interferers contribute to interference. In CDMA system, usually we only have 1-cell reuse. The parameter $f$ is the factor of interference from outside the current cell compared to users in the cell. It is strongly position dependent, and so approximate value of $f = 0.6$ is often taken as an average.
+   Users in the cell generate interference $(k-1)\frac{P}{B}$. So, all users together outside the cell generate $f(k-1)\frac{P}{B}$
+
+With all three of these factors:
+\[I_0 = (K - 1) \frac{P}{B} \frac{1 + f}{\gamma_a\gamma_b} + N_0\]
+ - For cell-based CDMA systems
+   
+** Rate Diagrams
+Two users in a multiple access system receive signals with rate $r^{(1)}$ and $r^{(2)}$ respectively. They have transmission powers $P^{(1)}$ and $P^{(2)}$, all over bandwidth $B$. [[id:0a3093d2-6df1-49f4-b00a-f506505c424d][AWGN]] is applied. The code rate pair $(R^{(1)}, R^{(2)}$ is achievable when the probability of error can be made arbitrarily small (as per the [[id:b90da113-9aad-4168-93f6-da016a54f577][Shannon Capacity Theorem]]):
+\begin{align*}
+R^{(1)} &< B\log_2 \left( 1 + \frac{P^{(1)}}{BN_0} \right) & (1)\\
+R^{(2)} &< B\log_2 \left( 1 + \frac{P^{(2)}}{BN_0} \right) & (2)\\
+R^{(1)} + R^{(2)} &< B\log_2 \left( 1 + \frac{P^{(1)} + P^{(2)}}{BN_0} \right) & (3)
+\end{align*}
+
+If user 2 did not transmit, then $(1)$ and $(3)$ are the same and represent the maximum rate for user 1, similarly for user 2.

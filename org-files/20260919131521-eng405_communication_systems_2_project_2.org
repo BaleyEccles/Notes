@@ -1,0 +1,391 @@
+:PROPERTIES:
+:ID:       380dc1d2-c47f-4168-8064-de16a0cdbe09
+:END:
+#+title: ENG405 - Communication Systems 2 – Project 2
+#+date: [2026-09-19 Sat 13:15]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER: \usepackage[export]{adjustbox}
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [12pt]
+
+
+* Question 1
+** (a) Probability of bit error
+We can use nearest neighbour. For QPSK $d_{\min} = \sqrt{2E_s}$ and $N_{\min} = 4\cdot 2$:
+
+\begin{align*}
+\Pr(\textrm{symbol error}) &\approx \frac{N_{min}}{M} Q\left(\sqrt{\frac{d_{min}^2}{2N_0}}\right) \\
+\Pr(\textrm{symbol error}) &\approx \frac{4\cdot 2}{4} Q\left(\sqrt{\frac{\left( \sqrt{2E_s} \right)^2}{2N_0}}\right) \\
+\Pr(\textrm{symbol error}) &\approx 2 Q\left(\sqrt{\frac{E_s}{N_0}}\right) \\
+\end{align*}
+This can be converted to a bit error probability:
+\begin{align*}
+\Pr(\textrm{bit error}) &\leq \frac{1}{\log_2(M)}\Pr(\textrm{symbol error}) \\
+\Pr(\textrm{bit error}) & = \frac{2}{\log_2(4)} Q\left(\sqrt{\frac{2E_b}{N_0}}\right) \\
+\Pr(\textrm{bit error}) & = Q\left(\sqrt{\frac{2E_b}{N_0}}\right) \\
+\Rightarrow P_b(\gamma_b) & = Q\left(\sqrt{2\gamma_b}\right) \\
+\end{align*}
+
+We can now find it for the Rayleigh Distribution:
+\begin{align*}
+P_b &= \int_0^{\infty} P_b(\gamma) p_{\gamma}(\gamma) d\gamma \\
+p_{\gamma}(\gamma) &= \frac{1}{\bar{\gamma}}e^{-\frac{\gamma}{\bar{\gamma}}} \\
+P_b &= \int_0^{\infty} Q\left(\sqrt{2\gamma_b}\right) \frac{1}{\bar{\gamma}}e^{-\frac{\gamma}{\bar{\gamma}}} d\gamma \\
+P_b &= -\frac{\sqrt{\bar{\gamma}}}{2 \sqrt{\bar{\gamma} + 1}} + \frac{1}{2}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_2_Q1.m
+clc
+clear
+close all
+
+if exist('OCTAVE_VERSION', 'builtin')
+  set(0, "DefaultLineLineWidth", 2);
+  set(0, "DefaultAxesFontSize", 25);
+  warning('off');
+  pkg load symbolic
+end
+
+syms gamma gamma_bar positive
+
+Q_term = sym(1)/2 * erfc(sqrt(gamma));
+pdf_gamma = (1/gamma_bar) * exp(-gamma/gamma_bar);
+P_b = int(Q_term * pdf_gamma, gamma, 0, Inf);
+P_b = simplify(P_b);
+
+latex(P_b)
+#+END_SRC
+
+#+RESULTS:
+: Symbolic pkg v3.2.2: Python communication link active, SymPy v1.14.0.
+: - \frac{\sqrt{\gamma_{bar}}}{2 \sqrt{\gamma_{bar} + 1}} + \frac{1}{2}
+
+The probability of a frame error can be found:
+\begin{align*}
+\Pr(\textrm{correct frame}) &= (1 - P_b)^{3500} \\
+\Rightarrow \Pr(\textrm{frame error}) &= 1 - (1 - P_b)^{3500} \\
+\Pr(\textrm{frame error}) &= 1 - \left(1 - \left( -\frac{\sqrt{\bar{\gamma}}}{2 \sqrt{\bar{\gamma} + 1}} + \frac{1}{2} \right) \right)^{3500} \\
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_2_Q1.m
+syms Pr_Bit_Error
+P_F = 1 - (1 - P_b)^{3500};
+latex(P_F)
+P_F = 1 - (1 - Pr_Bit_Error)^{3500};
+latex(P_F)
+#+END_SRC
+
+#+RESULTS:
+: 1 - \left(\frac{\sqrt{\gamma_{bar}}}{2 \sqrt{\gamma_{bar} + 1}} + \frac{1}{2}\right)^{3500}
+: 1 - \left(1 - Pr_{Bit Error}\right)^{3500}
+
+Next, the SNR required for a Bit Error Rate of $10^{-5}$:
+\begin{align*}
+10^{-5} &= -\frac{\sqrt{\bar{\gamma}}}{2 \sqrt{\bar{\gamma} + 1}} + \frac{1}{2} \\
+\Rightarrow \bar{\gamma} &= 24999.25 \\
+\bar{\gamma} &= 10\log_{10}(24999.25) \\
+\bar{\gamma} &= 43.98\ \textrm{dB}
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_2_Q1.m
+gamma_bar_10_n5 = vpasolve(P_b == 10^(-5), gamma_bar, 4)
+vpa(10*log10(gamma_bar_10_n5), 4)
+#+END_SRC
+
+#+RESULTS:
+: gamma_bar_10_n5 = (sym) 24999.250002500025000250002500025
+: ans = (sym) 43.98
+
+The Frame Error Rate at a Bit Error Rate of $10^{-5}$:
+\begin{align*}
+\Pr(\textrm{frame error}) &= 1 - \left(1 - 10^{-5}\right)^{3500} \\
+\Pr(\textrm{frame error}) &= 3.44\times 10^{-2} \\
+\textrm{FER} &= 3.44\% \\
+\end{align*}
+
+#+BEGIN_SRC octave :results output :exports none :session Q1 :eval no-export :tangle ENG405_Project_2_Q1.m
+Pr_FE = 1 - (1 - 10^(-5))^3500
+1/(Pr_FE)
+#+END_SRC
+
+#+RESULTS:
+: Pr_FE = 0.034395
+: ans = 29.074
+
+Note that $\frac{1}{3.44\%} = 29$, so even though 1 in $100\ 000$ bits are wrong, 1 in $29$ frames are wrong.
+
+** (b) QPSK Rayleigh Simulation
+In Figure \ref{fig:ENG405_Project_2_Q1_BER} we can see that the BER matches the theoretical line, as the SNR increases the BER decreases linearly (in decibels) as expected. From part a we calculated a required SNR of $43.98\
+ \textrm{dB}$ for a BER of $10^{-5}$e and on the plot we can see that this is true.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q1_BER} Uncoded BER
+[[./ENG405_Project_2_Q1_BER.pdf]]
+
+In Figure \ref{fig:ENG405_Project_2_Q1_FER} we can see that the FER matches the theoretical line, as the SNR increases the FER decreases as expected. Looking at both the FER and BER plots we can see that at around a BER of $10^{-3}$ we get $100\%$ FER. As calculated in part a we can see that a BER corresponds to a FER of $\approx 3.5\%$.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q1_FER} Uncoded FER
+[[./ENG405_Project_2_Q1_FER.pdf]]
+
+** (c) Why The required SNR Is Unreasonable
+Firstly, the SNR is very high ($44\ \textrm{dB}$) to achieve the modest $10^{-5}$ bit error rate. Secondly, a bit error rate of $10^{-5}$ is not sufficient to transmit the 3500 bit frame without consistent errors. As mentioned in part a, 1 in 29 frames being wrong would require significant retransmission of data to ensure the received data is not corrupted.
+
+* Question 2
+** (a) Convolutional Encoder
+It was chosen that $L=4$, and:
+\begin{align*}
+g_1 &= [1\ 1\ 0\ 1] \\
+g_2 &= [1\ 1\ 1\ 1] \\
+\end{align*}
+The shift register is $[n_1, n_2, n_3, n_4]$, and the two outputs are:
+\begin{align*}
+c_1 &= n_1 \otimes n_2 \otimes n_4 \\
+c_2 &= n_1 \otimes n_2 \otimes n_3 \otimes n_4
+\end{align*}
+This means that the coding rate is $R_c = \frac{k}{n} = \frac{1}{2}$, and there are $2^{L-1} = 2^{4-1} = 8$ states.
+
+The drawing of the convolutional encoder can be seen in the following drawing:
+
+#+ATTR_LATEX: :width 0.8\textwidth :placement [H]
+#+CAPTION: \label{fig:xopp} Convolutional Encoder Drawing
+
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/ENG405_Project_2_Q2_a_Encoder.xopp]]
+
+To fit this into the frame of 3500 bits we can send:
+\begin{align*}
+\textrm{information bits} &= R_c\textrm{frame size} \\
+\textrm{information bits} &= \frac{1}{2} 3500 \\
+\textrm{information bits} &= 1750\ \textrm{bits}
+\end{align*}
+However, we also need an extra three bits to return to $000$, so $\textrm{information bits} = 1747\ \textrm{bits}$
+
+** (b) Hard-decision Viterbi performance
+Comparing the BER curves in Figures \ref{fig:ENG405_Project_2_Q1_BER} and \ref{fig:ENG405_Project_2_Q2_convolutional_code_ber}: we can see that convolutional code is better than the uncoded scheme, it takes approximately $20.35\ \textrm{dB}$ less SNR to reach a BER of $10^{-5}$. This means that the required transmitter power for an equivalent BER is considerably less.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q2_convolutional_code_ber} Convolutional coded BER
+[[./ENG405_Project_2_Q2_convolutional_code_ber.pdf]]
+
+Comparing the FER curves in Figures \ref{fig:ENG405_Project_2_Q1_FER} and \ref{fig:ENG405_Project_2_Q2_convolutional_code_fer} we can see that convolutional is once again better than the uncoded scheme.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q2_convolutional_code_fer} Convolutional coded FER
+[[./ENG405_Project_2_Q2_convolutional_code_fer.pdf]]
+
+The coding gain can simply be calculated as following for each of the BERs:
+\begin{align*}
+G_{\textrm{coding}} &= \textrm{SNR}_{\textrm{uncoded}} - \textrm{SNR}_{\textrm{convolutional}} \\
+G_{\textrm{coding}}|_{10^{-2}} &= 4.37\ \textrm{dB} \\
+G_{\textrm{coding}}|_{10^{-5}} &= 20.35\ \textrm{dB} \\
+\end{align*}
+
+** (c) Error-Detection
+From the previous parts when frames were received the only reason we knew something was wrong was because we had the original transmissions. In reality the receiver does not have the transmitted information, so there needs to be a way to detect if an error has occurred. Error detection can be done using a Cyclic Redundancy Check (CRC). CRCs provide a 'summary'/hash of the information in the transmission, if the CRC is not the same at the transmitter and receiver then an error has occurred.
+
+CRC-16/CCITT will be used in this assignment. This CRC as the polynomial:
+\[g_{\textrm{CRC}}(x) = x^{16} + x^{12} + x^5 + 1\]
+
+Now the frame will require an extra 16 bits to store the CRC, so the frame will become:
+\[1731\ \textrm{information bits} + 16\ \textrm{CRC} + 3\ \textrm{return to 000} = 3500\ \textrm{transmitted bits}\]
+
+One problem with this is if the CRC passes, but the data has encountered one or more error(s). This is known as an undetected error, the CRC believes that data is correct however we know it is incorrect by looking at the transmitted data. The simulation showed occasional undetected errors at low SNR. The most undetected errors occurred at an SNR of $5\ \textrm{dB}$ and $7\ \textrm{dB}$, they both had 2 undetected errors.
+
+In Python we can use the ~binascii~ module to calculate the CRC.
+
+In Figure \ref{fig:ENG405_Project_2_Q2_retransmissions} we can see the retransmissions per frame, this was calculated using:
+
+\[E[N_T] = \frac{\textrm{total transmissions}}{\textrm{frames}}\]
+
+We can see that for SNRs lower than $\approx 12\ \textrm{dB}$ the amount of retransmissions grow very fast, until peaking at 100 (which is a limit of the simulation). For high SNR the retransmissions approach one, this means that every frame is accepted.
+
+
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q2_retransmissions} Retransmissions of convolutional coded scheme
+[[./ENG405_Project_2_Q2_retransmissions.pdf]]
+
+In Figure \ref{fig:ENG405_Project_2_Q2_throughput} we can see the throughput, it was calculated using:
+\begin{align*}
+\textrm{throughput} &= \frac{\textrm{payload bits delivered}}{\textrm{total transmitted bits}} \\
+\textrm{throughput} &= \frac{1731\cdot\textrm{frames}}{3500\cdot\textrm{total transmissions}}
+\end{align*}
+The maximum value is $\frac{1731}{3500} = 0.4956$, and it can be seen in the plot that it reaches it at high SNR. For low SNR the throughput goes to zero as expected.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q2_throughput} Throughput of convolutional coded scheme
+[[./ENG405_Project_2_Q2_throughput.pdf]]
+
+* Question 3
+** (a) Defining The Code
+The code chosen was $\textrm{RS}(218, 186)$ that operates over $\textrm{GF}(2^8)$. $\textrm{RS}(218, 186)$ was chosen as a shortened form of $\textrm{RS}(255, 223)$. It was shortened by subtracting $37$ from both $n$ and $k$. This ensures the minimum distance and amount of symbol errors it corrects remains the same, while creating a more optimal frame usage.
+
+\begin{align*}
+d_{\min} &= n - k + 1 \\
+d_{\min} &= 218 - 186 + 1 \\
+d_{\min} &= 33 \\
+t &= \left\lfloor \frac{d_{\min} - 1}{2} \right\rfloor \\
+t &= \left\lfloor \frac{33 - 1}{2} \right\rfloor \\
+t &= 16 \ \text{symbol errors per codeword}
+\end{align*}
+
+
+The shortened size is $218\cdot 8 = 1744\ \textrm{bits}$, but if two codewords are placed in one frame we get a size of $2\cdot1744 = 3488\ \textrm{bits}$, which is very close to the frame size of $3500\ \textrm{bits}$. Only $12\ \textrm{bits}$ are required for padding.
+
+The code rate is:
+\begin{align*}
+R_c &= \frac{k}{n} \\
+R_c &= \frac{186}{218} \\
+R_c &= 0.8532
+\end{align*}
+
+** (b) Performance of RS(218,186)
+The ~reedsolo~ PyPi project was used for encoding and decoding this portion of the simulation, as any implementation I could personally implement in Python would not be fast enough. The ~reedsolo~ project uses the Berlekamp-Massey algorithm for decoding, as required.
+
+The simulated BER and FER plots are shown in Figure \ref{fig:ENG405_Project_2_Q3_reed_solomon_code_ber} and Figure \ref{fig:ENG405_Project_2_Q3_reed_solomon_code_fer}, respectively. At low SNR the number of errors are greater than the maximum amount of correctable symbol errors, so the BER is high. For higher SNR the number of errors reduce lower than the 16 symbol errors, so they are corrected, which results in a sharp decrease in BER at around an SNR of $15\ \textrm{dB}$. The FER plot shows the same thing, for low SNR the errors are high and uncorrectable, but once the SNR increases above about $15\ \textrm{dB}$ the FER decreases dramatically.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q3_reed_solomon_code_ber} Reed Solomon coded BER
+[[./ENG405_Project_2_Q3_reed_solomon_code_ber.pdf]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q3_reed_solomon_code_fer} Reed Solomon coded FER
+[[./ENG405_Project_2_Q3_reed_solomon_code_fer.pdf]]
+
+The coding gain can also be calculated as following for each of the BERs:
+\begin{align*}
+G_{\textrm{coding}} &= \textrm{SNR}_{\textrm{uncoded}} - \textrm{SNR}_{\textrm{Reed Solomon}} \\
+G_{\textrm{coding}}|_{10^{-2}} &= 0.38\ \textrm{dB} \\
+G_{\textrm{coding}}|_{10^{-5}} &= 25.58\ \textrm{dB}
+\end{align*}
+
+** (c) Error-Detection
+The same CRC from Q2 part c will be used here, however the setup will be different because we have two Reed Solomon codes to deal with and thus one CRCs.
+
+$RS(218,186)$ produces $2\cdot 186\cdot 8 = 2976\ \textrm{information bits}$. The CRC is $16\ \textrm{bits}$ long, so we can transmit $2960\ \textrm{data bits}$ per codeword. This means the final transmission will become:
+
+\[2960\ \textrm{data bits} + 16\ \textrm{CRC} \rightarrow 2\cdot \textrm{RS}(218, 186) \rightarrow 3488 + 12\ \textrm{padding bits} = 3500\]
+
+The number of retransmissions per frame can be seen in Figure \ref{fig:ENG405_Project_2_Q3_retransmissions} and the normalised throughput can be seen in Figure \ref{fig:ENG405_Project_2_Q3_throughput}. The maximum throughput is $\frac{2960}{3500} = 0.8457$, in the plot it can be seen that this is reached for high SNR. Undetected errors occurred occasionally at low SNR.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q3_retransmissions} Retransmissions of Reed Solomon coded scheme
+[[./ENG405_Project_2_Q3_retransmissions.pdf]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q3_throughput} Throughput of Reed Solomon coded scheme
+[[./ENG405_Project_2_Q3_throughput.pdf]]
+
+* Question 4
+** (a) Defining The Code
+The two previously defined codes will be used to create a serial concatenated code:
+\[\textrm{RS}(218, 186) \rightarrow \textrm{convolutional code}\]
+The outer code is the Reed Solomon code: $\textrm{RS}(218, 186)$, it has previously calculated specifications:
+\begin{align*}
+&\textrm{GF}(2^8) \\
+&1488\ \textrm{information bits} \\
+&1744\ \textrm{coded bits} \\
+d_{\min} &= 33 \\
+t &= 16
+\end{align*}
+
+Three zero termination bits are then added to give $1747\ \textrm{bits}$. The inner code is the convolutional code defined by:
+\begin{align*}
+L &= 4 \\
+R_s &= \frac{1}{2} \\
+g_1 &= [1\ 1\ 0\ 1] \\
+g_2 &= [1\ 1\ 1\ 1] 
+\end{align*}
+
+The convolutional code produces $2\cdot 1747 = 3494\ \textrm{bits}$, then $6$ padded bits are added to create the 3500 bit long frame.
+
+The overall effective code rate is:
+\begin{align*}
+R_c &= \frac{\textrm{information bits}}{\textrm{transmitted bits}} \\
+R_c &= \frac{1488}{3500} \\
+R_c &= 0.4251 \\
+\end{align*}
+
+** (b) Performance Of The Coding Scheme
+The BER and FER plots for the concatenated coding scheme can be seen in Figures \ref{fig:ENG405_Project_2_Q2_concat_ber} and \ref{fig:ENG405_Project_2_Q2_concat_fer}. The coding gain compared to the uncoded scheme can be seen as follows:
+\begin{align*}
+G_{\textrm{coding}} &= \textrm{SNR}_{\textrm{uncoded}} - \textrm{SNR}_{\textrm{concatenated}} \\
+G_{\textrm{coding}}|_{10^{-2}} &= 5.01\ \textrm{dB} \\
+G_{\textrm{coding}}|_{10^{-5}} &= 32.38\ \textrm{dB} \\
+\end{align*}
+
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q2_concat_ber} Concatenated coded BER
+[[./ENG405_Project_2_Q4_concat_ber.pdf]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q2_concat_fer} Concatenated coded FER
+[[./ENG405_Project_2_Q4_concat_fer.pdf]]
+** (c) Error-Detection
+Likewise for this part we will also be using CRC-16/CCITT, the exact transmission scheme needs to be changed to add the extra $16$ CRC bits. This can be achieved by reducing the information bits from $1488$ to $1472$ and then appending them on prior to the Reed Solomon encoding.
+
+The number of retransmissions per frame can be seen in Figure \ref{fig:ENG405_Project_2_Q4_retransmissions} and the normalised throughput can be seen in Figure \ref{fig:ENG405_Project_2_Q4_throughput}. The maximum throughput is $\frac{1472}{3500} = 0.4206$, in the plot it can be seen that this is reached for high SNR. The most undetected errors occurred at an SNR of $4\ \textrm{dB}$, it had 3 undetected errors.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q4_retransmissions} Retransmissions of Concatenated coded scheme
+[[./ENG405_Project_2_Q4_retransmissions.pdf]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_Q4_throughput} Throughput of Concatenated coded scheme
+[[./ENG405_Project_2_Q4_throughput.pdf]]
+
+** (d) Comparison
+Figures \ref{fig:ENG405_Project_2_BER_comparison} and \ref{fig:ENG405_Project_2_FER_comparison} compare the performance of the uncoded, convolutional, Reed Solomon and concatenated transmission schemes.
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_BER_comparison} BER comparison of all coding schemes.
+[[./ENG405_Project_2_Q4_comparison_ber.pdf]]
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: \label{fig:ENG405_Project_2_FER_comparison} FER comparison of all coding schemes.
+[[./ENG405_Project_2_Q4_comparison_fer.pdf]]
+
+
+The uncoded system has the poorest error performance. From Question 1, an $E_b/N_0$ of approximately $43.98\ \textrm{dB}$ is required to obtain a BER of $10^{-5}$. The advantage of the uncoded system is that no bits are used for forward error correction, so it has the highest possible code rate.
+
+The convolutional code considerably improves the performance of the system. At a BER of $10^{-5}$ it provides a coding gain of approximately $20.35\ \textrm{dB}$ compared with the uncoded system. However, the rate-$1/2$ convolutional code introduces substantial redundancy. With CRC and termination bits, only $1731$ of the $3500$ transmitted bits are payload, giving a maximum normalised throughput of
+
+\[\eta_{\textrm{conv,max}} = \frac{1731}{3500} = 0.4946\]
+
+The Reed Solomon code behaves differently from the convolutional code. At lower $E_b/N_0$ its BER is relatively high because the number of corrupted symbols frequently exceeds the correction capability of $t=16$ symbols per codeword. Once the number of errors becomes sufficiently small, the decoder can correct the received codewords and the BER and FER decrease very rapidly. This produces the steep falloff visible in the BER and FER plots. At a BER of $10^{-5}$ the Reed Solomon scheme provides approximately $25.58\ \textrm{dB}$ of coding gain compared with the uncoded system.
+
+The Reed Solomon code also has a considerably higher code rate than the convolutional code:
+
+\[R_{\textrm{RS}} = \frac{186}{218} = 0.8532\]
+
+Therefore, the Reed Solomon scheme can carry substantially more payload data per transmitted frame while still providing strong error correction.
+
+The concatenated code provides the strongest error performance of the tested schemes. The convolutional inner code reduces the number of bit errors presented to the Reed Solomon outer decoder. The Reed Solomon decoder can then correct the remaining erroneous symbols, resulting in the very sharp reduction in both BER and FER visible at approximately $E_b/N_0=9\rightarrow 12\ \textrm{dB}$. At a BER of $10^{-5}$ the concatenated scheme provides a coding gain of approximately
+
+\[G_{\textrm{coding}} = 32.38\ \textrm{dB}\]
+
+relative to the uncoded system.
+
+This improved reliability comes at the cost of the lowest effective code rate:
+
+\[R_{\textrm{concat}} = \frac{1488}{3500} = 0.4251\]
+
+When the CRC is included, the maximum normalised payload throughput becomes
+
+\[\eta_{\textrm{concat,max}} = \frac{1472}{3500} = 0.4206\]
+
+Therefore, there is a clear trade-off between error performance and transmission efficiency. The uncoded system has the greatest payload efficiency but requires a very large $E_b/N_0$ for reliable transmission. The Reed Solomon code retains a high code rate while substantially improving BER and FER, particularly once its symbol-error correction threshold is reached. The convolutional code provides further protection against random bit errors, but approximately half of the transmitted bits are redundancy. Combining the two codes gives the strongest BER and FER performance, but also produces the lowest payload rate because redundancy is introduced by both coding stages.
+

@@ -1,0 +1,70 @@
+:PROPERTIES:
+:ID:       205304a8-4440-4708-bc6b-054ff2cbdd79
+:END:
+#+title: Noise
+#+date: [2026-09-18 Fri 14:32]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Noise
+[[id:acdd879a-f336-4758-9a82-eb23901354f8][Noise Figure]]
+ - $k = 1.38\times10^{-23}$
+ - $T_0 = 290\ \textrm{K}$
+** Thermal Noise
+\[P_n = kTB\]
+ - $T$ in Kelvin
+
+** Equivalent Noise Temperature
+\[T_e = \frac{N_0}{k B}\]
+
+** Noisy Amplifier
+\[N_0 = GkT_eB\]
+ - When the source is noiseless
+\[N_0 = GkB(T_s + T_e)\]
+ - When the source has noise temperature $T_s$
+   
+** Y-Factor
+Used to measure noise
+\[N_1 = GkB(T_1 + T_e)\]
+\[N_2 = GkB(T_2 + T_e)\]
+The Y-factor is defined as:
+\[Y = \frac{N_1}{N_2}\]
+\[Y = \frac{T_1 + T_e}{T_2 + T_e}\]
+
+** Non-Linear Distortion
+Represented using [[id:356b1296-2188-4d04-9ccc-a4381bcc02b6][Taylor Series]] model:
+\[v_0 = a_0 + a_1v_i + a_2v_i^2 + a_3v_i^3 + \hdots\]
+
+*** Gain compression
+Single-Tone Nonlinear Response:
+\[v_i = V_0 \cos(\omega_0t)\]
+\[G_v = a_1 + \frac{3}{4}a_3V_0^2\]
+
+1 dB Compression Point:
+\[OP_{1\textrm{dB}} = IP_{1\textrm{dB}} + G - 1\ \textrm{dB}\]
+
+*** Two-Tone Intermodulation
+\[v_i = V_0[\cos(\omega_1t) + \cos(\omega_2t)]\]
+Frequencies of the form $m\omega_1 + n\omega_2$
+ - $m,n = 0,\pm 1, \pm 2,\hdots$
+
+*** Second-Order Products
+Important second-order products are
+\[2\omega_1\]
+\[2\omega_2\]
+\[\omega_1 - \omega_2\]
+\[\omega_1 + \omega_2\]
+
+*** Third-Order Products
+\[3\omega_1\]
+\[3\omega_2\]
+\[2\omega_1 + \omega_2\]
+\[\omega_1 + 2\omega_2\]
+\[2\omega_1 - \omega_2\]
+\[2\omega_2 - \omega_1\]
+
+*** Linear Dynamic Range
+\[LDR_{\textrm{dB}} = OP_{1\textrm{dB}} - N_o\]
+
+*** Spurious-Free Dynamic Range
+\[SFDR_{\textrm{dB}} = \frac{2}{3}(OIP3 - N_0 - SNR)\]

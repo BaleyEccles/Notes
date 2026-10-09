@@ -1,0 +1,95 @@
+:PROPERTIES:
+:ID:       ece9dd1a-03f3-436f-be4b-a2bd1ec1fa4a
+:END:
+#+title: ENG439 - High Frequency Electronics - Question Week 11
+#+date: [2026-10-02 Fri 14:40]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER: \usepackage[export]{adjustbox}
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [12pt]
+
+* Question 1
+** a
+\begin{align*}
+y_{\textrm{stub}} &= j\tan(\beta l) \\
+y_{\textrm{stub}} &= j\tan(2\pi 0.206) \\
+y_{\textrm{stub}} &= j3.5245 \\
+z_{\textrm{source}} &= \frac{Z}{Z_0} \\
+z_{\textrm{source}} &= \frac{50}{50} \\
+z_{\textrm{source}} &= 1 \\
+y_{\textrm{source}} &= \frac{1}{z_{\textrm{source}}} = 1 \\
+y_A &= 1 + j3.5245 \\
+z_A &= \frac{1}{1 + j3.5245} = 0.07450 - j0.26259 \\
+\Gamma_A &= \frac{z_A - 1}{z_A + 1} \\
+\Gamma_A &= \frac{0.07450 - j0.26259 - 1}{0.07450 - j0.26259 + 1} \\
+\Gamma_A &= -0.75643 - j0.42924
+\end{align*}
+
+Transform through the $0.120 \lambda$ line:
+
+\begin{align*}
+\Gamma_S &= \Gamma_A e^{-j2\beta l} \\
+\Gamma_S &= (-0.75643 - j0.42924) e^{-j2\cdot 2\pi 0.120\lambda} \\
+\Gamma_S &= -0.4759 + j0.7280
+\end{align*}
+
+** b
+Almost the exact same calculation as part a:
+\begin{align*}
+y_{\textrm{stub}} &= j\tan(\beta l) \\
+y_{\textrm{stub}} &= j\tan(2\pi 0.206) \\
+y_{\textrm{stub}} &= j3.5245 \\
+z_{\textrm{source}} &= \frac{Z}{Z_0} \\
+z_{\textrm{source}} &= \frac{50}{50} \\
+z_{\textrm{source}} &= 1 \\
+y_{\textrm{source}} &= \frac{1}{z_{\textrm{source}}} = 1 \\
+y_B &= 1 + j3.5245 \\
+z_B &= \frac{1}{1 + j3.5245} = 0.07450 - j0.26259 \\
+\Gamma_B &= \frac{z_B - 1}{z_B + 1} \\
+\Gamma_B &= \frac{0.07450 - j0.26259 - 1}{0.07450 - j0.26259 + 1} \\
+\Gamma_B &= -0.75643 - j0.42924
+\end{align*}
+
+Transform through the $0.206 \lambda$ line:
+
+\begin{align*}
+\Gamma_L &= \Gamma_B e^{-j2\beta l} \\
+\Gamma_L &= (-0.75643 - j0.42924) e^{-j2\cdot 2\pi 0.206\lambda} \\
+\Gamma_L &= -0.4183 + j0.7625
+\end{align*}
+
+** c
+\begin{align*}
+\Gamma_{\textrm{in}} &= S_{11} + \frac{S_{12}S_{21} \Gamma_L}{1 - S_{22}\Gamma_L} \\
+\Gamma_{\textrm{in}} &= (0.72\angle-116^{\circ}) + \frac{(0.03\angle57^{\circ})(2.6\angle76^{\circ}) (-0.4183 + j0.7625)}{1 - (0.73\angle-54^{\circ})(-0.4183 + j0.7625)} \\
+\Gamma_{\textrm{in}} &= -0.47596 - j0.72697
+\end{align*}
+
+\begin{align*}
+\Gamma_{\textrm{out}} &= S_{22} + \frac{S_{12}S_{21} \Gamma_L}{1 - S_{11}\Gamma_S} \\
+\Gamma_{\textrm{out}} &= (0.73\angle-54^{\circ}) + \frac{(0.03\angle57^{\circ})(2.6\angle76^{\circ}) (-0.4183 + j0.7625)}{1 - (0.72\angle-116^{\circ})(-0.4183 + j0.7625)} \\
+\Gamma_{\textrm{out}} &= 0.42247 - j0.76590
+\end{align*}
+
+** d
+
+\begin{align*}
+\Gamma_L &= -0.4183 + j0.7625 \\
+\Gamma_{\textrm{out}}^{*} &= 0.42247 + j0.76590 \\
+\Gamma_S &= -0.4759 + j0.7280 \\
+\Gamma_{\textrm{in}}^{*} &= -0.47596 + j0.72697
+\end{align*}
+
+So, the conditions for simultaneous conjugate matching are approximately true. Hence the design is designed to achieve maximum power.

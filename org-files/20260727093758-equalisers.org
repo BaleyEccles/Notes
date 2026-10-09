@@ -434,7 +434,7 @@ Lets say the transmitted symbols are $\{-1, -1, +1, -1\}$. The receiver does not
 0.0770 + j0.0902
 0.6871 + j0.5272
 \end{bmatrix}\]
-The Viterbi Algorithm then has paths calculated:
+The [[id:dc801ca3-26d2-45d3-a69b-998dfb132361][Viterbi Algorithm]] then has paths calculated:
 \[\Delta_l = \|r[k] - h[0] a_k - h[1] a_{k-1}\|^2\]
 
 **** Example

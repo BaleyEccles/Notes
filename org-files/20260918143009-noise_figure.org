@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       acdd879a-f336-4758-9a82-eb23901354f8
+:END:
+#+title: Noise Figure
+#+date: [2026-09-18 Fri 14:30]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* [[id:205304a8-4440-4708-bc6b-054ff2cbdd79][Noise]] Figure
+ - $T_0 = 290\ \textrm{K}$
+Measures how much a device degrades [[id:13d613eb-9630-41af-ab3f-c15eabc686f5][SNR]]
+\[F = \frac{S_i/N_i}{S_o/N_o}\]
+ - $N_i = kT_0 B$
+
+
+** Noise Figure and Noise Temperature
+\[F = 1 + \frac{T_e}{T_0}\]
+
+** Of a lossy transmission line
+With $G < 1$:
+\[L = \frac{1}{G}\]
+\[T_e = (L-1)T\]
+\[F = 1 + (L - 1)\frac{T}{T_0}\]
+
+** Cascaded Noise Figuree
+For two stages:
+\[T_{cas} = T_{e1} + \frac{T_{e2}}{G_1}\]
+For multiple stages
+\[T_{cas} = T_{e1} + \frac{T_{e2}}{G_1} + \frac{T_{e3}}{G_1G_2} + \hdots\] 
+
+Friis Noise Equation:
+For two stages
+\[F_{cas} = F_1 + \frac{F_2 - 1}{G_1}\]
+For multiple stages
+\[F_{cas} = F_1 + \frac{F_2 - 1}{G_1} + \frac{F_3 - 1}{G_1G_2} + \hdots\] 

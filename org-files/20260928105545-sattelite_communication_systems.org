@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       1df9132f-113b-4a67-918a-081e2a346104
+:END:
+#+title: Satellite Communication Systems
+#+date: [2026-09-28 Mon 10:55]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Satellite Communication Systems
+Earths Radius 6370 km
+Low earth orbit (LEO)
+ - 500 to 2000 km above the earth's surface
+Medium earth orbit (MEO)
+ - ~10 000 km above the earth's surface
+Geosynchronous orbit (GEO)
+ - ~35 800 km above the earth's surface
+
+** Orbital Mechanics - Kepler's Laws
+First Law:
+ - The path followed by a satellite around the primary mass is elliptical
+Second Law:
+ - For equal time intervals, a satellite will sweep out equal areas in the orbital plane focused at the primary focal point
+Third Law:
+ - The square of the orbital period is proportional to the mean of the cube of the mean distance between the primary mass and the satellite
+
+** Antenna Design
+Gain: $G = \frac{\pi^2 D^2 \eta}{\lambda^2}$
+

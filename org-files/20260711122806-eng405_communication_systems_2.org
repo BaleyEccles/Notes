@@ -43,6 +43,9 @@
 [[id:70a97d9e-e944-48a9-8fc5-cf501a7a12ed][Channel Capacity]]
 [[id:1aa43cbf-971d-4746-9e70-49c82b154323][Error Detection]]
 
+[[id:4902c463-4e42-4bd6-ab54-6e23402981da][Frequency-Hopped Spread Spectrum (FH-SS)]]
+[[id:1df9132f-113b-4a67-918a-081e2a346104][Satellite Communication Systems]]
+
 * Diagram
 :TODO:
 * Assessment
@@ -63,5 +66,7 @@
  - [[id:c7b20e70-138a-4214-b0d5-54b9a357e3e8][ENG405 - Communication Systems 2 – Project 3]]
 ** Simulation Project 2
  - Due Week 12
+ - [[id:380dc1d2-c47f-4168-8064-de16a0cdbe09][ENG405 - Communication Systems 2 – Project 2]]
 
 ** Exam
+ - FH-SS is the same as tutorial stuff (none on previous exams)

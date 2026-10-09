@@ -13,6 +13,9 @@
 [[id:362ad5bc-234d-4218-a99c-fa03b4dc0cea][Hamming Distance]]
 [[id:91819072-d543-4ef1-b41d-c18778464fb1][Linear Block Codes]]
 
+[[id:e5d3443c-8ef6-43f0-8502-441561a3c26e][Convolutional Codes]]
+[[id:5033ffd9-730e-4414-ba8c-b00c4fa4e28a][Burst Error Correcting Codes]]
+
 We can code a system if we transmit two bits for one bit ($1 \rightarrow 11$ and $0 \rightarrow 00$) we can check if an error occurred by seeing $01$ or $10$. An undetected error is if we transmit $00$ and receive $11$ and vice versa.
 The probability of each case is:
 \begin{align*}

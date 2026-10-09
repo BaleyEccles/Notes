@@ -14,12 +14,13 @@
  - [[id:ce7f7be0-a734-4999-9175-9aabfa310530][Network Analysis]]
  - [[id:b01c8577-794b-41fc-b88c-143b1711d726][Analogue And Digital Filter Design]]
  - [[id:edb14fad-b35e-48e4-a1a3-8fcd7174d53b][Microstrip]]
+ - [[id:205304a8-4440-4708-bc6b-054ff2cbdd79][Noise]]
 * Assessment
 Microwave Engineering, D.M. Pozar
 ** Design Report
  - 5 parts
  - Design Report Extension Task
-
+ - [[id:679dfcf8-3294-4bc4-823a-dd77ed22581d][ENG439 - High Frequency Electronics - Design Report]]
 ** Assessed Tutorials
  - 12, take 10 best
 [[id:6e4a22da-fc94-456d-afad-f7a647dd8f33][ENG439 - High Frequency Electronics - Question Week 1]]
@@ -29,6 +30,8 @@ Microwave Engineering, D.M. Pozar
 [[id:6da06155-5d3d-4321-b7e5-1ba14b082ac8][ENG439 - High Frequency Electronics - Question Week 5]]
 [[id:f798997a-f8d2-48b9-b1a7-a500d4d7559e][ENG439 - High Frequency Electronics - Question Week 6]]
 [[id:6bb8a06a-4e96-4971-b574-63c60c63faf2][ENG439 - High Frequency Electronics - Question Week 7]]
+[[id:1f7f4504-387a-4309-8e60-72382b726158][ENG439 - High Frequency Electronics - Question Week 8]]
+[[id:ed374776-fadc-49e7-93bb-611001a6d10e][ENG439 - High Frequency Electronics - Question Week 9]]
 ** Mid Semester Test
  - after break
  - [[id:a6dd599f-5fe7-4321-8c3b-e2ad742b8c5b][ENG439 - High Frequency Electronics - Formula Sheet]]

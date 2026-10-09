@@ -1,0 +1,106 @@
+:PROPERTIES:
+:ID:       be7999f2-39f9-4b38-93c0-11e1cd8235c1
+:END:
+#+title: ENG439 - High Frequency Electronics - Question Week 10
+#+date: [2026-09-25 Fri 11:23]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+#+FILETAGS: :Assignment:UTAS:2026:
+#+LATEX_HEADER: \usepackage[a4paper, margin=1in]{geometry}
+#+LATEX_HEADER_EXTRA: \usepackage{minted}
+#+LATEX_HEADER_EXTRA: \usepackage{fontspec}
+#+LATEX_HEADER_EXTRA: \setmonofont{Iosevka}
+#+LATEX_HEADER_EXTRA: \setminted{fontsize=\small, frame=single, breaklines=true}
+#+LATEX_HEADER_EXTRA: \usemintedstyle{emacs}
+#+LATEX_HEADER_EXTRA: \usepackage{float}
+#+LATEX_HEADER_EXTRA: \usepackage[final]{pdfpages}
+#+LATEX_HEADER_EXTRA: \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA: \setlength{\parskip}{1em}
+#+LATEX_HEADER_EXTRA: \documentclass[12pt]{article}
+
+
+* Question 1
+** a
+Terminate port 1 with $Z_S$:
+\begin{align*}
+V_1^+ &= \Gamma_S V_1^- \\
+V_1^- &= S_{11} V_1^+ + S_{12} V_2^+ \\
+V_1^- &= S_{11} \Gamma_S V_1^- + S_{12} V_2^+ \\
+V_1^-(1 - S_{11}\Gamma_S) &= S_{12}V_2^+ \\
+V_1^- &= \frac{S_{12}V_2^+}{(1 - S_{11}\Gamma_S)}
+\end{align*}
+Also:
+\begin{align*}
+V_1^+ &= \Gamma_S V_1^- \\
+V_2^- &= S_{21} V_1^+ + S_{22} V_2^+ \\
+V_2^- &= S_{21} \Gamma_S V_1^- + S_{22} V_2^+ \\
+V_2^- &= S_{21} \Gamma_S \frac{S_{12}V_2^+}{(1 - S_{11}\Gamma_S)} + S_{22} V_2^+ \\
+\Rightarrow \Gamma_{\textrm{out}} &= \frac{V_2^-}{V_2^+} = S_{22} + \frac{S_{12}S_{21}\Gamma_S}{1 - S_{11}\Gamma_S}
+\end{align*}
+
+
+
+** b
+$\Gamma_{\textrm{out}}$ is the reflection coefficient looking into port 2. It describes:
+\[Z_{\textrm{out}} = Z_0 \frac{1 + \Gamma_{\textrm{out}}}{1 - \Gamma_{\textrm{out}}}\]
+It depends on $\Gamma_S$ because the amplifier can have reverse transmission through $S_{12}$.
+
+
+** c
+\begin{align*}
+V_2^+ &= \Gamma_L V_2^- \\
+V_2^- &= S_{21}V_1^+ + S_{22}V_2^+ \\
+V_2^- &= S_{21}V_1^+ + S_{22}\Gamma_L V_2^- \\
+\Rightarrow V_2^- &= \frac{S_{21}V_1^+}{1 - S_{22}\Gamma_L}
+\end{align*}
+
+** d
+*** Input Power
+\begin{align*}
+P_{\textrm{in}} &= \frac{|V_1^+|^2}{2Z_0}(1 - |\Gamma_{in}|^2) \\
+V_1^+ &= \frac{V_S}{2}\frac{1 - \Gamma_S}{1 - \Gamma_S \Gamma_{\textrm{in}}} \\
+\lvert V_1^+\rvert^2 &= \frac{\sqrt{V_S^2}^2}{\sqrt{2^2}^2}\frac{\sqrt{(1 - \Gamma_S)^2}^2}{\sqrt{(1 - \Gamma_S \Gamma_{\textrm{in}})^2}^2} \\
+\lvert V_1^+\rvert^2 &= \frac{|V_S|^2}{4}\frac{|1 - \Gamma_S|^2}{|1 - \Gamma_S \Gamma_{\textrm{in}}|^2} \\
+\Rightarrow P_{\textrm{in}} &= \frac{\frac{|V_S|^2}{4}\frac{|1 - \Gamma_S|^2}{|1 - \Gamma_S \Gamma_{\textrm{in}}|^2}}{2Z_0}(1 - |\Gamma_{in}|^2) \\
+P_{\textrm{in}} &= \frac{|V_S|^2}{8Z_0}\frac{|1-\Gamma_S|^2}{|1-\Gamma_S\Gamma_{\textrm{in}}|^2}(1-|\Gamma_{\textrm{in}}|^2)
+\end{align*}
+
+*** Power delivered to the load
+\begin{align*}
+P_L &= \frac{|V_2^-|^2}{2 Z_0} (1 - |\Gamma_L|^2) \\
+V_2^- &= \frac{S_{21}}{1 - S_{22}\Gamma_L} V_1^+ \\
+\lvert V_2^-\rvert^2 &= \frac{|S_{21}|^2}{|1 - S_{22}\Gamma_L|^2} |V_1^+|^2 \\
+P_L &= \frac{\frac{|S_{21}|^2}{|1 - S_{22}\Gamma_L|^2} |V_1^+|^2}{2 Z_0} (1 - |\Gamma_L|^2) \\
+P_L &= \frac{|V_1^+|^2}{2Z_0} \frac{|S_{21}|^2(1 - |\Gamma_L|^2)}{|1 - S_{22}\Gamma_L|^2}
+\end{align*}
+
+Sub in expression for $|V_1^+|^2$:
+\[P_L = \frac{|V_S|^2}{8Z_0}\frac{|S_{21}|^2|1 - \Gamma_S|^2(1 - |\Gamma_L|^2)}{|1 - S_{22} \Gamma_L|^2 |1 - \Gamma_S \Gamma_{\textrm{in}}|^2}\]
+
+*** Available power from the source ($P_{\textrm{avs}}$)
+Maximum power transfer occurs when $\Gamma_{\textrm{in}} = \Gamma_S^{*}$:
+\begin{align*}
+P_{\textrm{in}} &= \frac{|V_S|^2}{8Z_0}\frac{|1-\Gamma_S|^2}{|1-\Gamma_S\Gamma_{\textrm{in}}|^2}(1-|\Gamma_{\textrm{in}}|^2) \\
+P_{\textrm{avs}} &= \frac{|V_S|^2}{8Z_0}\frac{|1-\Gamma_S|^2}{|1-\Gamma_S\Gamma_S^{*}|^2}(1-|\Gamma_S^{*}|^2) \\
+\Gamma_S\Gamma_S^{*} &= |\Gamma_S|^2 \qquad |\Gamma_S^{*}|^2 = |\Gamma_S|^2 \\
+P_{\textrm{avs}} &= \frac{|V_S|^2}{8Z_0}\frac{|1-\Gamma_S|^2}{(1-|\Gamma_S|^2)^2}(1-|\Gamma_S|^2) \\
+P_{\textrm{avs}} &= \frac{|V_S|^2}{8Z_0}\frac{|1-\Gamma_S|^2}{1-|\Gamma_S|^2} \\
+\end{align*}
+
+*** Difference between $P_{\textrm{avs}}$ and $P_{\textrm{in}}$
+$P_{\textrm{avs}}$ is the maximum power that the source is capable of supplying and $P_{\textrm{in}}$ is the actual power entering the network.
+
+*** Available power from the network $P_{\textrm{avn}}$
+Maximum power transfer requires $\Gamma_L = \Gamma_{\textrm{out}}^{*}$. From:
+\[P_L = \frac{|V_S|^2}{8Z_0}\frac{|S_{21}|^2|1 - \Gamma_S|^2(1 - |\Gamma_L|^2)}{|1 - S_{22} \Gamma_L|^2 |1 - \Gamma_S \Gamma_{\textrm{in}}|^2}\]
+We can get:
+\[P_{\textrm{avn}} = \frac{|V_S|^2}{8Z_0}\frac{|S_{21}|^2|1 - \Gamma_S|^2}{|1 - S_{11} \Gamma_L|^2 (1 - |\Gamma_{\textrm{out}}|^2)}\]
+
+** e
+\begin{align*}
+G_A &= \frac{P_{\textrm{avn}}}{P_{\textrm{avs}}} \\
+G_A &= \frac{\frac{|V_S|^2}{8Z_0}\frac{|S_{21}|^2|1 - \Gamma_S|^2}{|1 - S_{11} \Gamma_L|^2 (1 - |\Gamma_{\textrm{out}}|^2)}}{\frac{|V_S|^2}{8Z_0}\frac{|1-\Gamma_S|^2}{1-|\Gamma_S|^2}} \\
+G_A &= \frac{|S_{21}|^2(1-|\Gamma_S|^2)}{|1 - S_{11}\Gamma_S|^2 (1 - |\Gamma_{\textrm{out}}|^2)}
+\end{align*}
+
+The initial substitution is the same as the lecture notes, however the final result is different.

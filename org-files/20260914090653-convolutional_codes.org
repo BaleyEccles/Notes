@@ -1,0 +1,74 @@
+:PROPERTIES:
+:ID:       e5d3443c-8ef6-43f0-8502-441561a3c26e
+:END:
+#+title: Convolutional Codes
+#+date: [2026-09-14 Mon 09:06]
+#+AUTHOR: Baley Eccles - 652137
+#+STARTUP: latexpreview
+
+* Convolutional Codes
+ - Has memory
+   - The encoder output depends on the current input and previous input bits stored in the shift register.
+ - Uses shift registers
+ - $L$ is the length
+ - $g_n$ are vectors representing the operations
+
+\[R_c = \frac{k}{n}\]
+** Encoder
+$c_1 = n_1 + n_3$
+$c_2 = n_1 + n_2 + n_3$
+Or:
+$g_1 = [1\ 0\ 1]$
+$g_2 = [1\ 1\ 1]$
+
+\[R_c = \frac{1}{2}\]
+
+| Input | Shift Register | c_1 | c_2 |
+|   N/A |            000 |   0 |   0 |
+|     0 |            000 |   0 |   0 |
+|     1 |            100 |   1 |   1 |
+|     0 |            010 |   0 |   1 |
+|     1 |            101 |   0 |   0 |
+
+0101 -> 00 11 01 00
+
+$2^{L-1} = 4\ \textrm{states}$
+Transition State Diagram:
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Convolutional_Code_Sate_Diagram.xopp]]
+
+** Trellis Diagram
+
+[[xopp-figure:/home/baley/UTAS/org-roam/org-files/Convolutional_Code_Trellis_Diagram.xopp]]
+
+We can simplify if we say that we must start in 00 state and finish in 00 state:
+\[R_c = \frac{k}{n + 4}\]
+ - $2$ bits at start, $2$ bits at end
+
+** Transfer Functions
+\[D^{\alpha}\]
+ - Number of ones in output defined by $\alpha$
+\[N^{\beta}\]
+ - Number of ones in input defined by $\beta$
+\[J\]
+ - Number of branches
+$T(D, N, J)$
+00 -> a
+01 -> b
+10 -> c
+11 -> d
+A signal flow graph can be made, and the transfer function can be obtained as:
+\[T(D, N, J) = D^5NJ^3 + D^6N^2J^4 + D^6N^2J^5 + \hdots\]
+Hamming weight = 5
+Free distance = 5
+
+
+** Catastrophic Codes
+ - Convolutional codes with a bad property
+With:
+$g_1 = [1\ 1\ 0]$
+$g_2 = [0\ 1\ 1]$
+The transition state diagram is symmetric, this can make errors decode incorrectly.
+
+** Optimal Decoder
+ - [[id:dc801ca3-26d2-45d3-a69b-998dfb132361][Viterbi Algorithm]]
+Uses the Trellis Diagram

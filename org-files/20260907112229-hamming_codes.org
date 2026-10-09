@@ -12,6 +12,7 @@ If a code word $c$ in a [[id:91819072-d543-4ef1-b41d-c18778464fb1][Linear Block 
 maximum of linear independent columns of $H$ is equal to $d_{min} -1$
 
 ** Example
+Hamming(7,4)
 if $d_{\min} = 3$, $n = 7$, $k = 4$, $m = n - k = 3$
 \[H = \begin{bmatrix}
 1 & 1 & 1 & 0 & 1 & 0 & 0 \\
